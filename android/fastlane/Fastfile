@@ -10,29 +10,96 @@
 #     https://docs.fastlane.tools/plugins/available-plugins
 #
 
-# Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
+update_fastlane
+
+version_code = ENV['CI_JOB_ID'].to_i == 0 ? 1 : ENV['CI_JOB_ID'].to_i
+
+release_notes = changelog_from_git_commits(
+    commits_count: 10,
+    pretty: "✨ %s%nBy %an, %ar%n",
+    date_format: "short",
+    match_lightweight_tag: false,
+    merge_commit_filtering: "exclude_merges"
+)
 
 default_platform(:android)
 
 platform :android do
-  desc "Runs all the tests"
-  lane :test do
-    gradle(task: "test")
-  end
 
-  desc "Submit a new Beta Build to Crashlytics Beta"
-  lane :beta do
-    gradle(task: "clean assembleRelease")
-    crashlytics
-  
-    # sh "your_script.sh"
-    # You can also use other beta testing services here
-  end
+    before_all do
+        ENV["SLACK_URL"] = ENV['SLACK_UPDATES']
+    end
 
-  desc "Deploy a new version to the Google Play"
-  lane :deploy do
-    gradle(task: "clean assembleRelease")
-    upload_to_play_store
-  end
+    desc "Runs all the tests"
+        lane :test do
+        gradle(task: "test")
+    end
+
+    desc "Submit a new Beta Build to Crashlytics Beta"
+    lane :beta do
+
+        # Dir.chdir("../") do
+            #sh('echo $APPLICANT_ENCODED_KEYSTORE | base64 --decode >>
+            #android/app/applicant_keystore.jks')
+        #end
+
+        Dir.chdir("../../") do
+            sh(
+                "flutter",
+                "build",
+                "apk",
+                "--release",
+                "--verbose",
+                "--build-number",
+                "#{version_code}",
+            )
+        end
+
+        firebase_app_distribution(
+            app: "1:772074731973:android:500c63dc87891a685ab3ac",
+            apk_path: "../build/app/outputs/apk/release/app-release.apk",
+            release_notes: release_notes,
+            groups: 'android',
+            firebase_cli_path: "/usr/local/bin/firebase",
+        )
+
+        slack(
+            message: "[Beta] Motim Android :rocket:
+            \n#{release_notes}",
+            success: true
+        )
+    end
+
+    desc "Deploy a new version to the Google Play"
+    lane :deploy do
+        # Dir.chdir("../") do
+            #sh('echo $APPLICANT_ENCODED_KEYSTORE | base64 --decode >>
+            #android/app/applicant_keystore.jks')
+        #end
+
+        Dir.chdir("../../") do
+            sh(
+                "flutter",
+                "build",
+                "appbundle",
+                "--release",
+                "--verbose",
+                "--build-number",
+                "#{version_code}",
+            )
+        end
+
+        upload_to_play_store(
+            track: 'alpha',
+            skip_upload_metadata: true,
+            aab: "../build/app/outputs/bundle/release/app-release.aab",
+            json_key: 'google_play_login.json'
+        )
+
+        slack(
+            message: "[Release] Motim Android :rocket:
+            \n#{release_notes}",
+            success: true
+        )
+    end
 end

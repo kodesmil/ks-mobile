@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "772074731973-0qdfiveb4e75babs0bgrhh7p9u2demfk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kodesmil.motim",
+            "certificate_hash": "b3b3084ac709f22847a600c6659465f5bdd9e286"
+          }
+        },
+        {
           "client_id": "772074731973-nnijlffd40sgokgurt14eji1vb82kd9r.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
