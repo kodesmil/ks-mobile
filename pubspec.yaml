@@ -33,6 +33,7 @@ dependencies:
   firebase_core: ^0.4.0+9
   firebase_analytics: ^5.0.2
   flushbar: ^1.9.1
+  fit_kit: ^1.0.1
 
   inject:
     git:

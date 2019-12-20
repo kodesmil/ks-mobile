@@ -6,6 +6,7 @@ import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:fit_kit/fit_kit.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -19,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-
+    readAll();
     //get all posts
     _store.getPosts();
   }
@@ -71,6 +72,31 @@ class _HomeScreenState extends State<HomeScreen> {
         )
       ],
     );
+  }
+
+  void read() async {
+    final results = await FitKit.read(
+      DataType.HEART_RATE,
+      dateFrom: DateTime.now().subtract(Duration(days: 5)),
+      dateTo: DateTime.now(),
+    );
+  }
+
+  void readLast() async {
+    final result = await FitKit.readLast(DataType.HEIGHT);
+  }
+
+  void readAll() async {
+    if (await FitKit.requestPermissions(DataType.values)) {
+      for (DataType type in DataType.values) {
+        final results = await FitKit.read(
+          type,
+          dateFrom: DateTime.now().subtract(Duration(days: 5)),
+          dateTo: DateTime.now(),
+        );
+        print(results);
+      }
+    }
   }
 
   Widget _buildListView() {
