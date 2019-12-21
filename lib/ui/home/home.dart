@@ -6,6 +6,7 @@ import 'package:boilerplate/widgets/progress_indicator_widget.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -75,22 +76,43 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildListView() {
     return _fitStore.fits != null
         ? ListView.separated(
-            itemCount: _fitStore.fits.fitDailies.length,
+            itemCount: _fitStore.fits.fitDailies.length + 1,
             separatorBuilder: (context, position) {
               return Divider();
             },
             itemBuilder: (context, position) {
+              if (position == 0) {
+                return Observer(
+                  builder: (context) {
+                    return _fitStore.loading
+                        ? Container()
+                        : Center(
+                            child: Container(
+                              padding: EdgeInsets.all(80),
+                              child: Text(
+                                _fitStore.fits?.points?.toInt()?.toString() ??
+                                    '',
+                                textScaleFactor: 3,
+                              ),
+                            ),
+                          );
+                  },
+                );
+              }
               return ListTile(
                 leading: Icon(Icons.cloud_circle),
                 title: Text(
-                  '${_fitStore.fits.fitDailies[position].date.toUtc()}',
+                  DateFormat.yMMMMd().format(
+                    _fitStore.fits.fitDailies[position - 1].date,
+                  ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   softWrap: false,
                   style: Theme.of(context).textTheme.title,
                 ),
                 subtitle: Text(
-                  '${_fitStore.fits.fitDailies[position].points}',
+                  '${_fitStore.fits.fitDailies[position - 1].points} points, '
+                  '${_fitStore.fits.fitDailies[position - 1].steps} steps',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   softWrap: false,

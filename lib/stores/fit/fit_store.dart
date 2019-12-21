@@ -15,7 +15,6 @@ part 'fit_store.g.dart';
 class FitStore = _FitStore with _$FitStore;
 
 abstract class _FitStore with Store {
-
   // store for handling errors
   final ErrorStore errorStore = ErrorStore();
 
@@ -54,7 +53,7 @@ abstract class _FitStore with Store {
   Future<List<FitData>> readFitData(DataType type) async {
     final a = await FitKit.read(
       type,
-      dateFrom: DateTime.now().subtract(Duration(days: 5)),
+      dateFrom: DateTime.now().subtract(Duration(days: 10)),
       dateTo: DateTime.now(),
     );
     return a;
@@ -85,8 +84,9 @@ abstract class _FitStore with Store {
           steps: steps,
           points: points,
           distance: distance,
-          date: DateTime.parse(key)));
+          date: DateFormat.yMMMMd().parse(key)));
     }
+    dailies.sort((a, b) => b.date.compareTo(a.date));
     return FitsList(
       points: dailies.fold(
         0,
@@ -100,7 +100,7 @@ abstract class _FitStore with Store {
     final HashMap<String, List<FitData>> result = HashMap();
     data.sort((a, b) => b.dateFrom.compareTo(a.dateFrom));
     for (FitData single in data) {
-      final key = DateFormat.yMMMd().format(single.dateFrom);
+      final key = DateFormat.yMMMMd().format(single.dateFrom);
       if (result.containsKey(key)) {
         final list = result[key];
         list.add(single);
