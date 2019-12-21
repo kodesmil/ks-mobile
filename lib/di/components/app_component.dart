@@ -1,4 +1,4 @@
-import 'package:boilerplate/data/repository.dart';
+import 'package:boilerplate/data/post_repository.dart';
 import 'package:boilerplate/di/modules/local_module.dart';
 import 'package:boilerplate/di/modules/netwok_module.dart';
 import 'package:boilerplate/main.dart';

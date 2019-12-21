@@ -1,12 +1,12 @@
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/routes.dart';
+import 'package:boilerplate/stores/fit/fit_store.dart';
 import 'package:boilerplate/stores/post/post_store.dart';
 import 'package:boilerplate/widgets/progress_indicator_widget.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:fit_kit/fit_kit.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -15,14 +15,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   //store
-  final _store = PostStore();
+  final _fitStore = FitStore();
 
   @override
   void initState() {
     super.initState();
-    readAll();
-    //get all posts
-    _store.getPosts();
+    _fitStore.getFits();
   }
 
   @override
@@ -57,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
       children: <Widget>[
         Observer(
           builder: (context) {
-            return _store.loading
+            return _fitStore.loading
                 ? CustomProgressIndicatorWidget()
                 : Material(child: _buildListView());
           },
@@ -65,44 +63,19 @@ class _HomeScreenState extends State<HomeScreen> {
         Observer(
           name: 'error',
           builder: (context) {
-            return _store.success
+            return _fitStore.success
                 ? Container()
-                : showErrorMessage(context, _store.errorStore.errorMessage);
+                : showErrorMessage(context, _fitStore.errorStore.errorMessage);
           },
         )
       ],
     );
   }
 
-  void read() async {
-    final results = await FitKit.read(
-      DataType.HEART_RATE,
-      dateFrom: DateTime.now().subtract(Duration(days: 5)),
-      dateTo: DateTime.now(),
-    );
-  }
-
-  void readLast() async {
-    final result = await FitKit.readLast(DataType.HEIGHT);
-  }
-
-  void readAll() async {
-    if (await FitKit.requestPermissions(DataType.values)) {
-      for (DataType type in DataType.values) {
-        final results = await FitKit.read(
-          type,
-          dateFrom: DateTime.now().subtract(Duration(days: 5)),
-          dateTo: DateTime.now(),
-        );
-        print(results);
-      }
-    }
-  }
-
   Widget _buildListView() {
-    return _store.postsList != null
+    return _fitStore.fits != null
         ? ListView.separated(
-            itemCount: _store.postsList.posts.length,
+            itemCount: _fitStore.fits.fitDailies.length,
             separatorBuilder: (context, position) {
               return Divider();
             },
@@ -110,14 +83,14 @@ class _HomeScreenState extends State<HomeScreen> {
               return ListTile(
                 leading: Icon(Icons.cloud_circle),
                 title: Text(
-                  '${_store.postsList.posts[position].title}',
+                  '${_fitStore.fits.fitDailies[position].date.toUtc()}',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   softWrap: false,
                   style: Theme.of(context).textTheme.title,
                 ),
                 subtitle: Text(
-                  '${_store.postsList.posts[position].body}',
+                  '${_fitStore.fits.fitDailies[position].points}',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   softWrap: false,

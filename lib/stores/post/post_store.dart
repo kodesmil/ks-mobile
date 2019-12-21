@@ -1,4 +1,4 @@
-import 'package:boilerplate/data/repository.dart';
+import 'package:boilerplate/data/post_repository.dart';
 import 'package:boilerplate/main.dart';
 import 'package:boilerplate/models/post/post_list.dart';
 import 'package:boilerplate/stores/error/error_store.dart';
