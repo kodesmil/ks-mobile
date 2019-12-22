@@ -64,7 +64,7 @@ platform :android do
         )
 
         slack(
-            message: "[Beta] Motim Android :rocket:
+            message: "[Beta] Motim Fit for Android :rocket:
             \n#{release_notes}",
             success: true
         )
@@ -97,7 +97,7 @@ platform :android do
         )
 
         slack(
-            message: "[Release] Motim Android :rocket:
+            message: "[Release] Motim Fit for Android :rocket:
             \n#{release_notes}",
             success: true
         )
