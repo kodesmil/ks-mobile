@@ -73,5 +73,5 @@ build/
 ios/Flutter/flutter_export_environment.sh
 /android/google_play_login.json
 /android/vendor/
-/is/vendor/
+/ios/vendor/
 /android/app/motim-release.keystore

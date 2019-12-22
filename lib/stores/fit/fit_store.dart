@@ -51,10 +51,11 @@ abstract class _FitStore with Store {
   }
 
   Future<List<FitData>> readFitData(DataType type) async {
+    final now = DateTime.now();
     final a = await FitKit.read(
       type,
-      dateFrom: DateTime.now().subtract(Duration(days: 10)),
-      dateTo: DateTime.now(),
+      dateFrom: DateTime(now.year),
+      dateTo: now,
     );
     return a;
   }

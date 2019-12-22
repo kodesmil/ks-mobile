@@ -1,7 +1,6 @@
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/routes.dart';
 import 'package:boilerplate/stores/fit/fit_store.dart';
-import 'package:boilerplate/stores/post/post_store.dart';
 import 'package:boilerplate/widgets/progress_indicator_widget.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +33,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildAppBar(BuildContext context) {
     return AppBar(
-      title: Text('Posts'),
+      title: Text(
+        'Motim Fit Points',
+        style: TextStyle(color: Colors.white),
+      ),
       actions: <Widget>[
         IconButton(
           onPressed: () {
@@ -45,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           icon: Icon(
             Icons.power_settings_new,
+            color: Colors.white,
           ),
         )
       ],
@@ -89,10 +92,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         : Center(
                             child: Container(
                               padding: EdgeInsets.all(80),
-                              child: Text(
-                                _fitStore.fits?.points?.toInt()?.toString() ??
-                                    '',
-                                textScaleFactor: 3,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(
+                                    _fitStore.fits?.points
+                                            ?.toInt()
+                                            ?.toString() ??
+                                        '',
+                                    textScaleFactor: 3,
+                                  ),
+                                  Text('this year so far'),
+                                ],
                               ),
                             ),
                           );
@@ -100,7 +111,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               }
               return ListTile(
-                leading: Icon(Icons.cloud_circle),
                 title: Text(
                   DateFormat.yMMMMd().format(
                     _fitStore.fits.fitDailies[position - 1].date,
@@ -111,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: Theme.of(context).textTheme.title,
                 ),
                 subtitle: Text(
-                  '${_fitStore.fits.fitDailies[position - 1].points} points, '
+                  '${_fitStore.fits.fitDailies[position - 1]?.points?.toInt() ?? ''} points, '
                   '${_fitStore.fits.fitDailies[position - 1].steps} steps',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,

@@ -13,7 +13,7 @@ class SharedPreferenceHelper {
   // General Methods: ----------------------------------------------------------
   Future<String> get authToken async {
     return _sharedPreference.then((preference) {
-      preference.getString(Preferences.auth_token);
+      return preference.getString(Preferences.auth_token);
     });
   }
 
@@ -31,7 +31,7 @@ class SharedPreferenceHelper {
 
   Future<bool> get isLoggedIn async {
     return _sharedPreference.then((preference) {
-      preference.getString(Preferences.auth_token) ?? false;
+      return preference.getString(Preferences.auth_token) ?? false;
     });
   }
 }
