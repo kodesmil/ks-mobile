@@ -1,4 +1,4 @@
-package com.kodesmil.kodesmil_mobile
+package com.kodesmil.motim
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

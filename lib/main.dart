@@ -48,7 +48,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: Strings.appName,
-      theme: themeData,
+      theme: MfThemeData.lightThemeData,
+      darkTheme: MfThemeData.darkThemeData,
       routes: Routes.routes,
       home: SplashScreen(),
     );
