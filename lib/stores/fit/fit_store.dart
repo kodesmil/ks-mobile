@@ -54,7 +54,7 @@ abstract class _FitStore with Store {
     final now = DateTime.now();
     final a = await FitKit.read(
       type,
-      dateFrom: DateTime(now.year),
+      dateFrom: DateTime(now.year, now.month),
       dateTo: now,
     );
     return a;

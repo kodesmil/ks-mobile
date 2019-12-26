@@ -23,10 +23,14 @@ class MfThemeData {
   static ThemeData themeData(ColorScheme colorScheme, Color focusColor) {
     return ThemeData(
       colorScheme: colorScheme,
-      textTheme: _textTheme,
+      textTheme: _textTheme.apply(
+        bodyColor: colorScheme.onSurface,
+        displayColor: colorScheme.onSurface,
+        decorationColor: colorScheme.onSurface,
+      ),
       appBarTheme: AppBarTheme(
         textTheme: _textTheme.apply(
-          bodyColor: colorScheme.onPrimary,
+          bodyColor: colorScheme.onSurface,
         ),
         color: colorScheme.background,
         elevation: 0,
@@ -40,6 +44,7 @@ class MfThemeData {
       scaffoldBackgroundColor: colorScheme.background,
       highlightColor: Colors.transparent,
       accentColor: colorScheme.primary,
+      primaryColor: colorScheme.primaryVariant,
       focusColor: focusColor,
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
@@ -88,6 +93,8 @@ class MfThemeData {
 
   static TextTheme _textTheme = TextTheme(
     display1: _MfTextStyles.heading,
+    display2: _MfTextStyles.heading2,
+    display3: _MfTextStyles.heading3,
     caption: _MfTextStyles.studyTitle,
     headline: _MfTextStyles.categoryTitle,
     subhead: _MfTextStyles.listTitle,
@@ -113,6 +120,18 @@ class _MfTextStyles {
     fontFamily: _montserrat,
     fontWeight: _bold,
     fontSize: 20.0,
+  );
+
+  static const heading2 = TextStyle(
+    fontFamily: _montserrat,
+    fontWeight: _bold,
+    fontSize: 24.0,
+  );
+
+  static const heading3 = TextStyle(
+    fontFamily: _montserrat,
+    fontWeight: _bold,
+    fontSize: 28.0,
   );
 
   static const studyTitle = TextStyle(
