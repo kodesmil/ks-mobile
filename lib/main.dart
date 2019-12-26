@@ -4,9 +4,10 @@ import 'package:boilerplate/routes.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:inject/inject.dart';
 
-import 'constants/app_theme.dart';
+import 'constants/theme.dart';
 import 'constants/strings.dart';
 import 'di/components/app_component.dart';
 import 'di/modules/local_module.dart';
@@ -15,9 +16,10 @@ import 'ui/splash/splash.dart';
 
 // global instance for app component
 // TODO find out a better way to use it across application
-var appComponent;
+AppComponent appComponent;
 
-void main() {
+void main() async {
+  await DotEnv().load('.env');
   // Set `enableInDevMode` to true to see reports while in debug mode
   // This is only to be used for confirming that reports are being
   // submitted as expected. It is not intended to be used for everyday
@@ -48,8 +50,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: Strings.appName,
-      theme: MfThemeData.lightThemeData,
-      darkTheme: MfThemeData.darkThemeData,
+      theme: MfThemeData.light(),
+      darkTheme: MfThemeData.light(),
       routes: Routes.routes,
       home: SplashScreen(),
     );

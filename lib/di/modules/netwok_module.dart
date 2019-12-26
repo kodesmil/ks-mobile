@@ -1,4 +1,6 @@
 import 'package:boilerplate/data/network/apis/posts/post_api.dart';
+import 'package:boilerplate/data/network/apis/posts/token_api.dart';
+import 'package:boilerplate/data/network/apis/posts/user_api.dart';
 import 'package:boilerplate/data/network/constants/endpoints.dart';
 import 'package:boilerplate/data/network/dio_client.dart';
 import 'package:boilerplate/data/network/rest_client.dart';
@@ -56,6 +58,15 @@ class NetworkModule {
   @provide
   @singleton
   PostApi providePostApi() => PostApi(provideDioClient(), provideRestClient());
-  // Api Providers End:---------------------------------------------------------
+
+  @provide
+  @singleton
+  TokenApi provideTokenApi() =>
+      TokenApi(provideDioClient(), provideRestClient());
+
+  @provide
+  @singleton
+  UserApi provideUserApi() => UserApi(provideDioClient(), provideRestClient());
+// Api Providers End:---------------------------------------------------------
 
 }

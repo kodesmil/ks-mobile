@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
@@ -19,7 +20,9 @@ class TimeSeriesBar extends StatelessWidget {
           labelOffsetFromAxisPx: 16,
           labelJustification: charts.TickLabelJustification.outside,
           labelStyle: new charts.TextStyleSpec(
-            color: charts.MaterialPalette.white,
+            color: charts.ColorUtil.fromDartColor(
+              Theme.of(context).textTheme.body1.color,
+            ),
           ),
           lineStyle: new charts.LineStyleSpec(
             color: charts.MaterialPalette.transparent,

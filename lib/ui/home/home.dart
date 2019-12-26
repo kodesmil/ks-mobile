@@ -94,38 +94,40 @@ class _HomeScreenState extends State<HomeScreen> {
                       ? Container()
                       : Center(
                           child: Container(
-                            height: 120,
-                            width: 120,
+                            height: 150,
+                            width: 150,
                             child: Stack(
                               children: <Widget>[
                                 Center(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: <Widget>[
                                       Text(
                                         _fitStore?.fits?.points
-                                            ?.floor()
-                                            ?.toString() ?? '',
+                                                ?.floor()
+                                                ?.toString() ??
+                                            '',
                                         style: Theme.of(context)
                                             .textTheme
-                                            .display3,
+                                            .display2,
                                       ),
                                       Text(
                                         'points this month',
                                         style:
-                                            Theme.of(context).textTheme.body2,
+                                            Theme.of(context).textTheme.caption,
                                       ),
                                     ],
                                   ),
                                 ),
                                 Container(
-                                  height: 120,
-                                  width: 120,
+                                  height: 150,
+                                  width: 150,
                                   child: CircularProgressIndicator(
                                     value: _fitStore?.fits?.points ??
                                         1.0 / 10000.0,
-                                    strokeWidth: 6,
+                                    strokeWidth: 8,
                                     valueColor: AlwaysStoppedAnimation(
                                         Theme.of(context).primaryColor),
                                     backgroundColor: Theme.of(context)
@@ -160,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               child: Text(
                 'Journal',
-                style: Theme.of(context).textTheme.display3,
+                style: Theme.of(context).textTheme.display2,
               ),
             ),
             Expanded(
@@ -178,7 +180,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 return _fitStore.success
                     ? Container()
                     : showErrorMessage(
-                        context, _fitStore.errorStore.errorMessage);
+                        context,
+                        _fitStore.errorStore.errorMessage,
+                      );
               },
             )
           ],
@@ -203,7 +207,6 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           icon: Icon(
             Icons.person,
-            color: Colors.white,
           ),
         )
       ],
@@ -235,6 +238,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   softWrap: false,
+                  style: Theme.of(context).textTheme.body1,
                 ),
               );
             },
@@ -265,13 +269,13 @@ class HomeChart extends StatelessWidget {
   })  : _fitStore = fitStore,
         super(key: key);
 
-  final colorFn =
-      (_, __) => charts.ColorUtil.fromDartColor(Colors.white.withAlpha(128));
-
   final FitStore _fitStore;
 
   @override
   Widget build(BuildContext context) {
+    final colorFn = (_, __) => charts.ColorUtil.fromDartColor(
+          Theme.of(context).textTheme.body1.color.withAlpha(128),
+        );
     return Container(
       height: 100,
       child: TimeSeriesBar(

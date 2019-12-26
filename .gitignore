@@ -75,3 +75,4 @@ ios/Flutter/flutter_export_environment.sh
 /android/vendor/
 /ios/vendor/
 /android/app/motim-release.keystore
+/.env

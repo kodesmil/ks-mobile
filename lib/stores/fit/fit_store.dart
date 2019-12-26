@@ -1,6 +1,5 @@
 import 'dart:collection';
 
-import 'package:boilerplate/data/post_repository.dart';
 import 'package:boilerplate/main.dart';
 import 'package:boilerplate/models/fit/fit.dart';
 import 'package:boilerplate/models/fit/fit_list.dart';
@@ -15,10 +14,9 @@ part 'fit_store.g.dart';
 class FitStore = _FitStore with _$FitStore;
 
 abstract class _FitStore with Store {
-  // store for handling errors
-  final ErrorStore errorStore = ErrorStore();
+  final errorStore = ErrorStore();
+  final tokenApi = appComponent.getTokenApi();
 
-  // store variables:-----------------------------------------------------------
   @observable
   FitsList fits;
 
@@ -28,9 +26,10 @@ abstract class _FitStore with Store {
   @observable
   bool loading = false;
 
-  // actions:-------------------------------------------------------------------
   @action
   Future getFits() async {
+    // String text = await tokenApi.getAccessToken();
+    // print(text);
     if (await FitKit.requestPermissions(DataType.values)) {
       try {
         loading = true;
