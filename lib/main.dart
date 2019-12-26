@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: Strings.appName,
       theme: MfThemeData.light(),
-      darkTheme: MfThemeData.light(),
+      darkTheme: MfThemeData.dark(),
       routes: Routes.routes,
       home: SplashScreen(),
     );

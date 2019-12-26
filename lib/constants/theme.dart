@@ -80,7 +80,7 @@ class MfThemeData {
       ),
       cursorColor: colorScheme.onSurface,
       backgroundColor: colorScheme.background,
-      iconTheme: IconThemeData(color: colorScheme.onSurface),
+      iconTheme: IconThemeData(color: colorScheme.primary),
       canvasColor: colorScheme.background,
       scaffoldBackgroundColor: colorScheme.background,
       highlightColor: Colors.transparent,

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/routes.dart';
 import 'package:flutter/material.dart';
