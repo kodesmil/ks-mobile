@@ -87,12 +87,62 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(
-                right: 16,
-                left: 16,
-                top: 64,
-                bottom: 16,
+              padding: const EdgeInsets.fromLTRB(24, 32, 24, 0),
+              child: Observer(
+                builder: (context) {
+                  return _fitStore.loading
+                      ? Container()
+                      : Center(
+                          child: Container(
+                            height: 120,
+                            width: 120,
+                            child: Stack(
+                              children: <Widget>[
+                                Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text(
+                                        _fitStore?.fits?.points
+                                            ?.floor()
+                                            ?.toString() ?? '',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .display3,
+                                      ),
+                                      Text(
+                                        'points this month',
+                                        style:
+                                            Theme.of(context).textTheme.body2,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  height: 120,
+                                  width: 120,
+                                  child: CircularProgressIndicator(
+                                    value: _fitStore?.fits?.points ??
+                                        1.0 / 10000.0,
+                                    strokeWidth: 6,
+                                    valueColor: AlwaysStoppedAnimation(
+                                        Theme.of(context).primaryColor),
+                                    backgroundColor: Theme.of(context)
+                                        .primaryColor
+                                        .withAlpha(128),
+                                    semanticsValue: '120',
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                },
               ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
               child: Observer(
                 builder: (context) {
                   return _fitStore.loading
@@ -141,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildAppBar(BuildContext context) {
     return AppBar(
       title: Text(
-        'Motim Fit Points',
+        '',
       ),
       actions: <Widget>[
         IconButton(
@@ -152,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
             });
           },
           icon: Icon(
-            Icons.power_settings_new,
+            Icons.person,
             color: Colors.white,
           ),
         )
@@ -223,7 +273,7 @@ class HomeChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: 100,
       child: TimeSeriesBar(
         [
           new charts.Series<TimeSeriesSales, DateTime>(
@@ -233,13 +283,14 @@ class HomeChart extends StatelessWidget {
             domainFn: (TimeSeriesSales sales, _) => sales.time,
             measureFn: (TimeSeriesSales sales, _) => sales.sales,
             data: _fitStore.fits?.fitDailies
-                ?.map(
-                  (d) => TimeSeriesSales(
-                    d.date,
-                    d.points.toInt(),
-                  ),
-                )
-                ?.toList() ?? [],
+                    ?.map(
+                      (d) => TimeSeriesSales(
+                        d.date,
+                        d.points.toInt(),
+                      ),
+                    )
+                    ?.toList() ??
+                [],
           )
         ],
       ),

@@ -99,9 +99,9 @@ class MfThemeData {
     headline: _MfTextStyles.categoryTitle,
     subhead: _MfTextStyles.listTitle,
     overline: _MfTextStyles.listDescription,
-    body2: _MfTextStyles.sliderTitle,
     subtitle: _MfTextStyles.settingsFooter,
     body1: _MfTextStyles.options,
+    body2: _MfTextStyles.sliderTitle,
     title: _MfTextStyles.title,
     button: _MfTextStyles.button,
   );
@@ -161,7 +161,7 @@ class _MfTextStyles {
   static const sliderTitle = TextStyle(
     fontFamily: _montserrat,
     fontWeight: _regular,
-    fontSize: 14.0,
+    fontSize: 12.0,
   );
 
   static const settingsFooter = TextStyle(
