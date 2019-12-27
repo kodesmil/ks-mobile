@@ -16,4 +16,7 @@ class Endpoints {
 
   // auth endpoints
   static const String getAuthToken = authUrl + "/oxauth/restv1/token";
+
+  // scim endpoints
+  static const String getScimUser = authUrl + "/identity/restv1/scim/v2/Users";
 }

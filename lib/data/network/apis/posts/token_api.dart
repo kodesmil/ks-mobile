@@ -1,10 +1,10 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:boilerplate/data/network/constants/endpoints.dart';
 import 'package:boilerplate/data/network/dio_client.dart';
 import 'package:boilerplate/data/network/exceptions/network_exceptions.dart';
 import 'package:boilerplate/data/network/rest_client.dart';
-import 'package:boilerplate/models/post/post_list.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -17,18 +17,17 @@ class TokenApi {
   Future<String> getAccessToken() => _dioClient
       .post(
         Endpoints.getAuthToken,
-        data: FormData.from(
-          {
-            'grant_type': 'client_credentials',
-          },
-        ),
+        data: {
+          'grant_type': 'client_credentials',
+        },
         options: Options(
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
             'Authorization': 'Basic ${DotEnv().env['AUTH_SCIM_ACCESS']}',
           },
+          contentType: ContentType('application', 'x-www-form-urlencoded'),
         ),
       )
-      .then((dynamic res) => res['access_token'])
-      .catchError((error) => throw NetworkException(message: error));
+      .then((dynamic res) {
+        return res['access_token'];
+      });
 }

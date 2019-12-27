@@ -20,7 +20,6 @@ class NetworkModule {
     ..options.baseUrl = Endpoints.baseUrl
     ..options.connectTimeout = Endpoints.connectionTimeout
     ..options.receiveTimeout = Endpoints.receiveTimeout
-    ..options.headers = {'Content-Type': 'application/json; charset=utf-8'}
     ..interceptors.add(LogInterceptor(responseBody: true))
     ..interceptors.add(InterceptorsWrapper(onRequest: (Options options) async {
       // getting shared pref instance
@@ -66,7 +65,8 @@ class NetworkModule {
 
   @provide
   @singleton
-  UserApi provideUserApi() => UserApi(provideDioClient(), provideRestClient());
+  UserApi provideUserApi() => UserApi(provideDioClient());
+
 // Api Providers End:---------------------------------------------------------
 
 }

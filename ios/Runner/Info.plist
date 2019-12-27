@@ -43,5 +43,16 @@
 	<false/>
 	<key>GADApplicationIdentifier</key>
     <string>ca-app-pub-8146161068556778~6340330228</string>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>motim</string>
+            </array>
+        </dict>
+    </array>
 </dict>
 </plist>

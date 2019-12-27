@@ -1,18 +1,19 @@
+import 'package:boilerplate/main.dart';
 import 'package:boilerplate/models/post/post_list.dart';
 import 'package:boilerplate/stores/error/error_store.dart';
 import 'package:mobx/mobx.dart';
 import 'package:validators/validators.dart';
+import 'package:flutter_appauth/flutter_appauth.dart';
 
 part 'form_store.g.dart';
 
 class FormStore = _FormStore with _$FormStore;
 
 abstract class _FormStore with Store {
-  // store for handling form errors
-  final FormErrorStore formErrorStore = FormErrorStore();
-
-  // store for handling error messages
-  final ErrorStore errorStore = ErrorStore();
+  final formErrorStore = FormErrorStore();
+  final errorStore = ErrorStore();
+  final tokenApi = appComponent.getTokenApi();
+  final userApi = appComponent.getUserApi();
 
   _FormStore() {
     _setupValidations();
@@ -50,7 +51,9 @@ abstract class _FormStore with Store {
 
   @computed
   bool get canLogin =>
-      !formErrorStore.hasErrorsInLogin && userEmail.isNotEmpty && password.isNotEmpty;
+      !formErrorStore.hasErrorsInLogin &&
+      userEmail.isNotEmpty &&
+      password.isNotEmpty;
 
   @computed
   bool get canRegister =>
@@ -120,6 +123,20 @@ abstract class _FormStore with Store {
   @action
   Future login() async {
     loading = true;
+    // String accessToken = await tokenApi.getAccessToken();
+    // await userApi.postUser(accessToken, userEmail, password);
+
+    FlutterAppAuth appAuth = FlutterAppAuth();
+    final AuthorizationTokenResponse result =
+        await appAuth.authorizeAndExchangeCode(
+      AuthorizationTokenRequest(
+        '37dc2100-7e95-4dcb-ba0a-df1f742244d2',
+        'motim://auth.kodesmil.com',
+        discoveryUrl:
+            'https://auth.kodesmil.com/.well-known/openid-configuration',
+        scopes: ['openid', 'profile', 'email'],
+      ),
+    );
 
     Future.delayed(Duration(milliseconds: 2000)).then((future) {
       loading = false;

@@ -1,4 +1,5 @@
 import 'package:boilerplate/data/network/apis/posts/token_api.dart';
+import 'package:boilerplate/data/network/apis/posts/user_api.dart';
 import 'package:boilerplate/data/post_repository.dart';
 import 'package:boilerplate/di/modules/local_module.dart';
 import 'package:boilerplate/di/modules/netwok_module.dart';
@@ -30,4 +31,7 @@ abstract class AppComponent {
 
   @provide
   TokenApi getTokenApi();
+
+  @provide
+  UserApi getUserApi();
 }

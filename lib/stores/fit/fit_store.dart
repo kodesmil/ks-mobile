@@ -15,7 +15,6 @@ class FitStore = _FitStore with _$FitStore;
 
 abstract class _FitStore with Store {
   final errorStore = ErrorStore();
-  final tokenApi = appComponent.getTokenApi();
 
   @observable
   FitsList fits;
@@ -28,8 +27,6 @@ abstract class _FitStore with Store {
 
   @action
   Future getFits() async {
-    // String text = await tokenApi.getAccessToken();
-    // print(text);
     if (await FitKit.requestPermissions(DataType.values)) {
       try {
         loading = true;

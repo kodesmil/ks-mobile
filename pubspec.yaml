@@ -57,6 +57,7 @@ dev_dependencies:
   json_serializable: ^3.2.3
   build_runner: ^1.7.2
   grinder: ^0.8.3+1
+  flutter_appauth: ^0.6.0
   inject_generator:
     git:
       url: https://github.com/google/inject.dart.git
