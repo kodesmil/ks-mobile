@@ -137,6 +137,7 @@ abstract class _FormStore with Store {
 
   @action
   Future login() async {
+    loading = true;
     FlutterAppAuth appAuth = FlutterAppAuth();
     final AuthorizationTokenResponse result =
         await appAuth.authorizeAndExchangeCode(
@@ -148,6 +149,9 @@ abstract class _FormStore with Store {
         scopes: ['openid', 'profile', 'email'],
       ),
     );
+    loading = false;
+    success = true;
+    errorStore.showError = false;
   }
 
   @action

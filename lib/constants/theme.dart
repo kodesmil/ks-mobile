@@ -87,6 +87,10 @@ class MfThemeData {
       accentColor: colorScheme.primary,
       primaryColor: colorScheme.primaryVariant,
       focusColor: focusColor,
+      buttonTheme: ButtonThemeData(
+        height: 40,
+        textTheme: ButtonTextTheme.primary,
+      ),
       inputDecorationTheme: InputDecorationTheme(
         labelStyle: TextStyle(
           fontWeight: FontWeight.w500,
@@ -113,12 +117,12 @@ class MfThemeData {
         .copyWith(
           body1: base.body1.copyWith(
             fontFamily: 'Roboto Condensed',
-            fontSize: 14,
+            fontSize: 15,
             fontWeight: FontWeight.w400,
           ),
           body2: base.body2.copyWith(
             fontFamily: _montserrat,
-            fontSize: 40,
+            fontSize: 17,
             fontWeight: FontWeight.w400,
             letterSpacing: 1.4,
           ),
@@ -127,10 +131,10 @@ class MfThemeData {
             fontWeight: FontWeight.w700,
             letterSpacing: 2.8,
           ),
-          headline: base.body2.copyWith(
+          headline: base.headline.copyWith(
             fontFamily: _montserrat,
             fontSize: 40,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w900,
             letterSpacing: 1.4,
           ),
         )
