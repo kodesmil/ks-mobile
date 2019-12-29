@@ -17,42 +17,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  //text controllers
-  TextEditingController _userEmailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-
-  //focus node
-  FocusNode _passwordFocusNode;
-
-  //form key
-  final _formKey = GlobalKey<FormState>();
-
-  //store
   final _store = FormStore();
-
-  @override
-  void initState() {
-    super.initState();
-
-    _passwordFocusNode = FocusNode();
-
-    _userEmailController.addListener(() {
-      //this will be called whenever user types in some value
-      _store.setUserId(_userEmailController.text);
-    });
-    _passwordController.addListener(() {
-      //this will be called whenever user types in some value
-      _store.setPassword(_passwordController.text);
-    });
-  }
-
-  @override
-  void dispose() {
-    _userEmailController.dispose();
-    _passwordController.dispose();
-    _passwordFocusNode.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +34,6 @@ class _LoginScreenState extends State<LoginScreen> {
         children: <Widget>[
           Center(child: _buildRightSide()),
           Observer(
-            name: 'navigate',
             builder: (context) {
               return _store.success
                   ? navigate(context)
@@ -77,7 +41,6 @@ class _LoginScreenState extends State<LoginScreen> {
             },
           ),
           Observer(
-            name: 'loading',
             builder: (context) {
               return Visibility(
                 visible: _store.loading,
@@ -91,101 +54,52 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _buildRightSide() {
-    return Form(
-      key: _formKey,
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              Column(
-                children: <Widget>[
-                  Text(
-                    'welcome to',
-                    style: Theme.of(context).textTheme.title,
-                  ),
-                  Text(
-                    'motim fit',
-                    style: Theme.of(context).textTheme.display3,
-                  ),
-                  Text(
-                    'Robin Hood for active people',
-                    style: Theme.of(context).textTheme.body1,
-                  ),
-                ],
-              ),
-
-              SizedBox(height: 72.0),
-              _buildUserIdField(),
-              _buildPasswordField(),
-              _buildForgotPasswordButton(),
-              _buildSignInButton()
-            ],
-          ),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                Text(
+                  'welcome to',
+                  style: Theme.of(context).textTheme.title,
+                ),
+                Text(
+                  'motim fit',
+                  style: Theme.of(context).textTheme.display3,
+                ),
+                Text(
+                  'Robin Hood for active people',
+                  style: Theme.of(context).textTheme.body1,
+                ),
+              ],
+            ),
+            SizedBox(height: 72.0),
+            _buildLoginField(),
+            _buildSignInButton()
+          ],
         ),
       ),
     );
   }
 
-  Widget _buildUserIdField() {
+  Widget _buildLoginField() {
     return Observer(
       builder: (context) {
-        return TextFieldWidget(
-          hint: Strings.login_et_user_email,
-          inputType: TextInputType.emailAddress,
-          icon: Icons.person,
-          textController: _userEmailController,
-          inputAction: TextInputAction.next,
-          onFieldSubmitted: (value) {
-            FocusScope.of(context).requestFocus(_passwordFocusNode);
-          },
-          errorText: _store.formErrorStore.userEmail,
+        return RaisedButton(
+          child: Text('Login'),
+          onPressed: () => _store.login(),
         );
       },
-    );
-  }
-
-  Widget _buildPasswordField() {
-    return Observer(
-      builder: (context) {
-        return TextFieldWidget(
-          hint: Strings.login_et_user_password,
-          isObscure: true,
-          padding: EdgeInsets.only(top: 16.0),
-          icon: Icons.lock,
-          textController: _passwordController,
-          focusNode: _passwordFocusNode,
-          errorText: _store.formErrorStore.password,
-        );
-      },
-    );
-  }
-
-  Widget _buildForgotPasswordButton() {
-    return Align(
-      alignment: FractionalOffset.centerRight,
-      child: FlatButton(
-        padding: EdgeInsets.all(0.0),
-        child: Text(
-          Strings.login_btn_forgot_password,
-          style: Theme.of(context).textTheme.caption,
-        ),
-        onPressed: () {},
-      ),
     );
   }
 
   Widget _buildSignInButton() {
     return RoundedButtonWidget(
-      buttonText: Strings.login_btn_sign_in,
-      onPressed: () async {
-        if (_store.canLogin) {
-          _store.login();
-        } else {
-          showErrorMessage(context, 'Please fill in all fields');
-        }
-      },
+      buttonText: 'Sign Up',
+      onPressed: () => Navigator.pushNamed(context, 'sign-up'),
     );
   }
 

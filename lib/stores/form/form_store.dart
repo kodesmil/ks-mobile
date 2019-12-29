@@ -116,16 +116,27 @@ abstract class _FormStore with Store {
   }
 
   @action
-  Future register() async {
+  Future signUp() async {
     loading = true;
+    try {
+      String accessToken = await tokenApi.getAccessToken();
+      await userApi.postUser(accessToken, userEmail, password);
+      loading = false;
+      success = true;
+      errorStore.showError = false;
+    } catch (e) {
+      loading = false;
+      success = false;
+      errorStore.showError = true;
+      errorStore.errorMessage = e.toString().contains("ERROR_USER_NOT_FOUND")
+          ? "Username and password doesn't match"
+          : "Something went wrong, please check your internet connection and try again";
+      print(e);
+    }
   }
 
   @action
   Future login() async {
-    loading = true;
-    // String accessToken = await tokenApi.getAccessToken();
-    // await userApi.postUser(accessToken, userEmail, password);
-
     FlutterAppAuth appAuth = FlutterAppAuth();
     final AuthorizationTokenResponse result =
         await appAuth.authorizeAndExchangeCode(
@@ -137,25 +148,6 @@ abstract class _FormStore with Store {
         scopes: ['openid', 'profile', 'email'],
       ),
     );
-
-    Future.delayed(Duration(milliseconds: 2000)).then((future) {
-      loading = false;
-      success = true;
-      errorStore.showError = false;
-    }).catchError((e) {
-      loading = false;
-      success = false;
-      errorStore.showError = true;
-      errorStore.errorMessage = e.toString().contains("ERROR_USER_NOT_FOUND")
-          ? "Username and password doesn't match"
-          : "Something went wrong, please check your internet connection and try again";
-      print(e);
-    });
-  }
-
-  @action
-  Future forgotPassword() async {
-    loading = true;
   }
 
   @action

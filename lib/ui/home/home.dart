@@ -112,7 +112,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         Observer(
-          name: 'error',
           builder: (context) {
             return _fitStore.success
                 ? Container()

@@ -25,7 +25,6 @@ class UserApi {
               'emails': [
                 {'value': email, 'type': 'work', 'primary': true},
               ],
-              'active': true,
               // "name": {"familyName": "Smith", "givenName": "Joe"},
               // "displayName": "Average Joe",
               'password': password,
