@@ -1,4 +1,5 @@
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
+import 'package:boilerplate/main.dart';
 import 'package:boilerplate/routes.dart';
 import 'package:boilerplate/stores/fit/fit_store.dart';
 import 'package:boilerplate/ui/home/chart.dart';
@@ -132,12 +133,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       actions: <Widget>[
         IconButton(
-          onPressed: () {
-            SharedPreferences.getInstance().then((preference) {
-              preference.setBool(Preferences.is_logged_in, false);
-              Navigator.of(context).pushReplacementNamed(Routes.login);
-            });
-          },
+          onPressed: () async =>
+              await appComponent.getSharedPreferenceHelper().removeAuthToken(),
           icon: Icon(
             Icons.person,
           ),

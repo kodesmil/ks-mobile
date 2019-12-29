@@ -1,6 +1,7 @@
 import 'package:boilerplate/data/network/apis/posts/token_api.dart';
 import 'package:boilerplate/data/network/apis/posts/user_api.dart';
 import 'package:boilerplate/data/post_repository.dart';
+import 'package:boilerplate/data/sharedpref/shared_preference_helper.dart';
 import 'package:boilerplate/di/modules/local_module.dart';
 import 'package:boilerplate/di/modules/netwok_module.dart';
 import 'package:boilerplate/main.dart';
@@ -16,9 +17,9 @@ abstract class AppComponent {
   MyApp get app;
 
   static Future<AppComponent> create(
-      NetworkModule networkModule,
-      LocalModule localModule,
-      ) async {
+    NetworkModule networkModule,
+    LocalModule localModule,
+  ) async {
     return await g.AppComponent$Injector.create(
       networkModule,
       localModule,
@@ -34,4 +35,7 @@ abstract class AppComponent {
 
   @provide
   UserApi getUserApi();
+
+  @provide
+  SharedPreferenceHelper getSharedPreferenceHelper();
 }

@@ -14,6 +14,7 @@ abstract class _FormStore with Store {
   final errorStore = ErrorStore();
   final tokenApi = appComponent.getTokenApi();
   final userApi = appComponent.getUserApi();
+  final sharedPreferenceHelper = appComponent.getSharedPreferenceHelper();
 
   _FormStore() {
     _setupValidations();
@@ -139,15 +140,20 @@ abstract class _FormStore with Store {
   Future login() async {
     loading = true;
     FlutterAppAuth appAuth = FlutterAppAuth();
+    var discoveryUrl =
+        'https://auth.kodesmil.com/.well-known/openid-configuration';
     final AuthorizationTokenResponse result =
         await appAuth.authorizeAndExchangeCode(
       AuthorizationTokenRequest(
         '37dc2100-7e95-4dcb-ba0a-df1f742244d2',
         'motim://auth.kodesmil.com',
-        discoveryUrl:
-            'https://auth.kodesmil.com/.well-known/openid-configuration',
+        discoveryUrl: discoveryUrl,
         scopes: ['openid', 'profile', 'email'],
       ),
+    );
+    await sharedPreferenceHelper.saveAuthToken(
+      result.accessToken,
+      result.refreshToken,
     );
     loading = false;
     success = true;

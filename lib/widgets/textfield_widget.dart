@@ -45,7 +45,6 @@ class TextFieldWidget extends StatelessWidget {
         autofocus: autoFocus,
         textInputAction: inputAction,
         obscureText: this.isObscure,
-        maxLength: 25,
         keyboardType: this.inputType,
         style: Theme.of(context).textTheme.body1,
         decoration: InputDecoration(

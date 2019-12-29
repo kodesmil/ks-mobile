@@ -53,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: Column(
         children: <Widget>[
-          SizedBox(height: 72.0),
+          SizedBox(height: 96.0),
           Column(
             children: <Widget>[
               Text(
@@ -70,8 +70,12 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ],
           ),
-          SizedBox(height: 72.0),
+          SizedBox(
+            height: 96.0,
+            width: 1000,
+          ),
           _buildLoginField(),
+          SizedBox(height: 16.0),
           _buildSignInButton()
         ],
       ),
@@ -116,17 +120,12 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget navigate(BuildContext context) {
-    SharedPreferences.getInstance().then((prefs) {
-      prefs.setBool(Preferences.is_logged_in, true);
-    });
-
     Future.delayed(Duration(milliseconds: 0), () {
       Navigator.of(context).pushNamedAndRemoveUntil(
         Routes.home,
         (Route<dynamic> route) => false,
       );
     });
-
     return Container();
   }
 }

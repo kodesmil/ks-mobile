@@ -17,21 +17,23 @@ class SharedPreferenceHelper {
     });
   }
 
-  Future<void> saveAuthToken(String authToken) async {
+  Future<void> saveAuthToken(String authToken, String refreshToken) async {
     return _sharedPreference.then((preference) {
       preference.setString(Preferences.auth_token, authToken);
+      preference.setString(Preferences.refresh_token, refreshToken);
     });
   }
 
   Future<void> removeAuthToken() async {
     return _sharedPreference.then((preference) {
       preference.remove(Preferences.auth_token);
+      preference.remove(Preferences.refresh_token);
     });
   }
 
   Future<bool> get isLoggedIn async {
     return _sharedPreference.then((preference) {
-      return preference.getString(Preferences.auth_token) ?? false;
+      return preference.getString(Preferences.auth_token)?.isNotEmpty ?? false;
     });
   }
 }
