@@ -41,7 +41,7 @@ abstract class _SignUpStore with Store {
   String lastName = '';
 
   @observable
-  DateTime dateOfBirth;
+  String dateOfBirth = '';
 
   @observable
   String password = '';
@@ -76,7 +76,7 @@ abstract class _SignUpStore with Store {
   }
 
   @action
-  void setDateOfBirth(DateTime value) {
+  void setDateOfBirth(String value) {
     dateOfBirth = value;
   }
 
@@ -121,8 +121,8 @@ abstract class _SignUpStore with Store {
   }
 
   @action
-  void validateDateOfBirth(DateTime value) {
-    if (value != null) {
+  void validateDateOfBirth(String value) {
+    if (value.isEmpty) {
       signUpErrorStore.dateOfBirth = "Date of birth can't be empty";
     } else {
       signUpErrorStore.dateOfBirth = null;

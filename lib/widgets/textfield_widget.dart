@@ -5,7 +5,6 @@ class TextFieldWidget extends StatelessWidget {
   final String hint;
   final String errorText;
   final bool isObscure;
-  final bool isIcon;
   final TextInputType inputType;
   final TextEditingController textController;
   final EdgeInsets padding;
@@ -15,6 +14,7 @@ class TextFieldWidget extends StatelessWidget {
   final ValueChanged onFieldSubmitted;
   final bool autoFocus;
   final TextInputAction inputAction;
+  final TextCapitalization textCapitalization;
 
   const TextFieldWidget({
     Key key,
@@ -24,7 +24,6 @@ class TextFieldWidget extends StatelessWidget {
     this.isObscure = false,
     this.inputType,
     this.textController,
-    this.isIcon = true,
     this.padding = const EdgeInsets.all(0),
     this.hintColor = Colors.grey,
     this.iconColor = Colors.grey,
@@ -32,6 +31,7 @@ class TextFieldWidget extends StatelessWidget {
     this.onFieldSubmitted,
     this.autoFocus = false,
     this.inputAction,
+    this.textCapitalization = TextCapitalization.none,
   }) : super(key: key);
 
   @override
@@ -41,6 +41,7 @@ class TextFieldWidget extends StatelessWidget {
       child: TextFormField(
         controller: textController,
         focusNode: focusNode,
+        textCapitalization: textCapitalization,
         onFieldSubmitted: onFieldSubmitted,
         autofocus: autoFocus,
         textInputAction: inputAction,
@@ -54,7 +55,6 @@ class TextFieldWidget extends StatelessWidget {
               ),
           errorText: errorText,
           counterText: '',
-          icon: this.isIcon ? Icon(this.icon, color: iconColor) : null,
         ),
       ),
     );

@@ -1,60 +1,58 @@
 import 'package:flutter/material.dart';
 
-class TextFieldWidget extends StatelessWidget {
-  final IconData icon;
+class DateFieldWidget extends StatelessWidget {
   final String hint;
   final String errorText;
-  final bool isObscure;
-  final bool isIcon;
-  final TextInputType inputType;
   final TextEditingController textController;
+  final Function(DateTime) selectedDate;
   final EdgeInsets padding;
   final Color hintColor;
-  final Color iconColor;
-  final FocusNode focusNode;
   final ValueChanged onFieldSubmitted;
   final bool autoFocus;
-  final TextInputAction inputAction;
 
-  const TextFieldWidget({
+  const DateFieldWidget({
     Key key,
-    this.icon,
     this.hint,
     this.errorText,
-    this.isObscure = false,
-    this.inputType,
     this.textController,
-    this.isIcon = true,
+    this.selectedDate,
     this.padding = const EdgeInsets.all(0),
     this.hintColor = Colors.grey,
-    this.iconColor = Colors.grey,
-    this.focusNode,
     this.onFieldSubmitted,
     this.autoFocus = false,
-    this.inputAction,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: padding,
-      child: TextFormField(
-        controller: textController,
-        focusNode: focusNode,
-        onFieldSubmitted: onFieldSubmitted,
-        autofocus: autoFocus,
-        textInputAction: inputAction,
-        obscureText: this.isObscure,
-        keyboardType: this.inputType,
-        style: Theme.of(context).textTheme.body1,
-        decoration: InputDecoration(
-          labelText: this.hint,
-          labelStyle: Theme.of(context).textTheme.body1.copyWith(
-                color: hintColor,
+      child: GestureDetector(
+        onTap: () async => selectedDate(await showDatePicker(
+          context: context,
+          initialDate: DateTime.now().subtract(Duration(days: 365 * 28)),
+          firstDate: DateTime(1900),
+          lastDate: DateTime.now(),
+          builder: (BuildContext context, Widget child) => Theme(
+            data: ThemeData.dark(),
+            child: child,
+          ),
+        )),
+        child: Container(
+          color: Colors.transparent,
+          child: IgnorePointer(
+            child: TextFormField(
+              controller: textController,
+              style: Theme.of(context).textTheme.body1,
+              decoration: InputDecoration(
+                labelText: this.hint,
+                labelStyle: Theme.of(context).textTheme.body1.copyWith(
+                      color: hintColor,
+                    ),
+                errorText: errorText,
+                counterText: '',
               ),
-          errorText: errorText,
-          counterText: '',
-          icon: this.isIcon ? Icon(this.icon, color: iconColor) : null,
+            ),
+          ),
         ),
       ),
     );

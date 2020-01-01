@@ -84,10 +84,7 @@ abstract class _LoginStore with Store {
         password: password,
       );
       final result = await tokenApi.getAuthAccessToken(user);
-      await sharedPreferenceHelper.saveAuthToken(
-        result.accessToken,
-        result.refreshToken,
-      );
+      await sharedPreferenceHelper.saveAuthToken(result);
       loading = false;
       success = false;
       errorStore.showError = false;
@@ -95,9 +92,9 @@ abstract class _LoginStore with Store {
       loading = false;
       success = false;
       errorStore.showError = true;
-      errorStore.errorMessage = e.toString().contains("ERROR_USER_NOT_FOUND")
-          ? "Username and password doesn't match"
-          : "Something went wrong, please check your internet connection and try again";
+      errorStore.errorMessage = e.toString().contains('ERROR_USER_NOT_FOUND')
+          ? 'Username and password doesn\'t match'
+          : 'Something went wrong, please check your internet connection and try again';
       print(e);
     }
   }

@@ -12,7 +12,7 @@ class User {
   String password;
   String userName;
   List<Email> emails;
-  DateTime dayOfBirth;
+  String dayOfBirth;
 
   User({
     this.name,
