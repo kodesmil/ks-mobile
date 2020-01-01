@@ -1,13 +1,10 @@
 import 'package:boilerplate/constants/strings.dart';
-import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/routes.dart';
-import 'package:boilerplate/stores/form/form_store.dart';
+import 'package:boilerplate/stores/form/sign_up_store.dart';
 import 'package:boilerplate/widgets/empty_app_bar_widget.dart';
 import 'package:boilerplate/widgets/progress_indicator_widget.dart';
-import 'package:boilerplate/widgets/rounded_button_widget.dart';
 import 'package:boilerplate/widgets/textfield_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flushbar/flushbar_helper.dart';
 
@@ -17,38 +14,26 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  //text controllers
-  TextEditingController _userEmailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-
-  //focus node
-  FocusNode _passwordFocusNode;
-
-  //form key
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _passwordFocusNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
-
-  //store
-  final _store = FormStore();
+  final _store = SignUpStore();
 
   @override
   void initState() {
     super.initState();
-
-    _passwordFocusNode = FocusNode();
-
-    _userEmailController.addListener(() {
-      //this will be called whenever user types in some value
-      _store.setUserId(_userEmailController.text);
+    _emailController.addListener(() {
+      _store.setEmail(_emailController.text);
     });
     _passwordController.addListener(() {
-      //this will be called whenever user types in some value
       _store.setPassword(_passwordController.text);
     });
   }
 
   @override
   void dispose() {
-    _userEmailController.dispose();
+    _emailController.dispose();
     _passwordController.dispose();
     _passwordFocusNode.dispose();
     super.dispose();
@@ -128,12 +113,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
           hint: Strings.login_et_user_email,
           inputType: TextInputType.emailAddress,
           icon: Icons.person,
-          textController: _userEmailController,
+          textController: _emailController,
           inputAction: TextInputAction.next,
           onFieldSubmitted: (value) {
             FocusScope.of(context).requestFocus(_passwordFocusNode);
           },
-          errorText: _store.formErrorStore.userEmail,
+          errorText: _store.signUpErrorStore.email,
         );
       },
     );
@@ -149,7 +134,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           icon: Icons.lock,
           textController: _passwordController,
           focusNode: _passwordFocusNode,
-          errorText: _store.formErrorStore.password,
+          errorText: _store.signUpErrorStore.password,
         );
       },
     );
@@ -160,7 +145,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       child: Text('Sign up'),
       shape: StadiumBorder(),
       onPressed: () async {
-        if (_store.canLogin) {
+        if (_store.canSignUp) {
           _store.signUp();
         } else {
           showErrorMessage(context, 'Please fill in all fields');
@@ -169,7 +154,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  // General Methods:-----------------------------------------------------------
   showErrorMessage(BuildContext context, String message) {
     if (message != null) {
       FlushbarHelper.createError(

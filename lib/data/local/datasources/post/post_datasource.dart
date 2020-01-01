@@ -20,7 +20,7 @@ class PostDataSource {
 
   // DB functions:--------------------------------------------------------------
   Future<int> insert(Post post) async {
-    return await _postsStore.add(await _db, post.toMap());
+    return await _postsStore.add(await _db, post.toJson());
   }
 
   Future<int> count() async {
@@ -40,7 +40,7 @@ class PostDataSource {
 
     // Making a List<Post> out of List<RecordSnapshot>
     return recordSnapshots.map((snapshot) {
-      final post = Post.fromMap(snapshot.value);
+      final post = Post.fromJson(snapshot.value);
       // An ID is a key of a record from the database.
       post.id = snapshot.key;
       return post;
@@ -48,7 +48,6 @@ class PostDataSource {
   }
 
   Future<PostsList> getPostsFromDb() async {
-
     print('Loading from database');
 
     // post list
@@ -60,14 +59,14 @@ class PostDataSource {
     );
 
     // Making a List<Post> out of List<RecordSnapshot>
-    if(recordSnapshots.length > 0) {
+    if (recordSnapshots.length > 0) {
       postsList = PostsList(
           posts: recordSnapshots.map((snapshot) {
-            final post = Post.fromMap(snapshot.value);
-            // An ID is a key of a record from the database.
-            post.id = snapshot.key;
-            return post;
-          }).toList());
+        final post = Post.fromJson(snapshot.value);
+        // An ID is a key of a record from the database.
+        post.id = snapshot.key;
+        return post;
+      }).toList());
     }
 
     return postsList;
@@ -79,7 +78,7 @@ class PostDataSource {
     final finder = Finder(filter: Filter.byKey(post.id));
     return await _postsStore.update(
       await _db,
-      post.toMap(),
+      post.toJson(),
       finder: finder,
     );
   }
@@ -97,5 +96,4 @@ class PostDataSource {
       await _db,
     );
   }
-
 }

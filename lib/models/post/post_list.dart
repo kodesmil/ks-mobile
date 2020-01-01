@@ -1,5 +1,9 @@
 import 'package:boilerplate/models/post/post.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'post_list.g.dart';
+
+@JsonSerializable(nullable: false)
 class PostsList {
   final List<Post> posts;
 
@@ -7,12 +11,7 @@ class PostsList {
     this.posts,
   });
 
-  factory PostsList.fromJson(List<dynamic> json) {
-    List<Post> posts = List<Post>();
-    posts = json.map((post) => Post.fromMap(post)).toList();
+  factory PostsList.fromJson(Map<String, dynamic> json) => _$PostsListFromJson(json);
 
-    return PostsList(
-      posts: posts,
-    );
-  }
+  Map<String, dynamic> toJson() => _$PostsListToJson(this);
 }

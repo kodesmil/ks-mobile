@@ -1,6 +1,6 @@
 import 'package:boilerplate/ui/home/home.dart';
 import 'package:boilerplate/ui/login/login.dart';
-import 'package:boilerplate/ui/login/signup.dart';
+import 'package:boilerplate/ui/login/sign_up.dart';
 import 'package:boilerplate/ui/splash/splash.dart';
 import 'package:flutter/material.dart';
 

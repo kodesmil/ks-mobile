@@ -26,7 +26,7 @@ class NetworkModule {
       var prefs = await SharedPreferences.getInstance();
 
       // getting token
-      var token = prefs.getString(Preferences.auth_token);
+      var token = prefs.getString(Preferences.accessToken);
 
       if (token != null) {
         options.headers.putIfAbsent('Authorization', () => token);
@@ -60,8 +60,7 @@ class NetworkModule {
 
   @provide
   @singleton
-  TokenApi provideTokenApi() =>
-      TokenApi(provideDioClient(), provideRestClient());
+  TokenApi provideTokenApi() => TokenApi(provideDioClient());
 
   @provide
   @singleton
