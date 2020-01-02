@@ -8,8 +8,6 @@ class TextFieldWidget extends StatelessWidget {
   final TextInputType inputType;
   final TextEditingController textController;
   final EdgeInsets padding;
-  final Color hintColor;
-  final Color iconColor;
   final FocusNode focusNode;
   final ValueChanged onFieldSubmitted;
   final bool autoFocus;
@@ -25,8 +23,6 @@ class TextFieldWidget extends StatelessWidget {
     this.inputType,
     this.textController,
     this.padding = const EdgeInsets.all(0),
-    this.hintColor = Colors.grey,
-    this.iconColor = Colors.grey,
     this.focusNode,
     this.onFieldSubmitted,
     this.autoFocus = false,
@@ -51,7 +47,7 @@ class TextFieldWidget extends StatelessWidget {
         decoration: InputDecoration(
           labelText: this.hint,
           labelStyle: Theme.of(context).textTheme.body1.copyWith(
-                color: hintColor,
+                color: Theme.of(context).hintColor,
               ),
           errorText: errorText,
           counterText: '',

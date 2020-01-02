@@ -12,14 +12,14 @@ class User {
   String password;
   String userName;
   List<Email> emails;
-  String dayOfBirth;
+  bool active;
 
   User({
     this.name,
     this.password,
     this.userName,
     this.emails,
-    this.dayOfBirth,
+    this.active
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

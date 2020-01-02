@@ -43,7 +43,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       _store.setFirstName(_firstNameController.text);
     });
     _lastNameController.addListener(() {
-      _store.setPassword(_lastNameController.text);
+      _store.setLastName(_lastNameController.text);
     });
   }
 
@@ -87,16 +87,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget _buildRightSide() => Form(
         key: _formKey,
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          padding: const EdgeInsets.symmetric(horizontal: 48.0),
           child: Column(
             children: <Widget>[
-              SizedBox(height: 32.0),
+              SizedBox(height: 48.0),
               _buildFirstNameField(),
               _buildLastNameField(),
               _buildDateOfBirthField(),
               _buildEmailField(),
               _buildPasswordField(),
-              SizedBox(height: 32.0),
+              SizedBox(height: 48.0),
               _buildSignUpButton()
             ],
           ),
@@ -161,12 +161,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
           selectedDate: (date) =>
               _dateOfBirthController.text = DateFormat.yMMMMd().format(date),
           errorText: _store.signUpErrorStore.dateOfBirth,
+          onFieldSubmitted: (value) =>
+              FocusScope.of(context).requestFocus(_emailFocusNode),
         ),
       );
 
   Widget _buildSignUpButton() {
     return RaisedButton(
-      child: Text('Sign up'),
+      child: Text('Sign up'.toUpperCase()),
       shape: StadiumBorder(),
       onPressed: () async {
         if (_store.canSignUp) {

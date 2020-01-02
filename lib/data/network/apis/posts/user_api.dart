@@ -20,7 +20,7 @@ class UserApi {
     return _dioClient
         .post(
           Endpoints.getScimUser,
-          data: user.toJson(),
+          data: json.encode(user.toJson()),
           options: Options(
             headers: {
               'Authorization': 'Bearer ${token.accessToken}',
@@ -28,7 +28,6 @@ class UserApi {
             contentType: ContentType('application', 'scim+json'),
           ),
         )
-        .then((dynamic res) => res)
-        .catchError((error) => throw NetworkException(message: error));
+        .then((dynamic res) => res);
   }
 }

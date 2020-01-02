@@ -46,7 +46,7 @@ class DateFieldWidget extends StatelessWidget {
               decoration: InputDecoration(
                 labelText: this.hint,
                 labelStyle: Theme.of(context).textTheme.body1.copyWith(
-                      color: hintColor,
+                      color: Theme.of(context).hintColor,
                     ),
                 errorText: errorText,
                 counterText: '',

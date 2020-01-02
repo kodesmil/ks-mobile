@@ -18,13 +18,13 @@ class MfThemeData {
 
   static light() {
     final colorScheme = ColorScheme(
-      primary: const Color(0xFFB93C5D),
+      primary: Colors.black,
       primaryVariant: const Color(0xFF117378),
       secondary: const Color(0xFFEFF3F3),
       secondaryVariant: const Color(0xFFFAFBFB),
-      background: const Color(0xFFE6EBEB),
-      surface: const Color(0xFFFAFBFB),
-      onBackground: Colors.white,
+      background: Colors.white,
+      surface: Colors.teal.shade100.withAlpha(156),
+      onBackground: Colors.black.withAlpha(220),
       error: _lightFillColor,
       onError: _lightFillColor,
       onPrimary: _lightFillColor,
@@ -38,13 +38,13 @@ class MfThemeData {
 
   static dark() {
     final colorScheme = ColorScheme(
-      primary: const Color(0xFFFF8383),
-      primaryVariant: const Color(0xFF1CDEC9),
-      secondary: const Color(0xFF4D1F7C),
-      secondaryVariant: const Color(0xFF451B6F),
-      background: const Color(0xFF241E30),
-      surface: const Color(0xFF1F1929),
-      onBackground: Colors.white.withOpacity(0.05),
+      primary: Colors.white.withAlpha(200),
+      primaryVariant: Colors.white.withAlpha(32),
+      secondary: Colors.teal.shade700,
+      secondaryVariant: Colors.teal,
+      background: const Color(0xFF00212A),
+      surface: Colors.black,
+      onBackground: Colors.white.withAlpha(220),
       error: _darkFillColor,
       onError: _darkFillColor,
       onPrimary: _darkFillColor,
@@ -62,9 +62,9 @@ class MfThemeData {
     return ThemeData(
       colorScheme: colorScheme,
       textTheme: _textTheme.apply(
-        bodyColor: colorScheme.onSurface,
-        displayColor: colorScheme.onSurface,
-        decorationColor: colorScheme.onSurface,
+        bodyColor: colorScheme.onSurface.withAlpha(220),
+        displayColor: colorScheme.onSurface.withAlpha(220),
+        decorationColor: colorScheme.onSurface.withAlpha(220),
       ),
       appBarTheme: AppBarTheme(
         color: colorScheme.background,
@@ -78,6 +78,7 @@ class MfThemeData {
       dividerTheme: DividerThemeData(
         thickness: 1,
       ),
+      hintColor: colorScheme.onBackground,
       cursorColor: colorScheme.onSurface,
       backgroundColor: colorScheme.background,
       iconTheme: IconThemeData(color: colorScheme.primary),

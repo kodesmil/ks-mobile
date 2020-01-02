@@ -137,6 +137,7 @@ abstract class _SignUpStore with Store {
       final user = User(
         userName: email,
         password: password,
+        active: true,
         name: Name(
           familyName: lastName,
           givenName: firstName,

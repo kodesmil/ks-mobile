@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'token.g.dart';
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: false, fieldRename: FieldRename.snake)
 class Token {
   String accessToken;
   String refreshToken;

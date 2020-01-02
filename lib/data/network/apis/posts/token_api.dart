@@ -47,6 +47,5 @@ class TokenApi {
           contentType: ContentType('application', 'x-www-form-urlencoded'),
         ),
       )
-      .then((dynamic res) => Token.fromJson(res))
-      .catchError((error) => throw NetworkException(message: error));
+      .then((dynamic res) => Token.fromJson(res));
 }

@@ -66,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildRightSide() => Form(
         key: _formKey,
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          padding: const EdgeInsets.symmetric(horizontal: 48.0),
           child: Column(
             children: <Widget>[
               Column(
@@ -88,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: 48.0),
               _buildEmailField(),
               _buildPasswordField(),
-              SizedBox(height: 32.0),
+              SizedBox(height: 48.0),
               _buildLoginField(),
               SizedBox(height: 16.0),
               _buildSignInButton()
