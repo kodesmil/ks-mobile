@@ -127,9 +127,17 @@ class _LoginScreenState extends State<LoginScreen> {
         builder: (context) => RaisedButton(
           child: Text('Login'.toUpperCase()),
           shape: StadiumBorder(),
-          onPressed: () => _store.login(),
+          onPressed: () async {
+            _store.validateAll();
+            if (_store.canLogin) {
+              _store.login();
+            } else {
+              showErrorMessage(context, 'Please fill in all fields');
+            }
+          },
         ),
       );
+
 
   Widget _buildSignInButton() => Observer(
         builder: (context) => FlatButton(
@@ -140,12 +148,8 @@ class _LoginScreenState extends State<LoginScreen> {
       );
 
   showErrorMessage(BuildContext context, String message) {
-    if (message != null) {
-      FlushbarHelper.createError(
-        message: message,
-        title: 'Error',
-        duration: Duration(seconds: 3),
-      )..show(context);
+    if (message?.isNotEmpty == true) {
+      Scaffold.of(context).showSnackBar(SnackBar(content: Text(message)));
     }
     return Container();
   }
@@ -154,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
     Future.delayed(Duration(milliseconds: 0), () {
       Navigator.of(context).pushNamedAndRemoveUntil(
         Routes.home,
-        (Route<dynamic> route) => false,
+        (route) => false,
       );
     });
     return Container();

@@ -168,18 +168,19 @@ abstract class _SignUpStore with Store {
     loading = true;
   }
 
-  void dispose() {
-    for (final d in _disposers) {
-      d();
-    }
-  }
-
+  @action
   void validateAll() {
     validatePassword(password);
     validateEmail(email);
     validateDateOfBirth(dateOfBirth);
     validateFirstName(firstName);
     validateLastName(lastName);
+  }
+
+  void dispose() {
+    for (final d in _disposers) {
+      d();
+    }
   }
 }
 

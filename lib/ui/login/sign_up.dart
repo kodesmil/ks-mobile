@@ -192,6 +192,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       child: Text('Sign up'.toUpperCase()),
       shape: StadiumBorder(),
       onPressed: () async {
+        _store.validateAll();
         if (_store.canSignUp) {
           _store.signUp();
         } else {
@@ -202,14 +203,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   showErrorMessage(BuildContext context, String message) {
-    if (message != null) {
-      FlushbarHelper.createError(
-        message: message,
-        title: 'Error',
-        duration: Duration(seconds: 3),
-      )..show(context);
+    if (message?.isNotEmpty == true) {
+      Scaffold.of(context).showSnackBar(SnackBar(content: Text(message)));
     }
-
     return Container();
   }
 

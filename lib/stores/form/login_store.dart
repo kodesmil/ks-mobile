@@ -104,15 +104,16 @@ abstract class _LoginStore with Store {
     loading = true;
   }
 
+  @action
+  void validateAll() {
+    validatePassword(password);
+    validateEmail(email);
+  }
+
   void dispose() {
     for (final d in _disposers) {
       d();
     }
-  }
-
-  void validateAll() {
-    validatePassword(password);
-    validateEmail(email);
   }
 }
 
