@@ -45,6 +45,7 @@ class TextFieldWidget extends StatelessWidget {
         keyboardType: this.inputType,
         style: Theme.of(context).textTheme.body1,
         decoration: InputDecoration(
+          prefixIcon: Icon(icon),
           labelText: this.hint,
           labelStyle: Theme.of(context).textTheme.body1.copyWith(
                 color: Theme.of(context).hintColor,

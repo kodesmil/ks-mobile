@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
         builder: (context) => TextFieldWidget(
           hint: Strings.login_et_user_email,
           inputType: TextInputType.emailAddress,
-          icon: Icons.person,
+          icon: Icons.email,
           textController: _emailController,
           inputAction: TextInputAction.next,
           onFieldSubmitted: (value) {

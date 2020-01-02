@@ -156,9 +156,9 @@ abstract class _SignUpStore with Store {
       loading = false;
       success = false;
       errorStore.showError = true;
-      errorStore.errorMessage = e.toString().contains("ERROR_USER_NOT_FOUND")
-          ? "Username and password doesn't match"
-          : "Something went wrong, please check your internet connection and try again";
+      errorStore.errorMessage = e.toString().contains('ERROR_USER_NOT_FOUND')
+          ? 'Username and password doesn\'t match'
+          : 'Something went wrong, please check your internet connection and try again';
       print(e);
     }
   }

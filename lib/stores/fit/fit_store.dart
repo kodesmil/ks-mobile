@@ -50,7 +50,8 @@ abstract class _FitStore with Store {
     final now = DateTime.now();
     final a = await FitKit.read(
       type,
-      dateFrom: DateTime(now.year, now.month),
+      // dateFrom: DateTime(now.year, now.month),
+      dateFrom: DateTime.now().subtract(Duration(days: 30)),
       dateTo: now,
     );
     return a;
@@ -75,13 +76,16 @@ abstract class _FitStore with Store {
       final time = list.fold<Duration>(Duration.zero, (previous, element) {
         return previous + element.dateTo.difference(element.dateFrom);
       });
-      final points = time.inMinutes * 2.0;
-      dailies.add(FitDaily(
+      final points = time.inMinutes.toDouble();
+      dailies.add(
+        FitDaily(
           userId: 0,
           steps: steps,
           points: points,
           distance: distance,
-          date: DateFormat.yMMMMd().parse(key)));
+          date: DateFormat.yMMMMd().parse(key),
+        ),
+      );
     }
     dailies.sort((a, b) => b.date.compareTo(a.date));
     return FitsList(

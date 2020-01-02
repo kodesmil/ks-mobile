@@ -24,6 +24,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _passwordFocusNode = FocusNode();
   final _emailFocusNode = FocusNode();
   final _lastNameFocusNode = FocusNode();
+  final _dateOfBirthFocusNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
   final _store = SignUpStore();
 
@@ -45,18 +46,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _lastNameController.addListener(() {
       _store.setLastName(_lastNameController.text);
     });
+    _dateOfBirthController.addListener(() {
+      _store.setDateOfBirth(_dateOfBirthController.text);
+    });
   }
 
   @override
   void dispose() {
+    _firstNameController.dispose();
     _emailController.dispose();
+    _emailFocusNode.dispose();
+    _passwordFocusNode.dispose();
     _passwordController.dispose();
     _lastNameController.dispose();
-    _firstNameController.dispose();
-    _dateOfBirthController.dispose();
-    _passwordFocusNode.dispose();
     _lastNameFocusNode.dispose();
-    _emailFocusNode.dispose();
+    _dateOfBirthController.dispose();
+    _dateOfBirthFocusNode.dispose();
     super.dispose();
   }
 
@@ -73,7 +78,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
           Observer(
             builder: (context) => _store.success
                 ? navigate(context)
-                : showErrorMessage(context, _store.errorStore.errorMessage),
+                : showErrorMessage(
+                    context,
+                    _store.errorStore.errorMessage,
+                  ),
           ),
           Observer(
             builder: (context) => Visibility(
@@ -106,13 +114,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget _buildEmailField() => Observer(
         builder: (context) => TextFieldWidget(
           hint: Strings.login_et_user_email,
+          icon: Icons.email,
           inputType: TextInputType.emailAddress,
           textController: _emailController,
           focusNode: _emailFocusNode,
           padding: EdgeInsets.only(top: 16.0),
           inputAction: TextInputAction.next,
-          onFieldSubmitted: (value) =>
-              FocusScope.of(context).requestFocus(_passwordFocusNode),
+          onFieldSubmitted: (value) => FocusScope.of(context).requestFocus(
+            _passwordFocusNode,
+          ),
           errorText: _store.signUpErrorStore.email,
         ),
       );
@@ -120,12 +130,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget _buildFirstNameField() => Observer(
         builder: (context) => TextFieldWidget(
           hint: 'First Name',
+          icon: Icons.person,
           textController: _firstNameController,
           inputAction: TextInputAction.next,
           autoFocus: true,
           textCapitalization: TextCapitalization.words,
-          onFieldSubmitted: (value) =>
-              FocusScope.of(context).requestFocus(_lastNameFocusNode),
+          onFieldSubmitted: (value) => FocusScope.of(context).requestFocus(
+            _lastNameFocusNode,
+          ),
           errorText: _store.signUpErrorStore.firstName,
         ),
       );
@@ -133,18 +145,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget _buildLastNameField() => Observer(
         builder: (context) => TextFieldWidget(
           hint: 'Last Name',
+          icon: Icons.person,
           textController: _lastNameController,
           inputAction: TextInputAction.next,
           focusNode: _lastNameFocusNode,
           textCapitalization: TextCapitalization.words,
           padding: EdgeInsets.only(top: 16.0),
           errorText: _store.signUpErrorStore.lastName,
+          onFieldSubmitted: (value) => FocusScope.of(context).requestFocus(
+            _dateOfBirthFocusNode,
+          ),
         ),
       );
 
   Widget _buildPasswordField() => Observer(
         builder: (context) => TextFieldWidget(
           hint: Strings.login_et_user_password,
+          icon: Icons.lock,
           isObscure: true,
           padding: EdgeInsets.only(top: 16.0),
           textController: _passwordController,
@@ -156,13 +173,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget _buildDateOfBirthField() => Observer(
         builder: (context) => DateFieldWidget(
           hint: 'Date of birth',
+          icon: Icons.child_friendly,
           padding: EdgeInsets.only(top: 16.0),
           textController: _dateOfBirthController,
-          selectedDate: (date) =>
-              _dateOfBirthController.text = DateFormat.yMMMMd().format(date),
+          focusNode: _dateOfBirthFocusNode,
+          selectedDate: (date) {
+            if (date != null) {
+              _dateOfBirthController.text = DateFormat.yMMMMd().format(date);
+              FocusScope.of(context).requestFocus(_emailFocusNode);
+            }
+          },
           errorText: _store.signUpErrorStore.dateOfBirth,
-          onFieldSubmitted: (value) =>
-              FocusScope.of(context).requestFocus(_emailFocusNode),
         ),
       );
 
