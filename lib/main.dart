@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:inject/inject.dart';
+import 'package:lib_di/di/modules/local_module.dart';
+import 'package:lib_di/di/modules/netwok_module.dart';
 
 import 'constants/theme.dart';
 import 'constants/strings.dart';
 import 'di/components/app_component.dart';
-import 'di/modules/local_module.dart';
-import 'di/modules/netwok_module.dart';
 import 'ui/splash/splash.dart';
 
 // global instance for app component

@@ -1,8 +1,8 @@
 import 'package:boilerplate/ui/home/home.dart';
-import 'package:boilerplate/ui/login/login.dart';
-import 'package:boilerplate/ui/login/sign_up.dart';
 import 'package:boilerplate/ui/splash/splash.dart';
 import 'package:flutter/material.dart';
+import 'package:lib_auth/ui/login/login.dart';
+import 'package:lib_auth/ui/login/sign_up.dart';
 
 class Routes {
   Routes._();

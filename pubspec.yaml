@@ -40,7 +40,15 @@ dependencies:
   intl_translation: ^0.17.7
   firebase_admob: ^0.9.0+10
   flutter_dotenv: ^2.1.0
-  flutter_appauth: ^0.6.0
+
+  lib_lego:
+    path: lib_lego
+
+  lib_di:
+    path: lib_di
+
+  lib_auth:
+    path: lib_auth
 
   inject:
     git:

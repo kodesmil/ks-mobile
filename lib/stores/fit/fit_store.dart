@@ -1,9 +1,8 @@
 import 'dart:collection';
 
-import 'package:boilerplate/main.dart';
 import 'package:boilerplate/models/fit/fit.dart';
 import 'package:boilerplate/models/fit/fit_list.dart';
-import 'package:boilerplate/stores/error/error_store.dart';
+import 'file:///Users/maverick/Documents/Kodesmil/kodesmil_mobile/lib_di/lib/stores/error/error_store.dart';
 import 'package:boilerplate/utils/dio/dio_error_util.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';

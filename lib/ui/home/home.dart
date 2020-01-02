@@ -1,9 +1,8 @@
-import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/main.dart';
 import 'package:boilerplate/routes.dart';
 import 'package:boilerplate/stores/fit/fit_store.dart';
 import 'package:boilerplate/ui/home/chart.dart';
-import 'package:boilerplate/widgets/progress_indicator_widget.dart';
+import 'package:lib_lego/widgets/progress_indicator_widget.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

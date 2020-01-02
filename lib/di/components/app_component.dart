@@ -1,11 +1,7 @@
-import 'package:boilerplate/data/network/apis/posts/token_api.dart';
-import 'package:boilerplate/data/network/apis/posts/user_api.dart';
-import 'package:boilerplate/data/post_repository.dart';
-import 'package:boilerplate/data/sharedpref/shared_preference_helper.dart';
-import 'package:boilerplate/di/modules/local_module.dart';
-import 'package:boilerplate/di/modules/netwok_module.dart';
 import 'package:boilerplate/main.dart';
 import 'package:inject/inject.dart';
+import 'package:lib_di/di/modules/local_module.dart';
+import 'package:lib_di/di/modules/netwok_module.dart';
 
 import 'app_component.inject.dart' as g;
 
@@ -25,17 +21,4 @@ abstract class AppComponent {
       localModule,
     );
   }
-
-  /// An accessor to RestClient object that an application may use.
-  @provide
-  Repository getRepository();
-
-  @provide
-  TokenApi getTokenApi();
-
-  @provide
-  UserApi getUserApi();
-
-  @provide
-  SharedPreferenceHelper getSharedPreferenceHelper();
 }
