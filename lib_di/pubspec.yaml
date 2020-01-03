@@ -19,7 +19,6 @@ dependencies:
   validators: ^2.0.0+1
   dio: 2.1.13
   flutter_dotenv: ^2.1.0
-  build_runner: ^1.7.2
 
   inject:
     git:
@@ -35,10 +34,5 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  inject_generator:
-    git:
-      url: https://github.com/AndreySouza1/inject.dart.git
-      ref: develop
-      path: package/inject_generator
-
 flutter:
+  uses-material-design: true
