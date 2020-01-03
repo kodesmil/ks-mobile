@@ -1,0 +1,44 @@
+name: lib_di
+description: A new Flutter package project.
+version: 0.0.1
+author: KodeSmil authors
+homepage: kodesmil.com
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+
+  shared_preferences: ^0.5.4+6
+  http: ^0.12.0+2
+  f_logs: ^1.2.1
+  flutter_mobx: ^0.3.6
+  mobx: ^0.4.0+1
+  mobx_codegen: ^0.3.13
+  provider: ^3.2.0
+  validators: ^2.0.0+1
+  dio: 2.1.13
+  flutter_dotenv: ^2.1.0
+  build_runner: ^1.7.2
+
+  inject:
+    git:
+      # revert to google
+      url: https://github.com/AndreySouza1/inject.dart.git
+      ref: develop
+      path: package/inject
+
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  inject_generator:
+    git:
+      url: https://github.com/AndreySouza1/inject.dart.git
+      ref: develop
+      path: package/inject_generator
+
+flutter:
