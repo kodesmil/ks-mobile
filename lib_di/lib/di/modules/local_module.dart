@@ -3,10 +3,8 @@ import 'dart:async';
 import 'package:inject/inject.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'netwok_module.dart';
-
 @module
-class LocalModule extends NetworkModule {
+class LocalModule {
   @provide
   @singleton
   @asynchronous

@@ -16,17 +16,14 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flutter_localizations:
-    sdk: flutter
-  flutter_cupertino_localizations: ^1.0.1
   cupertino_icons: ^0.1.2
   shared_preferences: ^0.5.4+6
   http: ^0.12.0+2
   flutter_launcher_icons: ^0.7.4
   f_logs: ^1.2.1
-  mobx: ^0.3.9+3
-  flutter_mobx: ^0.3.3+3
-  mobx_codegen: ^0.3.10+1
+  flutter_mobx: ^0.3.6
+  mobx: ^0.4.0+1
+  mobx_codegen: ^0.3.13
   provider: ^3.2.0
   validators: ^2.0.0+1
   dio: 2.1.13
@@ -36,8 +33,6 @@ dependencies:
   fit_kit: ^1.1.0
   firebase_crashlytics: ^0.1.2+4
   charts_flutter: ^0.8.1
-  intl: ^0.16.0
-  intl_translation: ^0.17.7
   firebase_admob: ^0.9.0+10
   flutter_dotenv: ^2.1.0
 
@@ -54,6 +49,7 @@ dependencies:
     git:
       # revert to google
       url: https://github.com/AndreySouza1/inject.dart.git
+      ref: develop
       path: package/inject
 
 dependency_overrides:
@@ -64,12 +60,13 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  json_serializable: ^3.2.3
+  json_serializable: ^3.2.5
   build_runner: ^1.7.2
   grinder: ^0.8.3+1
   inject_generator:
     git:
       url: https://github.com/AndreySouza1/inject.dart.git
+      ref: develop
       path: package/inject_generator
 
 flutter_icons:

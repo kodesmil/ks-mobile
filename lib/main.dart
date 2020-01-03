@@ -14,10 +14,6 @@ import 'constants/strings.dart';
 import 'di/components/app_component.dart';
 import 'ui/splash/splash.dart';
 
-// global instance for app component
-// TODO find out a better way to use it across application
-AppComponent appComponent;
-
 void main() async {
   await DotEnv().load('.env');
   // Set `enableInDevMode` to true to see reports while in debug mode
@@ -35,9 +31,7 @@ void main() async {
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
     ]).then((_) async {
-      appComponent = await AppComponent.create(NetworkModule(), LocalModule());
-
-      runApp(appComponent.app);
+      runApp(MyApp());
     });
   }, onError: Crashlytics.instance.recordError);
 }

@@ -1,3 +1,4 @@
+import 'package:boilerplate/di/components/app_component.dart';
 import 'package:boilerplate/main.dart';
 import 'package:boilerplate/routes.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   navigate() async {
-    final helper = appComponent.getSharedPreferenceHelper();
+    final helper = authLocalModule.provideSharedPreferenceHelper();
     final isLoggedIn = await helper.isLoggedIn;
     if (isLoggedIn) {
       Navigator.of(context).pushReplacementNamed(Routes.home);

@@ -1,3 +1,4 @@
+import 'package:lib_auth/di/components/app_component.dart';
 import 'package:lib_auth/models/user/user.dart';
 import 'package:lib_di/stores/error/error_store.dart';
 import 'package:mobx/mobx.dart';
@@ -10,9 +11,9 @@ class SignUpStore = _SignUpStore with _$SignUpStore;
 abstract class _SignUpStore with Store {
   final signUpErrorStore = SignUpErrorStore();
   final errorStore = ErrorStore();
-  final tokenApi = appComponent.getTokenApi();
-  final userApi = appComponent.getUserApi();
-  final sharedPreferenceHelper = appComponent.getSharedPreferenceHelper();
+  final tokenApi = networkModule.provideTokenApi();
+  final userApi = networkModule.provideUserApi();
+  final sharedPreferenceHelper = localModule.provideSharedPreferenceHelper();
 
   _SignUpStore() {
     _setupValidations();

@@ -1,14 +1,13 @@
-import 'package:boilerplate/main.dart';
-import 'package:boilerplate/routes.dart';
+import 'package:boilerplate/di/components/app_component.dart';
 import 'package:boilerplate/stores/fit/fit_store.dart';
 import 'package:boilerplate/ui/home/chart.dart';
+import 'package:lib_auth/di/components/app_component.dart';
 import 'package:lib_lego/widgets/progress_indicator_widget.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:firebase_admob/firebase_admob.dart';
 
@@ -132,8 +131,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       actions: <Widget>[
         IconButton(
-          onPressed: () async =>
-              await appComponent.getSharedPreferenceHelper().removeAuthToken(),
+          onPressed: () async => await authLocalModule
+              .provideSharedPreferenceHelper()
+              .removeAuthToken(),
           icon: Icon(
             Icons.person,
           ),
