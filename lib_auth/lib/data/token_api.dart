@@ -3,8 +3,8 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:lib_auth/models/token/token.dart';
-import 'package:lib_auth/models/user/user.dart';
+import 'package:lib_auth/models/token.dart';
+import 'package:lib_auth/models/user.dart';
 import 'package:lib_di/data/network/constants/endpoints.dart';
 import 'package:lib_di/data/network/dio_client.dart';
 import 'package:lib_di/data/network/exceptions/network_exceptions.dart';

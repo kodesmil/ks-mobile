@@ -1,5 +1,5 @@
-import 'package:lib_auth/di/components/app_component.dart';
-import 'package:lib_auth/models/user/user.dart';
+import 'package:lib_auth/models/user.dart';
+import 'package:lib_auth/di/auth_component.dart';
 import 'package:lib_di/stores/error/error_store.dart';
 import 'package:mobx/mobx.dart';
 import 'package:validators/validators.dart';

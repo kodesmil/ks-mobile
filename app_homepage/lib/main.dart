@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lib_auth/ui/login/sign_up.dart';
+import 'package:lib_auth/pages/sign_up_page.dart';
 import 'package:lib_lego/theme.dart';
 
 void main() => runApp(MyApp());

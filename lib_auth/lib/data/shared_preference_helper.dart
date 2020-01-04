@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:lib_auth/models/token/token.dart';
+import 'package:lib_auth/models/token.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'constants/preferences.dart';

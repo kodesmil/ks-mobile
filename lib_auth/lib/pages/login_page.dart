@@ -1,4 +1,4 @@
-import 'package:lib_auth/stores/form/login_store.dart';
+import 'package:lib_auth/stores/login_store.dart';
 import 'package:lib_lego/widgets/empty_app_bar_widget.dart';
 import 'package:lib_lego/widgets/progress_indicator_widget.dart';
 import 'package:lib_lego/widgets/textfield_widget.dart';
