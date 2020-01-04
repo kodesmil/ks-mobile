@@ -12,6 +12,7 @@ import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 void registerPlugins(PluginRegistry registry) {
   FirebaseCoreWeb.registerWith(registry.registrarFor(FirebaseCoreWeb));
-  SharedPreferencesPlugin.registerWith(registry.registrarFor(SharedPreferencesPlugin));
+  SharedPreferencesPlugin.registerWith(
+      registry.registrarFor(SharedPreferencesPlugin));
   registry.registerMessageHandler();
 }

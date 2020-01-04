@@ -13,8 +13,8 @@ class FitsList {
     this.fitDailies,
   });
 
-  factory FitsList.fromJson(Map<String, dynamic> json) => _$FitsListFromJson
-    (json);
+  factory FitsList.fromJson(Map<String, dynamic> json) =>
+      _$FitsListFromJson(json);
 
   Map<String, dynamic> toJson() => _$FitsListToJson(this);
 }

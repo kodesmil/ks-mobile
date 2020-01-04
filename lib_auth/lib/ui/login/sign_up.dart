@@ -1,4 +1,3 @@
-import 'package:lib_auth/constants/strings.dart';
 import 'package:lib_auth/stores/form/sign_up_store.dart';
 import 'package:lib_lego/widgets/date_field_widget.dart';
 import 'package:lib_lego/widgets/empty_app_bar_widget.dart';
@@ -111,7 +110,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Widget _buildEmailField() => Observer(
         builder: (context) => TextFieldWidget(
-          hint: Strings.login_et_user_email,
+          hint: 'Email',
           icon: Icons.email,
           inputType: TextInputType.emailAddress,
           textController: _emailController,
@@ -158,7 +157,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Widget _buildPasswordField() => Observer(
         builder: (context) => TextFieldWidget(
-          hint: Strings.login_et_user_password,
+          hint: 'Password',
           icon: Icons.lock,
           isObscure: true,
           padding: EdgeInsets.only(top: 16.0),

@@ -13,8 +13,7 @@ abstract class _LoginStore with Store {
   final errorStore = ErrorStore();
   final tokenApi = networkModule.provideTokenApi();
   final userApi = networkModule.provideUserApi();
-  final sharedPreferenceHelper =
-      localModule.provideSharedPreferenceHelper();
+  final sharedPreferenceHelper = localModule.provideSharedPreferenceHelper();
 
   _LoginStore() {
     _setupValidations();

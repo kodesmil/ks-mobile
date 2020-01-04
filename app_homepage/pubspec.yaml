@@ -14,6 +14,8 @@ dependencies:
 
   lib_auth:
     path: ../lib_auth
+  lib_lego:
+    path: ../lib_lego
 
 dev_dependencies:
   flutter_test:

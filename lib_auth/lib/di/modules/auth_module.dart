@@ -5,14 +5,12 @@ import 'package:lib_di/di/modules/local_module.dart';
 import 'package:lib_di/di/modules/netwok_module.dart';
 
 class AuthNetworkModule extends NetworkModule {
-
   TokenApi provideTokenApi() => TokenApi(provideDioClient());
 
   UserApi provideUserApi() => UserApi(provideDioClient());
 }
 
 class AuthLocalModule extends LocalModule {
-
   SharedPreferenceHelper provideSharedPreferenceHelper() =>
       SharedPreferenceHelper(provideSharedPreferences());
 }

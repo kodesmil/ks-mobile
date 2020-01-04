@@ -17,6 +17,32 @@ Future<void> format({String path = '.'}) async {
   await _runProcess('flutter', ['format', path]);
 }
 
+@Task('Build build runner')
+Future<void> runner() async {
+  await _buildRunner();
+  await _buildRunner(workingDirectory: 'lib_auth');
+  await _buildRunner(workingDirectory: 'lib_di');
+  // await _buildRunner(workingDirectory: 'lib_lego');
+  // await _buildRunner(workingDirectory: 'lib_locale');
+  // await _buildRunner(workingDirectory: 'app_homepage');
+}
+
+Future<void> _buildRunner({String workingDirectory = '.'}) async {
+  await _runProcess(
+    'flutter',
+    [
+      'packages',
+      'pub',
+      'run',
+      'build_runner',
+      'build',
+      '--delete-conflicting-outputs',
+      '--verbose',
+    ],
+    workingDirectory: workingDirectory,
+  );
+}
+
 @Task('Generate localizations files')
 Future<void> generateLocalizations() async {
   final l10nScriptFile = path.join(
@@ -49,8 +75,16 @@ String _flutterRootPath() {
   return Platform.environment['FLUTTER_ROOT'];
 }
 
-Future<void> _runProcess(String executable, List<String> arguments) async {
-  final result = await Process.run(executable, arguments);
+Future<void> _runProcess(
+  String executable,
+  List<String> arguments, {
+  String workingDirectory = '.',
+}) async {
+  final result = await Process.run(
+    executable,
+    arguments,
+    workingDirectory: workingDirectory,
+  );
   stdout.write(result.stdout);
   stderr.write(result.stderr);
 }

@@ -1,4 +1,3 @@
-import 'package:lib_auth/constants/strings.dart';
 import 'package:lib_auth/stores/form/login_store.dart';
 import 'package:lib_lego/widgets/empty_app_bar_widget.dart';
 import 'package:lib_lego/widgets/progress_indicator_widget.dart';
@@ -97,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildEmailField() => Observer(
         builder: (context) => TextFieldWidget(
-          hint: Strings.login_et_user_email,
+          hint: 'Email',
           inputType: TextInputType.emailAddress,
           icon: Icons.email,
           textController: _emailController,
@@ -111,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildPasswordField() => Observer(
         builder: (context) => TextFieldWidget(
-          hint: Strings.login_et_user_password,
+          hint: 'Password',
           isObscure: true,
           padding: EdgeInsets.only(top: 16.0),
           icon: Icons.lock,
