@@ -137,14 +137,14 @@ mixin _$SignUpStore on _SignUpStore, Store {
   final _$signUpAsyncAction = AsyncAction('signUp');
 
   @override
-  Future signUp() {
+  Future<dynamic> signUp() {
     return _$signUpAsyncAction.run(() => super.signUp());
   }
 
   final _$logoutAsyncAction = AsyncAction('logout');
 
   @override
-  Future logout() {
+  Future<dynamic> logout() {
     return _$logoutAsyncAction.run(() => super.logout());
   }
 

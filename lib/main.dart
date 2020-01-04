@@ -5,13 +5,9 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:inject/inject.dart';
-import 'package:lib_di/di/modules/local_module.dart';
-import 'package:lib_di/di/modules/netwok_module.dart';
 
 import 'constants/theme.dart';
 import 'constants/strings.dart';
-import 'di/components/app_component.dart';
 import 'ui/splash/splash.dart';
 
 void main() async {
@@ -36,7 +32,6 @@ void main() async {
   }, onError: Crashlytics.instance.recordError);
 }
 
-@provide
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override

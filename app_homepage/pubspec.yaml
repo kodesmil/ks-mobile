@@ -1,8 +1,8 @@
 name: app_homepage
 description: A new Flutter project.
-version: 1.0.0+1
 author: KodeSmil authors
 homepage: kodesmil.com
+version: 1.0.0+1
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -11,6 +11,9 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^0.1.2
+
+  lib_auth:
+    path: ../lib_auth
 
 dev_dependencies:
   flutter_test:

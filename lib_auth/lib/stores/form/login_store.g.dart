@@ -86,14 +86,14 @@ mixin _$LoginStore on _LoginStore, Store {
   final _$loginAsyncAction = AsyncAction('login');
 
   @override
-  Future login() {
+  Future<dynamic> login() {
     return _$loginAsyncAction.run(() => super.login());
   }
 
   final _$logoutAsyncAction = AsyncAction('logout');
 
   @override
-  Future logout() {
+  Future<dynamic> logout() {
     return _$logoutAsyncAction.run(() => super.logout());
   }
 
