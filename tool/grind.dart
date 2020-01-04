@@ -4,12 +4,41 @@ import 'package:path/path.dart' as path;
 
 main(args) => grind(args);
 
+final apps = [
+  '.',
+  'lib_lego',
+  'lib_locale',
+  'lib_di',
+  'module_auth',
+  'module_fit',
+  'app_homepage',
+  'app_motim_fit',
+];
+
 @Task('Get packages')
-Future<void> pubGet({String directory}) async {
+Future<void> pubget({String workingDirectory}) async {
   await _runProcess(
     'flutter',
-    ['pub', 'get', if (directory != null) directory],
+    ['pub', 'get', if (workingDirectory != null) workingDirectory],
   );
+}
+
+@Task('Get all packages')
+Future<void> pubgetall() async {
+  apps.forEach((app) async => await pubget(workingDirectory: app));
+}
+
+@Task('Upgrade packages')
+Future<void> pubupgrade({String workingDirectory}) async {
+  await _runProcess(
+    'flutter',
+    ['pub', 'upgrade', if (workingDirectory != null) workingDirectory],
+  );
+}
+
+@Task('Upgrade all packages')
+Future<void> pubupgradeall() async {
+  apps.forEach((app) async => await pubupgrade(workingDirectory: app));
 }
 
 @Task('Format dart files')
@@ -18,16 +47,11 @@ Future<void> format({String path = '.'}) async {
 }
 
 @Task('Build build runner')
-Future<void> runner() async {
-  await _buildRunner();
-  await _buildRunner(workingDirectory: 'lib_auth');
-  await _buildRunner(workingDirectory: 'lib_di');
-  // await _buildRunner(workingDirectory: 'lib_lego');
-  // await _buildRunner(workingDirectory: 'lib_locale');
-  // await _buildRunner(workingDirectory: 'app_homepage');
+Future<void> runnerall() async {
+  apps.forEach((app) async => await runner(workingDirectory: app));
 }
 
-Future<void> _buildRunner({String workingDirectory = '.'}) async {
+Future<void> runner({String workingDirectory = '.'}) async {
   await _runProcess(
     'flutter',
     [
@@ -65,7 +89,7 @@ Future<void> generateLocalizations() async {
 @Depends(generateLocalizations)
 Future<void> l10n() async {
   final l10nPath = path.join(Directory.current.path, 'l10n_cli');
-  await pubGet(directory: l10nPath);
+  await pubget(workingDirectory: l10nPath);
 
   Dart.run(path.join(l10nPath, 'bin', 'main.dart'));
 }

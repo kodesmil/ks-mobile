@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lib_auth/pages/login_page.dart';
-import 'package:lib_auth/pages/sign_up_page.dart';
+import 'package:module_auth/pages/login_page.dart';
+import 'package:module_auth/pages/sign_up_page.dart';
 
 class Routes {
   Routes._();

@@ -201,7 +201,7 @@ class Routes {
 This is the starting point of the application. All the application level configurations are defined in this file i.e, theme, routes, title, orientation etc.
 
 ```
-import 'package:boilerplate/routes.dart';
+import 'package:app_motim_fit/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
