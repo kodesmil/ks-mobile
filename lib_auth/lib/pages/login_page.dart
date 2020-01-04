@@ -80,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: Theme.of(context).textTheme.display3,
                   ),
                   Text(
-                    'Robin Hood for active people',
+                    'find your motivation',
                     style: Theme.of(context).textTheme.body1,
                   ),
                 ],
@@ -100,6 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildEmailField() => Observer(
         builder: (context) => TextFieldWidget(
           hint: 'Email',
+          autoFocus: true,
           inputType: TextInputType.emailAddress,
           icon: Icons.email,
           textController: _emailController,
@@ -142,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
         builder: (context) => FlatButton(
           child: Text('Sign up'.toUpperCase()),
           shape: StadiumBorder(),
-          onPressed: () => Navigator.pushNamed(context, '/sign-up'),
+          onPressed: () => Navigator.pushNamed(context, 'sign-up'),
         ),
       );
 
@@ -156,7 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget navigate(BuildContext context) {
     Future.delayed(Duration(milliseconds: 0), () {
       Navigator.of(context).pushNamedAndRemoveUntil(
-        '/home',
+        'home',
         (route) => false,
       );
     });

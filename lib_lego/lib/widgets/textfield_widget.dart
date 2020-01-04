@@ -47,9 +47,6 @@ class TextFieldWidget extends StatelessWidget {
         decoration: InputDecoration(
           prefixIcon: Icon(icon),
           labelText: this.hint,
-          labelStyle: Theme.of(context).textTheme.body1.copyWith(
-                color: Theme.of(context).hintColor,
-              ),
           errorText: errorText,
           counterText: '',
         ),

@@ -89,6 +89,7 @@ class MfThemeData {
       inputDecorationTheme: InputDecorationTheme(
         labelStyle: TextStyle(
           fontWeight: FontWeight.w500,
+          color: colorScheme.onBackground,
         ),
         filled: true,
         fillColor: colorScheme.surface,

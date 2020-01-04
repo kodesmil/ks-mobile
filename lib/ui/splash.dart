@@ -26,9 +26,9 @@ class _SplashScreenState extends State<SplashScreen> {
     final helper = authLocalModule.provideSharedPreferenceHelper();
     final isLoggedIn = await helper.isLoggedIn;
     if (isLoggedIn) {
-      Navigator.of(context).pushReplacementNamed(Routes.home);
+      Navigator.of(context).pushReplacementNamed('home');
     } else {
-      Navigator.of(context).pushReplacementNamed(Routes.login);
+      Navigator.of(context).pushReplacementNamed('login');
     }
   }
 }

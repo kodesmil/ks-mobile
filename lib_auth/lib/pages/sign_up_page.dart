@@ -102,7 +102,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
               _buildEmailField(),
               _buildPasswordField(),
               SizedBox(height: 48.0),
-              _buildSignUpButton()
+              _buildSignUpButton(),
+              SizedBox(height: 16.0),
+              _buildLoginButton(),
             ],
           ),
         ),
@@ -198,6 +200,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
       },
     );
   }
+
+  Widget _buildLoginButton() => Observer(
+    builder: (context) => FlatButton(
+      child: Text('Login'.toUpperCase()),
+      shape: StadiumBorder(),
+      onPressed: () => Navigator.pushNamed(context, 'login'),
+    ),
+  );
 
   showErrorMessage(BuildContext context, String message) {
     if (message?.isNotEmpty == true) {
