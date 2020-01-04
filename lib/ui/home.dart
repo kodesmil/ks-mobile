@@ -1,6 +1,6 @@
-import 'package:boilerplate/di/components/app_component.dart';
-import 'package:boilerplate/stores/fit/fit_store.dart';
-import 'package:boilerplate/ui/home/chart.dart';
+import 'package:boilerplate/di/app_component.dart';
+import 'package:boilerplate/stores/fit_store.dart';
+import 'package:boilerplate/ui/chart.dart';
 import 'package:lib_lego/widgets/progress_indicator_widget.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/cupertino.dart';

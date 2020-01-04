@@ -1,4 +1,4 @@
-import 'package:lib_auth/di/modules/auth_module.dart';
+import 'package:lib_auth/di/auth_module.dart';
 import 'package:lib_di/di/modules/local_module.dart';
 import 'package:lib_di/di/modules/netwok_module.dart';
 

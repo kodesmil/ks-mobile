@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:lib_lego/theme.dart';
 
-import 'ui/splash/splash.dart';
+import 'ui/splash.dart';
 
 void main() async {
   await DotEnv().load('.env');

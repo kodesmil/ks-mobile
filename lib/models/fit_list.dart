@@ -1,4 +1,4 @@
-import 'package:boilerplate/models/fit/fit.dart';
+import 'package:boilerplate/models/fit.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'fit_list.g.dart';

@@ -1,4 +1,4 @@
-import 'package:boilerplate/di/components/app_component.dart';
+import 'package:boilerplate/di/app_component.dart';
 import 'package:boilerplate/main.dart';
 import 'package:boilerplate/routes.dart';
 import 'package:flutter/material.dart';
