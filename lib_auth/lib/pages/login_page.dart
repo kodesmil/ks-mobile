@@ -45,7 +45,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildBody() => Stack(
         children: <Widget>[
-          Center(child: _buildRightSide()),
+          Center(
+            heightFactor: 1.5,
+            child: _buildRightSide(),
+          ),
           Observer(
             builder: (context) => _store.success
                 ? navigate(context)

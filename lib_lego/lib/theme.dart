@@ -8,13 +8,7 @@ class MfThemeData {
   static const _lightFillColor = Colors.black;
   static const _darkFillColor = Colors.white;
 
-  static const _regular = FontWeight.w400;
-  static const _medium = FontWeight.w500;
-  static const _semiBold = FontWeight.w600;
-  static const _bold = FontWeight.w700;
-
-  static const _montserrat = 'Montserrat';
-  static const _oswald = 'Oswald';
+  static const _montserrat = 'Avenir';
 
   static light() {
     final colorScheme = ColorScheme(
@@ -24,7 +18,7 @@ class MfThemeData {
       secondaryVariant: const Color(0xFFFAFBFB),
       background: Colors.white,
       surface: Colors.teal.shade100.withAlpha(156),
-      onBackground: Colors.black.withAlpha(220),
+      onBackground: Colors.black,
       error: _lightFillColor,
       onError: _lightFillColor,
       onPrimary: _lightFillColor,
@@ -44,7 +38,7 @@ class MfThemeData {
       secondaryVariant: Colors.teal,
       background: const Color(0xFF00212A),
       surface: Colors.black,
-      onBackground: Colors.white.withAlpha(220),
+      onBackground: Colors.white,
       error: _darkFillColor,
       onError: _darkFillColor,
       onPrimary: _darkFillColor,
@@ -81,7 +75,7 @@ class MfThemeData {
       hintColor: colorScheme.onBackground,
       cursorColor: colorScheme.onSurface,
       backgroundColor: colorScheme.background,
-      iconTheme: IconThemeData(color: colorScheme.primary),
+      iconTheme: IconThemeData(color: colorScheme.onBackground),
       canvasColor: colorScheme.background,
       scaffoldBackgroundColor: colorScheme.background,
       highlightColor: Colors.transparent,

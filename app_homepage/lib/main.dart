@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lib_auth/pages/sign_up_page.dart';
+import 'package:lib_auth/pages/login_page.dart';
 import 'package:lib_lego/theme.dart';
 
 void main() => runApp(MyApp());
@@ -28,7 +29,15 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SignUpScreen(),
+      body: LayoutBuilder(
+        builder: (context, cns) => Center(
+          child: Container(
+            width: cns.widthConstraints().biggest.width * 0.4,
+            child: LoginScreen(),
+            // child: SignUpScreen(),
+          ),
+        ),
+      ),
     );
   }
 }
