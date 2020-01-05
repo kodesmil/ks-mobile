@@ -241,6 +241,20 @@ class KsLoc {
         name: 'fsOurPartners',
         desc: r'',
       );
+
+  String fsSendUsRequest() => Intl.message(
+        'Send us request',
+        locale: _localeName,
+        name: 'fsSendUsRequest',
+        desc: r'',
+      );
+
+  String fsWhatIceBreaker() => Intl.message(
+        'Looking for great ice-breaker for your event?',
+        locale: _localeName,
+        name: 'fsWhatIceBreaker',
+        desc: r'',
+      );
 }
 
 class _KsLocDelegate extends LocalizationsDelegate<KsLoc> {
