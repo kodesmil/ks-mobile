@@ -31,7 +31,6 @@ class MyApp extends StatelessWidget {
 
   Container buildHeader(BoxConstraints cns, BuildContext context) {
     return Container(
-      color: Colors.red,
       height: cns.biggest.height,
       child: Stack(
         children: [
@@ -57,6 +56,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
           Center(
+            heightFactor: 2,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
@@ -185,32 +185,33 @@ class _FeatureWidget extends StatelessWidget {
 
 final features = [
   _Feature(
-    title: 'An attendant that is always there',
-    description: 'The client does not have to worry about installing '
-        'the photo booth nor any other technical issues. '
+    title: 'Support & attendant',
+    description: 'You won\'n need to worry about installation '
+        'of the photo booth nor about any other technical issue. '
         'Let us do it for you.',
   ),
   _Feature(
-    title: 'Photo printouts are unlimited',
-    description: 'There is usually 3 or 4 photos at a single printout stripe. '
-        'We can print as many as needed with no extra cost for the client, '
-        'during rental hours',
+    title: 'Unlimited photo printouts',
+    description: 'There are usually 3 or 4 photos on a single printout stripe. '
+        'We will print as many as needed - with no extra cost! '
+        '(during rental hours)',
   ),
   _Feature(
-    title: 'Photos are taken with a proffesional SLR camera',
-    description: 'There is many photo booth services offering small, '
+    title: 'Top-quality camera',
+    description: 'Photo booth services often use small, '
         'portable equipment with low-quality camera. '
-        'We offer a top quality.',
+        'Our photos are taken with a proffesional SLR camera to ensure the '
+        'best quality for you.',
   ),
   _Feature(
     title: 'Vast choice of props',
-    description: 'All props and backgrounds are available to our '
-        'clients (we send patterns on request). '
+    description: 'You can use all of our hundreds of props and backgrounds. '
+        '(we send patterns on request). '
         'What\'s more, client can order props dedicated for a special theme party, '
         'altough this service is extra paid.',
   ),
   _Feature(
-    title: 'Delivery within Stor Trondheim is free',
+    title: 'Delivery within Stor Trondheim',
     description: 'Okay, let\'s say Orkanger, Stjørdal and Melhus are '
         'still free. For further distances - send us request.',
   ),
