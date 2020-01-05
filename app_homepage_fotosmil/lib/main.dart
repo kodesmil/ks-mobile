@@ -124,17 +124,17 @@ class _SmilesWidgetState extends State<SmilesWidget>
   void initState() {
     super.initState();
     controller = AnimationController(
-      duration: const Duration(seconds: 10),
+      duration: const Duration(seconds: 1),
       vsync: this,
     );
-    animation = Tween<double>(begin: 20000, end: 22342).animate(controller);
+    animation = Tween<double>(begin: 22100, end: 22342).animate(controller);
     controller.forward();
   }
 
   Widget build(BuildContext context) {
     return Container(
       color: Colors.orange,
-      padding: const EdgeInsets.all(36),
+      padding: const EdgeInsets.all(64),
       child: SmileWidget(animation: animation),
     );
   }
