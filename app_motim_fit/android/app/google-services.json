@@ -15,19 +15,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "772074731973-t9vnuiq2sdglsvom787lsnqdk8l7kjrf.apps.googleusercontent.com",
+          "client_id": "772074731973-fs7432lma86rb98jchor1ggfesgvq3og.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.kodesmil.motim",
-            "certificate_hash": "e85065706d7f948c202bc9bf8ca562d0a86b4aba"
+            "certificate_hash": "1526f269adfbe0bec24d122795a038b5f651fc4e"
           }
         },
         {
-          "client_id": "772074731973-0qdfiveb4e75babs0bgrhh7p9u2demfk.apps.googleusercontent.com",
+          "client_id": "772074731973-ndm133efqs30ct4341ithijpdp9kkkvm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.kodesmil.motim",
-            "certificate_hash": "b3b3084ac709f22847a600c6659465f5bdd9e286"
+            "certificate_hash": "3f16373571a9542c0b18144feb059d771e1aefa2"
           }
         },
         {
