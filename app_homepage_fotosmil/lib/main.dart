@@ -15,88 +15,142 @@ class MyApp extends StatelessWidget {
         body: LayoutBuilder(
           builder: (ctx, cns) => ListView(
             children: <Widget>[
-              Container(
-                color: Colors.red,
-                height: cns.biggest.height,
-                child: Stack(
-                  children: [
-                    Image.asset(
-                      'assets/background.jpg',
-                      fit: BoxFit.cover,
-                      width: cns.biggest.width,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(24.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          KsText.body2(
-                            context,
-                            'fotosmil.trondheim@gmail.com',
-                          ),
-                          KsText.body2(
-                            context,
-                            'tlf. 92125656',
-                          ),
-                        ],
-                      ),
-                    ),
-                    Center(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          KsText.display4(
-                            context,
-                            'FotoSmil Trondheim',
-                          ),
-                          KsText.display2(
-                            context,
-                            'Professional photo booth service',
-                          ),
-                          KsText.display1(
-                            context,
-                            'for weddings, events and parties',
-                          ),
-                          KsVerticalSpace.xl(),
-                          KsText.display1(
-                            context,
-                            'Price: 4000 NOK for 2 hours + 1000 NOK/extra hour',
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              buildHeader(cns, context),
               Container(
                 color: Colors.orange,
                 height: 20,
               ),
-              Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    KsVerticalSpace.xxl(),
-                    KsText.display3(
-                      context,
-                      'What\'s included?',
-                    ),
-                    ...features
-                        .map(
-                          (f) => _FeatureWidget(
-                            title: f.title,
-                            description: f.description,
-                          ),
-                        )
-                        .toList(),
-                    KsVerticalSpace.xxl(),
-                  ],
-                ),
-              ),
+              buildWhatsIncluded(context),
+              SmilesWidget(),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Container buildHeader(BoxConstraints cns, BuildContext context) {
+    return Container(
+      color: Colors.red,
+      height: cns.biggest.height,
+      child: Stack(
+        children: [
+          Image.asset(
+            'assets/background.jpg',
+            fit: BoxFit.cover,
+            width: cns.biggest.width,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                KsText.body2(
+                  context,
+                  'fotosmil.trondheim@gmail.com',
+                ),
+                KsText.body2(
+                  context,
+                  'tlf. 92125656',
+                ),
+              ],
+            ),
+          ),
+          Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                KsText.display4(
+                  context,
+                  'FotoSmil Trondheim',
+                ),
+                KsText.display2(
+                  context,
+                  'Professional photo booth service',
+                ),
+                KsText.display1(
+                  context,
+                  'for weddings, events and parties',
+                ),
+                KsVerticalSpace.xl(),
+                KsText.display1(
+                  context,
+                  'Price: 4000 NOK for 2 hours + 1000 NOK/extra hour',
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Center buildWhatsIncluded(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          KsVerticalSpace.xxl(),
+          KsText.display3(
+            context,
+            'What\'s included?',
+          ),
+          ...features
+              .map(
+                (f) => _FeatureWidget(
+                  title: f.title,
+                  description: f.description,
+                ),
+              )
+              .toList(),
+          KsVerticalSpace.xxl(),
+        ],
+      ),
+    );
+  }
+}
+
+class SmilesWidget extends StatefulWidget {
+  @override
+  _SmilesWidgetState createState() => _SmilesWidgetState();
+}
+
+class _SmilesWidgetState extends State<SmilesWidget>
+    with SingleTickerProviderStateMixin {
+  AnimationController controller;
+
+  Animation<double> animation;
+
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      duration: const Duration(seconds: 10),
+      vsync: this,
+    );
+    animation = Tween<double>(begin: 20000, end: 22342).animate(controller);
+    controller.forward();
+  }
+
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.orange,
+      padding: const EdgeInsets.all(36),
+      child: SmileWidget(animation: animation),
+    );
+  }
+}
+
+class SmileWidget extends AnimatedWidget {
+  SmileWidget({Key key, Animation<double> animation})
+      : super(key: key, listenable: animation);
+
+  Widget build(BuildContext context) {
+    final animation = listenable as Animation<double>;
+    return Column(
+      children: <Widget>[
+        KsText.display3(context, animation.value.floor().toString()),
+        KsText.display1(context, 'smiles delivered'),
+      ],
     );
   }
 }
