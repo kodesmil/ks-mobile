@@ -12,17 +12,13 @@ class KsLoc {
 
   final String _localeName;
 
-  static Future<KsLoc> load(Locale locale) {
-    return initializeMessages(locale.toString())
-        .then<KsLoc>((_) => KsLoc(locale));
-  }
+  static Future<KsLoc> load(Locale locale) =>
+      initializeMessages(locale.toString()).then<KsLoc>((_) => KsLoc(locale));
 
-  static KsLoc of(BuildContext context) {
-    return Localizations.of<KsLoc>(context, KsLoc);
-  }
+  static KsLoc of(BuildContext context) =>
+      Localizations.of<KsLoc>(context, KsLoc);
 
-  static const LocalizationsDelegate<KsLoc> delegate =
-      _MfLocalizationsDelegate();
+  static const LocalizationsDelegate<KsLoc> delegate = _KsLocDelegate();
 
   static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
       <LocalizationsDelegate<dynamic>>[
@@ -33,8 +29,8 @@ class KsLoc {
   ];
 
   static const List<Locale> supportedLocales = <Locale>[
-    Locale('en'),
     Locale('messages'),
+    Locale('en'),
     Locale('nb'),
     Locale('pl'),
   ];
@@ -43,6 +39,13 @@ class KsLoc {
         r'test',
         locale: _localeName,
         name: 'test',
+        desc: r'',
+      );
+
+  String gJournal() => Intl.message(
+        r'Journal',
+        locale: _localeName,
+        name: 'gJournal',
         desc: r'',
       );
 
@@ -98,7 +101,7 @@ class KsLoc {
   String fsWhatsIncluded() => Intl.message(
         'What\'s included?',
         locale: _localeName,
-        name: 'fsSmilesDelivered',
+        name: 'fsWhatsIncluded',
         desc: r'',
       );
 
@@ -171,7 +174,7 @@ class KsLoc {
   String fsFeat5Title() => Intl.message(
         r'Delivery within Stor Trondheim',
         locale: _localeName,
-        name: 'fsFeat1Title',
+        name: 'fsFeat5Title',
         desc: r'',
       );
 
@@ -179,25 +182,25 @@ class KsLoc {
         'Okay, let\'s say Orkanger, Stjørdal and Melhus are '
         'still free. For further distances - send us request.',
         locale: _localeName,
-        name: 'fsFeat1Description',
+        name: 'fsFeat5Description',
         desc: r'',
       );
 }
 
-class _MfLocalizationsDelegate extends LocalizationsDelegate<KsLoc> {
-  const _MfLocalizationsDelegate();
+class _KsLocDelegate extends LocalizationsDelegate<KsLoc> {
+  const _KsLocDelegate();
 
   @override
   Future<KsLoc> load(Locale locale) => KsLoc.load(locale);
 
   @override
   bool isSupported(Locale locale) => <String>[
-        'en',
         'messages',
+        'en',
         'nb',
         'pl',
       ].contains(locale.languageCode);
 
   @override
-  bool shouldReload(_MfLocalizationsDelegate old) => false;
+  bool shouldReload(_KsLocDelegate old) => false;
 }

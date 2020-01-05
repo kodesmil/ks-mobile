@@ -88,25 +88,37 @@ Future<void> runnerall() async {
 }
 
 @Task('Generate localizations files')
-Future<void> generateLocalizations() async {
-  final l10nScriptFile = path.join(
-    _flutterRootPath(),
-    'dev',
-    'tools',
-    'localization',
-    'gen_l10n.dart',
+Future<void> generatelocalizations() async {
+  _runProcess(
+    'flutter',
+    [
+      'pub',
+      'run',
+      'intl_translation:extract_to_arb',
+      '--output-dir=lib_locale/lib',
+      'lib_locale/lib/localizations.dart',
+    ],
   );
-
-  Dart.run(l10nScriptFile, arguments: [
-    '--template-arb-file=intl_en.arb',
-    '--output-localization-file=localizations.dart',
-    '--output-class=MfLocalizations',
-  ]);
-  await format(workingDirectory: path.join('lib', 'l10n'));
+  _runProcess(
+    'flutter',
+    [
+      'pub',
+      'run',
+      'intl_translation:generate_from_arb',
+      '--output-dir=lib_locale/lib',
+      '--no-use-deferred-loading',
+      'lib_locale/lib/localizations.dart',
+      'lib_locale/lib/intl_messages.arb',
+      'lib_locale/lib/intl_en.arb',
+      'lib_locale/lib/intl_nb.arb',
+      'lib_locale/lib/intl_pl.arb',
+    ],
+  );
+  await format(workingDirectory: path.join('lib_locale', 'lib'));
 }
 
 @Task('Transform arb to xml for English')
-@Depends(generateLocalizations)
+@Depends(generatelocalizations)
 Future<void> l10n() async {
   final l10nPath = path.join(Directory.current.path, 'l10n_cli');
   await pubget(workingDirectory: l10nPath);

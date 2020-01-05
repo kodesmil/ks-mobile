@@ -8,6 +8,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:firebase_admob/firebase_admob.dart';
+import 'package:lib_lego/texts.dart';
+import 'package:lib_locale/localizations.dart';
 import 'package:module_fit/stores/fit_store.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -95,10 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
             top: 64,
             bottom: 16,
           ),
-          child: Text(
-            'Journal',
-            style: Theme.of(context).textTheme.display2,
-          ),
+          child: KsText.display2(KsLoc.of(context).gJournal()),
         ),
         Expanded(
           child: Observer(

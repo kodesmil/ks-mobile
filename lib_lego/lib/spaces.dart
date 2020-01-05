@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class KsVerticalSpace extends StatelessWidget {
-  final height;
+  final double height;
 
   const KsVerticalSpace({
     Key key,
@@ -23,7 +23,7 @@ class KsVerticalSpace extends StatelessWidget {
 }
 
 class KsHorizontalSpace extends StatelessWidget {
-  final width;
+  final double width;
 
   const KsHorizontalSpace({
     Key key,

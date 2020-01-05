@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:lib_lego/themes.dart';
+import 'package:lib_locale/localizations.dart';
 
 import 'routes.dart';
 import 'ui/splash.dart';
@@ -36,8 +37,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Motim Fit',
+      localizationsDelegates: KsLoc.localizationsDelegates,
+      supportedLocales: KsLoc.supportedLocales,
       theme: MfThemeData.light(),
       darkTheme: MfThemeData.dark(),
       routes: Routes.routes,
