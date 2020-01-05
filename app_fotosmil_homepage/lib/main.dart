@@ -45,11 +45,9 @@ class MyApp extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 KsText.body2(
-                  context,
                   'fotosmil.trondheim@gmail.com',
                 ),
                 KsText.body2(
-                  context,
                   'tlf. 92125656',
                 ),
               ],
@@ -61,20 +59,16 @@ class MyApp extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 KsText.display4(
-                  context,
                   'FotoSmil Trondheim',
                 ),
                 KsText.display2(
-                  context,
                   'Professional photo booth service',
                 ),
                 KsText.display1(
-                  context,
                   'for weddings, events and parties',
                 ),
                 KsVerticalSpace.xl(),
                 KsText.display1(
-                  context,
                   'Price: 4000 NOK for 2 hours + 1000 NOK/extra hour',
                 ),
               ],
@@ -92,7 +86,6 @@ class MyApp extends StatelessWidget {
         children: <Widget>[
           KsVerticalSpace.xxl(),
           KsText.display3(
-            context,
             'What\'s included?',
           ),
           ...features
@@ -148,8 +141,8 @@ class SmileWidget extends AnimatedWidget {
     final animation = listenable as Animation<double>;
     return Column(
       children: <Widget>[
-        KsText.display3(context, animation.value.floor().toString()),
-        KsText.display1(context, 'smiles delivered'),
+        KsText.display3(animation.value.floor().toString()),
+        KsText.display1('smiles delivered'),
       ],
     );
   }
@@ -173,9 +166,9 @@ class _FeatureWidget extends StatelessWidget {
         child: Column(
           children: <Widget>[
             KsVerticalSpace.xl(),
-            KsText.display1(context, title),
+            KsText.display1(title),
             KsVerticalSpace.m(),
-            KsText.body2(context, description),
+            KsText.body2(description),
           ],
         ),
       ),

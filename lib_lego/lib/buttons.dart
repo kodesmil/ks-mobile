@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:lib_lego/texts.dart';
 
 class KsRoundedButton extends StatelessWidget {
-  final String buttonText;
+  final String text;
   final VoidCallback onPressed;
 
   const KsRoundedButton({
     Key key,
-    this.buttonText,
+    this.text,
     this.onPressed,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return FlatButton(
-      shape: StadiumBorder(),
-      onPressed: onPressed,
-      child: Text(
-        buttonText,
-      ),
-    );
-  }
+  Widget build(BuildContext context) => FlatButton(
+        shape: StadiumBorder(),
+        onPressed: onPressed,
+        child: KsText.button(text),
+      );
 }

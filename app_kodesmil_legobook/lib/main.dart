@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lib_lego/themes.dart';
-import 'package:lib_lego/spaces.dart';
-import 'package:lib_lego/texts.dart';
 
 void main() => runApp(MyApp());
 
