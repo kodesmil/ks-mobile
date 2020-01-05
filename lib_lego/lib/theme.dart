@@ -22,8 +22,8 @@ class MfThemeData {
       error: _lightFillColor,
       onError: _lightFillColor,
       onPrimary: _lightFillColor,
-      onSecondary: const Color(0xFF322942),
-      onSurface: const Color(0xFF241E30),
+      onSecondary: Colors.black,
+      onSurface: Colors.black,
       brightness: Brightness.light,
     );
     final focusColor = Colors.black.withOpacity(0.12);
@@ -56,9 +56,9 @@ class MfThemeData {
     return ThemeData(
       colorScheme: colorScheme,
       textTheme: _textTheme.apply(
-        bodyColor: colorScheme.onSurface.withAlpha(220),
-        displayColor: colorScheme.onSurface.withAlpha(220),
-        decorationColor: colorScheme.onSurface.withAlpha(220),
+        bodyColor: colorScheme.onSurface,
+        displayColor: colorScheme.onSurface,
+        decorationColor: colorScheme.onSurface,
       ),
       appBarTheme: AppBarTheme(
         color: colorScheme.background,
