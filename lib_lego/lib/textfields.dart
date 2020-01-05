@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class TextFieldWidget extends StatelessWidget {
+class KsTextField extends StatelessWidget {
   final IconData icon;
   final String hint;
   final String errorText;
@@ -14,7 +14,7 @@ class TextFieldWidget extends StatelessWidget {
   final TextInputAction inputAction;
   final TextCapitalization textCapitalization;
 
-  const TextFieldWidget({
+  const KsTextField({
     Key key,
     this.icon,
     this.hint,

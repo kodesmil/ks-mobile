@@ -1,8 +1,8 @@
 import 'package:module_auth/stores/sign_up_store.dart';
-import 'package:lib_lego/widgets/date_field_widget.dart';
-import 'package:lib_lego/widgets/empty_app_bar_widget.dart';
-import 'package:lib_lego/widgets/progress_indicator_widget.dart';
-import 'package:lib_lego/widgets/textfield_widget.dart';
+import 'package:lib_lego/date_fields.dart';
+import 'package:lib_lego/app_bars.dart';
+import 'package:lib_lego/progress_indicators.dart';
+import 'package:lib_lego/textfields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
@@ -65,7 +65,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
         primary: true,
-        appBar: EmptyAppBar(),
+        appBar: KsEmptyAppBar(),
         body: _buildBody(),
       );
 
@@ -83,7 +83,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           Observer(
             builder: (context) => Visibility(
               visible: _store.loading,
-              child: CustomProgressIndicatorWidget(),
+              child: KsProgressIndicator(),
             ),
           )
         ],
@@ -111,7 +111,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       );
 
   Widget _buildEmailField() => Observer(
-        builder: (context) => TextFieldWidget(
+        builder: (context) => KsTextField(
           hint: 'Email',
           icon: Icons.email,
           inputType: TextInputType.emailAddress,
@@ -127,7 +127,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       );
 
   Widget _buildFirstNameField() => Observer(
-        builder: (context) => TextFieldWidget(
+        builder: (context) => KsTextField(
           hint: 'First Name',
           icon: Icons.person,
           textController: _firstNameController,
@@ -142,7 +142,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       );
 
   Widget _buildLastNameField() => Observer(
-        builder: (context) => TextFieldWidget(
+        builder: (context) => KsTextField(
           hint: 'Last Name',
           icon: Icons.person,
           textController: _lastNameController,
@@ -158,7 +158,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       );
 
   Widget _buildPasswordField() => Observer(
-        builder: (context) => TextFieldWidget(
+        builder: (context) => KsTextField(
           hint: 'Password',
           icon: Icons.lock,
           isObscure: true,
@@ -170,7 +170,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       );
 
   Widget _buildDateOfBirthField() => Observer(
-        builder: (context) => DateFieldWidget(
+        builder: (context) => KsDateFieldWidget(
           hint: 'Date of birth',
           icon: Icons.child_friendly,
           padding: EdgeInsets.only(top: 16.0),

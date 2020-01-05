@@ -21,3 +21,25 @@ class KsVerticalSpace extends StatelessWidget {
     return SizedBox(height: height);
   }
 }
+
+class KsHorizontalSpace extends StatelessWidget {
+  final width;
+
+  const KsHorizontalSpace({
+    Key key,
+    this.width,
+  }) : super(key: key);
+
+  factory KsHorizontalSpace.m() => KsHorizontalSpace(width: 24);
+
+  factory KsHorizontalSpace.l() => KsHorizontalSpace(width: 48);
+
+  factory KsHorizontalSpace.xl() => KsHorizontalSpace(width: 72);
+
+  factory KsHorizontalSpace.xxl() => KsHorizontalSpace(width: 96);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(width: width);
+  }
+}

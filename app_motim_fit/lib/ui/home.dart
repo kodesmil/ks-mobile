@@ -1,6 +1,6 @@
 import 'package:app_motim_fit/di/app_component.dart';
 import 'package:app_motim_fit/ui/chart.dart';
-import 'package:lib_lego/widgets/progress_indicator_widget.dart';
+import 'package:lib_lego/progress_indicators.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -104,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Observer(
             builder: (context) {
               return _fitStore.loading
-                  ? CustomProgressIndicatorWidget()
+                  ? KsProgressIndicator()
                   : Material(child: _buildListView());
             },
           ),

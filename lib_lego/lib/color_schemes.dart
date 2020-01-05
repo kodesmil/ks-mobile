@@ -1,0 +1,65 @@
+import 'package:flutter/material.dart';
+
+class KsColorScheme extends ColorScheme {
+  KsColorScheme({
+    @required primary,
+    @required primaryVariant,
+    @required secondary,
+    @required secondaryVariant,
+    @required surface,
+    @required background,
+    @required error,
+    @required onPrimary,
+    @required onSecondary,
+    @required onSurface,
+    @required onBackground,
+    @required onError,
+    @required brightness,
+  }) : super(
+          primary: primary,
+          primaryVariant: primaryVariant,
+          secondary: secondary,
+          secondaryVariant: secondaryVariant,
+          surface: surface,
+          background: background,
+          error: error,
+          onPrimary: onPrimary,
+          onSecondary: onSecondary,
+          onSurface: onSurface,
+          onBackground: onBackground,
+          onError: onError,
+          brightness: brightness,
+        );
+
+  factory KsColorScheme.motimLight() => KsColorScheme(
+        primary: Colors.black,
+        primaryVariant: const Color(0xFF117378),
+        secondary: const Color(0xFFEFF3F3),
+        secondaryVariant: const Color(0xFFFAFBFB),
+        background: Colors.white,
+        surface: Colors.teal.shade100.withAlpha(156),
+        onBackground: Colors.black,
+        error: Colors.black,
+        onError: Colors.black,
+        onPrimary: Colors.black,
+        onSecondary: Colors.black,
+        onSurface: Colors.black,
+        brightness: Brightness.light,
+      );
+
+  factory KsColorScheme.motimDark() => KsColorScheme(
+        primary: Colors.white.withAlpha(200),
+        primaryVariant: Colors.white.withAlpha(32),
+        secondary: Colors.teal.shade700,
+        secondaryVariant: Colors.teal,
+        background: const Color(0xFF00212A),
+        surface: Colors.black,
+        onBackground: Colors.white,
+        error: Colors.white,
+        onError: Colors.white,
+        onPrimary: Colors.white,
+        onSecondary: Colors.white,
+        onSurface: Colors.white,
+        brightness: Brightness.dark,
+      );
+}

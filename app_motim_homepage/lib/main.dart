@@ -1,6 +1,6 @@
 import 'package:app_motim_homepage/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:lib_lego/theme.dart';
+import 'package:lib_lego/themes.dart';
 
 void main() => runApp(MyApp());
 

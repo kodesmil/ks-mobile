@@ -3,51 +3,23 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:lib_lego/color_schemes.dart';
 
 class MfThemeData {
-  static const _lightFillColor = Colors.black;
-  static const _darkFillColor = Colors.white;
-
-  static const _montserrat = 'Avenir';
-
   static light() {
-    final colorScheme = ColorScheme(
-      primary: Colors.black,
-      primaryVariant: const Color(0xFF117378),
-      secondary: const Color(0xFFEFF3F3),
-      secondaryVariant: const Color(0xFFFAFBFB),
-      background: Colors.white,
-      surface: Colors.teal.shade100.withAlpha(156),
-      onBackground: Colors.black,
-      error: _lightFillColor,
-      onError: _lightFillColor,
-      onPrimary: _lightFillColor,
-      onSecondary: Colors.black,
-      onSurface: Colors.black,
-      brightness: Brightness.light,
-    );
     final focusColor = Colors.black.withOpacity(0.12);
-    return MfThemeData.generic(colorScheme, focusColor);
+    return MfThemeData.generic(
+      KsColorScheme.motimLight(),
+      focusColor,
+    );
   }
 
   static dark() {
-    final colorScheme = ColorScheme(
-      primary: Colors.white.withAlpha(200),
-      primaryVariant: Colors.white.withAlpha(32),
-      secondary: Colors.teal.shade700,
-      secondaryVariant: Colors.teal,
-      background: const Color(0xFF00212A),
-      surface: Colors.black,
-      onBackground: Colors.white,
-      error: _darkFillColor,
-      onError: _darkFillColor,
-      onPrimary: _darkFillColor,
-      onSecondary: _darkFillColor,
-      onSurface: _darkFillColor,
-      brightness: Brightness.dark,
-    );
     final focusColor = Colors.black.withOpacity(0.12);
-    return MfThemeData.generic(colorScheme, focusColor);
+    return MfThemeData.generic(
+      KsColorScheme.motimDark(),
+      focusColor,
+    );
   }
 
   static generic(ColorScheme colorScheme, Color focusColor) {
@@ -98,11 +70,11 @@ class MfThemeData {
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
         backgroundColor: Color.alphaBlend(
-          _lightFillColor.withOpacity(0.80),
-          _darkFillColor,
+          Colors.black.withOpacity(0.80),
+          Colors.white,
         ),
         contentTextStyle: _textTheme.subhead.apply(
-          color: _darkFillColor,
+          color: Colors.white,
         ),
       ),
     );
@@ -117,7 +89,7 @@ class MfThemeData {
             fontWeight: FontWeight.w400,
           ),
           body2: base.body2.copyWith(
-            fontFamily: _montserrat,
+            fontFamily: 'Avenir',
             fontSize: 17,
             fontWeight: FontWeight.w400,
             letterSpacing: 1.4,
@@ -128,7 +100,7 @@ class MfThemeData {
             letterSpacing: 2.8,
           ),
           headline: base.headline.copyWith(
-            fontFamily: _montserrat,
+            fontFamily: 'Avenir',
             fontSize: 40,
             fontWeight: FontWeight.w900,
             letterSpacing: 1.4,

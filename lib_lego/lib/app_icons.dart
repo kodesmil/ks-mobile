@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class AppIconWidget extends StatelessWidget {
+class KsAppIcon extends StatelessWidget {
   final image;
 
-  const AppIconWidget({
+  const KsAppIcon({
     Key key,
     this.image,
   }) : super(key: key);

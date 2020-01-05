@@ -1,7 +1,7 @@
 import 'package:module_auth/stores/login_store.dart';
-import 'package:lib_lego/widgets/empty_app_bar_widget.dart';
-import 'package:lib_lego/widgets/progress_indicator_widget.dart';
-import 'package:lib_lego/widgets/textfield_widget.dart';
+import 'package:lib_lego/app_bars.dart';
+import 'package:lib_lego/progress_indicators.dart';
+import 'package:lib_lego/textfields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
         primary: true,
-        appBar: EmptyAppBar(),
+        appBar: KsEmptyAppBar(),
         body: _buildBody(),
       );
 
@@ -57,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Observer(
             builder: (context) => Visibility(
               visible: _store.loading,
-              child: CustomProgressIndicatorWidget(),
+              child: KsProgressIndicator(),
             ),
           )
         ],
@@ -98,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
       );
 
   Widget _buildEmailField() => Observer(
-        builder: (context) => TextFieldWidget(
+        builder: (context) => KsTextField(
           hint: 'Email',
           autoFocus: true,
           inputType: TextInputType.emailAddress,
@@ -113,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
       );
 
   Widget _buildPasswordField() => Observer(
-        builder: (context) => TextFieldWidget(
+        builder: (context) => KsTextField(
           hint: 'Password',
           isObscure: true,
           padding: EdgeInsets.only(top: 16.0),

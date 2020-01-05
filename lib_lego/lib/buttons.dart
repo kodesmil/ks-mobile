@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class RoundedButtonWidget extends StatelessWidget {
+class KsRoundedButton extends StatelessWidget {
   final String buttonText;
   final VoidCallback onPressed;
 
-  const RoundedButtonWidget({
+  const KsRoundedButton({
     Key key,
     this.buttonText,
     this.onPressed,

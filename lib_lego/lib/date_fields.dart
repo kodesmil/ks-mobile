@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class DateFieldWidget extends StatefulWidget {
+class KsDateFieldWidget extends StatefulWidget {
   final String hint;
   final String errorText;
   final IconData icon;
@@ -12,7 +12,7 @@ class DateFieldWidget extends StatefulWidget {
   final bool autoFocus;
   final FocusNode focusNode;
 
-  const DateFieldWidget({
+  const KsDateFieldWidget({
     Key key,
     this.icon,
     this.hint,
@@ -27,10 +27,10 @@ class DateFieldWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _DateFieldWidgetState createState() => _DateFieldWidgetState();
+  _KsDateFieldWidgetState createState() => _KsDateFieldWidgetState();
 }
 
-class _DateFieldWidgetState extends State<DateFieldWidget> {
+class _KsDateFieldWidgetState extends State<KsDateFieldWidget> {
   bool calendarPressed = false;
 
   @override
