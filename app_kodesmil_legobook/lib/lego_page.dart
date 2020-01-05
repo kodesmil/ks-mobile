@@ -46,7 +46,9 @@ class LegoDefaultPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => LayoutBuilder(
         builder: (context, constraints) => Container(
-          width: constraints.maxWidth * 0.5,
+          width: constraints.maxWidth > 800
+              ? constraints.maxWidth * 0.5
+              : constraints.maxWidth * 0.9,
           child: Center(child: child),
         ),
       );
@@ -75,11 +77,12 @@ class LegoTextsPage extends StatelessWidget {
 }
 
 class LegoSpacesPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) => LegoDefaultPage(
         child: Column(
           children: <Widget>[
+            KsText.display1('Vertical Space - XXL'),
+            _LegoSpacesInternal(child: KsVerticalSpace.xxl()),
             KsText.display1('Vertical Space - XL'),
             _LegoSpacesInternal(child: KsVerticalSpace.xl()),
             KsText.display1('Vertical Space - L'),
