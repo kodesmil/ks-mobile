@@ -4,72 +4,152 @@ class KsText extends StatelessWidget {
   final String text;
   final TextStyle style;
   final KsTextType type;
+  final strutStyle;
+  final textAlign;
+  final textDirection;
+  final locale;
+  final softWrap;
+  final overflow;
+  final textScaleFactor;
+  final maxLines;
+  final semanticsLabel;
+  final textWidthBasis;
 
-  const KsText({
+  const KsText(
+    this.text, {
     Key key,
-    this.text,
     this.style,
     this.type = KsTextType.body1,
+    this.strutStyle,
+    this.textAlign,
+    this.textDirection,
+    this.locale,
+    this.softWrap,
+    this.overflow,
+    this.textScaleFactor,
+    this.maxLines,
+    this.semanticsLabel,
+    this.textWidthBasis,
   }) : super(key: key);
 
-  factory KsText.display1(String text) => KsText(
-        text: text,
+  factory KsText.display1(
+    String text, {
+    TextAlign textAlign,
+  }) =>
+      KsText(
+        text,
         type: KsTextType.display1,
+        textAlign: textAlign,
       );
 
-  factory KsText.display2(String text) => KsText(
-        text: text,
+  factory KsText.display2(
+    String text, {
+    TextAlign textAlign,
+  }) =>
+      KsText(
+        text,
         type: KsTextType.display2,
+        textAlign: textAlign,
       );
 
-  factory KsText.display3(String text) => KsText(
-        text: text,
+  factory KsText.display3(
+    String text, {
+    TextAlign textAlign,
+  }) =>
+      KsText(
+        text,
         type: KsTextType.display3,
+        textAlign: textAlign,
       );
 
-  factory KsText.display4(String text) => KsText(
-        text: text,
+  factory KsText.display4(
+    String text, {
+    TextAlign textAlign,
+  }) =>
+      KsText(
+        text,
         type: KsTextType.display4,
+        textAlign: textAlign,
       );
 
-  factory KsText.body1(String text) => KsText(
-        text: text,
+  factory KsText.body1(
+    String text, {
+    TextAlign textAlign,
+  }) =>
+      KsText(
+        text,
         type: KsTextType.body1,
+        textAlign: textAlign,
       );
 
-  factory KsText.body2(String text) => KsText(
-        text: text,
+  factory KsText.body2(
+    String text, {
+    TextAlign textAlign,
+  }) =>
+      KsText(
+        text,
         type: KsTextType.body2,
+        textAlign: textAlign,
       );
 
-  factory KsText.title(String text) => KsText(
-        text: text,
+  factory KsText.title(
+    String text, {
+    TextAlign textAlign,
+  }) =>
+      KsText(
+        text,
         type: KsTextType.title,
+        textAlign: textAlign,
       );
 
-  factory KsText.caption(String text) => KsText(
-        text: text,
+  factory KsText.caption(
+    String text, {
+    TextAlign textAlign,
+  }) =>
+      KsText(
+        text,
         type: KsTextType.caption,
+        textAlign: textAlign,
       );
 
-  factory KsText.headline(String text) => KsText(
-        text: text,
+  factory KsText.headline(
+    String text, {
+    TextAlign textAlign,
+  }) =>
+      KsText(
+        text,
         type: KsTextType.headline,
+        textAlign: textAlign,
       );
 
-  factory KsText.button(String text) => KsText(
-        text: text,
+  factory KsText.button(
+    String text, {
+    TextAlign textAlign,
+  }) =>
+      KsText(
+        text,
         type: KsTextType.button,
+        textAlign: textAlign,
       );
 
-  factory KsText.subhead(String text) => KsText(
-        text: text,
+  factory KsText.subhead(
+    String text, {
+    TextAlign textAlign,
+  }) =>
+      KsText(
+        text,
         type: KsTextType.subhead,
+        textAlign: textAlign,
       );
 
-  factory KsText.subtitle(String text) => KsText(
-        text: text,
+  factory KsText.subtitle(
+    String text, {
+    TextAlign textAlign,
+  }) =>
+      KsText(
+        text,
         type: KsTextType.subtitle,
+        textAlign: textAlign,
       );
 
   @override
@@ -77,7 +157,16 @@ class KsText extends StatelessWidget {
     return Text(
       text,
       style: style ?? getStyle(context, type),
-      textAlign: TextAlign.center,
+      textAlign: textAlign,
+      textScaleFactor: textScaleFactor,
+      textDirection: textDirection,
+      textWidthBasis: textWidthBasis,
+      strutStyle: strutStyle,
+      softWrap: softWrap,
+      semanticsLabel: semanticsLabel,
+      locale: locale,
+      overflow: overflow,
+      maxLines: maxLines,
     );
   }
 
@@ -91,8 +180,6 @@ class KsText extends StatelessWidget {
         return Theme.of(context).textTheme.display3;
       case KsTextType.display4:
         return Theme.of(context).textTheme.display4;
-      case KsTextType.body1:
-        return Theme.of(context).textTheme.body1;
       case KsTextType.body2:
         return Theme.of(context).textTheme.body2;
       case KsTextType.title:
@@ -107,6 +194,11 @@ class KsText extends StatelessWidget {
         return Theme.of(context).textTheme.subhead;
       case KsTextType.headline:
         return Theme.of(context).textTheme.headline;
+      case KsTextType.overline:
+        return Theme.of(context).textTheme.overline;
+      case KsTextType.body1:
+      default:
+        return Theme.of(context).textTheme.body1;
     }
   }
 }
@@ -124,4 +216,5 @@ enum KsTextType {
   button,
   subhead,
   headline,
+  overline,
 }

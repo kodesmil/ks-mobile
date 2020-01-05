@@ -13,6 +13,7 @@ class KsTextField extends StatelessWidget {
   final bool autoFocus;
   final TextInputAction inputAction;
   final TextCapitalization textCapitalization;
+  final int minLines;
 
   const KsTextField({
     Key key,
@@ -27,6 +28,7 @@ class KsTextField extends StatelessWidget {
     this.onFieldSubmitted,
     this.autoFocus = false,
     this.inputAction,
+    this.minLines,
     this.textCapitalization = TextCapitalization.none,
   }) : super(key: key);
 
@@ -41,12 +43,13 @@ class KsTextField extends StatelessWidget {
         onFieldSubmitted: onFieldSubmitted,
         autofocus: autoFocus,
         textInputAction: inputAction,
-        obscureText: this.isObscure,
-        keyboardType: this.inputType,
+        obscureText: isObscure,
+        minLines: minLines,
+        keyboardType: inputType,
         style: Theme.of(context).textTheme.body1,
         decoration: InputDecoration(
           prefixIcon: Icon(icon),
-          labelText: this.hint,
+          labelText: hint,
           errorText: errorText,
           counterText: '',
         ),

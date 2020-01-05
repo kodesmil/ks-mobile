@@ -57,7 +57,7 @@ class KsLoc {
       );
 
   String fsProfessionalPhotoBooth() => Intl.message(
-        r'Professional photo booth service',
+        r'Professional Photo Booth Service',
         locale: _localeName,
         name: 'fsProfessionalPhotoBooth',
         desc: r'',
@@ -78,14 +78,14 @@ class KsLoc {
       );
 
   String fsPhone() => Intl.message(
-        r'tlf. 92125656',
+        r'+47 921 256 56',
         locale: _localeName,
         name: 'fsPhone',
         desc: r'',
       );
 
   String fsPrice() => Intl.message(
-        r'Price: 4000 NOK for 2 hours + 1000 NOK/extra hour',
+        r'Price: only 4000 NOK for 2 hours + 1000 NOK/extra hour',
         locale: _localeName,
         name: 'fsPrice',
         desc: r'',
@@ -183,6 +183,62 @@ class KsLoc {
         'still free. For further distances - send us request.',
         locale: _localeName,
         name: 'fsFeat5Description',
+        desc: r'',
+      );
+
+  String fsRecommendation1() => Intl.message(
+        'FotoSmil er utrolig artig og gjestene våre digget det! Du får en god latter og et stort smil om munnen med bilder fra FotoSmil',
+        locale: _localeName,
+        name: 'fsRecommendation1',
+        desc: r'',
+      );
+
+  String fsRecommendationAuthor1() => Intl.message(
+        'Stammen Café & Bar Crew',
+        locale: _localeName,
+        name: 'fsRecommendationAuthor1',
+        desc: r'',
+      );
+
+  String fsRecommendation2() => Intl.message(
+        'I asked Fotosmil to organize a photo booth as an activity for the Julebord (Christmas dinner) '
+        '2018/19 of the Department of Structural Engineering at NTNU. '
+        'It was a great experience and people had a lot of fun with the costumes '
+        'and possibilities that Fotosmil provided.'
+        '\n\nMany people gave great feedback and thought it was a very '
+        'original idea. The employees of Fotosmil provided a great service. '
+        'They arrived punctual to the location and were very helpful in general. '
+        'I strongly recommend contacting Fotosmil for events such as work-related parties, weddings and other ceremonies.',
+        locale: _localeName,
+        name: 'fsRecommendation2',
+        desc: r'',
+      );
+
+  String fsRecommendationAuthor2() => Intl.message(
+        'Jorge Mendoza Espinosa, NTNU',
+        locale: _localeName,
+        name: 'fsRecommendationAuthor2',
+        desc: r'',
+      );
+
+  String fsOurRecommendations() => Intl.message(
+        'Our recommendations',
+        locale: _localeName,
+        name: 'fsOurRecommendations',
+        desc: r'',
+      );
+
+  String fsOurPartners() => Intl.message(
+        'Our partners',
+        locale: _localeName,
+        name: 'fsOurPartners',
+        desc: r'',
+      );
+
+  String fsContactUs() => Intl.message(
+        'Contact us',
+        locale: _localeName,
+        name: 'fsOurPartners',
         desc: r'',
       );
 }
