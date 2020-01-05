@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       locale: Locale('en'),
       localizationsDelegates: KsLoc.localizationsDelegates,
       supportedLocales: KsLoc.supportedLocales,
-      theme: MfThemeData.light(),
+      theme: KsTheme.motimLight(),
       home: HomepagePage(),
     );
   }

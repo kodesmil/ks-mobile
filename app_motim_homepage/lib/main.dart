@@ -10,9 +10,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Motim FIt',
       routes: Routes.routes,
-      theme: MfThemeData.light(),
+      theme: KsTheme.motimLight(),
       // darkTheme: MfThemeData.dark(),
-      darkTheme: MfThemeData.light(),
+      darkTheme: KsTheme.motimDark(),
       initialRoute: 'login',
     );
   }

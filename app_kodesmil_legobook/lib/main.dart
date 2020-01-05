@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       localizationsDelegates: KsLoc.localizationsDelegates,
       title: 'KodeSmil Lego',
-      theme: MfThemeData.light(),
+      theme: KsTheme.motimLight(),
       home: LegoPage(),
     );
   }
