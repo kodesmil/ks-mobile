@@ -12,6 +12,8 @@ dependencies:
   cupertino_icons: ^0.1.2
   lib_lego:
     path: ../lib_lego
+  lib_locale:
+    path: ../lib_locale
 
 dev_dependencies:
   flutter_test:

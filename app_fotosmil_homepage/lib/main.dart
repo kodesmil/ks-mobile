@@ -1,7 +1,9 @@
+import 'package:app_fotosmil_homepage/models/feature.dart';
 import 'package:flutter/material.dart';
 import 'package:lib_lego/themes.dart';
 import 'package:lib_lego/spaces.dart';
 import 'package:lib_lego/texts.dart';
+import 'package:lib_locale/localizations.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'FotoSmil Trondheim',
+      title: KsLoc.of(context).fsTitle(),
       theme: MfThemeData.light(),
       home: Scaffold(
         body: LayoutBuilder(
@@ -44,12 +46,8 @@ class MyApp extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                KsText.body2(
-                  'fotosmil.trondheim@gmail.com',
-                ),
-                KsText.body2(
-                  'tlf. 92125656',
-                ),
+                KsText.body2(KsLoc.of(context).fsEmail()),
+                KsText.body2(KsLoc.of(context).fsPhone()),
               ],
             ),
           ),
@@ -58,19 +56,11 @@ class MyApp extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                KsText.display4(
-                  'FotoSmil Trondheim',
-                ),
-                KsText.display2(
-                  'Professional photo booth service',
-                ),
-                KsText.display1(
-                  'for weddings, events and parties',
-                ),
+                KsText.display4(KsLoc.of(context).fsTitle()),
+                KsText.display2(KsLoc.of(context).fsProfessionalPhotoBooth()),
+                KsText.display1(KsLoc.of(context).fsForWeddingsEvents()),
                 KsVerticalSpace.xl(),
-                KsText.display1(
-                  'Price: 4000 NOK for 2 hours + 1000 NOK/extra hour',
-                ),
+                KsText.display1(KsLoc.of(context).fsPrice()),
               ],
             ),
           ),
@@ -85,16 +75,12 @@ class MyApp extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           KsVerticalSpace.xxl(),
-          KsText.display3(
-            'What\'s included?',
-          ),
-          ...features
-              .map(
-                (f) => _FeatureWidget(
-                  title: f.title,
-                  description: f.description,
-                ),
-              )
+          KsText.display3(KsLoc.of(context).fsWhatsIncluded()),
+          ...getFeatures(context)
+              .map((f) => _FeatureWidget(
+                    title: f.title,
+                    description: f.description,
+                  ))
               .toList(),
           KsVerticalSpace.xxl(),
         ],
@@ -142,7 +128,7 @@ class SmileWidget extends AnimatedWidget {
     return Column(
       children: <Widget>[
         KsText.display3(animation.value.floor().toString()),
-        KsText.display1('smiles delivered'),
+        KsText.display1(KsLoc.of(context).fsSmilesDelivered()),
       ],
     );
   }
@@ -174,48 +160,4 @@ class _FeatureWidget extends StatelessWidget {
       ),
     );
   }
-}
-
-final features = [
-  _Feature(
-    title: 'Support & attendant',
-    description: 'You won\'n need to worry about installation '
-        'of the photo booth nor about any other technical issue. '
-        'Let us do it for you.',
-  ),
-  _Feature(
-    title: 'Unlimited photo printouts',
-    description: 'There are usually 3 or 4 photos on a single printout stripe. '
-        'We will print as many as needed - with no extra cost! '
-        '(during rental hours)',
-  ),
-  _Feature(
-    title: 'Top-quality camera',
-    description: 'Photo booth services often use small, '
-        'portable equipment with low-quality camera. '
-        'Our photos are taken with a proffesional SLR camera to ensure the '
-        'best quality for you.',
-  ),
-  _Feature(
-    title: 'Vast choice of props',
-    description: 'You can use all of our hundreds of props and backgrounds. '
-        '(we send patterns on request). '
-        'What\'s more, client can order props dedicated for a special theme party, '
-        'altough this service is extra paid.',
-  ),
-  _Feature(
-    title: 'Delivery within Stor Trondheim',
-    description: 'Okay, let\'s say Orkanger, Stjørdal and Melhus are '
-        'still free. For further distances - send us request.',
-  ),
-];
-
-class _Feature {
-  String title;
-  String description;
-
-  _Feature({
-    this.title,
-    this.description,
-  });
 }
