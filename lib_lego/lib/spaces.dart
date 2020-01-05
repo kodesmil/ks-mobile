@@ -8,6 +8,10 @@ class KsVerticalSpace extends StatelessWidget {
     this.height,
   }) : super(key: key);
 
+  factory KsVerticalSpace.xs() => KsVerticalSpace(height: 8);
+
+  factory KsVerticalSpace.s() => KsVerticalSpace(height: 16);
+
   factory KsVerticalSpace.m() => KsVerticalSpace(height: 24);
 
   factory KsVerticalSpace.l() => KsVerticalSpace(height: 48);

@@ -1,3 +1,4 @@
+import 'package:app_kodesmil_legobook/lego_page.dart';
 import 'package:flutter/material.dart';
 import 'package:lib_lego/themes.dart';
 import 'package:lib_locale/localizations.dart';
@@ -11,19 +12,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: KsLoc.localizationsDelegates,
       title: 'KodeSmil Lego',
       theme: MfThemeData.light(),
-      home: Scaffold(
-        body: LayoutBuilder(
-          builder: (ctx, cns) =>
-              ListView(
-                children: <Widget>[
-                  Container(
-                    color: Colors.orange,
-                    height: 20,
-                  ),
-                ],
-              ),
-        ),
-      ),
+      home: LegoPage(),
     );
   }
 }

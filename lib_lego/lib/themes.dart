@@ -40,6 +40,9 @@ class MfThemeData {
         ),
         brightness: colorScheme.brightness,
       ),
+      tabBarTheme: TabBarTheme(
+        labelColor: colorScheme.onPrimary,
+      ),
       dividerColor: colorScheme.onBackground.withAlpha(128),
       dividerTheme: DividerThemeData(
         thickness: 1,
