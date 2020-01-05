@@ -11,8 +11,10 @@ final apps = [
   'lib_di',
   'module_auth',
   'module_fit',
-  'app_homepage',
+  'app_motim_homepage',
   'app_motim_fit',
+  'app_kodesmil_legobook',
+  'app_fotosmil_homepage',
 ];
 
 @Task('Get packages')
@@ -42,13 +44,26 @@ Future<void> pubupgradeall() async {
 }
 
 @Task('Format dart files')
-Future<void> format({String path = '.'}) async {
-  await _runProcess('flutter', ['format', path]);
+Future<void> format({String workingDirectory = '.'}) async {
+  await _runProcess('flutter', ['format', workingDirectory]);
 }
 
-@Task('Build build runner')
-Future<void> runnerall() async {
-  apps.forEach((app) async => await runner(workingDirectory: app));
+@Task('Format all dart files')
+Future<void> formatall() async {
+  apps.forEach((app) async => await format(workingDirectory: app));
+}
+
+@Task('Clean dart files')
+Future<void> clean({String workingDirectory = '.'}) async {
+  _runProcess('flutter', ['clean', workingDirectory]);
+}
+
+@Task('Clean all dart files')
+Future<void> cleanall() async {
+  await Future.forEach(
+    apps,
+    (app) async => await clean(workingDirectory: app),
+  );
 }
 
 Future<void> runner({String workingDirectory = '.'}) async {
@@ -67,6 +82,11 @@ Future<void> runner({String workingDirectory = '.'}) async {
   );
 }
 
+@Task('Build build runner')
+Future<void> runnerall() async {
+  apps.forEach((app) async => await runner(workingDirectory: app));
+}
+
 @Task('Generate localizations files')
 Future<void> generateLocalizations() async {
   final l10nScriptFile = path.join(
@@ -82,7 +102,7 @@ Future<void> generateLocalizations() async {
     '--output-localization-file=localizations.dart',
     '--output-class=MfLocalizations',
   ]);
-  await format(path: path.join('lib', 'l10n'));
+  await format(workingDirectory: path.join('lib', 'l10n'));
 }
 
 @Task('Transform arb to xml for English')
@@ -121,6 +141,3 @@ test() => new TestRunner().testAsync();
 build() {
   Pub.build();
 }
-
-@Task()
-clean() => defaultClean();
