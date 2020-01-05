@@ -12,7 +12,10 @@ class ContactUsWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           KsVerticalSpace.xl(),
-          KsText.display2(KsLoc.of(context).fsWhatIceBreaker()),
+          KsText.display2(
+            KsLoc.of(context).fsWhatIceBreaker(),
+            textAlign: TextAlign.center,
+          ),
           KsVerticalSpace.m(),
           KsText.display1(KsLoc.of(context).fsContactUs()),
           KsVerticalSpace.l(),
