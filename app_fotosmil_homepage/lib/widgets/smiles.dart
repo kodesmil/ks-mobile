@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lib_lego/spaces.dart';
 import 'package:lib_lego/texts.dart';
+import 'package:lib_lego/dimensions.dart';
 import 'package:lib_locale/localizations.dart';
 
 class SmilesWidget extends StatefulWidget {
@@ -25,15 +26,23 @@ class _SmilesWidgetState extends State<SmilesWidget>
   }
 
   Widget build(BuildContext context) => Column(
-    children: <Widget>[
-      Container(
+        children: <Widget>[
+          Container(
+            color: Colors.orange.withAlpha(128),
+            height: KsDimension.s,
+          ),
+          Container(
             color: Colors.orange,
             child: SmileWidget(animation: animation),
           ),
-      KsVerticalSpace.m(),
-      KsText.display4('🥳'),
-    ],
-  );
+          Container(
+            color: Colors.orange.withAlpha(128),
+            height: KsDimension.s,
+          ),
+          KsSpace.lH(),
+          KsText.display4('🥳'),
+        ],
+      );
 }
 
 class SmileWidget extends AnimatedWidget {
@@ -45,10 +54,10 @@ class SmileWidget extends AnimatedWidget {
     return Column(
       children: <Widget>[
         Container(width: MediaQuery.of(context).size.width),
-        KsVerticalSpace.m(),
+        KsSpace.mH(),
         KsText.display3(animation.value.floor().toString()),
         KsText.display1(KsLoc.of(context).fsSmilesDelivered()),
-        KsVerticalSpace.m(),
+        KsSpace.mH(),
       ],
     );
   }

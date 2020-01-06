@@ -42,12 +42,12 @@ class _FeatureWidget extends StatelessWidget {
           width: cns.maxWidth > 800 ? cns.maxWidth * 0.5 : cns.maxWidth * 0.9,
           child: Column(
             children: <Widget>[
-              KsVerticalSpace.xl(),
+              KsSpace.xlH(),
               KsText.display1(
                 title,
                 textAlign: TextAlign.center,
               ),
-              KsVerticalSpace.m(),
+              KsSpace.mH(),
               KsText.body2(
                 description,
                 textAlign: TextAlign.center,

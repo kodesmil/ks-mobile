@@ -9,9 +9,9 @@ class RecommendationsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        KsVerticalSpace.l(),
+        KsSpace.lH(),
         KsText.display2(KsLoc.of(context).fsOurRecommendations()),
-        KsVerticalSpace.l(),
+        KsSpace.lH(),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -27,7 +27,7 @@ class RecommendationsWidget extends StatelessWidget {
                     textAlign: TextAlign.right,
                     textScaleFactor: 1.2,
                   ),
-                  KsVerticalSpace.s(),
+                  KsSpace.sH(),
                   KsText.body2(
                     KsLoc.of(context).fsRecommendationAuthor1(),
                     textAlign: TextAlign.right,
@@ -35,21 +35,21 @@ class RecommendationsWidget extends StatelessWidget {
                 ],
               ),
             ),
-            KsHorizontalSpace.m(),
+            KsSpace.mW(),
             Container(
               width: KsContrainer.column12Width(context, 2),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   KsText.body2(KsLoc.of(context).fsRecommendation2()),
-                  KsVerticalSpace.s(),
+                  KsSpace.sH(),
                   KsText.body2(KsLoc.of(context).fsRecommendationAuthor2()),
                 ],
               ),
             )
           ],
         ),
-        KsVerticalSpace.xl(),
+        KsSpace.xlH(),
       ],
     );
   }

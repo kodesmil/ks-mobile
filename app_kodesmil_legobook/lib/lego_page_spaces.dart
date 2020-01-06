@@ -9,17 +9,17 @@ class LegoSpacesPage extends StatelessWidget {
         child: Column(
           children: <Widget>[
             KsText.display1('Vertical Space - XXL'),
-            _LegoSpacesInternal(child: KsVerticalSpace.xxl()),
+            _LegoSpacesInternal(child: KsSpace.xxlH()),
             KsText.display1('Vertical Space - XL'),
-            _LegoSpacesInternal(child: KsVerticalSpace.xl()),
+            _LegoSpacesInternal(child: KsSpace.xlH()),
             KsText.display1('Vertical Space - L'),
-            _LegoSpacesInternal(child: KsVerticalSpace.l()),
+            _LegoSpacesInternal(child: KsSpace.lH()),
             KsText.display1('Vertical Space - M'),
-            _LegoSpacesInternal(child: KsVerticalSpace.m()),
+            _LegoSpacesInternal(child: KsSpace.mH()),
             KsText.display1('Vertical Space - S'),
-            _LegoSpacesInternal(child: KsVerticalSpace.s()),
+            _LegoSpacesInternal(child: KsSpace.sH()),
             KsText.display1('Vertical Space - XS'),
-            _LegoSpacesInternal(child: KsVerticalSpace.xs()),
+            _LegoSpacesInternal(child: KsSpace.xsH()),
           ],
         ),
       );
@@ -31,7 +31,7 @@ class _LegoSpacesInternal extends StatelessWidget {
     @required this.child,
   }) : super(key: key);
 
-  final KsVerticalSpace child;
+  final KsSpace child;
 
   @override
   Widget build(BuildContext context) {

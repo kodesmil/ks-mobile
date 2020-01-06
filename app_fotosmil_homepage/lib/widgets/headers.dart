@@ -29,7 +29,7 @@ class HeaderWidget extends StatelessWidget {
                   onTap: () async =>
                       await _launchEmail(KsLoc.of(context).fsEmail()),
                 ),
-                KsVerticalSpace.xs(),
+                KsSpace.xsH(),
                 GestureDetector(
                   child: KsText.body2(KsLoc.of(context).fsPhone()),
                   onTap: () async =>
@@ -48,17 +48,17 @@ class HeaderWidget extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     KsText.display4(KsLoc.of(context).fsTitle()),
-                    KsVerticalSpace.m(),
+                    KsSpace.mH(),
                     KsText.body2(
                       KsLoc.of(context)
                           .fsProfessionalPhotoBooth()
                           .toUpperCase(),
                     ),
-                    KsVerticalSpace.s(),
+                    KsSpace.sH(),
                     KsText.display1(
                       KsLoc.of(context).fsForWeddingsEvents().toUpperCase(),
                     ),
-                    KsVerticalSpace.m(),
+                    KsSpace.mH(),
                     KsText(
                       '${KsLoc.of(context).fsPrice().toUpperCase()}: '
                       '${KsLoc.of(context).fsPrice4k().toUpperCase()}',

@@ -11,10 +11,10 @@ class WhatsIncludedWidget extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          KsVerticalSpace.xxl(),
+          KsSpace.xxlH(),
           KsText.display3(KsLoc.of(context).fsWhatsIncluded()),
           ...getFeatures(context),
-          KsVerticalSpace.xxl(),
+          KsSpace.xxlH(),
         ],
       ),
     );

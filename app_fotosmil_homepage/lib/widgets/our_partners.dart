@@ -9,9 +9,9 @@ class OurPartnersWidget extends StatelessWidget {
     final width = screenWidth > 600 ? screenWidth * 0.1 : screenWidth * 0.2;
     return Column(
       children: <Widget>[
-        KsVerticalSpace.xl(),
+        KsSpace.xlH(),
         KsText.display2('Our partners'),
-        KsVerticalSpace.l(),
+        KsSpace.lH(),
         Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -23,7 +23,7 @@ class OurPartnersWidget extends StatelessWidget {
                   fit: BoxFit.contain,
                 ),
               ),
-              KsHorizontalSpace.m(),
+              KsSpace.mW(),
               Container(
                 width: width,
                 child: Image.asset(
@@ -31,7 +31,7 @@ class OurPartnersWidget extends StatelessWidget {
                   fit: BoxFit.contain,
                 ),
               ),
-              KsHorizontalSpace.m(),
+              KsSpace.mW(),
               Container(
                 width: width,
                 child: Image.asset(
@@ -39,7 +39,7 @@ class OurPartnersWidget extends StatelessWidget {
                   fit: BoxFit.contain,
                 ),
               ),
-              KsHorizontalSpace.m(),
+              KsSpace.mW(),
               Container(
                 width: width,
                 child: Image.asset(
@@ -50,7 +50,7 @@ class OurPartnersWidget extends StatelessWidget {
             ],
           ),
         ),
-        KsVerticalSpace.xl(),
+        KsSpace.xlH(),
       ],
     );
   }

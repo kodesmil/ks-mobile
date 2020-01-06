@@ -11,20 +11,20 @@ class ContactUsWidget extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          KsVerticalSpace.xl(),
+          KsSpace.xlH(),
           KsText.display2(
             KsLoc.of(context).fsWhatIceBreaker(),
             textAlign: TextAlign.center,
           ),
-          KsVerticalSpace.m(),
+          KsSpace.mH(),
           KsText.display1(KsLoc.of(context).fsContactUs()),
-          KsVerticalSpace.l(),
+          KsSpace.lH(),
           RaisedButton(
             child: Text(KsLoc.of(context).fsSendUsRequest()),
             shape: StadiumBorder(),
             onPressed: () => _launchEmail(KsLoc.of(context).fsEmail()),
           ),
-          KsVerticalSpace.xxl(),
+          KsSpace.xxlH(),
         ],
       ),
     );
