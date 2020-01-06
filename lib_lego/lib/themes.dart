@@ -13,6 +13,16 @@ class KsTheme {
         KsTextTheme.motim(KsColorScheme.motimDark()),
       );
 
+  static fotosmilLight() => KsTheme.base(
+        KsColorScheme.motimLight(),
+        KsTextTheme.fotosmil(KsColorScheme.motimLight()),
+      );
+
+  static fotosmilDark() => KsTheme.base(
+        KsColorScheme.motimDark(),
+        KsTextTheme.fotosmil(KsColorScheme.motimDark()),
+      );
+
   static base(ColorScheme colorScheme, TextTheme textTheme) {
     final focusColor = Colors.black.withOpacity(0.12);
     return ThemeData(
@@ -142,6 +152,63 @@ class KsTextTheme extends TextTheme {
             fontSize: 40,
             fontWeight: FontWeight.w900,
             letterSpacing: 1.4,
+          ),
+        )
+        .apply(
+          bodyColor: colorScheme.onSurface,
+          displayColor: colorScheme.onSurface,
+          decorationColor: colorScheme.onSurface,
+        );
+    return KsTextTheme.base(theme);
+  }
+
+  factory KsTextTheme.fotosmil(ColorScheme colorScheme) {
+    final base = ThemeData.dark().textTheme;
+    final fontFamily = 'Inter';
+    final theme = base
+        .copyWith(
+          body1: base.body1.copyWith(
+            fontFamily: fontFamily,
+          ),
+          body2: base.body2.copyWith(
+            fontFamily: fontFamily,
+            fontSize: 17,
+            fontWeight: FontWeight.w400,
+            letterSpacing: 1.4,
+          ),
+          button: base.button.copyWith(
+            fontFamily: fontFamily,
+          ),
+          headline: base.headline.copyWith(
+            fontFamily: fontFamily,
+          ),
+          overline: base.overline.copyWith(
+            fontFamily: fontFamily,
+          ),
+          display1: base.display1.copyWith(
+            fontFamily: fontFamily,
+          ),
+          display2: base.display2.copyWith(
+            fontFamily: fontFamily,
+          ),
+          display3: base.display3.copyWith(
+            fontFamily: fontFamily,
+          ),
+          display4: base.display4.copyWith(
+            fontFamily: fontFamily,
+            fontSize: 96,
+          ),
+          caption: base.caption.copyWith(
+            fontFamily: fontFamily,
+          ),
+          title: base.title.copyWith(
+            fontFamily: fontFamily,
+          ),
+          subtitle: base.subtitle.copyWith(
+            fontFamily: fontFamily,
+          ),
+          subhead: base.subhead.copyWith(
+            fontFamily: fontFamily,
           ),
         )
         .apply(

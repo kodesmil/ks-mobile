@@ -85,9 +85,16 @@ class KsLoc {
       );
 
   String fsPrice() => Intl.message(
-        r'Price: only 4000 NOK for 2 hours + 1000 NOK/extra hour',
+        r'Price',
         locale: _localeName,
         name: 'fsPrice',
+        desc: r'',
+      );
+
+  String fsPrice4k() => Intl.message(
+        r'only 4000 NOK for 2 hours + 1000 NOK/extra hour',
+        locale: _localeName,
+        name: 'fsPrice4k',
         desc: r'',
       );
 
@@ -113,7 +120,7 @@ class KsLoc {
       );
 
   String fsFeat1Description() => Intl.message(
-        'You won\'n need to worry about installation '
+        'You won\'t need to worry about installation '
         'of the photo booth nor about any other technical issue. '
         'Let us do it for you.',
         locale: _localeName,
@@ -250,7 +257,7 @@ class KsLoc {
       );
 
   String fsWhatIceBreaker() => Intl.message(
-        'Looking for great ice-breaker for your event?',
+        'Looking for a great ice-breaker to your event?',
         locale: _localeName,
         name: 'fsWhatIceBreaker',
         desc: r'',

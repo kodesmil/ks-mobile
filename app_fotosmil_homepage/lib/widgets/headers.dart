@@ -39,20 +39,31 @@ class HeaderWidget extends StatelessWidget {
             ),
           ),
           Center(
-            heightFactor: size.width > 800 ? 1.75 : 2.5,
+            heightFactor: size.width > 800 ? 2.25 : 3,
             child: Container(
-              width: MediaQuery.of(context).size.width * 0.65,
+              width: MediaQuery.of(context).size.width * 0.7,
               child: FittedBox(
                 fit: size.width > 800 ? BoxFit.none : BoxFit.fitWidth,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     KsText.display4(KsLoc.of(context).fsTitle()),
+                    KsVerticalSpace.m(),
+                    KsText.body2(
+                      KsLoc.of(context)
+                          .fsProfessionalPhotoBooth()
+                          .toUpperCase(),
+                    ),
+                    KsVerticalSpace.s(),
                     KsText.display1(
-                        KsLoc.of(context).fsProfessionalPhotoBooth()),
-                    KsText.display2(KsLoc.of(context).fsForWeddingsEvents()),
-                    KsVerticalSpace.xl(),
-                    KsText.display1(KsLoc.of(context).fsPrice()),
+                      KsLoc.of(context).fsForWeddingsEvents().toUpperCase(),
+                    ),
+                    KsVerticalSpace.m(),
+                    KsText(
+                      '${KsLoc.of(context).fsPrice().toUpperCase()}: '
+                      '${KsLoc.of(context).fsPrice4k().toUpperCase()}',
+                      type: KsTextType.body2,
+                    ),
                   ],
                 ),
               ),
