@@ -29,13 +29,18 @@ class KsTheme {
       colorScheme: colorScheme,
       textTheme: textTheme,
       appBarTheme: AppBarTheme(
-        color: colorScheme.background,
-        elevation: 0,
-        iconTheme: IconThemeData(
-          color: colorScheme.primary,
+        textTheme: TextTheme(
+          title: TextStyle(
+            fontSize: 20,
+            color: colorScheme.onPrimary,
+          ),
         ),
-        brightness: colorScheme.brightness,
+        color: colorScheme.surface,
+        iconTheme: IconThemeData(
+          color: colorScheme.onPrimary,
+        ),
       ),
+      dialogBackgroundColor: colorScheme.background,
       tabBarTheme: TabBarTheme(
         labelColor: colorScheme.onPrimary,
       ),

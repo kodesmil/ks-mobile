@@ -11,6 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^0.1.2
+  dynamic_theme: ^1.0.1
 
   lib_lego:
     path: ../lib_lego
@@ -24,3 +25,11 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter/Inter-Regular.otf
+        - asset: assets/fonts/Inter/Inter-Italic.otf
+          style: italic

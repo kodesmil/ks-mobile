@@ -30,6 +30,6 @@ flutter:
   fonts:
     - family: Inter
       fonts:
-        - asset: assets/fonts/Inter-Regular.otf
-        - asset: assets/fonts/Inter-Italic.otf
+        - asset: assets/fonts/Inter/Inter-Regular.otf
+        - asset: assets/fonts/Inter/Inter-Italic.otf
           style: italic

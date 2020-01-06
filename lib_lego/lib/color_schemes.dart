@@ -48,10 +48,42 @@ class KsColorScheme extends ColorScheme {
       );
 
   factory KsColorScheme.motimDark() => KsColorScheme(
-        primary: Colors.white.withAlpha(200),
-        primaryVariant: Colors.white.withAlpha(32),
+        primary: Colors.white,
+        primaryVariant: Colors.white,
         secondary: Colors.teal.shade700,
         secondaryVariant: Colors.teal,
+        background: const Color(0xFF00212A),
+        surface: Colors.black,
+        onBackground: Colors.white,
+        error: Colors.white,
+        onError: Colors.white,
+        onPrimary: Colors.white,
+        onSecondary: Colors.white,
+        onSurface: Colors.white,
+        brightness: Brightness.dark,
+      );
+
+  factory KsColorScheme.fotosmilLight() => KsColorScheme(
+        primary: Colors.orange,
+        primaryVariant: Colors.black,
+        secondary: const Color(0xFFEFF3F3),
+        secondaryVariant: const Color(0xFFFAFBFB),
+        background: Colors.white,
+        surface: Colors.orange.shade100.withAlpha(156),
+        onBackground: Colors.black,
+        error: Colors.black,
+        onError: Colors.black,
+        onPrimary: Colors.black,
+        onSecondary: Colors.black,
+        onSurface: Colors.black,
+        brightness: Brightness.light,
+      );
+
+  factory KsColorScheme.fotosmilDark() => KsColorScheme(
+        primary: Colors.white,
+        primaryVariant: Colors.white,
+        secondary: Colors.orange.shade700,
+        secondaryVariant: Colors.orange,
         background: const Color(0xFF00212A),
         surface: Colors.black,
         onBackground: Colors.white,
