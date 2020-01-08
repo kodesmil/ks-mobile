@@ -1,7 +1,6 @@
 import 'package:app_motim_fit/di/app_component.dart';
 import 'package:app_motim_fit/ui/chart.dart';
 import 'package:lib_lego/progress_indicators.dart';
-import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -175,16 +174,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // General Methods:-----------------------------------------------------------
   showErrorMessage(BuildContext context, String message) {
-    Future.delayed(Duration(milliseconds: 0), () {
-      if (message != null) {
-        FlushbarHelper.createError(
-          message: message,
-          title: 'Error',
-          duration: Duration(seconds: 3),
-        )..show(context);
-      }
-    });
-
     return Container();
   }
 }

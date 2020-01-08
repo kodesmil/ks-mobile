@@ -9,10 +9,9 @@ class Routes {
   Routes._();
 
   static final routes = <String, WidgetBuilder>{
-    'splash': (BuildContext context) => SplashScreen(),
-    'login': (BuildContext context) => LoginScreen(),
-    'sign-up': (BuildContext context) => SignUpScreen(),
-//    home: (BuildContext context) => HomeScreen(),
-    'home': (BuildContext context) => MainCollapsingToolbar(),
+    '/splash': (BuildContext context) => SplashScreen(),
+    '/login': (BuildContext context) => LoginScreen(),
+    '/sign-up': (BuildContext context) => SignUpScreen(),
+    '/home': (BuildContext context) => MainCollapsingToolbar(),
   };
 }
