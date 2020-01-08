@@ -150,7 +150,7 @@ abstract class _SignUpStore with Store {
       final result = await tokenApi.getAuthAccessToken(user);
       await sharedPreferenceHelper.saveAuthToken(result);
       loading = false;
-      success = false;
+      success = true;
       errorStore.showError = false;
     } catch (e) {
       loading = false;

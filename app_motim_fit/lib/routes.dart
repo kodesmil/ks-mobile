@@ -10,8 +10,8 @@ class Routes {
 
   static final routes = <String, WidgetBuilder>{
     '/splash': (BuildContext context) => SplashScreen(),
-    '/login': (BuildContext context) => LoginScreen(),
-    '/sign-up': (BuildContext context) => SignUpScreen(),
-    '/home': (BuildContext context) => MainCollapsingToolbar(),
+    '/login': (BuildContext context) => LoginPage(),
+    '/sign-up': (BuildContext context) => SignUpPage(),
+    '/home': (BuildContext context) => HomePage(),
   };
 }

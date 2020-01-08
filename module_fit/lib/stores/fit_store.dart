@@ -45,16 +45,12 @@ abstract class _FitStore with Store {
     }
   }
 
-  Future<List<FitData>> readFitData(DataType type) async {
-    final now = DateTime.now();
-    final a = await FitKit.read(
+  Future<List<FitData>> readFitData(DataType type) async => await FitKit.read(
       type,
       // dateFrom: DateTime(now.year, now.month),
       dateFrom: DateTime.now().subtract(Duration(days: 30)),
-      dateTo: now,
+      dateTo: DateTime.now(),
     );
-    return a;
-  }
 
   FitsList _generateDataFromFits(
     List<FitData> stepsData,

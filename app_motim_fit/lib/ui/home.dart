@@ -11,21 +11,21 @@ import 'package:lib_lego/texts.dart';
 import 'package:lib_locale/localizations.dart';
 import 'package:module_fit/stores/fit_store.dart';
 
-class HomeScreen extends StatefulWidget {
+class Home2Screen extends StatefulWidget {
   FitStore fitStore;
 
-  HomeScreen(this.fitStore);
+  Home2Screen(this.fitStore);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState(fitStore);
+  _Home2ScreenState createState() => _Home2ScreenState(fitStore);
 }
 
 const String testDevice = 'YOUR_DEVICE_ID';
 
-class _HomeScreenState extends State<HomeScreen> {
+class _Home2ScreenState extends State<Home2Screen> {
   FitStore _fitStore;
 
-  _HomeScreenState(this._fitStore);
+  _Home2ScreenState(this._fitStore);
 
   @override
   void initState() {
@@ -218,12 +218,12 @@ class HomeChart extends StatelessWidget {
   }
 }
 
-class MainCollapsingToolbar extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  _MainCollapsingToolbarState createState() => _MainCollapsingToolbarState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _MainCollapsingToolbarState extends State<MainCollapsingToolbar> {
+class _HomePageState extends State<HomePage> {
   final _fitStore = FitStore();
 
   @override
@@ -316,35 +316,10 @@ class _MainCollapsingToolbarState extends State<MainCollapsingToolbar> {
             ];
           },
           body: Center(
-            child: HomeScreen(_fitStore),
+            child: Home2Screen(_fitStore),
           ),
         ),
       ),
     );
-  }
-}
-
-class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  _SliverAppBarDelegate(this._tabBar);
-
-  final TabBar _tabBar;
-
-  @override
-  double get minExtent => _tabBar.preferredSize.height;
-
-  @override
-  double get maxExtent => _tabBar.preferredSize.height;
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return new Container(
-      child: _tabBar,
-    );
-  }
-
-  @override
-  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
-    return false;
   }
 }

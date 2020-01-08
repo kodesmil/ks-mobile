@@ -1,16 +1,18 @@
 import 'package:module_auth/stores/login_store.dart';
 import 'package:lib_lego/app_bars.dart';
 import 'package:lib_lego/progress_indicators.dart';
+import 'package:lib_lego/snack_bars.dart';
+import 'package:lib_lego/navigations.dart';
 import 'package:lib_lego/textfields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginPage extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _passwordFocusNode = FocusNode();
@@ -51,8 +53,8 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           Observer(
             builder: (context) => _store.success
-                ? navigate(context)
-                : showErrorMessage(context, _store.errorStore.errorMessage),
+                ? ksNavigateAndRemoveUntil(context, '/home')
+                : ksShowErrorMessage(context, _store.errorStore.errorMessage),
           ),
           Observer(
             builder: (context) => Visibility(
@@ -126,14 +128,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildLoginField() => Observer(
         builder: (context) => RaisedButton(
-          child: Text('Login'.toUpperCase()),
+          child: Text('Login'),
           shape: StadiumBorder(),
           onPressed: () async {
             _store.validateAll();
             if (_store.canLogin) {
               _store.login();
             } else {
-              showErrorMessage(context, 'Please fill in all fields');
+              ksShowErrorMessage(context, 'Please fill in all fields');
             }
           },
         ),
@@ -141,26 +143,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildSignInButton() => Observer(
         builder: (context) => FlatButton(
-          child: Text('Sign up'.toUpperCase()),
+          child: Text('Sign up'),
           shape: StadiumBorder(),
-          onPressed: () => Navigator.pushNamed(context, 'sign-up'),
+          onPressed: () => Navigator.pushNamed(context, '/sign-up'),
         ),
       );
 
-  showErrorMessage(BuildContext context, String message) {
-    if (message?.isNotEmpty == true) {
-      Scaffold.of(context).showSnackBar(SnackBar(content: Text(message)));
-    }
-    return Container();
-  }
-
-  Widget navigate(BuildContext context) {
-    Future.delayed(Duration(milliseconds: 0), () {
-      Navigator.of(context).pushNamedAndRemoveUntil(
-        'home',
-        (route) => false,
-      );
-    });
-    return Container();
-  }
 }

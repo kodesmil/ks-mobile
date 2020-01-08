@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lib_lego/dimensions.dart';
 
 class KsProgressIndicator extends StatelessWidget {
   const KsProgressIndicator({
@@ -18,12 +19,14 @@ class KsProgressIndicator extends StatelessWidget {
             height: 100,
             width: 100,
             child: Card(
+              color: Theme.of(context).backgroundColor,
               child: Padding(
-                padding: const EdgeInsets.all(25.0),
+                padding: const EdgeInsets.all(KsDimension.m),
                 child: CircularProgressIndicator(),
               ),
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0)),
+                borderRadius: BorderRadius.circular(10.0),
+              ),
             ),
           ),
         ),

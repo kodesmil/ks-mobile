@@ -1,18 +1,20 @@
 import 'package:module_auth/stores/sign_up_store.dart';
 import 'package:lib_lego/date_fields.dart';
 import 'package:lib_lego/app_bars.dart';
+import 'package:lib_lego/snack_bars.dart';
 import 'package:lib_lego/progress_indicators.dart';
+import 'package:lib_lego/navigations.dart';
 import 'package:lib_lego/textfields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 
-class SignUpScreen extends StatefulWidget {
+class SignUpPage extends StatefulWidget {
   @override
-  _SignUpScreenState createState() => _SignUpScreenState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignUpPageState extends State<SignUpPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _dateOfBirthController = TextEditingController();
@@ -74,8 +76,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           _buildRightSide(),
           Observer(
             builder: (context) => _store.success
-                ? navigate(context)
-                : showErrorMessage(
+                ? ksNavigateAndRemoveUntil(context, '/home')
+                : ksShowErrorMessage(
                     context,
                     _store.errorStore.errorMessage,
                   ),
@@ -195,34 +197,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
         if (_store.canSignUp) {
           _store.signUp();
         } else {
-          showErrorMessage(context, 'Please fill in all fields');
+          ksShowErrorMessage(context, 'Please fill in all fields');
         }
       },
     );
   }
 
   Widget _buildLoginButton() => Observer(
-    builder: (context) => FlatButton(
-      child: Text('Login'.toUpperCase()),
-      shape: StadiumBorder(),
-      onPressed: () => Navigator.pushNamed(context, 'login'),
-    ),
-  );
-
-  showErrorMessage(BuildContext context, String message) {
-    if (message?.isNotEmpty == true) {
-      Scaffold.of(context).showSnackBar(SnackBar(content: Text(message)));
-    }
-    return Container();
-  }
-
-  Widget navigate(BuildContext context) {
-    Future.delayed(Duration(milliseconds: 0), () {
-      Navigator.of(context).pushNamedAndRemoveUntil(
-        '/home',
-        (Route<dynamic> route) => false,
+        builder: (context) => FlatButton(
+          child: Text('Login'.toUpperCase()),
+          shape: StadiumBorder(),
+          onPressed: () => Navigator.pushNamed(context, '/login'),
+        ),
       );
-    });
-    return Container();
-  }
 }

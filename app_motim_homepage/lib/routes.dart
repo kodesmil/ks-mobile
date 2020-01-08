@@ -6,27 +6,27 @@ class Routes {
   Routes._();
 
   static final routes = <String, WidgetBuilder>{
-    'login': (BuildContext context) => Scaffold(
+    '/login': (BuildContext context) => Scaffold(
       body: LayoutBuilder(
         builder: (context, cns) => Center(
           child: Container(
             width: cns.widthConstraints().biggest.width * 0.4,
-            child: LoginScreen(),
+            child: LoginPage(),
           ),
         ),
       ),
     ),
-    'sign-up': (BuildContext context) => Scaffold(
+    '/sign-up': (BuildContext context) => Scaffold(
       body: LayoutBuilder(
         builder: (context, cns) => Center(
           child: Container(
             width: cns.widthConstraints().biggest.width * 0.4,
-            child: SignUpScreen(),
+            child: SignUpPage(),
           ),
         ),
       ),
     ),
-    'home': (BuildContext context) => Center(
+    '/home': (BuildContext context) => Center(
           child: Text('Home'),
         ),
   };

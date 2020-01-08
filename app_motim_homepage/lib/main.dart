@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       theme: KsTheme.motimLight(),
       // darkTheme: MfThemeData.dark(),
       darkTheme: KsTheme.motimDark(),
-      initialRoute: 'login',
+      initialRoute: '/login',
     );
   }
 }

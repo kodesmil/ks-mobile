@@ -28,6 +28,7 @@ class KsTheme {
     return ThemeData(
       colorScheme: colorScheme,
       textTheme: textTheme,
+      indicatorColor: colorScheme.onBackground,
       appBarTheme: AppBarTheme(
         textTheme: TextTheme(
           title: TextStyle(
