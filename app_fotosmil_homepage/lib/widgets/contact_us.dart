@@ -3,6 +3,7 @@ import 'package:lib_lego/spaces.dart';
 import 'package:lib_lego/texts.dart';
 import 'package:lib_locale/localizations.dart';
 import 'package:url_launcher_web/url_launcher_web.dart';
+import 'package:flare_flutter/flare_actor.dart';
 
 class ContactUsWidget extends StatelessWidget {
   @override

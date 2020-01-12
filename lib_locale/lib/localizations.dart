@@ -262,6 +262,20 @@ class KsLoc {
         name: 'fsWhatIceBreaker',
         desc: r'',
       );
+
+  String ksTitle() => Intl.message(
+        'KodeSmil',
+        locale: _localeName,
+        name: 'ksTitle',
+        desc: r'',
+      );
+
+  String ksMotto() => Intl.message(
+        'Flutter Experts',
+        locale: _localeName,
+        name: 'ksMotto',
+        desc: r'',
+      );
 }
 
 class _KsLocDelegate extends LocalizationsDelegate<KsLoc> {
