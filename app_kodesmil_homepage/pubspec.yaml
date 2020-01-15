@@ -14,6 +14,10 @@ dependencies:
   url_launcher: ^5.4.1
   url_launcher_web: ^0.1.0+2
   cupertino_icons: ^0.1.2
+  flutter_svg:
+    git:
+      url: git@github.com:feilfeilundfeil/flutter_svg.git
+      branch: feature/web
   lib_lego:
     path: ../lib_lego
   lib_locale:
@@ -31,6 +35,8 @@ flutter:
   fonts:
     - family: Inter
       fonts:
-        - asset: assets/fonts/Inter/Inter-Regular.otf
-        - asset: assets/fonts/Inter/Inter-Italic.otf
-          style: italic
+        - asset: assets/fonts/Noto/NotoSansDisplay-Thin.ttf
+          weight: 300
+        - asset: assets/fonts/Noto/NotoSansDisplay-Regular.ttf
+        - asset: assets/fonts/Noto/NotoSansDisplay-Black.ttf
+          weight: 600

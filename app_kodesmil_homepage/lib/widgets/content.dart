@@ -3,6 +3,7 @@ import 'package:lib_lego/dimensions.dart';
 import 'package:lib_lego/spaces.dart';
 import 'package:lib_lego/texts.dart';
 import 'package:lib_locale/localizations.dart';
+import 'package:lib_lego/gradients.dart';
 
 class ContentWidget extends StatelessWidget {
   @override
@@ -10,19 +11,18 @@ class ContentWidget extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       height: size.height < size.width ? size.height : null,
+      color: Colors.white,
       child: Stack(
         children: [
-          Container(
-            padding: EdgeInsets.all(KsDimension.xxl),
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [
-                  Colors.indigo.shade900,
-                  Colors.cyan.shade600,
-                ],
+          ClipRRect(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(200.0),
+              bottomRight: Radius.circular(200.0),
+            ),
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                gradient: KsGradient.kodesmil().gradient,
               ),
             ),
           ),

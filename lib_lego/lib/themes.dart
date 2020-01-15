@@ -23,6 +23,16 @@ class KsTheme {
         KsTextTheme.fotosmil(KsColorScheme.motimDark()),
       );
 
+  static kodesmilLight() => KsTheme.base(
+        KsColorScheme.kodesmilLight(),
+        KsTextTheme.kodesmil(KsColorScheme.kodesmilLight()),
+      );
+
+  static kodesmilDark() => KsTheme.base(
+        KsColorScheme.kodesmilDark(),
+        KsTextTheme.kodesmil(KsColorScheme.kodesmilDark()),
+      );
+
   static base(ColorScheme colorScheme, TextTheme textTheme) {
     final focusColor = Colors.black.withOpacity(0.12);
     return ThemeData(
@@ -171,6 +181,63 @@ class KsTextTheme extends TextTheme {
   factory KsTextTheme.fotosmil(ColorScheme colorScheme) {
     final base = ThemeData.dark().textTheme;
     final fontFamily = 'Inter';
+    final theme = base
+        .copyWith(
+          body1: base.body1.copyWith(
+            fontFamily: fontFamily,
+          ),
+          body2: base.body2.copyWith(
+            fontFamily: fontFamily,
+            fontSize: 17,
+            fontWeight: FontWeight.w400,
+            letterSpacing: 1.4,
+          ),
+          button: base.button.copyWith(
+            fontFamily: fontFamily,
+          ),
+          headline: base.headline.copyWith(
+            fontFamily: fontFamily,
+          ),
+          overline: base.overline.copyWith(
+            fontFamily: fontFamily,
+          ),
+          display1: base.display1.copyWith(
+            fontFamily: fontFamily,
+          ),
+          display2: base.display2.copyWith(
+            fontFamily: fontFamily,
+          ),
+          display3: base.display3.copyWith(
+            fontFamily: fontFamily,
+          ),
+          display4: base.display4.copyWith(
+            fontFamily: fontFamily,
+            fontSize: 96,
+          ),
+          caption: base.caption.copyWith(
+            fontFamily: fontFamily,
+          ),
+          title: base.title.copyWith(
+            fontFamily: fontFamily,
+          ),
+          subtitle: base.subtitle.copyWith(
+            fontFamily: fontFamily,
+          ),
+          subhead: base.subhead.copyWith(
+            fontFamily: fontFamily,
+          ),
+        )
+        .apply(
+          bodyColor: colorScheme.onSurface,
+          displayColor: colorScheme.onSurface,
+          decorationColor: colorScheme.onSurface,
+        );
+    return KsTextTheme.base(theme);
+  }
+
+  factory KsTextTheme.kodesmil(ColorScheme colorScheme) {
+    final base = ThemeData.dark().textTheme;
+    final fontFamily = 'Noto';
     final theme = base
         .copyWith(
           body1: base.body1.copyWith(
