@@ -23,6 +23,7 @@ class _KsCheckboxState extends State<KsCheckbox> {
 
     return Row(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
           padding: EdgeInsets.all(0),
