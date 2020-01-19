@@ -19,15 +19,6 @@ class HomepagePage extends StatelessWidget {
               children: [
                 KsSpace.xxlH(),
                 KsSpace.xxlH(),
-                Center(
-                  child: KsText(
-                    'Technology is our hobby',
-                    style: Theme.of(context).textTheme.display2.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.indigo.shade900,
-                        ),
-                  ),
-                ),
                 KsSpace.xxlH(),
                 KsSpace.xxlH(),
               ],

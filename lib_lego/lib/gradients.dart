@@ -34,7 +34,7 @@ class KsGradient {
   factory KsGradient.kodesmil() => KsGradient(
         RadialGradient(
           center: Alignment.bottomCenter,
-          radius: 1.15,
+          radius: 1.12,
           stops: KsGradientStops.kodesmil().stops,
           colors: KsGradientColors.kodesmil().colors,
         ),

@@ -67,11 +67,13 @@ class KsTheme {
       scaffoldBackgroundColor: colorScheme.background,
       highlightColor: Colors.transparent,
       accentColor: colorScheme.primary,
-      primaryColor: colorScheme.primaryVariant,
+      primaryColor: colorScheme.primary,
       focusColor: focusColor,
       buttonTheme: ButtonThemeData(
-        height: 40,
+        shape: StadiumBorder(),
+        height: 45,
         textTheme: ButtonTextTheme.primary,
+        colorScheme: colorScheme,
       ),
       inputDecorationTheme: InputDecorationTheme(
         labelStyle: TextStyle(
@@ -251,6 +253,8 @@ class KsTextTheme extends TextTheme {
           ),
           button: base.button.copyWith(
             fontFamily: fontFamily,
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
           ),
           headline: base.headline.copyWith(
             fontFamily: fontFamily,

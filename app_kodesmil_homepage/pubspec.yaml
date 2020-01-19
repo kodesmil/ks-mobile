@@ -14,6 +14,7 @@ dependencies:
   url_launcher: ^5.4.1
   url_launcher_web: ^0.1.0+2
   cupertino_icons: ^0.1.2
+  flutter_widgets: ^0.1.9
   flutter_svg:
     git:
       url: git@github.com:feilfeilundfeil/flutter_svg.git
@@ -33,10 +34,10 @@ flutter:
   assets:
     - assets/
   fonts:
-    - family: Inter
+    - family: Noto
       fonts:
         - asset: assets/fonts/Noto/NotoSansDisplay-Thin.ttf
-          weight: 300
+          weight: 200
         - asset: assets/fonts/Noto/NotoSansDisplay-Regular.ttf
-        - asset: assets/fonts/Noto/NotoSansDisplay-Black.ttf
+        - asset: assets/fonts/Noto/NotoSansDisplay-Bold.ttf
           weight: 600

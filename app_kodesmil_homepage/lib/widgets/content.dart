@@ -15,10 +15,6 @@ class ContentWidget extends StatelessWidget {
       child: Stack(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(200.0),
-              bottomRight: Radius.circular(200.0),
-            ),
             child: Container(
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
@@ -32,16 +28,6 @@ class ContentWidget extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  KsText.display1(
-                    'We treat each app as our own product',
-                  ),
-                  KsText.display1(
-                    'We don\'t stop until it\'s pixel perfect',
-                  ),
-                  KsText.display1(
-                    'Online Tracking Feature will be available to '
-                    'track the progress of your project',
-                  ),
                 ],
               ),
             ),

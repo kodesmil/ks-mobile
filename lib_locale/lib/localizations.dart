@@ -271,7 +271,7 @@ class KsLoc {
       );
 
   String ksMotto() => Intl.message(
-        'Flutter Experts',
+        'All technologies start with "Hello World!"',
         locale: _localeName,
         name: 'ksMotto',
         desc: r'',
