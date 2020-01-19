@@ -60,13 +60,13 @@ class KsSpace extends StatelessWidget {
       );
 
   /// Default: 8 pt
-  factory KsSpace.xsSq() => KsSpace(
+  factory KsSpace.xs() => KsSpace(
         width: KsDimension.xs,
         height: KsDimension.xs,
       );
 
   /// Default: 16 pt
-  factory KsSpace.sSq() => KsSpace(
+  factory KsSpace.s() => KsSpace(
         width: KsDimension.s,
         height: KsDimension.s,
       );
@@ -78,19 +78,19 @@ class KsSpace extends StatelessWidget {
       );
 
   /// Default: 48 pt
-  factory KsSpace.lSq() => KsSpace(
+  factory KsSpace.l() => KsSpace(
         width: KsDimension.l,
         height: KsDimension.l,
       );
 
   /// Default: 72 pt
-  factory KsSpace.xlSq() => KsSpace(
+  factory KsSpace.xl() => KsSpace(
         width: KsDimension.xl,
         height: KsDimension.xl,
       );
 
   /// Default: 96 pt
-  factory KsSpace.xxlSq() => KsSpace(
+  factory KsSpace.xxl() => KsSpace(
         width: KsDimension.xxl,
         height: KsDimension.xxl,
       );

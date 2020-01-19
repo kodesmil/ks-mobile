@@ -15,6 +15,7 @@ dependencies:
   url_launcher_web: ^0.1.0+2
   cupertino_icons: ^0.1.2
   flutter_widgets: ^0.1.9
+  auto_size_text: ^2.1.0
   flutter_svg:
     git:
       url: git@github.com:feilfeilundfeil/flutter_svg.git

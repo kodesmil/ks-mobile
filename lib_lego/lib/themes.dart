@@ -71,7 +71,7 @@ class KsTheme {
       focusColor: focusColor,
       buttonTheme: ButtonThemeData(
         shape: StadiumBorder(),
-        height: 45,
+        height: 40,
         textTheme: ButtonTextTheme.primary,
         colorScheme: colorScheme,
       ),
@@ -248,13 +248,12 @@ class KsTextTheme extends TextTheme {
           body2: base.body2.copyWith(
             fontFamily: fontFamily,
             fontSize: 17,
-            fontWeight: FontWeight.w400,
             letterSpacing: 1.4,
           ),
           button: base.button.copyWith(
             fontFamily: fontFamily,
             fontSize: 18,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.bold,
           ),
           headline: base.headline.copyWith(
             fontFamily: fontFamily,
@@ -280,6 +279,7 @@ class KsTextTheme extends TextTheme {
           ),
           title: base.title.copyWith(
             fontFamily: fontFamily,
+            fontWeight: FontWeight.bold,
           ),
           subtitle: base.subtitle.copyWith(
             fontFamily: fontFamily,

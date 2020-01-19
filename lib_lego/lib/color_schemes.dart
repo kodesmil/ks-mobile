@@ -80,13 +80,13 @@ class KsColorScheme extends ColorScheme {
       );
 
   factory KsColorScheme.kodesmilDark() => KsColorScheme(
-        primary: Colors.white,
+        primary: const Color(0xFFC004D9),
         primaryVariant: Colors.white,
         secondary: Colors.teal.shade700,
         secondaryVariant: Colors.teal,
-        background: const Color(0xFF00212A),
+        background: Colors.white,
         surface: Colors.black,
-        onBackground: Colors.white,
+        onBackground: Colors.black,
         error: Colors.white,
         onError: Colors.white,
         onPrimary: Colors.white,
