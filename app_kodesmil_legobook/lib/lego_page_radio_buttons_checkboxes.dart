@@ -9,8 +9,8 @@ class LegoRadioButtonsCheckboxesPage extends StatelessWidget {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        KsCheckbox(label: 'sample text',),
-        KsRadio(label: 'sample text',),
+        KsCheckbox(label: 'Sample Text',),
+        KsRadio(labels: ['Sample Text 1', 'Sample Text 2']),
       ],
     ),
   );
