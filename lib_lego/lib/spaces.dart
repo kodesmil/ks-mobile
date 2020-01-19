@@ -72,7 +72,7 @@ class KsSpace extends StatelessWidget {
       );
 
   /// Default: 32 pt
-  factory KsSpace.mSq() => KsSpace(
+  factory KsSpace.m() => KsSpace(
         width: KsDimension.m,
         height: KsDimension.m,
       );

@@ -2,8 +2,71 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <!-- Start of HubSpot Embed Code -->
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/7020884.js"></script>
+    <!-- End of HubSpot Embed Code -->
 </head>
 <body>
+<script type="application/javascript">
+
+    function getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(';');
+      for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
+
+    function formv3(email){
+        // Create the new request
+        var xhr = new XMLHttpRequest();
+        var url = 'https://api.hsforms.com/submissions/v3/integration/submit/7020884/274cb0b6-4875-46de-98da-71e21d8db829'
+
+        // Example request JSON:
+        var data = {
+          "submittedAt": Date.now(),
+          "fields": [
+            {
+              "name": "email",
+              "value": email
+            },
+          ],
+          "context": {
+            "hutk": getCookie("hubspotutk"),
+            "pageUri": "www.fotosmil.no",
+            "pageName": "FotoSmil"
+          },
+          "legalConsentOptions":{ // Include this object when GDPR options are enabled
+            "consent":{
+              "consentToProcess":true,
+              "text":"I agree to allow FotoSmil to store and process my personal data.",
+              "communications":[
+                {
+                  "value":true,
+                  "subscriptionTypeId":999,
+                  "text":"I agree to receive marketing communications from FotoSmil."
+                }
+              ]
+            }
+          }
+        }
+
+        var final_data = JSON.stringify(data)
+
+        xhr.open('POST', url);
+        // Sets the value of the 'Content-Type' HTTP request headers to 'application/json'
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(final_data)
+    }
+
+</script>
 <script src="main.dart.js" type="application/javascript"></script>
 </body>
 </html>

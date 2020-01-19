@@ -1,3 +1,4 @@
+import 'package:app_kodesmil_homepage/widgets/contact.dart';
 import 'package:app_kodesmil_homepage/widgets/content.dart';
 import 'package:app_kodesmil_homepage/widgets/footer.dart';
 import 'package:app_kodesmil_homepage/widgets/headers.dart';
@@ -12,6 +13,7 @@ class HomepagePage extends StatelessWidget {
         children: <Widget>[
           HeaderWidget(),
           ContentWidget(),
+          ContactWidget(),
           FooterWidget(),
         ],
       ),

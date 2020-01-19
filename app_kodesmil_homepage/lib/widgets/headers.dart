@@ -104,12 +104,14 @@ class HeaderWidget extends StatelessWidget {
                             'Kode',
                             style: textTheme.display1.copyWith(
                               fontWeight: FontWeight.w200,
+                              color: colorScheme.onPrimary,
                             ),
                           ),
                           KsText(
                             'Smil',
                             style: textTheme.display1.copyWith(
                               fontWeight: FontWeight.bold,
+                              color: colorScheme.onPrimary,
                             ),
                           )
                         ],
@@ -149,7 +151,9 @@ class HeaderWidget extends StatelessWidget {
                     width: size.width * 0.4,
                     child: Text(
                       KsLoc.of(context).ksMotto(),
-                      style: textTheme.display3,
+                      style: textTheme.display3.copyWith(
+                        color: colorScheme.onPrimary,
+                      ),
                       maxLines: 3,
                     ),
                   ),

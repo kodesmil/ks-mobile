@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class KsTextField extends StatelessWidget {
   final IconData icon;
   final String hint;
+  final String label;
   final String errorText;
   final bool isObscure;
   final TextInputType inputType;
@@ -19,6 +20,7 @@ class KsTextField extends StatelessWidget {
     Key key,
     this.icon,
     this.hint,
+    this.label,
     this.errorText,
     this.isObscure = false,
     this.inputType,
@@ -49,7 +51,8 @@ class KsTextField extends StatelessWidget {
         style: Theme.of(context).textTheme.body1,
         decoration: InputDecoration(
           prefixIcon: Icon(icon),
-          labelText: hint,
+          labelText: label,
+          hintText: hint,
           errorText: errorText,
           counterText: '',
         ),

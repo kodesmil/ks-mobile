@@ -2,14 +2,70 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <script>
-        (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/dm1w3f0x';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
-    </script>
+    <!-- Start of HubSpot Embed Code -->
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/7020674.js"></script>
+    <!-- End of HubSpot Embed Code -->
 </head>
 <body>
-<script type="application/javascript"> window.Intercom("boot", {
-  app_id: "dm1w3f0x"
-});
+<script type="application/javascript">
+
+    function getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(';');
+      for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
+
+    function formv3(email, newsletterChecked){
+        // Create the new request
+        var xhr = new XMLHttpRequest();
+        var url = 'https://api.hsforms.com/submissions/v3/integration/submit/7020674/7c1b09cc-7c57-45a6-869b-9fed1c5647ba'
+
+        // Example request JSON:
+        var data = {
+          "submittedAt": Date.now(),
+          "fields": [
+            {
+              "name": "email",
+              "value": email
+            },
+          ],
+          "context": {
+            "hutk": getCookie("hubspotutk"),
+            "pageUri": "www.kodesmil.com",
+            "pageName": "KodeSmil"
+          },
+          "legalConsentOptions":{ // Include this object when GDPR options are enabled
+            "consent":{
+              "consentToProcess":true,
+              "text":"I agree to allow KodeSmil to store and process my personal data.",
+              "communications":[
+                {
+                  "value":newsletterChecked,
+                  "subscriptionTypeId":999,
+                  "text":"I agree to receive marketing communications from KodeSmil."
+                }
+              ]
+            }
+          }
+        }
+
+        var final_data = JSON.stringify(data)
+
+        xhr.open('POST', url);
+        // Sets the value of the 'Content-Type' HTTP request headers to 'application/json'
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(final_data);
+    }
+
 </script>
 <script src="main.dart.js" type="application/javascript"></script>
 </body>

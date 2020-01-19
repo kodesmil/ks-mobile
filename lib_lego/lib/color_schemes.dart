@@ -85,13 +85,13 @@ class KsColorScheme extends ColorScheme {
         secondary: Colors.teal.shade700,
         secondaryVariant: Colors.teal,
         background: Colors.white,
-        surface: Colors.black,
+        surface: const Color(0xFFFAFAFA),
         onBackground: Colors.black,
         error: Colors.white,
         onError: Colors.white,
         onPrimary: Colors.white,
         onSecondary: Colors.white,
-        onSurface: Colors.white,
+        onSurface: Colors.black,
         brightness: Brightness.dark,
       );
 
