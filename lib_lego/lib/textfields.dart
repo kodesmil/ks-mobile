@@ -11,6 +11,7 @@ class KsTextField extends StatelessWidget {
   final EdgeInsets padding;
   final FocusNode focusNode;
   final ValueChanged onFieldSubmitted;
+  final ValueChanged onFieldChanged;
   final bool autoFocus;
   final TextInputAction inputAction;
   final TextCapitalization textCapitalization;
@@ -28,6 +29,7 @@ class KsTextField extends StatelessWidget {
     this.padding = const EdgeInsets.all(0),
     this.focusNode,
     this.onFieldSubmitted,
+    this.onFieldChanged,
     this.autoFocus = false,
     this.inputAction,
     this.minLines,
@@ -43,6 +45,7 @@ class KsTextField extends StatelessWidget {
         focusNode: focusNode,
         textCapitalization: textCapitalization,
         onFieldSubmitted: onFieldSubmitted,
+        onChanged: onFieldChanged,
         autofocus: autoFocus,
         textInputAction: inputAction,
         obscureText: isObscure,

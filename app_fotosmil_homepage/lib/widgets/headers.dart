@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lib_lego/spaces.dart';
 import 'package:lib_lego/texts.dart';
 import 'package:lib_locale/localizations.dart';
-import 'package:url_launcher_web/url_launcher_web.dart';
-import 'dart:html' as html;
-import 'dart:js' as js;
-
 class HeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -25,15 +21,17 @@ class HeaderWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 GestureDetector(
-                  child: KsText.body2(KsLoc.of(context).fsEmail()),
-                  onTap: () async =>
-                      await _launchEmail(KsLoc.of(context).fsEmail()),
+                  child: SelectableText(
+                    KsLoc.of(context).fsEmail(),
+                    style: Theme.of(context).textTheme.body2,
+                  ),
                 ),
                 KsSpace.xsH(),
                 GestureDetector(
-                  child: KsText.body2(KsLoc.of(context).fsPhone()),
-                  onTap: () async =>
-                      await _launchPhone(KsLoc.of(context).fsPhone()),
+                  child: SelectableText(
+                    '+47 40627410',
+                    style: Theme.of(context).textTheme.body2,
+                  ),
                 ),
               ],
             ),
@@ -71,24 +69,6 @@ class HeaderWidget extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  void _launchEmail(String email) {
-    js.context.callMethod('openEmail');
-  }
-
-  _launchPhone(String phone) async {
-    final url = 'tel:$phone';
-    final launcher = UrlLauncherPlugin();
-    await launcher.launch(
-      url,
-      enableDomStorage: true,
-      useWebView: false,
-      enableJavaScript: true,
-      headers: {},
-      useSafariVC: true,
-      universalLinksOnly: false,
     );
   }
 }

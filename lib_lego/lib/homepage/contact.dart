@@ -1,36 +1,38 @@
-import 'dart:convert';
-
-import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:lib_lego/dimensions.dart';
 import 'package:lib_lego/spaces.dart';
 import 'package:lib_lego/textfields.dart';
-import 'package:lib_lego/texts.dart';
-import 'package:lib_locale/localizations.dart';
-import 'package:lib_lego/gradients.dart';
 import 'dart:js';
 
-String loremIpsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
-    'Proin sem purus, hendrerit in pellentesque congue, eleifend ut quam. '
-    'Vestibulum bibendum mollis fermentum. '
-    'Aliquam quam eros, placerat vitae nulla eu.';
-
 class ContactWidget extends StatelessWidget {
+  final String companyName;
+
+  const ContactWidget({
+    Key key,
+    this.companyName,
+  }) : super(key: key);
+
   @override
-  Widget build(BuildContext ctx) {
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Center(
       child: Container(
         padding: EdgeInsets.symmetric(vertical: KsDimension.xxl),
-        width: MediaQuery.of(ctx).size.width * 0.3,
-        child: ContactForm(),
+        width: size.width > 600 ? 500 : size.width * 0.8,
+        child: ContactForm(
+          companyName: this.companyName,
+        ),
       ),
     );
   }
 }
 
 class ContactForm extends StatefulWidget {
+  final String companyName;
+
   const ContactForm({
     Key key,
+    this.companyName,
   }) : super(key: key);
 
   @override
@@ -40,6 +42,7 @@ class ContactForm extends StatefulWidget {
 class _ContactFormState extends State<ContactForm> {
   bool privacyValue = false;
   bool newsletterValue = false;
+  String email = '';
 
   TextEditingController textController;
 
@@ -54,31 +57,51 @@ class _ContactFormState extends State<ContactForm> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          'Do you want more information?',
-          style: Theme.of(ctx).textTheme.display1.copyWith(
-            color: Theme.of(ctx).colorScheme.onBackground,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        KsSpace.xs(),
+        RichText(
+            text: TextSpan(
+                text: 'Would you like to receive\n',
+                style: Theme.of(ctx).textTheme.display1.copyWith(
+                      color: Theme.of(ctx).colorScheme.onBackground,
+                      fontWeight: FontWeight.bold,
+                    ),
+                children: [
+              TextSpan(
+                text: 'more ',
+                style: Theme.of(ctx).textTheme.display1.copyWith(
+                      color: Theme.of(ctx).colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              TextSpan(
+                text: 'information?',
+                style: Theme.of(ctx).textTheme.display1.copyWith(
+                      color: Theme.of(ctx).colorScheme.onBackground,
+                      fontWeight: FontWeight.bold,
+                    ),
+              )
+            ])),
         Text(
           'Leave us your email.',
           style: Theme.of(ctx).textTheme.body2.copyWith(
-            color: Theme.of(ctx).colorScheme.onBackground,
-            fontWeight: FontWeight.bold,
-          ),
+                color: Theme.of(ctx).colorScheme.onBackground,
+                fontWeight: FontWeight.bold,
+              ),
         ),
         KsSpace.l(),
         KsTextField(
           icon: Icons.email,
           hint: 'Email',
           textController: textController,
+          onFieldChanged: (value) {
+            setState(() {
+              email = value;
+            });
+          },
           autoFocus: true,
         ),
         KsSpace.m(),
         Text(
-          'KodeSmil is committed to protecting and respecting your privacy, '
+          '${widget.companyName} is committed to protecting and respecting your privacy, '
           'and we’ll only use your personal information to administer your account '
           'and to provide the products and services you requested from us. '
           'From time to time, we would like to contact you about our products and services, '
@@ -92,7 +115,7 @@ class _ContactFormState extends State<ContactForm> {
         ),
         CheckboxListTile(
           title: Text(
-            'I agree to receive marketing communications from KodeSmil.',
+            'I agree to receive marketing communications from ${widget.companyName}.',
             style: Theme.of(ctx).textTheme.caption.copyWith(
                   color: Theme.of(ctx).colorScheme.onBackground,
                 ),
@@ -115,8 +138,8 @@ class _ContactFormState extends State<ContactForm> {
         ),
         CheckboxListTile(
           title: Text(
-            '* I agree to allow KodeSmil to store and process my personal '
-                'data.',
+            '* I agree to allow ${widget.companyName} to store and process my personal '
+            'data.',
             style: Theme.of(ctx).textTheme.caption.copyWith(
                   color: Theme.of(ctx).colorScheme.onBackground,
                 ),
@@ -143,13 +166,26 @@ class _ContactFormState extends State<ContactForm> {
           child: Text('Request contact'),
           onPressed: () {
             if (!privacyValue) {
-              // Please accept privacy consent
+              final snackBar = SnackBar(
+                content: Text(
+                  'Please accept Privacy Policy consent.',
+                ),
+              );
+              Scaffold.of(ctx).showSnackBar(snackBar);
               return;
             }
-            final email = 'marcin+1003@kodesmil.com';
+            final snackBar = SnackBar(
+              content: Text(
+                'Thank you. We will contact you as soon as possible.',
+              ),
+            );
+            Scaffold.of(ctx).showSnackBar(snackBar);
             return context.callMethod(
               'formv3',
-              [email, newsletterValue],
+              [
+                email,
+                newsletterValue,
+              ],
             );
           },
         )

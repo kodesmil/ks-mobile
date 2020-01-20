@@ -6,6 +6,7 @@ import 'package:app_fotosmil_homepage/widgets/smiles.dart';
 import 'package:app_fotosmil_homepage/widgets/whats_included.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lib_lego/homepage/contact.dart';
 
 class HomepagePage extends StatelessWidget {
   @override
@@ -21,7 +22,9 @@ class HomepagePage extends StatelessWidget {
           Container(color: Colors.orange, height: 8),
           OurPartnersWidget(),
           Container(color: Colors.orange, height: 8),
-          ContactUsWidget(),
+          ContactWidget(
+            companyName: 'FotoSmil',
+          ),
         ],
       ),
     );

@@ -25,7 +25,6 @@ class RecommendationsWidget extends StatelessWidget {
                     KsLoc.of(context).fsRecommendation1(),
                     type: KsTextType.body2,
                     textAlign: TextAlign.right,
-                    textScaleFactor: 1.2,
                   ),
                   KsSpace.sH(),
                   KsText.body2(
