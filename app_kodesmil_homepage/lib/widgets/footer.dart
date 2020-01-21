@@ -19,7 +19,7 @@ class FooterWidget extends StatelessWidget {
               blurRadius: 25,
             ),
             child: Container(
-              height: 900,
+              height: 800,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 gradient: KsGradient.kodesmilDown().gradient,

@@ -24,8 +24,8 @@ class KsGradientStops {
 
   factory KsGradientStops.kodesmil() => KsGradientStops(
         [
-          0.3104,
-          0.6264,
+          0.3,
+          0.7,
           1,
         ],
       );

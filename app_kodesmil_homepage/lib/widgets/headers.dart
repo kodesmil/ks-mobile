@@ -149,22 +149,39 @@ class HeaderWidget extends StatelessWidget {
                       )
                     ],
                   ),
-                  KsSpace.xxl(),
                   KsSpace.xl(),
                   Container(
-                    width: size.width * 0.4,
-                    child: Text(
-                      KsLoc.of(context).ksMotto(),
-                      style: textTheme.display3.copyWith(
-                        color: colorScheme.onPrimary,
-                      ),
-                      maxLines: 3,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Container(
+                          width: size.width * 0.35,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                KsLoc.of(context).ksMotto(),
+                                style: textTheme.display3.copyWith(
+                                  color: colorScheme.onPrimary,
+                                ),
+                                maxLines: 3,
+                              ),
+                              KsSpace.l(),
+                              RaisedButton(
+                                child: Text('Read more'),
+                                onPressed: () => print('Test'),
+                              ),
+                            ],
+                          ),
+                        ),
+                        FittedBox(
+                          child: Image.asset(
+                            'assets/header.png',
+                            scale: 1,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  KsSpace.l(),
-                  RaisedButton(
-                    child: Text('Read more'),
-                    onPressed: () => print('Test'),
                   ),
                 ],
               ),

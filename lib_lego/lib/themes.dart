@@ -269,6 +269,8 @@ class KsTextTheme extends TextTheme {
           ),
           display3: base.display3.copyWith(
             fontFamily: fontFamily,
+            fontSize: 40,
+            fontWeight: FontWeight.bold,
           ),
           display4: base.display4.copyWith(
             fontFamily: fontFamily,
