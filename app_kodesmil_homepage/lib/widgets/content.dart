@@ -35,7 +35,7 @@ class ContentWidget extends StatelessWidget {
                 FeatureWidget(),
                 FeatureWidget(),
               ],
-            )
+            ),
           ],
         ),
       ),

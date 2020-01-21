@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lib_lego/dimensions.dart';
 import 'package:lib_lego/spaces.dart';
 import 'package:lib_lego/texts.dart';
+import 'package:lib_lego/clip_paths.dart';
 import 'package:lib_locale/localizations.dart';
 import 'package:lib_lego/gradients.dart';
 
@@ -29,8 +30,11 @@ class HeaderWidget extends StatelessWidget {
               'assets/bg_grained.png',
             ),
           ),
-          ClipPath(
+          ClipShadowPath(
             clipper: TriangleClipper(),
+            shadow: Shadow(
+              blurRadius: 25,
+            ),
             child: Container(
               width: size.width,
               height: size.height * 1.5,
@@ -178,7 +182,7 @@ class TriangleClipper extends CustomClipper<Path> {
     return Path()
       ..lineTo(size.width, 0.0)
       ..lineTo(size.width, size.height * 0.5)
-      ..conicTo(size.width / 2, size.height * 0.66, 0, size.height * 0.5, 10)
+      ..conicTo(size.width / 2, size.height * 0.65, 0, size.height * 0.5, 25)
       ..lineTo(0, size.height * 0.5)
       ..close();
   }
