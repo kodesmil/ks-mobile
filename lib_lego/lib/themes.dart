@@ -69,6 +69,9 @@ class KsTheme {
       accentColor: colorScheme.primary,
       primaryColor: colorScheme.primary,
       focusColor: focusColor,
+      popupMenuTheme: PopupMenuThemeData(
+        color: Colors.white,
+      ),
       buttonTheme: ButtonThemeData(
         shape: StadiumBorder(),
         height: 40,

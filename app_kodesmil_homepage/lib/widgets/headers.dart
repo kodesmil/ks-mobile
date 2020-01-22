@@ -1,12 +1,11 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lib_lego/clip_paths.dart';
 import 'package:lib_lego/dimensions.dart';
+import 'package:lib_lego/gradients.dart';
 import 'package:lib_lego/spaces.dart';
 import 'package:lib_lego/texts.dart';
-import 'package:lib_lego/clip_paths.dart';
 import 'package:lib_locale/localizations.dart';
-import 'package:lib_lego/gradients.dart';
+import 'package:responsive_grid/responsive_grid.dart';
 
 String loremIpsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
     'Proin sem purus, hendrerit in pellentesque congue, eleifend ut quam. '
@@ -16,79 +15,16 @@ String loremIpsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
 class HeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       color: Colors.white,
       child: Stack(
         children: [
-          Positioned(
-            bottom: 0,
-            right: 0,
-            child: Image.asset(
-              'assets/bg_grained.png',
-            ),
-          ),
-          ClipShadowPath(
-            clipper: TriangleClipper(),
-            shadow: Shadow(
-              blurRadius: 25,
-            ),
-            child: Container(
-              width: size.width,
-              height: size.height * 1.5,
-              decoration: BoxDecoration(
-                gradient: KsGradient.kodesmil().gradient,
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 200,
-            width: size.width * 0.2,
-            left: size.width * 0.125,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                RichText(
-                  text: TextSpan(
-                    text: 'Who are',
-                    style: textTheme.display1.copyWith(
-                      color: colorScheme.onBackground,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    children: [
-                      TextSpan(
-                        text: ' we',
-                        style: textTheme.display1.copyWith(
-                          color: colorScheme.primary,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      TextSpan(
-                        text: '?',
-                        style: textTheme.display1.copyWith(
-                          color: colorScheme.onBackground,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                KsSpace.s(),
-                KsText(
-                  loremIpsum,
-                  style: textTheme.body2.copyWith(
-                    color: colorScheme.onBackground,
-                  ),
-                )
-              ],
-            ),
-          ),
+          _HeaderGrainedWidget(),
+          _HeaderBackgroundWidget(),
+          _HeaderWhoWeAreWidget(),
           Center(
-            child: Container(
-              width: size.width * 0.75,
+            child: FractionallySizedBox(
+              widthFactor: 0.75,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -96,92 +32,24 @@ class HeaderWidget extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Image.asset(
-                            'assets/logo.png',
-                            width: KsDimension.l,
-                            height: KsDimension.l,
-                          ),
-                          KsSpace.xs(),
-                          KsText(
-                            'Kode',
-                            style: textTheme.display1.copyWith(
-                              fontWeight: FontWeight.w200,
-                              color: colorScheme.onPrimary,
-                            ),
-                          ),
-                          KsText(
-                            'Smil',
-                            style: textTheme.display1.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: colorScheme.onPrimary,
-                            ),
-                          )
-                        ],
-                      ),
-                      Row(
-                        children: <Widget>[
-                          FlatButton(
-                            child: Text('Home'),
-                            onPressed: () => print(''),
-                          ),
-                          KsSpace.s(),
-                          FlatButton(
-                            child: Text('Products'),
-                            onPressed: () => print(''),
-                          ),
-                          KsSpace.s(),
-                          FlatButton(
-                            child: Text('Team'),
-                            onPressed: () => print(''),
-                          ),
-                          KsSpace.s(),
-                          OutlineButton(
-                            child: Text('Contact'),
-                            onPressed: () => print(''),
-                            borderSide: BorderSide(
-                              color: colorScheme.background,
-                              width: 2,
-                            ),
-                          ),
-                        ],
-                      )
+                      KodeSmilLogo(),
+                      MediaQuery.of(context).size.width > 1024
+                          ? MenuLong()
+                          : MenuShort()
                     ],
                   ),
                   KsSpace.xl(),
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Container(
-                          width: size.width * 0.35,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                KsLoc.of(context).ksMotto(),
-                                style: textTheme.display3.copyWith(
-                                  color: colorScheme.onPrimary,
-                                ),
-                                maxLines: 3,
-                              ),
-                              KsSpace.l(),
-                              RaisedButton(
-                                child: Text('Read more'),
-                                onPressed: () => print('Test'),
-                              ),
-                            ],
-                          ),
-                        ),
-                        FittedBox(
-                          child: Image.asset(
-                            'assets/header.png',
-                            scale: 1,
-                          ),
-                        ),
-                      ],
-                    ),
+                  ResponsiveGridRow(
+                    children: [
+                      ResponsiveGridCol(
+                        md: 6,
+                        child: HeaderLeftWidget(),
+                      ),
+                      ResponsiveGridCol(
+                        md: 6,
+                        child: HeaderRightWidget(),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -189,6 +57,305 @@ class HeaderWidget extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _HeaderGrainedWidget extends StatelessWidget {
+  const _HeaderGrainedWidget({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      bottom: 0,
+      right: 0,
+      child: Image.asset(
+        'assets/bg_grained.png',
+      ),
+    );
+  }
+}
+
+class _HeaderWhoWeAreWidget extends StatelessWidget {
+  const _HeaderWhoWeAreWidget({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height * 0.5,
+      child: Center(
+        child: FractionallySizedBox(
+          widthFactor: 0.75,
+          heightFactor: 0.5,
+          child: ResponsiveGridRow(
+            children: [
+              ResponsiveGridCol(
+                xs: 12,
+                md: 6,
+                lg: 4,
+                xl: 3,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      _WhoWeAre(),
+                      KsSpace.s(),
+                      KsText(
+                        loremIpsum,
+                        style: Theme.of(context).textTheme.body2.copyWith(
+                              color: Theme.of(context).colorScheme.onBackground,
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _HeaderBackgroundWidget extends StatelessWidget {
+  const _HeaderBackgroundWidget({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipShadowPath(
+      clipper: TriangleClipper(),
+      shadow: Shadow(
+        blurRadius: 25,
+      ),
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height * 1.5,
+        decoration: BoxDecoration(
+          gradient: KsGradient.kodesmil().gradient,
+        ),
+      ),
+    );
+  }
+}
+
+class HeaderRightWidget extends StatelessWidget {
+  const HeaderRightWidget({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(KsDimension.m),
+      child: Image.asset(
+        'assets/header.png',
+        scale: 1,
+      ),
+    );
+  }
+}
+
+class HeaderLeftWidget extends StatelessWidget {
+  const HeaderLeftWidget({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Text(
+            KsLoc.of(context).ksMotto(),
+            style: Theme.of(context).textTheme.display3.copyWith(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+            maxLines: 3,
+          ),
+          KsSpace.l(),
+          RaisedButton(
+            child: Text('Read more'),
+            onPressed: () => print('Test'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _WhoWeAre extends StatelessWidget {
+  const _WhoWeAre({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RichText(
+      text: TextSpan(
+        text: 'Who are',
+        style: Theme.of(context).textTheme.display1.copyWith(
+              color: Theme.of(context).colorScheme.onBackground,
+              fontWeight: FontWeight.bold,
+            ),
+        children: [
+          TextSpan(
+            text: ' we',
+            style: Theme.of(context).textTheme.display1.copyWith(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+          TextSpan(
+            text: '?',
+            style: Theme.of(context).textTheme.display1.copyWith(
+                  color: Theme.of(context).colorScheme.onBackground,
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class KodeSmilLogo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        Image.asset(
+          'assets/logo.png',
+          width: KsDimension.l,
+          height: KsDimension.l,
+        ),
+        KsSpace.xs(),
+        KsText(
+          'Kode',
+          style: Theme.of(context).textTheme.display1.copyWith(
+                fontWeight: FontWeight.w200,
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
+        ),
+        KsText(
+          'Smil',
+          style: Theme.of(context).textTheme.display1.copyWith(
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
+        )
+      ],
+    );
+  }
+}
+
+class MenuShort extends StatelessWidget {
+  const MenuShort({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return PopupMenuButton(
+      icon: Icon(
+        Icons.more_vert,
+        color: Theme.of(context).colorScheme.background,
+      ),
+      itemBuilder: (context) => [
+        PopupMenuItem(
+          child: GestureDetector(
+            child: Text(
+              'Home',
+              style: Theme.of(context).textTheme.button.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
+            onTap: () => print(''),
+          ),
+        ),
+        PopupMenuItem(
+          child: GestureDetector(
+            child: Text(
+              'Products',
+              style: Theme.of(context).textTheme.button.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
+            onTap: () => print(''),
+          ),
+        ),
+        PopupMenuItem(
+          child: GestureDetector(
+            child: Text(
+              'Team',
+              style: Theme.of(context).textTheme.button.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
+            onTap: () => print(''),
+          ),
+        ),
+        PopupMenuItem(
+          child: GestureDetector(
+            child: Text(
+              'Contact',
+              style: Theme.of(context).textTheme.button.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
+            onTap: () => print(''),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class MenuLong extends StatelessWidget {
+  const MenuLong({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        FlatButton(
+          child: Text('Home'),
+          onPressed: () => print(''),
+        ),
+        KsSpace.s(),
+        FlatButton(
+          child: Text('Products'),
+          onPressed: () => print(''),
+        ),
+        KsSpace.s(),
+        FlatButton(
+          child: Text('Team'),
+          onPressed: () => print(''),
+        ),
+        KsSpace.s(),
+        OutlineButton(
+          child: Text('Contact'),
+          onPressed: () => print(''),
+          borderSide: BorderSide(
+            color: Theme.of(context).colorScheme.background,
+            width: 2,
+          ),
+        ),
+      ],
     );
   }
 }
