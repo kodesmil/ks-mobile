@@ -20,11 +20,11 @@ class HomepagePage extends StatelessWidget {
             children: <Widget>[
               Image.asset(
                 'assets/let_s_make_great.png',
-                scale: 1.3,
+                scale: MediaQuery.of(context).size.width > 666 ? 1.5 : 2.25,
               ),
             ],
           ),
-          KsSpace.xl(),
+          KsSpace.l(),
           ContactWidget(
             companyName: 'KodeSmil',
           ),

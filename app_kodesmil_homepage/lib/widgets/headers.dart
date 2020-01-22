@@ -38,20 +38,27 @@ class HeaderWidget extends StatelessWidget {
                           : MenuShort()
                     ],
                   ),
-                  KsSpace.xl(),
-                  ResponsiveGridRow(
-                    children: [
-                      ResponsiveGridCol(
-                        md: 6,
-                        child: HeaderLeftWidget(),
-                      ),
-                      ResponsiveGridCol(
-                        md: 6,
-                        child: HeaderRightWidget(),
-                      ),
-                    ],
-                  ),
                 ],
+              ),
+            ),
+          ),
+          Center(
+            heightFactor: 1.5,
+            child: Container(
+              child: FractionallySizedBox(
+                widthFactor: 0.75,
+                child: ResponsiveGridRow(
+                  children: [
+                    ResponsiveGridCol(
+                      md: 6,
+                      child: HeaderLeftWidget(),
+                    ),
+                    ResponsiveGridCol(
+                      md: 6,
+                      child: HeaderRightWidget(),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -88,26 +95,24 @@ class _HeaderWhoWeAreWidget extends StatelessWidget {
     return Positioned(
       top: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.5,
-      child: Center(
-        child: FractionallySizedBox(
-          widthFactor: 0.75,
-          heightFactor: 0.5,
-          child: ResponsiveGridRow(
-            children: [
-              ResponsiveGridCol(
-                xs: 12,
-                md: 6,
-                lg: 4,
-                xl: 3,
+      child: FractionallySizedBox(
+        widthFactor: 0.75,
+        child: ResponsiveGridRow(
+          children: [
+            ResponsiveGridCol(
+              xs: 12,
+              md: 6,
+              lg: 3,
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.5,
                 child: Center(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      _WhoWeAre(),
-                      KsSpace.s(),
+                      _WhoWeAreText(),
+                      KsSpace.sH(),
                       KsText(
                         loremIpsum,
                         style: Theme.of(context).textTheme.body2.copyWith(
@@ -118,8 +123,8 @@ class _HeaderWhoWeAreWidget extends StatelessWidget {
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -174,30 +179,33 @@ class HeaderLeftWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Text(
-            KsLoc.of(context).ksMotto(),
-            style: Theme.of(context).textTheme.display3.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
-            maxLines: 3,
-          ),
-          KsSpace.l(),
-          RaisedButton(
-            child: Text('Read more'),
-            onPressed: () => print('Test'),
-          ),
-        ],
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: KsDimension.m),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text(
+              KsLoc.of(context).ksMotto(),
+              style: Theme.of(context).textTheme.display3.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+              maxLines: 3,
+            ),
+            KsSpace.l(),
+            RaisedButton(
+              child: Text('Read more'),
+              onPressed: () => print('Test'),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
 
-class _WhoWeAre extends StatelessWidget {
-  const _WhoWeAre({
+class _WhoWeAreText extends StatelessWidget {
+  const _WhoWeAreText({
     Key key,
   }) : super(key: key);
 
