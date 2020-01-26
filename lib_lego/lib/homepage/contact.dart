@@ -1,8 +1,9 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:lib_lego/dimensions.dart';
 import 'package:lib_lego/spaces.dart';
 import 'package:lib_lego/textfields.dart';
-import 'dart:js';
 
 class ContactWidget extends StatelessWidget {
   final String companyName;
@@ -97,7 +98,6 @@ class _ContactFormState extends State<ContactForm> {
               email = value;
             });
           },
-          autoFocus: true,
         ),
         KsSpace.m(),
         Text(

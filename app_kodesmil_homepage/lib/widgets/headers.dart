@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:lib_lego/clip_paths.dart';
 import 'package:lib_lego/dimensions.dart';
@@ -7,12 +9,15 @@ import 'package:lib_lego/texts.dart';
 import 'package:lib_locale/localizations.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
-String loremIpsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
-    'Proin sem purus, hendrerit in pellentesque congue, eleifend ut quam. '
-    'Vestibulum bibendum mollis fermentum. '
-    'Aliquam quam eros, placerat vitae nulla eu.';
-
 class HeaderWidget extends StatelessWidget {
+  final Function onContactTap;
+  final Function onReadMoreTap;
+
+  HeaderWidget({
+    this.onContactTap,
+    this.onReadMoreTap,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,8 +39,8 @@ class HeaderWidget extends StatelessWidget {
                     children: <Widget>[
                       KodeSmilLogo(),
                       MediaQuery.of(context).size.width > 1024
-                          ? MenuLong()
-                          : MenuShort()
+                          ? MenuLong(onContactTap: onContactTap)
+                          : MenuShort(onContactTap: onContactTap)
                     ],
                   ),
                 ],
@@ -51,7 +56,9 @@ class HeaderWidget extends StatelessWidget {
                   children: [
                     ResponsiveGridCol(
                       md: 6,
-                      child: HeaderLeftWidget(),
+                      child: HeaderLeftWidget(
+                        onReadMoreTap: onReadMoreTap,
+                      ),
                     ),
                     ResponsiveGridCol(
                       md: 6,
@@ -114,7 +121,11 @@ class _HeaderWhoWeAreWidget extends StatelessWidget {
                       _WhoWeAreText(),
                       KsSpace.sH(),
                       KsText(
-                        loremIpsum,
+                        'At KodeSmil we specialize in accomplishing things '
+                        'that others cannot. We design outstanding '
+                        'software solutions and build them from scratch. '
+                        'But above all – whatever we agree upon, we’re completely '
+                        'capable of carrying out',
                         style: Theme.of(context).textTheme.body2.copyWith(
                               color: Theme.of(context).colorScheme.onBackground,
                             ),
@@ -172,8 +183,11 @@ class HeaderRightWidget extends StatelessWidget {
 }
 
 class HeaderLeftWidget extends StatelessWidget {
+  final Function onReadMoreTap;
+
   const HeaderLeftWidget({
     Key key,
+    this.onReadMoreTap,
   }) : super(key: key);
 
   @override
@@ -195,7 +209,7 @@ class HeaderLeftWidget extends StatelessWidget {
             KsSpace.l(),
             RaisedButton(
               child: Text('Read more'),
-              onPressed: () => print('Test'),
+              onPressed: () => onReadMoreTap(),
             ),
           ],
         ),
@@ -270,8 +284,11 @@ class KodeSmilLogo extends StatelessWidget {
 }
 
 class MenuShort extends StatelessWidget {
+  final Function onContactTap;
+
   const MenuShort({
     Key key,
+    this.onContactTap,
   }) : super(key: key);
 
   @override
@@ -293,28 +310,28 @@ class MenuShort extends StatelessWidget {
             onTap: () => print(''),
           ),
         ),
-        PopupMenuItem(
-          child: GestureDetector(
-            child: Text(
-              'Products',
-              style: Theme.of(context).textTheme.button.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
-            ),
-            onTap: () => print(''),
-          ),
-        ),
-        PopupMenuItem(
-          child: GestureDetector(
-            child: Text(
-              'Team',
-              style: Theme.of(context).textTheme.button.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
-            ),
-            onTap: () => print(''),
-          ),
-        ),
+//        PopupMenuItem(
+//          child: GestureDetector(
+//            child: Text(
+//              'Products',
+//              style: Theme.of(context).textTheme.button.copyWith(
+//                    color: Theme.of(context).colorScheme.onBackground,
+//                  ),
+//            ),
+//            onTap: () => print(''),
+//          ),
+//        ),
+//        PopupMenuItem(
+//          child: GestureDetector(
+//            child: Text(
+//              'Team',
+//              style: Theme.of(context).textTheme.button.copyWith(
+//                    color: Theme.of(context).colorScheme.onBackground,
+//                  ),
+//            ),
+//            onTap: () => print(''),
+//          ),
+//        ),
         PopupMenuItem(
           child: GestureDetector(
             child: Text(
@@ -323,7 +340,7 @@ class MenuShort extends StatelessWidget {
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
             ),
-            onTap: () => print(''),
+            onTap: () => onContactTap(),
           ),
         ),
       ],
@@ -332,8 +349,11 @@ class MenuShort extends StatelessWidget {
 }
 
 class MenuLong extends StatelessWidget {
+  final Function onContactTap;
+
   const MenuLong({
     Key key,
+    this.onContactTap,
   }) : super(key: key);
 
   @override
@@ -344,20 +364,20 @@ class MenuLong extends StatelessWidget {
           child: Text('Home'),
           onPressed: () => print(''),
         ),
-        KsSpace.s(),
-        FlatButton(
-          child: Text('Products'),
-          onPressed: () => print(''),
-        ),
-        KsSpace.s(),
-        FlatButton(
-          child: Text('Team'),
-          onPressed: () => print(''),
-        ),
+//        KsSpace.s(),
+//        FlatButton(
+//          child: Text('Products'),
+//          onPressed: () => print(''),
+//        ),
+//        KsSpace.s(),
+//        FlatButton(
+//          child: Text('Team'),
+//          onPressed: () => print(''),
+//        ),
         KsSpace.s(),
         OutlineButton(
           child: Text('Contact'),
-          onPressed: () => print(''),
+          onPressed: () => onContactTap(),
           borderSide: BorderSide(
             color: Theme.of(context).colorScheme.background,
             width: 2,

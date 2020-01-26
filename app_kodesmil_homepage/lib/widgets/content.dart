@@ -3,17 +3,12 @@ import 'package:lib_lego/dimensions.dart';
 import 'package:lib_lego/spaces.dart';
 import 'package:responsive/responsive.dart';
 
-String loremIpsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
-    'Proin sem purus, hendrerit in pellentesque congue, eleifend ut quam. '
-    'Vestibulum bibendum mollis fermentum. '
-    'Aliquam quam eros, placerat vitae nulla eu.';
-
 class ContentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: KsDimension.xl),
+        padding: EdgeInsets.symmetric(vertical: KsDimension.xxl),
         child: FractionallySizedBox(
           widthFactor: 0.75,
           child: ResponsiveRow(
@@ -28,28 +23,64 @@ class ContentWidget extends StatelessWidget {
               ),
               FlexWidget(
                 md: 6,
-                xl: 4,
-                child: FeatureWidget(),
+                lg: 4,
+                xl: 3,
+                child: FeatureWidget(
+                  header: 'Flutter',
+                  content: 'Mobile, web, desktop – we bet on one codebase '
+                      'to rule them all. As the first company in Norway, '
+                      'we fully leverage the potential of Flutter framework, '
+                      'making it popular even far beyond the Norwegian borders.',
+                ),
               ),
               FlexWidget(
                 md: 6,
-                xl: 4,
-                child: FeatureWidget(),
+                lg: 4,
+                xl: 3,
+                child: FeatureWidget(
+                  header: 'Python',
+                  content: 'What drives the change in technology these days '
+                      'is the artificial intelligence and machine learning. '
+                      'That’s why we utilize Python – in order to get '
+                      'the most advanced things done in the most efficient manner.',
+                ),
               ),
               FlexWidget(
                 md: 6,
-                xl: 4,
-                child: FeatureWidget(),
+                lg: 4,
+                xl: 3,
+                child: FeatureWidget(
+                  header: 'Processes',
+                  content: 'Being agile and having established processes or '
+                      'procedures go hand-in-hand at KodeSmil. '
+                      'This helps us react and adapt to changes in a very organized way. '
+                      'There’s no room for chaotic actions here! ',
+                ),
               ),
               FlexWidget(
                 md: 6,
-                xl: 4,
-                child: FeatureWidget(),
+                lg: 4,
+                xl: 3,
+                child: FeatureWidget(
+                  header: 'Communication',
+                  content:
+                      'We stay in touch and keep you posted about everything '
+                      'we do for you, no matter what. We’re transparent and honest. '
+                      'And having a reliable and trustful partner will make '
+                      'you credible in front of your stakeholders.',
+                ),
               ),
               FlexWidget(
                 md: 6,
-                xl: 4,
-                child: FeatureWidget(),
+                lg: 4,
+                xl: 3,
+                child: FeatureWidget(
+                  header: 'Fun',
+                  content: 'Doing business with us is highly professional. '
+                      'However, it’s a super nice and amusing experience, too! '
+                      'The one doesn’t preclude the other, and we can prove it. '
+                      'Wanna give it a shot? ',
+                ),
               ),
             ],
           ),
@@ -60,8 +91,13 @@ class ContentWidget extends StatelessWidget {
 }
 
 class FeatureWidget extends StatelessWidget {
+  final String header;
+  final String content;
+
   const FeatureWidget({
     Key key,
+    this.content,
+    this.header,
   }) : super(key: key);
 
   @override
@@ -80,14 +116,14 @@ class FeatureWidget extends StatelessWidget {
           ),
           KsSpace.xs(),
           Text(
-            'Latest technologies',
+            header,
             style: Theme.of(context).textTheme.title.copyWith(
                   color: Theme.of(context).colorScheme.onBackground,
                 ),
           ),
           KsSpace.xs(),
           Text(
-            loremIpsum,
+            content,
             textAlign: TextAlign.justify,
             style: Theme.of(context).textTheme.body1.copyWith(
                   color: Theme.of(context).colorScheme.onBackground,
