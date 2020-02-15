@@ -42,7 +42,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "fsPrice": "Price: 4000 NOK for 2 hours + 1000 NOK/extra hour",
+  "fsPrice": "Price: 6000 NOK for the first 2 hours + 2000 NOK/extra hour",
   "@fsPrice": {
     "description": "",
     "type": "text",

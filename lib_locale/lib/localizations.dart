@@ -92,7 +92,7 @@ class KsLoc {
       );
 
   String fsPrice4k() => Intl.message(
-        r'only 4000 NOK for 2 hours + 1000 NOK/extra hour',
+        r'only 6000 NOK for the first 2 hours + 2000 NOK/extra hour',
         locale: _localeName,
         name: 'fsPrice4k',
         desc: r'',
