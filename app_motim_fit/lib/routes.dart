@@ -4,6 +4,7 @@ import 'package:module_auth/pages/sign_up_page.dart';
 
 import 'ui/home.dart';
 import 'ui/splash.dart';
+import 'ui/onboarding.dart';
 
 class Routes {
   Routes._();
@@ -13,5 +14,6 @@ class Routes {
     '/login': (BuildContext context) => LoginPage(),
     '/sign-up': (BuildContext context) => SignUpPage(),
     '/home': (BuildContext context) => HomePage(),
+    '/onboarding': (BuildContext context) => OnboardingScreen(),
   };
 }
