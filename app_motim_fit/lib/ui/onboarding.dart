@@ -2,6 +2,51 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:app_motim_fit/utilities/styles.dart';
 
+
+class OnboardingFeatureWidget extends StatelessWidget {
+  const OnboardingFeatureWidget({
+    Key key,
+    this.text1,
+    this.text2,
+    this.image,
+  }) : super(key: key);
+
+  final String text1;
+  final String text2;
+  final String image;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(40.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Center(
+            child: Image(
+              image: AssetImage(
+                image,
+              ),
+              height: 300.0,
+              width: 300.0,
+            ),
+          ),
+          SizedBox(height: 30.0),
+          RichText(
+            text: TextSpan(
+              style: kTitleStyle,
+              children: <TextSpan>[
+                TextSpan(text: text1),
+                TextSpan(text: text2, style: kTitleStyleBold),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class OnboardingScreen extends StatefulWidget {
   @override
   _OnboardingScreenState createState() => _OnboardingScreenState();
@@ -58,86 +103,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       });
                     },
                     children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.all(40.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Center(
-                              child: Image(
-                                image: AssetImage(
-                                  'assets/images/onboarding0.png',
-                                ),
-                                height: 300.0,
-                                width: 300.0,
-                              ),
-                            ),
-                            SizedBox(height: 30.0),
-                            Text(
-                              'Be active with',
-                              style: kTitleStyle,
-                            ),
-                            Text(
-                              'Motim Fit!',
-                              style: kTitleStyleBold,
-                            ),
-                            SizedBox(height: 15.0),
-                          ],
-                        ),
+                      new OnboardingFeatureWidget(
+                        text1: 'Be active with \n',
+                        text2: 'Motim Fit!',
+                        image: 'assets/images/onboarding0.png',
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(40.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Center(
-                              child: Image(
-                                image: AssetImage(
-                                  'assets/images/onboarding1.png',
-                                ),
-                                height: 300.0,
-                                width: 300.0,
-                              ),
-                            ),
-                            SizedBox(height: 30.0),
-                            RichText(
-                              text: TextSpan(
-                                style: kTitleStyle,
-                                children: <TextSpan>[
-                                  TextSpan(text: 'Get out of\nthe house and\ncollect '),
-                                  TextSpan(text: 'coupons.', style: kTitleStyleBold),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
+                      new OnboardingFeatureWidget(
+                        text1: 'Get out of\nthe house and\ncollect ',
+                        text2: 'coupons.',
+                        image: 'assets/images/onboarding1.png',
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(40.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Center(
-                              child: Image(
-                                image: AssetImage(
-                                  'assets/images/onboarding2.png',
-                                ),
-                                height: 300.0,
-                                width: 300.0,
-                              ),
-                            ),
-                            SizedBox(height: 30.0),
-                            RichText(
-                              text: TextSpan(
-                                style: kTitleStyle,
-                                children: <TextSpan>[
-                                  TextSpan(text: 'Motim Fit\nfor '),
-                                  TextSpan(text: 'everyone!', style: kTitleStyleBold),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
+                      new OnboardingFeatureWidget(
+                        text1: 'Motim Fit\nfor ',
+                        text2: 'everyone!',
+                        image: 'assets/images/onboarding2.png',
                       ),
                     ],
                   ),
