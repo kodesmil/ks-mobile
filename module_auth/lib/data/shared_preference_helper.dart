@@ -20,6 +20,10 @@ class SharedPreferenceHelper {
         p.remove(Preferences.refreshToken);
       });
 
+  Future<void> hasSeenOnboarding() async => _sharedPreference.then((p) {
+        p.setBool(Preferences.hasSeenOnboarding, true);
+      });
+
   Future<bool> get isLoggedIn async => _sharedPreference.then(
         (p) => p.getString(Preferences.accessToken)?.isNotEmpty ?? false,
       );
