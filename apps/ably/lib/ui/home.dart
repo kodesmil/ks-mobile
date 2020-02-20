@@ -38,7 +38,9 @@ class _HomePageState extends State<HomePage> {
                   child: Text(
                     'Started recording at ' +
                         DateFormat("yyyy-MM-dd HH:mm:ss").format(
-                            _sensorsStore.gyroscopeEvents[0].recordedAt),
+                          _sensorsStore.gyroscopeEvents?.first?.recordedAt ??
+                              DateTime.now(),
+                        ),
                   ),
                 );
               },
