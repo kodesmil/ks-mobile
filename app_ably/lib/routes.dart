@@ -9,7 +9,7 @@ class Routes {
   Routes._();
 
   static final routes = <String, WidgetBuilder>{
-    '/splash': (BuildContext context) => SplashScreen(),
+    '/splash': (BuildContext context) => SplashPage(),
     '/login': (BuildContext context) => LoginPage(),
     '/sign-up': (BuildContext context) => SignUpPage(),
     '/home': (BuildContext context) => HomePage(),

@@ -1,5 +1,6 @@
-import 'package:grinder/grinder.dart';
 import 'dart:io';
+
+import 'package:grinder/grinder.dart';
 import 'package:path/path.dart' as path;
 
 main(args) => grind(args);
@@ -11,7 +12,9 @@ final apps = [
   'lib_di',
   'module_auth',
   'module_fit',
+  'module_sensors',
   'app_motim_homepage',
+  'app_ably',
   'app_motim_fit',
   'app_kodesmil_legobook',
   'app_fotosmil_homepage',

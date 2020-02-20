@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 
 import '../di/app_component.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashPage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _SplashScreenState();
+  State<StatefulWidget> createState() => _SplashPageState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    navigate();
+    Navigator.of(context).pushReplacementNamed('/home');
+    // navigate();
   }
 
   @override

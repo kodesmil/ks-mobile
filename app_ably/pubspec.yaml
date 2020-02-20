@@ -30,8 +30,8 @@ dependencies:
 
   module_auth:
     path: ../module_auth
-  module_fit:
-    path: ../module_fit
+  module_sensors:
+    path: ../module_sensors
   lib_di:
     path: ../lib_di
   lib_lego:

@@ -54,5 +54,7 @@
             </array>
         </dict>
     </array>
+    <key>NSMotionUsageDescription</key>
+    <string>We use motion sensors to provide users feedback about health data</string>
 </dict>
 </plist>
