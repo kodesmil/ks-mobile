@@ -1,12 +1,40 @@
 import 'dart:async';
+import 'dart:io';
 
+import 'package:archive/archive_io.dart';
+import 'package:csv/csv.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_sensors/flutter_sensors.dart';
+import 'package:intl/intl.dart';
 import 'package:lib_di/stores/error/error_store.dart';
 import 'package:mobx/mobx.dart';
+import 'package:path_provider/path_provider.dart';
 
 part 'sensors_store.g.dart';
 
 class SensorsStore = _SensorsStore with _$SensorsStore;
+
+class AblySensorEvent {
+  SensorEvent event;
+  DateTime recordedAt;
+
+  AblySensorEvent({this.event, this.recordedAt});
+
+  @override
+  String toString() {
+    return '<${recordedAt.toIso8601String()}: '
+        '${event.data.join(' - ')} '
+        '(${event.accuracy})}>';
+  }
+
+  List toProps() {
+    return [
+      recordedAt.millisecondsSinceEpoch,
+      ...event.data,
+      event.accuracy,
+    ];
+  }
+}
 
 abstract class _SensorsStore with Store {
   final errorStore = ErrorStore();
@@ -19,13 +47,13 @@ abstract class _SensorsStore with Store {
   bool loading = false;
 
   @observable
-  SensorEvent accelerometerEvent;
+  List<AblySensorEvent> accelerometerEvents = [];
 
   @observable
-  SensorEvent gyroscopeEvent;
+  List<AblySensorEvent> gyroscopeEvents = [];
 
   @observable
-  SensorEvent magnetometerEvent;
+  List<AblySensorEvent> magnetometerEvents = [];
 
   StreamSubscription<SensorEvent> _$accelerometer;
 
@@ -34,13 +62,71 @@ abstract class _SensorsStore with Store {
   StreamSubscription<SensorEvent> _$magnetometer;
 
   @action
+  Future sendAsEmail() async {
+    final timestamp = DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now());
+    Directory ablyDir = await getTemporaryDirectory()
+      ..createTemp('ably');
+    final acFile = await csvAccelerometer(ablyDir);
+    final gsFile = await csvGyroscope(ablyDir);
+    final mgFile = await csvMagnetometer(ablyDir);
+
+    final zipFilePath = '${ablyDir.path}/$timestamp.zip';
+    var encoder = ZipFileEncoder();
+    encoder.create(zipFilePath);
+    encoder.addFile(acFile);
+    encoder.addFile(gsFile);
+    encoder.addFile(mgFile);
+    encoder.close();
+
+    final Email email = Email(
+      subject: 'User data <$timestamp>',
+      recipients: ['deepakpalaksha22@gmail.com'],
+      attachmentPath: zipFilePath,
+      isHTML: false,
+    );
+    await FlutterEmailSender.send(email);
+  }
+
+  final header = ['timestamp', 'x', 'y', 'z', 'accuracy'];
+
+  Future<File> csvAccelerometer(Directory directory) {
+    final events = [
+      header,
+      ...accelerometerEvents.map((e) => e.toProps()),
+    ];
+    final file = File('${directory.path}/accelerometer.csv');
+    return file.writeAsString(ListToCsvConverter().convert(events));
+  }
+
+  Future<File> csvMagnetometer(Directory directory) async {
+    final events = [
+      header,
+      ...magnetometerEvents.map((e) => e.toProps()),
+    ];
+    final file = File('${directory.path}/magnetometer.csv');
+    return file.writeAsString(ListToCsvConverter().convert(events));
+  }
+
+  Future<File> csvGyroscope(Directory directory) async {
+    final events = [
+      header,
+      ...gyroscopeEvents.map((e) => e.toProps()),
+    ];
+    final file = File('${directory.path}/gyroscope.csv');
+    return file.writeAsString(ListToCsvConverter().convert(events));
+  }
+
+  @action
   Future startAccelerometer() async {
     final stream = await SensorManager().sensorUpdates(
       sensorId: Sensors.ACCELEROMETER,
-      interval: Sensors.SENSOR_DELAY_GAME,
+      interval: Duration(seconds: 1),
     );
     _$accelerometer = stream.listen((sensorEvent) {
-      accelerometerEvent = sensorEvent;
+      accelerometerEvents = [
+        ...accelerometerEvents,
+        AblySensorEvent(event: sensorEvent, recordedAt: DateTime.now())
+      ];
     });
   }
 
@@ -53,10 +139,13 @@ abstract class _SensorsStore with Store {
   Future startGyroscope() async {
     final stream = await SensorManager().sensorUpdates(
       sensorId: Sensors.GYROSCOPE,
-      interval: Sensors.SENSOR_DELAY_GAME,
+      interval: Duration(seconds: 1),
     );
     _$gyroscope = stream.listen((sensorEvent) {
-      gyroscopeEvent = sensorEvent;
+      gyroscopeEvents = [
+        ...gyroscopeEvents,
+        AblySensorEvent(event: sensorEvent, recordedAt: DateTime.now())
+      ];
     });
   }
 
@@ -69,10 +158,13 @@ abstract class _SensorsStore with Store {
   Future startMagnetometer() async {
     final stream = await SensorManager().sensorUpdates(
       sensorId: Sensors.MAGNETIC_FIELD,
-      interval: Sensors.SENSOR_DELAY_GAME,
+      interval: Duration(seconds: 1),
     );
     _$magnetometer = stream.listen((sensorEvent) {
-      magnetometerEvent = sensorEvent;
+      magnetometerEvents = [
+        ...magnetometerEvents,
+        AblySensorEvent(event: sensorEvent, recordedAt: DateTime.now())
+      ];
     });
   }
 

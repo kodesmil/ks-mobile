@@ -9,6 +9,10 @@ environment:
 
 dependencies:
   flutter_sensors: ^0.1.5
+  csv: ^4.0.3
+  flutter_email_sender: ^2.2.2
+  path_provider: ^1.6.0
+  archive: ^2.0.11
   flutter_mobx: ^0.3.6
   mobx: ^0.4.0+1
   mobx_codegen: ^0.3.13
