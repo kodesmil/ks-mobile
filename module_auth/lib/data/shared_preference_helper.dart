@@ -24,6 +24,10 @@ class SharedPreferenceHelper {
         p.setBool(Preferences.hasSeenOnboarding, true);
       });
 
+  Future<bool> get onboardingDisplayed async => _sharedPreference.then(
+        (p) => p.getBool(Preferences.hasSeenOnboarding)
+  );
+
   Future<bool> get isLoggedIn async => _sharedPreference.then(
         (p) => p.getString(Preferences.accessToken)?.isNotEmpty ?? false,
       );
