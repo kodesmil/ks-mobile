@@ -1,0 +1,6 @@
+{
+  "hosting": {
+    "site": "kodesmil1",
+    "public": "build/web"
+  }
+}

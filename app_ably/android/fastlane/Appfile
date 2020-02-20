@@ -1,2 +1,0 @@
-json_key_file("google_play_login.json")
-package_name("com.kodesmil.ably")

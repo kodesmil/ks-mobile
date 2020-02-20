@@ -76,3 +76,9 @@ ios/Flutter/flutter_export_environment.sh
 /app_motim_fit/ios/vendor/
 /app_motim_fit/android/app/motim-release.keystore
 /app_motim_fit/.env
+# Ably
+/apps/ably/android/google_play_login.json
+/apps/ably/android/vendor/
+/apps/ably/ios/vendor/
+/apps/ably/android/app/ably-release.keystore
+/apps/ably/.env

@@ -13,11 +13,12 @@ final apps = [
   'module_auth',
   'module_fit',
   'module_sensors',
-  'app_motim_homepage',
-  'app_ably',
+  'apps/ably',
   'app_motim_fit',
   'app_kodesmil_legobook',
-  'app_fotosmil_homepage',
+  'landings/app_motim_homepage',
+  'landings/app_fotosmil_homepage',
+  'landings/app_kodesmil_homepage',
 ];
 
 @Task('Get packages')

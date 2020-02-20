@@ -1,0 +1,26 @@
+name: app_motim_homepage
+description: A new Flutter project.
+author: KodeSmil authors
+homepage: kodesmil.com
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.6.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^0.1.2
+
+  module_auth:
+    path: ../../module_auth
+  lib_lego:
+    path: ../../lib_lego
+
+dev_dependencies:
+  build_runner: ^1.7.2
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
