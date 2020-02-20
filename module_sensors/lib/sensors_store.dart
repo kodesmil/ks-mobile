@@ -22,9 +22,10 @@ class AblySensorEvent {
 
   @override
   String toString() {
-    return '<${recordedAt.toIso8601String()}: '
-        '${event.data.join(' - ')} '
-        '(${event.accuracy})}>';
+    final timestamp = DateFormat("yyyy-MM-dd HH:mm:ss").format(recordedAt);
+    return '$timestamp     '
+        '${event.data.map((e) => e.toStringAsFixed(2)).join(' - ')}      '
+        '(${event.accuracy.toStringAsFixed(2)})';
   }
 
   List toProps() {

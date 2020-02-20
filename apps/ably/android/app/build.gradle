@@ -35,7 +35,7 @@ android {
 
     signingConfigs {
         release {
-            storeFile file(System.getenv("ABLY_KEYSTORE") ?: "ably-release.keystore")
+            storeFile file(System.getenv("ABLY_KEYSTORE") ?: "ably.keystore")
             storePassword System.getenv("ABLY_KEYSTORE_PASSWORD")
             keyAlias System.getenv("ABLY_KEY_ALIAS")
             keyPassword System.getenv("ABLY_KEY_PASSWORD")

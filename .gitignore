@@ -80,5 +80,6 @@ ios/Flutter/flutter_export_environment.sh
 /apps/ably/android/google_play_login.json
 /apps/ably/android/vendor/
 /apps/ably/ios/vendor/
-/apps/ably/android/app/ably-release.keystore
+/apps/ably/android/app/ably.keystore
 /apps/ably/.env
+/apps/ably/ios/Runner/GoogleService-Info.plist

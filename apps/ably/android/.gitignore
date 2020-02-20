@@ -5,3 +5,6 @@ gradle/wrapper/gradle-wrapper.jar
 /gradlew.bat
 /local.properties
 GeneratedPluginRegistrant.java
+/fastlane/report.xml
+/app/ably.keystore
+/app/google-services.json
