@@ -13,6 +13,16 @@ class KsTheme {
         KsTextTheme.motim(KsColorScheme.motimDark()),
       );
 
+  static ablyLight() => KsTheme.base(
+        KsColorScheme.motimLight(),
+        KsTextTheme.motim(KsColorScheme.motimLight()),
+      );
+
+  static ablyDark() => KsTheme.base(
+        KsColorScheme.motimDark(),
+        KsTextTheme.motim(KsColorScheme.motimDark()),
+      );
+
   static fotosmilLight() => KsTheme.base(
         KsColorScheme.motimLight(),
         KsTextTheme.fotosmil(KsColorScheme.motimLight()),
