@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:module_auth/models/token.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,9 +21,12 @@ class SharedPreferenceHelper {
         p.remove(Preferences.refreshToken);
       });
 
-  Future<void> hasSeenOnboarding() async => _sharedPreference.then((p) {
+  Future<void> setHasSeenOnboarding() async => _sharedPreference.then((p) {
         p.setBool(Preferences.hasSeenOnboarding, true);
       });
+
+  Future<bool> get onboardingDisplayed async => _sharedPreference
+      .then((p) => p.getBool(Preferences.hasSeenOnboarding) ?? false);
 
   Future<bool> get isLoggedIn async => _sharedPreference.then(
         (p) => p.getString(Preferences.accessToken)?.isNotEmpty ?? false,

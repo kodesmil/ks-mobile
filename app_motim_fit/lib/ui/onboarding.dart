@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:app_motim_fit/utilities/styles.dart';
+import 'package:module_auth/stores/onboarding_store.dart';
 
 
 class OnboardingFeatureWidget extends StatelessWidget {
@@ -53,6 +54,7 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
+  final _store = OnboardingStore();
   final int _numPages = 3;
   final PageController _pageController = PageController(initialPage: 0);
   int _currentPage = 0;
@@ -135,7 +137,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         width: double.infinity,
         color: Color(0xFF242424),
         child: GestureDetector(
-          onTap: () => Navigator.pushNamed(context, '/splash'),
+          onTap: () {
+            _store.onboardingDisplayed();
+            Navigator.pushNamed(context, '/splash');
+          },
           child: Padding(
             padding: EdgeInsets.only(top: 17.0, left: 74.0),
             child: Text(

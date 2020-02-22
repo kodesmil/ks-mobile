@@ -24,9 +24,14 @@ class _SplashScreenState extends State<SplashScreen> {
   navigate() async {
     final helper = authLocalModule.provideSharedPreferenceHelper();
     final isLoggedIn = await helper.isLoggedIn;
-    if (isLoggedIn) {
+    final onboardingDisplayed = await helper.onboardingDisplayed;
+    if (!onboardingDisplayed){
+      Navigator.of(context).pushReplacementNamed('/onboarding');
+    }
+    else if (isLoggedIn) {
       Navigator.of(context).pushReplacementNamed('/home');
-    } else {
+    }
+    else {
       Navigator.of(context).pushReplacementNamed('/login');
     }
   }
