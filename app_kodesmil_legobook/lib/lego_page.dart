@@ -1,7 +1,6 @@
 import 'package:app_kodesmil_legobook/lego_page_spaces.dart';
 import 'package:app_kodesmil_legobook/lego_page_texts.dart';
-import 'package:app_kodesmil_legobook/lego_page_radio_buttons_checkboxes.dart';
-import 'package:app_kodesmil_legobook/lego_page_buttons.dart';
+import 'package:app_kodesmil_legobook/lego_page_progress.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:lib_lego/rare/style_switcher.dart';
@@ -48,7 +47,8 @@ class LegoPage extends StatelessWidget {
               LegoSpacesPage(),
               LegoButtonsPage(),
               LegoSpacesPage(),
-              LegoRadioButtonsCheckboxesPage(),
+              LegoProgressPage(),
+              LegoSpacesPage(),
               LegoSpacesPage(),
               LegoSpacesPage(),
             ],
