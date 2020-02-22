@@ -10,6 +10,6 @@ abstract class _OnboardingStore with Store {
 
   @action
   Future onboardingDisplayed() async {
-    await sharedPreferenceHelper.hasSeenOnboarding();
+    await sharedPreferenceHelper.setHasSeenOnboarding();
   }
 }
