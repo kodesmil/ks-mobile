@@ -139,7 +139,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         child: GestureDetector(
           onTap: () {
             _store.onboardingDisplayed();
-            //Navigator.pushNamed(context, '/splash');
+            Navigator.pushNamed(context, '/splash');
           },
           child: Padding(
             padding: EdgeInsets.only(top: 17.0, left: 74.0),
