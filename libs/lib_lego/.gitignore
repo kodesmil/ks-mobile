@@ -1,6 +1,5 @@
 # Miscellaneous
 *.class
-*.lock
 *.log
 *.pyc
 *.swp
@@ -11,18 +10,21 @@
 .svn/
 
 # IntelliJ related
-*.iml
+lib_lego.iml
 *.ipr
 *.iws
 .idea/
 
-# Visual Studio Code related
-.vscode/
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
 
 # Flutter/Dart/Pub related
 **/doc/api/
 .dart_tool/
 .flutter-plugins
+.flutter-plugins-dependencies
 .packages
 .pub-cache/
 .pub/
@@ -56,10 +58,12 @@ build/
 **/ios/.generated/
 **/ios/Flutter/App.framework
 **/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
 **/ios/Flutter/Generated.xcconfig
 **/ios/Flutter/app.flx
 **/ios/Flutter/app.zip
 **/ios/Flutter/flutter_assets/
+**/ios/Flutter/flutter_export_environment.sh
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
 
@@ -69,18 +73,3 @@ build/
 !**/ios/**/default.pbxuser
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
-.flutter-plugins-dependencies
-ios/Flutter/flutter_export_environment.sh
-/apps/motim_fit/android/google_play_login.json
-/apps/motim_fit/android/vendor/
-/apps/motim_fit/ios/vendor/
-/apps/motim_fit/android/app/motim-release.keystore
-/apps/motim_fit/.env
-# Ably
-/apps/ably/android/google_play_login.json
-/apps/ably/android/vendor/
-/apps/ably/ios/vendor/
-/apps/ably/android/app/ably.keystore
-/apps/ably/.env
-/apps/ably/ios/Runner/GoogleService-Info.plist
-!/.idea/runConfigurations/

@@ -32,8 +32,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       localizationsDelegates: KsLoc.localizationsDelegates,
       supportedLocales: KsLoc.supportedLocales,
-      theme: KsTheme.ablyLight(),
-      darkTheme: KsTheme.ablyDark(),
+      theme: KsTheme.motimLight(),
+      darkTheme: KsTheme.motimDark(),
       initialRoute: '/splash',
       routes: Routes.routes,
     );

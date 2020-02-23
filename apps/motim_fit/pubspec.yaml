@@ -1,6 +1,6 @@
-name: ably
+name: motim_fit
 description: A flutter boilerplate project created using MobX and Provider.
-version: 0.0.2
+version: 0.0.1+1
 author: KodeSmil authors
 homepage: kodesmil.com
 
@@ -30,8 +30,8 @@ dependencies:
 
   module_auth:
     path: ../../modules/module_auth
-  module_sensors:
-    path: ../../modules/module_sensors
+  module_fit:
+    path: ../../modules/module_fit
   lib_di:
     path: ../../libs/lib_di
   lib_lego:
@@ -53,6 +53,7 @@ flutter:
 
   uses-material-design: true
   assets:
+    - assets/images/
     - assets/icons/
     - .env
 

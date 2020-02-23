@@ -7,18 +7,18 @@ main(args) => grind(args);
 
 final apps = [
   '.',
-  'lib_lego',
-  'lib_locale',
-  'lib_di',
-  'module_auth',
-  'module_fit',
-  'module_sensors',
+  'translations/kodesmil_locale',
+  'libs/lib_lego',
+  'libs/lib_di',
+  'modules/module_auth',
+  'modules/module_fit',
+  'modules/module_sensors',
   'apps/ably',
-  'app_motim_fit',
-  'app_kodesmil_legobook',
-  'landings/app_motim_homepage',
-  'landings/app_fotosmil_homepage',
-  'landings/app_kodesmil_homepage',
+  'apps/motim_fit',
+  'apps/legobook',
+  'landings/motim_landing',
+  'landings/fotosmil_landing',
+  'landings/kodesmil_landing',
 ];
 
 @Task('Get packages')
@@ -99,8 +99,8 @@ Future<void> generatelocalizations() async {
       'pub',
       'run',
       'intl_translation:extract_to_arb',
-      '--output-dir=lib_locale/lib',
-      'lib_locale/lib/localizations.dart',
+      '--output-dir=kodesmil_locale/lib',
+      'kodesmil_locale/lib/localizations.dart',
     ],
   );
   _runProcess(
@@ -109,16 +109,17 @@ Future<void> generatelocalizations() async {
       'pub',
       'run',
       'intl_translation:generate_from_arb',
-      '--output-dir=lib_locale/lib',
+      '--output-dir=kodesmil_locale/lib',
       '--no-use-deferred-loading',
-      'lib_locale/lib/localizations.dart',
-      'lib_locale/lib/intl_messages.arb',
-      'lib_locale/lib/intl_en.arb',
-      'lib_locale/lib/intl_nb.arb',
-      'lib_locale/lib/intl_pl.arb',
+      'translations/kodesmil_locale/lib/localizations.dart',
+      'translations/kodesmil_locale/lib/intl_messages.arb',
+      'translations/kodesmil_locale/lib/intl_en.arb',
+      'translations/kodesmil_locale/lib/intl_nb.arb',
+      'translations/kodesmil_locale/lib/intl_pl.arb',
     ],
   );
-  await format(workingDirectory: path.join('lib_locale', 'lib'));
+  await format(
+      workingDirectory: path.join('translations/kodesmil_locale', 'lib'));
 }
 
 @Task('Transform arb to xml for English')
