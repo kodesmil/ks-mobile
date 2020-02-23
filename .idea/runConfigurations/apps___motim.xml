@@ -1,0 +1,6 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="apps - motim" type="FlutterRunConfigurationType" factoryName="Flutter" singleton="false">
+    <option name="filePath" value="$PROJECT_DIR$/apps/motim_fit/lib/main.dart" />
+    <method v="2" />
+  </configuration>
+</component>
