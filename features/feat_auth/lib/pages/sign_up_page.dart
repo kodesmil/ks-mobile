@@ -1,3 +1,4 @@
+import 'package:feat_auth/stores/sign_up_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
@@ -7,7 +8,6 @@ import 'package:lib_lego/navigations.dart';
 import 'package:lib_lego/progress_indicators.dart';
 import 'package:lib_lego/snack_bars.dart';
 import 'package:lib_lego/textfields.dart';
-import 'package:feat_auth/stores/sign_up_storeart';
 
 class SignUpPage extends StatefulWidget {
   @override

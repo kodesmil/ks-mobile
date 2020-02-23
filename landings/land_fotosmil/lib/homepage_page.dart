@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/materialrt';
+import 'package:flutter/material.dart';
 import 'package:land_fotosmil/widgets/headers.dart';
 import 'package:land_fotosmil/widgets/our_partners.dart';
 import 'package:land_fotosmil/widgets/recommendations.dart';

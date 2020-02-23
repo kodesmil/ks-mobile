@@ -1,7 +1,7 @@
+import 'package:feat_auth/di/auth_component.dart';
+import 'package:feat_auth/models/user.dart';
 import 'package:lib_di/stores/error/error_store.dart';
 import 'package:mobx/mobx.dart';
-import 'package:feat_auth/di/auth_component.dart';
-import 'package:feat_auth/models/usert';
 import 'package:validators/validators.dart';
 
 part 'login_store.g.dart';

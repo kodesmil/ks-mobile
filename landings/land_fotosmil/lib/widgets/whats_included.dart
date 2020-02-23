@@ -1,8 +1,9 @@
-import 'package:app_fotosmil_homepage/widgets/features.dart';
 import 'package:flutter/material.dart';
 import 'package:kodesmil_locale/localizations.dart';
 import 'package:lib_lego/spaces.dart';
-import 'package:lib_lego/textt';
+import 'package:lib_lego/texts.dart';
+
+import 'features.dart';
 
 class WhatsIncludedWidget extends StatelessWidget {
   @override

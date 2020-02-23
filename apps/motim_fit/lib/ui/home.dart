@@ -1,6 +1,5 @@
-import 'package:app_motim_fit/di/app_component.dart';
-import 'package:app_motim_fit/ui/chart.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:feat_fit/stores/fit_store.dart';
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +7,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 import 'package:kodesmil_locale/localizations.dart';
 import 'package:lib_lego/progress_indicators.dart';
-import 'package:lib_lego/text
-import 'package:feat_fit/stores/fit_store.dart';
+import 'package:lib_lego/texts.dart';
+import 'package:motim_fit/di/app_component.dart';
+import 'package:motim_fit/ui/chart.dart';
 
 class Home2Screen extends StatefulWidget {
   FitStore fitStore;

@@ -1,7 +1,8 @@
-import 'package:app_fotosmil_homepage/homepage_page.dart';
 import 'package:flutter/material.dart';
 import 'package:kodesmil_locale/localizations.dart';
-import 'package:lib_lego/themet';
+import 'package:lib_lego/themes.dart';
+
+import 'homepage_page.dart';
 
 void main() => runApp(MyApp());
 

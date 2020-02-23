@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:land_kodesmil/homepage_page.dart';
 import 'package:kodesmil_locale/localizations.dart';
-import 'package:lib_lego/themeart';
+import 'package:land_kodesmil/homepage_page.dart';
+import 'package:lib_lego/themes.dart';
 
 void main() => runApp(MyApp());
 
