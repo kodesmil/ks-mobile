@@ -9,7 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:kodesmil_locale/localizations.dart';
 import 'package:lib_lego/progress_indicators.dart';
 import 'package:lib_lego/text
-import 'package:module_fit/stores/fit_store.dart';
+import 'package:feat_fit/stores/fit_store.dart';
 
 class Home2Screen extends StatefulWidget {
   FitStore fitStore;

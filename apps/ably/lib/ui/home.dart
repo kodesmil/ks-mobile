@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 import 'package:lib_lego/buttons.dart';
 import 'package:lib_lego/spaces.dart';
-import 'package:module_sensors/sensors_store.dart';
+import 'package:feat_sensors/sensors_store.dart';
 
 class HomePage extends StatefulWidget {
   HomePage();

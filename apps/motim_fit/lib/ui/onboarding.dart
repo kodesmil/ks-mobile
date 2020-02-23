@@ -1,6 +1,6 @@
+import 'package:feat_auth/stores/onboarding_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:module_auth/stores/onboarding_store.dart';
 import 'package:motim_fit/utilities/styles.dart';
 
 class OnboardingFeatureWidget extends StatelessWidget {

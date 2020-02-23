@@ -10,15 +10,15 @@ final apps = [
   'translations/kodesmil_locale',
   'libs/lib_lego',
   'libs/lib_di',
-  'modules/module_auth',
-  'modules/module_fit',
-  'modules/module_sensors',
+  'features/feat_auth',
+  'features/feat_fit',
+  'features/feat_sensors',
   'apps/ably',
   'apps/motim_fit',
   'apps/legobook',
-  'landings/motim_landing',
-  'landings/fotosmil_landing',
-  'landings/kodesmil_landing',
+  'landings/land_motim',
+  'landings/land_fotosmil',
+  'landings/land_kodesmil',
 ];
 
 @Task('Get packages')

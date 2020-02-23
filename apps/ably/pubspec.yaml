@@ -28,10 +28,10 @@ dependencies:
   mobx_codegen: ^0.3.13
   json_serializable: ^3.2.3
 
-  module_auth:
-    path: ../../modules/module_auth
-  module_sensors:
-    path: ../../modules/module_sensors
+  feat_auth:
+    path: ../../features/feat_auth
+  feat_sensors:
+    path: ../../features/feat_sensors
   lib_di:
     path: ../../libs/lib_di
   lib_lego:
