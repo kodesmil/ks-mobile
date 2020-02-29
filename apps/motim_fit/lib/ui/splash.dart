@@ -25,6 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
     final helper = authLocalModule.provideSharedPreferenceHelper();
     final isLoggedIn = await helper.isLoggedIn;
     final onboardingDisplayed = await helper.onboardingDisplayed;
+    Navigator.of(context).pushReplacementNamed('/google_sign_in');
     if (!onboardingDisplayed){
       Navigator.of(context).pushReplacementNamed('/onboarding');
     }

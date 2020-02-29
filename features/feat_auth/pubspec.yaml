@@ -22,6 +22,8 @@ dependencies:
   mobx_codegen: ^0.3.13
   json_serializable: ^3.2.3
 
+  google_sign_in:
+
   lib_di:
     path: ../../libs/lib_di
   lib_lego:

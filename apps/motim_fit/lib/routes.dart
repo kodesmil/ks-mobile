@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'ui/home.dart';
 import 'ui/onboarding.dart';
 import 'ui/splash.dart';
+import 'ui/google_sign_in_page.dart';
 
 class Routes {
   Routes._();
@@ -15,5 +16,6 @@ class Routes {
     '/sign-up': (BuildContext context) => SignUpPage(),
     '/home': (BuildContext context) => HomePage(),
     '/onboarding': (BuildContext context) => OnboardingScreen(),
+    '/google_sign_in': (BuildContext context) => GoogleSignInPage(),
   };
 }
