@@ -8,24 +8,23 @@ import 'package:intl/intl.dart';
 import 'package:kodesmil_locale/localizations.dart';
 import 'package:lib_lego/progress_indicators.dart';
 import 'package:lib_lego/texts.dart';
-import 'package:motim_fit/di/app_component.dart';
 import 'package:motim_fit/ui/chart.dart';
 
-class Home2Screen extends StatefulWidget {
-  FitStore fitStore;
+class HomeWidget extends StatefulWidget {
+  final FitStore fitStore;
 
-  Home2Screen(this.fitStore);
+  HomeWidget(this.fitStore);
 
   @override
-  _Home2ScreenState createState() => _Home2ScreenState(fitStore);
+  _HomeWidgetState createState() => _HomeWidgetState(fitStore);
 }
 
 const String testDevice = 'YOUR_DEVICE_ID';
 
-class _Home2ScreenState extends State<Home2Screen> {
+class _HomeWidgetState extends State<HomeWidget> {
   FitStore _fitStore;
 
-  _Home2ScreenState(this._fitStore);
+  _HomeWidgetState(this._fitStore);
 
   @override
   void initState() {
@@ -116,24 +115,6 @@ class _Home2ScreenState extends State<Home2Screen> {
                     _fitStore.errorStore.errorMessage,
                   );
           },
-        )
-      ],
-    );
-  }
-
-  Widget _buildAppBar(BuildContext context) {
-    return AppBar(
-      title: Text(
-        '',
-      ),
-      actions: <Widget>[
-        IconButton(
-          onPressed: () async => await authLocalModule
-              .provideSharedPreferenceHelper()
-              .removeAuthToken(),
-          icon: Icon(
-            Icons.person,
-          ),
         )
       ],
     );
@@ -316,7 +297,7 @@ class _HomePageState extends State<HomePage> {
             ];
           },
           body: Center(
-            child: Home2Screen(_fitStore),
+            child: HomeWidget(_fitStore),
           ),
         ),
       ),

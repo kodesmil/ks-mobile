@@ -47,12 +47,12 @@ class OnboardingFeatureWidget extends StatelessWidget {
   }
 }
 
-class OnboardingScreen extends StatefulWidget {
+class OnboardingPage extends StatefulWidget {
   @override
-  _OnboardingScreenState createState() => _OnboardingScreenState();
+  _OnboardingPageState createState() => _OnboardingPageState();
 }
 
-class _OnboardingScreenState extends State<OnboardingScreen> {
+class _OnboardingPageState extends State<OnboardingPage> {
   final _store = OnboardingStore();
   final int _numPages = 3;
   final PageController _pageController = PageController(initialPage: 0);

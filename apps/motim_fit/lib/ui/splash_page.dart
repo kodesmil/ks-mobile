@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../di/app_component.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashPage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _SplashScreenState();
+  State<StatefulWidget> createState() => _SplashPageState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
@@ -26,13 +26,11 @@ class _SplashScreenState extends State<SplashScreen> {
     final isLoggedIn = await helper.isLoggedIn;
     final onboardingDisplayed = await helper.onboardingDisplayed;
     Navigator.of(context).pushReplacementNamed('/google_sign_in');
-    if (!onboardingDisplayed){
+    if (!onboardingDisplayed) {
       Navigator.of(context).pushReplacementNamed('/onboarding');
-    }
-    else if (isLoggedIn) {
+    } else if (isLoggedIn) {
       Navigator.of(context).pushReplacementNamed('/home');
-    }
-    else {
+    } else {
       Navigator.of(context).pushReplacementNamed('/login');
     }
   }
