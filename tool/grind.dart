@@ -70,6 +70,7 @@ Future<void> cleanall() async {
   );
 }
 
+@Task('Autogenerate runner code for one')
 Future<void> runner({String workingDirectory = '.'}) async {
   await _runProcess(
     'flutter',
@@ -86,9 +87,34 @@ Future<void> runner({String workingDirectory = '.'}) async {
   );
 }
 
-@Task('Build build runner')
+@Task('Autogenerate runner code for all')
 Future<void> runnerall() async {
   apps.forEach((app) async => await runner(workingDirectory: app));
+}
+
+@Task('Watch & autogenerate runner code for one')
+Future<void> watch({String workingDirectory}) async {
+  TaskArgs args = context.invocation.arguments;
+  String dir = workingDirectory ?? args.getOption('dir') ?? '.';
+  print(dir);
+  await _runProcess(
+    'flutter',
+    [
+      'packages',
+      'pub',
+      'run',
+      'build_runner',
+      'watch',
+      '--delete-conflicting-outputs',
+      '--verbose',
+    ],
+    workingDirectory: dir,
+  );
+}
+
+@Task('Watch & autogenerate runner code for all')
+Future<void> watchall() async {
+  apps.forEach((app) async => await watch(workingDirectory: app));
 }
 
 @Task('Generate localizations files')
