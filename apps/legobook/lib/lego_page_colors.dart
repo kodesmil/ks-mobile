@@ -9,12 +9,12 @@ class LegoColorsPage extends StatelessWidget {
         child: Column(
           children: <Widget>[
             KsText.display1('Primary color'),
-            _LegoColorsInternal(child: KsColor.primary()),
+            KsColor.primary(),
           ],
         ),
       );
 }
-
+/*
 class _LegoColorsInternal extends StatelessWidget {
   const _LegoColorsInternal({
     Key key,
@@ -30,3 +30,4 @@ class _LegoColorsInternal extends StatelessWidget {
     );
   }
 }
+*/
