@@ -71,7 +71,9 @@ Future<void> cleanall() async {
 }
 
 @Task('Autogenerate runner code for one')
-Future<void> runner({String workingDirectory = '.'}) async {
+Future<void> runner({String workingDirectory}) async {
+  TaskArgs args = context.invocation.arguments;
+  String dir = workingDirectory ?? args.getOption('dir') ?? '.';
   await _runProcess(
     'flutter',
     [
@@ -83,7 +85,7 @@ Future<void> runner({String workingDirectory = '.'}) async {
       '--delete-conflicting-outputs',
       '--verbose',
     ],
-    workingDirectory: workingDirectory,
+    workingDirectory: dir,
   );
 }
 
@@ -96,7 +98,6 @@ Future<void> runnerall() async {
 Future<void> watch({String workingDirectory}) async {
   TaskArgs args = context.invocation.arguments;
   String dir = workingDirectory ?? args.getOption('dir') ?? '.';
-  print(dir);
   await _runProcess(
     'flutter',
     [

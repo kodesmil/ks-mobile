@@ -43,21 +43,38 @@ mixin _$GoogleSignInStore on _GoogleSignInStore, Store {
     }, _$currentUserAtom, name: '${_$currentUserAtom.name}_set');
   }
 
-  final _$handleSignInAsyncAction = AsyncAction('handleSignIn');
+  final _$signInSilentlyAsyncAction = AsyncAction('signInSilently');
 
   @override
-  Future<void> handleSignIn() {
-    return _$handleSignInAsyncAction.run(() => super.handleSignIn());
+  Future<void> signInSilently() {
+    return _$signInSilentlyAsyncAction.run(() => super.signInSilently());
+  }
+
+  final _$signInAsyncAction = AsyncAction('signIn');
+
+  @override
+  Future<void> signIn() {
+    return _$signInAsyncAction.run(() => super.signIn());
   }
 
   final _$_GoogleSignInStoreActionController =
       ActionController(name: '_GoogleSignInStore');
 
   @override
-  Future<void> handleSignOut() {
+  Future<void> signOut() {
     final _$actionInfo = _$_GoogleSignInStoreActionController.startAction();
     try {
-      return super.handleSignOut();
+      return super.signOut();
+    } finally {
+      _$_GoogleSignInStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  Future<void> dispose() {
+    final _$actionInfo = _$_GoogleSignInStoreActionController.startAction();
+    try {
+      return super.dispose();
     } finally {
       _$_GoogleSignInStoreActionController.endAction(_$actionInfo);
     }
