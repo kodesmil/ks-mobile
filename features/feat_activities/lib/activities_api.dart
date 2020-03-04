@@ -7,7 +7,7 @@ import 'package:lib_di/data/network/exceptions/network_exceptions.dart';
 class ActivitiesApi {
   final _dioClient = DioClient(Dio()
     // ..options.baseUrl = 'http://10.0.2.2:5000'
-    ..options.baseUrl = 'https://activities.kodesmil.com/'
+    ..options.baseUrl = 'http://activities.kodesmil.com/'
     ..interceptors.add(LogInterceptor(responseBody: true))
     ..interceptors.add(
       InterceptorsWrapper(onRequest: (Options options) async {}),
