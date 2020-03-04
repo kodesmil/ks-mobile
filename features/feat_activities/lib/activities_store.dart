@@ -26,7 +26,8 @@ abstract class _ActivitiesStore with Store {
   @action
   Future sendData() async {
     final authentication = await _googleSignInStore.currentUser.authentication;
-    _activitiesApi.getFitActivities(authentication.accessToken);
+    final email = _googleSignInStore.currentUser.email;
+    await _activitiesApi.getFitActivities(authentication.accessToken, email);
   }
 
   @action
