@@ -1,36 +1,27 @@
-name: feat_auth
+name: feat_activities
 description: A new Flutter package project.
-version: 0.0.1
 author: KodeSmil authors
 homepage: kodesmil.com
+version: 1.0.0+1
 
 environment:
   sdk: ">=2.6.0 <3.0.0"
 
 dependencies:
-
-  shared_preferences: ^0.5.4+6
-  http: ^0.12.0+2
-  f_logs: ^1.2.1
-  provider: ^4.0.4
-  validators: ^2.0.0+1
-  dio: 2.1.13
-  flutter_dotenv: ^2.1.0
-
   flutter_mobx: ^0.3.6
   mobx: ^0.4.0+1
   mobx_codegen: ^0.3.13
   json_serializable: ^3.2.3
-
+  intl: ^0.16.0
   google_sign_in: ^4.1.4
+  provider: ^4.0.4
 
+  feat_auth:
+    path: ../feat_auth
   lib_di:
     path: ../../libs/lib_di
   lib_lego:
     path: ../../libs/lib_lego
-  kodesmil_locale:
-    path: ../../translations/kodesmil_locale
-
   flutter:
     sdk: flutter
 

@@ -1,4 +1,4 @@
-import 'package:feat_auth/data/shared_preference_helper.dart';
+import 'package:feat_auth/data/auth_storage.dart';
 import 'package:feat_auth/data/token_api.dart';
 import 'package:feat_auth/data/user_api.dart';
 import 'package:lib_di/di/modules/local_module.dart';
@@ -11,6 +11,6 @@ class AuthNetworkModule extends NetworkModule {
 }
 
 class AuthLocalModule extends LocalModule {
-  SharedPreferenceHelper provideSharedPreferenceHelper() =>
-      SharedPreferenceHelper(provideSharedPreferences());
+  AuthStorage provideSharedPreferenceHelper() =>
+      AuthStorage(provideSharedPreferences());
 }

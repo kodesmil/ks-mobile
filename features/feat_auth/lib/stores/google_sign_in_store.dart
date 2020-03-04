@@ -8,24 +8,14 @@ part 'google_sign_in_store.g.dart';
 class GoogleSignInStore = _GoogleSignInStore with _$GoogleSignInStore;
 
 abstract class _GoogleSignInStore with Store {
-  @observable
-  GoogleSignIn _googleSignIn = GoogleSignIn(
-    scopes: <String>[
-      'email',
-      'profile',
-      'openid',
-      'https://www.googleapis.com/auth/fitness.body.read',
-      'https://www.googleapis.com/auth/fitness.location.read',
-      'https://www.googleapis.com/auth/fitness.nutrition.read',
-    ],
-  );
+  GoogleSignIn _googleSignIn;
 
   @observable
   GoogleSignInAccount currentUser;
 
   StreamSubscription<GoogleSignInAccount> user$;
 
-  _GoogleSignInStore() {
+  _GoogleSignInStore(this._googleSignIn) {
     user$ = _googleSignIn.onCurrentUserChanged
         .listen((GoogleSignInAccount account) {
       currentUser = account;

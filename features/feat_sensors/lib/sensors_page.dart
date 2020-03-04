@@ -1,21 +1,21 @@
+import 'package:feat_sensors/sensors_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 import 'package:lib_lego/buttons.dart';
 import 'package:lib_lego/spaces.dart';
-import 'package:feat_sensors/sensors_store.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage();
+class SensorsPage extends StatefulWidget {
+  SensorsPage();
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _SensorsPageState createState() => _SensorsPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _SensorsPageState extends State<SensorsPage> {
   final SensorsStore _sensorsStore = SensorsStore();
 
-  _HomePageState();
+  _SensorsPageState();
 
   @override
   void initState() {

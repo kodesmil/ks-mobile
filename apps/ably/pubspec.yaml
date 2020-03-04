@@ -15,7 +15,7 @@ dependencies:
   shared_preferences: ^0.5.4+6
   flutter_launcher_icons: ^0.7.4
   f_logs: ^1.2.1
-  provider: ^3.2.0
+  provider: ^4.0.4
   validators: ^2.0.0+1
   firebase_core: ^0.4.0+9
   firebase_analytics: ^5.0.2
@@ -28,10 +28,14 @@ dependencies:
   mobx_codegen: ^0.3.13
   json_serializable: ^3.2.3
 
+  google_sign_in: ^4.1.4
+
   feat_auth:
     path: ../../features/feat_auth
   feat_sensors:
     path: ../../features/feat_sensors
+  feat_activities:
+    path: ../../features/feat_activities
   lib_di:
     path: ../../libs/lib_di
   lib_lego:

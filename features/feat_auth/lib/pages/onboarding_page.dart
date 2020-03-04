@@ -1,7 +1,6 @@
 import 'package:feat_auth/stores/onboarding_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:motim_fit/utilities/styles.dart';
 
 class OnboardingFeatureWidget extends StatelessWidget {
   const OnboardingFeatureWidget({
@@ -34,10 +33,13 @@ class OnboardingFeatureWidget extends StatelessWidget {
           SizedBox(height: 30.0),
           RichText(
             text: TextSpan(
-              style: kTitleStyle,
+              style: Theme.of(context).textTheme.title,
               children: <TextSpan>[
                 TextSpan(text: text1),
-                TextSpan(text: text2, style: kTitleStyleBold),
+                TextSpan(
+                  text: text2,
+                  style: Theme.of(context).textTheme.title,
+                ),
               ],
             ),
           ),

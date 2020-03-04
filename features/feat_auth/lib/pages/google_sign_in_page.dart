@@ -1,6 +1,8 @@
 import 'package:feat_auth/stores/google_sign_in_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:lib_lego/navigations.dart';
+import 'package:provider/provider.dart';
 
 class GoogleSignInPage extends StatefulWidget {
   @override
@@ -8,26 +10,23 @@ class GoogleSignInPage extends StatefulWidget {
 }
 
 class _GoogleSignInPageState extends State<GoogleSignInPage> {
-  final _store = GoogleSignInStore();
-
   Widget _buildBody() {
-    if (_store.currentUser == null) {
+    final store = Provider.of<GoogleSignInStore>(context);
+    if (store.currentUser == null) {
       return Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          const Text("You are not currently signed in."),
+          const Text("Connect the app with Google"),
           RaisedButton(
-            child: const Text('SIGN IN'),
-            onPressed: _store.signIn,
+            child: const Text('Connect'),
+            onPressed: store.signIn,
           ),
         ],
       );
     } else {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          const Text("You are currently signed in."),
-        ],
+      return ksNavigateAndRemoveUntil(
+        context,
+        '/home',
       );
     }
   }
@@ -35,9 +34,6 @@ class _GoogleSignInPageState extends State<GoogleSignInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Google Sign In'),
-      ),
       body: ConstrainedBox(
         constraints: const BoxConstraints.expand(),
         child: Observer(builder: (context) => _buildBody()),

@@ -20,7 +20,7 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-8146161068556778~6190148804"/>
         <activity
-            android:name="com.kodesmil.ably.MainActivity"
+            android:name=".MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density"

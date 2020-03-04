@@ -5,10 +5,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'constants/preferences.dart';
 
-class SharedPreferenceHelper {
+class AuthStorage {
   final Future<SharedPreferences> _sharedPreference;
 
-  SharedPreferenceHelper(this._sharedPreference);
+  AuthStorage(this._sharedPreference);
 
   Future<void> saveAuthToken(Token token) async =>
       _sharedPreference.then((preference) {

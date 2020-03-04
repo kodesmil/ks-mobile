@@ -10,6 +10,7 @@ final apps = [
   'translations/kodesmil_locale',
   'libs/lib_lego',
   'libs/lib_di',
+  'features/feat_activities',
   'features/feat_auth',
   'features/feat_fit',
   'features/feat_sensors',
