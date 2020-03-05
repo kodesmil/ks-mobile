@@ -36,6 +36,10 @@ dependencies:
     path: ../../features/feat_sensors
   feat_activities:
     path: ../../features/feat_activities
+  feat_onboarding:
+    path: ../../features/feat_onboarding
+  feat_health_survey:
+    path: ../../features/feat_health_survey
   lib_di:
     path: ../../libs/lib_di
   lib_lego:

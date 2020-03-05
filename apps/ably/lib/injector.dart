@@ -1,13 +1,13 @@
 import 'package:dio/dio.dart';
-import 'package:feat_activities/activities_api.dart';
-import 'package:feat_activities/activities_store.dart';
+import 'package:feat_activities/feat_activities.dart';
 import 'package:feat_auth/data/auth_storage.dart';
 import 'package:feat_auth/data/token_api.dart';
 import 'package:feat_auth/data/user_api.dart';
 import 'package:feat_auth/stores/google_sign_in_store.dart';
 import 'package:feat_auth/stores/login_store.dart';
-import 'package:feat_auth/stores/onboarding_store.dart';
 import 'package:feat_auth/stores/sign_up_store.dart';
+import 'package:feat_health_survey/feat_health_survey.dart';
+import 'package:feat_onboarding/feat_onboarding.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:lib_di/data/network/dio_client.dart';
@@ -51,6 +51,16 @@ class Injector extends StatelessWidget {
               Dio()
                 // ..options.baseUrl = 'http://10.0.2.2:5000'
                 ..options.baseUrl = 'http://auth.kodesmil.com'
+                ..interceptors.add(LogInterceptor(responseBody: true)),
+            ),
+          ),
+        ),
+        Provider(
+          create: (_) => HealthSurveyApi(
+            DioClient(
+              Dio()
+                // ..options.baseUrl = 'http://10.0.2.2:5000'
+                ..options.baseUrl = 'http://health-survey.kodesmil.com'
                 ..interceptors.add(LogInterceptor(responseBody: true)),
             ),
           ),

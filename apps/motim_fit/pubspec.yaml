@@ -34,6 +34,10 @@ dependencies:
     path: ../../features/feat_sensors
   feat_activities:
     path: ../../features/feat_activities
+  feat_health_survey:
+    path: ../../features/feat_health_survey
+  feat_onboarding:
+    path: ../../features/feat_onboarding
   feat_fit:
     path: ../../features/feat_fit
   lib_di:

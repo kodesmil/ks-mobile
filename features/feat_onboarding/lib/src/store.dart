@@ -1,7 +1,7 @@
 import 'package:feat_auth/data/auth_storage.dart';
 import 'package:mobx/mobx.dart';
 
-part 'onboarding_store.g.dart';
+part 'store.g.dart';
 
 class OnboardingStore = _OnboardingStore with _$OnboardingStore;
 

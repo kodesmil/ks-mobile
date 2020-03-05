@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:feat_activities/activities_api.dart';
+import 'package:feat_activities/src/api.dart';
 import 'package:feat_auth/stores/google_sign_in_store.dart';
 import 'package:lib_di/stores/error/error_store.dart';
 import 'package:mobx/mobx.dart';
 
-part 'activities_store.g.dart';
+part 'store.g.dart';
 
 class ActivitiesStore = _ActivitiesStore with _$ActivitiesStore;
 

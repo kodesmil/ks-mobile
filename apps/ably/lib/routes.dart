@@ -1,8 +1,8 @@
-import 'package:feat_activities/activities_page.dart';
+import 'package:feat_activities/feat_activities.dart';
 import 'package:feat_auth/pages/google_sign_in_page.dart';
 import 'package:feat_auth/pages/login_page.dart';
-import 'package:feat_auth/pages/onboarding_page.dart';
 import 'package:feat_auth/pages/sign_up_page.dart';
+import 'package:feat_onboarding/feat_onboarding.dart';
 import 'package:flutter/material.dart';
 
 import 'ui/splash_page.dart';
