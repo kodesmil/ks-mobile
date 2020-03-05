@@ -30,6 +30,10 @@ dependencies:
 
   feat_auth:
     path: ../../features/feat_auth
+  feat_sensors:
+    path: ../../features/feat_sensors
+  feat_activities:
+    path: ../../features/feat_activities
   feat_fit:
     path: ../../features/feat_fit
   lib_di:

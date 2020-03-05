@@ -6,6 +6,7 @@ import 'package:lib_lego/navigations.dart';
 import 'package:lib_lego/progress_indicators.dart';
 import 'package:lib_lego/snack_bars.dart';
 import 'package:lib_lego/textfields.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -17,16 +18,16 @@ class _LoginPageState extends State<LoginPage> {
   final _passwordController = TextEditingController();
   final _passwordFocusNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
-  final _store = LoginStore();
 
   @override
   void initState() {
     super.initState();
+    final store = Provider.of<LoginStore>(context);
     _emailController.addListener(() {
-      _store.setEmail(_emailController.text);
+      store.setEmail(_emailController.text);
     });
     _passwordController.addListener(() {
-      _store.setPassword(_passwordController.text);
+      store.setPassword(_passwordController.text);
     });
   }
 
@@ -39,33 +40,36 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        primary: true,
-        appBar: KsEmptyAppBar(),
-        body: _buildBody(),
-      );
+  Widget build(BuildContext context) {
+    final store = Provider.of<LoginStore>(context);
+    return Scaffold(
+      primary: true,
+      appBar: KsEmptyAppBar(),
+      body: _buildBody(store),
+    );
+  }
 
-  Widget _buildBody() => Stack(
+  Widget _buildBody(LoginStore store) => Stack(
         children: <Widget>[
           Center(
             heightFactor: 1.5,
-            child: _buildRightSide(),
+            child: _buildRightSide(store),
           ),
           Observer(
-            builder: (context) => _store.success
+            builder: (context) => store.success
                 ? ksNavigateAndRemoveUntil(context, '/home')
-                : ksShowErrorMessage(context, _store.errorStore.errorMessage),
+                : ksShowErrorMessage(context, store.errorStore.errorMessage),
           ),
           Observer(
             builder: (context) => Visibility(
-              visible: _store.loading,
+              visible: store.loading,
               child: KsProgressIndicator(),
             ),
           )
         ],
       );
 
-  Widget _buildRightSide() => Form(
+  Widget _buildRightSide(LoginStore store) => Form(
         key: _formKey,
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 48.0),
@@ -88,18 +92,18 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
               SizedBox(height: 48.0),
-              _buildEmailField(),
-              _buildPasswordField(),
+              _buildEmailField(store),
+              _buildPasswordField(store),
               SizedBox(height: 48.0),
-              _buildLoginField(),
+              _buildLoginField(store),
               SizedBox(height: 16.0),
-              _buildSignInButton()
+              _buildSignInButton(store)
             ],
           ),
         ),
       );
 
-  Widget _buildEmailField() => Observer(
+  Widget _buildEmailField(LoginStore store) => Observer(
         builder: (context) => KsTextField(
           hint: 'Email',
           autoFocus: true,
@@ -110,11 +114,11 @@ class _LoginPageState extends State<LoginPage> {
           onFieldSubmitted: (value) {
             FocusScope.of(context).requestFocus(_passwordFocusNode);
           },
-          errorText: _store.formErrorStore.email,
+          errorText: store.formErrorStore.email,
         ),
       );
 
-  Widget _buildPasswordField() => Observer(
+  Widget _buildPasswordField(LoginStore store) => Observer(
         builder: (context) => KsTextField(
           hint: 'Password',
           isObscure: true,
@@ -122,18 +126,18 @@ class _LoginPageState extends State<LoginPage> {
           icon: Icons.lock,
           textController: _passwordController,
           focusNode: _passwordFocusNode,
-          errorText: _store.formErrorStore.password,
+          errorText: store.formErrorStore.password,
         ),
       );
 
-  Widget _buildLoginField() => Observer(
+  Widget _buildLoginField(LoginStore store) => Observer(
         builder: (context) => RaisedButton(
           child: Text('Login'),
           shape: StadiumBorder(),
           onPressed: () async {
-            _store.validateAll();
-            if (_store.canLogin) {
-              _store.login();
+            store.validateAll();
+            if (store.canLogin) {
+              store.login();
             } else {
               ksShowErrorMessage(context, 'Please fill in all fields');
             }
@@ -141,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
 
-  Widget _buildSignInButton() => Observer(
+  Widget _buildSignInButton(LoginStore store) => Observer(
         builder: (context) => FlatButton(
           child: Text('Sign up'),
           shape: StadiumBorder(),

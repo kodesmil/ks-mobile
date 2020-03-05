@@ -1,4 +1,6 @@
-import 'package:feat_auth/di/auth_component.dart';
+import 'package:feat_auth/data/auth_storage.dart';
+import 'package:feat_auth/data/token_api.dart';
+import 'package:feat_auth/data/user_api.dart';
 import 'package:feat_auth/models/user.dart';
 import 'package:lib_di/stores/error/error_store.dart';
 import 'package:mobx/mobx.dart';
@@ -9,13 +11,19 @@ part 'login_store.g.dart';
 class LoginStore = _LoginStore with _$LoginStore;
 
 abstract class _LoginStore with Store {
-  final formErrorStore = LoginErrorStore();
-  final errorStore = ErrorStore();
-  final tokenApi = networkModule.provideTokenApi();
-  final userApi = networkModule.provideUserApi();
-  final sharedPreferenceHelper = localModule.provideSharedPreferenceHelper();
+  final LoginErrorStore formErrorStore;
+  final ErrorStore errorStore;
+  final TokenApi tokenApi;
+  final UserApi userApi;
+  final AuthStorage authStorage;
 
-  _LoginStore() {
+  _LoginStore(
+    this.errorStore,
+    this.formErrorStore,
+    this.tokenApi,
+    this.userApi,
+    this.authStorage,
+  ) {
     _setupValidations();
   }
 
@@ -84,7 +92,7 @@ abstract class _LoginStore with Store {
         password: password,
       );
       final result = await tokenApi.getAuthAccessToken(user);
-      await sharedPreferenceHelper.saveAuthToken(result);
+      await authStorage.saveAuthToken(result);
       loading = false;
       success = false;
       errorStore.showError = false;

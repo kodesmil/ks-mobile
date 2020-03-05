@@ -8,6 +8,7 @@ import 'package:lib_lego/navigations.dart';
 import 'package:lib_lego/progress_indicators.dart';
 import 'package:lib_lego/snack_bars.dart';
 import 'package:lib_lego/textfields.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -25,28 +26,28 @@ class _SignUpPageState extends State<SignUpPage> {
   final _lastNameFocusNode = FocusNode();
   final _dateOfBirthFocusNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
-  final _store = SignUpStore();
 
   @override
   void initState() {
     super.initState();
+    final store = Provider.of<SignUpStore>(context);
     _emailController.addListener(() {
-      _store.setEmail(_emailController.text);
+      store.setEmail(_emailController.text);
     });
     _passwordController.addListener(() {
-      _store.setPassword(_passwordController.text);
+      store.setPassword(_passwordController.text);
     });
     _dateOfBirthController.addListener(() {
-      _store.setDateOfBirth(_dateOfBirthController.text);
+      store.setDateOfBirth(_dateOfBirthController.text);
     });
     _firstNameController.addListener(() {
-      _store.setFirstName(_firstNameController.text);
+      store.setFirstName(_firstNameController.text);
     });
     _lastNameController.addListener(() {
-      _store.setLastName(_lastNameController.text);
+      store.setLastName(_lastNameController.text);
     });
     _dateOfBirthController.addListener(() {
-      _store.setDateOfBirth(_dateOfBirthController.text);
+      store.setDateOfBirth(_dateOfBirthController.text);
     });
   }
 
@@ -65,54 +66,57 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        primary: true,
-        appBar: KsEmptyAppBar(),
-        body: _buildBody(),
-      );
+  Widget build(BuildContext context) {
+    final store = Provider.of<SignUpStore>(context);
+    return Scaffold(
+      primary: true,
+      appBar: KsEmptyAppBar(),
+      body: _buildBody(store),
+    );
+  }
 
-  Widget _buildBody() => Stack(
+  Widget _buildBody(SignUpStore store) => Stack(
         children: [
-          _buildRightSide(),
+          _buildRightSide(store),
           Observer(
-            builder: (context) => _store.success
+            builder: (context) => store.success
                 ? ksNavigateAndRemoveUntil(context, '/home')
                 : ksShowErrorMessage(
                     context,
-                    _store.errorStore.errorMessage,
+                    store.errorStore.errorMessage,
                   ),
           ),
           Observer(
             builder: (context) => Visibility(
-              visible: _store.loading,
+              visible: store.loading,
               child: KsProgressIndicator(),
             ),
           )
         ],
       );
 
-  Widget _buildRightSide() => Form(
+  Widget _buildRightSide(SignUpStore store) => Form(
         key: _formKey,
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 48.0),
           child: Column(
             children: <Widget>[
               SizedBox(height: 48.0),
-              _buildFirstNameField(),
-              _buildLastNameField(),
-              _buildDateOfBirthField(),
-              _buildEmailField(),
-              _buildPasswordField(),
+              _buildFirstNameField(store),
+              _buildLastNameField(store),
+              _buildDateOfBirthField(store),
+              _buildEmailField(store),
+              _buildPasswordField(store),
               SizedBox(height: 48.0),
-              _buildSignUpButton(),
+              _buildSignUpButton(store),
               SizedBox(height: 16.0),
-              _buildLoginButton(),
+              _buildLoginButton(store),
             ],
           ),
         ),
       );
 
-  Widget _buildEmailField() => Observer(
+  Widget _buildEmailField(SignUpStore store) => Observer(
         builder: (context) => KsTextField(
           hint: 'Email',
           icon: Icons.email,
@@ -124,11 +128,11 @@ class _SignUpPageState extends State<SignUpPage> {
           onFieldSubmitted: (value) => FocusScope.of(context).requestFocus(
             _passwordFocusNode,
           ),
-          errorText: _store.signUpErrorStore.email,
+          errorText: store.signUpErrorStore.email,
         ),
       );
 
-  Widget _buildFirstNameField() => Observer(
+  Widget _buildFirstNameField(SignUpStore store) => Observer(
         builder: (context) => KsTextField(
           hint: 'First Name',
           icon: Icons.person,
@@ -139,11 +143,11 @@ class _SignUpPageState extends State<SignUpPage> {
           onFieldSubmitted: (value) => FocusScope.of(context).requestFocus(
             _lastNameFocusNode,
           ),
-          errorText: _store.signUpErrorStore.firstName,
+          errorText: store.signUpErrorStore.firstName,
         ),
       );
 
-  Widget _buildLastNameField() => Observer(
+  Widget _buildLastNameField(SignUpStore store) => Observer(
         builder: (context) => KsTextField(
           hint: 'Last Name',
           icon: Icons.person,
@@ -152,14 +156,14 @@ class _SignUpPageState extends State<SignUpPage> {
           focusNode: _lastNameFocusNode,
           textCapitalization: TextCapitalization.words,
           padding: EdgeInsets.only(top: 16.0),
-          errorText: _store.signUpErrorStore.lastName,
+          errorText: store.signUpErrorStore.lastName,
           onFieldSubmitted: (value) => FocusScope.of(context).requestFocus(
             _dateOfBirthFocusNode,
           ),
         ),
       );
 
-  Widget _buildPasswordField() => Observer(
+  Widget _buildPasswordField(SignUpStore store) => Observer(
         builder: (context) => KsTextField(
           hint: 'Password',
           icon: Icons.lock,
@@ -167,11 +171,11 @@ class _SignUpPageState extends State<SignUpPage> {
           padding: EdgeInsets.only(top: 16.0),
           textController: _passwordController,
           focusNode: _passwordFocusNode,
-          errorText: _store.signUpErrorStore.password,
+          errorText: store.signUpErrorStore.password,
         ),
       );
 
-  Widget _buildDateOfBirthField() => Observer(
+  Widget _buildDateOfBirthField(SignUpStore store) => Observer(
         builder: (context) => KsDateFieldWidget(
           hint: 'Date of birth',
           icon: Icons.child_friendly,
@@ -184,18 +188,18 @@ class _SignUpPageState extends State<SignUpPage> {
               FocusScope.of(context).requestFocus(_emailFocusNode);
             }
           },
-          errorText: _store.signUpErrorStore.dateOfBirth,
+          errorText: store.signUpErrorStore.dateOfBirth,
         ),
       );
 
-  Widget _buildSignUpButton() {
+  Widget _buildSignUpButton(SignUpStore store) {
     return RaisedButton(
       child: Text('Sign up'.toUpperCase()),
       shape: StadiumBorder(),
       onPressed: () async {
-        _store.validateAll();
-        if (_store.canSignUp) {
-          _store.signUp();
+        store.validateAll();
+        if (store.canSignUp) {
+          store.signUp();
         } else {
           ksShowErrorMessage(context, 'Please fill in all fields');
         }
@@ -203,7 +207,7 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget _buildLoginButton() => Observer(
+  Widget _buildLoginButton(SignUpStore store) => Observer(
         builder: (context) => FlatButton(
           child: Text('Login'.toUpperCase()),
           shape: StadiumBorder(),

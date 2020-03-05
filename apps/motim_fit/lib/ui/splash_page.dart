@@ -1,6 +1,6 @@
+import 'package:feat_auth/data/auth_storage.dart';
 import 'package:flutter/material.dart';
-
-import '../di/app_component.dart';
+import 'package:provider/provider.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -22,9 +22,9 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   navigate() async {
-    final helper = authLocalModule.provideSharedPreferenceHelper();
-    final isLoggedIn = await helper.isLoggedIn;
-    final onboardingDisplayed = await helper.onboardingDisplayed;
+    final storage = Provider.of<AuthStorage>(context);
+    final isLoggedIn = await storage.isLoggedIn;
+    final onboardingDisplayed = await storage.onboardingDisplayed;
     Navigator.of(context).pushReplacementNamed('/google_sign_in');
     if (!onboardingDisplayed) {
       Navigator.of(context).pushReplacementNamed('/onboarding');

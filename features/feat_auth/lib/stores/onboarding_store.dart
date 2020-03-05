@@ -1,4 +1,4 @@
-import 'package:feat_auth/di/auth_component.dart';
+import 'package:feat_auth/data/auth_storage.dart';
 import 'package:mobx/mobx.dart';
 
 part 'onboarding_store.g.dart';
@@ -6,10 +6,12 @@ part 'onboarding_store.g.dart';
 class OnboardingStore = _OnboardingStore with _$OnboardingStore;
 
 abstract class _OnboardingStore with Store {
-  final sharedPreferenceHelper = localModule.provideSharedPreferenceHelper();
+  final AuthStorage authStorage;
+
+  _OnboardingStore(this.authStorage);
 
   @action
   Future onboardingDisplayed() async {
-    await sharedPreferenceHelper.setHasSeenOnboarding();
+    await authStorage.setHasSeenOnboarding();
   }
 }

@@ -1,6 +1,7 @@
 import 'package:feat_auth/stores/onboarding_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class OnboardingFeatureWidget extends StatelessWidget {
   const OnboardingFeatureWidget({
@@ -55,7 +56,6 @@ class OnboardingPage extends StatefulWidget {
 }
 
 class _OnboardingPageState extends State<OnboardingPage> {
-  final _store = OnboardingStore();
   final int _numPages = 3;
   final PageController _pageController = PageController(initialPage: 0);
   int _currentPage = 0;
@@ -83,6 +83,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   @override
   Widget build(BuildContext context) {
+    final store = Provider.of<OnboardingStore>(context);
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
@@ -139,7 +140,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
         color: Color(0xFF242424),
         child: GestureDetector(
           onTap: () {
-            _store.onboardingDisplayed();
+            store.onboardingDisplayed();
             Navigator.pushNamed(context, '/splash');
           },
           child: Padding(

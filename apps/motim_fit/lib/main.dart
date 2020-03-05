@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:kodesmil_locale/localizations.dart';
 import 'package:lib_lego/themes.dart';
+import 'package:motim_fit/injector.dart';
 
 import 'routes.dart';
 
@@ -29,13 +30,15 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      localizationsDelegates: KsLoc.localizationsDelegates,
-      supportedLocales: KsLoc.supportedLocales,
-      theme: KsTheme.motimLight(),
-      darkTheme: KsTheme.motimDark(),
-      initialRoute: '/google-sign-in',
-      routes: Routes.routes,
+    throw Injector(
+      child: MaterialApp(
+        localizationsDelegates: KsLoc.localizationsDelegates,
+        supportedLocales: KsLoc.supportedLocales,
+        theme: KsTheme.motimLight(),
+        darkTheme: KsTheme.motimDark(),
+        initialRoute: '/google-sign-in',
+        routes: Routes.routes,
+      ),
     );
   }
 }

@@ -10,12 +10,15 @@ part 'activities_store.g.dart';
 class ActivitiesStore = _ActivitiesStore with _$ActivitiesStore;
 
 abstract class _ActivitiesStore with Store {
-  final errorStore = ErrorStore();
+  final ErrorStore errorStore;
+  final GoogleSignInStore googleSignInStore;
+  final ActivitiesApi activitiesApi;
 
-  final GoogleSignInStore _googleSignInStore;
-  final ActivitiesApi _activitiesApi;
-
-  _ActivitiesStore(this._googleSignInStore, this._activitiesApi);
+  _ActivitiesStore(
+    this.errorStore,
+    this.googleSignInStore,
+    this.activitiesApi,
+  );
 
   @observable
   bool success = false;
@@ -25,9 +28,9 @@ abstract class _ActivitiesStore with Store {
 
   @action
   Future sendData() async {
-    final authentication = await _googleSignInStore.currentUser.authentication;
-    final email = _googleSignInStore.currentUser.email;
-    await _activitiesApi.getFitActivities(authentication.accessToken, email);
+    final authentication = await googleSignInStore.currentUser.authentication;
+    final email = googleSignInStore.currentUser.email;
+    await activitiesApi.getFitActivities(authentication.accessToken, email);
   }
 
   @action
