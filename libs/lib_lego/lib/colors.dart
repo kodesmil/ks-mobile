@@ -9,12 +9,13 @@ class KsColor extends StatelessWidget {
 
 
   /// Default: 48 pt
-  factory KsColor.primary() => KsColor(Colors.amber);
+  factory KsColor.primary() => KsColor(Colors.red);
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-    height: 60,
+  Widget build(BuildContext context) => Container(
     width: 60,
-    child: const DecoratedBox(decoration: const BoxDecoration(color: this.color)),
+    height: 60,gi
+    color: this.color,
   );
+
 }
