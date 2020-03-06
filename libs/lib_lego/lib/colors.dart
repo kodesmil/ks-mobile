@@ -14,7 +14,7 @@ class KsColor extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     width: 60,
-    height: 60,gi
+    height: 60,
     color: this.color,
   );
 
