@@ -9,6 +9,7 @@ import 'package:feat_auth/stores/sign_up_store.dart';
 import 'package:feat_onboarding/feat_onboarding.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lib_di/data/network/dio_client.dart';
 import 'package:lib_di/stores/error/error_store.dart';
 import 'package:provider/provider.dart';
@@ -53,6 +54,22 @@ class Injector extends StatelessWidget {
                 ..interceptors.add(LogInterceptor(responseBody: true)),
             ),
           ),
+        ),
+        Provider(
+          create: (_) => GoogleSignIn(
+            scopes: <String>[
+              'email',
+              'profile',
+              'openid',
+              'https://www.googleapis.com/auth/fitness.activity.read',
+              'https://www.googleapis.com/auth/fitness.body.read',
+              'https://www.googleapis.com/auth/fitness.location.read',
+              'https://www.googleapis.com/auth/fitness.nutrition.read',
+            ],
+          ),
+        ),
+        ProxyProvider<GoogleSignIn, GoogleSignInStore>(
+          update: (_, dep, __) => GoogleSignInStore(dep),
         ),
         ProxyProvider2<GoogleSignInStore, ActivitiesApi, ActivitiesStore>(
           update: (_, dep, dep2, __) => ActivitiesStore(

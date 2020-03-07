@@ -28,6 +28,8 @@ dependencies:
   mobx_codegen: ^0.3.13
   json_serializable: ^3.2.3
 
+  google_sign_in: ^4.1.4
+
   feat_auth:
     path: ../../features/feat_auth
   feat_sensors:

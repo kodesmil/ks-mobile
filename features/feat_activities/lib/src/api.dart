@@ -12,7 +12,7 @@ class ActivitiesApi {
   Future<dynamic> getFitActivities(String accessToken, String email) =>
       dioClient
           .post(
-            '/sync-google-fit-activities',
+            '/sync/google-fit',
             data: {
               'access_token': accessToken,
               'email': email,
