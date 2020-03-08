@@ -1,4 +1,5 @@
 import 'package:legobook/lego_page_spaces.dart';
+import 'package:legobook/lego_page_colors.dart';
 import 'package:legobook/lego_page_texts.dart';
 import 'package:legobook/lego_page_progress.dart';
 import 'package:legobook/lego_page_buttons.dart';
@@ -50,7 +51,7 @@ class LegoPage extends StatelessWidget {
               LegoButtonsPage(),
               LegoProgressPage(),
               LegoRadioButtonsCheckboxesPage(),
-              LegoSpacesPage(),
+              LegoColorsPage(),
               LegoSpacesPage(),
             ],
           ),
