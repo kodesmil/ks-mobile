@@ -32,7 +32,7 @@ class KsColor extends StatelessWidget {
   factory KsColor.splash_dark() => KsColor(ThemeData.dark().splashColor);
   factory KsColor.textSelection_dark() => KsColor(ThemeData.dark().textSelectionColor);
   factory KsColor.textSelectionHandle_dark() => KsColor(ThemeData.dark().textSelectionHandleColor);
-  factory KsColor.toggleableActve_dark() => KsColor(ThemeData.dark().toggleableActiveColor);
+  factory KsColor.toggleableActive_dark() => KsColor(ThemeData.dark().toggleableActiveColor);
   factory KsColor.unselectedWidget_dark() => KsColor(ThemeData.dark().unselectedWidgetColor);
 
   factory KsColor.primary_light() => KsColor(ThemeData.light().primaryColor);
@@ -58,7 +58,7 @@ class KsColor extends StatelessWidget {
   factory KsColor.splash_light() => KsColor(ThemeData.light().splashColor);
   factory KsColor.textSelection_light() => KsColor(ThemeData.light().textSelectionColor);
   factory KsColor.textSelectionHandle_light() => KsColor(ThemeData.light().textSelectionHandleColor);
-  factory KsColor.toggleableActve_light() => KsColor(ThemeData.light().toggleableActiveColor);
+  factory KsColor.toggleableActive_light() => KsColor(ThemeData.light().toggleableActiveColor);
   factory KsColor.unselectedWidget_light() => KsColor(ThemeData.light().unselectedWidgetColor);
 
   @override

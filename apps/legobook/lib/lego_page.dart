@@ -52,7 +52,6 @@ class LegoPage extends StatelessWidget {
               LegoProgressPage(),
               LegoRadioButtonsCheckboxesPage(),
               LegoColorsPage(),
-              //LegoSpacesPage(),
               LegoSpacesPage(),
             ],
           ),
