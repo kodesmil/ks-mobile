@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'fit.dart';
+part of 'rank.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

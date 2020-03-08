@@ -14,7 +14,7 @@ dependencies:
   f_logs: ^1.2.1
   provider: ^4.0.4
   validators: ^2.0.0+1
-  dio: 2.1.13
+  dio: ^3.0.9
   flutter_dotenv: ^2.1.0
 
   flutter_mobx: ^0.3.6

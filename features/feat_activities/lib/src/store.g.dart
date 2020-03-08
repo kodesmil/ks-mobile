@@ -43,11 +43,11 @@ mixin _$ActivitiesStore on _ActivitiesStore, Store {
     }, _$loadingAtom, name: '${_$loadingAtom.name}_set');
   }
 
-  final _$sendAsEmailAsyncAction = AsyncAction('sendAsEmail');
+  final _$sendDataAsyncAction = AsyncAction('sendData');
 
   @override
   Future<dynamic> sendData() {
-    return _$sendAsEmailAsyncAction.run(() => super.sendData());
+    return _$sendDataAsyncAction.run(() => super.sendData());
   }
 
   final _$closeAsyncAction = AsyncAction('close');

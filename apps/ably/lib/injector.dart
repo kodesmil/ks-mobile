@@ -30,8 +30,8 @@ class Injector extends StatelessWidget {
           create: (_) => ActivitiesApi(
             DioClient(
               Dio()
-                ..options.baseUrl = 'http://10.0.2.2:5000'
-                // ..options.baseUrl = 'http://activities.kodesmil.com'
+                // ..options.baseUrl = 'http://10.0.2.2:5000'
+                ..options.baseUrl = 'http://activities.api.kodesmil.com'
                 ..interceptors.add(LogInterceptor(responseBody: true)),
             ),
           ),
@@ -61,7 +61,8 @@ class Injector extends StatelessWidget {
             DioClient(
               Dio()
                 // ..options.baseUrl = 'http://10.0.2.2:5000'
-                ..options.baseUrl = 'http://health-survey.kodesmil.com'
+                ..options.baseUrl = 'http://health-survey.api.kodesmil.com'
+                // ..options.baseUrl = 'http://192.168.64.2:31908'
                 ..interceptors.add(LogInterceptor(responseBody: true)),
             ),
           ),
@@ -109,6 +110,12 @@ class Injector extends StatelessWidget {
         ),
         ProxyProvider<AuthStorage, OnboardingStore>(
           update: (_, dep, __) => OnboardingStore(
+            dep,
+          ),
+        ),
+        ProxyProvider<HealthSurveyApi, HealthSurveyStore>(
+          update: (_, dep, __) => HealthSurveyStore(
+            ErrorStore(),
             dep,
           ),
         ),

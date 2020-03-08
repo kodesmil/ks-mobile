@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: KsLoc.supportedLocales,
         theme: KsTheme.ablyLight(),
         darkTheme: KsTheme.ablyDark(),
-        initialRoute: '/google-sign-in',
+        initialRoute: '/home',
         routes: Routes.routes,
       ),
     );

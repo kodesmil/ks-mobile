@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:feat_auth/models/token.dart';
@@ -22,7 +21,7 @@ class UserApi {
             headers: {
               'Authorization': 'Bearer ${token.accessToken}',
             },
-            contentType: ContentType('application', 'scim+json'),
+            contentType: 'application/scim+json',
           ),
         )
         .then((dynamic res) => res);

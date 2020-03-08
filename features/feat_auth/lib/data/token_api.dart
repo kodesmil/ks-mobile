@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:feat_auth/models/token.dart';
@@ -24,7 +23,7 @@ class TokenApi {
           headers: {
             'Authorization': 'Basic ${DotEnv().env['AUTH_SCIM_ACCESS']}',
           },
-          contentType: ContentType('application', 'x-www-form-urlencoded'),
+          contentType: 'application/x-www-form-urlencoded',
         ),
       )
       .then((dynamic res) => Token.fromJson(res))
@@ -43,7 +42,7 @@ class TokenApi {
           headers: {
             'Authorization': 'Basic ${DotEnv().env['AUTH_SCIM_ACCESS']}',
           },
-          contentType: ContentType('application', 'x-www-form-urlencoded'),
+          contentType: 'application/x-www-form-urlencoded',
         ),
       )
       .then((dynamic res) => Token.fromJson(res));

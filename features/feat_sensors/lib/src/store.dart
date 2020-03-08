@@ -10,7 +10,7 @@ import 'package:lib_di/stores/error/error_store.dart';
 import 'package:mobx/mobx.dart';
 import 'package:path_provider/path_provider.dart';
 
-part 'sensors_store.g.dart';
+part 'store.g.dart';
 
 class SensorsStore = _SensorsStore with _$SensorsStore;
 

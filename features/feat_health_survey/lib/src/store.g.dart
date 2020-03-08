@@ -9,7 +9,7 @@ part of 'store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HealthSurveyStore on _HealthSurveyStore, Store {
-  final _$successAtom = Atom(name: '_ActivitiesStore.success');
+  final _$successAtom = Atom(name: '_HealthSurveyStore.success');
 
   @override
   bool get success {
@@ -26,7 +26,7 @@ mixin _$HealthSurveyStore on _HealthSurveyStore, Store {
     }, _$successAtom, name: '${_$successAtom.name}_set');
   }
 
-  final _$loadingAtom = Atom(name: '_ActivitiesStore.loading');
+  final _$loadingAtom = Atom(name: '_HealthSurveyStore.loading');
 
   @override
   bool get loading {
@@ -43,11 +43,18 @@ mixin _$HealthSurveyStore on _HealthSurveyStore, Store {
     }, _$loadingAtom, name: '${_$loadingAtom.name}_set');
   }
 
-  final _$sendAsEmailAsyncAction = AsyncAction('sendAsEmail');
+  final _$sendMoodRankAsyncAction = AsyncAction('sendMoodRank');
 
   @override
-  Future<dynamic> sendData() {
-    return _$sendAsEmailAsyncAction.run(() => super.sendData());
+  Future<dynamic> sendMoodRank(double value) {
+    return _$sendMoodRankAsyncAction.run(() => super.sendMoodRank(value));
+  }
+
+  final _$sendHealthRankAsyncAction = AsyncAction('sendHealthRank');
+
+  @override
+  Future<dynamic> sendHealthRank(double value) {
+    return _$sendHealthRankAsyncAction.run(() => super.sendHealthRank(value));
   }
 
   final _$closeAsyncAction = AsyncAction('close');

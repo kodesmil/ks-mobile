@@ -5,10 +5,11 @@ import 'package:intl/intl.dart';
 import 'package:lib_di/stores/error/error_store.dart';
 import 'package:lib_di/utils/dio/dio_error_util.dart';
 import 'package:mobx/mobx.dart';
-import 'package:feat_fit/models/fit.dart';
-import 'package:feat_fit/models/fit_list.dart';
 
-part 'fit_store.g.dart';
+import 'models/fit.dart';
+import 'models/fit_list.dart';
+
+part 'store.g.dart';
 
 class FitStore = _FitStore with _$FitStore;
 
