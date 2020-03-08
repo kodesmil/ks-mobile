@@ -30,7 +30,9 @@ class AuthStorage {
   Future<bool> get onboardingDisplayed async =>
       _sharedPreference.then((p) => p.getBool(hasSeenOnboarding) ?? false);
 
-  Future<bool> get isLoggedIn async => _sharedPreference.then(
-        (p) => p.getString(accessToken)?.isNotEmpty ?? false,
-      );
+  Future<bool> get isLoggedIn async {
+    return _sharedPreference.then(
+      (p) => p.getString(accessToken)?.isNotEmpty ?? false,
+    );
+  }
 }

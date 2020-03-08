@@ -51,7 +51,7 @@ class KsTheme {
       indicatorColor: colorScheme.onBackground,
       appBarTheme: AppBarTheme(
         textTheme: TextTheme(
-          title: TextStyle(
+          headline6: TextStyle(
             fontSize: 20,
             color: colorScheme.onPrimary,
           ),
@@ -103,7 +103,7 @@ class KsTheme {
           Colors.black.withOpacity(0.80),
           Colors.white,
         ),
-        contentTextStyle: textTheme.subhead.apply(
+        contentTextStyle: textTheme.subtitle1.apply(
           color: Colors.white,
         ),
       ),
@@ -113,73 +113,74 @@ class KsTheme {
 
 class KsTextTheme extends TextTheme {
   KsTextTheme({
-    display4,
-    display3,
-    display2,
-    display1,
-    headline,
-    title,
-    subhead,
-    body2,
-    body1,
+    headline1,
+    headline2,
+    headline3,
+    headline4,
+    headline5,
+    headline6,
+    subtitle1,
+    subtitle2,
+    bodyText1,
+    bodyText2,
     caption,
     button,
-    subtitle,
     overline,
   }) : super(
-          display4: display4,
-          display3: display3,
-          display2: display2,
-          display1: display1,
-          headline: headline,
-          title: title,
-          subhead: subhead,
-          body2: body2,
-          body1: body1,
+          headline1: headline1,
+          headline2: headline2,
+          headline3: headline3,
+          headline4: headline4,
+          headline5: headline5,
+          headline6: headline6,
+          subtitle1: subtitle1,
+          bodyText2: bodyText2,
+          bodyText1: bodyText1,
           caption: caption,
           button: button,
-          subtitle: subtitle,
+          subtitle2: subtitle2,
           overline: overline,
         );
 
   factory KsTextTheme.base(TextTheme theme) => KsTextTheme(
-        display4: theme.display4,
-        display3: theme.display3,
-        display2: theme.display2,
-        display1: theme.display1,
-        headline: theme.headline,
-        title: theme.title,
-        subhead: theme.subhead,
-        body2: theme.body2,
-        body1: theme.body1,
+        headline1: theme.headline1,
+        headline2: theme.headline2,
+        headline3: theme.headline3,
+        headline4: theme.headline4,
+        headline5: theme.headline5,
+        headline6: theme.headline6,
+        subtitle1: theme.subtitle1,
+        subtitle2: theme.subtitle2,
+        bodyText1: theme.bodyText1,
+        bodyText2: theme.bodyText2,
         caption: theme.caption,
         button: theme.button,
-        subtitle: theme.subtitle,
         overline: theme.overline,
       );
 
   factory KsTextTheme.motim(ColorScheme colorScheme) {
     final base = ThemeData.dark().textTheme;
+    final fontFamily = 'SourceSansPro';
     final theme = base
         .copyWith(
-          body1: base.body1.copyWith(
-            fontFamily: 'Roboto Condensed',
+          bodyText1: base.bodyText1.copyWith(
+            fontFamily: fontFamily,
             fontSize: 15,
             fontWeight: FontWeight.w400,
           ),
-          body2: base.body2.copyWith(
-            fontFamily: 'Avenir',
+          bodyText2: base.bodyText2.copyWith(
+            fontFamily: fontFamily,
             fontSize: 17,
             fontWeight: FontWeight.w400,
             letterSpacing: 1.4,
           ),
           button: base.button.copyWith(
-            fontFamily: 'Roboto Condensed',
+            fontFamily: fontFamily,
             fontWeight: FontWeight.w700,
             letterSpacing: 2.8,
           ),
-          headline: base.headline.copyWith(
-            fontFamily: 'Avenir',
+          headline5: base.headline5.copyWith(
+            fontFamily: fontFamily,
             fontSize: 40,
             fontWeight: FontWeight.w900,
             letterSpacing: 1.4,
@@ -198,10 +199,10 @@ class KsTextTheme extends TextTheme {
     final fontFamily = 'Inter';
     final theme = base
         .copyWith(
-          body1: base.body1.copyWith(
+          bodyText1: base.bodyText1.copyWith(
             fontFamily: fontFamily,
           ),
-          body2: base.body2.copyWith(
+          bodyText2: base.bodyText2.copyWith(
             fontFamily: fontFamily,
             fontSize: 17,
             fontWeight: FontWeight.w400,
@@ -210,35 +211,35 @@ class KsTextTheme extends TextTheme {
           button: base.button.copyWith(
             fontFamily: fontFamily,
           ),
-          headline: base.headline.copyWith(
-            fontFamily: fontFamily,
-          ),
           overline: base.overline.copyWith(
             fontFamily: fontFamily,
           ),
-          display1: base.display1.copyWith(
-            fontFamily: fontFamily,
-          ),
-          display2: base.display2.copyWith(
-            fontFamily: fontFamily,
-          ),
-          display3: base.display3.copyWith(
-            fontFamily: fontFamily,
-          ),
-          display4: base.display4.copyWith(
+          headline1: base.headline1.copyWith(
             fontFamily: fontFamily,
             fontSize: 96,
           ),
+          headline2: base.headline2.copyWith(
+            fontFamily: fontFamily,
+          ),
+          headline3: base.headline3.copyWith(
+            fontFamily: fontFamily,
+          ),
+          headline4: base.headline4.copyWith(
+            fontFamily: fontFamily,
+          ),
+          headline5: base.headline5.copyWith(
+            fontFamily: fontFamily,
+          ),
+          headline6: base.headline6.copyWith(
+            fontFamily: fontFamily,
+          ),
+          subtitle1: base.subtitle1.copyWith(
+            fontFamily: fontFamily,
+          ),
+          subtitle2: base.subtitle2.copyWith(
+            fontFamily: fontFamily,
+          ),
           caption: base.caption.copyWith(
-            fontFamily: fontFamily,
-          ),
-          title: base.title.copyWith(
-            fontFamily: fontFamily,
-          ),
-          subtitle: base.subtitle.copyWith(
-            fontFamily: fontFamily,
-          ),
-          subhead: base.subhead.copyWith(
             fontFamily: fontFamily,
           ),
         )
@@ -255,10 +256,10 @@ class KsTextTheme extends TextTheme {
     final fontFamily = 'Noto';
     final theme = base
         .copyWith(
-          body1: base.body1.copyWith(
+          bodyText1: base.bodyText1.copyWith(
             fontFamily: fontFamily,
           ),
-          body2: base.body2.copyWith(
+          bodyText2: base.bodyText2.copyWith(
             fontFamily: fontFamily,
             fontSize: 17,
             letterSpacing: 1.4,
@@ -268,38 +269,38 @@ class KsTextTheme extends TextTheme {
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
-          headline: base.headline.copyWith(
-            fontFamily: fontFamily,
-          ),
           overline: base.overline.copyWith(
             fontFamily: fontFamily,
           ),
-          display1: base.display1.copyWith(
+          headline1: base.headline1.copyWith(
             fontFamily: fontFamily,
+            fontSize: 96,
           ),
-          display2: base.display2.copyWith(
-            fontFamily: fontFamily,
-          ),
-          display3: base.display3.copyWith(
+          headline2: base.headline2.copyWith(
             fontFamily: fontFamily,
             fontSize: 40,
             fontWeight: FontWeight.bold,
           ),
-          display4: base.display4.copyWith(
+          headline3: base.headline3.copyWith(
             fontFamily: fontFamily,
-            fontSize: 96,
+          ),
+          headline4: base.headline4.copyWith(
+            fontFamily: fontFamily,
+          ),
+          headline5: base.headline5.copyWith(
+            fontFamily: fontFamily,
           ),
           caption: base.caption.copyWith(
             fontFamily: fontFamily,
           ),
-          title: base.title.copyWith(
+          headline6: base.headline6.copyWith(
             fontFamily: fontFamily,
             fontWeight: FontWeight.bold,
           ),
-          subtitle: base.subtitle.copyWith(
+          subtitle1: base.subtitle1.copyWith(
             fontFamily: fontFamily,
           ),
-          subhead: base.subhead.copyWith(
+          subtitle2: base.subtitle2.copyWith(
             fontFamily: fontFamily,
           ),
         )

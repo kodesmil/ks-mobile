@@ -25,7 +25,11 @@ class Injector extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider(create: (_) => AuthStorage(SharedPreferences.getInstance())),
+        Provider(
+          create: (_) => AuthStorage(
+            SharedPreferences.getInstance(),
+          ),
+        ),
         Provider(
           create: (_) => ActivitiesApi(
             DioClient(

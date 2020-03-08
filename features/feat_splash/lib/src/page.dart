@@ -9,14 +9,9 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   @override
-  void initState() {
-    super.initState();
-    Future.delayed(const Duration(milliseconds: 500), () {
-      setState(() {
-        Navigator.of(context).pushReplacementNamed('/home');
-      });
-    });
-    // navigate();
+  void didChangeDependencies() {
+    navigate();
+    super.didChangeDependencies();
   }
 
   @override
@@ -29,10 +24,15 @@ class _SplashPageState extends State<SplashPage> {
   navigate() async {
     final storage = Provider.of<AuthStorage>(context);
     final isLoggedIn = await storage.isLoggedIn;
-    if (isLoggedIn) {
-      Navigator.of(context).pushReplacementNamed('/home');
+    final hasSeenOnboarding = await storage.onboardingDisplayed;
+    if (hasSeenOnboarding) {
+      if (isLoggedIn) {
+        Navigator.of(context).pushReplacementNamed('/home');
+      } else {
+        Navigator.of(context).pushReplacementNamed('/login');
+      }
     } else {
-      Navigator.of(context).pushReplacementNamed('/login');
+      Navigator.of(context).pushReplacementNamed('/onboarding');
     }
   }
 }

@@ -34,6 +34,8 @@ dependencies:
     path: ../../features/feat_auth
   feat_sensors:
     path: ../../features/feat_sensors
+  feat_splash:
+    path: ../../features/feat_splash
   feat_activities:
     path: ../../features/feat_activities
   feat_onboarding:
@@ -58,17 +60,16 @@ flutter_icons:
   ios: true
 
 flutter:
-
   uses-material-design: true
   assets:
     - assets/icons/
+    - assets/images/
     - .env
-
   fonts:
-    - family: ProductSans
+    - family: SourceSansPro
       fonts:
-        - asset: assets/fonts/Product-Sans-Regular.ttf
-        - asset: assets/fonts/Product-Sans-Italic.ttf
+        - asset: assets/fonts/SourceSansPro-Regular.ttf
+        - asset: assets/fonts/SourceSansPro-Italic.ttf
           style: italic
-        - asset: assets/fonts/Product-Sans-Bold.ttf
+        - asset: assets/fonts/SourceSansPro-Bold.ttf
           weight: 700

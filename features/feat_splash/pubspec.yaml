@@ -1,4 +1,4 @@
-name: feat_onboarding
+name: feat_splash
 description: A new Flutter package project.
 author: KodeSmil authors
 homepage: kodesmil.com
@@ -15,7 +15,7 @@ dependencies:
   intl: ^0.16.0
   google_sign_in: ^4.1.4
   provider: ^4.0.4
-  flutter_svg: ^0.17.2
+  smooth_star_rating: ^1.0.4+2
 
   feat_auth:
     path: ../feat_auth
