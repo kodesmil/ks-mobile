@@ -35,7 +35,7 @@ class LegoColorsPage extends StatelessWidget {
             KsColor.textSelectionHandle_light(),
             KsColor.toggleableActive_light(),
             KsColor.unselectedWidget_light(),
-            /*
+
             KsColor.primary_dark(),
             KsColor.accent_dark(),
             KsColor.background_dark(),
@@ -60,7 +60,7 @@ class LegoColorsPage extends StatelessWidget {
             KsColor.textSelection_dark(),
             KsColor.textSelectionHandle_dark(),
             KsColor.toggleableActive_dark(),
-            KsColor.unselectedWidget_dark(),*/
+            KsColor.unselectedWidget_dark(),
           ],
         ),
       );
