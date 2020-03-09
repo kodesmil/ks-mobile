@@ -1,6 +1,6 @@
 import 'package:feat_activities/feat_activities.dart';
 import 'package:feat_auth/stores/google_sign_in_store.dart';
-import 'package:feat_health_survey/feat_health_survey.dart';
+import 'package:feat_survey/feat_survey.dart';
 import 'package:flutter/material.dart';
 import 'package:lib_lego/navigations.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +26,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return HealthSurveyPage();
+    return SurveyPage();
   }
 }

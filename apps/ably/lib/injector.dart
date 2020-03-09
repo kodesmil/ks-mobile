@@ -6,8 +6,8 @@ import 'package:feat_auth/data/user_api.dart';
 import 'package:feat_auth/stores/google_sign_in_store.dart';
 import 'package:feat_auth/stores/login_store.dart';
 import 'package:feat_auth/stores/sign_up_store.dart';
-import 'package:feat_health_survey/feat_health_survey.dart';
 import 'package:feat_onboarding/feat_onboarding.dart';
+import 'package:feat_survey/feat_survey.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -61,7 +61,7 @@ class Injector extends StatelessWidget {
           ),
         ),
         Provider(
-          create: (_) => HealthSurveyApi(
+          create: (_) => SurveyApi(
             DioClient(
               Dio()
                 ..options.baseUrl = 'http://10.0.2.2:5000'
@@ -117,8 +117,8 @@ class Injector extends StatelessWidget {
             dep,
           ),
         ),
-        ProxyProvider2<HealthSurveyApi, AuthStorage, HealthSurveyStore>(
-          update: (_, dep, dep2, __) => HealthSurveyStore(
+        ProxyProvider2<SurveyApi, AuthStorage, SurveyStore>(
+          update: (_, dep, dep2, __) => SurveyStore(
             ErrorStore(),
             dep,
             dep2,

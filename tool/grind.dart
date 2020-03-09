@@ -16,7 +16,7 @@ final apps = [
   'features/feat_sensors',
   'features/feat_onboarding',
   'features/feat_splash',
-  'features/feat_health_survey',
+  'features/feat_survey',
   'apps/ably',
   'apps/motim_fit',
   'apps/legobook',
