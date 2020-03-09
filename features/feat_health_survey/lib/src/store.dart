@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:feat_auth/data/auth_storage.dart';
 import 'package:feat_health_survey/feat_health_survey.dart';
 import 'package:lib_di/stores/error/error_store.dart';
 import 'package:mobx/mobx.dart';
@@ -13,10 +14,12 @@ class HealthSurveyStore = _HealthSurveyStore with _$HealthSurveyStore;
 abstract class _HealthSurveyStore with Store {
   final ErrorStore errorStore;
   final HealthSurveyApi api;
+  final AuthStorage authStorage;
 
   _HealthSurveyStore(
     this.errorStore,
     this.api,
+    this.authStorage,
   );
 
   @observable
@@ -27,18 +30,24 @@ abstract class _HealthSurveyStore with Store {
 
   @action
   Future sendMoodRank(double value) async {
-    api.postRank(Rank(
-      value: value,
-      type: RankType.mood,
-    ));
+    api.postRank(
+      await authStorage.accessToken,
+      Rank(
+        value: value,
+        type: RankType.mood,
+      ),
+    );
   }
 
   @action
   Future sendHealthRank(double value) async {
-    api.postRank(Rank(
-      value: value,
-      type: RankType.health,
-    ));
+    api.postRank(
+      await authStorage.accessToken,
+      Rank(
+        value: value,
+        type: RankType.health,
+      ),
+    );
   }
 
   @action

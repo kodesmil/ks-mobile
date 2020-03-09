@@ -22,6 +22,7 @@ class TokenApi {
         options: Options(
           headers: {
             'Authorization': 'Basic ${DotEnv().env['AUTH_SCIM_ACCESS']}',
+            'Content-Type': 'application/x-www-form-urlencoded',
           },
           contentType: 'application/x-www-form-urlencoded',
         ),

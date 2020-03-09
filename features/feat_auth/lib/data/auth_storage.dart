@@ -4,9 +4,9 @@ import 'package:feat_auth/models/token.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthStorage {
-  static const String accessToken = 'accessToken';
-  static const String refreshToken = 'refreshToken';
-  static const String hasSeenOnboarding = 'hasSeenOnboarding';
+  static const String ACCESS_TOKEN = 'accessToken';
+  static const String REFRESH_TOKEN = 'refreshToken';
+  static const String HAS_SEEN_ONBOARDING = 'hasSeenOnboarding';
 
   final Future<SharedPreferences> _sharedPreference;
 
@@ -14,25 +14,28 @@ class AuthStorage {
 
   Future<void> saveAuthToken(Token token) async =>
       _sharedPreference.then((preference) {
-        preference.setString(accessToken, token.accessToken);
-        preference.setString(refreshToken, token.refreshToken);
+        preference.setString(ACCESS_TOKEN, token.accessToken);
+        preference.setString(REFRESH_TOKEN, token.refreshToken);
       });
 
   Future<void> removeAuthToken() async => _sharedPreference.then((p) {
-        p.remove(accessToken);
-        p.remove(refreshToken);
+        p.remove(ACCESS_TOKEN);
+        p.remove(REFRESH_TOKEN);
       });
 
   Future<void> setHasSeenOnboarding() async => _sharedPreference.then((p) {
-        p.setBool(hasSeenOnboarding, true);
+        p.setBool(HAS_SEEN_ONBOARDING, true);
       });
 
   Future<bool> get onboardingDisplayed async =>
-      _sharedPreference.then((p) => p.getBool(hasSeenOnboarding) ?? false);
+      _sharedPreference.then((p) => p.getBool(HAS_SEEN_ONBOARDING) ?? false);
+
+  Future<String> get accessToken async =>
+      _sharedPreference.then((p) => p.getString(ACCESS_TOKEN) ?? '');
 
   Future<bool> get isLoggedIn async {
     return _sharedPreference.then(
-      (p) => p.getString(accessToken)?.isNotEmpty ?? false,
+      (p) => p.getString(ACCESS_TOKEN)?.isNotEmpty ?? false,
     );
   }
 }

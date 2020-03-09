@@ -20,8 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
     final store = Provider.of<LoginStore>(context);
     _emailController.addListener(() {
       store.setEmail(_emailController.text);
@@ -29,6 +28,7 @@ class _LoginPageState extends State<LoginPage> {
     _passwordController.addListener(() {
       store.setPassword(_passwordController.text);
     });
+    super.didChangeDependencies();
   }
 
   @override

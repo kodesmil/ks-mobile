@@ -51,7 +51,7 @@ class KsTextField extends StatelessWidget {
         obscureText: isObscure,
         minLines: minLines,
         keyboardType: inputType,
-        style: Theme.of(context).textTheme.body1,
+        style: Theme.of(context).textTheme.bodyText2,
         decoration: InputDecoration(
           prefixIcon: Icon(icon),
           labelText: label,

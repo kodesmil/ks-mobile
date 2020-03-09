@@ -14,6 +14,9 @@ final apps = [
   'features/feat_auth',
   'features/feat_fit',
   'features/feat_sensors',
+  'features/feat_onboarding',
+  'features/feat_splash',
+  'features/feat_health_survey',
   'apps/ably',
   'apps/motim_fit',
   'apps/legobook',
@@ -26,49 +29,64 @@ final apps = [
 Future<void> pubget({String workingDirectory}) async {
   await _runProcess(
     'flutter',
-    ['pub', 'get', if (workingDirectory != null) workingDirectory],
+    ['pub', 'get'],
+    workingDirectory: workingDirectory,
   );
 }
 
 @Task('Get all packages')
 Future<void> pubgetall() async {
-  apps.forEach((app) async => await pubget(workingDirectory: app));
+  return timelabeled(() async {
+    for (String app in apps) {
+      await pubget(workingDirectory: app);
+    }
+  });
 }
 
 @Task('Upgrade packages')
 Future<void> pubupgrade({String workingDirectory}) async {
   await _runProcess(
     'flutter',
-    ['pub', 'upgrade', if (workingDirectory != null) workingDirectory],
+    ['pub', 'upgrade'],
+    workingDirectory: workingDirectory,
   );
 }
 
 @Task('Upgrade all packages')
 Future<void> pubupgradeall() async {
-  apps.forEach((app) async => await pubupgrade(workingDirectory: app));
+  return timelabeled(() async {
+    for (String app in apps) {
+      await pubupgrade(workingDirectory: app);
+    }
+  });
 }
 
 @Task('Format dart files')
 Future<void> format({String workingDirectory = '.'}) async {
-  await _runProcess('flutter', ['format', workingDirectory]);
+  await _runProcess('flutter', ['format'], workingDirectory: workingDirectory);
 }
 
 @Task('Format all dart files')
 Future<void> formatall() async {
-  apps.forEach((app) async => await format(workingDirectory: app));
+  return timelabeled(() async {
+    for (String app in apps) {
+      await format(workingDirectory: app);
+    }
+  });
 }
 
 @Task('Clean dart files')
 Future<void> clean({String workingDirectory = '.'}) async {
-  _runProcess('flutter', ['clean', workingDirectory]);
+  await _runProcess('flutter', ['clean'], workingDirectory: workingDirectory);
 }
 
 @Task('Clean all dart files')
 Future<void> cleanall() async {
-  await Future.forEach(
-    apps,
-    (app) async => await clean(workingDirectory: app),
-  );
+  return timelabeled(() async {
+    for (String app in apps) {
+      await clean(workingDirectory: app);
+    }
+  });
 }
 
 @Task('Autogenerate runner code for one')
@@ -92,7 +110,18 @@ Future<void> runner({String workingDirectory}) async {
 
 @Task('Autogenerate runner code for all')
 Future<void> runnerall() async {
-  apps.forEach((app) async => await runner(workingDirectory: app));
+  return timelabeled(() async {
+    for (String app in apps) {
+      await runner(workingDirectory: app);
+    }
+  });
+}
+
+Future<void> timelabeled(Function function) async {
+  final start = DateTime.now();
+  await function();
+  final end = DateTime.now();
+  print('Finished in ${end.difference(start)}');
 }
 
 @Task('Watch & autogenerate runner code for one')
@@ -169,6 +198,7 @@ Future<void> _runProcess(
   List<String> arguments, {
   String workingDirectory = '.',
 }) async {
+  print('Running $executable $arguments in $workingDirectory');
   final result = await Process.run(
     executable,
     arguments,

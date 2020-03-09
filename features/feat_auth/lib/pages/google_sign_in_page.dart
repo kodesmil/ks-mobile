@@ -1,7 +1,9 @@
 import 'package:feat_auth/stores/google_sign_in_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lib_lego/navigations.dart';
+import 'package:lib_lego/spaces.dart';
 import 'package:provider/provider.dart';
 
 class GoogleSignInPage extends StatefulWidget {
@@ -14,9 +16,26 @@ class _GoogleSignInPageState extends State<GoogleSignInPage> {
     final store = Provider.of<GoogleSignInStore>(context);
     if (store.currentUser == null) {
       return Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          const Text("Connect the app with Google"),
+          Text(
+            "Connect the app with Google",
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.headline6,
+          ),
+          KsSpace.xs(),
+          Text(
+            "Bla bla bla",
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodyText2,
+          ),
+          KsSpace.l(),
+          SvgPicture.asset(
+            'assets/images/onboarding1.svg',
+            height: 100,
+          ),
+          KsSpace.l(),
           RaisedButton(
             child: const Text('Connect'),
             onPressed: store.signIn,

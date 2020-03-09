@@ -33,11 +33,11 @@ class KsColorScheme extends ColorScheme {
 
   factory KsColorScheme.motimLight() => KsColorScheme(
         primary: Colors.black,
-        primaryVariant: const Color(0xFF117378),
+        primaryVariant: const Color(0xFF00BFA6),
         secondary: const Color(0xFFEFF3F3),
         secondaryVariant: const Color(0xFFFAFBFB),
         background: Colors.white,
-        surface: Colors.teal.shade100.withAlpha(156),
+        surface: Color(0xFF00BFA6).withAlpha(50),
         onBackground: Colors.black,
         error: Colors.black,
         onError: Colors.black,

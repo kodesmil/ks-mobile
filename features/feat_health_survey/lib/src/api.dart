@@ -11,14 +11,16 @@ class HealthSurveyApi {
 
   final DioClient dioClient;
 
-  Future<dynamic> postRank(Rank rank) => dioClient
+  Future<dynamic> postRank(String accessToken, Rank rank) => dioClient
       .post(
         '/ranks',
         data: rank.toJson(),
         options: Options(
-          headers: {},
+          headers: {
+            'Authorization': accessToken,
+          },
         ),
       )
       .then((dynamic res) => print(res))
-      .catchError((error) => throw NetworkException(message: error));
+      .catchError((error) => throw NetworkException(message: error.toString()));
 }

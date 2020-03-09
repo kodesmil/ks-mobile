@@ -28,8 +28,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
 
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
     final store = Provider.of<SignUpStore>(context);
     _emailController.addListener(() {
       store.setEmail(_emailController.text);
@@ -49,6 +48,7 @@ class _SignUpPageState extends State<SignUpPage> {
     _dateOfBirthController.addListener(() {
       store.setDateOfBirth(_dateOfBirthController.text);
     });
+    super.didChangeDependencies();
   }
 
   @override

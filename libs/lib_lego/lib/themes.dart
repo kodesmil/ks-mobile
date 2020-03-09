@@ -95,7 +95,12 @@ class KsTheme {
         ),
         filled: true,
         fillColor: colorScheme.surface,
-        focusedBorder: InputBorder.none,
+        border: InputBorder.none,
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            width: 0.75,
+          ),
+        ),
       ),
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
