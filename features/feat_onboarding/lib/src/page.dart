@@ -1,3 +1,4 @@
+import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -86,12 +87,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
     final store = Provider.of<OnboardingStore>(context);
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 40.0),
+        padding: const EdgeInsets.only(bottom: 120, top: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              height: 600.0,
+            Expanded(
               child: PageView(
                 physics: ClampingScrollPhysics(),
                 controller: _pageController,
@@ -126,21 +126,25 @@ class _OnboardingPageState extends State<OnboardingPage> {
           ],
         ),
       ),
-      bottomSheet: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          height: 68.0,
-          width: double.infinity,
-          child: GestureDetector(
-            onTap: () {
-              store.onboardingDisplayed();
-              Navigator.pushNamed(context, '/splash');
-            },
-            child: Center(
-              child: Text(
-                'Get started',
-                style: TextStyle(
-                  fontSize: 20.0,
+      bottomSheet: Container(
+        height: 120,
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 24,
+            ),
+            child: ClayContainer(
+              height: 60,
+              borderRadius: 200,
+              color: Colors.white,
+              curveType: CurveType.convex,
+              child: FlatButton(
+                onPressed: () {
+                  store.onboardingDisplayed();
+                  Navigator.pushNamed(context, '/splash');
+                },
+                child: Text(
+                  'Get started'.toUpperCase(),
                 ),
               ),
             ),

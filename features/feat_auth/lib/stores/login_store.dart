@@ -94,7 +94,7 @@ abstract class _LoginStore with Store {
       final result = await tokenApi.getAuthAccessToken(user);
       await authStorage.saveAuthToken(result);
       loading = false;
-      success = false;
+      success = true;
       errorStore.showError = false;
     } catch (e) {
       loading = false;

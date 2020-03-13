@@ -6,6 +6,7 @@ import 'package:feat_auth/data/user_api.dart';
 import 'package:feat_auth/stores/google_sign_in_store.dart';
 import 'package:feat_auth/stores/login_store.dart';
 import 'package:feat_auth/stores/sign_up_store.dart';
+import 'package:feat_locations/feat_locations.dart';
 import 'package:feat_onboarding/feat_onboarding.dart';
 import 'package:feat_survey/feat_survey.dart';
 import 'package:flutter/foundation.dart';
@@ -36,6 +37,15 @@ class Injector extends StatelessWidget {
               Dio()
                 // ..options.baseUrl = 'http://10.0.2.2:5000'
                 ..options.baseUrl = 'http://activities.api.kodesmil.com'
+                ..interceptors.add(LogInterceptor(responseBody: true)),
+            ),
+          ),
+        ),
+        Provider(
+          create: (_) => LocationsApi(
+            DioClient(
+              Dio()
+                ..options.baseUrl = 'http://locations.api.kodesmil.com'
                 ..interceptors.add(LogInterceptor(responseBody: true)),
             ),
           ),
@@ -119,6 +129,13 @@ class Injector extends StatelessWidget {
         ),
         ProxyProvider2<SurveyApi, AuthStorage, SurveyStore>(
           update: (_, dep, dep2, __) => SurveyStore(
+            ErrorStore(),
+            dep,
+            dep2,
+          ),
+        ),
+        ProxyProvider2<LocationsApi, AuthStorage, LocationsStore>(
+          update: (_, dep, dep2, __) => LocationsStore(
             ErrorStore(),
             dep,
             dep2,

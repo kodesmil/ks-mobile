@@ -17,7 +17,7 @@ class SurveyApi {
         data: answer.toJson(),
         options: Options(
           headers: {
-            'Authorization': accessToken,
+            'Authorization': 'Bearer $accessToken',
           },
         ),
       )
@@ -29,7 +29,7 @@ class SurveyApi {
         '/answers',
         options: Options(
           headers: {
-            'Authorization': accessToken,
+            'Authorization': 'Bearer $accessToken',
           },
         ),
       )
@@ -41,7 +41,7 @@ class SurveyApi {
         '/questions',
         options: Options(
           headers: {
-            'Authorization': accessToken,
+            'Authorization': 'Bearer $accessToken',
           },
         ),
       )

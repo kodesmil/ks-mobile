@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:crossplat_objectid/crossplat_objectid.dart';
 import 'package:feat_auth/data/auth_storage.dart';
 import 'package:feat_survey/feat_survey.dart';
 import 'package:lib_di/stores/error/error_store.dart';
@@ -37,6 +38,7 @@ abstract class _SurveyStore with Store {
   @action
   Future saveAnswer(Question question, double value) async {
     answers[question] = Answer(
+      id: ObjectId().toString(),
       value: value,
       questionId: question.id,
       type: QuestionType.rank,
@@ -51,6 +53,7 @@ abstract class _SurveyStore with Store {
         answer,
       );
     });
+    answers.clear();
   }
 
   @action
@@ -58,7 +61,6 @@ abstract class _SurveyStore with Store {
     questions = await api.getQuestions(
       await authStorage.accessToken,
     );
-    print(questions);
   }
 
   @action

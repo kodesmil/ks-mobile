@@ -4,7 +4,7 @@ part 'model.g.dart';
 
 enum QuestionType { rank, open }
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class TransText {
   String en;
   String nb;
@@ -20,7 +20,7 @@ class TransText {
   Map<String, dynamic> toJson() => _$TransTextToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Question {
   @JsonKey(name: '_id')
   String id;
@@ -39,12 +39,12 @@ class Question {
   Map<String, dynamic> toJson() => _$QuestionToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Answer {
   @JsonKey(name: '_id')
   String id;
-  double value;
   String questionId;
+  double value;
   QuestionType type;
 
   Answer({

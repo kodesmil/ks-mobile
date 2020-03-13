@@ -37,7 +37,7 @@ class TokenApi {
           'grant_type': 'password',
           'password': user.password,
           'username': user.userName,
-          'scope': 'openid,email,profile',
+          'scope': 'openid profile',
         },
         options: Options(
           headers: {

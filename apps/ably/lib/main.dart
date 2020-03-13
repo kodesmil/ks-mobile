@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: KsLoc.supportedLocales,
         theme: KsTheme.ablyLight(),
         darkTheme: KsTheme.ablyDark(),
-        initialRoute: '/splash',
+        initialRoute: '/locations',
         routes: Routes.routes,
       ),
     );

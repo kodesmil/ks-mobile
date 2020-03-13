@@ -15,10 +15,11 @@ class ActivitiesApi {
             '/sync/google-fit',
             data: {
               'access_token': accessToken,
-              'email': email,
             },
             options: Options(
-              headers: {},
+              headers: {
+                'Authorization': 'Bearer $accessToken',
+              },
             ),
           )
           .then((dynamic res) => print(res))

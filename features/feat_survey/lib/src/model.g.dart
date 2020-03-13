@@ -74,7 +74,7 @@ const _$QuestionTypeEnumMap = {
 Answer _$AnswerFromJson(Map<String, dynamic> json) {
   return Answer(
     id: json['_id'] as String,
-    questionId: json['questionId'] as String,
+    questionId: json['question_id'] as String,
     value: (json['value'] as num)?.toDouble(),
     type: _$enumDecodeNullable(_$QuestionTypeEnumMap, json['type']),
   );
@@ -82,7 +82,7 @@ Answer _$AnswerFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$AnswerToJson(Answer instance) => <String, dynamic>{
       '_id': instance.id,
+      'question_id': instance.questionId,
       'value': instance.value,
-      'questionId': instance.questionId,
       'type': _$QuestionTypeEnumMap[instance.type],
     };

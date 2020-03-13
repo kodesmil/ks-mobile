@@ -56,7 +56,7 @@ class SurveyRateWidget extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    throw _SurveyRateWidgetState();
+    return _SurveyRateWidgetState();
   }
 }
 
@@ -66,11 +66,10 @@ class _SurveyRateWidgetState extends State<SurveyRateWidget> {
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<SurveyStore>(context);
-    print(widget.question.text.en);
     return Column(
       children: <Widget>[
         Text(
-          'aaa',
+          widget.question.text.en,
           style: Theme.of(context).textTheme.headline6,
         ),
         KsSpace.xxs(),
