@@ -31,6 +31,7 @@ class _LocationsWidgetState extends State<LocationsWidget> {
     });
 
     bg.BackgroundGeolocation.ready(bg.Config(
+            enableHeadless: true,
             desiredAccuracy: bg.Config.DESIRED_ACCURACY_HIGH,
             distanceFilter: 20.0,
             stopOnTerminate: false,
@@ -39,9 +40,6 @@ class _LocationsWidgetState extends State<LocationsWidget> {
             logLevel: bg.Config.LOG_LEVEL_VERBOSE))
         .then((bg.State state) {
       if (!state.enabled) {
-        ////
-        // 3.  Start the plugin.
-        //
         bg.BackgroundGeolocation.start();
       }
     });
