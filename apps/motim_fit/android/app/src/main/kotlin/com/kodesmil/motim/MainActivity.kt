@@ -1,4 +1,4 @@
-package com.kodesmil.motim.motim_fit
+package com.kodesmil.motim
 
 import io.flutter.embedding.android.FlutterActivity
 
