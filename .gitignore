@@ -16,7 +16,6 @@
 *.iws
 
 # Visual Studio Code related
-.vscode/
 
 # Flutter/Dart/Pub related
 **/doc/api/

@@ -1,0 +1,39 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Abli Health [Dev]",
+            "request": "launch",
+            "program": "apps/ably/lib/main_dev.dart",
+            "type": "dart",
+            "args": [
+                "--flavor",
+                "dev",
+                "--verbose",
+            ],
+        },
+        {
+            "name": "Abli Health [QA]",
+            "request": "launch",
+            "program": "apps/ably/lib/main_qa.dart",
+            "type": "dart",
+            "args": [
+                "--flavor",
+                "qa",
+            ],
+        },
+        {
+            "name": "Abli Health [Prod]",
+            "request": "launch",
+            "program": "apps/ably/lib/main_prod.dart",
+            "type": "dart",
+            "args": [
+                "--flavor",
+                "prod",
+            ],
+        }
+    ]
+}

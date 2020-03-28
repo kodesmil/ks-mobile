@@ -1,0 +1,129 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+update_fastlane
+
+version_code = ENV['CI_JOB_ID'].to_i == 0 ? 1 : ENV['CI_JOB_ID'].to_i
+firebase_project_id_prod = '1:1024113237937:ios:da94ce200b55c1fc206790'
+firebase_project_id_qa = '1:1024113237937:ios:387d1b30d2599ccd206790'
+app_name = 'Abli Health'
+slack_url = ENV['ABLI_SLACK']
+
+release_notes = changelog_from_git_commits(
+    commits_count: 10,
+    pretty: "✨ %s%nBy %an, %ar%n",
+    date_format: "short",
+    match_lightweight_tag: false,
+    merge_commit_filtering: "exclude_merges"
+)
+
+default_platform(:ios)
+
+platform :ios do
+
+  before_all do
+    ENV["SLACK_URL"] = slack_url
+    ENV["DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS"] = "-t DAV"
+  end
+
+  desc "[QA] Build & sign iOS app"
+  lane :build_qa do |options|
+    
+    Dir.chdir("../../") do
+      sh(
+          "flutter",
+          "build",
+          "ios",
+          "--flavor",
+          "qa",
+          "--target",
+          "lib/main_qa.dart",
+          "--release",
+          "--verbose",
+          "--build-number",
+          "#{version_code}",
+      )
+    end
+    
+    match(type: "adhoc")
+    
+    build_ios_app(
+      scheme: 'qa',
+      export_options: {
+          method: "ad-hoc",
+          "signingStyle": "automatic",
+      },
+      output_directory: "./build/Runner"
+    )
+  end
+
+  desc "[Prod] Build & sign iOS app"
+  lane :build_prod do |options|
+
+    Dir.chdir("../../") do
+      sh(
+          "flutter",
+          "build",
+          "ios",
+          "--flavor",
+          "prod",
+          "--target",
+          "lib/main_prod.dart",
+          "--release",
+          "--verbose",
+          "--build-number",
+          "#{version_code}",
+      )
+    end
+
+    match(type: "adhoc")
+
+    build_ios_app(
+      scheme: 'prod',
+      export_options: {method: "ad-hoc" },
+      output_directory: "./build/Runner"
+    )
+
+  end
+
+  desc "Deploy QA Build"
+  lane :deploy_qa do |options|
+    firebase_app_distribution(
+      app: firebase_project_id_qa,
+      groups: "ios",
+      release_notes: release_notes,
+      ipa_path: "./build/Runner/Runner.ipa"
+    )
+    
+    slack(
+      message: "[QA] #{app_name} for iOS :rocket:
+      \n#{release_notes}",
+      success: true
+    )
+  end
+
+  desc "Deploy Prod Build"
+  lane :deploy_prod do |options|
+    firebase_app_distribution(
+      app: firebase_project_id_prod,
+      groups: "ios",
+      release_notes: release_notes,
+      ipa_path: "./build/Runner/Runner.ipa"
+    )
+    
+    slack(
+      message: "[Live] #{app_name} for iOS :rocket:
+      \n#{release_notes}",
+      success: true
+    )
+  end
+end

@@ -1,0 +1,2 @@
+git_url("https://github.com/maszhin/certificates")
+app_identifier("com.kodesmil.ably,com.kodesmil.ably.qa,com.kodesmil.ably.dev")

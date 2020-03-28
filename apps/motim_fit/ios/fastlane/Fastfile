@@ -1,0 +1,80 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+update_fastlane
+
+version_code = ENV['CI_JOB_ID'].to_i == 0 ? 1 : ENV['CI_JOB_ID'].to_i
+firebase_project_id_prod = '1:772074731973:ios:96cb9aea55f0feed5ab3ac'
+firebase_project_id_qa = '1:772074731973:ios:a2d6992be2c3b1eb5ab3ac'
+app_name = 'Motim Fit'
+keystore = '$MOTIM_ENCODED_KEYSTORE'
+slack_url = ENV['MOTIM_SLACK']
+
+release_notes = changelog_from_git_commits(
+    commits_count: 10,
+    pretty: "✨ %s%nBy %an, %ar%n",
+    date_format: "short",
+    match_lightweight_tag: false,
+    merge_commit_filtering: "exclude_merges"
+)
+
+default_platform(:ios)
+
+platform :ios do
+
+    before_all do
+        ENV["SLACK_URL"] = slack_url
+        ENV["DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS"] = "-t DAV"
+    end
+
+    desc "Runs all the tests"
+        lane :test do
+    end
+
+    desc "Deploy QA to Firebase App Distribution"
+    lane :deploy_qa do
+
+        Dir.chdir("../../") do
+            sh(
+                "flutter",
+                "build",
+                "ios",
+                "--flavor",
+                "qa",
+                "--target",
+                "lib/main_qa.dart",
+                "--release",
+                "--verbose",
+                "--build-number",
+                "#{version_code}",
+            )
+        end
+
+        firebase_app_distribution(
+            app: firebase_project_id_qa,
+            ipa_path: 'Runner.ipa',
+            release_notes: release_notes,
+            groups: 'ios',
+            firebase_cli_path: "/usr/local/bin/firebase",
+        )
+    
+        slack(
+            message: "[QA] #{app_name} for iOS :rocket:
+            \n#{release_notes}",
+            success: true
+        )
+    end
+
+    desc "Deploy to the App Store"
+    lane :deploy_prod do
+    end
+end

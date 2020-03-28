@@ -36,7 +36,7 @@ platform :android do
     end
 
     desc "Runs all the tests"
-        lane :test do
+    lane :test do
         gradle(task: "test")
     end
 
@@ -57,12 +57,7 @@ platform :android do
                 "--build-number",
                 "#{version_code}",
             )
-
         end
-
-        sh('echo build/app/outputs/apk/qa/release/app-qa-release.apk')
-
-        puts "APK path is: #{Actions.lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]}"
 
         firebase_app_distribution(
             app: firebase_project_id_qa,

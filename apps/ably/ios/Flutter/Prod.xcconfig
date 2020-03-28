@@ -2,3 +2,4 @@
 
 FLUTTER_TARGET=lib/main_prod.dart
 PRODUCT_BUNDLE_IDENTIFIER=com.kodesmil.ably
+PRODUCT_BUNDLE_NAME=Abli Health
