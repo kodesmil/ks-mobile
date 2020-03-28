@@ -38,10 +38,10 @@ android {
 
     signingConfigs {
         release {
-            storeFile file(System.getenv("ABLY_KEYSTORE") ?: "ably.keystore")
-            storePassword System.getenv("ABLY_KEYSTORE_PASSWORD")
-            keyAlias System.getenv("ABLY_KEY_ALIAS")
-            keyPassword System.getenv("ABLY_KEY_PASSWORD")
+            storeFile file(System.getenv("ABLI_KEYSTORE") ?: "release.keystore")
+            storePassword System.getenv("ABLI_KEYSTORE_PASSWORD")
+            keyAlias System.getenv("ABLI_KEY_ALIAS")
+            keyPassword System.getenv("ABLI_KEY_PASSWORD")
         }
     }
 

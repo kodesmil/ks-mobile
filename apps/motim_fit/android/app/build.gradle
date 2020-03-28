@@ -33,7 +33,7 @@ android {
 
     signingConfigs {
         release {
-            storeFile file(System.getenv("MOTIM_KEYSTORE") ?: "motim-release.keystore")
+            storeFile file(System.getenv("MOTIM_KEYSTORE") ?: "release.keystore")
             storePassword System.getenv("MOTIM_KEYSTORE_PASSWORD")
             keyAlias System.getenv("MOTIM_KEY_ALIAS")
             keyPassword System.getenv("MOTIM_KEY_PASSWORD")

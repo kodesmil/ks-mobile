@@ -5,5 +5,5 @@ gradle/wrapper/gradle-wrapper.jar
 /gradlew.bat
 /local.properties
 GeneratedPluginRegistrant.java
-/app/motim-release.keystore
+/app/release.keystore
 /app/google-services.json
