@@ -10,7 +10,7 @@ import 'package:lib_lego/themes.dart';
 
 import 'routes.dart';
 
-void main() async {
+void realMain() async {
   await DotEnv().load('.env');
   Crashlytics.instance.enableInDevMode = true;
   FlutterError.onError = Crashlytics.instance.recordFlutterError;

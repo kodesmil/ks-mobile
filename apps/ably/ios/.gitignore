@@ -24,7 +24,9 @@ Flutter/flutter_assets/
 Flutter/flutter_export_environment.sh
 ServiceDefinitions.json
 Runner/GeneratedPluginRegistrant.*
-Runner/GoogleService-Info.plist
+Runner/Config/Dev/GoogleService-Info.plist
+Runner/Config/Prod/GoogleService-Info.plist
+Runner/Config/QA/GoogleService-Info.plist
 
 # Exceptions to above rules.
 !default.mode1v3

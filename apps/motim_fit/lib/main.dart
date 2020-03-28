@@ -10,7 +10,7 @@ import 'package:motim_fit/injector.dart';
 
 import 'routes.dart';
 
-void main() async {
+void realMain() async {
   await DotEnv().load('.env');
   Crashlytics.instance.enableInDevMode = true;
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
