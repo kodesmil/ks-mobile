@@ -1,7 +1,8 @@
 container:
   image: cirrusci/flutter:latest
 
-test_task:
+task:
   pub_cache:
     folder: ~/.pub-cache
-  test_script: grind pubgetall
+  install_grind_script: pub global activate grinder
+  install_script: grind pubgetall
