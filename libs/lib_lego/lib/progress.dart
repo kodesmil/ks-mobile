@@ -10,7 +10,8 @@ class KsProgress extends StatelessWidget {
   }) : super(key: key);
 
   factory KsProgress.progress(
-      double value,) =>
+    double value,
+  ) =>
       KsProgress(
         value: value,
       );

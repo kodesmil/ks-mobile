@@ -6,12 +6,14 @@ import 'package:lib_lego/radio_buttons.dart';
 class LegoRadioButtonsCheckboxesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => LegoDefaultPage(
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        KsCheckbox(label: 'Sample Text',),
-        KsRadio(labels: ['Sample Text 1', 'Sample Text 2']),
-      ],
-    ),
-  );
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            KsCheckbox(
+              label: 'Sample Text',
+            ),
+            KsRadio(labels: ['Sample Text 1', 'Sample Text 2']),
+          ],
+        ),
+      );
 }

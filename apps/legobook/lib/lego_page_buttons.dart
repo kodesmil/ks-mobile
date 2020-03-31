@@ -25,7 +25,6 @@ class LegoButtonsPage extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.volume_up),
               onPressed: () {},
-
             ),
             OutlineButton(
               onPressed: () {},
@@ -41,7 +40,6 @@ class LegoButtonsPage extends StatelessWidget {
               child: Icon(Icons.navigation),
               backgroundColor: Colors.green,
             ),
-
           ],
         ),
       );

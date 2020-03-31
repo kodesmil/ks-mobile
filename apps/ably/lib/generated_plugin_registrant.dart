@@ -15,6 +15,7 @@ import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 void registerPlugins(PluginRegistry registry) {
   FirebaseCoreWeb.registerWith(registry.registrarFor(FirebaseCoreWeb));
   GoogleSignInPlugin.registerWith(registry.registrarFor(GoogleSignInPlugin));
-  SharedPreferencesPlugin.registerWith(registry.registrarFor(SharedPreferencesPlugin));
+  SharedPreferencesPlugin.registerWith(
+      registry.registrarFor(SharedPreferencesPlugin));
   registry.registerMessageHandler();
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class KsCheckbox extends StatefulWidget {
   final String label;
 
-  const KsCheckbox({Key key, this.label}): super(key: key);
+  const KsCheckbox({Key key, this.label}) : super(key: key);
 
   @override
   _KsCheckboxState createState() => _KsCheckboxState();
@@ -20,7 +20,6 @@ class _KsCheckboxState extends State<KsCheckbox> {
 
   @override
   Widget build(BuildContext context) {
-
     return Row(
       children: [
         Container(
@@ -36,5 +35,4 @@ class _KsCheckboxState extends State<KsCheckbox> {
       ],
     );
   }
-
 }

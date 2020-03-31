@@ -30,14 +30,36 @@ default_platform(:ios)
 
 platform :ios do
 
+  setup_travis
+
   before_all do
     ENV["SLACK_URL"] = slack_url
     ENV["DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS"] = "-t DAV"
   end
 
+  desc "Installs the certificates locally"
+  private_lane :install_certificates do
+    tmp_keychain = "temporary_keychain"
+    create_keychain(
+      name: tmp_keychain,
+      password: tmp_keychain,
+      default_keychain: true,
+      timeout: 3600,
+      unlock: true,
+    )
+    match(
+      type: "appstore",
+      keychain_name: tmp_keychain,
+      keychain_password: tmp_keychain,
+      readonly: true
+    )
+  end
+
   desc "[QA] Build & sign iOS app"
   lane :build_qa do |options|
-    
+
+    install_certificates
+
     Dir.chdir("../../") do
       sh(
           "flutter",
@@ -48,22 +70,17 @@ platform :ios do
           "--target",
           "lib/main_qa.dart",
           "--release",
-          "--verbose",
           "--build-number",
           "#{version_code}",
       )
     end
-    
-    match(type: "adhoc")
-    
-    build_ios_app(
+
+    gym(
       scheme: 'qa',
-      export_options: {
-          method: "ad-hoc",
-          "signingStyle": "automatic",
-      },
+      silent: true,
       output_directory: "./build/Runner"
     )
+  
   end
 
   desc "[Prod] Build & sign iOS app"

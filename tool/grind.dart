@@ -6,7 +6,6 @@ import 'package:path/path.dart' as path;
 main(args) => grind(args);
 
 final apps = [
-  '.',
   'translations/kodesmil_locale',
   'libs/lib_lego',
   'libs/lib_di',
@@ -26,73 +25,83 @@ final apps = [
 ];
 
 @Task('Get packages')
-Future<void> pubget({String workingDirectory}) async {
+Future<void> pubget() async {
+  TaskArgs args = context.invocation.arguments;
+  String dir = args.getOption('dir');
+  if (dir != null) {
+    await _pubget(dir: dir);
+  } else {
+    for (String app in apps) {
+      await _pubget(dir: app);
+    }
+  }
+}
+
+Future<void> _pubget({String dir}) async {
   await _runProcess(
     'flutter',
     ['pub', 'get'],
-    workingDirectory: workingDirectory,
+    dir: dir,
   );
-}
-
-@Task('Get all packages')
-Future<void> pubgetall() async {
-  return timelabeled(() async {
-    for (String app in apps) {
-      await pubget(workingDirectory: app);
-    }
-  });
 }
 
 @Task('Upgrade packages')
-Future<void> pubupgrade({String workingDirectory}) async {
+Future<void> pubupgrade() async {
+  TaskArgs args = context.invocation.arguments;
+  String dir = args.getOption('dir');
+  if (dir != null) {
+    await _pubupgrade(dir: dir);
+  } else {
+    for (String app in apps) {
+      await _pubupgrade(dir: app);
+    }
+  }
+}
+
+Future<void> _pubupgrade({String dir}) async {
   await _runProcess(
     'flutter',
     ['pub', 'upgrade'],
-    workingDirectory: workingDirectory,
+    dir: dir,
   );
 }
 
-@Task('Upgrade all packages')
-Future<void> pubupgradeall() async {
-  return timelabeled(() async {
-    for (String app in apps) {
-      await pubupgrade(workingDirectory: app);
-    }
-  });
-}
-
 @Task('Format dart files')
-Future<void> format({String workingDirectory = '.'}) async {
-  await _runProcess('flutter', ['format'], workingDirectory: workingDirectory);
-}
-
-@Task('Format all dart files')
-Future<void> formatall() async {
-  return timelabeled(() async {
-    for (String app in apps) {
-      await format(workingDirectory: app);
-    }
-  });
+Future<void> format() async {
+  await _runProcess('flutter', ['format'], dir: '.');
 }
 
 @Task('Clean dart files')
-Future<void> clean({String workingDirectory = '.'}) async {
-  await _runProcess('flutter', ['clean'], workingDirectory: workingDirectory);
-}
-
-@Task('Clean all dart files')
-Future<void> cleanall() async {
-  return timelabeled(() async {
-    for (String app in apps) {
-      await clean(workingDirectory: app);
-    }
-  });
-}
-
-@Task('Autogenerate runner code for one')
-Future<void> runner({String workingDirectory}) async {
+Future<void> clean() async {
   TaskArgs args = context.invocation.arguments;
-  String dir = workingDirectory ?? args.getOption('dir') ?? '.';
+  String dir = args.getOption('dir');
+  if (dir != null) {
+    await _clean(dir: dir);
+  } else {
+    for (String app in apps) {
+      await _clean(dir: app);
+    }
+  }
+}
+
+Future<void> _clean({String dir = '.'}) async {
+  await _runProcess('flutter', ['clean'], dir: dir);
+}
+
+@Task('Autogenerate runner code')
+Future<void> runner() async {
+  TaskArgs args = context.invocation.arguments;
+  String dir = args.getOption('dir');
+  if (dir != null) {
+    await _runner(dir: dir);
+  } else {
+    for (String app in apps) {
+      await _runner(dir: app);
+    }
+  }
+}
+
+Future<void> _runner({String dir}) async {
   await _runProcess(
     'flutter',
     [
@@ -104,30 +113,103 @@ Future<void> runner({String workingDirectory}) async {
       '--delete-conflicting-outputs',
       '--verbose',
     ],
-    workingDirectory: dir,
+    dir: dir,
   );
 }
 
-@Task('Autogenerate runner code for all')
-Future<void> runnerall() async {
-  return timelabeled(() async {
-    for (String app in apps) {
-      await runner(workingDirectory: app);
-    }
-  });
-}
-
-Future<void> timelabeled(Function function) async {
-  final start = DateTime.now();
-  await function();
-  final end = DateTime.now();
-  print('Finished in ${end.difference(start)}');
-}
-
-@Task('Watch & autogenerate runner code for one')
-Future<void> watch({String workingDirectory}) async {
+@Task('Fastlane deploy')
+Future<void> deploy() async {
   TaskArgs args = context.invocation.arguments;
-  String dir = workingDirectory ?? args.getOption('dir') ?? '.';
+  String dir = args.getOption('dir');
+  String env = args.getOption('env');
+  if (dir != null) {
+    await _deploy(dir: dir, env: env);
+  } else {
+    for (String app in apps) {
+      await _deploy(dir: app, env: env);
+    }
+  }
+}
+
+Future<void> _deploy({String env, String dir}) async {
+  await _runProcess(
+    'bundle',
+    [
+      'exec',
+      'fastlane',
+      'ios',
+      'deploy_qa',
+    ],
+    dir: dir,
+  );
+}
+
+@Task('Fastlane build')
+Future<void> build() async {
+  TaskArgs args = context.invocation.arguments;
+  String dir = args.getOption('dir');
+  String env = args.getOption('env');
+  if (dir != null) {
+    await _build(dir: dir, env: env);
+  } else {
+    for (String app in apps) {
+      await _build(dir: app, env: env);
+    }
+  }
+}
+
+Future<void> _build({String env, String dir}) async {
+  await _runProcess(
+    'bundle',
+    [
+      'exec',
+      'fastlane',
+      'ios',
+      'build_qa',
+    ],
+    dir: dir,
+  );
+}
+
+
+@Task('Bundle install')
+Future<void> bundleinstall() async {
+  TaskArgs args = context.invocation.arguments;
+  String dir = args.getOption('dir');
+  String env = args.getOption('env');
+  if (dir != null) {
+    await _bundleinstall(dir: dir, env: env);
+  } else {
+    for (String app in apps) {
+      await _bundleinstall(dir: app, env: env);
+    }
+  }
+}
+
+Future<void> _bundleinstall({String env, String dir}) async {
+  await _runProcess(
+    'bundle',
+    [
+      'install',
+    ],
+    dir: dir,
+  );
+}
+
+@Task('Watch & autogenerate runner code')
+Future<void> watch() async {
+  TaskArgs args = context.invocation.arguments;
+  String dir = args.getOption('dir');
+  if (dir != null) {
+    await _watch(dir: dir);
+  } else {
+    for (String app in apps) {
+      await _watch(dir: app);
+    }
+  }
+}
+
+Future<void> _watch({String dir}) async {
   await _runProcess(
     'flutter',
     [
@@ -139,13 +221,8 @@ Future<void> watch({String workingDirectory}) async {
       '--delete-conflicting-outputs',
       '--verbose',
     ],
-    workingDirectory: dir,
+    dir: dir,
   );
-}
-
-@Task('Watch & autogenerate runner code for all')
-Future<void> watchall() async {
-  apps.forEach((app) async => await watch(workingDirectory: app));
 }
 
 @Task('Generate localizations files')
@@ -175,34 +252,28 @@ Future<void> generatelocalizations() async {
       'translations/kodesmil_locale/lib/intl_pl.arb',
     ],
   );
-  await format(
-      workingDirectory: path.join('translations/kodesmil_locale', 'lib'));
+  await format();
 }
 
 @Task('Transform arb to xml for English')
 @Depends(generatelocalizations)
 Future<void> l10n() async {
   final l10nPath = path.join(Directory.current.path, 'l10n_cli');
-  await pubget(workingDirectory: l10nPath);
+  await _pubget(dir: l10nPath);
 
   Dart.run(path.join(l10nPath, 'bin', 'main.dart'));
-}
-
-/// Return the flutter root path from the environment variables.
-String _flutterRootPath() {
-  return Platform.environment['FLUTTER_ROOT'];
 }
 
 Future<void> _runProcess(
   String executable,
   List<String> arguments, {
-  String workingDirectory = '.',
+  String dir = '.',
 }) async {
-  print('Running $executable $arguments in $workingDirectory');
+  print('Running $executable $arguments in $dir');
   final result = await Process.run(
     executable,
     arguments,
-    workingDirectory: workingDirectory,
+    workingDirectory: dir,
   );
   stdout.write(result.stdout);
   stderr.write(result.stderr);
@@ -210,9 +281,3 @@ Future<void> _runProcess(
 
 @Task()
 test() => new TestRunner().testAsync();
-
-@DefaultTask()
-@Depends(test)
-build() {
-  Pub.build();
-}

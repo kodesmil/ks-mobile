@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 enum Options { one, two, three, four }
 
-
 class PopupMenuWidget extends StatefulWidget {
   PopupMenuWidget({Key key}) : super(key: key);
 
@@ -16,7 +15,11 @@ class _PopupMenuWidgetState extends State<PopupMenuWidget> {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<Options>(
-      onSelected: (Options result) { setState(() { _selection = result; }); },
+      onSelected: (Options result) {
+        setState(() {
+          _selection = result;
+        });
+      },
       itemBuilder: (BuildContext context) => <PopupMenuEntry<Options>>[
         const PopupMenuItem<Options>(
           value: Options.one,

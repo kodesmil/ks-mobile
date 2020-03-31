@@ -37,8 +37,8 @@ class FooterWidget extends StatelessWidget {
               'Made with ❤️ in Trondheim, Norway and Lodz, Poland',
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.body2.copyWith(
-                color: Theme.of(context).colorScheme.onPrimary,
-              ),
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
             ),
           )
         ],
