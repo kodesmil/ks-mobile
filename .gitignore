@@ -71,3 +71,4 @@ build/
 ios/Flutter/flutter_export_environment.sh
 /.idea/workspace.xml
 /.idea/libraries/
+config.tar

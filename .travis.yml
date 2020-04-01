@@ -1,36 +1,61 @@
 os: osx
 language: objective-c
 osx_image: xcode11.3
+
 before_install:
-- openssl aes-256-cbc -K $encrypted_ab925b6da285_key -iv $encrypted_ab925b6da285_iv
-  -in apps/ably/ios/Runner/Config/Dev/GoogleService-Info.plist.enc -out apps/ably/ios/Runner/Config/Dev/GoogleService-Info.plist
-  -d
-- openssl aes-256-cbc -K $encrypted_79d5c2ebfaac_key -iv $encrypted_79d5c2ebfaac_iv
-  -in apps/ably/ios/Runner/Config/QA/GoogleService-Info.plist.enc -out apps/ably/ios/Runner/Config/QA/GoogleService-Info.plist
-  -d
-- openssl aes-256-cbc -K $encrypted_5a73b4d7b2fa_key -iv $encrypted_5a73b4d7b2fa_iv
-  -in apps/ably/ios/Runner/Config/Prod/GoogleService-Info.plist.enc -out apps/ably/ios/Runner/Config/Prod/GoogleService-Info.plist
-  -d
+  - bundle config path $HOME/.gem-cache
+  - export PATH=$HOME/flutter/bin:$HOME/flutter/bin/cache/dart-sdk/bin/:$HOME/.pub-cache/bin:$PATH
+  - git clone https://github.com/flutter/flutter.git $HOME/flutter -b beta  --depth 1
+  - openssl aes-256-cbc -K $encrypted_12eaa4ded41a_key -iv $encrypted_12eaa4ded41a_iv -in config.tar.enc -out config.tar -d
+  - echo -e "machine github.com\n login $CI_USER_TOKEN" >> ~/.netrc
+  - tar xvf config.tar
+
 before_script:
-- echo -e "machine github.com\n  login $CI_USER_TOKEN" >> ~/.netrc
-- git clone https://github.com/flutter/flutter.git $HOME/flutter -b beta  --depth
-  1
-- export PATH=$HOME/flutter/bin:$HOME/flutter/bin/cache/dart-sdk/bin/:$HOME/.pub-cache/bin:$PATH
-- flutter pub global activate grinder
-- flutter pub upgrade
-- curl -sL https://firebase.tools | bash
-script:
-- cd apps/ably
-- flutter pub get
-- cd ios
-- bundle install
-- bundle exec fastlane ios build_qa
-- bundle exec fastlane ios deploy_qa
+  - flutter pub upgrade
+  - curl -sL https://firebase.tools | bash
+
+jobs:
+  include:
+    # - stage: test_lint
+      # script: 
+        # - cd apps/ably/
+        # - flutter lint
+        # - flutter test
+    - stage: deploy_ios_qa
+      if: branch = dev
+      script: 
+        - cd apps/ably/ios
+        - bundle install
+        - bundle exec fastlane ios build_qa
+        - bundle exec fastlane ios deploy_qa
+    - stage: deploy_android_qa
+      if: branch = dev
+      script:
+        - brew cask install android-sdk
+        - cd apps/ably/android
+        - export ANDROID_HOME=/usr/local/share/android-sdk
+        - bundle install
+        - bundle exec fastlane android build_qa
+        - bundle exec fastlane android deploy_qa
+    - stage: deploy_ios_prod
+      if: branch = master
+      script: 
+        - cd apps/ably/ios
+        - bundle install
+        - bundle exec fastlane ios build_prod
+        - bundle exec fastlane ios deploy_prod
+    - stage: deploy_android_prod
+      if: branch = master
+      script:
+        - brew cask install android-sdk
+        - export ANDROID_HOME=/usr/local/share/android-sdk
+        - cd apps/ably/android
+        - bundle install
+        - bundle exec fastlane android build_prod
+        - bundle exec fastlane android deploy_prod
+
 cache:
   directories:
-  - "$HOME/.pub-cache"
-env:
-  global:
-  - secure: DPaqDCp6DNNqb3dWQ1meVPZUy+97YNoFjakl7Hy9EKEKF4HhmEoKHb9GM2oOMhV/nxcd1Un5w8Z9ocTBY71aKJChXYQUKH7LKN3wQ5uvQJ9lff98c1poWoa1w2QaVMRzzTj9EVFM3AM85ByMroqgp6IqkDwSe7nztqbYymXSTLXKpz3XqBUpNcXzPfPxO7DQi6BqdPmA7caEotKdlOrPM1yTopLDF702OCFYH7wNtKmGRsvmomIXae2U8xG8iE4Sx49hmP7h2B1IIw46/rDZbtP33dprLfFTc/1/2AscPLDjYeDgUwKo/6cldjjgl9p2/WHlABt8umBiJi1TgFJuGj4NYkNI4c8Z9e6u7jeGNNk9A8S09K87uxeCloOBwGnAA2j0EkChkk23NxRRLjKTkROIAYXqcvUHB6HBCaQOBrp/OT0N5nBMI80FGP6Y/KFRVb1LMLZd8BFA7WSj0n+G6t295Rjdt//5iZanW9iA4dF4fPl53IgzK1354n6j4peRuhNw1qjmQ7gkjDNNOAfhJZmRGQgU/gFJfVl4mGpDcezBARp6nVGAprj8YvbRCmEH+6rqNfOYsAQOMDneBR/74rmyXy9vd63ocX1i2jCZHHjLrkKmcMYCArpBZIGRI+BksXPpnryrbeQ12hSA3b4TSJSZLTIksWZpRduYrl4lXhU=
-  - secure: imY3h82IT2HnjMoCZVIy4z1+6/Muo5T6Ss5QDsMwC8BYtkt1SV41A+nbcX+PGdn6wftk5hDsGCodoXAnzl+ZGZQPSCqAEF9YVRVgvq0gx8UnqihTkc/LgrFcYgKhYyNy+kHJIotOsIL3hjlfmGsywz9n65LegZ/Vyhz1AtucLzyaFcOxT764Z4qEEUp2oA3AZrRAq6ygufBxhKw8GuQfndA9xYNk55zYQIeaU4te9RlciPcHLWn54UWSL8DJCfoIEZNFZ95rni4IyPEleFtyAI907JGku50yRUe1kBJCeSYrFxwQ4a766aH0OE+XO4hqpY1KLLRiTnM1dEQHUhbl+GMZF41vvI1m5e8nvlx7ttEH07SllvB+aPAic6ZoW2K5x5xEEBAF7rXoJM4nJurG2LcQgNOrrGKneCvzr7yaj3b1yUas+ZBllHlKRxwuet7lfSGJMBqn2XRdFTk4F9AMwIf78WjVVXU/0UiBeuncl+BKqOvtbFXXmJtwxWWcLaD/WBYneBuIsvL3ajj+X/4L/q3ZrI/pF+cQqTG3w0NhmoX5pZDEMhtgNGLTK8mCnkmQ0QpDWdjrIMYB2V8lf1XizyqygxOSS62B/z8XgtcAqaAAeUL9TM70xxwDQuQagC5Cju5ThT6VsZwvhLMoL+ieXWGmJXX7X37vkhjbPqu0bq4=
-  - secure: CiFR9qdMG4rYfla00A1MmCxEwGs9Q3Nqjv5JOrKo4NI4/oKHA1DeHsWPFOSiD/o3jVvsEkokcq4xzUppBF+yu+yJZJYYXCaiI6JpSBU4GhqQ3WMogXmiMR3E0zBUTx53D57Qpx0loB+d5uoh5GTyF4UJ7OJ8mXJLI5Js6hZd5wOsSGBSQOZ/R9HQzBcWewLU3/DIZ7h1KI+3phgsO1CFEK+Cmy6o0WjlLcnl9lTgYerOpPkvtPC9CcT/MWhH6JiFfoWCuT+nvpSfUjSL68ASSDAXNWvGNvm51X8lH1SzqxQM5x3Aze5WdoCS5olLjddfEm6R4mIfZF17AYE8sbj/B1C6J1fQ4P/u5YNqTg+a/X+E7ZaZ4ndeNmSBAqcB85dh0ujBXDKOQ9PHHIA9v4SRIYkfpLF3idhkK9IdoHnzgbJwmtZqW/qybCzoqu8uyVJx2NO8JSm2DnvVx4BV5pdKAUQU5RerC7sXmBzc733p35JL4Vg6iqd3c6vQen4eOBtvyBmYjEmgNXMiJlpYI4gaMbkikUwS9eF/ohyYCpfCJP49YJvd3K3GIY5o5fToTqd53yRn5ha6OUq98rE4EavgiRWPs+LIQa0UCU+TFWBVyP29dG2avJO9kBzaW1rFFUZN5Hh1/JLY2IeRsgqpqmxJflGZOqUxS/8E3hZw1C4Obes=
+    - "$HOME/.pub-cache"
+    - "$HOME/.gem-cache"
+    - "$HOME/Library/Caches/CocoaPods"

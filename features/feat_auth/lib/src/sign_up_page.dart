@@ -1,4 +1,4 @@
-import 'package:feat_auth/stores/sign_up_store.dart';
+import 'package:feat_auth/feat_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';

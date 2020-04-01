@@ -1,4 +1,4 @@
-import 'package:feat_auth/data/auth_storage.dart';
+import 'package:feat_auth/feat_auth.dart';
 import 'package:mobx/mobx.dart';
 
 part 'store.g.dart';

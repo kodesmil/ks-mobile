@@ -12,7 +12,7 @@
 
 update_fastlane
 
-version_code = ENV['CI_JOB_ID'].to_i == 0 ? 1 : ENV['CI_JOB_ID'].to_i
+version_code = ENV['TRAVIS_BUILD_NUMBER'].to_i == 0 ? 1 : ENV['TRAVIS_BUILD_NUMBER'].to_i
 firebase_project_id_prod = '1:1024113237937:ios:da94ce200b55c1fc206790'
 firebase_project_id_qa = '1:1024113237937:ios:387d1b30d2599ccd206790'
 app_name = 'Abli Health'
@@ -29,8 +29,6 @@ release_notes = changelog_from_git_commits(
 default_platform(:ios)
 
 platform :ios do
-
-  setup_travis
 
   before_all do
     ENV["SLACK_URL"] = slack_url
@@ -51,7 +49,11 @@ platform :ios do
       type: "appstore",
       keychain_name: tmp_keychain,
       keychain_password: tmp_keychain,
-      readonly: true
+    )
+    match(
+      type: "adhoc",
+      keychain_name: tmp_keychain,
+      keychain_password: tmp_keychain,
     )
   end
 
@@ -78,6 +80,7 @@ platform :ios do
     gym(
       scheme: 'qa',
       silent: true,
+      export_options: {method: "ad-hoc" },
       output_directory: "./build/Runner"
     )
   
@@ -85,6 +88,8 @@ platform :ios do
 
   desc "[Prod] Build & sign iOS app"
   lane :build_prod do |options|
+
+    install_certificates
 
     Dir.chdir("../../") do
       sh(
@@ -96,17 +101,14 @@ platform :ios do
           "--target",
           "lib/main_prod.dart",
           "--release",
-          "--verbose",
           "--build-number",
           "#{version_code}",
       )
     end
 
-    match(type: "adhoc")
-
-    build_ios_app(
+    gym(
       scheme: 'prod',
-      export_options: {method: "ad-hoc" },
+      silent: true,
       output_directory: "./build/Runner"
     )
 

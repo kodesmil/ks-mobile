@@ -1,5 +1,5 @@
 import 'package:feat_activities/feat_activities.dart';
-import 'package:feat_auth/stores/google_sign_in_store.dart';
+import 'package:feat_auth/feat_auth.dart';
 import 'package:feat_survey/feat_survey.dart';
 import 'package:flutter/material.dart';
 import 'package:lib_lego/navigations.dart';

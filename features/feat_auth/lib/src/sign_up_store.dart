@@ -1,7 +1,4 @@
-import 'package:feat_auth/data/auth_storage.dart';
-import 'package:feat_auth/data/token_api.dart';
-import 'package:feat_auth/data/user_api.dart';
-import 'package:feat_auth/models/user.dart';
+import 'package:feat_auth/feat_auth.dart';
 import 'package:lib_di/stores/error/error_store.dart';
 import 'package:mobx/mobx.dart';
 import 'package:validators/validators.dart';

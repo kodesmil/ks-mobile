@@ -1,5 +1,4 @@
-import 'package:feat_auth/pages/login_page.dart';
-import 'package:feat_auth/pages/sign_up_page.dart';
+import 'package:feat_auth/feat_auth.dart';
 import 'package:flutter/material.dart';
 
 class Routes {

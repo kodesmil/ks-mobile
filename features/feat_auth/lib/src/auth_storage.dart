@@ -1,7 +1,8 @@
 import 'dart:async';
 
-import 'package:feat_auth/models/token.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'models/token.dart';
 
 class AuthStorage {
   static const String ACCESS_TOKEN = 'accessToken';

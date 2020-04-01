@@ -1,11 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:feat_activities/feat_activities.dart';
-import 'package:feat_auth/data/auth_storage.dart';
-import 'package:feat_auth/data/token_api.dart';
-import 'package:feat_auth/data/user_api.dart';
-import 'package:feat_auth/stores/google_sign_in_store.dart';
-import 'package:feat_auth/stores/login_store.dart';
-import 'package:feat_auth/stores/sign_up_store.dart';
+import 'package:feat_auth/feat_auth.dart';
 import 'package:feat_onboarding/feat_onboarding.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

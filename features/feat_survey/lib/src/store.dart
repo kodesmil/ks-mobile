@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:crossplat_objectid/crossplat_objectid.dart';
-import 'package:feat_auth/data/auth_storage.dart';
+import 'package:feat_auth/feat_auth.dart';
 import 'package:feat_survey/feat_survey.dart';
 import 'package:lib_di/stores/error/error_store.dart';
 import 'package:mobx/mobx.dart';

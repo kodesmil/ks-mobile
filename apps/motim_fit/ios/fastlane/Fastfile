@@ -12,7 +12,7 @@
 
 update_fastlane
 
-version_code = ENV['CI_JOB_ID'].to_i == 0 ? 1 : ENV['CI_JOB_ID'].to_i
+version_code = ENV['TRAVIS_BUILD_NUMBER'].to_i == 0 ? 1 : ENV['TRAVIS_BUILD_NUMBER'].to_i
 firebase_project_id_prod = '1:772074731973:ios:96cb9aea55f0feed5ab3ac'
 firebase_project_id_qa = '1:772074731973:ios:a2d6992be2c3b1eb5ab3ac'
 app_name = 'Motim Fit'

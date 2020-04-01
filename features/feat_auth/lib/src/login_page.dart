@@ -1,4 +1,3 @@
-import 'package:feat_auth/stores/login_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:lib_lego/app_bars.dart';
@@ -7,6 +6,8 @@ import 'package:lib_lego/progress_indicators.dart';
 import 'package:lib_lego/snack_bars.dart';
 import 'package:lib_lego/textfields.dart';
 import 'package:provider/provider.dart';
+
+import 'login_store.dart';
 
 class LoginPage extends StatefulWidget {
   @override

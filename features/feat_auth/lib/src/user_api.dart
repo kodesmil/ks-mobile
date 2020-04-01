@@ -2,8 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:feat_auth/models/token.dart';
-import 'package:feat_auth/models/user.dart';
+import 'package:feat_auth/feat_auth.dart';
 import 'package:lib_di/data/network/constants/endpoints.dart';
 import 'package:lib_di/data/network/dio_client.dart';
 

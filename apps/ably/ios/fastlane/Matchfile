@@ -1,3 +1,4 @@
 git_url("https://github.com/maszhin/ios-certificates.git")
 team_id("4ZAS8U996K")
+username("hello@kodesmil.com")
 app_identifier("com.kodesmil.ably,com.kodesmil.ably.qa,com.kodesmil.ably.dev")

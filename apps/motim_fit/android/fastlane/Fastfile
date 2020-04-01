@@ -12,7 +12,7 @@
 
 update_fastlane
 
-version_code = ENV['CI_JOB_ID'].to_i == 0 ? 1 : ENV['CI_JOB_ID'].to_i
+version_code = ENV['TRAVIS_BUILD_NUMBER'].to_i == 0 ? 1 : ENV['TRAVIS_BUILD_NUMBER'].to_i
 firebase_project_id_qa = '1:772074731973:android:c058a591178b86165ab3ac'
 firebase_project_id_prod = '1:772074731973:android:500c63dc87891a685ab3ac'
 app_name = 'Motim Fit'
@@ -40,8 +40,8 @@ platform :android do
         gradle(task: "test")
     end
 
-    desc "Deploy QA Build"
-    lane :deploy_qa do
+    desc "Build QA Build"
+    lane :build_qa do
 
         Dir.chdir("../../") do
             sh(
@@ -58,6 +58,10 @@ platform :android do
                 "#{version_code}",
             )
         end
+    end
+
+    desc "Deploy QA Build"
+    lane :deploy_qa do
 
         firebase_app_distribution(
             app: firebase_project_id_qa,

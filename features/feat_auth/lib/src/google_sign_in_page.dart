@@ -1,10 +1,11 @@
-import 'package:feat_auth/stores/google_sign_in_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lib_lego/navigations.dart';
 import 'package:lib_lego/spaces.dart';
 import 'package:provider/provider.dart';
+
+import 'google_sign_in_store.dart';
 
 class GoogleSignInPage extends StatefulWidget {
   @override
