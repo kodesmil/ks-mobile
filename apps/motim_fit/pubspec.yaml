@@ -29,6 +29,7 @@ dependencies:
   json_serializable: ^3.2.3
 
   google_sign_in: ^4.1.4
+  firebase_auth: ^0.15.5+3
 
   feat_auth:
     path: ../../features/feat_auth

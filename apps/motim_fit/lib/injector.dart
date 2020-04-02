@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:feat_activities/feat_activities.dart';
 import 'package:feat_auth/feat_auth.dart';
 import 'package:feat_onboarding/feat_onboarding.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -31,26 +32,6 @@ class Injector extends StatelessWidget {
           ),
         ),
         Provider(
-          create: (_) => TokenApi(
-            DioClient(
-              Dio()
-                // ..options.baseUrl = 'http://10.0.2.2:5000'
-                ..options.baseUrl = 'http://auth.kodesmil.com'
-                ..interceptors.add(LogInterceptor(responseBody: true)),
-            ),
-          ),
-        ),
-        Provider(
-          create: (_) => UserApi(
-            DioClient(
-              Dio()
-                // ..options.baseUrl = 'http://10.0.2.2:5000'
-                ..options.baseUrl = 'http://auth.kodesmil.com'
-                ..interceptors.add(LogInterceptor(responseBody: true)),
-            ),
-          ),
-        ),
-        Provider(
           create: (_) => GoogleSignIn(
             scopes: <String>[
               'email',
@@ -63,6 +44,9 @@ class Injector extends StatelessWidget {
             ],
           ),
         ),
+        Provider(
+          create: (_) => FirebaseAuth.instance,
+        ),
         ProxyProvider<GoogleSignIn, GoogleSignInStore>(
           update: (_, dep, __) => GoogleSignInStore(dep),
         ),
@@ -73,22 +57,20 @@ class Injector extends StatelessWidget {
             dep2,
           ),
         ),
-        ProxyProvider3<TokenApi, UserApi, AuthStorage, LoginStore>(
-          update: (_, dep, dep2, dep3, __) => LoginStore(
+        ProxyProvider2<FirebaseAuth, AuthStorage, LoginStore>(
+          update: (_, dep, dep2, __) => LoginStore(
             ErrorStore(),
             LoginErrorStore(),
             dep,
             dep2,
-            dep3,
           ),
         ),
-        ProxyProvider3<TokenApi, UserApi, AuthStorage, SignUpStore>(
-          update: (_, dep, dep2, dep3, __) => SignUpStore(
+        ProxyProvider2<FirebaseAuth, AuthStorage, SignUpStore>(
+          update: (_, dep, dep2, __) => SignUpStore(
             ErrorStore(),
             SignUpErrorStore(),
             dep,
             dep2,
-            dep3,
           ),
         ),
         ProxyProvider<AuthStorage, OnboardingStore>(

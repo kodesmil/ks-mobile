@@ -61,7 +61,7 @@ platform :android do
     end
 
     desc "Deploy QA Build"
-    lane :deploy_qa dos
+    lane :deploy_qa do
 
         firebase_app_distribution(
             app: firebase_project_id_qa,

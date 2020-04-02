@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:crossplat_objectid/crossplat_objectid.dart';
-import 'package:feat_auth/feat_auth.dart';
 import 'package:feat_survey/feat_survey.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lib_di/stores/error/error_store.dart';
 import 'package:mobx/mobx.dart';
 
@@ -15,12 +15,12 @@ class SurveyStore = _SurveyStore with _$SurveyStore;
 abstract class _SurveyStore with Store {
   final ErrorStore errorStore;
   final SurveyApi api;
-  final AuthStorage authStorage;
+  final FirebaseAuth firebaseAuth;
 
   _SurveyStore(
     this.errorStore,
     this.api,
-    this.authStorage,
+    this.firebaseAuth,
   );
 
   @observable
@@ -49,7 +49,6 @@ abstract class _SurveyStore with Store {
   Future sendAnswers() async {
     answers.values.forEach((answer) async {
       await api.postAnswer(
-        await authStorage.accessToken,
         answer,
       );
     });
@@ -58,9 +57,7 @@ abstract class _SurveyStore with Store {
 
   @action
   Future fetchQuestions() async {
-    questions = await api.getQuestions(
-      await authStorage.accessToken,
-    );
+    questions = await api.getQuestions();
   }
 
   @action

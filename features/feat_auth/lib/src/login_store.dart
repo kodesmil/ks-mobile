@@ -1,4 +1,5 @@
 import 'package:feat_auth/feat_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lib_di/stores/error/error_store.dart';
 import 'package:mobx/mobx.dart';
 import 'package:validators/validators.dart';
@@ -10,15 +11,13 @@ class LoginStore = _LoginStore with _$LoginStore;
 abstract class _LoginStore with Store {
   final LoginErrorStore formErrorStore;
   final ErrorStore errorStore;
-  final TokenApi tokenApi;
-  final UserApi userApi;
+  final FirebaseAuth firebaseAuth;
   final AuthStorage authStorage;
 
   _LoginStore(
     this.errorStore,
     this.formErrorStore,
-    this.tokenApi,
-    this.userApi,
+    this.firebaseAuth,
     this.authStorage,
   ) {
     _setupValidations();
@@ -45,6 +44,9 @@ abstract class _LoginStore with Store {
   @observable
   bool loading = false;
 
+  @observable
+  FirebaseUser user;
+
   @computed
   bool get canLogin => !formErrorStore.hasErrors;
 
@@ -70,6 +72,16 @@ abstract class _LoginStore with Store {
   }
 
   @action
+  void signInSilently() async {
+    user = await firebaseAuth.currentUser();
+    if (user != null) {
+      loading = false;
+      success = true;
+      errorStore.showError = false;
+    }
+  }
+
+  @action
   void validatePassword(String value) {
     if (value.isEmpty) {
       formErrorStore.password = "Password can't be empty";
@@ -84,12 +96,10 @@ abstract class _LoginStore with Store {
   Future login() async {
     loading = true;
     try {
-      final user = User(
-        userName: email,
+      await firebaseAuth.signInWithEmailAndPassword(
+        email: email,
         password: password,
       );
-      final result = await tokenApi.getAuthAccessToken(user);
-      await authStorage.saveAuthToken(result);
       loading = false;
       success = true;
       errorStore.showError = false;

@@ -23,14 +23,9 @@ class _SplashPageState extends State<SplashPage> {
 
   navigate() async {
     final storage = Provider.of<AuthStorage>(context);
-    final isLoggedIn = await storage.isLoggedIn;
     final hasSeenOnboarding = await storage.onboardingDisplayed;
     if (hasSeenOnboarding) {
-      if (isLoggedIn) {
-        Navigator.of(context).pushReplacementNamed('/home');
-      } else {
-        Navigator.of(context).pushReplacementNamed('/login');
-      }
+      Navigator.of(context).pushReplacementNamed('/login');
     } else {
       Navigator.of(context).pushReplacementNamed('/onboarding');
     }

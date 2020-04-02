@@ -4,6 +4,7 @@ import 'package:feat_auth/feat_auth.dart';
 import 'package:feat_locations/feat_locations.dart';
 import 'package:feat_onboarding/feat_onboarding.dart';
 import 'package:feat_survey/feat_survey.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -21,6 +22,9 @@ class Injector extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        Provider(
+          create: (_) => FirebaseAuth.instance,
+        ),
         Provider(
           create: (_) => AuthStorage(
             SharedPreferences.getInstance(),
@@ -45,28 +49,8 @@ class Injector extends StatelessWidget {
             ),
           ),
         ),
-        Provider(
-          create: (_) => TokenApi(
-            DioClient(
-              Dio()
-                // ..options.baseUrl = 'http://10.0.2.2:5000'
-                ..options.baseUrl = 'https://auth.kodesmil.com'
-                ..interceptors.add(LogInterceptor(responseBody: true)),
-            ),
-          ),
-        ),
-        Provider(
-          create: (_) => UserApi(
-            DioClient(
-              Dio()
-                // ..options.baseUrl = 'http://10.0.2.2:5000'
-                ..options.baseUrl = 'https://auth.kodesmil.com'
-                ..interceptors.add(LogInterceptor(responseBody: true)),
-            ),
-          ),
-        ),
-        Provider(
-          create: (_) => SurveyApi(
+        ProxyProvider<FirebaseAuth, SurveyApi>(
+          update: (_, dep, __) => SurveyApi(
             DioClient(
               Dio()
                 ..options.baseUrl = 'http://10.0.2.2:5000'
@@ -74,6 +58,7 @@ class Injector extends StatelessWidget {
                 // ..options.baseUrl = 'http://192.168.64.2:31908'
                 ..interceptors.add(LogInterceptor(responseBody: true)),
             ),
+            dep,
           ),
         ),
         Provider(
@@ -99,30 +84,24 @@ class Injector extends StatelessWidget {
             dep2,
           ),
         ),
-        ProxyProvider3<TokenApi, UserApi, AuthStorage, LoginStore>(
-          update: (_, dep, dep2, dep3, __) => LoginStore(
+        ProxyProvider2<FirebaseAuth, AuthStorage, LoginStore>(
+          update: (_, dep, dep2, __) => LoginStore(
             ErrorStore(),
             LoginErrorStore(),
             dep,
             dep2,
-            dep3,
           ),
         ),
-        ProxyProvider3<TokenApi, UserApi, AuthStorage, SignUpStore>(
-          update: (_, dep, dep2, dep3, __) => SignUpStore(
-            ErrorStore(),
-            SignUpErrorStore(),
-            dep,
-            dep2,
-            dep3,
-          ),
+        ProxyProvider2<FirebaseAuth, AuthStorage, SignUpStore>(
+          update: (_, dep, dep2, __) =>
+              SignUpStore(ErrorStore(), SignUpErrorStore(), dep, dep2),
         ),
         ProxyProvider<AuthStorage, OnboardingStore>(
           update: (_, dep, __) => OnboardingStore(
             dep,
           ),
         ),
-        ProxyProvider2<SurveyApi, AuthStorage, SurveyStore>(
+        ProxyProvider2<SurveyApi, FirebaseAuth, SurveyStore>(
           update: (_, dep, dep2, __) => SurveyStore(
             ErrorStore(),
             dep,

@@ -1,4 +1,5 @@
 import 'package:feat_auth/feat_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lib_di/stores/error/error_store.dart';
 import 'package:mobx/mobx.dart';
 import 'package:validators/validators.dart';
@@ -10,15 +11,13 @@ class SignUpStore = _SignUpStore with _$SignUpStore;
 abstract class _SignUpStore with Store {
   final SignUpErrorStore signUpErrorStore;
   final ErrorStore errorStore;
-  final TokenApi tokenApi;
-  final UserApi userApi;
+  final FirebaseAuth firebaseAuth;
   final AuthStorage authStorage;
 
   _SignUpStore(
     this.errorStore,
     this.signUpErrorStore,
-    this.tokenApi,
-    this.userApi,
+    this.firebaseAuth,
     this.authStorage,
   ) {
     _setupValidations();
@@ -138,22 +137,10 @@ abstract class _SignUpStore with Store {
   Future signUp() async {
     loading = true;
     try {
-      final token = await tokenApi.getSkimAccessToken();
-      final user = User(
-        userName: email,
+      firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
         password: password,
-        active: true,
-        name: Name(
-          familyName: lastName,
-          givenName: firstName,
-        ),
-        emails: [
-          Email(value: email),
-        ],
       );
-      await userApi.postUser(token, user);
-      final result = await tokenApi.getAuthAccessToken(user);
-      await authStorage.saveAuthToken(result);
       loading = false;
       success = true;
       errorStore.showError = false;
