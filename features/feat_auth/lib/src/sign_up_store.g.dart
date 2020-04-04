@@ -32,57 +32,6 @@ mixin _$SignUpStore on _SignUpStore, Store {
     }, _$emailAtom, name: '${_$emailAtom.name}_set');
   }
 
-  final _$firstNameAtom = Atom(name: '_SignUpStore.firstName');
-
-  @override
-  String get firstName {
-    _$firstNameAtom.context.enforceReadPolicy(_$firstNameAtom);
-    _$firstNameAtom.reportObserved();
-    return super.firstName;
-  }
-
-  @override
-  set firstName(String value) {
-    _$firstNameAtom.context.conditionallyRunInAction(() {
-      super.firstName = value;
-      _$firstNameAtom.reportChanged();
-    }, _$firstNameAtom, name: '${_$firstNameAtom.name}_set');
-  }
-
-  final _$lastNameAtom = Atom(name: '_SignUpStore.lastName');
-
-  @override
-  String get lastName {
-    _$lastNameAtom.context.enforceReadPolicy(_$lastNameAtom);
-    _$lastNameAtom.reportObserved();
-    return super.lastName;
-  }
-
-  @override
-  set lastName(String value) {
-    _$lastNameAtom.context.conditionallyRunInAction(() {
-      super.lastName = value;
-      _$lastNameAtom.reportChanged();
-    }, _$lastNameAtom, name: '${_$lastNameAtom.name}_set');
-  }
-
-  final _$dateOfBirthAtom = Atom(name: '_SignUpStore.dateOfBirth');
-
-  @override
-  String get dateOfBirth {
-    _$dateOfBirthAtom.context.enforceReadPolicy(_$dateOfBirthAtom);
-    _$dateOfBirthAtom.reportObserved();
-    return super.dateOfBirth;
-  }
-
-  @override
-  set dateOfBirth(String value) {
-    _$dateOfBirthAtom.context.conditionallyRunInAction(() {
-      super.dateOfBirth = value;
-      _$dateOfBirthAtom.reportChanged();
-    }, _$dateOfBirthAtom, name: '${_$dateOfBirthAtom.name}_set');
-  }
-
   final _$passwordAtom = Atom(name: '_SignUpStore.password');
 
   @override
@@ -171,36 +120,6 @@ mixin _$SignUpStore on _SignUpStore, Store {
   }
 
   @override
-  void setFirstName(String value) {
-    final _$actionInfo = _$_SignUpStoreActionController.startAction();
-    try {
-      return super.setFirstName(value);
-    } finally {
-      _$_SignUpStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setLastName(String value) {
-    final _$actionInfo = _$_SignUpStoreActionController.startAction();
-    try {
-      return super.setLastName(value);
-    } finally {
-      _$_SignUpStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setDateOfBirth(String value) {
-    final _$actionInfo = _$_SignUpStoreActionController.startAction();
-    try {
-      return super.setDateOfBirth(value);
-    } finally {
-      _$_SignUpStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   void validateEmail(String value) {
     final _$actionInfo = _$_SignUpStoreActionController.startAction();
     try {
@@ -211,40 +130,10 @@ mixin _$SignUpStore on _SignUpStore, Store {
   }
 
   @override
-  void validateFirstName(String value) {
-    final _$actionInfo = _$_SignUpStoreActionController.startAction();
-    try {
-      return super.validateFirstName(value);
-    } finally {
-      _$_SignUpStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void validateLastName(String value) {
-    final _$actionInfo = _$_SignUpStoreActionController.startAction();
-    try {
-      return super.validateLastName(value);
-    } finally {
-      _$_SignUpStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   void validatePassword(String value) {
     final _$actionInfo = _$_SignUpStoreActionController.startAction();
     try {
       return super.validatePassword(value);
-    } finally {
-      _$_SignUpStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void validateDateOfBirth(String value) {
-    final _$actionInfo = _$_SignUpStoreActionController.startAction();
-    try {
-      return super.validateDateOfBirth(value);
     } finally {
       _$_SignUpStoreActionController.endAction(_$actionInfo);
     }
@@ -300,56 +189,5 @@ mixin _$SignUpErrorStore on _SignUpErrorStore, Store {
       super.password = value;
       _$passwordAtom.reportChanged();
     }, _$passwordAtom, name: '${_$passwordAtom.name}_set');
-  }
-
-  final _$firstNameAtom = Atom(name: '_SignUpErrorStore.firstName');
-
-  @override
-  String get firstName {
-    _$firstNameAtom.context.enforceReadPolicy(_$firstNameAtom);
-    _$firstNameAtom.reportObserved();
-    return super.firstName;
-  }
-
-  @override
-  set firstName(String value) {
-    _$firstNameAtom.context.conditionallyRunInAction(() {
-      super.firstName = value;
-      _$firstNameAtom.reportChanged();
-    }, _$firstNameAtom, name: '${_$firstNameAtom.name}_set');
-  }
-
-  final _$lastNameAtom = Atom(name: '_SignUpErrorStore.lastName');
-
-  @override
-  String get lastName {
-    _$lastNameAtom.context.enforceReadPolicy(_$lastNameAtom);
-    _$lastNameAtom.reportObserved();
-    return super.lastName;
-  }
-
-  @override
-  set lastName(String value) {
-    _$lastNameAtom.context.conditionallyRunInAction(() {
-      super.lastName = value;
-      _$lastNameAtom.reportChanged();
-    }, _$lastNameAtom, name: '${_$lastNameAtom.name}_set');
-  }
-
-  final _$dateOfBirthAtom = Atom(name: '_SignUpErrorStore.dateOfBirth');
-
-  @override
-  String get dateOfBirth {
-    _$dateOfBirthAtom.context.enforceReadPolicy(_$dateOfBirthAtom);
-    _$dateOfBirthAtom.reportObserved();
-    return super.dateOfBirth;
-  }
-
-  @override
-  set dateOfBirth(String value) {
-    _$dateOfBirthAtom.context.conditionallyRunInAction(() {
-      super.dateOfBirth = value;
-      _$dateOfBirthAtom.reportChanged();
-    }, _$dateOfBirthAtom, name: '${_$dateOfBirthAtom.name}_set');
   }
 }

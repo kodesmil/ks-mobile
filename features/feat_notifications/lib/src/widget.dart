@@ -16,7 +16,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
   @override
   void didChangeDependencies() {
     final store = Provider.of<NotificationsStore>(context);
-    store.fetch();
+    store.fetchAll();
     super.didChangeDependencies();
   }
 
@@ -28,10 +28,19 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
         KsSpace.l(),
         Observer(
           builder: (context) => Text(
-            store.notification?.notification?.content ?? 'Empty',
+            store.notifications.data?.toString() ?? 'Empty',
+          ),
+        ),
+        Observer(
+          builder: (context) => Text(
+            store.notification?.content ?? 'Empty',
           ),
         ),
         KsSpace.l(),
+        RaisedButton(
+          child: Text('Create notification'),
+          onPressed: () => store.createNotification(),
+        ),
       ],
     );
   }

@@ -72,7 +72,7 @@ abstract class _LoginStore with Store {
   }
 
   @action
-  void signInSilently() async {
+  Future signInSilently() async {
     user = await firebaseAuth.currentUser();
     if (user != null) {
       loading = false;

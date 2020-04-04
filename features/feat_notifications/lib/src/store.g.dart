@@ -43,45 +43,42 @@ mixin _$NotificationsStore on _NotificationsStore, Store {
     }, _$loadingAtom, name: '${_$loadingAtom.name}_set');
   }
 
-  final _$notificationsAtom = Atom(name: '_NotificationsStore.notifications');
-
-  @override
-  ResponseStream<NotificationsListResponse> get notifications {
-    _$notificationsAtom.context.enforceReadPolicy(_$notificationsAtom);
-    _$notificationsAtom.reportObserved();
-    return super.notifications;
-  }
-
-  @override
-  set notifications(ResponseStream<NotificationsListResponse> value) {
-    _$notificationsAtom.context.conditionallyRunInAction(() {
-      super.notifications = value;
-      _$notificationsAtom.reportChanged();
-    }, _$notificationsAtom, name: '${_$notificationsAtom.name}_set');
-  }
-
   final _$notificationAtom = Atom(name: '_NotificationsStore.notification');
 
   @override
-  NotificationReadResponse get notification {
+  Notification get notification {
     _$notificationAtom.context.enforceReadPolicy(_$notificationAtom);
     _$notificationAtom.reportObserved();
     return super.notification;
   }
 
   @override
-  set notification(NotificationReadResponse value) {
+  set notification(Notification value) {
     _$notificationAtom.context.conditionallyRunInAction(() {
       super.notification = value;
       _$notificationAtom.reportChanged();
     }, _$notificationAtom, name: '${_$notificationAtom.name}_set');
   }
 
-  final _$fetchAsyncAction = AsyncAction('fetch');
+  final _$fetchByIdAsyncAction = AsyncAction('fetchById');
 
   @override
-  ObservableFuture<dynamic> fetch() {
-    return ObservableFuture<dynamic>(
-        _$fetchAsyncAction.run(() => super.fetch()));
+  Future<dynamic> fetchById() {
+    return _$fetchByIdAsyncAction.run(() => super.fetchById());
+  }
+
+  final _$fetchAllAsyncAction = AsyncAction('fetchAll');
+
+  @override
+  Future<dynamic> fetchAll() {
+    return _$fetchAllAsyncAction.run(() => super.fetchAll());
+  }
+
+  final _$createNotificationAsyncAction = AsyncAction('createNotification');
+
+  @override
+  Future<dynamic> createNotification() {
+    return _$createNotificationAsyncAction
+        .run(() => super.createNotification());
   }
 }

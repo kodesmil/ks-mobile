@@ -1,5 +1,6 @@
 import 'package:feat_activities/feat_activities.dart';
 import 'package:feat_auth/feat_auth.dart';
+import 'package:feat_locations/feat_locations.dart';
 import 'package:feat_notifications/feat_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,6 +28,23 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return NotificationsWidget();
+    return Scaffold(
+      body: Center(
+        heightFactor: 0.75,
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width * 0.8,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text('Aa'),
+              LocationsWidget(),
+              NotificationsWidget(),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

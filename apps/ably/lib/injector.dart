@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:grpc/grpc.dart';
 import 'package:lib_di/data/network/dio_client.dart';
 import 'package:lib_di/stores/error/error_store.dart';
 import 'package:provider/provider.dart';
@@ -94,6 +95,9 @@ class Injector extends StatelessWidget {
           update: (_, dep, dep2, __) =>
               SignUpStore(ErrorStore(), SignUpErrorStore(), dep, dep2),
         ),
+        ProxyProvider<FirebaseAuth, UserStore>(
+          update: (_, dep, __) => UserStore(dep),
+        ),
         ProxyProvider<AuthStorage, OnboardingStore>(
           update: (_, dep, __) => OnboardingStore(
             dep,
@@ -110,6 +114,18 @@ class Injector extends StatelessWidget {
           update: (_, dep, __) => NotificationsStore(
             ErrorStore(),
             dep,
+            NotificationServiceClient(
+              ClientChannel(
+                'notifications.dev.api.kodesmil.com',
+                port: 443,
+                options: const ChannelOptions(
+                  credentials: ChannelCredentials.secure(),
+                ),
+              ),
+              options: CallOptions(
+                timeout: Duration(seconds: 30),
+              ),
+            ),
           ),
         ),
         ProxyProvider2<LocationsApi, AuthStorage, LocationsStore>(

@@ -83,6 +83,30 @@ mixin _$LoginStore on _LoginStore, Store {
     }, _$loadingAtom, name: '${_$loadingAtom.name}_set');
   }
 
+  final _$userAtom = Atom(name: '_LoginStore.user');
+
+  @override
+  FirebaseUser get user {
+    _$userAtom.context.enforceReadPolicy(_$userAtom);
+    _$userAtom.reportObserved();
+    return super.user;
+  }
+
+  @override
+  set user(FirebaseUser value) {
+    _$userAtom.context.conditionallyRunInAction(() {
+      super.user = value;
+      _$userAtom.reportChanged();
+    }, _$userAtom, name: '${_$userAtom.name}_set');
+  }
+
+  final _$signInSilentlyAsyncAction = AsyncAction('signInSilently');
+
+  @override
+  Future<dynamic> signInSilently() {
+    return _$signInSilentlyAsyncAction.run(() => super.signInSilently());
+  }
+
   final _$loginAsyncAction = AsyncAction('login');
 
   @override

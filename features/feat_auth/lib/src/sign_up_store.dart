@@ -28,24 +28,12 @@ abstract class _SignUpStore with Store {
   void _setupValidations() {
     _disposers = [
       reaction((_) => email, validateEmail),
-      reaction((_) => firstName, validateFirstName),
-      reaction((_) => lastName, validateLastName),
-      reaction((_) => dateOfBirth, validateDateOfBirth),
       reaction((_) => password, validatePassword),
     ];
   }
 
   @observable
   String email = '';
-
-  @observable
-  String firstName = '';
-
-  @observable
-  String lastName = '';
-
-  @observable
-  String dateOfBirth = '';
 
   @observable
   String password = '';
@@ -70,21 +58,6 @@ abstract class _SignUpStore with Store {
   }
 
   @action
-  void setFirstName(String value) {
-    firstName = value;
-  }
-
-  @action
-  void setLastName(String value) {
-    lastName = value;
-  }
-
-  @action
-  void setDateOfBirth(String value) {
-    dateOfBirth = value;
-  }
-
-  @action
   void validateEmail(String value) {
     if (value.isEmpty) {
       signUpErrorStore.email = "Email can't be empty";
@@ -96,24 +69,6 @@ abstract class _SignUpStore with Store {
   }
 
   @action
-  void validateFirstName(String value) {
-    if (value.isEmpty) {
-      signUpErrorStore.firstName = "First name can't be empty";
-    } else {
-      signUpErrorStore.firstName = null;
-    }
-  }
-
-  @action
-  void validateLastName(String value) {
-    if (value.isEmpty) {
-      signUpErrorStore.lastName = "Last name can't be empty";
-    } else {
-      signUpErrorStore.lastName = null;
-    }
-  }
-
-  @action
   void validatePassword(String value) {
     if (value.isEmpty) {
       signUpErrorStore.password = "Password can't be empty";
@@ -121,15 +76,6 @@ abstract class _SignUpStore with Store {
       signUpErrorStore.password = "Password must be at-least 6 characters long";
     } else {
       signUpErrorStore.password = null;
-    }
-  }
-
-  @action
-  void validateDateOfBirth(String value) {
-    if (value.isEmpty) {
-      signUpErrorStore.dateOfBirth = "Date of birth can't be empty";
-    } else {
-      signUpErrorStore.dateOfBirth = null;
     }
   }
 
@@ -164,9 +110,6 @@ abstract class _SignUpStore with Store {
   void validateAll() {
     validatePassword(password);
     validateEmail(email);
-    validateDateOfBirth(dateOfBirth);
-    validateFirstName(firstName);
-    validateLastName(lastName);
   }
 
   void dispose() {
@@ -185,20 +128,6 @@ abstract class _SignUpErrorStore with Store {
   @observable
   String password;
 
-  @observable
-  String firstName;
-
-  @observable
-  String lastName;
-
-  @observable
-  String dateOfBirth;
-
   @computed
-  bool get hasErrors =>
-      email != null ||
-      password != null ||
-      firstName != null ||
-      lastName != null ||
-      dateOfBirth != null;
+  bool get hasErrors => email != null || password != null;
 }

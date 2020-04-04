@@ -1,7 +1,8 @@
 import 'dart:async';
+import 'dart:math';
 
+import 'package:feat_notifications/src/generated/google/protobuf/timestamp.pb.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:grpc/grpc.dart';
 import 'package:lib_di/stores/error/error_store.dart';
 import 'package:mobx/mobx.dart';
 
@@ -20,20 +21,8 @@ abstract class _NotificationsStore with Store {
   _NotificationsStore(
     this.errorStore,
     this.firebaseAuth,
-  ) {
-    this.client = NotificationServiceClient(
-      ClientChannel(
-        'https://notifications.dev.api.kodesmil.com',
-        port: 443,
-        options: const ChannelOptions(
-          credentials: ChannelCredentials.insecure(),
-        ),
-      ),
-      options: CallOptions(
-        timeout: Duration(seconds: 30),
-      ),
-    );
-  }
+    this.client,
+  );
 
   @observable
   bool success = false;
@@ -42,21 +31,34 @@ abstract class _NotificationsStore with Store {
   bool loading = false;
 
   @observable
-  ResponseStream<NotificationsListResponse> notifications;
+  Notification notification;
 
-  @observable
-  NotificationReadResponse notification;
+  ObservableStream<NotificationsListResponse> notifications;
 
-  @observable
   @action
-  Future fetch() async {
-    /*
-    notifications = client.notificationsList(
-      NotificationsListRequest(),
-    );
-    */
+  Future fetchById() async {
     final request = NotificationReadRequest()..id = "5e7bf879ae19ee478a38bd89";
-    this.notification = await client.notificationRead(request);
-    print(this.notification);
+    final response = await client.notificationRead(request);
+    this.notification = response.notification;
+  }
+
+  @action
+  Future fetchAll() async {
+    final request = NotificationsListRequest();
+    final response = client.notificationsList(request);
+    this.notifications = response.asObservable();
+  }
+
+  @action
+  Future createNotification() async {
+    final user = await firebaseAuth.currentUser();
+    final notification = Notification.create()
+      ..content = 'New notification: ${Random().nextInt(30)}'
+      ..userId = user.uid
+      ..time = Timestamp.fromDateTime(DateTime.now());
+    final request = NotificationCreateRequest.create()
+      ..notification = notification;
+    final response = await client.notificationCreate(request);
+    this.notification = response.notification;
   }
 }
