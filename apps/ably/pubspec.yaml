@@ -43,6 +43,8 @@ dependencies:
     path: ../../features/feat_onboarding
   feat_locations:
     path: ../../features/feat_locations
+  feat_notifications:
+    path: ../../features/feat_notifications
   feat_survey:
     path: ../../features/feat_survey
   lib_di:
