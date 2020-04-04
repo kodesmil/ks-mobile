@@ -19,8 +19,6 @@ final apps = [
   'apps/ably',
   'apps/motim_fit',
   'apps/legobook',
-  'landings/land_motim',
-  'landings/land_fotosmil',
   'landings/land_kodesmil',
 ];
 

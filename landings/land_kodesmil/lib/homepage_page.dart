@@ -3,8 +3,7 @@ import 'package:flutter_widgets/flutter_widgets.dart';
 import 'package:land_kodesmil/widgets/content.dart';
 import 'package:land_kodesmil/widgets/footer.dart';
 import 'package:land_kodesmil/widgets/headers.dart';
-import 'package:lib_lego/homepage/contact.dart';
-import 'package:lib_lego/spaces.dart';
+import 'package:lib_lego/lib_lego.dart';
 
 class HomepagePage extends StatefulWidget {
   @override
@@ -60,7 +59,6 @@ class _HomepagePageState extends State<HomepagePage> {
 
   @override
   Widget build(BuildContext context) {
-    ;
     return Scaffold(
       body: ScrollablePositionedList.builder(
         itemScrollController: controller,

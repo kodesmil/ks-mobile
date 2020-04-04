@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lib_lego/dimensions.dart';
-import 'package:lib_lego/spaces.dart';
+import 'package:lib_lego/lib_lego.dart';
 import 'package:responsive/responsive.dart';
 
 class ContentWidget extends StatelessWidget {
@@ -117,7 +116,7 @@ class FeatureWidget extends StatelessWidget {
           KsSpace.xs(),
           Text(
             header,
-            style: Theme.of(context).textTheme.title.copyWith(
+            style: Theme.of(context).textTheme.headline6.copyWith(
                   color: Theme.of(context).colorScheme.onBackground,
                 ),
           ),
@@ -125,7 +124,7 @@ class FeatureWidget extends StatelessWidget {
           Text(
             content,
             textAlign: TextAlign.justify,
-            style: Theme.of(context).textTheme.body1.copyWith(
+            style: Theme.of(context).textTheme.bodyText2.copyWith(
                   color: Theme.of(context).colorScheme.onBackground,
                 ),
           ),
@@ -153,28 +152,28 @@ class ReasonsWidget extends StatelessWidget {
         children: [
           Text(
             '5 reasons why',
-            style: textTheme.display1.copyWith(
+            style: textTheme.headline4.copyWith(
               color: colorScheme.onBackground,
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
             'you should',
-            style: textTheme.display1.copyWith(
+            style: textTheme.headline4.copyWith(
               color: colorScheme.onBackground,
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
             'cooperate',
-            style: textTheme.display1.copyWith(
+            style: textTheme.headline4.copyWith(
               color: colorScheme.primary,
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
             'with us!',
-            style: textTheme.display1.copyWith(
+            style: textTheme.headline4.copyWith(
               color: colorScheme.onBackground,
               fontWeight: FontWeight.bold,
             ),

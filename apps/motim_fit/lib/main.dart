@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:kodesmil_locale/localizations.dart';
-import 'package:lib_lego/themes.dart';
+import 'package:lib_lego/lib_lego.dart';
 import 'package:motim_fit/injector.dart';
 
 import 'routes.dart';

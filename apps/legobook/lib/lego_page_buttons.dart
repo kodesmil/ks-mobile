@@ -1,8 +1,6 @@
-import 'package:legobook/lego_page.dart';
 import 'package:flutter/material.dart';
-import 'package:lib_lego/checkboxes.dart';
-import 'package:lib_lego/dropdown_button.dart';
-import 'package:lib_lego/popup_menu.dart';
+import 'package:legobook/lego_page.dart';
+import 'package:lib_lego/lib_lego.dart';
 
 class LegoButtonsPage extends StatelessWidget {
   @override

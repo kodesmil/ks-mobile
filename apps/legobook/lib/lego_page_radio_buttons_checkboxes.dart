@@ -1,7 +1,6 @@
-import 'package:legobook/lego_page.dart';
 import 'package:flutter/material.dart';
-import 'package:lib_lego/checkboxes.dart';
-import 'package:lib_lego/radio_buttons.dart';
+import 'package:legobook/lego_page.dart';
+import 'package:lib_lego/lib_lego.dart';
 
 class LegoRadioButtonsCheckboxesPage extends StatelessWidget {
   @override

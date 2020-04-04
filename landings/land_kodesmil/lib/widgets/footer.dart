@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lib_lego/clip_paths.dart';
-import 'package:lib_lego/dimensions.dart';
-import 'package:lib_lego/spaces.dart';
-import 'package:lib_lego/texts.dart';
-import 'package:kodesmil_locale/localizations.dart';
-import 'package:lib_lego/gradients.dart';
+import 'package:lib_lego/lib_lego.dart';
 
 class FooterWidget extends StatelessWidget {
   @override
@@ -36,7 +31,7 @@ class FooterWidget extends StatelessWidget {
             child: Text(
               'Made with ❤️ in Trondheim, Norway and Lodz, Poland',
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.body2.copyWith(
+              style: Theme.of(context).textTheme.bodyText1.copyWith(
                     color: Theme.of(context).colorScheme.onPrimary,
                   ),
             ),

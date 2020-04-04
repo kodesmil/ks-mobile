@@ -48,9 +48,6 @@ class _LocationsWidgetState extends State<LocationsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final store = Provider.of<LocationsStore>(context);
-    return Column(
-      children: <Widget>[],
-    );
+    return Container();
   }
 }

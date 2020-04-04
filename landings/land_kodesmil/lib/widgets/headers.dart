@@ -1,12 +1,9 @@
+// ignore: avoid_web_libraries_in_flutter
 import 'dart:html';
 
 import 'package:flutter/material.dart';
-import 'package:lib_lego/clip_paths.dart';
-import 'package:lib_lego/dimensions.dart';
-import 'package:lib_lego/gradients.dart';
-import 'package:lib_lego/spaces.dart';
-import 'package:lib_lego/texts.dart';
 import 'package:kodesmil_locale/localizations.dart';
+import 'package:lib_lego/lib_lego.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 class HeaderWidget extends StatelessWidget {
@@ -126,7 +123,7 @@ class _HeaderWhoWeAreWidget extends StatelessWidget {
                         'software solutions and build them from scratch. '
                         'But above all – whatever we agree upon, we’re completely '
                         'capable of carrying out',
-                        style: Theme.of(context).textTheme.body2.copyWith(
+                        style: Theme.of(context).textTheme.bodyText1.copyWith(
                               color: Theme.of(context).colorScheme.onBackground,
                             ),
                       ),
@@ -201,7 +198,7 @@ class HeaderLeftWidget extends StatelessWidget {
           children: <Widget>[
             Text(
               KsLoc.of(context).ksMotto(),
-              style: Theme.of(context).textTheme.display3.copyWith(
+              style: Theme.of(context).textTheme.headline2.copyWith(
                     color: Theme.of(context).colorScheme.onPrimary,
                   ),
               maxLines: 3,
@@ -228,21 +225,21 @@ class _WhoWeAreText extends StatelessWidget {
     return RichText(
       text: TextSpan(
         text: 'Who are',
-        style: Theme.of(context).textTheme.display1.copyWith(
+        style: Theme.of(context).textTheme.headline4.copyWith(
               color: Theme.of(context).colorScheme.onBackground,
               fontWeight: FontWeight.bold,
             ),
         children: [
           TextSpan(
             text: ' we',
-            style: Theme.of(context).textTheme.display1.copyWith(
+            style: Theme.of(context).textTheme.headline4.copyWith(
                   color: Theme.of(context).colorScheme.primary,
                   fontWeight: FontWeight.bold,
                 ),
           ),
           TextSpan(
             text: '?',
-            style: Theme.of(context).textTheme.display1.copyWith(
+            style: Theme.of(context).textTheme.headline4.copyWith(
                   color: Theme.of(context).colorScheme.onBackground,
                   fontWeight: FontWeight.bold,
                 ),
@@ -266,14 +263,14 @@ class KodeSmilLogo extends StatelessWidget {
         KsSpace.xs(),
         KsText(
           'Kode',
-          style: Theme.of(context).textTheme.display1.copyWith(
+          style: Theme.of(context).textTheme.headline4.copyWith(
                 fontWeight: FontWeight.w200,
                 color: Theme.of(context).colorScheme.onPrimary,
               ),
         ),
         KsText(
           'Smil',
-          style: Theme.of(context).textTheme.display1.copyWith(
+          style: Theme.of(context).textTheme.headline4.copyWith(
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).colorScheme.onPrimary,
               ),

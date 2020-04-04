@@ -1,11 +1,7 @@
 import 'package:feat_auth/feat_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:lib_lego/app_bars.dart';
-import 'package:lib_lego/navigations.dart';
-import 'package:lib_lego/progress_indicators.dart';
-import 'package:lib_lego/snack_bars.dart';
-import 'package:lib_lego/textfields.dart';
+import 'package:lib_lego/lib_lego.dart';
 import 'package:provider/provider.dart';
 
 class SignUpPage extends StatefulWidget {

@@ -1,9 +1,6 @@
-import 'package:feat_activities/feat_activities.dart';
-import 'package:feat_auth/feat_auth.dart';
 import 'package:feat_locations/feat_locations.dart';
 import 'package:feat_notifications/feat_notifications.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -13,8 +10,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void didChangeDependencies() {
-    final activitiesStore = Provider.of<ActivitiesStore>(context);
-    final googleStore = Provider.of<GoogleSignInStore>(context);
+    //final activitiesStore = Provider.of<ActivitiesStore>(context);
+    //final googleStore = Provider.of<GoogleSignInStore>(context);
     // googleStore.signInSilently();
     /*
     if (googleStore.currentUser != null) {

@@ -1,11 +1,11 @@
-import 'package:legobook/lego_page_spaces.dart';
-import 'package:legobook/lego_page_texts.dart';
-import 'package:legobook/lego_page_progress.dart';
-import 'package:legobook/lego_page_buttons.dart';
-import 'package:legobook/lego_page_radio_buttons_checkboxes.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:lib_lego/rare/style_switcher.dart';
+import 'package:legobook/lego_page_buttons.dart';
+import 'package:legobook/lego_page_progress.dart';
+import 'package:legobook/lego_page_radio_buttons_checkboxes.dart';
+import 'package:legobook/lego_page_spaces.dart';
+import 'package:legobook/lego_page_texts.dart';
+import 'package:lib_lego/lib_lego.dart';
 
 class LegoPage extends StatelessWidget {
   @override

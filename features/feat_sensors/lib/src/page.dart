@@ -2,8 +2,7 @@ import 'package:feat_sensors/feat_sensors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
-import 'package:lib_lego/buttons.dart';
-import 'package:lib_lego/spaces.dart';
+import 'package:lib_lego/lib_lego.dart';
 
 class SensorsPage extends StatefulWidget {
   SensorsPage();

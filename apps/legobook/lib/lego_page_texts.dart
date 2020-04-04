@@ -1,6 +1,6 @@
-import 'package:legobook/lego_page.dart';
 import 'package:flutter/material.dart';
-import 'package:lib_lego/texts.dart';
+import 'package:legobook/lego_page.dart';
+import 'package:lib_lego/lib_lego.dart';
 
 class LegoTextsPage extends StatelessWidget {
   @override
@@ -8,16 +8,16 @@ class LegoTextsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            KsText.display1('Display 1'),
-            KsText.display2('Display 2'),
-            KsText.display3('Display 3'),
-            KsText.display4('Display 4'),
-            KsText.body1('Body 1'),
-            KsText.body2('Body 2'),
-            KsText.title('Title'),
-            KsText.subtitle('Subtitle'),
-            KsText.headline('Headline'),
-            KsText.subhead('Subhead'),
+            KsText.headline4('Headline 4'),
+            KsText.headline3('Headline 3'),
+            KsText.headline2('Headline 2'),
+            KsText.headline1('Headline 1'),
+            KsText.bodyText2('Body 1'),
+            KsText.bodyText1('Body Text 1'),
+            KsText.headline6('Title'),
+            KsText.subtitle2('Subtitle'),
+            KsText.headline5('Headline'),
+            KsText.subtitle1('Subtitle 1'),
             KsText.button('Button'),
           ],
         ),

@@ -6,8 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 import 'package:kodesmil_locale/localizations.dart';
-import 'package:lib_lego/progress_indicators.dart';
-import 'package:lib_lego/texts.dart';
+import 'package:lib_lego/lib_lego.dart';
 import 'package:motim_fit/ui/chart.dart';
 
 class HomeWidget extends StatefulWidget {
@@ -95,7 +94,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             top: 64,
             bottom: 16,
           ),
-          child: KsText.display2(KsLoc.of(context).gJournal()),
+          child: KsText.headline3(KsLoc.of(context).gJournal()),
         ),
         Expanded(
           child: Observer(
@@ -137,7 +136,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   softWrap: false,
-                  style: Theme.of(context).textTheme.title,
+                  style: Theme.of(context).textTheme.headline6,
                 ),
                 subtitle: Text(
                   '${daily?.points?.toInt() ?? ''} points, '
@@ -145,7 +144,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   softWrap: false,
-                  style: Theme.of(context).textTheme.body1,
+                  style: Theme.of(context).textTheme.bodyText2,
                 ),
               );
             },
@@ -171,7 +170,7 @@ class HomeChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorFn = (_, __) => charts.ColorUtil.fromDartColor(
-          Theme.of(context).textTheme.body1.color.withAlpha(128),
+          Theme.of(context).textTheme.bodyText2.color.withAlpha(128),
         );
     return Container(
       height: 100,
@@ -248,7 +247,7 @@ class _HomePageState extends State<HomePage> {
                                                 '',
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .display2,
+                                                .headline3,
                                           ),
                                           Text(
                                             'points this month',

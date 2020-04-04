@@ -1,6 +1,6 @@
+import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
 
 class TimeSeriesBar extends StatelessWidget {
   final List<charts.Series<TimeSeriesSales, DateTime>> seriesList;
@@ -21,7 +21,7 @@ class TimeSeriesBar extends StatelessWidget {
           labelJustification: charts.TickLabelJustification.outside,
           labelStyle: new charts.TextStyleSpec(
             color: charts.ColorUtil.fromDartColor(
-              Theme.of(context).textTheme.body1.color,
+              Theme.of(context).textTheme.bodyText2.color,
             ),
           ),
           lineStyle: new charts.LineStyleSpec(

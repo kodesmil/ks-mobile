@@ -2,7 +2,7 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:kodesmil_locale/localizations.dart';
 import 'package:legobook/lego_page.dart';
-import 'package:lib_lego/themes.dart';
+import 'package:lib_lego/lib_lego.dart';
 
 void main() => runApp(MyApp());
 
