@@ -58,7 +58,7 @@ platform :ios do
   end
 
   desc "[QA] Build & sign iOS app"
-  lane :build_qa do |options|
+  lane :build_qa do
 
     install_certificates
 
@@ -87,7 +87,7 @@ platform :ios do
   end
 
   desc "[Prod] Build & sign iOS app"
-  lane :build_prod do |options|
+  lane :build_prod do
 
     install_certificates
 
@@ -115,7 +115,7 @@ platform :ios do
   end
 
   desc "Deploy QA Build"
-  lane :deploy_qa
+  lane :deploy_qa do
 
     build_qa
 
