@@ -115,7 +115,10 @@ platform :ios do
   end
 
   desc "Deploy QA Build"
-  lane :deploy_qa do |options|
+  lane :deploy_qa
+
+    build_qa
+
     firebase_app_distribution(
       app: firebase_project_id_qa,
       groups: "ios",
@@ -128,6 +131,7 @@ platform :ios do
       \n#{release_notes}",
       success: true
     )
+
   end
 
   desc "Deploy Prod Build"

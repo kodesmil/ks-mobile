@@ -27,7 +27,6 @@ jobs:
       script:
         - cd apps/ably/ios
         - bundle install
-        - bundle exec fastlane ios build_qa
         - bundle exec fastlane ios deploy_qa
 
     - stage: deploy_android_qa
@@ -52,7 +51,6 @@ jobs:
       script:
         - cd apps/ably/android
         - bundle install
-        - bundle exec fastlane android build_qa
         - bundle exec fastlane android deploy_qa
 
     - stage: deploy_ios_prod

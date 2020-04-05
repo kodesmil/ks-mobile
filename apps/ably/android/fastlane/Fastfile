@@ -63,6 +63,8 @@ platform :android do
     desc "Deploy QA Build"
     lane :deploy_qa do
 
+        build_qa
+
         firebase_app_distribution(
             app: firebase_project_id_qa,
             apk_path: "../build/app/outputs/apk/qa/release/app-qa-release.apk",
@@ -81,10 +83,6 @@ platform :android do
 
     desc "Deploy Prod Build"
     lane :deploy_prod do
-
-        Dir.chdir("../") do
-            sh("echo #{keystore} | base64 --decode >> android/app/release.keystore")
-        end
 
         Dir.chdir("../../") do
 

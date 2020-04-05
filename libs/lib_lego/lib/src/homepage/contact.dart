@@ -1,5 +1,5 @@
 // ignore: avoid_web_libraries_in_flutter
-import 'dart:js';
+// import 'dart:js';
 
 import 'package:flutter/material.dart';
 
@@ -182,13 +182,7 @@ class _ContactFormState extends State<ContactForm> {
               ),
             );
             Scaffold.of(ctx).showSnackBar(snackBar);
-            return context.callMethod(
-              'formv3',
-              [
-                email,
-                newsletterValue,
-              ],
-            );
+            return null;
           },
         )
       ],
