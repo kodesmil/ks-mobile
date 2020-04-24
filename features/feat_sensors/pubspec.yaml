@@ -8,7 +8,7 @@ environment:
   sdk: ">=2.6.0 <3.0.0"
 
 dependencies:
-  flutter_sensors: ^0.1.5
+  flutter_sensors: ^0.1.6
   csv: ^4.0.3
   flutter_email_sender: ^2.2.2
   path_provider: ^1.6.0

@@ -18,13 +18,14 @@ dependencies:
   smooth_star_rating: ^1.0.4+2
   crossplat_objectid: ^2.1.4
   firebase_auth: ^0.15.5+3
-  protobuf: ^1.0.1
   grpc: ^2.1.3
 
   lib_di:
     path: ../../libs/lib_di
   lib_lego:
     path: ../../libs/lib_lego
+  lib_services:
+    path: ../../libs/lib_services
   flutter:
     sdk: flutter
 

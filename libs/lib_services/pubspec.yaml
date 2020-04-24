@@ -1,0 +1,22 @@
+name: lib_services
+description: A new Flutter package project.
+author: KodeSmil authors
+homepage: kodesmil.com
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  protobuf: ^1.0.1
+  grpc: ^2.1.3
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+

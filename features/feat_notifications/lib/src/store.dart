@@ -4,11 +4,8 @@ import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:grpc/grpc.dart';
 import 'package:lib_di/lib_di.dart';
+import 'package:lib_services/lib_services.dart';
 import 'package:mobx/mobx.dart';
-
-import 'generated/github.com/kodesmil/go-patient-registry/pkg/pb/service.pbgrpc.dart';
-import 'generated/google/protobuf/timestamp.pb.dart';
-import 'generated/notification.pbgrpc.dart';
 
 part 'store.g.dart';
 
