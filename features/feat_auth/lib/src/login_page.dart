@@ -135,7 +135,7 @@ class _LoginPageState extends State<LoginPage> {
           onPressed: () async {
             store.validateAll();
             if (store.canLogin) {
-              store.login();
+              await store.login();
             } else {
               ksShowErrorMessage(context, 'Please fill in all fields');
             }

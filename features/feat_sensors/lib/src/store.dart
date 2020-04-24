@@ -6,7 +6,7 @@ import 'package:csv/csv.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_sensors/flutter_sensors.dart';
 import 'package:intl/intl.dart';
-import 'package:lib_di/stores/error/error_store.dart';
+import 'package:lib_di/lib_di.dart';
 import 'package:mobx/mobx.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -22,7 +22,7 @@ class AblySensorEvent {
 
   @override
   String toString() {
-    final timestamp = DateFormat("yyyy-MM-dd HH:mm:ss").format(recordedAt);
+    final timestamp = DateFormat('yyyy-MM-dd HH:mm:ss').format(recordedAt);
     return '$timestamp     '
         '${event.data.map((e) => e.toStringAsFixed(2)).join(' - ')}      '
         '(${event.accuracy.toStringAsFixed(2)})';
@@ -64,8 +64,8 @@ abstract class _SensorsStore with Store {
 
   @action
   Future sendAsEmail() async {
-    final timestamp = DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now());
-    Directory ablyDir = await getTemporaryDirectory()
+    final timestamp = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
+    var ablyDir = await getTemporaryDirectory()
       ..createTemp('ably');
     final acFile = await csvAccelerometer(ablyDir);
     final gsFile = await csvGyroscope(ablyDir);
@@ -79,7 +79,7 @@ abstract class _SensorsStore with Store {
     encoder.addFile(mgFile);
     encoder.close();
 
-    final Email email = Email(
+    final email = Email(
       subject: 'User data <$timestamp>',
       recipients: ['deepakpalaksha22@gmail.com'],
       attachmentPath: zipFilePath,
@@ -133,7 +133,7 @@ abstract class _SensorsStore with Store {
 
   @action
   Future stopAccelerometer() async {
-    _$accelerometer.cancel();
+    await _$accelerometer.cancel();
   }
 
   @action
@@ -152,7 +152,7 @@ abstract class _SensorsStore with Store {
 
   @action
   Future stopGyroscope() async {
-    _$gyroscope.cancel();
+    await _$gyroscope.cancel();
   }
 
   @action
@@ -171,13 +171,13 @@ abstract class _SensorsStore with Store {
 
   @action
   Future stopMagnetometer() async {
-    _$magnetometer.cancel();
+    await _$magnetometer.cancel();
   }
 
   @action
   Future close() async {
-    stopAccelerometer();
-    stopGyroscope();
-    stopMagnetometer();
+    await stopAccelerometer();
+    await stopGyroscope();
+    await stopMagnetometer();
   }
 }

@@ -8,7 +8,7 @@ part 'google_sign_in_store.g.dart';
 class GoogleSignInStore = _GoogleSignInStore with _$GoogleSignInStore;
 
 abstract class _GoogleSignInStore with Store {
-  GoogleSignIn _googleSignIn;
+  final GoogleSignIn _googleSignIn;
 
   @observable
   GoogleSignInAccount currentUser;

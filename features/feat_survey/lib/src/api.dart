@@ -2,8 +2,7 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:lib_di/data/network/dio_client.dart';
-import 'package:lib_di/data/network/exceptions/network_exceptions.dart';
+import 'package:lib_di/lib_di.dart';
 
 import 'model.dart';
 

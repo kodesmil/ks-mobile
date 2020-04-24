@@ -40,13 +40,13 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
       return value * (progress / delay);
     }
 
-    double calculatedFirstDepth =
+    var calculatedFirstDepth =
         stagger(firstDepth, _animationController.value, 0.25);
-    double calculatedSecondDepth =
+    var calculatedSecondDepth =
         stagger(secondDepth, _animationController.value, 0.5);
-    double calculatedThirdDepth =
+    var calculatedThirdDepth =
         stagger(thirdDepth, _animationController.value, 0.75);
-    double calculatedFourthDepth =
+    var calculatedFourthDepth =
         stagger(fourthDepth, _animationController.value, 1);
 
     return Container(

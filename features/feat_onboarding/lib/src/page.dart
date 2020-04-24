@@ -62,8 +62,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
   int _currentPage = 0;
 
   List<Widget> _buildPageIndicator() {
-    List<Widget> list = [];
-    for (int i = 0; i < _numPages; i++) {
+    var list = <Widget>[];
+    for (var i = 0; i < _numPages; i++) {
       list.add(i == _currentPage ? _indicator(true) : _indicator(false));
     }
     return list;
@@ -101,17 +101,17 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   });
                 },
                 children: <Widget>[
-                  new OnboardingFeatureWidget(
+                  OnboardingFeatureWidget(
                     text1: 'Be active with \n',
                     text2: 'Abli Health!',
                     image: 'assets/images/onboarding0.svg',
                   ),
-                  new OnboardingFeatureWidget(
+                  OnboardingFeatureWidget(
                     text1: 'Get out of\nthe house and\ncollect ',
                     text2: 'coupons.',
                     image: 'assets/images/onboarding1.svg',
                   ),
-                  new OnboardingFeatureWidget(
+                  OnboardingFeatureWidget(
                     text1: 'Abli Health\nfor ',
                     text2: 'everyone!',
                     image: 'assets/images/onboarding2.svg',

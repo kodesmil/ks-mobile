@@ -20,13 +20,13 @@ class _GoogleSignInPageState extends State<GoogleSignInPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            "Connect the app with Google",
+            'Connect the app with Google',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.headline6,
           ),
           KsSpace.xs(),
           Text(
-            "Bla bla bla",
+            'Bla bla bla',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyText2,
           ),

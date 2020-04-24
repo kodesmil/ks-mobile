@@ -1,6 +1,6 @@
 import 'package:feat_auth/feat_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:lib_di/stores/error/error_store.dart';
+import 'package:lib_di/lib_di.dart';
 import 'package:mobx/mobx.dart';
 import 'package:validators/validators.dart';
 
@@ -86,7 +86,7 @@ abstract class _LoginStore with Store {
     if (value.isEmpty) {
       formErrorStore.password = "Password can't be empty";
     } else if (value.length < 6) {
-      formErrorStore.password = "Password must be at-least 6 characters long";
+      formErrorStore.password = 'Password must be at-least 6 characters long';
     } else {
       formErrorStore.password = null;
     }

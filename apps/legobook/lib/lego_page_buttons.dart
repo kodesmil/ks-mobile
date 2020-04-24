@@ -16,7 +16,7 @@ class LegoButtonsPage extends StatelessWidget {
             FlatButton(
               onPressed: () {},
               child: const Text(
-                "Flat Button",
+                'Flat Button',
                 style: TextStyle(fontSize: 20),
               ),
             ),
@@ -27,7 +27,7 @@ class LegoButtonsPage extends StatelessWidget {
             OutlineButton(
               onPressed: () {},
               child: const Text(
-                "Outline Button",
+                'Outline Button',
                 style: TextStyle(fontSize: 20),
               ),
             ),

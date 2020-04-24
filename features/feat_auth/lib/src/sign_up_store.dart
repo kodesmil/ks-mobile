@@ -1,6 +1,6 @@
 import 'package:feat_auth/feat_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:lib_di/stores/error/error_store.dart';
+import 'package:lib_di/lib_di.dart';
 import 'package:mobx/mobx.dart';
 import 'package:validators/validators.dart';
 
@@ -73,7 +73,7 @@ abstract class _SignUpStore with Store {
     if (value.isEmpty) {
       signUpErrorStore.password = "Password can't be empty";
     } else if (value.length < 6) {
-      signUpErrorStore.password = "Password must be at-least 6 characters long";
+      signUpErrorStore.password = 'Password must be at-least 6 characters long';
     } else {
       signUpErrorStore.password = null;
     }
@@ -83,7 +83,7 @@ abstract class _SignUpStore with Store {
   Future signUp() async {
     loading = true;
     try {
-      firebaseAuth.createUserWithEmailAndPassword(
+      await firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );

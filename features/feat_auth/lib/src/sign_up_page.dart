@@ -120,7 +120,7 @@ class _SignUpPageState extends State<SignUpPage> {
       onPressed: () async {
         store.validateAll();
         if (store.canSignUp) {
-          store.signUp();
+          await store.signUp();
         } else {
           ksShowErrorMessage(context, 'Please fill in all fields');
         }

@@ -21,7 +21,7 @@ class HomeWidget extends StatefulWidget {
 const String testDevice = 'YOUR_DEVICE_ID';
 
 class _HomeWidgetState extends State<HomeWidget> {
-  FitStore _fitStore;
+  final FitStore _fitStore;
 
   _HomeWidgetState(this._fitStore);
 
@@ -37,8 +37,8 @@ class _HomeWidgetState extends State<HomeWidget> {
       String rewardType,
       int rewardAmount,
     }) {
-      print("RewardedVideoAd event $event");
-      print("Reward $rewardAmount");
+      print('RewardedVideoAd event $event');
+      print('Reward $rewardAmount');
     };
   }
 
@@ -59,7 +59,7 @@ class _HomeWidgetState extends State<HomeWidget> {
       size: AdSize.fullBanner,
       targetingInfo: targetingInfo,
       listener: (MobileAdEvent event) {
-        print("BannerAd event $event");
+        print('BannerAd event $event');
       },
     );
   }
@@ -69,7 +69,7 @@ class _HomeWidgetState extends State<HomeWidget> {
       adUnitId: InterstitialAd.testAdUnitId,
       targetingInfo: targetingInfo,
       listener: (MobileAdEvent event) {
-        print("InterstitialAd event $event");
+        print('InterstitialAd event $event');
       },
     );
   }
@@ -152,8 +152,7 @@ class _HomeWidgetState extends State<HomeWidget> {
         : Center(child: Text('No posts found'));
   }
 
-  // General Methods:-----------------------------------------------------------
-  showErrorMessage(BuildContext context, String message) {
+  Container showErrorMessage(BuildContext context, String message) {
     return Container();
   }
 }
@@ -176,7 +175,7 @@ class HomeChart extends StatelessWidget {
       height: 100,
       child: TimeSeriesBar(
         [
-          new charts.Series<TimeSeriesSales, DateTime>(
+          charts.Series<TimeSeriesSales, DateTime>(
             id: 'Sales',
             colorFn: colorFn,
             fillColorFn: colorFn,

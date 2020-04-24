@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:feat_activities/src/api.dart';
 import 'package:feat_auth/feat_auth.dart';
-import 'package:lib_di/stores/error/error_store.dart';
+import 'package:lib_di/lib_di.dart';
 import 'package:mobx/mobx.dart';
 
 part 'store.g.dart';

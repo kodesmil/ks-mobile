@@ -4,47 +4,47 @@ import 'package:flutter/material.dart';
 import 'color_schemes.dart';
 
 class KsTheme {
-  static motimLight() => KsTheme.base(
+  static ThemeData motimLight() => KsTheme.base(
         KsColorScheme.motimLight(),
         KsTextTheme.motim(KsColorScheme.motimLight()),
       );
 
-  static motimDark() => KsTheme.base(
+  static ThemeData motimDark() => KsTheme.base(
         KsColorScheme.motimDark(),
         KsTextTheme.motim(KsColorScheme.motimDark()),
       );
 
-  static ablyLight() => KsTheme.base(
+  static ThemeData ablyLight() => KsTheme.base(
         KsColorScheme.motimLight(),
         KsTextTheme.motim(KsColorScheme.motimLight()),
       );
 
-  static ablyDark() => KsTheme.base(
+  static ThemeData ablyDark() => KsTheme.base(
         KsColorScheme.motimDark(),
         KsTextTheme.motim(KsColorScheme.motimDark()),
       );
 
-  static fotosmilLight() => KsTheme.base(
+  static ThemeData fotosmilLight() => KsTheme.base(
         KsColorScheme.motimLight(),
         KsTextTheme.fotosmil(KsColorScheme.motimLight()),
       );
 
-  static fotosmilDark() => KsTheme.base(
+  static ThemeData fotosmilDark() => KsTheme.base(
         KsColorScheme.motimDark(),
         KsTextTheme.fotosmil(KsColorScheme.motimDark()),
       );
 
-  static kodesmilLight() => KsTheme.base(
+  static ThemeData kodesmilLight() => KsTheme.base(
         KsColorScheme.kodesmilLight(),
         KsTextTheme.kodesmil(KsColorScheme.kodesmilLight()),
       );
 
-  static kodesmilDark() => KsTheme.base(
+  static ThemeData kodesmilDark() => KsTheme.base(
         KsColorScheme.kodesmilDark(),
         KsTextTheme.kodesmil(KsColorScheme.kodesmilDark()),
       );
 
-  static base(ColorScheme colorScheme, TextTheme textTheme) {
+  static ThemeData base(ColorScheme colorScheme, TextTheme textTheme) {
     final focusColor = Colors.black.withOpacity(0.12);
     return ThemeData(
       colorScheme: colorScheme,

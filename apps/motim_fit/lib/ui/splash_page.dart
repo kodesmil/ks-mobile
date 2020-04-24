@@ -21,14 +21,14 @@ class _SplashPageState extends State<SplashPage> {
     );
   }
 
-  navigate() async {
+  Future navigate() async {
     final storage = Provider.of<AuthStorage>(context);
     final onboardingDisplayed = await storage.onboardingDisplayed;
-    Navigator.of(context).pushReplacementNamed('/google_sign_in');
+    await Navigator.of(context).pushReplacementNamed('/google_sign_in');
     if (!onboardingDisplayed) {
-      Navigator.of(context).pushReplacementNamed('/onboarding');
+      await Navigator.of(context).pushReplacementNamed('/onboarding');
     } else {
-      Navigator.of(context).pushReplacementNamed('/login');
+      await Navigator.of(context).pushReplacementNamed('/login');
     }
   }
 }

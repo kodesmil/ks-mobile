@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+export PROTOBUF=/home/murbanski-personal/KodeSmil/protobuf
+export GOOGLEAPIS=/home/murbanski-personal/KodeSmil/googleapis
+export S_APIS=/home/murbanski-personal/go/src/github.com/kodesmil/go-patient-registry/pkg/pb
+export N_APIS=/home/murbanski-personal/KodeSmil/universe/go_notifications/proto
+export GO_GATEWAY_API=/home/murbanski-personal/go/src/github.com/grpc-ecosystem/grpc-gateway/
+export INFO_BLOCKS_API=/home/murbanski-personal/go/src/github.com/infobloxopen/
+
+home=/home/murbanski-personal/go/src
+
 if [ ! -d "$PROTOBUF" ]; then
   echo "Please set the PROTOBUF environment variable to your clone of google/protobuf."
   exit 1
@@ -15,7 +24,7 @@ if [ ! -d "$N_APIS" ]; then
   exit 1
 fi
 
-PROTOC="protoc --dart_out=grpc:lib/src/generated -I$PROTOBUF/src -I$GOOGLEAPIS -I$GO_GATEWAY_API -I$INFO_BLOCKS_API -I$S_APIS -I$N_APIS"
+PROTOC="protoc --dart_out=grpc:lib/src/generated -I$PROTOBUF/src -I$GOOGLEAPIS -I$GO_GATEWAY_API -I$home -I$S_APIS -I$N_APIS"
 
 $PROTOC $GOOGLEAPIS/google/logging/v2/logging.proto
 $PROTOC $GOOGLEAPIS/google/logging/v2/log_entry.proto

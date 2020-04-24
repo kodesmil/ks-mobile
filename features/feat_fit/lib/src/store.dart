@@ -2,8 +2,7 @@ import 'dart:collection';
 
 import 'package:fit_kit/fit_kit.dart';
 import 'package:intl/intl.dart';
-import 'package:lib_di/stores/error/error_store.dart';
-import 'package:lib_di/utils/dio/dio_error_util.dart';
+import 'package:lib_di/lib_di.dart';
 import 'package:mobx/mobx.dart';
 
 import 'models/fit.dart';
@@ -59,8 +58,8 @@ abstract class _FitStore with Store {
   ) {
     final stepsMap = _mapFitData(stepsData);
     final distanceMap = _mapFitData(distanceData);
-    final List<FitDaily> dailies = [];
-    for (String key in distanceMap.keys) {
+    final dailies = [];
+    for (var key in distanceMap.keys) {
       final list = distanceMap[key];
       final stepsList = stepsMap[key];
       final distance = list.fold(0, (previous, element) {
@@ -94,9 +93,9 @@ abstract class _FitStore with Store {
   }
 
   HashMap<String, List<FitData>> _mapFitData(List<FitData> data) {
-    final HashMap<String, List<FitData>> result = HashMap();
+    final result = HashMap();
     data.sort((a, b) => b.dateFrom.compareTo(a.dateFrom));
-    for (FitData single in data) {
+    for (var single in data) {
       final key = DateFormat.yMMMMd().format(single.dateFrom);
       if (result.containsKey(key)) {
         final list = result[key];

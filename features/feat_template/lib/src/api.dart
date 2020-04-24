@@ -1,4 +1,4 @@
-import 'package:lib_di/data/network/dio_client.dart';
+import 'package:lib_di/lib_di.dart';
 
 class ActivitiesApi {
   ActivitiesApi(this.dioClient);

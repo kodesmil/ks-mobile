@@ -2,9 +2,8 @@ import 'dart:async';
 
 import 'package:crossplat_objectid/crossplat_objectid.dart';
 import 'package:feat_auth/feat_auth.dart';
-import 'package:flutter_background_geolocation/flutter_background_geolocation'
-    '.dart' as bg;
-import 'package:lib_di/stores/error/error_store.dart';
+import 'package:flutter_background_geolocation/flutter_background_geolocation.dart' as bg;
+import 'package:lib_di/lib_di.dart';
 import 'package:mobx/mobx.dart';
 
 import 'api.dart';

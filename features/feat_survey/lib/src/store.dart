@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:crossplat_objectid/crossplat_objectid.dart';
 import 'package:feat_survey/feat_survey.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:lib_di/stores/error/error_store.dart';
+import 'package:lib_di/lib_di.dart';
 import 'package:mobx/mobx.dart';
 
 import 'model.dart';
