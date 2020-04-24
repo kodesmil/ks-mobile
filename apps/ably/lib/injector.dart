@@ -36,7 +36,7 @@ class Injector extends StatelessWidget {
           create: (_) => ActivitiesApi(
             DioClient(
               Dio()
-                ..options.baseUrl = 'https://activities.dev.api.kodesmil.com'
+                ..options.baseUrl = 'https://activities.qa.api.kodesmil.com'
                 ..interceptors.add(LogInterceptor(responseBody: true)),
             ),
           ),
@@ -45,7 +45,7 @@ class Injector extends StatelessWidget {
           create: (_) => LocationsApi(
             DioClient(
               Dio()
-                ..options.baseUrl = 'https://locations.dev.api.kodesmil.com'
+                ..options.baseUrl = 'https://locations.qa.api.kodesmil.com'
                 ..interceptors.add(LogInterceptor(responseBody: true)),
             ),
           ),
@@ -54,7 +54,7 @@ class Injector extends StatelessWidget {
           update: (_, dep, __) => SurveyApi(
             DioClient(
               Dio()
-                ..options.baseUrl = 'https://survey.dev.api.kodesmil.com'
+                ..options.baseUrl = 'https://survey.qa.api.kodesmil.com'
                 ..interceptors.add(LogInterceptor(responseBody: true)),
             ),
             dep,
@@ -116,7 +116,7 @@ class Injector extends StatelessWidget {
             dep,
             NotificationServiceClient(
               ClientChannel(
-                'notifications.dev.api.kodesmil.com',
+                'notifications.qa.api.kodesmil.com',
                 port: 443,
                 options: const ChannelOptions(
                   credentials: ChannelCredentials.secure(),

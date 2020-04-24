@@ -1,2 +1,2 @@
-json_key_file("google_play_login.json")
-package_name("com.kodesmil.motim")
+json_key_file('google_play_login.json')
+package_name('com.kodesmil.motim')

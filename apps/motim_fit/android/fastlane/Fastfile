@@ -21,10 +21,10 @@ slack_url = ENV['MOTIM_SLACK']
 
 release_notes = changelog_from_git_commits(
     commits_count: 10,
-    pretty: "✨ %s%nBy %an, %ar%n",
-    date_format: "short",
+    pretty: '✨ %s%nBy %an, %ar%n',
+    date_format: 'short',
     match_lightweight_tag: false,
-    merge_commit_filtering: "exclude_merges"
+    merge_commit_filtering: 'exclude_merges'
 )
 
 default_platform(:android)
@@ -32,109 +32,109 @@ default_platform(:android)
 platform :android do
 
     before_all do
-        ENV["SLACK_URL"] = slack_url
+        ENV['SLACK_URL'] = slack_url
     end
 
-    desc "Runs all the tests"
+    desc 'Runs all the tests'
     lane :test do
-        gradle(task: "test")
+        gradle(task: 'test')
     end
 
-    desc "Build QA Build"
+    desc 'Build QA Build'
     lane :build_qa do
 
-        Dir.chdir("../../") do
+        Dir.chdir('../../') do
             sh(
-                "flutter",
-                "build",
-                "apk",
-                "--flavor",
-                "qa",
-                "--target",
-                "lib/main_qa.dart",
-                "--release",
-                "--verbose",
-                "--build-number",
-                "#{version_code}",
+                'flutter',
+                'build',
+                'apk',
+                '--flavor',
+                'qa',
+                '--target',
+                'lib/main_qa.dart',
+                '--release',
+                '--verbose',
+                '--build-number',
+                '#{version_code}',
             )
         end
     end
 
-    desc "Deploy QA Build"
+    desc 'Deploy QA Build'
     lane :deploy_qa do
 
         firebase_app_distribution(
             app: firebase_project_id_qa,
-            apk_path: "../build/app/outputs/apk/qa/release/app-qa-release.apk",
+            apk_path: '../build/app/outputs/apk/qa/release/app-qa-release.apk',
             release_notes: release_notes,
             groups: 'android',
-            firebase_cli_path: "/usr/local/bin/firebase",
+            firebase_cli_path: '/usr/local/bin/firebase',
         )
     
         slack(
-            message: "[QA] #{app_name} for Android :rocket:
-            \n#{release_notes}",
+            message: '[QA] #{app_name} for Android :rocket:
+            \n#{release_notes}',
             success: true
         )
     end
 
-    desc "Deploy Prod Build"
+    desc 'Deploy Prod Build'
     lane :deploy_prod do
 
-        Dir.chdir("../") do
-            sh("echo #{keystore} | base64 --decode >> android/app/release.keystore")
+        Dir.chdir('../') do
+            sh('echo #{keystore} | base64 --decode >> android/app/release.keystore')
         end
 
-        Dir.chdir("../../") do
+        Dir.chdir('../../') do
 
             sh(
-                "flutter",
-                "build",
-                "apk",
-                "--flavor",
-                "prod",
-                "--target",
-                "lib/main_prod.dart",
-                "--release",
-                "--verbose",
-                "--build-number",
-                "#{version_code}",
+                'flutter',
+                'build',
+                'apk',
+                '--flavor',
+                'prod',
+                '--target',
+                'lib/main_prod.dart',
+                '--release',
+                '--verbose',
+                '--build-number',
+                '#{version_code}',
             )
 
             sh(
-                "flutter",
-                "build",
-                "appbundle",
-                "--flavor",
-                "prod",
-                "--target",
-                "lib/main_prod.dart",
-                "--release",
-                "--verbose",
-                "--build-number",
-                "#{version_code}",
+                'flutter',
+                'build',
+                'appbundle',
+                '--flavor',
+                'prod',
+                '--target',
+                'lib/main_prod.dart',
+                '--release',
+                '--verbose',
+                '--build-number',
+                '#{version_code}',
             )
 
             firebase_app_distribution(
                 app: firebase_project_id_qa,
-                apk_path: "build/app/outputs/apk/prod/release/app-prod-release.apk",
+                apk_path: 'build/app/outputs/apk/prod/release/app-prod-release.apk',
                 release_notes: release_notes,
                 groups: 'android',
-                firebase_cli_path: "/usr/local/bin/firebase",
+                firebase_cli_path: '/usr/local/bin/firebase',
             )
 
             upload_to_play_store(
                 track: 'alpha',
                 skip_upload_metadata: true,
-                aab: "build/app/outputs/bundle/prod/release/app-prod-release.aab",
+                aab: 'build/app/outputs/bundle/prod/release/app-prod-release.aab',
                 json_key: 'google_play_login.json'
             )
 
         end
 
         slack(
-            message: "[Live] #{app_name} for Android :rocket:
-            \n#{release_notes}",
+            message: '[Live] #{app_name} for Android :rocket:
+            \n#{release_notes}',
             success: true
         )
     end

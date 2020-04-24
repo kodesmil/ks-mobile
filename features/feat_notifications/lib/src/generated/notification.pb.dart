@@ -107,6 +107,47 @@ class Notification extends $pb.GeneratedMessage {
   $1.Timestamp ensureTime() => $_ensure(4);
 }
 
+class IDtoken extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('IDtoken',
+      package: const $pb.PackageName('notifications'),
+      createEmptyInstance: create)
+    ..aOS(1, 'token')
+    ..hasRequiredFields = false;
+
+  IDtoken._() : super();
+  factory IDtoken() => create();
+  factory IDtoken.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory IDtoken.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  IDtoken clone() => IDtoken()..mergeFromMessage(this);
+  IDtoken copyWith(void Function(IDtoken) updates) =>
+      super.copyWith((message) => updates(message as IDtoken));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static IDtoken create() => IDtoken._();
+  IDtoken createEmptyInstance() => create();
+  static $pb.PbList<IDtoken> createRepeated() => $pb.PbList<IDtoken>();
+  @$core.pragma('dart2js:noInline')
+  static IDtoken getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<IDtoken>(create);
+  static IDtoken _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get token => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set token($core.String v) {
+    $_setString(0, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasToken() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearToken() => clearField(1);
+}
+
 class NotificationCreateRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('NotificationCreateRequest',
       package: const $pb.PackageName('notifications'),
@@ -482,6 +523,7 @@ class NotificationsListRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('NotificationsListRequest',
       package: const $pb.PackageName('notifications'),
       createEmptyInstance: create)
+    ..aOM<IDtoken>(1, 'idtoken', subBuilder: IDtoken.create)
     ..hasRequiredFields = false;
 
   NotificationsListRequest._() : super();
@@ -507,6 +549,20 @@ class NotificationsListRequest extends $pb.GeneratedMessage {
   static NotificationsListRequest getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<NotificationsListRequest>(create);
   static NotificationsListRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  IDtoken get idtoken => $_getN(0);
+  @$pb.TagNumber(1)
+  set idtoken(IDtoken v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasIdtoken() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearIdtoken() => clearField(1);
+  @$pb.TagNumber(1)
+  IDtoken ensureIdtoken() => $_ensure(0);
 }
 
 class NotificationsListResponse extends $pb.GeneratedMessage {

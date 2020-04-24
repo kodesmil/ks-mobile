@@ -2,7 +2,10 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:feat_notifications/src/generated/google/protobuf/timestamp.pb.dart';
+import 'package:feat_notifications/src/generated/service.pb.dart';
+import 'package:feat_notifications/src/generated/service.pbgrpc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:grpc/grpc.dart';
 import 'package:lib_di/stores/error/error_store.dart';
 import 'package:mobx/mobx.dart';
 
@@ -17,12 +20,15 @@ abstract class _NotificationsStore with Store {
   final FirebaseAuth firebaseAuth;
 
   NotificationServiceClient client;
+  ProfilesClient pClient;
 
   _NotificationsStore(
     this.errorStore,
     this.firebaseAuth,
     this.client,
-  );
+  ) {
+
+  }
 
   @observable
   bool success = false;
@@ -32,6 +38,9 @@ abstract class _NotificationsStore with Store {
 
   @observable
   Notification notification;
+
+  @observable
+  Profile profile;
 
   ObservableStream<NotificationsListResponse> notifications;
 
@@ -50,7 +59,7 @@ abstract class _NotificationsStore with Store {
   }
 
   @action
-  Future createNotification() async {
+  Future createNotification2() async {
     final user = await firebaseAuth.currentUser();
     final notification = Notification.create()
       ..content = 'New notification: ${Random().nextInt(30)}'
@@ -60,5 +69,33 @@ abstract class _NotificationsStore with Store {
       ..notification = notification;
     final response = await client.notificationCreate(request);
     this.notification = response.notification;
+  }
+
+  @action
+  Future createNotification() async {
+    final user = await firebaseAuth.currentUser();
+    final token = await user.getIdToken();
+    this.pClient = ProfilesClient(
+      ClientChannel(
+        'grpc-clinic.qa.api.kodesmil.com',
+        port: 443,
+        options: const ChannelOptions(
+          credentials: ChannelCredentials.secure(),
+        ),
+      ),
+      options: CallOptions(
+          timeout: Duration(seconds: 30),
+          metadata: {
+            'authorization': 'Bearer ${token.token}'
+          }
+      ),
+    );
+    final profile = Profile.create()
+    ..notes = 'Jada'
+    ..name = 'MarcinjANO Ano';
+    final request = CreateProfileRequest.create()
+      ..payload = profile;
+    final response = await pClient.create(request);
+    this.profile = response.result;
   }
 }

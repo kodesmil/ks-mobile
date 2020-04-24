@@ -33,7 +33,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
         ),
         Observer(
           builder: (context) => Text(
-            store.notification?.content ?? 'Empty',
+            store.profile?.name ?? 'Empty',
           ),
         ),
         KsSpace.l(),

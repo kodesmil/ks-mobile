@@ -23,6 +23,13 @@ const Notification$json = const {
   ],
 };
 
+const IDtoken$json = const {
+  '1': 'IDtoken',
+  '2': const [
+    const {'1': 'token', '3': 1, '4': 1, '5': 9, '10': 'token'},
+  ],
+};
+
 const NotificationCreateRequest$json = const {
   '1': 'NotificationCreateRequest',
   '2': const [
@@ -116,6 +123,16 @@ const NotificationDeleteResponse$json = const {
 
 const NotificationsListRequest$json = const {
   '1': 'NotificationsListRequest',
+  '2': const [
+    const {
+      '1': 'idtoken',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.notifications.IDtoken',
+      '10': 'idtoken'
+    },
+  ],
 };
 
 const NotificationsListResponse$json = const {

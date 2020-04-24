@@ -21,10 +21,10 @@ slack_url = ENV['MOTIM_SLACK']
 
 release_notes = changelog_from_git_commits(
     commits_count: 10,
-    pretty: "✨ %s%nBy %an, %ar%n",
-    date_format: "short",
+    pretty: '✨ %s%nBy %an, %ar%n',
+    date_format: 'short',
     match_lightweight_tag: false,
-    merge_commit_filtering: "exclude_merges"
+    merge_commit_filtering: 'exclude_merges'
 )
 
 default_platform(:ios)
@@ -32,30 +32,30 @@ default_platform(:ios)
 platform :ios do
 
     before_all do
-        ENV["SLACK_URL"] = slack_url
-        ENV["DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS"] = "-t DAV"
+        ENV['SLACK_URL'] = slack_url
+        ENV['DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS'] = '-t DAV'
     end
 
-    desc "Runs all the tests"
+    desc 'Runs all the tests'
         lane :test do
     end
 
-    desc "Deploy QA to Firebase App Distribution"
+    desc 'Deploy QA to Firebase App Distribution'
     lane :deploy_qa do
 
-        Dir.chdir("../../") do
+        Dir.chdir('../../') do
             sh(
-                "flutter",
-                "build",
-                "ios",
-                "--flavor",
-                "qa",
-                "--target",
-                "lib/main_qa.dart",
-                "--release",
-                "--verbose",
-                "--build-number",
-                "#{version_code}",
+                'flutter',
+                'build',
+                'ios',
+                '--flavor',
+                'qa',
+                '--target',
+                'lib/main_qa.dart',
+                '--release',
+                '--verbose',
+                '--build-number',
+                '#{version_code}',
             )
         end
 
@@ -64,17 +64,17 @@ platform :ios do
             ipa_path: 'Runner.ipa',
             release_notes: release_notes,
             groups: 'ios',
-            firebase_cli_path: "/usr/local/bin/firebase",
+            firebase_cli_path: '/usr/local/bin/firebase',
         )
     
         slack(
-            message: "[QA] #{app_name} for iOS :rocket:
-            \n#{release_notes}",
+            message: '[QA] #{app_name} for iOS :rocket:
+            \n#{release_notes}',
             success: true
         )
     end
 
-    desc "Deploy to the App Store"
+    desc 'Deploy to the App Store'
     lane :deploy_prod do
     end
 end

@@ -1,123 +1,123 @@
 {
-  "@@last_modified": "2020-01-05T14:25:31.413654",
-  "test": "test",
-  "@test": {
-    "description": "",
-    "type": "text",
-    "placeholders": {}
+  '@@last_modified': '2020-01-05T14:25:31.413654',
+  'test': 'test',
+  '@test': {
+    'description': '',
+    'type': 'text',
+    'placeholders': {}
   },
-  "gJournal": "Journal",
-  "@gJournal": {
-    "description": "",
-    "type": "text",
-    "placeholders": {}
+  'gJournal': 'Journal',
+  '@gJournal': {
+    'description': '',
+    'type': 'text',
+    'placeholders': {}
   },
-  "fsTitle": "FotoSmil Trondheim",
-  "@fsTitle": {
-    "description": "",
-    "type": "text",
-    "placeholders": {}
+  'fsTitle': 'FotoSmil Trondheim',
+  '@fsTitle': {
+    'description': '',
+    'type': 'text',
+    'placeholders': {}
   },
-  "fsProfessionalPhotoBooth": "Professional photo booth service",
-  "@fsProfessionalPhotoBooth": {
-    "description": "",
-    "type": "text",
-    "placeholders": {}
+  'fsProfessionalPhotoBooth': 'Professional photo booth service',
+  '@fsProfessionalPhotoBooth': {
+    'description': '',
+    'type': 'text',
+    'placeholders': {}
   },
-  "fsForWeddingsEvents": "for weddings, events and parties",
-  "@fsForWeddingsEvents": {
-    "description": "",
-    "type": "text",
-    "placeholders": {}
+  'fsForWeddingsEvents': 'for weddings, events and parties',
+  '@fsForWeddingsEvents': {
+    'description': '',
+    'type': 'text',
+    'placeholders': {}
   },
-  "fsEmail": "fotosmil.trondheim@gmail.com",
-  "@fsEmail": {
-    "description": "",
-    "type": "text",
-    "placeholders": {}
+  'fsEmail': 'fotosmil.trondheim@gmail.com',
+  '@fsEmail': {
+    'description': '',
+    'type': 'text',
+    'placeholders': {}
   },
-  "fsPhone": "tlf. 92125656",
-  "@fsPhone": {
-    "description": "",
-    "type": "text",
-    "placeholders": {}
+  'fsPhone': 'tlf. 92125656',
+  '@fsPhone': {
+    'description': '',
+    'type': 'text',
+    'placeholders': {}
   },
-  "fsPrice": "Price: 6000 NOK for the first 2 hours + 2000 NOK/extra hour",
-  "@fsPrice": {
-    "description": "",
-    "type": "text",
-    "placeholders": {}
+  'fsPrice': 'Price: 6000 NOK for the first 2 hours + 2000 NOK/extra hour',
+  '@fsPrice': {
+    'description': '',
+    'type': 'text',
+    'placeholders': {}
   },
-  "fsSmilesDelivered": "smiles delivered",
-  "@fsSmilesDelivered": {
-    "description": "",
-    "type": "text",
-    "placeholders": {}
+  'fsSmilesDelivered': 'smiles delivered',
+  '@fsSmilesDelivered': {
+    'description': '',
+    'type': 'text',
+    'placeholders': {}
   },
-  "fsWhatsIncluded": "What's included?",
-  "@fsWhatsIncluded": {
-    "description": "",
-    "type": "text",
-    "placeholders": {}
+  'fsWhatsIncluded': 'What's included?',
+  '@fsWhatsIncluded': {
+    'description': '',
+    'type': 'text',
+    'placeholders': {}
   },
-  "fsFeat1Title": "Support & attendant",
-  "@fsFeat1Title": {
-    "description": "",
-    "type": "text",
-    "placeholders": {}
+  'fsFeat1Title': 'Support & attendant',
+  '@fsFeat1Title': {
+    'description': '',
+    'type': 'text',
+    'placeholders': {}
   },
-  "fsFeat1Description": "You won'n need to worry about installation of the photo booth nor about any other technical issue. Let us do it for you.",
-  "@fsFeat1Description": {
-    "description": "",
-    "type": "text",
-    "placeholders": {}
+  'fsFeat1Description': 'You won'n need to worry about installation of the photo booth nor about any other technical issue. Let us do it for you.',
+  '@fsFeat1Description': {
+    'description': '',
+    'type': 'text',
+    'placeholders': {}
   },
-  "fsFeat2Title": "Unlimited photo printouts",
-  "@fsFeat2Title": {
-    "description": "",
-    "type": "text",
-    "placeholders": {}
+  'fsFeat2Title': 'Unlimited photo printouts',
+  '@fsFeat2Title': {
+    'description': '',
+    'type': 'text',
+    'placeholders': {}
   },
-  "fsFeat2Description": "There are usually 3 or 4 photos on a single printout stripe. We will print as many as needed - with no extra cost! (during rental hours)",
-  "@fsFeat2Description": {
-    "description": "",
-    "type": "text",
-    "placeholders": {}
+  'fsFeat2Description': 'There are usually 3 or 4 photos on a single printout stripe. We will print as many as needed - with no extra cost! (during rental hours)',
+  '@fsFeat2Description': {
+    'description': '',
+    'type': 'text',
+    'placeholders': {}
   },
-  "fsFeat3Title": "Top-quality camera",
-  "@fsFeat3Title": {
-    "description": "",
-    "type": "text",
-    "placeholders": {}
+  'fsFeat3Title': 'Top-quality camera',
+  '@fsFeat3Title': {
+    'description': '',
+    'type': 'text',
+    'placeholders': {}
   },
-  "fsFeat3Description": "Photo booth services often use small, portable equipment with low-quality camera. Our photos are taken with a proffesional SLR camera to ensure the best quality for you.",
-  "@fsFeat3Description": {
-    "description": "",
-    "type": "text",
-    "placeholders": {}
+  'fsFeat3Description': 'Photo booth services often use small, portable equipment with low-quality camera. Our photos are taken with a proffesional SLR camera to ensure the best quality for you.',
+  '@fsFeat3Description': {
+    'description': '',
+    'type': 'text',
+    'placeholders': {}
   },
-  "fsFeat4Title": "Vast choice of props",
-  "@fsFeat4Title": {
-    "description": "",
-    "type": "text",
-    "placeholders": {}
+  'fsFeat4Title': 'Vast choice of props',
+  '@fsFeat4Title': {
+    'description': '',
+    'type': 'text',
+    'placeholders': {}
   },
-  "fsFeat4Description": "You can use all of our hundreds of props and backgrounds. (we send patterns on request). What's more, client can order props dedicated for a special theme party, altough this service is extra paid.",
-  "@fsFeat4Description": {
-    "description": "",
-    "type": "text",
-    "placeholders": {}
+  'fsFeat4Description': 'You can use all of our hundreds of props and backgrounds. (we send patterns on request). What's more, client can order props dedicated for a special theme party, altough this service is extra paid.',
+  '@fsFeat4Description': {
+    'description': '',
+    'type': 'text',
+    'placeholders': {}
   },
-  "fsFeat5Title": "Delivery within Stor Trondheim",
-  "@fsFeat5Title": {
-    "description": "",
-    "type": "text",
-    "placeholders": {}
+  'fsFeat5Title': 'Delivery within Stor Trondheim',
+  '@fsFeat5Title': {
+    'description': '',
+    'type': 'text',
+    'placeholders': {}
   },
-  "fsFeat5Description": "Okay, let's say Orkanger, Stjørdal and Melhus are still free. For further distances - send us request.",
-  "@fsFeat5Description": {
-    "description": "",
-    "type": "text",
-    "placeholders": {}
+  'fsFeat5Description': 'Okay, let's say Orkanger, Stjørdal and Melhus are still free. For further distances - send us request.',
+  '@fsFeat5Description': {
+    'description': '',
+    'type': 'text',
+    'placeholders': {}
   }
 }

@@ -1,5 +1,5 @@
 {
-  "projects": {
-    "staging": "ably1"
+  'projects': {
+    'staging': 'ably1'
   }
 }

@@ -1,2 +1,2 @@
-app_identifier("com.kodesmil.motim")
-apple_id("hello@kodesmil.com")
+app_identifier('com.kodesmil.motim')
+apple_id('hello@kodesmil.com')
