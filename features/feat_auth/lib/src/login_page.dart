@@ -25,6 +25,7 @@ class _LoginPageState extends State<LoginPage> {
     _passwordController.addListener(() {
       store.setPassword(_passwordController.text);
     });
+    print("Logowanko");
     store.signInSilently();
     super.didChangeDependencies();
   }

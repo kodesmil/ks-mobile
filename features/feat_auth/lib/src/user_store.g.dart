@@ -9,10 +9,20 @@ part of 'user_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$UserStore on _UserStore, Store {
-  final _$logoutAsyncAction = AsyncAction('logout');
+  final _$userAtom = Atom(name: '_UserStore.user');
 
   @override
-  Future<dynamic> logout() {
-    return _$logoutAsyncAction.run(() => super.logout());
+  FirebaseUser get user {
+    _$userAtom.context.enforceReadPolicy(_$userAtom);
+    _$userAtom.reportObserved();
+    return super.user;
+  }
+
+  @override
+  set user(FirebaseUser value) {
+    _$userAtom.context.conditionallyRunInAction(() {
+      super.user = value;
+      _$userAtom.reportChanged();
+    }, _$userAtom, name: '${_$userAtom.name}_set');
   }
 }

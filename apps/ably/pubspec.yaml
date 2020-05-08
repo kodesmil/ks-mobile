@@ -46,6 +46,10 @@ dependencies:
     path: ../../features/feat_locations
   feat_notifications:
     path: ../../features/feat_notifications
+  feat_profile:
+    path: ../../features/feat_profile
+  feat_journal:
+    path: ../../features/feat_journal
   feat_survey:
     path: ../../features/feat_survey
   lib_di:

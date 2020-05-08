@@ -12,13 +12,13 @@ abstract class _LoginStore with Store {
   final LoginErrorStore formErrorStore;
   final ErrorStore errorStore;
   final FirebaseAuth firebaseAuth;
-  final AuthStorage authStorage;
+  final UserStore userStore;
 
   _LoginStore(
     this.errorStore,
     this.formErrorStore,
     this.firebaseAuth,
-    this.authStorage,
+    this.userStore,
   ) {
     _setupValidations();
   }
@@ -43,9 +43,6 @@ abstract class _LoginStore with Store {
 
   @observable
   bool loading = false;
-
-  @observable
-  FirebaseUser user;
 
   @computed
   bool get canLogin => !formErrorStore.hasErrors;
@@ -73,11 +70,13 @@ abstract class _LoginStore with Store {
 
   @action
   Future signInSilently() async {
-    user = await firebaseAuth.currentUser();
-    if (user != null) {
+    final newUser = await firebaseAuth.currentUser();
+    if (newUser != null) {
       loading = false;
       success = true;
       errorStore.showError = false;
+      success = true;
+      userStore.user = newUser;
     }
   }
 

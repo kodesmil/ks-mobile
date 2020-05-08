@@ -12,13 +12,13 @@ abstract class _SignUpStore with Store {
   final SignUpErrorStore signUpErrorStore;
   final ErrorStore errorStore;
   final FirebaseAuth firebaseAuth;
-  final AuthStorage authStorage;
+  final UserStore userStore;
 
   _SignUpStore(
     this.errorStore,
     this.signUpErrorStore,
     this.firebaseAuth,
-    this.authStorage,
+    this.userStore,
   ) {
     _setupValidations();
   }

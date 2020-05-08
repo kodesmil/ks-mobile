@@ -5,6 +5,298 @@
 // @dart = 2.3
 // ignore_for_file: camel_case_types,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type
 
+const JournalSubject$json = const {
+  '1': 'JournalSubject',
+  '2': const [
+    const {
+      '1': 'id',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.atlas.rpc.Identifier',
+      '8': const {},
+      '10': 'id'
+    },
+    const {'1': 'key', '3': 2, '4': 1, '5': 9, '10': 'key'},
+    const {'1': 'name', '3': 3, '4': 1, '5': 9, '10': 'name'},
+    const {
+      '1': 'type',
+      '3': 4,
+      '4': 1,
+      '5': 14,
+      '6': '.service.JournalSubject.Type',
+      '10': 'type'
+    },
+  ],
+  '4': const [JournalSubject_Type$json],
+  '7': const {},
+};
+
+const JournalSubject_Type$json = const {
+  '1': 'Type',
+  '2': const [
+    const {'1': 'ACTIVITY', '2': 0},
+    const {'1': 'SYMPTOM', '2': 1},
+  ],
+};
+
+const JournalEntry$json = const {
+  '1': 'JournalEntry',
+  '2': const [
+    const {
+      '1': 'id',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.atlas.rpc.Identifier',
+      '8': const {},
+      '10': 'id'
+    },
+    const {
+      '1': 'severity',
+      '3': 2,
+      '4': 1,
+      '5': 14,
+      '6': '.service.JournalEntry.Severity',
+      '10': 'severity'
+    },
+    const {'1': 'note', '3': 3, '4': 1, '5': 9, '10': 'note'},
+    const {
+      '1': 'timestamp',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.google.protobuf.Timestamp',
+      '10': 'timestamp'
+    },
+    const {
+      '1': 'journal_subject_id',
+      '3': 5,
+      '4': 1,
+      '5': 3,
+      '10': 'journalSubjectId'
+    },
+  ],
+  '4': const [JournalEntry_Severity$json],
+  '7': const {},
+};
+
+const JournalEntry_Severity$json = const {
+  '1': 'Severity',
+  '2': const [
+    const {'1': 'NONE', '2': 0},
+    const {'1': 'LOW', '2': 1},
+    const {'1': 'MID', '2': 2},
+    const {'1': 'HIGH', '2': 3},
+  ],
+};
+
+const CreateJournalEntryRequest$json = const {
+  '1': 'CreateJournalEntryRequest',
+  '2': const [
+    const {
+      '1': 'payload',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.service.JournalEntry',
+      '10': 'payload'
+    },
+  ],
+};
+
+const CreateJournalEntryResponse$json = const {
+  '1': 'CreateJournalEntryResponse',
+  '2': const [
+    const {
+      '1': 'result',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.service.JournalEntry',
+      '10': 'result'
+    },
+  ],
+};
+
+const ReadJournalEntryRequest$json = const {
+  '1': 'ReadJournalEntryRequest',
+  '2': const [
+    const {
+      '1': 'id',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.atlas.rpc.Identifier',
+      '10': 'id'
+    },
+  ],
+};
+
+const ReadJournalEntryResponse$json = const {
+  '1': 'ReadJournalEntryResponse',
+  '2': const [
+    const {
+      '1': 'result',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.service.JournalEntry',
+      '10': 'result'
+    },
+  ],
+};
+
+const UpdateJournalEntryRequest$json = const {
+  '1': 'UpdateJournalEntryRequest',
+  '2': const [
+    const {
+      '1': 'payload',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.service.JournalEntry',
+      '10': 'payload'
+    },
+  ],
+};
+
+const UpdateJournalEntryResponse$json = const {
+  '1': 'UpdateJournalEntryResponse',
+  '2': const [
+    const {
+      '1': 'result',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.service.JournalEntry',
+      '10': 'result'
+    },
+  ],
+};
+
+const DeleteJournalEntryRequest$json = const {
+  '1': 'DeleteJournalEntryRequest',
+  '2': const [
+    const {
+      '1': 'id',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.atlas.rpc.Identifier',
+      '10': 'id'
+    },
+  ],
+};
+
+const DeleteJournalEntryResponse$json = const {
+  '1': 'DeleteJournalEntryResponse',
+};
+
+const ListJournalEntryRequest$json = const {
+  '1': 'ListJournalEntryRequest',
+  '2': const [
+    const {
+      '1': 'filter',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.infoblox.api.Filtering',
+      '10': 'filter'
+    },
+    const {
+      '1': 'order_by',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.infoblox.api.Sorting',
+      '10': 'orderBy'
+    },
+    const {
+      '1': 'fields',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.infoblox.api.FieldSelection',
+      '10': 'fields'
+    },
+    const {
+      '1': 'paging',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.infoblox.api.Pagination',
+      '10': 'paging'
+    },
+  ],
+};
+
+const ListJournalEntryResponse$json = const {
+  '1': 'ListJournalEntryResponse',
+  '2': const [
+    const {
+      '1': 'results',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.service.JournalEntry',
+      '10': 'results'
+    },
+  ],
+};
+
+const ListJournalSubjectRequest$json = const {
+  '1': 'ListJournalSubjectRequest',
+  '2': const [
+    const {
+      '1': 'filter',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.infoblox.api.Filtering',
+      '10': 'filter'
+    },
+    const {
+      '1': 'order_by',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.infoblox.api.Sorting',
+      '10': 'orderBy'
+    },
+    const {
+      '1': 'fields',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.infoblox.api.FieldSelection',
+      '10': 'fields'
+    },
+    const {
+      '1': 'paging',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.infoblox.api.Pagination',
+      '10': 'paging'
+    },
+  ],
+};
+
+const ListJournalSubjectResponse$json = const {
+  '1': 'ListJournalSubjectResponse',
+  '2': const [
+    const {
+      '1': 'results',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.service.JournalSubject',
+      '10': 'results'
+    },
+  ],
+};
+
 const Profile$json = const {
   '1': 'Profile',
   '2': const [
@@ -17,19 +309,20 @@ const Profile$json = const {
       '8': const {},
       '10': 'id'
     },
-    const {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
-    const {'1': 'notes', '3': 3, '4': 1, '5': 9, '10': 'notes'},
+    const {'1': 'notes', '3': 2, '4': 1, '5': 9, '10': 'notes'},
+    const {'1': 'first_name', '3': 3, '4': 1, '5': 9, '10': 'firstName'},
+    const {'1': 'last_name', '3': 4, '4': 1, '5': 9, '10': 'lastName'},
     const {
-      '1': 'contacts',
-      '3': 4,
-      '4': 3,
-      '5': 11,
-      '6': '.service.Contact',
-      '10': 'contacts'
+      '1': 'primary_email',
+      '3': 5,
+      '4': 1,
+      '5': 9,
+      '8': const {},
+      '10': 'primaryEmail'
     },
     const {
       '1': 'groups',
-      '3': 5,
+      '3': 6,
       '4': 3,
       '5': 11,
       '6': '.service.Group',
@@ -215,15 +508,6 @@ const Group$json = const {
       '6': '.atlas.rpc.Identifier',
       '10': 'profileId'
     },
-    const {
-      '1': 'contacts',
-      '3': 5,
-      '4': 3,
-      '5': 11,
-      '6': '.service.Contact',
-      '8': const {},
-      '10': 'contacts'
-    },
   ],
   '7': const {},
 };
@@ -368,8 +652,8 @@ const ListGroupRequest$json = const {
   ],
 };
 
-const ListGroupsResponse$json = const {
-  '1': 'ListGroupsResponse',
+const ListGroupResponse$json = const {
+  '1': 'ListGroupResponse',
   '2': const [
     const {
       '1': 'results',
@@ -378,285 +662,6 @@ const ListGroupsResponse$json = const {
       '5': 11,
       '6': '.service.Group',
       '10': 'results'
-    },
-  ],
-};
-
-const Contact$json = const {
-  '1': 'Contact',
-  '2': const [
-    const {
-      '1': 'id',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.atlas.rpc.Identifier',
-      '8': const {},
-      '10': 'id'
-    },
-    const {'1': 'first_name', '3': 2, '4': 1, '5': 9, '10': 'firstName'},
-    const {'1': 'middle_name', '3': 3, '4': 1, '5': 9, '10': 'middleName'},
-    const {'1': 'last_name', '3': 4, '4': 1, '5': 9, '10': 'lastName'},
-    const {
-      '1': 'primary_email',
-      '3': 5,
-      '4': 1,
-      '5': 9,
-      '8': const {},
-      '10': 'primaryEmail'
-    },
-    const {'1': 'notes', '3': 6, '4': 1, '5': 9, '10': 'notes'},
-    const {
-      '1': 'emails',
-      '3': 7,
-      '4': 3,
-      '5': 11,
-      '6': '.service.Email',
-      '10': 'emails'
-    },
-    const {
-      '1': 'home_address',
-      '3': 8,
-      '4': 1,
-      '5': 11,
-      '6': '.service.Address',
-      '10': 'homeAddress'
-    },
-    const {
-      '1': 'work_address',
-      '3': 9,
-      '4': 1,
-      '5': 11,
-      '6': '.service.Address',
-      '10': 'workAddress'
-    },
-    const {
-      '1': 'profile_id',
-      '3': 10,
-      '4': 1,
-      '5': 11,
-      '6': '.atlas.rpc.Identifier',
-      '10': 'profileId'
-    },
-    const {
-      '1': 'groups',
-      '3': 11,
-      '4': 3,
-      '5': 11,
-      '6': '.service.Group',
-      '8': const {},
-      '10': 'groups'
-    },
-    const {
-      '1': 'nicknames',
-      '3': 12,
-      '4': 1,
-      '5': 11,
-      '6': '.gorm.types.JSONValue',
-      '10': 'nicknames'
-    },
-  ],
-  '7': const {},
-};
-
-const Email$json = const {
-  '1': 'Email',
-  '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
-    const {
-      '1': 'address',
-      '3': 2,
-      '4': 1,
-      '5': 9,
-      '8': const {},
-      '10': 'address'
-    },
-  ],
-  '7': const {},
-};
-
-const Address$json = const {
-  '1': 'Address',
-  '2': const [
-    const {'1': 'address', '3': 1, '4': 1, '5': 9, '10': 'address'},
-    const {'1': 'city', '3': 2, '4': 1, '5': 9, '10': 'city'},
-    const {'1': 'state', '3': 3, '4': 1, '5': 9, '10': 'state'},
-    const {'1': 'zip', '3': 4, '4': 1, '5': 9, '10': 'zip'},
-    const {'1': 'country', '3': 5, '4': 1, '5': 9, '10': 'country'},
-  ],
-  '7': const {},
-};
-
-const CreateContactRequest$json = const {
-  '1': 'CreateContactRequest',
-  '2': const [
-    const {
-      '1': 'payload',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.service.Contact',
-      '10': 'payload'
-    },
-  ],
-};
-
-const CreateContactResponse$json = const {
-  '1': 'CreateContactResponse',
-  '2': const [
-    const {
-      '1': 'result',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.service.Contact',
-      '10': 'result'
-    },
-  ],
-};
-
-const ReadContactRequest$json = const {
-  '1': 'ReadContactRequest',
-  '2': const [
-    const {
-      '1': 'id',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.atlas.rpc.Identifier',
-      '10': 'id'
-    },
-  ],
-};
-
-const ReadContactResponse$json = const {
-  '1': 'ReadContactResponse',
-  '2': const [
-    const {
-      '1': 'result',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.service.Contact',
-      '10': 'result'
-    },
-  ],
-};
-
-const UpdateContactRequest$json = const {
-  '1': 'UpdateContactRequest',
-  '2': const [
-    const {
-      '1': 'payload',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.service.Contact',
-      '10': 'payload'
-    },
-    const {
-      '1': 'fields',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.google.protobuf.FieldMask',
-      '10': 'fields'
-    },
-  ],
-};
-
-const UpdateContactResponse$json = const {
-  '1': 'UpdateContactResponse',
-  '2': const [
-    const {
-      '1': 'result',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.service.Contact',
-      '10': 'result'
-    },
-  ],
-};
-
-const DeleteContactRequest$json = const {
-  '1': 'DeleteContactRequest',
-  '2': const [
-    const {
-      '1': 'id',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.atlas.rpc.Identifier',
-      '10': 'id'
-    },
-  ],
-};
-
-const DeleteContactResponse$json = const {
-  '1': 'DeleteContactResponse',
-};
-
-const ListContactsResponse$json = const {
-  '1': 'ListContactsResponse',
-  '2': const [
-    const {
-      '1': 'results',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.service.Contact',
-      '10': 'results'
-    },
-  ],
-};
-
-const SMSRequest$json = const {
-  '1': 'SMSRequest',
-  '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
-    const {'1': 'message', '3': 2, '4': 1, '5': 9, '10': 'message'},
-  ],
-};
-
-const SMSResponse$json = const {
-  '1': 'SMSResponse',
-};
-
-const ListContactRequest$json = const {
-  '1': 'ListContactRequest',
-  '2': const [
-    const {
-      '1': 'filter',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.infoblox.api.Filtering',
-      '10': 'filter'
-    },
-    const {
-      '1': 'order_by',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.infoblox.api.Sorting',
-      '10': 'orderBy'
-    },
-    const {
-      '1': 'fields',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.infoblox.api.FieldSelection',
-      '10': 'fields'
-    },
-    const {
-      '1': 'paging',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.infoblox.api.Pagination',
-      '10': 'paging'
     },
   ],
 };

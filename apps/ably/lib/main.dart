@@ -28,7 +28,7 @@ void realMain() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Injector(
+    return AppInjector(
       child: MaterialApp(
         localizationsDelegates: KsLoc.localizationsDelegates,
         supportedLocales: KsLoc.supportedLocales,

@@ -31,11 +31,6 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
             store.notifications.data?.toString() ?? 'Empty',
           ),
         ),
-        Observer(
-          builder: (context) => Text(
-            store.profile?.name ?? 'Empty',
-          ),
-        ),
         KsSpace.l(),
         RaisedButton(
           child: Text('Create notification'),

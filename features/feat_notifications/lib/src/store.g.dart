@@ -60,23 +60,6 @@ mixin _$NotificationsStore on _NotificationsStore, Store {
     }, _$notificationAtom, name: '${_$notificationAtom.name}_set');
   }
 
-  final _$profileAtom = Atom(name: '_NotificationsStore.profile');
-
-  @override
-  Profile get profile {
-    _$profileAtom.context.enforceReadPolicy(_$profileAtom);
-    _$profileAtom.reportObserved();
-    return super.profile;
-  }
-
-  @override
-  set profile(Profile value) {
-    _$profileAtom.context.conditionallyRunInAction(() {
-      super.profile = value;
-      _$profileAtom.reportChanged();
-    }, _$profileAtom, name: '${_$profileAtom.name}_set');
-  }
-
   final _$fetchByIdAsyncAction = AsyncAction('fetchById');
 
   @override
@@ -89,14 +72,6 @@ mixin _$NotificationsStore on _NotificationsStore, Store {
   @override
   Future<dynamic> fetchAll() {
     return _$fetchAllAsyncAction.run(() => super.fetchAll());
-  }
-
-  final _$createNotification2AsyncAction = AsyncAction('createNotification2');
-
-  @override
-  Future<dynamic> createNotification2() {
-    return _$createNotification2AsyncAction
-        .run(() => super.createNotification2());
   }
 
   final _$createNotificationAsyncAction = AsyncAction('createNotification');

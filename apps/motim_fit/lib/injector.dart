@@ -56,7 +56,7 @@ class Injector extends StatelessWidget {
             dep2,
           ),
         ),
-        ProxyProvider2<FirebaseAuth, AuthStorage, LoginStore>(
+        ProxyProvider2<FirebaseAuth, UserStore, LoginStore>(
           update: (_, dep, dep2, __) => LoginStore(
             ErrorStore(),
             LoginErrorStore(),
@@ -64,7 +64,7 @@ class Injector extends StatelessWidget {
             dep2,
           ),
         ),
-        ProxyProvider2<FirebaseAuth, AuthStorage, SignUpStore>(
+        ProxyProvider2<FirebaseAuth, UserStore, SignUpStore>(
           update: (_, dep, dep2, __) => SignUpStore(
             ErrorStore(),
             SignUpErrorStore(),
