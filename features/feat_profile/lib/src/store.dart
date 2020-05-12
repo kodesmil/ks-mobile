@@ -31,17 +31,35 @@ abstract class _ProfileStore with Store {
 
   @action
   Future fetchProfile() async {
-    final id = Identifier.create()..resourceId = user.uid;
-    final request = ReadProfileRequest.create()..id = id;
-    final response = await client.read(request);
-    profile = response.result;
+    profile = Profile();
+    if (user != null) {
+      try {
+        final id = Identifier()..resourceId = user.uid;
+        final request = ReadProfileRequest()..id = id;
+        final response = await client.read(request);
+        profile = response.result;
+      } catch (e) {
+        profile = Profile()..primaryEmail = user.email;
+      }
+    }
+  }
+
+  @action
+  Future createOrUpdateProfile() async {
+    return profile?.id == null ? createProfile() : updateProfile();
   }
 
   @action
   Future createProfile() async {
-    final payload = Profile.create()..primaryEmail = 'marcin@gmail.com';
-    final request = CreateProfileRequest.create()..payload = payload;
+    final request = CreateProfileRequest()..payload = profile;
     final response = await client.create(request);
+    profile = response.result;
+  }
+
+  @action
+  Future updateProfile() async {
+    final request = UpdateProfileRequest()..payload = profile;
+    final response = await client.update(request);
     profile = response.result;
   }
 }

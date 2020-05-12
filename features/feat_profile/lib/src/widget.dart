@@ -13,10 +13,16 @@ class ProfileWidget extends StatefulWidget {
 }
 
 class _ProfileWidgetState extends State<ProfileWidget> {
+
+  final _emailController = TextEditingController();
+
   @override
   void didChangeDependencies() {
     final store = Provider.of<ProfileStore>(context);
     store.fetchProfile();
+    _emailController.addListener(() {
+      store.profile.primaryEmail = _emailController.text;
+    });
     super.didChangeDependencies();
   }
 
@@ -25,16 +31,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     final store = Provider.of<ProfileStore>(context);
     return Column(
       children: <Widget>[
-        KsSpace.l(),
         Observer(
           builder: (context) => Text(
-            store.profile?.primaryEmail ?? 'Empty',
+            'Welcome',
+            style: Theme.of(context).textTheme.bodyText1,
           ),
-        ),
-        KsSpace.l(),
-        RaisedButton(
-          child: Text('Create profile'),
-          onPressed: () => store.createProfile(),
         ),
       ],
     );

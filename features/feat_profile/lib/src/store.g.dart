@@ -67,10 +67,12 @@ mixin _$ProfileStore on _ProfileStore, Store {
     return _$fetchProfileAsyncAction.run(() => super.fetchProfile());
   }
 
-  final _$createProfileAsyncAction = AsyncAction('createProfile');
+  final _$createOrUpdateProfileAsyncAction =
+      AsyncAction('createOrUpdateProfile');
 
   @override
-  Future<dynamic> createProfile() {
-    return _$createProfileAsyncAction.run(() => super.createProfile());
+  Future<dynamic> createOrUpdateProfile() {
+    return _$createOrUpdateProfileAsyncAction
+        .run(() => super.createOrUpdateProfile());
   }
 }

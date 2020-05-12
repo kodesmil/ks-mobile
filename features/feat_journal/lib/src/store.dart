@@ -31,6 +31,9 @@ abstract class _JournalStore with Store {
   @observable
   List<JournalSubject> journalActivities = [];
 
+  @observable
+  List<JournalEntry> entries = [];
+
   @action
   Future createJournal() async {
     final payload = JournalEntry.create()..severity = JournalEntry_Severity.NONE;
@@ -50,5 +53,12 @@ abstract class _JournalStore with Store {
       ..filter = filter;
     final response = await jsClient.list(request);
     journalActivities = response.results;
+  }
+
+  @action
+  Future fetchJournalEntries() async {
+    final request = ListJournalEntryRequest();
+    final response = await jeClient.list(request);
+    entries = response.results;
   }
 }

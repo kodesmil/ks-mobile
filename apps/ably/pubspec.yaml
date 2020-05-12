@@ -76,6 +76,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - assets/images/women/
   fonts:
     - family: SourceSansPro
       fonts:

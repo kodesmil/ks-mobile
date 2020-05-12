@@ -95,10 +95,11 @@ abstract class _LoginStore with Store {
   Future login() async {
     loading = true;
     try {
-      await firebaseAuth.signInWithEmailAndPassword(
+      final result = await firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+      userStore.user = result.user;
       loading = false;
       success = true;
       errorStore.showError = false;

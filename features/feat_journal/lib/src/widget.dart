@@ -18,6 +18,7 @@ class _JournalWidgetState extends State<JournalWidget> {
   void didChangeDependencies() {
     final store = Provider.of<JournalStore>(context);
     store.fetchJournalSubjectActivities(JournalSubject_Type.ACTIVITY);
+    store.fetchJournalEntries();
     super.didChangeDependencies();
   }
 
@@ -30,6 +31,12 @@ class _JournalWidgetState extends State<JournalWidget> {
         Observer(
           builder: (context) => Column(
             children: store.journalActivities.map((e) => Text(e.name)).toList(),
+          ),
+        ),
+        KsSpace.l(),
+        Observer(
+          builder: (context) => Column(
+            children: store.entries.map((e) => Text(e.note)).toList(),
           ),
         ),
         KsSpace.l(),

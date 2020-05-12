@@ -87,6 +87,7 @@ class UserInjector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (user == null) return Container();
+
     final notificationsChannel = ClientChannel(
       'notifications.qa.api.kodesmil.com',
       port: 443,
@@ -94,6 +95,7 @@ class UserInjector extends StatelessWidget {
         credentials: ChannelCredentials.secure(),
       ),
     );
+
     final channel = ClientChannel(
       'grpc-clinic.qa.api.kodesmil.com',
       port: 443,
@@ -105,6 +107,9 @@ class UserInjector extends StatelessWidget {
     return FutureBuilder<IdTokenResult>(
       future: user.getIdToken(),
       builder: (context, snap) {
+        if (!snap.hasData) {
+          return Container();
+        }
         final options = CallOptions(
           metadata: {'authorization': 'Bearer ${snap.data.token}'},
         );

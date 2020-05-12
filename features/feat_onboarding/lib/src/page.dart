@@ -6,12 +6,9 @@ import 'package:provider/provider.dart';
 import 'store.dart';
 
 class OnboardingFeatureWidget extends StatelessWidget {
-  const OnboardingFeatureWidget({
-    Key key,
-    this.text1,
-    this.text2,
-    this.image,
-  }) : super(key: key);
+  const OnboardingFeatureWidget(
+      {Key key, this.text1, this.text2, this.image, t})
+      : super(key: key);
 
   final String text1;
   final String text2;
@@ -25,10 +22,16 @@ class OnboardingFeatureWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Center(
-            child: SvgPicture.asset(
-              image,
-              height: 300,
-            ),
+            child: image.contains('svg')
+                ? SvgPicture.asset(
+                    image,
+                    height: 300,
+                  )
+                : Image.asset(
+                    image,
+                    height: 350,
+                    fit: BoxFit.fitHeight,
+                  ),
           ),
           SizedBox(height: 30.0),
           RichText(
@@ -102,19 +105,19 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 },
                 children: <Widget>[
                   OnboardingFeatureWidget(
-                    text1: 'Be active with \n',
-                    text2: 'Abli Health!',
-                    image: 'assets/images/onboarding0.svg',
+                    text1: 'Reduce anxiety \nwith ',
+                    text2: 'Hooli!',
+                    image: 'assets/images/women/computer.png',
                   ),
                   OnboardingFeatureWidget(
-                    text1: 'Get out of\nthe house and\ncollect ',
-                    text2: 'coupons.',
-                    image: 'assets/images/onboarding1.svg',
+                    text1: 'Get motivated and find your ',
+                    text2: 'relaxation.',
+                    image: 'assets/images/women/relaxing.png',
                   ),
                   OnboardingFeatureWidget(
-                    text1: 'Abli Health\nfor ',
+                    text1: 'Hooli App\nfor ',
                     text2: 'everyone!',
-                    image: 'assets/images/onboarding2.svg',
+                    image: 'assets/images/women/selfie.png',
                   ),
                 ],
               ),

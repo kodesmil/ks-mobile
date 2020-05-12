@@ -77,6 +77,23 @@ mixin _$JournalStore on _JournalStore, Store {
     }, _$journalActivitiesAtom, name: '${_$journalActivitiesAtom.name}_set');
   }
 
+  final _$entriesAtom = Atom(name: '_JournalStore.entries');
+
+  @override
+  List<JournalEntry> get entries {
+    _$entriesAtom.context.enforceReadPolicy(_$entriesAtom);
+    _$entriesAtom.reportObserved();
+    return super.entries;
+  }
+
+  @override
+  set entries(List<JournalEntry> value) {
+    _$entriesAtom.context.conditionallyRunInAction(() {
+      super.entries = value;
+      _$entriesAtom.reportChanged();
+    }, _$entriesAtom, name: '${_$entriesAtom.name}_set');
+  }
+
   final _$createJournalAsyncAction = AsyncAction('createJournal');
 
   @override
@@ -91,5 +108,13 @@ mixin _$JournalStore on _JournalStore, Store {
   Future<dynamic> fetchJournalSubjectActivities(JournalSubject_Type type) {
     return _$fetchJournalSubjectActivitiesAsyncAction
         .run(() => super.fetchJournalSubjectActivities(type));
+  }
+
+  final _$fetchJournalEntriesAsyncAction = AsyncAction('fetchJournalEntries');
+
+  @override
+  Future<dynamic> fetchJournalEntries() {
+    return _$fetchJournalEntriesAsyncAction
+        .run(() => super.fetchJournalEntries());
   }
 }

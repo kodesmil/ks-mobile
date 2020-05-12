@@ -83,10 +83,11 @@ abstract class _SignUpStore with Store {
   Future signUp() async {
     loading = true;
     try {
-      await firebaseAuth.createUserWithEmailAndPassword(
+      final result = await firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      userStore.user = result.user;
       loading = false;
       success = true;
       errorStore.showError = false;
