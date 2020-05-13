@@ -10,7 +10,7 @@ class FeedStore = _FeedStore with _$FeedStore;
 abstract class _FeedStore with Store {
   final ErrorStore errorStore;
 
-  FeedsClient client;
+  FeedArticlesClient client;
 
   _FeedStore(
     this.errorStore,
@@ -26,10 +26,25 @@ abstract class _FeedStore with Store {
   @observable
   List<FeedArticle> articles = [];
 
+  @computed
+  List<FeedArticle> get dailyArticles => articles
+      .where((element) => element.feedTags.any((tag) => tag.key == 'daily'))
+      .toList();
+
+  @computed
+  List<FeedArticle> get reliefArticles => articles
+      .where((element) => element.feedTags.any((tag) => tag.key == 'relief'))
+      .toList();
+
+  @computed
+  List<FeedArticle> get updatesArticles => articles
+      .where((element) => element.feedTags.any((tag) => tag.key == 'updates'))
+      .toList();
+
   @action
   Future fetchArticles(String tagKey) async {
     final request = ListFeedArticleRequest();
-    final response = await client.listArticles(request);
+    final response = await client.list(request);
     articles = response.results;
   }
 }

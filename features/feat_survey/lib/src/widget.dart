@@ -76,7 +76,7 @@ class _SurveyRateWidgetState extends State<SurveyRateWidget> {
         SmoothStarRating(
           color: Colors.amberAccent,
           borderColor: Colors.amber,
-          onRatingChanged: (value) {
+          onRated: (value) {
             store.saveAnswer(widget.question, value);
             setState(() {
               rate = value;

@@ -24,15 +24,15 @@ class HelloPage extends StatelessWidget {
                 children: [
                   FeedScroll(
                     title: 'Daily Feed',
-                    feedKey: 'covid-19',
+                    feedKey: 'daily',
                   ),
                   FeedScroll(
                     title: 'Quick Relief',
-                    feedKey: 'covid-19',
+                    feedKey: 'relief',
                   ),
                   FeedScroll(
                     title: 'Daily Updates',
-                    feedKey: 'covid-19',
+                    feedKey: 'updates',
                   ),
                   KsSpace.xl(),
                 ],

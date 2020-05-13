@@ -13,109 +13,90 @@ import 'package:grpc/service_api.dart' as $grpc;
 import 'service.pb.dart' as $0;
 export 'service.pb.dart';
 
-class JournalsClient extends $grpc.Client {
-  static final _$createEntry = $grpc.ClientMethod<$0.CreateJournalEntryRequest,
+class JournalEntriesClient extends $grpc.Client {
+  static final _$create = $grpc.ClientMethod<$0.CreateJournalEntryRequest,
           $0.CreateJournalEntryResponse>(
-      '/service.Journals/CreateEntry',
+      '/service.JournalEntries/Create',
       ($0.CreateJournalEntryRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $0.CreateJournalEntryResponse.fromBuffer(value));
-  static final _$readEntry = $grpc.ClientMethod<$0.ReadJournalEntryRequest,
+  static final _$read = $grpc.ClientMethod<$0.ReadJournalEntryRequest,
           $0.ReadJournalEntryResponse>(
-      '/service.Journals/ReadEntry',
+      '/service.JournalEntries/Read',
       ($0.ReadJournalEntryRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $0.ReadJournalEntryResponse.fromBuffer(value));
-  static final _$updateEntry = $grpc.ClientMethod<$0.UpdateJournalEntryRequest,
+  static final _$update = $grpc.ClientMethod<$0.UpdateJournalEntryRequest,
           $0.UpdateJournalEntryResponse>(
-      '/service.Journals/UpdateEntry',
+      '/service.JournalEntries/Update',
       ($0.UpdateJournalEntryRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $0.UpdateJournalEntryResponse.fromBuffer(value));
-  static final _$deleteEntry = $grpc.ClientMethod<$0.DeleteJournalEntryRequest,
+  static final _$delete = $grpc.ClientMethod<$0.DeleteJournalEntryRequest,
           $0.DeleteJournalEntryResponse>(
-      '/service.Journals/DeleteEntry',
+      '/service.JournalEntries/Delete',
       ($0.DeleteJournalEntryRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $0.DeleteJournalEntryResponse.fromBuffer(value));
-  static final _$listEntries = $grpc.ClientMethod<$0.ListJournalEntryRequest,
+  static final _$list = $grpc.ClientMethod<$0.ListJournalEntryRequest,
           $0.ListJournalEntryResponse>(
-      '/service.Journals/ListEntries',
+      '/service.JournalEntries/List',
       ($0.ListJournalEntryRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $0.ListJournalEntryResponse.fromBuffer(value));
-  static final _$listSubjects = $grpc.ClientMethod<$0.ListJournalSubjectRequest,
-          $0.ListJournalSubjectResponse>(
-      '/service.Journals/ListSubjects',
-      ($0.ListJournalSubjectRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) =>
-          $0.ListJournalSubjectResponse.fromBuffer(value));
 
-  JournalsClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
+  JournalEntriesClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
 
-  $grpc.ResponseFuture<$0.CreateJournalEntryResponse> createEntry(
+  $grpc.ResponseFuture<$0.CreateJournalEntryResponse> create(
       $0.CreateJournalEntryRequest request,
       {$grpc.CallOptions options}) {
-    final call = $createCall(
-        _$createEntry, $async.Stream.fromIterable([request]),
+    final call = $createCall(_$create, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
 
-  $grpc.ResponseFuture<$0.ReadJournalEntryResponse> readEntry(
+  $grpc.ResponseFuture<$0.ReadJournalEntryResponse> read(
       $0.ReadJournalEntryRequest request,
       {$grpc.CallOptions options}) {
-    final call = $createCall(_$readEntry, $async.Stream.fromIterable([request]),
+    final call = $createCall(_$read, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
 
-  $grpc.ResponseFuture<$0.UpdateJournalEntryResponse> updateEntry(
+  $grpc.ResponseFuture<$0.UpdateJournalEntryResponse> update(
       $0.UpdateJournalEntryRequest request,
       {$grpc.CallOptions options}) {
-    final call = $createCall(
-        _$updateEntry, $async.Stream.fromIterable([request]),
+    final call = $createCall(_$update, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
 
-  $grpc.ResponseFuture<$0.DeleteJournalEntryResponse> deleteEntry(
+  $grpc.ResponseFuture<$0.DeleteJournalEntryResponse> delete(
       $0.DeleteJournalEntryRequest request,
       {$grpc.CallOptions options}) {
-    final call = $createCall(
-        _$deleteEntry, $async.Stream.fromIterable([request]),
+    final call = $createCall(_$delete, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
 
-  $grpc.ResponseFuture<$0.ListJournalEntryResponse> listEntries(
+  $grpc.ResponseFuture<$0.ListJournalEntryResponse> list(
       $0.ListJournalEntryRequest request,
       {$grpc.CallOptions options}) {
-    final call = $createCall(
-        _$listEntries, $async.Stream.fromIterable([request]),
-        options: options);
-    return $grpc.ResponseFuture(call);
-  }
-
-  $grpc.ResponseFuture<$0.ListJournalSubjectResponse> listSubjects(
-      $0.ListJournalSubjectRequest request,
-      {$grpc.CallOptions options}) {
-    final call = $createCall(
-        _$listSubjects, $async.Stream.fromIterable([request]),
+    final call = $createCall(_$list, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
 }
 
-abstract class JournalsServiceBase extends $grpc.Service {
-  $core.String get $name => 'service.Journals';
+abstract class JournalEntriesServiceBase extends $grpc.Service {
+  $core.String get $name => 'service.JournalEntries';
 
-  JournalsServiceBase() {
+  JournalEntriesServiceBase() {
     $addMethod($grpc.ServiceMethod<$0.CreateJournalEntryRequest,
             $0.CreateJournalEntryResponse>(
-        'CreateEntry',
-        createEntry_Pre,
+        'Create',
+        create_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
@@ -123,8 +104,8 @@ abstract class JournalsServiceBase extends $grpc.Service {
         ($0.CreateJournalEntryResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.ReadJournalEntryRequest,
             $0.ReadJournalEntryResponse>(
-        'ReadEntry',
-        readEntry_Pre,
+        'Read',
+        read_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
@@ -132,8 +113,8 @@ abstract class JournalsServiceBase extends $grpc.Service {
         ($0.ReadJournalEntryResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.UpdateJournalEntryRequest,
             $0.UpdateJournalEntryResponse>(
-        'UpdateEntry',
-        updateEntry_Pre,
+        'Update',
+        update_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
@@ -141,8 +122,8 @@ abstract class JournalsServiceBase extends $grpc.Service {
         ($0.UpdateJournalEntryResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.DeleteJournalEntryRequest,
             $0.DeleteJournalEntryResponse>(
-        'DeleteEntry',
-        deleteEntry_Pre,
+        'Delete',
+        delete_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
@@ -150,17 +131,84 @@ abstract class JournalsServiceBase extends $grpc.Service {
         ($0.DeleteJournalEntryResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.ListJournalEntryRequest,
             $0.ListJournalEntryResponse>(
-        'ListEntries',
-        listEntries_Pre,
+        'List',
+        list_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
             $0.ListJournalEntryRequest.fromBuffer(value),
         ($0.ListJournalEntryResponse value) => value.writeToBuffer()));
+  }
+
+  $async.Future<$0.CreateJournalEntryResponse> create_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.CreateJournalEntryRequest> request) async {
+    return create(call, await request);
+  }
+
+  $async.Future<$0.ReadJournalEntryResponse> read_Pre($grpc.ServiceCall call,
+      $async.Future<$0.ReadJournalEntryRequest> request) async {
+    return read(call, await request);
+  }
+
+  $async.Future<$0.UpdateJournalEntryResponse> update_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.UpdateJournalEntryRequest> request) async {
+    return update(call, await request);
+  }
+
+  $async.Future<$0.DeleteJournalEntryResponse> delete_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.DeleteJournalEntryRequest> request) async {
+    return delete(call, await request);
+  }
+
+  $async.Future<$0.ListJournalEntryResponse> list_Pre($grpc.ServiceCall call,
+      $async.Future<$0.ListJournalEntryRequest> request) async {
+    return list(call, await request);
+  }
+
+  $async.Future<$0.CreateJournalEntryResponse> create(
+      $grpc.ServiceCall call, $0.CreateJournalEntryRequest request);
+  $async.Future<$0.ReadJournalEntryResponse> read(
+      $grpc.ServiceCall call, $0.ReadJournalEntryRequest request);
+  $async.Future<$0.UpdateJournalEntryResponse> update(
+      $grpc.ServiceCall call, $0.UpdateJournalEntryRequest request);
+  $async.Future<$0.DeleteJournalEntryResponse> delete(
+      $grpc.ServiceCall call, $0.DeleteJournalEntryRequest request);
+  $async.Future<$0.ListJournalEntryResponse> list(
+      $grpc.ServiceCall call, $0.ListJournalEntryRequest request);
+}
+
+class JournalSubjectsClient extends $grpc.Client {
+  static final _$list = $grpc.ClientMethod<$0.ListJournalSubjectRequest,
+          $0.ListJournalSubjectResponse>(
+      '/service.JournalSubjects/List',
+      ($0.ListJournalSubjectRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $0.ListJournalSubjectResponse.fromBuffer(value));
+
+  JournalSubjectsClient($grpc.ClientChannel channel,
+      {$grpc.CallOptions options})
+      : super(channel, options: options);
+
+  $grpc.ResponseFuture<$0.ListJournalSubjectResponse> list(
+      $0.ListJournalSubjectRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(_$list, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+}
+
+abstract class JournalSubjectsServiceBase extends $grpc.Service {
+  $core.String get $name => 'service.JournalSubjects';
+
+  JournalSubjectsServiceBase() {
     $addMethod($grpc.ServiceMethod<$0.ListJournalSubjectRequest,
             $0.ListJournalSubjectResponse>(
-        'ListSubjects',
-        listSubjects_Pre,
+        'List',
+        list_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
@@ -168,85 +216,43 @@ abstract class JournalsServiceBase extends $grpc.Service {
         ($0.ListJournalSubjectResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$0.CreateJournalEntryResponse> createEntry_Pre(
-      $grpc.ServiceCall call,
-      $async.Future<$0.CreateJournalEntryRequest> request) async {
-    return createEntry(call, await request);
-  }
-
-  $async.Future<$0.ReadJournalEntryResponse> readEntry_Pre(
-      $grpc.ServiceCall call,
-      $async.Future<$0.ReadJournalEntryRequest> request) async {
-    return readEntry(call, await request);
-  }
-
-  $async.Future<$0.UpdateJournalEntryResponse> updateEntry_Pre(
-      $grpc.ServiceCall call,
-      $async.Future<$0.UpdateJournalEntryRequest> request) async {
-    return updateEntry(call, await request);
-  }
-
-  $async.Future<$0.DeleteJournalEntryResponse> deleteEntry_Pre(
-      $grpc.ServiceCall call,
-      $async.Future<$0.DeleteJournalEntryRequest> request) async {
-    return deleteEntry(call, await request);
-  }
-
-  $async.Future<$0.ListJournalEntryResponse> listEntries_Pre(
-      $grpc.ServiceCall call,
-      $async.Future<$0.ListJournalEntryRequest> request) async {
-    return listEntries(call, await request);
-  }
-
-  $async.Future<$0.ListJournalSubjectResponse> listSubjects_Pre(
-      $grpc.ServiceCall call,
+  $async.Future<$0.ListJournalSubjectResponse> list_Pre($grpc.ServiceCall call,
       $async.Future<$0.ListJournalSubjectRequest> request) async {
-    return listSubjects(call, await request);
+    return list(call, await request);
   }
 
-  $async.Future<$0.CreateJournalEntryResponse> createEntry(
-      $grpc.ServiceCall call, $0.CreateJournalEntryRequest request);
-  $async.Future<$0.ReadJournalEntryResponse> readEntry(
-      $grpc.ServiceCall call, $0.ReadJournalEntryRequest request);
-  $async.Future<$0.UpdateJournalEntryResponse> updateEntry(
-      $grpc.ServiceCall call, $0.UpdateJournalEntryRequest request);
-  $async.Future<$0.DeleteJournalEntryResponse> deleteEntry(
-      $grpc.ServiceCall call, $0.DeleteJournalEntryRequest request);
-  $async.Future<$0.ListJournalEntryResponse> listEntries(
-      $grpc.ServiceCall call, $0.ListJournalEntryRequest request);
-  $async.Future<$0.ListJournalSubjectResponse> listSubjects(
+  $async.Future<$0.ListJournalSubjectResponse> list(
       $grpc.ServiceCall call, $0.ListJournalSubjectRequest request);
 }
 
-class FeedsClient extends $grpc.Client {
-  static final _$listArticles =
+class FeedArticlesClient extends $grpc.Client {
+  static final _$list =
       $grpc.ClientMethod<$0.ListFeedArticleRequest, $0.ListFeedArticleResponse>(
-          '/service.Feeds/ListArticles',
+          '/service.FeedArticles/List',
           ($0.ListFeedArticleRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.ListFeedArticleResponse.fromBuffer(value));
 
-  FeedsClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
+  FeedArticlesClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
 
-  $grpc.ResponseFuture<$0.ListFeedArticleResponse> listArticles(
+  $grpc.ResponseFuture<$0.ListFeedArticleResponse> list(
       $0.ListFeedArticleRequest request,
       {$grpc.CallOptions options}) {
-    final call = $createCall(
-        _$listArticles, $async.Stream.fromIterable([request]),
+    final call = $createCall(_$list, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
 }
 
-abstract class FeedsServiceBase extends $grpc.Service {
-  $core.String get $name => 'service.Feeds';
+abstract class FeedArticlesServiceBase extends $grpc.Service {
+  $core.String get $name => 'service.FeedArticles';
 
-  FeedsServiceBase() {
+  FeedArticlesServiceBase() {
     $addMethod($grpc.ServiceMethod<$0.ListFeedArticleRequest,
             $0.ListFeedArticleResponse>(
-        'ListArticles',
-        listArticles_Pre,
+        'List',
+        list_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
@@ -254,13 +260,12 @@ abstract class FeedsServiceBase extends $grpc.Service {
         ($0.ListFeedArticleResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$0.ListFeedArticleResponse> listArticles_Pre(
-      $grpc.ServiceCall call,
+  $async.Future<$0.ListFeedArticleResponse> list_Pre($grpc.ServiceCall call,
       $async.Future<$0.ListFeedArticleRequest> request) async {
-    return listArticles(call, await request);
+    return list(call, await request);
   }
 
-  $async.Future<$0.ListFeedArticleResponse> listArticles(
+  $async.Future<$0.ListFeedArticleResponse> list(
       $grpc.ServiceCall call, $0.ListFeedArticleRequest request);
 }
 

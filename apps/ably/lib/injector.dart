@@ -128,7 +128,13 @@ class UserInjector extends StatelessWidget {
               ),
             ),
             Provider(
-              create: (_) => JournalsClient(
+              create: (_) => JournalEntriesClient(
+                channel,
+                options: options,
+              ),
+            ),
+            Provider(
+              create: (_) => JournalSubjectsClient(
                 channel,
                 options: options,
               ),
@@ -140,7 +146,7 @@ class UserInjector extends StatelessWidget {
               ),
             ),
             Provider(
-              create: (_) => FeedsClient(
+              create: (_) => FeedArticlesClient(
                 channel,
                 options: options,
               ),
@@ -158,13 +164,14 @@ class UserInjector extends StatelessWidget {
                 user,
               ),
             ),
-            ProxyProvider<JournalsClient, JournalStore>(
-              update: (_, dep, __) => JournalStore(
+            ProxyProvider2<JournalSubjectsClient, JournalEntriesClient, JournalStore>(
+              update: (_, dep, dep2, __) => JournalStore(
                 ErrorStore(),
                 dep,
+                dep2,
               ),
             ),
-            ProxyProvider<FeedsClient, FeedStore>(
+            ProxyProvider<FeedArticlesClient, FeedStore>(
               update: (_, dep, __) => FeedStore(
                 ErrorStore(),
                 dep,

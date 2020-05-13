@@ -33,6 +33,7 @@ class JournalPage extends StatelessWidget {
                     title: Text('Journal'),
                     onChanged: (value) {},
                   ),
+                  JournalWidget(),
                 ],
               ),
             ),

@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:lib_lego/lib_lego.dart';
+import 'package:lib_services/lib_services.dart';
 import 'package:provider/provider.dart';
 
 import 'store.dart';
@@ -54,39 +57,86 @@ class DailyFeed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = [
-      Colors.red,
-      Colors.blue,
-      Colors.green,
-      Colors.yellow,
-      Colors.orange,
-    ];
     final store = Provider.of<FeedStore>(context);
     return Container(
-      height: 160,
-      padding: EdgeInsets.symmetric(horizontal: 12),
+      height: 200,
+      padding: EdgeInsets.only(left: 10),
       child: Observer(
-        builder: (context) => ListView.separated(
-          itemCount: store.articles.length,
-          separatorBuilder: (context, index) => KsSpace.xs(),
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            final article = store.articles[index];
-            return Column(
-              children: <Widget>[
-                Container(
-                  width: 240.0,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    color: colors[index],
+        builder: (context) {
+          final articles = getArticlesFromKey(store, feedKey);
+          return ListView.separated(
+            itemCount: articles.length,
+            separatorBuilder: (context, index) => KsSpace.xxs(),
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              final article = articles[index];
+              return InkWell(
+                onTap: () => newPageStart(context, article),
+                child: Container(
+                  width: 250,
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                    child: Stack(
+                      children: <Widget>[
+                        Image.network(
+                          article.coverPictureUrl,
+                          fit: BoxFit.fitWidth,
+                          width: 250,
+                        ),
+                        Expanded(
+                          child: Container(color: Colors.black26),
+                        ),
+                        ListTile(
+                          title: Text(
+                            article.title,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText2
+                                .copyWith(color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                Text(article.title),
-              ],
-            );
-          },
-        ),
+              );
+            },
+          );
+        },
       ),
     );
   }
+
+  List<FeedArticle> getArticlesFromKey(FeedStore store, String key) {
+    switch (key) {
+      case 'daily':
+        return store.dailyArticles;
+      case 'relief':
+        return store.reliefArticles;
+      case 'updates':
+        return store.updatesArticles;
+    }
+    return [];
+  }
+}
+
+Future newPageStart(BuildContext context, FeedArticle article) {
+  return Navigator.of(context).push(
+    CupertinoPageRoute<void>(
+      builder: (BuildContext context) {
+        return CupertinoPageScaffold(
+          navigationBar: CupertinoNavigationBar(
+            middle: Text(article.title),
+          ),
+          child: SafeArea(
+            child: Markdown(
+              data: article.content,
+            ),
+          ),
+        );
+      },
+    ),
+  );
 }
