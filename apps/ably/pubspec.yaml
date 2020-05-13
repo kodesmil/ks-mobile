@@ -52,6 +52,8 @@ dependencies:
     path: ../../features/feat_journal
   feat_survey:
     path: ../../features/feat_survey
+  feat_feed:
+    path: ../../features/feat_feed
   lib_di:
     path: ../../libs/lib_di
   lib_lego:

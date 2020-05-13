@@ -21,6 +21,7 @@ final apps = [
   'features/feat_locations',
   'features/feat_survey',
   'features/feat_profile',
+  'features/feat_feed',
   'features/feat_journal',
   'apps/ably',
   'apps/motim_fit',

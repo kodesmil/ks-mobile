@@ -114,7 +114,7 @@ class JournalEntry extends $pb.GeneratedMessage {
         valueOf: JournalEntry_Severity.valueOf,
         enumValues: JournalEntry_Severity.values)
     ..aOS(3, 'note')
-    ..aOM<$2.Timestamp>(4, 'timestamp', subBuilder: $2.Timestamp.create)
+    ..aOM<$2.Timestamp>(4, 'createdAt', subBuilder: $2.Timestamp.create)
     ..aInt64(5, 'journalSubjectId')
     ..hasRequiredFields = false;
 
@@ -179,18 +179,18 @@ class JournalEntry extends $pb.GeneratedMessage {
   void clearNote() => clearField(3);
 
   @$pb.TagNumber(4)
-  $2.Timestamp get timestamp => $_getN(3);
+  $2.Timestamp get createdAt => $_getN(3);
   @$pb.TagNumber(4)
-  set timestamp($2.Timestamp v) {
+  set createdAt($2.Timestamp v) {
     setField(4, v);
   }
 
   @$pb.TagNumber(4)
-  $core.bool hasTimestamp() => $_has(3);
+  $core.bool hasCreatedAt() => $_has(3);
   @$pb.TagNumber(4)
-  void clearTimestamp() => clearField(4);
+  void clearCreatedAt() => clearField(4);
   @$pb.TagNumber(4)
-  $2.Timestamp ensureTimestamp() => $_ensure(3);
+  $2.Timestamp ensureCreatedAt() => $_ensure(3);
 
   @$pb.TagNumber(5)
   $fixnum.Int64 get journalSubjectId => $_getI64(4);
@@ -814,6 +814,418 @@ class ListJournalSubjectResponse extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(1)
   $core.List<JournalSubject> get results => $_getList(0);
+}
+
+class FeedTag extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('FeedTag',
+      package: const $pb.PackageName('service'), createEmptyInstance: create)
+    ..aOM<$1.Identifier>(1, 'id', subBuilder: $1.Identifier.create)
+    ..aOS(2, 'key')
+    ..aOS(3, 'name')
+    ..pc<FeedArticle>(4, 'feedArticles', $pb.PbFieldType.PM,
+        subBuilder: FeedArticle.create)
+    ..hasRequiredFields = false;
+
+  FeedTag._() : super();
+  factory FeedTag() => create();
+  factory FeedTag.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory FeedTag.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  FeedTag clone() => FeedTag()..mergeFromMessage(this);
+  FeedTag copyWith(void Function(FeedTag) updates) =>
+      super.copyWith((message) => updates(message as FeedTag));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static FeedTag create() => FeedTag._();
+  FeedTag createEmptyInstance() => create();
+  static $pb.PbList<FeedTag> createRepeated() => $pb.PbList<FeedTag>();
+  @$core.pragma('dart2js:noInline')
+  static FeedTag getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FeedTag>(create);
+  static FeedTag _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $1.Identifier get id => $_getN(0);
+  @$pb.TagNumber(1)
+  set id($1.Identifier v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+  @$pb.TagNumber(1)
+  $1.Identifier ensureId() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get key => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set key($core.String v) {
+    $_setString(1, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasKey() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearKey() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get name => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set name($core.String v) {
+    $_setString(2, v);
+  }
+
+  @$pb.TagNumber(3)
+  $core.bool hasName() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearName() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.List<FeedArticle> get feedArticles => $_getList(3);
+}
+
+class FeedAuthor extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('FeedAuthor',
+      package: const $pb.PackageName('service'), createEmptyInstance: create)
+    ..aOM<$1.Identifier>(1, 'id', subBuilder: $1.Identifier.create)
+    ..aOS(2, 'name')
+    ..aOS(3, 'profilePhotoUrl')
+    ..aOS(4, 'bio')
+    ..pc<FeedArticle>(5, 'feedArticles', $pb.PbFieldType.PM,
+        subBuilder: FeedArticle.create)
+    ..hasRequiredFields = false;
+
+  FeedAuthor._() : super();
+  factory FeedAuthor() => create();
+  factory FeedAuthor.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory FeedAuthor.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  FeedAuthor clone() => FeedAuthor()..mergeFromMessage(this);
+  FeedAuthor copyWith(void Function(FeedAuthor) updates) =>
+      super.copyWith((message) => updates(message as FeedAuthor));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static FeedAuthor create() => FeedAuthor._();
+  FeedAuthor createEmptyInstance() => create();
+  static $pb.PbList<FeedAuthor> createRepeated() => $pb.PbList<FeedAuthor>();
+  @$core.pragma('dart2js:noInline')
+  static FeedAuthor getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FeedAuthor>(create);
+  static FeedAuthor _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $1.Identifier get id => $_getN(0);
+  @$pb.TagNumber(1)
+  set id($1.Identifier v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+  @$pb.TagNumber(1)
+  $1.Identifier ensureId() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set name($core.String v) {
+    $_setString(1, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearName() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get profilePhotoUrl => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set profilePhotoUrl($core.String v) {
+    $_setString(2, v);
+  }
+
+  @$pb.TagNumber(3)
+  $core.bool hasProfilePhotoUrl() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearProfilePhotoUrl() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get bio => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set bio($core.String v) {
+    $_setString(3, v);
+  }
+
+  @$pb.TagNumber(4)
+  $core.bool hasBio() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearBio() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.List<FeedArticle> get feedArticles => $_getList(4);
+}
+
+class FeedArticle extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('FeedArticle',
+      package: const $pb.PackageName('service'), createEmptyInstance: create)
+    ..aOM<$1.Identifier>(1, 'id', subBuilder: $1.Identifier.create)
+    ..aOM<$2.Timestamp>(2, 'createdAt', subBuilder: $2.Timestamp.create)
+    ..aOS(3, 'title')
+    ..aOS(4, 'subtitle')
+    ..aOS(5, 'coverPictureUrl')
+    ..aOS(6, 'content')
+    ..pc<FeedTag>(7, 'feedTags', $pb.PbFieldType.PM, subBuilder: FeedTag.create)
+    ..aOM<FeedAuthor>(8, 'feedAuthor', subBuilder: FeedAuthor.create)
+    ..hasRequiredFields = false;
+
+  FeedArticle._() : super();
+  factory FeedArticle() => create();
+  factory FeedArticle.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory FeedArticle.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  FeedArticle clone() => FeedArticle()..mergeFromMessage(this);
+  FeedArticle copyWith(void Function(FeedArticle) updates) =>
+      super.copyWith((message) => updates(message as FeedArticle));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static FeedArticle create() => FeedArticle._();
+  FeedArticle createEmptyInstance() => create();
+  static $pb.PbList<FeedArticle> createRepeated() => $pb.PbList<FeedArticle>();
+  @$core.pragma('dart2js:noInline')
+  static FeedArticle getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FeedArticle>(create);
+  static FeedArticle _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $1.Identifier get id => $_getN(0);
+  @$pb.TagNumber(1)
+  set id($1.Identifier v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+  @$pb.TagNumber(1)
+  $1.Identifier ensureId() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $2.Timestamp get createdAt => $_getN(1);
+  @$pb.TagNumber(2)
+  set createdAt($2.Timestamp v) {
+    setField(2, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasCreatedAt() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCreatedAt() => clearField(2);
+  @$pb.TagNumber(2)
+  $2.Timestamp ensureCreatedAt() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $core.String get title => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set title($core.String v) {
+    $_setString(2, v);
+  }
+
+  @$pb.TagNumber(3)
+  $core.bool hasTitle() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearTitle() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get subtitle => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set subtitle($core.String v) {
+    $_setString(3, v);
+  }
+
+  @$pb.TagNumber(4)
+  $core.bool hasSubtitle() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSubtitle() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get coverPictureUrl => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set coverPictureUrl($core.String v) {
+    $_setString(4, v);
+  }
+
+  @$pb.TagNumber(5)
+  $core.bool hasCoverPictureUrl() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearCoverPictureUrl() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get content => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set content($core.String v) {
+    $_setString(5, v);
+  }
+
+  @$pb.TagNumber(6)
+  $core.bool hasContent() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearContent() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.List<FeedTag> get feedTags => $_getList(6);
+
+  @$pb.TagNumber(8)
+  FeedAuthor get feedAuthor => $_getN(7);
+  @$pb.TagNumber(8)
+  set feedAuthor(FeedAuthor v) {
+    setField(8, v);
+  }
+
+  @$pb.TagNumber(8)
+  $core.bool hasFeedAuthor() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearFeedAuthor() => clearField(8);
+  @$pb.TagNumber(8)
+  FeedAuthor ensureFeedAuthor() => $_ensure(7);
+}
+
+class ListFeedArticleRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ListFeedArticleRequest',
+      package: const $pb.PackageName('service'), createEmptyInstance: create)
+    ..aOM<$3.Filtering>(1, 'filter', subBuilder: $3.Filtering.create)
+    ..aOM<$3.Sorting>(2, 'orderBy', subBuilder: $3.Sorting.create)
+    ..aOM<$3.FieldSelection>(3, 'fields', subBuilder: $3.FieldSelection.create)
+    ..aOM<$3.Pagination>(4, 'paging', subBuilder: $3.Pagination.create)
+    ..hasRequiredFields = false;
+
+  ListFeedArticleRequest._() : super();
+  factory ListFeedArticleRequest() => create();
+  factory ListFeedArticleRequest.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory ListFeedArticleRequest.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  ListFeedArticleRequest clone() =>
+      ListFeedArticleRequest()..mergeFromMessage(this);
+  ListFeedArticleRequest copyWith(
+          void Function(ListFeedArticleRequest) updates) =>
+      super.copyWith((message) => updates(message as ListFeedArticleRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListFeedArticleRequest create() => ListFeedArticleRequest._();
+  ListFeedArticleRequest createEmptyInstance() => create();
+  static $pb.PbList<ListFeedArticleRequest> createRepeated() =>
+      $pb.PbList<ListFeedArticleRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListFeedArticleRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ListFeedArticleRequest>(create);
+  static ListFeedArticleRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $3.Filtering get filter => $_getN(0);
+  @$pb.TagNumber(1)
+  set filter($3.Filtering v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasFilter() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFilter() => clearField(1);
+  @$pb.TagNumber(1)
+  $3.Filtering ensureFilter() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $3.Sorting get orderBy => $_getN(1);
+  @$pb.TagNumber(2)
+  set orderBy($3.Sorting v) {
+    setField(2, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasOrderBy() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearOrderBy() => clearField(2);
+  @$pb.TagNumber(2)
+  $3.Sorting ensureOrderBy() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $3.FieldSelection get fields => $_getN(2);
+  @$pb.TagNumber(3)
+  set fields($3.FieldSelection v) {
+    setField(3, v);
+  }
+
+  @$pb.TagNumber(3)
+  $core.bool hasFields() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFields() => clearField(3);
+  @$pb.TagNumber(3)
+  $3.FieldSelection ensureFields() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  $3.Pagination get paging => $_getN(3);
+  @$pb.TagNumber(4)
+  set paging($3.Pagination v) {
+    setField(4, v);
+  }
+
+  @$pb.TagNumber(4)
+  $core.bool hasPaging() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearPaging() => clearField(4);
+  @$pb.TagNumber(4)
+  $3.Pagination ensurePaging() => $_ensure(3);
+}
+
+class ListFeedArticleResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ListFeedArticleResponse',
+      package: const $pb.PackageName('service'), createEmptyInstance: create)
+    ..pc<FeedArticle>(1, 'results', $pb.PbFieldType.PM,
+        subBuilder: FeedArticle.create)
+    ..hasRequiredFields = false;
+
+  ListFeedArticleResponse._() : super();
+  factory ListFeedArticleResponse() => create();
+  factory ListFeedArticleResponse.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory ListFeedArticleResponse.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  ListFeedArticleResponse clone() =>
+      ListFeedArticleResponse()..mergeFromMessage(this);
+  ListFeedArticleResponse copyWith(
+          void Function(ListFeedArticleResponse) updates) =>
+      super.copyWith((message) => updates(message as ListFeedArticleResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListFeedArticleResponse create() => ListFeedArticleResponse._();
+  ListFeedArticleResponse createEmptyInstance() => create();
+  static $pb.PbList<ListFeedArticleResponse> createRepeated() =>
+      $pb.PbList<ListFeedArticleResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListFeedArticleResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ListFeedArticleResponse>(create);
+  static ListFeedArticleResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<FeedArticle> get results => $_getList(0);
 }
 
 class Profile extends $pb.GeneratedMessage {

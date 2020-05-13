@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:feat_activities/feat_activities.dart';
 import 'package:feat_auth/feat_auth.dart';
+import 'package:feat_feed/feat_feed.dart';
 import 'package:feat_journal/feat_journal.dart';
 import 'package:feat_locations/feat_locations.dart';
 import 'package:feat_notifications/feat_notifications.dart';
@@ -127,19 +128,19 @@ class UserInjector extends StatelessWidget {
               ),
             ),
             Provider(
-              create: (_) => JournalSubjectsClient(
-                channel,
-                options: options,
-              ),
-            ),
-            Provider(
-              create: (_) => JournalEntriesClient(
+              create: (_) => JournalsClient(
                 channel,
                 options: options,
               ),
             ),
             Provider(
               create: (_) => GroupsClient(
+                channel,
+                options: options,
+              ),
+            ),
+            Provider(
+              create: (_) => FeedsClient(
                 channel,
                 options: options,
               ),
@@ -157,10 +158,17 @@ class UserInjector extends StatelessWidget {
                 user,
               ),
             ),
-            ProxyProvider2<JournalEntriesClient, JournalSubjectsClient,
-                JournalStore>(
-              update: (_, dep, dep2, __) =>
-                  JournalStore(ErrorStore(), dep, dep2),
+            ProxyProvider<JournalsClient, JournalStore>(
+              update: (_, dep, __) => JournalStore(
+                ErrorStore(),
+                dep,
+              ),
+            ),
+            ProxyProvider<FeedsClient, FeedStore>(
+              update: (_, dep, __) => FeedStore(
+                ErrorStore(),
+                dep,
+              ),
             ),
           ],
           child: child,

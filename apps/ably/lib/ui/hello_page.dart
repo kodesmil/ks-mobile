@@ -11,7 +11,7 @@ class HelloPage extends StatelessWidget {
         slivers: <Widget>[
           CupertinoSliverNavigationBar(
             largeTitle: Text(
-              'Happenings',
+              'Hello',
               style: Theme.of(context).textTheme.headline5,
               textScaleFactor: MediaQuery.textScaleFactorOf(context),
             ),
@@ -29,6 +29,7 @@ class HelloPage extends StatelessWidget {
                     ),
                   ),
                   DailyFeed(),
+                  KsSpace.xs(),
                   ListTile(
                     title: Text(
                       'Quick Relief',
@@ -40,6 +41,7 @@ class HelloPage extends StatelessWidget {
                     ),
                   ),
                   DailyFeed(),
+                  KsSpace.xs(),
                   ListTile(
                     leading: Text(
                       'Daily Goals',
