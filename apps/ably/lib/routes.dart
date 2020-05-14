@@ -21,11 +21,11 @@ class Routes {
           if (snap.connectionState == ConnectionState.done) {
             return FutureBuilder(
               future: Future.delayed(Duration.zero, () {
-                return Navigator.of(context).(
+                return Navigator.of(context).pushReplacementNamed(
                   snap.data == null ? '/login' : '/home',
                 );
               }),
-              builder: (context, snap) => Container(),
+              builder: (context, snap) => SplashPage(),
             );
           }
           return SplashPage();
@@ -34,11 +34,7 @@ class Routes {
     },
     '/login': (BuildContext context) => LoginPage(),
     '/sign-up': (BuildContext context) => SignUpPage(),
-    '/home': (BuildContext context) {
-      final userStore = Provider.of<UserStore>(context);
-      final user = userStore.user;
-      return UserInjector(child: HomePage(), user: user);
-    },
+    '/home': (BuildContext context) => HomePage(),
     '/onboarding': (BuildContext context) => OnboardingPage(),
   };
 }

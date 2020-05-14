@@ -27,6 +27,22 @@ class AppInjector extends StatefulWidget {
 }
 
 class _AppInjectorState extends State<AppInjector> {
+  final notificationsChannel = ClientChannel(
+    'notifications.qa.api.kodesmil.com',
+    port: 443,
+    options: const ChannelOptions(
+      credentials: ChannelCredentials.secure(),
+    ),
+  );
+
+  final channel = ClientChannel(
+    'grpc-clinic.qa.api.kodesmil.com',
+    port: 443,
+    options: const ChannelOptions(
+      credentials: ChannelCredentials.secure(),
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -35,7 +51,9 @@ class _AppInjectorState extends State<AppInjector> {
           update: (_, __) => FirebaseAuth.instance,
         ),
         ProxyProvider<FirebaseAuth, UserStore>(
-          update: (_, dep, __) => UserStore(dep),
+          update: (_, dep, old) {
+            return old ?? UserStore(dep);
+          },
         ),
         ProxyProvider0(
           update: (_, __) => AuthStorage(
@@ -75,120 +93,77 @@ class _AppInjectorState extends State<AppInjector> {
             dep,
           ),
         ),
-      ],
-      child: Observer(
-        builder: (context) {
-
-        },
-      ),
-    );
-  }
-}
-
-class UserInjector extends StatefulWidget {
-  final Widget child;
-  final FirebaseUser user;
-
-  const UserInjector({Key key, this.child, this.user}) : super(key: key);
-
-  @override
-  _UserInjectorState createState() => _UserInjectorState();
-}
-
-class _UserInjectorState extends State<UserInjector> {
-  @override
-  Widget build(BuildContext context) {
-    if (widget.user == null) return SplashPage();
-
-    final notificationsChannel = ClientChannel(
-      'notifications.qa.api.kodesmil.com',
-      port: 443,
-      options: const ChannelOptions(
-        credentials: ChannelCredentials.secure(),
-      ),
-    );
-
-    final channel = ClientChannel(
-      'grpc-clinic.qa.api.kodesmil.com',
-      port: 443,
-      options: const ChannelOptions(
-        credentials: ChannelCredentials.secure(),
-      ),
-    );
-
-    return FutureBuilder<IdTokenResult>(
-      future: widget.user.getIdToken(),
-      builder: (context, snap) {
-        if (!snap.hasData) {
-          return SplashPage();
-        }
-        final options = CallOptions(
-          metadata: {
-            'authorization': 'Bearer ${snap.data.token}',
+        ProxyProvider<UserStore, CallOptions>(
+          update: (_, store, __) {
+            return CallOptions(
+              providers: [
+                (metadata, url) async {
+                  if (store.user == null) return;
+                  final idToken = await store.user.getIdToken();
+                  metadata['authorization'] = 'Bearer ${idToken.token}';
+                },
+              ],
+            );
           },
-        );
-        return MultiProvider(
-          providers: [
-            ProxyProvider0(
-              update: (_, __) => NotificationServiceClient(
-                notificationsChannel,
-              ),
-            ),
-            ProxyProvider0(
-              update: (_, __) => ProfilesClient(
-                channel,
-                options: options,
-              ),
-            ),
-            ProxyProvider0(
-              update: (_, __) => JournalEntriesClient(
-                channel,
-                options: options,
-              ),
-            ),
-            ProxyProvider0(
-              update: (_, __) => JournalSubjectsClient(
-                channel,
-                options: options,
-              ),
-            ),
-            ProxyProvider0(
-              update: (_, __) => GroupsClient(
-                channel,
-                options: options,
-              ),
-            ),
-            ProxyProvider0(
-              update: (_, __) => FeedArticlesClient(
-                channel,
-                options: options,
-              ),
-            ),
-            ProxyProvider2<UserStore, ProfilesClient, ProfileStore>(
-              update: (_, dep, dep2, __) => ProfileStore(
-                ErrorStore(),
-                dep,
-                dep2,
-              ),
-            ),
-            ProxyProvider2<JournalSubjectsClient, JournalEntriesClient,
-                JournalStore>(
-              update: (_, dep, dep2, __) => JournalStore(
-                ErrorStore(),
-                dep,
-                dep2,
-              ),
-            ),
-            ProxyProvider<FeedArticlesClient, FeedStore>(
-              update: (_, dep, __) => FeedStore(
-                ErrorStore(),
-                dep,
-              ),
-            ),
-          ],
-          child: widget.child,
-        );
-      },
+        ),
+        ProxyProvider0(
+          update: (_, __) => NotificationServiceClient(
+            notificationsChannel,
+          ),
+        ),
+        ProxyProvider<CallOptions, ProfilesClient>(
+          update: (_, dep, __) => ProfilesClient(
+            channel,
+            options: dep,
+          ),
+        ),
+        ProxyProvider<CallOptions, JournalEntriesClient>(
+          update: (_, dep, __) => JournalEntriesClient(
+            channel,
+            options: dep,
+          ),
+        ),
+        ProxyProvider<CallOptions, JournalSubjectsClient>(
+          update: (_, dep, __) => JournalSubjectsClient(
+            channel,
+            options: dep,
+          ),
+        ),
+        ProxyProvider<CallOptions, GroupsClient>(
+          update: (_, dep, __) => GroupsClient(
+            channel,
+            options: dep,
+          ),
+        ),
+        ProxyProvider<CallOptions, FeedArticlesClient>(
+          update: (_, dep, __) => FeedArticlesClient(
+            channel,
+            options: dep,
+          ),
+        ),
+        ProxyProvider2<UserStore, ProfilesClient, ProfileStore>(
+          update: (_, dep, dep2, __) => ProfileStore(
+            ErrorStore(),
+            dep,
+            dep2,
+          ),
+        ),
+        ProxyProvider2<JournalSubjectsClient, JournalEntriesClient,
+            JournalStore>(
+          update: (_, dep, dep2, __) => JournalStore(
+            ErrorStore(),
+            dep,
+            dep2,
+          ),
+        ),
+        ProxyProvider<FeedArticlesClient, FeedStore>(
+          update: (_, dep, __) => FeedStore(
+            ErrorStore(),
+            dep,
+          ),
+        ),
+      ],
+      child: widget.child,
     );
   }
 }

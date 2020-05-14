@@ -45,6 +45,7 @@ abstract class _FeedStore with Store {
   Future fetchArticles(String tagKey) async {
     final request = ListFeedArticleRequest();
     final response = await client.list(request);
+    success = true;
     articles = response.results;
   }
 }

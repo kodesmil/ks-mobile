@@ -12,20 +12,21 @@ import 'routes.dart';
 void realMain() async {
   Crashlytics.instance.enableInDevMode = true;
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
-  if (kIsWeb) {
-    runApp(MyApp());
-  } else {
-    runZoned(
-      () {
-        WidgetsFlutterBinding.ensureInitialized();
-        runApp(MyApp());
-      },
-      onError: Crashlytics.instance.recordError,
-    );
-  }
+  runZoned(
+    () {
+      WidgetsFlutterBinding.ensureInitialized();
+      runApp(MyApp());
+    },
+    onError: Crashlytics.instance.recordError,
+  );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return AppInjector(
