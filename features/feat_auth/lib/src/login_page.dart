@@ -19,6 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void didChangeDependencies() {
     final store = Provider.of<LoginStore>(context);
+    store.reset();
     _emailController.addListener(() {
       store.setEmail(_emailController.text);
     });
@@ -107,6 +108,7 @@ class _LoginPageState extends State<LoginPage> {
           autoFocus: true,
           inputType: TextInputType.emailAddress,
           icon: Icons.email,
+          textCapitalization: TextCapitalization.none,
           textController: _emailController,
           inputAction: TextInputAction.next,
           onFieldSubmitted: (value) {
@@ -122,6 +124,7 @@ class _LoginPageState extends State<LoginPage> {
           isObscure: true,
           padding: EdgeInsets.only(top: 16.0),
           icon: Icons.lock,
+          textCapitalization: TextCapitalization.none,
           textController: _passwordController,
           focusNode: _passwordFocusNode,
           errorText: store.formErrorStore.password,

@@ -83,6 +83,13 @@ mixin _$SignUpStore on _SignUpStore, Store {
     }, _$loadingAtom, name: '${_$loadingAtom.name}_set');
   }
 
+  final _$resetAsyncAction = AsyncAction('reset');
+
+  @override
+  Future<dynamic> reset() {
+    return _$resetAsyncAction.run(() => super.reset());
+  }
+
   final _$signUpAsyncAction = AsyncAction('signUp');
 
   @override

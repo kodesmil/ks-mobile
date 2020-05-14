@@ -19,6 +19,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   void didChangeDependencies() {
     final store = Provider.of<SignUpStore>(context);
+    store.reset();
     _emailController.addListener(() {
       store.setEmail(_emailController.text);
     });
@@ -91,6 +92,7 @@ class _SignUpPageState extends State<SignUpPage> {
           icon: Icons.email,
           inputType: TextInputType.emailAddress,
           textController: _emailController,
+          textCapitalization: TextCapitalization.none,
           focusNode: _emailFocusNode,
           padding: EdgeInsets.only(top: 16.0),
           inputAction: TextInputAction.next,
@@ -108,6 +110,7 @@ class _SignUpPageState extends State<SignUpPage> {
           isObscure: true,
           padding: EdgeInsets.only(top: 16.0),
           textController: _passwordController,
+          textCapitalization: TextCapitalization.none,
           focusNode: _passwordFocusNode,
           errorText: store.signUpErrorStore.password,
         ),

@@ -39,14 +39,18 @@ abstract class _ProfileStore with Store {
         profile = response.result;
       } catch (e) {
         profile = Profile()..primaryEmail = userStore.user.email;
+        await createOrUpdateProfile();
       }
+    } else {
+      await createOrUpdateProfile();
     }
   }
 
   @action
-  Future createOrUpdateProfile() async {
-    return profile?.id == null ? createProfile() : updateProfile();
-  }
+  Future createOrUpdateProfile() async =>
+      profile?.id?.resourceId?.isNotEmpty == true
+          ? await updateProfile()
+          : await createProfile();
 
   @action
   Future createProfile() async {

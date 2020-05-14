@@ -104,6 +104,13 @@ mixin _$LoginStore on _LoginStore, Store {
     return _$logoutAsyncAction.run(() => super.logout());
   }
 
+  final _$resetAsyncAction = AsyncAction('reset');
+
+  @override
+  Future<dynamic> reset() {
+    return _$resetAsyncAction.run(() => super.reset());
+  }
+
   final _$_LoginStoreActionController = ActionController(name: '_LoginStore');
 
   @override

@@ -58,6 +58,12 @@ abstract class _SignUpStore with Store {
   }
 
   @action
+  Future reset() async {
+    loading = false;
+    success = false;
+  }
+
+  @action
   void validateEmail(String value) {
     if (value.isEmpty) {
       signUpErrorStore.email = "Email can't be empty";

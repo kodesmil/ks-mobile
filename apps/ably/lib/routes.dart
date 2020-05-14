@@ -18,10 +18,13 @@ class Routes {
     '/home': (BuildContext context) => Observer(builder: (context) {
           final userStore = Provider.of<UserStore>(context);
           final user = userStore.user;
-          return UserInjector(
-            child: HomePage(),
-            user: user
-          );
+          if (user == null) {
+            Future.delayed(Duration.zero, () {
+              Navigator.of(context).pushReplacementNamed('/login');
+            });
+            return Container();
+          }
+          return UserInjector(child: HomePage(), user: user);
         }),
     '/onboarding': (BuildContext context) => OnboardingPage(),
   };

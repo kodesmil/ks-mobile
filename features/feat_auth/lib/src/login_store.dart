@@ -120,6 +120,12 @@ abstract class _LoginStore with Store {
   }
 
   @action
+  Future reset() async {
+     loading = false;
+     success = false;
+  }
+
+  @action
   void validateAll() {
     validatePassword(password);
     validateEmail(email);

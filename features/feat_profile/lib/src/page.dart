@@ -5,7 +5,20 @@ import 'package:lib_lego/lib_lego.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+
+  @override
+  void didChangeDependencies() {
+    final store = Provider.of<ProfileStore>(context);
+    store.fetchProfile();
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
