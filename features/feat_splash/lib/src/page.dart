@@ -8,26 +8,22 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  @override
-  void didChangeDependencies() {
-    navigate();
-    super.didChangeDependencies();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Theme.of(context).accentColor,
+      child: Container(
+        constraints: BoxConstraints.expand(),
+        color: Colors.white,
+        child: Center(
+          child: Container(
+            child: Image.asset(
+              'assets/images/women/dancing.png',
+              height: MediaQuery.of(context).size.height * 0.3,
+            ),
+          ),
+        ),
+      ),
     );
-  }
-
-  navigate() async {
-    final storage = Provider.of<AuthStorage>(context);
-    final hasSeenOnboarding = await storage.onboardingDisplayed;
-    if (hasSeenOnboarding) {
-      Navigator.of(context).pushReplacementNamed('/login');
-    } else {
-      Navigator.of(context).pushReplacementNamed('/onboarding');
-    }
   }
 }

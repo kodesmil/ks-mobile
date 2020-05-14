@@ -23,12 +23,6 @@ class FeedScroll extends StatefulWidget {
 }
 
 class _FeedScrollState extends State<FeedScroll> {
-  @override
-  void didChangeDependencies() {
-    final store = Provider.of<FeedStore>(context);
-    store.fetchArticles(widget.feedKey);
-    super.didChangeDependencies();
-  }
 
   @override
   Widget build(BuildContext context) {

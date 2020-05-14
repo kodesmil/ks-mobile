@@ -4,38 +4,46 @@ import 'package:feat_feed/feat_feed.dart';
 import 'package:feat_journal/feat_journal.dart';
 import 'package:feat_onboarding/feat_onboarding.dart';
 import 'package:feat_profile/feat_profile.dart';
+import 'package:feat_splash/feat_splash.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:grpc/grpc.dart';
 import 'package:lib_di/lib_di.dart';
 import 'package:lib_services/lib_services.dart';
+import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AppInjector extends StatelessWidget {
+class AppInjector extends StatefulWidget {
   final Widget child;
 
   const AppInjector({Key key, this.child}) : super(key: key);
 
   @override
+  _AppInjectorState createState() => _AppInjectorState();
+}
+
+class _AppInjectorState extends State<AppInjector> {
+  @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider(
-          create: (_) => FirebaseAuth.instance,
+        ProxyProvider0(
+          update: (_, __) => FirebaseAuth.instance,
         ),
         ProxyProvider<FirebaseAuth, UserStore>(
           update: (_, dep, __) => UserStore(dep),
         ),
-        Provider(
-          create: (_) => AuthStorage(
+        ProxyProvider0(
+          update: (_, __) => AuthStorage(
             SharedPreferences.getInstance(),
           ),
         ),
-        Provider(
-          create: (_) => GoogleSignIn(
+        ProxyProvider0(
+          update: (_, __) => GoogleSignIn(
             scopes: <String>[
               'email',
               'profile',
@@ -68,20 +76,29 @@ class AppInjector extends StatelessWidget {
           ),
         ),
       ],
-      child: child,
+      child: Observer(
+        builder: (context) {
+
+        },
+      ),
     );
   }
 }
 
-class UserInjector extends StatelessWidget {
+class UserInjector extends StatefulWidget {
   final Widget child;
   final FirebaseUser user;
 
   const UserInjector({Key key, this.child, this.user}) : super(key: key);
 
   @override
+  _UserInjectorState createState() => _UserInjectorState();
+}
+
+class _UserInjectorState extends State<UserInjector> {
+  @override
   Widget build(BuildContext context) {
-    if (user == null) return Container();
+    if (widget.user == null) return SplashPage();
 
     final notificationsChannel = ClientChannel(
       'notifications.qa.api.kodesmil.com',
@@ -100,47 +117,49 @@ class UserInjector extends StatelessWidget {
     );
 
     return FutureBuilder<IdTokenResult>(
-      future: user.getIdToken(),
+      future: widget.user.getIdToken(),
       builder: (context, snap) {
         if (!snap.hasData) {
-          return Container();
+          return SplashPage();
         }
         final options = CallOptions(
-          metadata: {'authorization': 'Bearer ${snap.data.token}'},
+          metadata: {
+            'authorization': 'Bearer ${snap.data.token}',
+          },
         );
         return MultiProvider(
           providers: [
-            Provider(
-              create: (_) => NotificationServiceClient(
+            ProxyProvider0(
+              update: (_, __) => NotificationServiceClient(
                 notificationsChannel,
               ),
             ),
-            Provider(
-              create: (_) => ProfilesClient(
+            ProxyProvider0(
+              update: (_, __) => ProfilesClient(
                 channel,
                 options: options,
               ),
             ),
-            Provider(
-              create: (_) => JournalEntriesClient(
+            ProxyProvider0(
+              update: (_, __) => JournalEntriesClient(
                 channel,
                 options: options,
               ),
             ),
-            Provider(
-              create: (_) => JournalSubjectsClient(
+            ProxyProvider0(
+              update: (_, __) => JournalSubjectsClient(
                 channel,
                 options: options,
               ),
             ),
-            Provider(
-              create: (_) => GroupsClient(
+            ProxyProvider0(
+              update: (_, __) => GroupsClient(
                 channel,
                 options: options,
               ),
             ),
-            Provider(
-              create: (_) => FeedArticlesClient(
+            ProxyProvider0(
+              update: (_, __) => FeedArticlesClient(
                 channel,
                 options: options,
               ),
@@ -152,7 +171,8 @@ class UserInjector extends StatelessWidget {
                 dep2,
               ),
             ),
-            ProxyProvider2<JournalSubjectsClient, JournalEntriesClient, JournalStore>(
+            ProxyProvider2<JournalSubjectsClient, JournalEntriesClient,
+                JournalStore>(
               update: (_, dep, dep2, __) => JournalStore(
                 ErrorStore(),
                 dep,
@@ -166,7 +186,7 @@ class UserInjector extends StatelessWidget {
               ),
             ),
           ],
-          child: child,
+          child: widget.child,
         );
       },
     );

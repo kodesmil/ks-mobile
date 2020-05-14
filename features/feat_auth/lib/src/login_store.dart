@@ -42,7 +42,7 @@ abstract class _LoginStore with Store {
   bool success = false;
 
   @observable
-  bool loading = false;
+  bool loading = true;
 
   @computed
   bool get canLogin => !formErrorStore.hasErrors;
@@ -65,18 +65,6 @@ abstract class _LoginStore with Store {
       formErrorStore.email = 'Please enter a valid email address';
     } else {
       formErrorStore.email = null;
-    }
-  }
-
-  @action
-  Future signInSilently() async {
-    final newUser = await firebaseAuth.currentUser();
-    if (newUser != null) {
-      loading = false;
-      success = true;
-      errorStore.showError = false;
-      success = true;
-      userStore.user = newUser;
     }
   }
 
@@ -121,7 +109,6 @@ abstract class _LoginStore with Store {
 
   @action
   Future reset() async {
-     loading = false;
      success = false;
   }
 

@@ -34,7 +34,8 @@ abstract class _ProfileStore with Store {
     if (userStore.user != null) {
       try {
         final id = Identifier()..resourceId = userStore.user.uid;
-        final request = ReadProfileRequest()..id = id;
+        final request = ReadProfileRequest()
+          ..id = id;
         final response = await client.read(request);
         profile = response.result;
       } catch (e) {

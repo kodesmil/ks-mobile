@@ -14,6 +14,12 @@ abstract class _UserStore with Store {
   FirebaseUser user;
 
   @action
+  Future<FirebaseUser> signInSilently() async {
+    user = await firebaseAuth.currentUser();
+    return user;
+  }
+
+  @action
   Future signOut() async {
     await firebaseAuth.signOut();
     user = null;

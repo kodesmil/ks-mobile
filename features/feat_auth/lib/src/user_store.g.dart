@@ -26,6 +26,13 @@ mixin _$UserStore on _UserStore, Store {
     }, _$userAtom, name: '${_$userAtom.name}_set');
   }
 
+  final _$signInSilentlyAsyncAction = AsyncAction('signInSilently');
+
+  @override
+  Future<FirebaseUser> signInSilently() {
+    return _$signInSilentlyAsyncAction.run(() => super.signInSilently());
+  }
+
   final _$signOutAsyncAction = AsyncAction('signOut');
 
   @override

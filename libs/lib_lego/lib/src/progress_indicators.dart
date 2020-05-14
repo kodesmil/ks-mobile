@@ -9,29 +9,16 @@ class KsProgressIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.center,
-      child: Container(
-        height: 100,
-        constraints: BoxConstraints.expand(),
-        child: FittedBox(
-          fit: BoxFit.none,
-          child: SizedBox(
-            height: 100,
-            width: 100,
-            child: Card(
-              color: Theme.of(context).backgroundColor,
-              child: Padding(
-                padding: const EdgeInsets.all(KsDimension.m),
-                child: CircularProgressIndicator(),
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-            ),
+    return Container(
+      constraints: BoxConstraints.expand(),
+      color: Colors.white,
+      child: Center(
+        child: Container(
+          child: Image.asset(
+            'assets/images/women/dancing.png',
+            height: MediaQuery.of(context).size.height * 0.3,
           ),
         ),
-        decoration: BoxDecoration(color: Color.fromARGB(100, 105, 105, 105)),
       ),
     );
   }

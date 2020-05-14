@@ -4,15 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:lib_lego/lib_lego.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfilePage extends StatefulWidget {
-
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-
   @override
   void didChangeDependencies() {
     final store = Provider.of<ProfileStore>(context);
@@ -84,6 +83,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       'Email support',
                       style: Theme.of(context).textTheme.bodyText2,
                     ),
+                    onTap: () =>
+                        openUrl('mailto:hello@kodesmil.com?subject=Hello'),
                   ),
                   ListTile(
                     leading: Text(
@@ -108,14 +109,20 @@ class _ProfilePageState extends State<ProfilePage> {
                       'Delete account',
                       style: Theme.of(context).textTheme.bodyText2,
                     ),
-                    onTap: store.deleteUser,
+                    onTap: () async {
+                      await store.deleteUser();
+                      await Navigator.of(context).pushReplacementNamed('/splash');
+                    },
                   ),
                   ListTile(
                     leading: Text(
                       'Sign out',
                       style: Theme.of(context).textTheme.bodyText2,
                     ),
-                    onTap: store.signOut,
+                    onTap: () async {
+                      await store.signOut();
+                      await Navigator.of(context).pushReplacementNamed('/splash');
+                    },
                   ),
                   KsSpace.l(),
                 ],
@@ -125,6 +132,14 @@ class _ProfilePageState extends State<ProfilePage> {
         ],
       ),
     );
+  }
+}
+
+Future<void> openUrl(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }
 
