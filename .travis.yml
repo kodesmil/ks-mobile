@@ -23,7 +23,7 @@ jobs:
       osx_image: xcode11.3
       language: generic
 
-      if: branch = dev
+      if: branch = dev_fix
       script:
         - cd apps/ably/ios
         - bundle install
