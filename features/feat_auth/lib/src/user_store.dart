@@ -6,9 +6,22 @@ part 'user_store.g.dart';
 class UserStore = _UserStore with _$UserStore;
 
 abstract class _UserStore with Store {
+  final FirebaseAuth firebaseAuth;
 
-  _UserStore();
+  _UserStore(this.firebaseAuth);
 
   @observable
   FirebaseUser user;
+
+  @action
+  Future signOut() async {
+    await firebaseAuth.signOut();
+    user = null;
+  }
+
+  @action
+  Future deleteUser() async {
+    await user.delete();
+    user = null;
+  }
 }

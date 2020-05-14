@@ -75,4 +75,32 @@ mixin _$ProfileStore on _ProfileStore, Store {
     return _$createOrUpdateProfileAsyncAction
         .run(() => super.createOrUpdateProfile());
   }
+
+  final _$createProfileAsyncAction = AsyncAction('createProfile');
+
+  @override
+  Future<dynamic> createProfile() {
+    return _$createProfileAsyncAction.run(() => super.createProfile());
+  }
+
+  final _$updateProfileAsyncAction = AsyncAction('updateProfile');
+
+  @override
+  Future<dynamic> updateProfile() {
+    return _$updateProfileAsyncAction.run(() => super.updateProfile());
+  }
+
+  final _$signOutAsyncAction = AsyncAction('signOut');
+
+  @override
+  Future<dynamic> signOut() {
+    return _$signOutAsyncAction.run(() => super.signOut());
+  }
+
+  final _$deleteUserAsyncAction = AsyncAction('deleteUser');
+
+  @override
+  Future<dynamic> deleteUser() {
+    return _$deleteUserAsyncAction.run(() => super.deleteUser());
+  }
 }

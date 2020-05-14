@@ -73,20 +73,28 @@ class DailyFeed extends StatelessWidget {
               return InkWell(
                 onTap: () => newPageStart(context, article),
                 child: Container(
-                  width: 250,
+                  width: 300,
                   child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(40),
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    shape: BeveledRectangleBorder(
+                      borderRadius: BorderRadius.circular(6),
                     ),
                     child: Stack(
                       children: <Widget>[
                         Image.network(
                           article.coverPictureUrl,
-                          fit: BoxFit.fitWidth,
-                          width: 250,
+                          fit: BoxFit.cover,
+                          width: 300,
                         ),
-                        Expanded(
-                          child: Container(color: Colors.black26),
+                        Flex(
+                          direction: Axis.vertical,
+                          children: [
+                            Expanded(
+                              child: Container(
+                                color: Colors.black26,
+                              ),
+                            ),
+                          ],
                         ),
                         ListTile(
                           title: Text(
@@ -94,7 +102,12 @@ class DailyFeed extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText2
-                                .copyWith(color: Colors.white),
+                                .copyWith(color: Colors.white, shadows: [
+                              BoxShadow(
+                                blurRadius: 20,
+                                spreadRadius: 5,
+                              )
+                            ]),
                           ),
                         ),
                       ],

@@ -34,24 +34,14 @@ dependencies:
 
   feat_auth:
     path: ../../features/feat_auth
-  feat_sensors:
-    path: ../../features/feat_sensors
   feat_splash:
     path: ../../features/feat_splash
-  feat_activities:
-    path: ../../features/feat_activities
   feat_onboarding:
     path: ../../features/feat_onboarding
-  feat_locations:
-    path: ../../features/feat_locations
-  feat_notifications:
-    path: ../../features/feat_notifications
   feat_profile:
     path: ../../features/feat_profile
   feat_journal:
     path: ../../features/feat_journal
-  feat_survey:
-    path: ../../features/feat_survey
   feat_feed:
     path: ../../features/feat_feed
   lib_di:

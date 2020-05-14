@@ -1,10 +1,15 @@
+import 'package:feat_profile/feat_profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lib_lego/lib_lego.dart';
+import 'package:mobx/mobx.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
+    final store = Provider.of<ProfileStore>(context);
     return CupertinoPageScaffold(
       child: CustomScrollView(
         slivers: <Widget>[
@@ -90,12 +95,14 @@ class ProfilePage extends StatelessWidget {
                       'Delete account',
                       style: Theme.of(context).textTheme.bodyText2,
                     ),
+                    onTap: store.deleteUser,
                   ),
                   ListTile(
                     leading: Text(
                       'Sign out',
                       style: Theme.of(context).textTheme.bodyText2,
                     ),
+                    onTap: store.signOut,
                   ),
                   KsSpace.l(),
                 ],

@@ -25,4 +25,18 @@ mixin _$UserStore on _UserStore, Store {
       _$userAtom.reportChanged();
     }, _$userAtom, name: '${_$userAtom.name}_set');
   }
+
+  final _$signOutAsyncAction = AsyncAction('signOut');
+
+  @override
+  Future<dynamic> signOut() {
+    return _$signOutAsyncAction.run(() => super.signOut());
+  }
+
+  final _$deleteUserAsyncAction = AsyncAction('deleteUser');
+
+  @override
+  Future<dynamic> deleteUser() {
+    return _$deleteUserAsyncAction.run(() => super.deleteUser());
+  }
 }
