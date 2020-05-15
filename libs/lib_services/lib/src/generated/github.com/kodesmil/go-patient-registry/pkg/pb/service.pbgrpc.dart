@@ -269,6 +269,271 @@ abstract class FeedArticlesServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $0.ListFeedArticleRequest request);
 }
 
+class FeedArticleDetailsClient extends $grpc.Client {
+  static final _$read = $grpc.ClientMethod<$0.ReadFeedArticleDetailsRequest,
+          $0.ReadFeedArticleDetailsResponse>(
+      '/service.FeedArticleDetails/Read',
+      ($0.ReadFeedArticleDetailsRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $0.ReadFeedArticleDetailsResponse.fromBuffer(value));
+
+  FeedArticleDetailsClient($grpc.ClientChannel channel,
+      {$grpc.CallOptions options})
+      : super(channel, options: options);
+
+  $grpc.ResponseFuture<$0.ReadFeedArticleDetailsResponse> read(
+      $0.ReadFeedArticleDetailsRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(_$read, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+}
+
+abstract class FeedArticleDetailsServiceBase extends $grpc.Service {
+  $core.String get $name => 'service.FeedArticleDetails';
+
+  FeedArticleDetailsServiceBase() {
+    $addMethod($grpc.ServiceMethod<$0.ReadFeedArticleDetailsRequest,
+            $0.ReadFeedArticleDetailsResponse>(
+        'Read',
+        read_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.ReadFeedArticleDetailsRequest.fromBuffer(value),
+        ($0.ReadFeedArticleDetailsResponse value) => value.writeToBuffer()));
+  }
+
+  $async.Future<$0.ReadFeedArticleDetailsResponse> read_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.ReadFeedArticleDetailsRequest> request) async {
+    return read(call, await request);
+  }
+
+  $async.Future<$0.ReadFeedArticleDetailsResponse> read(
+      $grpc.ServiceCall call, $0.ReadFeedArticleDetailsRequest request);
+}
+
+class NotificationSettingsClient extends $grpc.Client {
+  static final _$create = $grpc.ClientMethod<
+          $0.CreateNotificationSettingRequest,
+          $0.CreateNotificationSettingResponse>(
+      '/service.NotificationSettings/Create',
+      ($0.CreateNotificationSettingRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $0.CreateNotificationSettingResponse.fromBuffer(value));
+  static final _$read = $grpc.ClientMethod<$0.ReadNotificationSettingRequest,
+          $0.ReadNotificationSettingResponse>(
+      '/service.NotificationSettings/Read',
+      ($0.ReadNotificationSettingRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $0.ReadNotificationSettingResponse.fromBuffer(value));
+  static final _$update = $grpc.ClientMethod<
+          $0.UpdateNotificationSettingRequest,
+          $0.UpdateNotificationSettingResponse>(
+      '/service.NotificationSettings/Update',
+      ($0.UpdateNotificationSettingRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $0.UpdateNotificationSettingResponse.fromBuffer(value));
+  static final _$delete = $grpc.ClientMethod<
+          $0.DeleteNotificationSettingRequest,
+          $0.DeleteNotificationSettingResponse>(
+      '/service.NotificationSettings/Delete',
+      ($0.DeleteNotificationSettingRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $0.DeleteNotificationSettingResponse.fromBuffer(value));
+  static final _$list = $grpc.ClientMethod<$0.ListNotificationSettingRequest,
+          $0.ListNotificationSettingResponse>(
+      '/service.NotificationSettings/List',
+      ($0.ListNotificationSettingRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $0.ListNotificationSettingResponse.fromBuffer(value));
+
+  NotificationSettingsClient($grpc.ClientChannel channel,
+      {$grpc.CallOptions options})
+      : super(channel, options: options);
+
+  $grpc.ResponseFuture<$0.CreateNotificationSettingResponse> create(
+      $0.CreateNotificationSettingRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(_$create, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.ReadNotificationSettingResponse> read(
+      $0.ReadNotificationSettingRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(_$read, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.UpdateNotificationSettingResponse> update(
+      $0.UpdateNotificationSettingRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(_$update, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.DeleteNotificationSettingResponse> delete(
+      $0.DeleteNotificationSettingRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(_$delete, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.ListNotificationSettingResponse> list(
+      $0.ListNotificationSettingRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(_$list, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+}
+
+abstract class NotificationSettingsServiceBase extends $grpc.Service {
+  $core.String get $name => 'service.NotificationSettings';
+
+  NotificationSettingsServiceBase() {
+    $addMethod($grpc.ServiceMethod<$0.CreateNotificationSettingRequest,
+            $0.CreateNotificationSettingResponse>(
+        'Create',
+        create_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.CreateNotificationSettingRequest.fromBuffer(value),
+        ($0.CreateNotificationSettingResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ReadNotificationSettingRequest,
+            $0.ReadNotificationSettingResponse>(
+        'Read',
+        read_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.ReadNotificationSettingRequest.fromBuffer(value),
+        ($0.ReadNotificationSettingResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.UpdateNotificationSettingRequest,
+            $0.UpdateNotificationSettingResponse>(
+        'Update',
+        update_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.UpdateNotificationSettingRequest.fromBuffer(value),
+        ($0.UpdateNotificationSettingResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.DeleteNotificationSettingRequest,
+            $0.DeleteNotificationSettingResponse>(
+        'Delete',
+        delete_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.DeleteNotificationSettingRequest.fromBuffer(value),
+        ($0.DeleteNotificationSettingResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListNotificationSettingRequest,
+            $0.ListNotificationSettingResponse>(
+        'List',
+        list_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.ListNotificationSettingRequest.fromBuffer(value),
+        ($0.ListNotificationSettingResponse value) => value.writeToBuffer()));
+  }
+
+  $async.Future<$0.CreateNotificationSettingResponse> create_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.CreateNotificationSettingRequest> request) async {
+    return create(call, await request);
+  }
+
+  $async.Future<$0.ReadNotificationSettingResponse> read_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.ReadNotificationSettingRequest> request) async {
+    return read(call, await request);
+  }
+
+  $async.Future<$0.UpdateNotificationSettingResponse> update_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.UpdateNotificationSettingRequest> request) async {
+    return update(call, await request);
+  }
+
+  $async.Future<$0.DeleteNotificationSettingResponse> delete_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.DeleteNotificationSettingRequest> request) async {
+    return delete(call, await request);
+  }
+
+  $async.Future<$0.ListNotificationSettingResponse> list_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.ListNotificationSettingRequest> request) async {
+    return list(call, await request);
+  }
+
+  $async.Future<$0.CreateNotificationSettingResponse> create(
+      $grpc.ServiceCall call, $0.CreateNotificationSettingRequest request);
+  $async.Future<$0.ReadNotificationSettingResponse> read(
+      $grpc.ServiceCall call, $0.ReadNotificationSettingRequest request);
+  $async.Future<$0.UpdateNotificationSettingResponse> update(
+      $grpc.ServiceCall call, $0.UpdateNotificationSettingRequest request);
+  $async.Future<$0.DeleteNotificationSettingResponse> delete(
+      $grpc.ServiceCall call, $0.DeleteNotificationSettingRequest request);
+  $async.Future<$0.ListNotificationSettingResponse> list(
+      $grpc.ServiceCall call, $0.ListNotificationSettingRequest request);
+}
+
+class NotificationDevicesClient extends $grpc.Client {
+  static final _$create = $grpc.ClientMethod<$0.CreateNotificationDeviceRequest,
+          $0.CreateNotificationDeviceResponse>(
+      '/service.NotificationDevices/Create',
+      ($0.CreateNotificationDeviceRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $0.CreateNotificationDeviceResponse.fromBuffer(value));
+
+  NotificationDevicesClient($grpc.ClientChannel channel,
+      {$grpc.CallOptions options})
+      : super(channel, options: options);
+
+  $grpc.ResponseFuture<$0.CreateNotificationDeviceResponse> create(
+      $0.CreateNotificationDeviceRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(_$create, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+}
+
+abstract class NotificationDevicesServiceBase extends $grpc.Service {
+  $core.String get $name => 'service.NotificationDevices';
+
+  NotificationDevicesServiceBase() {
+    $addMethod($grpc.ServiceMethod<$0.CreateNotificationDeviceRequest,
+            $0.CreateNotificationDeviceResponse>(
+        'Create',
+        create_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.CreateNotificationDeviceRequest.fromBuffer(value),
+        ($0.CreateNotificationDeviceResponse value) => value.writeToBuffer()));
+  }
+
+  $async.Future<$0.CreateNotificationDeviceResponse> create_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.CreateNotificationDeviceRequest> request) async {
+    return create(call, await request);
+  }
+
+  $async.Future<$0.CreateNotificationDeviceResponse> create(
+      $grpc.ServiceCall call, $0.CreateNotificationDeviceRequest request);
+}
+
 class ProfilesClient extends $grpc.Client {
   static final _$create =
       $grpc.ClientMethod<$0.CreateProfileRequest, $0.CreateProfileResponse>(
@@ -295,11 +560,11 @@ class ProfilesClient extends $grpc.Client {
           ($core.List<$core.int> value) =>
               $0.DeleteProfileResponse.fromBuffer(value));
   static final _$list =
-      $grpc.ClientMethod<$0.ListProfileRequest, $0.ListProfilesResponse>(
+      $grpc.ClientMethod<$0.ListProfileRequest, $0.ListProfileResponse>(
           '/service.Profiles/List',
           ($0.ListProfileRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
-              $0.ListProfilesResponse.fromBuffer(value));
+              $0.ListProfileResponse.fromBuffer(value));
 
   ProfilesClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
@@ -336,7 +601,7 @@ class ProfilesClient extends $grpc.Client {
     return $grpc.ResponseFuture(call);
   }
 
-  $grpc.ResponseFuture<$0.ListProfilesResponse> list(
+  $grpc.ResponseFuture<$0.ListProfileResponse> list(
       $0.ListProfileRequest request,
       {$grpc.CallOptions options}) {
     final call = $createCall(_$list, $async.Stream.fromIterable([request]),
@@ -386,14 +651,14 @@ abstract class ProfilesServiceBase extends $grpc.Service {
                 $0.DeleteProfileRequest.fromBuffer(value),
             ($0.DeleteProfileResponse value) => value.writeToBuffer()));
     $addMethod(
-        $grpc.ServiceMethod<$0.ListProfileRequest, $0.ListProfilesResponse>(
+        $grpc.ServiceMethod<$0.ListProfileRequest, $0.ListProfileResponse>(
             'List',
             list_Pre,
             false,
             false,
             ($core.List<$core.int> value) =>
                 $0.ListProfileRequest.fromBuffer(value),
-            ($0.ListProfilesResponse value) => value.writeToBuffer()));
+            ($0.ListProfileResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.CreateProfileResponse> create_Pre($grpc.ServiceCall call,
@@ -416,7 +681,7 @@ abstract class ProfilesServiceBase extends $grpc.Service {
     return delete(call, await request);
   }
 
-  $async.Future<$0.ListProfilesResponse> list_Pre($grpc.ServiceCall call,
+  $async.Future<$0.ListProfileResponse> list_Pre($grpc.ServiceCall call,
       $async.Future<$0.ListProfileRequest> request) async {
     return list(call, await request);
   }
@@ -429,7 +694,7 @@ abstract class ProfilesServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $0.UpdateProfileRequest request);
   $async.Future<$0.DeleteProfileResponse> delete(
       $grpc.ServiceCall call, $0.DeleteProfileRequest request);
-  $async.Future<$0.ListProfilesResponse> list(
+  $async.Future<$0.ListProfileResponse> list(
       $grpc.ServiceCall call, $0.ListProfileRequest request);
 }
 

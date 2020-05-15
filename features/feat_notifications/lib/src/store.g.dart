@@ -43,42 +43,16 @@ mixin _$NotificationsStore on _NotificationsStore, Store {
     }, _$loadingAtom, name: '${_$loadingAtom.name}_set');
   }
 
-  final _$notificationAtom = Atom(name: '_NotificationsStore.notification');
+  final _$_NotificationsStoreActionController =
+      ActionController(name: '_NotificationsStore');
 
   @override
-  Notification get notification {
-    _$notificationAtom.context.enforceReadPolicy(_$notificationAtom);
-    _$notificationAtom.reportObserved();
-    return super.notification;
-  }
-
-  @override
-  set notification(Notification value) {
-    _$notificationAtom.context.conditionallyRunInAction(() {
-      super.notification = value;
-      _$notificationAtom.reportChanged();
-    }, _$notificationAtom, name: '${_$notificationAtom.name}_set');
-  }
-
-  final _$fetchByIdAsyncAction = AsyncAction('fetchById');
-
-  @override
-  Future<dynamic> fetchById() {
-    return _$fetchByIdAsyncAction.run(() => super.fetchById());
-  }
-
-  final _$fetchAllAsyncAction = AsyncAction('fetchAll');
-
-  @override
-  Future<dynamic> fetchAll() {
-    return _$fetchAllAsyncAction.run(() => super.fetchAll());
-  }
-
-  final _$createNotificationAsyncAction = AsyncAction('createNotification');
-
-  @override
-  Future<dynamic> createNotification() {
-    return _$createNotificationAsyncAction
-        .run(() => super.createNotification());
+  Future registerDeviceToken(String token) {
+    final _$actionInfo = _$_NotificationsStoreActionController.startAction();
+    try {
+      return super.registerDeviceToken(token);
+    } finally {
+      _$_NotificationsStoreActionController.endAction(_$actionInfo);
+    }
   }
 }

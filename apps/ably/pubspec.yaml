@@ -42,6 +42,8 @@ dependencies:
     path: ../../features/feat_profile
   feat_journal:
     path: ../../features/feat_journal
+  feat_notifications:
+    path: ../../features/feat_notifications
   feat_feed:
     path: ../../features/feat_feed
   lib_di:

@@ -12,11 +12,13 @@ class NotificationsStore = _NotificationsStore with _$NotificationsStore;
 abstract class _NotificationsStore with Store {
   final ErrorStore errorStore;
 
-  NotificationServiceClient client;
+  NotificationSettingsClient nsClient;
+  NotificationDevicesClient ndClient;
 
   _NotificationsStore(
     this.errorStore,
-    this.client,
+    this.nsClient,
+    this.ndClient,
   );
 
   @observable
@@ -25,33 +27,14 @@ abstract class _NotificationsStore with Store {
   @observable
   bool loading = false;
 
-  @observable
-  Notification notification;
-
-  ObservableStream<NotificationsListResponse> notifications;
-
   @action
-  Future fetchById() async {
-    final request = NotificationReadRequest()..id = '5e7bf879ae19ee478a38bd89';
-    final response = await client.notificationRead(request);
-    notification = response.notification;
-  }
-
-  @action
-  Future fetchAll() async {
-    final request = NotificationsListRequest();
-    final response = client.notificationsList(request);
-    notifications = response.asObservable();
-  }
-
-  @action
-  Future createNotification() async {
-    final notification = Notification.create()
-      ..content = 'New notification: ${Random().nextInt(30)}'
-      ..time = Timestamp.fromDateTime(DateTime.now());
-    final request = NotificationCreateRequest.create()
-      ..notification = notification;
-    final response = await client.notificationCreate(request);
-    this.notification = response.notification;
+  Future registerDeviceToken(String token) {
+    final timestamp = Timestamp();
+    final payload = NotificationDevice()
+      ..createdAt = timestamp
+      ..updatedAt = timestamp
+      ..deviceToken = token;
+    final request = CreateNotificationDeviceRequest()..payload = payload;
+    return ndClient.create(request);
   }
 }

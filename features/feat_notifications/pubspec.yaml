@@ -19,6 +19,7 @@ dependencies:
   crossplat_objectid: ^2.1.4
   firebase_auth: ^0.15.5+3
   grpc: ^2.1.3
+  firebase_messaging: ^6.0.15
 
   lib_di:
     path: ../../libs/lib_di

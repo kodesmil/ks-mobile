@@ -975,6 +975,175 @@ class FeedAuthor extends $pb.GeneratedMessage {
   $core.List<FeedArticle> get feedArticles => $_getList(4);
 }
 
+class FeedArticleDetail extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('FeedArticleDetail',
+      package: const $pb.PackageName('service'), createEmptyInstance: create)
+    ..aOM<$1.Identifier>(1, 'id', subBuilder: $1.Identifier.create)
+    ..aOS(2, 'content')
+    ..aOM<FeedArticle>(3, 'feedArticle', subBuilder: FeedArticle.create)
+    ..hasRequiredFields = false;
+
+  FeedArticleDetail._() : super();
+  factory FeedArticleDetail() => create();
+  factory FeedArticleDetail.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory FeedArticleDetail.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  FeedArticleDetail clone() => FeedArticleDetail()..mergeFromMessage(this);
+  FeedArticleDetail copyWith(void Function(FeedArticleDetail) updates) =>
+      super.copyWith((message) => updates(message as FeedArticleDetail));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static FeedArticleDetail create() => FeedArticleDetail._();
+  FeedArticleDetail createEmptyInstance() => create();
+  static $pb.PbList<FeedArticleDetail> createRepeated() =>
+      $pb.PbList<FeedArticleDetail>();
+  @$core.pragma('dart2js:noInline')
+  static FeedArticleDetail getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FeedArticleDetail>(create);
+  static FeedArticleDetail _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $1.Identifier get id => $_getN(0);
+  @$pb.TagNumber(1)
+  set id($1.Identifier v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+  @$pb.TagNumber(1)
+  $1.Identifier ensureId() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get content => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set content($core.String v) {
+    $_setString(1, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasContent() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearContent() => clearField(2);
+
+  @$pb.TagNumber(3)
+  FeedArticle get feedArticle => $_getN(2);
+  @$pb.TagNumber(3)
+  set feedArticle(FeedArticle v) {
+    setField(3, v);
+  }
+
+  @$pb.TagNumber(3)
+  $core.bool hasFeedArticle() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFeedArticle() => clearField(3);
+  @$pb.TagNumber(3)
+  FeedArticle ensureFeedArticle() => $_ensure(2);
+}
+
+class ReadFeedArticleDetailsRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      'ReadFeedArticleDetailsRequest',
+      package: const $pb.PackageName('service'),
+      createEmptyInstance: create)
+    ..aOM<$1.Identifier>(1, 'id', subBuilder: $1.Identifier.create)
+    ..hasRequiredFields = false;
+
+  ReadFeedArticleDetailsRequest._() : super();
+  factory ReadFeedArticleDetailsRequest() => create();
+  factory ReadFeedArticleDetailsRequest.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory ReadFeedArticleDetailsRequest.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  ReadFeedArticleDetailsRequest clone() =>
+      ReadFeedArticleDetailsRequest()..mergeFromMessage(this);
+  ReadFeedArticleDetailsRequest copyWith(
+          void Function(ReadFeedArticleDetailsRequest) updates) =>
+      super.copyWith(
+          (message) => updates(message as ReadFeedArticleDetailsRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ReadFeedArticleDetailsRequest create() =>
+      ReadFeedArticleDetailsRequest._();
+  ReadFeedArticleDetailsRequest createEmptyInstance() => create();
+  static $pb.PbList<ReadFeedArticleDetailsRequest> createRepeated() =>
+      $pb.PbList<ReadFeedArticleDetailsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ReadFeedArticleDetailsRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ReadFeedArticleDetailsRequest>(create);
+  static ReadFeedArticleDetailsRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $1.Identifier get id => $_getN(0);
+  @$pb.TagNumber(1)
+  set id($1.Identifier v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+  @$pb.TagNumber(1)
+  $1.Identifier ensureId() => $_ensure(0);
+}
+
+class ReadFeedArticleDetailsResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      'ReadFeedArticleDetailsResponse',
+      package: const $pb.PackageName('service'),
+      createEmptyInstance: create)
+    ..aOM<FeedArticleDetail>(1, 'result', subBuilder: FeedArticleDetail.create)
+    ..hasRequiredFields = false;
+
+  ReadFeedArticleDetailsResponse._() : super();
+  factory ReadFeedArticleDetailsResponse() => create();
+  factory ReadFeedArticleDetailsResponse.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory ReadFeedArticleDetailsResponse.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  ReadFeedArticleDetailsResponse clone() =>
+      ReadFeedArticleDetailsResponse()..mergeFromMessage(this);
+  ReadFeedArticleDetailsResponse copyWith(
+          void Function(ReadFeedArticleDetailsResponse) updates) =>
+      super.copyWith(
+          (message) => updates(message as ReadFeedArticleDetailsResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ReadFeedArticleDetailsResponse create() =>
+      ReadFeedArticleDetailsResponse._();
+  ReadFeedArticleDetailsResponse createEmptyInstance() => create();
+  static $pb.PbList<ReadFeedArticleDetailsResponse> createRepeated() =>
+      $pb.PbList<ReadFeedArticleDetailsResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ReadFeedArticleDetailsResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ReadFeedArticleDetailsResponse>(create);
+  static ReadFeedArticleDetailsResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  FeedArticleDetail get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result(FeedArticleDetail v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  FeedArticleDetail ensureResult() => $_ensure(0);
+}
+
 class FeedArticle extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('FeedArticle',
       package: const $pb.PackageName('service'), createEmptyInstance: create)
@@ -1226,6 +1395,829 @@ class ListFeedArticleResponse extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(1)
   $core.List<FeedArticle> get results => $_getList(0);
+}
+
+class NotificationSetting extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('NotificationSetting',
+      package: const $pb.PackageName('service'), createEmptyInstance: create)
+    ..aOM<$1.Identifier>(1, 'id', subBuilder: $1.Identifier.create)
+    ..aOM<$2.Timestamp>(2, 'createdAt', subBuilder: $2.Timestamp.create)
+    ..aOM<$2.Timestamp>(3, 'updatedAt', subBuilder: $2.Timestamp.create)
+    ..aOB(4, 'enableNotifications')
+    ..aOB(5, 'enableJournalReminder')
+    ..aOS(6, 'cronJournalReminder')
+    ..hasRequiredFields = false;
+
+  NotificationSetting._() : super();
+  factory NotificationSetting() => create();
+  factory NotificationSetting.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory NotificationSetting.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  NotificationSetting clone() => NotificationSetting()..mergeFromMessage(this);
+  NotificationSetting copyWith(void Function(NotificationSetting) updates) =>
+      super.copyWith((message) => updates(message as NotificationSetting));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static NotificationSetting create() => NotificationSetting._();
+  NotificationSetting createEmptyInstance() => create();
+  static $pb.PbList<NotificationSetting> createRepeated() =>
+      $pb.PbList<NotificationSetting>();
+  @$core.pragma('dart2js:noInline')
+  static NotificationSetting getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<NotificationSetting>(create);
+  static NotificationSetting _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $1.Identifier get id => $_getN(0);
+  @$pb.TagNumber(1)
+  set id($1.Identifier v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+  @$pb.TagNumber(1)
+  $1.Identifier ensureId() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $2.Timestamp get createdAt => $_getN(1);
+  @$pb.TagNumber(2)
+  set createdAt($2.Timestamp v) {
+    setField(2, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasCreatedAt() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCreatedAt() => clearField(2);
+  @$pb.TagNumber(2)
+  $2.Timestamp ensureCreatedAt() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $2.Timestamp get updatedAt => $_getN(2);
+  @$pb.TagNumber(3)
+  set updatedAt($2.Timestamp v) {
+    setField(3, v);
+  }
+
+  @$pb.TagNumber(3)
+  $core.bool hasUpdatedAt() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearUpdatedAt() => clearField(3);
+  @$pb.TagNumber(3)
+  $2.Timestamp ensureUpdatedAt() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  $core.bool get enableNotifications => $_getBF(3);
+  @$pb.TagNumber(4)
+  set enableNotifications($core.bool v) {
+    $_setBool(3, v);
+  }
+
+  @$pb.TagNumber(4)
+  $core.bool hasEnableNotifications() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearEnableNotifications() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.bool get enableJournalReminder => $_getBF(4);
+  @$pb.TagNumber(5)
+  set enableJournalReminder($core.bool v) {
+    $_setBool(4, v);
+  }
+
+  @$pb.TagNumber(5)
+  $core.bool hasEnableJournalReminder() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearEnableJournalReminder() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get cronJournalReminder => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set cronJournalReminder($core.String v) {
+    $_setString(5, v);
+  }
+
+  @$pb.TagNumber(6)
+  $core.bool hasCronJournalReminder() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearCronJournalReminder() => clearField(6);
+}
+
+class CreateNotificationSettingRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      'CreateNotificationSettingRequest',
+      package: const $pb.PackageName('service'),
+      createEmptyInstance: create)
+    ..aOM<NotificationSetting>(1, 'payload',
+        subBuilder: NotificationSetting.create)
+    ..hasRequiredFields = false;
+
+  CreateNotificationSettingRequest._() : super();
+  factory CreateNotificationSettingRequest() => create();
+  factory CreateNotificationSettingRequest.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory CreateNotificationSettingRequest.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  CreateNotificationSettingRequest clone() =>
+      CreateNotificationSettingRequest()..mergeFromMessage(this);
+  CreateNotificationSettingRequest copyWith(
+          void Function(CreateNotificationSettingRequest) updates) =>
+      super.copyWith(
+          (message) => updates(message as CreateNotificationSettingRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static CreateNotificationSettingRequest create() =>
+      CreateNotificationSettingRequest._();
+  CreateNotificationSettingRequest createEmptyInstance() => create();
+  static $pb.PbList<CreateNotificationSettingRequest> createRepeated() =>
+      $pb.PbList<CreateNotificationSettingRequest>();
+  @$core.pragma('dart2js:noInline')
+  static CreateNotificationSettingRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<CreateNotificationSettingRequest>(
+          create);
+  static CreateNotificationSettingRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  NotificationSetting get payload => $_getN(0);
+  @$pb.TagNumber(1)
+  set payload(NotificationSetting v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasPayload() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPayload() => clearField(1);
+  @$pb.TagNumber(1)
+  NotificationSetting ensurePayload() => $_ensure(0);
+}
+
+class CreateNotificationSettingResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      'CreateNotificationSettingResponse',
+      package: const $pb.PackageName('service'),
+      createEmptyInstance: create)
+    ..aOM<NotificationSetting>(1, 'result',
+        subBuilder: NotificationSetting.create)
+    ..hasRequiredFields = false;
+
+  CreateNotificationSettingResponse._() : super();
+  factory CreateNotificationSettingResponse() => create();
+  factory CreateNotificationSettingResponse.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory CreateNotificationSettingResponse.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  CreateNotificationSettingResponse clone() =>
+      CreateNotificationSettingResponse()..mergeFromMessage(this);
+  CreateNotificationSettingResponse copyWith(
+          void Function(CreateNotificationSettingResponse) updates) =>
+      super.copyWith(
+          (message) => updates(message as CreateNotificationSettingResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static CreateNotificationSettingResponse create() =>
+      CreateNotificationSettingResponse._();
+  CreateNotificationSettingResponse createEmptyInstance() => create();
+  static $pb.PbList<CreateNotificationSettingResponse> createRepeated() =>
+      $pb.PbList<CreateNotificationSettingResponse>();
+  @$core.pragma('dart2js:noInline')
+  static CreateNotificationSettingResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<CreateNotificationSettingResponse>(
+          create);
+  static CreateNotificationSettingResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  NotificationSetting get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result(NotificationSetting v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  NotificationSetting ensureResult() => $_ensure(0);
+}
+
+class ReadNotificationSettingRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      'ReadNotificationSettingRequest',
+      package: const $pb.PackageName('service'),
+      createEmptyInstance: create)
+    ..aOM<$1.Identifier>(1, 'id', subBuilder: $1.Identifier.create)
+    ..hasRequiredFields = false;
+
+  ReadNotificationSettingRequest._() : super();
+  factory ReadNotificationSettingRequest() => create();
+  factory ReadNotificationSettingRequest.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory ReadNotificationSettingRequest.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  ReadNotificationSettingRequest clone() =>
+      ReadNotificationSettingRequest()..mergeFromMessage(this);
+  ReadNotificationSettingRequest copyWith(
+          void Function(ReadNotificationSettingRequest) updates) =>
+      super.copyWith(
+          (message) => updates(message as ReadNotificationSettingRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ReadNotificationSettingRequest create() =>
+      ReadNotificationSettingRequest._();
+  ReadNotificationSettingRequest createEmptyInstance() => create();
+  static $pb.PbList<ReadNotificationSettingRequest> createRepeated() =>
+      $pb.PbList<ReadNotificationSettingRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ReadNotificationSettingRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ReadNotificationSettingRequest>(create);
+  static ReadNotificationSettingRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $1.Identifier get id => $_getN(0);
+  @$pb.TagNumber(1)
+  set id($1.Identifier v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+  @$pb.TagNumber(1)
+  $1.Identifier ensureId() => $_ensure(0);
+}
+
+class ReadNotificationSettingResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      'ReadNotificationSettingResponse',
+      package: const $pb.PackageName('service'),
+      createEmptyInstance: create)
+    ..aOM<NotificationSetting>(1, 'result',
+        subBuilder: NotificationSetting.create)
+    ..hasRequiredFields = false;
+
+  ReadNotificationSettingResponse._() : super();
+  factory ReadNotificationSettingResponse() => create();
+  factory ReadNotificationSettingResponse.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory ReadNotificationSettingResponse.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  ReadNotificationSettingResponse clone() =>
+      ReadNotificationSettingResponse()..mergeFromMessage(this);
+  ReadNotificationSettingResponse copyWith(
+          void Function(ReadNotificationSettingResponse) updates) =>
+      super.copyWith(
+          (message) => updates(message as ReadNotificationSettingResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ReadNotificationSettingResponse create() =>
+      ReadNotificationSettingResponse._();
+  ReadNotificationSettingResponse createEmptyInstance() => create();
+  static $pb.PbList<ReadNotificationSettingResponse> createRepeated() =>
+      $pb.PbList<ReadNotificationSettingResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ReadNotificationSettingResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ReadNotificationSettingResponse>(
+          create);
+  static ReadNotificationSettingResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  NotificationSetting get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result(NotificationSetting v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  NotificationSetting ensureResult() => $_ensure(0);
+}
+
+class UpdateNotificationSettingRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      'UpdateNotificationSettingRequest',
+      package: const $pb.PackageName('service'),
+      createEmptyInstance: create)
+    ..aOM<NotificationSetting>(1, 'payload',
+        subBuilder: NotificationSetting.create)
+    ..hasRequiredFields = false;
+
+  UpdateNotificationSettingRequest._() : super();
+  factory UpdateNotificationSettingRequest() => create();
+  factory UpdateNotificationSettingRequest.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory UpdateNotificationSettingRequest.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  UpdateNotificationSettingRequest clone() =>
+      UpdateNotificationSettingRequest()..mergeFromMessage(this);
+  UpdateNotificationSettingRequest copyWith(
+          void Function(UpdateNotificationSettingRequest) updates) =>
+      super.copyWith(
+          (message) => updates(message as UpdateNotificationSettingRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static UpdateNotificationSettingRequest create() =>
+      UpdateNotificationSettingRequest._();
+  UpdateNotificationSettingRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateNotificationSettingRequest> createRepeated() =>
+      $pb.PbList<UpdateNotificationSettingRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateNotificationSettingRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<UpdateNotificationSettingRequest>(
+          create);
+  static UpdateNotificationSettingRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  NotificationSetting get payload => $_getN(0);
+  @$pb.TagNumber(1)
+  set payload(NotificationSetting v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasPayload() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPayload() => clearField(1);
+  @$pb.TagNumber(1)
+  NotificationSetting ensurePayload() => $_ensure(0);
+}
+
+class UpdateNotificationSettingResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      'UpdateNotificationSettingResponse',
+      package: const $pb.PackageName('service'),
+      createEmptyInstance: create)
+    ..aOM<NotificationSetting>(1, 'result',
+        subBuilder: NotificationSetting.create)
+    ..hasRequiredFields = false;
+
+  UpdateNotificationSettingResponse._() : super();
+  factory UpdateNotificationSettingResponse() => create();
+  factory UpdateNotificationSettingResponse.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory UpdateNotificationSettingResponse.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  UpdateNotificationSettingResponse clone() =>
+      UpdateNotificationSettingResponse()..mergeFromMessage(this);
+  UpdateNotificationSettingResponse copyWith(
+          void Function(UpdateNotificationSettingResponse) updates) =>
+      super.copyWith(
+          (message) => updates(message as UpdateNotificationSettingResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static UpdateNotificationSettingResponse create() =>
+      UpdateNotificationSettingResponse._();
+  UpdateNotificationSettingResponse createEmptyInstance() => create();
+  static $pb.PbList<UpdateNotificationSettingResponse> createRepeated() =>
+      $pb.PbList<UpdateNotificationSettingResponse>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateNotificationSettingResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<UpdateNotificationSettingResponse>(
+          create);
+  static UpdateNotificationSettingResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  NotificationSetting get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result(NotificationSetting v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  NotificationSetting ensureResult() => $_ensure(0);
+}
+
+class DeleteNotificationSettingRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      'DeleteNotificationSettingRequest',
+      package: const $pb.PackageName('service'),
+      createEmptyInstance: create)
+    ..aOM<$1.Identifier>(1, 'id', subBuilder: $1.Identifier.create)
+    ..hasRequiredFields = false;
+
+  DeleteNotificationSettingRequest._() : super();
+  factory DeleteNotificationSettingRequest() => create();
+  factory DeleteNotificationSettingRequest.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory DeleteNotificationSettingRequest.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  DeleteNotificationSettingRequest clone() =>
+      DeleteNotificationSettingRequest()..mergeFromMessage(this);
+  DeleteNotificationSettingRequest copyWith(
+          void Function(DeleteNotificationSettingRequest) updates) =>
+      super.copyWith(
+          (message) => updates(message as DeleteNotificationSettingRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static DeleteNotificationSettingRequest create() =>
+      DeleteNotificationSettingRequest._();
+  DeleteNotificationSettingRequest createEmptyInstance() => create();
+  static $pb.PbList<DeleteNotificationSettingRequest> createRepeated() =>
+      $pb.PbList<DeleteNotificationSettingRequest>();
+  @$core.pragma('dart2js:noInline')
+  static DeleteNotificationSettingRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<DeleteNotificationSettingRequest>(
+          create);
+  static DeleteNotificationSettingRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $1.Identifier get id => $_getN(0);
+  @$pb.TagNumber(1)
+  set id($1.Identifier v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+  @$pb.TagNumber(1)
+  $1.Identifier ensureId() => $_ensure(0);
+}
+
+class DeleteNotificationSettingResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      'DeleteNotificationSettingResponse',
+      package: const $pb.PackageName('service'),
+      createEmptyInstance: create)
+    ..hasRequiredFields = false;
+
+  DeleteNotificationSettingResponse._() : super();
+  factory DeleteNotificationSettingResponse() => create();
+  factory DeleteNotificationSettingResponse.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory DeleteNotificationSettingResponse.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  DeleteNotificationSettingResponse clone() =>
+      DeleteNotificationSettingResponse()..mergeFromMessage(this);
+  DeleteNotificationSettingResponse copyWith(
+          void Function(DeleteNotificationSettingResponse) updates) =>
+      super.copyWith(
+          (message) => updates(message as DeleteNotificationSettingResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static DeleteNotificationSettingResponse create() =>
+      DeleteNotificationSettingResponse._();
+  DeleteNotificationSettingResponse createEmptyInstance() => create();
+  static $pb.PbList<DeleteNotificationSettingResponse> createRepeated() =>
+      $pb.PbList<DeleteNotificationSettingResponse>();
+  @$core.pragma('dart2js:noInline')
+  static DeleteNotificationSettingResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<DeleteNotificationSettingResponse>(
+          create);
+  static DeleteNotificationSettingResponse _defaultInstance;
+}
+
+class ListNotificationSettingRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      'ListNotificationSettingRequest',
+      package: const $pb.PackageName('service'),
+      createEmptyInstance: create)
+    ..aOM<$3.Filtering>(1, 'filter', subBuilder: $3.Filtering.create)
+    ..aOM<$3.Sorting>(2, 'orderBy', subBuilder: $3.Sorting.create)
+    ..aOM<$3.FieldSelection>(3, 'fields', subBuilder: $3.FieldSelection.create)
+    ..aOM<$3.Pagination>(4, 'paging', subBuilder: $3.Pagination.create)
+    ..hasRequiredFields = false;
+
+  ListNotificationSettingRequest._() : super();
+  factory ListNotificationSettingRequest() => create();
+  factory ListNotificationSettingRequest.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory ListNotificationSettingRequest.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  ListNotificationSettingRequest clone() =>
+      ListNotificationSettingRequest()..mergeFromMessage(this);
+  ListNotificationSettingRequest copyWith(
+          void Function(ListNotificationSettingRequest) updates) =>
+      super.copyWith(
+          (message) => updates(message as ListNotificationSettingRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListNotificationSettingRequest create() =>
+      ListNotificationSettingRequest._();
+  ListNotificationSettingRequest createEmptyInstance() => create();
+  static $pb.PbList<ListNotificationSettingRequest> createRepeated() =>
+      $pb.PbList<ListNotificationSettingRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListNotificationSettingRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ListNotificationSettingRequest>(create);
+  static ListNotificationSettingRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $3.Filtering get filter => $_getN(0);
+  @$pb.TagNumber(1)
+  set filter($3.Filtering v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasFilter() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFilter() => clearField(1);
+  @$pb.TagNumber(1)
+  $3.Filtering ensureFilter() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $3.Sorting get orderBy => $_getN(1);
+  @$pb.TagNumber(2)
+  set orderBy($3.Sorting v) {
+    setField(2, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasOrderBy() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearOrderBy() => clearField(2);
+  @$pb.TagNumber(2)
+  $3.Sorting ensureOrderBy() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $3.FieldSelection get fields => $_getN(2);
+  @$pb.TagNumber(3)
+  set fields($3.FieldSelection v) {
+    setField(3, v);
+  }
+
+  @$pb.TagNumber(3)
+  $core.bool hasFields() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFields() => clearField(3);
+  @$pb.TagNumber(3)
+  $3.FieldSelection ensureFields() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  $3.Pagination get paging => $_getN(3);
+  @$pb.TagNumber(4)
+  set paging($3.Pagination v) {
+    setField(4, v);
+  }
+
+  @$pb.TagNumber(4)
+  $core.bool hasPaging() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearPaging() => clearField(4);
+  @$pb.TagNumber(4)
+  $3.Pagination ensurePaging() => $_ensure(3);
+}
+
+class ListNotificationSettingResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      'ListNotificationSettingResponse',
+      package: const $pb.PackageName('service'),
+      createEmptyInstance: create)
+    ..pc<NotificationSetting>(1, 'results', $pb.PbFieldType.PM,
+        subBuilder: NotificationSetting.create)
+    ..hasRequiredFields = false;
+
+  ListNotificationSettingResponse._() : super();
+  factory ListNotificationSettingResponse() => create();
+  factory ListNotificationSettingResponse.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory ListNotificationSettingResponse.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  ListNotificationSettingResponse clone() =>
+      ListNotificationSettingResponse()..mergeFromMessage(this);
+  ListNotificationSettingResponse copyWith(
+          void Function(ListNotificationSettingResponse) updates) =>
+      super.copyWith(
+          (message) => updates(message as ListNotificationSettingResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListNotificationSettingResponse create() =>
+      ListNotificationSettingResponse._();
+  ListNotificationSettingResponse createEmptyInstance() => create();
+  static $pb.PbList<ListNotificationSettingResponse> createRepeated() =>
+      $pb.PbList<ListNotificationSettingResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListNotificationSettingResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ListNotificationSettingResponse>(
+          create);
+  static ListNotificationSettingResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<NotificationSetting> get results => $_getList(0);
+}
+
+class NotificationDevice extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('NotificationDevice',
+      package: const $pb.PackageName('service'), createEmptyInstance: create)
+    ..aOM<$1.Identifier>(1, 'id', subBuilder: $1.Identifier.create)
+    ..aOM<$2.Timestamp>(2, 'createdAt', subBuilder: $2.Timestamp.create)
+    ..aOM<$2.Timestamp>(3, 'updatedAt', subBuilder: $2.Timestamp.create)
+    ..aOS(4, 'deviceToken')
+    ..hasRequiredFields = false;
+
+  NotificationDevice._() : super();
+  factory NotificationDevice() => create();
+  factory NotificationDevice.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory NotificationDevice.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  NotificationDevice clone() => NotificationDevice()..mergeFromMessage(this);
+  NotificationDevice copyWith(void Function(NotificationDevice) updates) =>
+      super.copyWith((message) => updates(message as NotificationDevice));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static NotificationDevice create() => NotificationDevice._();
+  NotificationDevice createEmptyInstance() => create();
+  static $pb.PbList<NotificationDevice> createRepeated() =>
+      $pb.PbList<NotificationDevice>();
+  @$core.pragma('dart2js:noInline')
+  static NotificationDevice getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<NotificationDevice>(create);
+  static NotificationDevice _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $1.Identifier get id => $_getN(0);
+  @$pb.TagNumber(1)
+  set id($1.Identifier v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+  @$pb.TagNumber(1)
+  $1.Identifier ensureId() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $2.Timestamp get createdAt => $_getN(1);
+  @$pb.TagNumber(2)
+  set createdAt($2.Timestamp v) {
+    setField(2, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasCreatedAt() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCreatedAt() => clearField(2);
+  @$pb.TagNumber(2)
+  $2.Timestamp ensureCreatedAt() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $2.Timestamp get updatedAt => $_getN(2);
+  @$pb.TagNumber(3)
+  set updatedAt($2.Timestamp v) {
+    setField(3, v);
+  }
+
+  @$pb.TagNumber(3)
+  $core.bool hasUpdatedAt() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearUpdatedAt() => clearField(3);
+  @$pb.TagNumber(3)
+  $2.Timestamp ensureUpdatedAt() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  $core.String get deviceToken => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set deviceToken($core.String v) {
+    $_setString(3, v);
+  }
+
+  @$pb.TagNumber(4)
+  $core.bool hasDeviceToken() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearDeviceToken() => clearField(4);
+}
+
+class CreateNotificationDeviceRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      'CreateNotificationDeviceRequest',
+      package: const $pb.PackageName('service'),
+      createEmptyInstance: create)
+    ..aOM<NotificationDevice>(1, 'payload',
+        subBuilder: NotificationDevice.create)
+    ..hasRequiredFields = false;
+
+  CreateNotificationDeviceRequest._() : super();
+  factory CreateNotificationDeviceRequest() => create();
+  factory CreateNotificationDeviceRequest.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory CreateNotificationDeviceRequest.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  CreateNotificationDeviceRequest clone() =>
+      CreateNotificationDeviceRequest()..mergeFromMessage(this);
+  CreateNotificationDeviceRequest copyWith(
+          void Function(CreateNotificationDeviceRequest) updates) =>
+      super.copyWith(
+          (message) => updates(message as CreateNotificationDeviceRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static CreateNotificationDeviceRequest create() =>
+      CreateNotificationDeviceRequest._();
+  CreateNotificationDeviceRequest createEmptyInstance() => create();
+  static $pb.PbList<CreateNotificationDeviceRequest> createRepeated() =>
+      $pb.PbList<CreateNotificationDeviceRequest>();
+  @$core.pragma('dart2js:noInline')
+  static CreateNotificationDeviceRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<CreateNotificationDeviceRequest>(
+          create);
+  static CreateNotificationDeviceRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  NotificationDevice get payload => $_getN(0);
+  @$pb.TagNumber(1)
+  set payload(NotificationDevice v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasPayload() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPayload() => clearField(1);
+  @$pb.TagNumber(1)
+  NotificationDevice ensurePayload() => $_ensure(0);
+}
+
+class CreateNotificationDeviceResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      'CreateNotificationDeviceResponse',
+      package: const $pb.PackageName('service'),
+      createEmptyInstance: create)
+    ..aOM<NotificationDevice>(1, 'result',
+        subBuilder: NotificationDevice.create)
+    ..hasRequiredFields = false;
+
+  CreateNotificationDeviceResponse._() : super();
+  factory CreateNotificationDeviceResponse() => create();
+  factory CreateNotificationDeviceResponse.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory CreateNotificationDeviceResponse.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  CreateNotificationDeviceResponse clone() =>
+      CreateNotificationDeviceResponse()..mergeFromMessage(this);
+  CreateNotificationDeviceResponse copyWith(
+          void Function(CreateNotificationDeviceResponse) updates) =>
+      super.copyWith(
+          (message) => updates(message as CreateNotificationDeviceResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static CreateNotificationDeviceResponse create() =>
+      CreateNotificationDeviceResponse._();
+  CreateNotificationDeviceResponse createEmptyInstance() => create();
+  static $pb.PbList<CreateNotificationDeviceResponse> createRepeated() =>
+      $pb.PbList<CreateNotificationDeviceResponse>();
+  @$core.pragma('dart2js:noInline')
+  static CreateNotificationDeviceResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<CreateNotificationDeviceResponse>(
+          create);
+  static CreateNotificationDeviceResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  NotificationDevice get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result(NotificationDevice v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  NotificationDevice ensureResult() => $_ensure(0);
 }
 
 class Profile extends $pb.GeneratedMessage {
@@ -1752,34 +2744,33 @@ class ListProfileRequest extends $pb.GeneratedMessage {
   $3.Pagination ensurePaging() => $_ensure(3);
 }
 
-class ListProfilesResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ListProfilesResponse',
+class ListProfileResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ListProfileResponse',
       package: const $pb.PackageName('service'), createEmptyInstance: create)
     ..pc<Profile>(1, 'results', $pb.PbFieldType.PM, subBuilder: Profile.create)
     ..hasRequiredFields = false;
 
-  ListProfilesResponse._() : super();
-  factory ListProfilesResponse() => create();
-  factory ListProfilesResponse.fromBuffer($core.List<$core.int> i,
+  ListProfileResponse._() : super();
+  factory ListProfileResponse() => create();
+  factory ListProfileResponse.fromBuffer($core.List<$core.int> i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(i, r);
-  factory ListProfilesResponse.fromJson($core.String i,
+  factory ListProfileResponse.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
-  ListProfilesResponse clone() =>
-      ListProfilesResponse()..mergeFromMessage(this);
-  ListProfilesResponse copyWith(void Function(ListProfilesResponse) updates) =>
-      super.copyWith((message) => updates(message as ListProfilesResponse));
+  ListProfileResponse clone() => ListProfileResponse()..mergeFromMessage(this);
+  ListProfileResponse copyWith(void Function(ListProfileResponse) updates) =>
+      super.copyWith((message) => updates(message as ListProfileResponse));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static ListProfilesResponse create() => ListProfilesResponse._();
-  ListProfilesResponse createEmptyInstance() => create();
-  static $pb.PbList<ListProfilesResponse> createRepeated() =>
-      $pb.PbList<ListProfilesResponse>();
+  static ListProfileResponse create() => ListProfileResponse._();
+  ListProfileResponse createEmptyInstance() => create();
+  static $pb.PbList<ListProfileResponse> createRepeated() =>
+      $pb.PbList<ListProfileResponse>();
   @$core.pragma('dart2js:noInline')
-  static ListProfilesResponse getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ListProfilesResponse>(create);
-  static ListProfilesResponse _defaultInstance;
+  static ListProfileResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ListProfileResponse>(create);
+  static ListProfileResponse _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.List<Profile> get results => $_getList(0);
