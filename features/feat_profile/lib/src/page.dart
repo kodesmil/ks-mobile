@@ -1,3 +1,4 @@
+import 'package:feat_notifications/feat_notifications.dart';
 import 'package:feat_profile/feat_profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -38,40 +39,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Column(
                 children: [
                   KsSpace.xs(),
-                  ListTile(
-                    leading: Text(
-                      'Notifications',
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                  ),
-                  SwitchListTile(
-                    value: true,
-                    title: Text(
-                      'Send me notifications',
-                      style: Theme.of(context).textTheme.bodyText2,
-                    ),
-                    onChanged: (value) {},
-                  ),
-                  ListTile(
-                    leading: Text(
-                      'Reminders',
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                  ),
-                  SwitchListTile(
-                    value: true,
-                    title: Text(
-                      'Daily Journal',
-                      style: Theme.of(context).textTheme.bodyText2,
-                    ),
-                    onChanged: (value) {},
-                  ),
-                  ListTile(
-                    leading: Text(
-                      'Reminder time',
-                      style: Theme.of(context).textTheme.bodyText2,
-                    ),
-                  ),
+                  NotificationsSettings(),
                   ListTile(
                     leading: Text(
                       'Support',

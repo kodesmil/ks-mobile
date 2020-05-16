@@ -7,25 +7,18 @@ import 'package:mobx/mobx.dart';
 
 part 'store.g.dart';
 
-class NotificationsStore = _NotificationsStore with _$NotificationsStore;
+class NotificationDevicesStore = _NotificationDevicesStore
+    with _$NotificationDevicesStore;
 
-abstract class _NotificationsStore with Store {
+abstract class _NotificationDevicesStore with Store {
   final ErrorStore errorStore;
 
-  NotificationSettingsClient nsClient;
-  NotificationDevicesClient ndClient;
+  NotificationDevicesClient client;
 
-  _NotificationsStore(
+  _NotificationDevicesStore(
     this.errorStore,
-    this.nsClient,
-    this.ndClient,
+    this.client,
   );
-
-  @observable
-  bool success = false;
-
-  @observable
-  bool loading = false;
 
   @action
   Future registerDeviceToken(String token) {
@@ -35,6 +28,6 @@ abstract class _NotificationsStore with Store {
       ..updatedAt = timestamp
       ..deviceToken = token;
     final request = CreateNotificationDeviceRequest()..payload = payload;
-    return ndClient.create(request);
+    return client.create(request);
   }
 }

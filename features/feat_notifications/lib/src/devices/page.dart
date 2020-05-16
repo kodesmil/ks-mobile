@@ -17,7 +17,7 @@ class _NotificationContainerState extends State<NotificationContainer> {
 
   @override
   void didChangeDependencies() {
-    final store = Provider.of<NotificationsStore>(context);
+    final store = Provider.of<NotificationDevicesStore>(context);
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
         print('onMessage: $message');

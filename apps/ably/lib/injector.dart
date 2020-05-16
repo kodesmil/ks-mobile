@@ -156,8 +156,14 @@ class _AppInjectorState extends State<AppInjector> {
             dep2,
           ),
         ),
-        ProxyProvider2<NotificationSettingsClient, NotificationDevicesClient, NotificationsStore>(
-          update: (_, dep, dep2, __) => NotificationsStore(
+        ProxyProvider<NotificationDevicesClient, NotificationDevicesStore>(
+          update: (_, dep, __) => NotificationDevicesStore(
+            ErrorStore(),
+            dep,
+          ),
+        ),
+        ProxyProvider2<UserStore, NotificationSettingsClient, NotificationSettingsStore>(
+          update: (_, dep, dep2, __) => NotificationSettingsStore(
             ErrorStore(),
             dep,
             dep2,

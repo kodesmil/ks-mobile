@@ -23,6 +23,8 @@ dependencies:
 
   feat_auth:
     path: ../feat_auth
+  feat_notifications:
+    path: ../feat_notifications
   lib_di:
     path: ../../libs/lib_di
   lib_lego:
