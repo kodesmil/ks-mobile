@@ -9,6 +9,13 @@ part of 'store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$NotificationSettingsStore on _NotificationSettingsStore, Store {
+  Computed<TimeOfDay> _$timeJournalReminderComputed;
+
+  @override
+  TimeOfDay get timeJournalReminder => (_$timeJournalReminderComputed ??=
+          Computed<TimeOfDay>(() => super.timeJournalReminder))
+      .value;
+
   final _$settingAtom = Atom(name: '_NotificationSettingsStore.setting');
 
   @override
@@ -44,9 +51,12 @@ mixin _$NotificationSettingsStore on _NotificationSettingsStore, Store {
 
   @override
   Future<dynamic> update(
-      {bool enableNotifications, bool enableJournalReminder}) {
+      {bool enableNotifications,
+      bool enableJournalReminder,
+      TimeOfDay timeJournalReminder}) {
     return _$updateAsyncAction.run(() => super.update(
         enableNotifications: enableNotifications,
-        enableJournalReminder: enableJournalReminder));
+        enableJournalReminder: enableJournalReminder,
+        timeJournalReminder: timeJournalReminder));
   }
 }

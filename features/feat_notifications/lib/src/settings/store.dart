@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:feat_auth/feat_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:lib_di/lib_di.dart';
 import 'package:lib_services/lib_services.dart';
 import 'package:mobx/mobx.dart';
@@ -31,6 +32,20 @@ abstract class _NotificationSettingsStore with Store {
 
   @observable
   NotificationSetting setting;
+
+  @computed
+  TimeOfDay get timeJournalReminder {
+    final reminder = setting.cronJournalReminder;
+    final parts = reminder.split(' ');
+    final time = DateTime.utc(
+      DateTime.now().year,
+      DateTime.now().month,
+      DateTime.now().day,
+      int.parse(parts[0]),
+      int.parse(parts[1]),
+    ).toLocal();
+    return TimeOfDay.fromDateTime(time);
+  }
 
   @action
   Future readOrCreate() async {
@@ -65,14 +80,25 @@ abstract class _NotificationSettingsStore with Store {
   Future update({
     bool enableNotifications,
     bool enableJournalReminder,
+    TimeOfDay timeJournalReminder,
   }) async {
+    if (timeJournalReminder != null) {
+      final time = DateTime(
+        DateTime.now().year,
+        DateTime.now().month,
+        DateTime.now().day,
+        timeJournalReminder.hour,
+        timeJournalReminder.minute,
+      ).toUtc();
+      setting.cronJournalReminder = '${time.hour} ${time.minute} * * * *';
+    }
     final timestamp = Timestamp.fromDateTime(DateTime.now());
     setting..updatedAt = timestamp;
     final payload = setting
       ..enableJournalReminder =
           enableJournalReminder ?? setting.enableJournalReminder
-      ..enableNotifications = enableNotifications ?? setting.enableNotifications
-      ..cronJournalReminder = '${noon.hour} ${noon.minute} * * * *';
+      ..enableNotifications =
+          enableNotifications ?? setting.enableNotifications;
     final request = UpdateNotificationSettingRequest()..payload = payload;
     final response = await client.update(request);
     setting = response.result;

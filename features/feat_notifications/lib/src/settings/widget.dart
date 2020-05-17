@@ -60,6 +60,18 @@ class _NotificationsSettingsState extends State<NotificationsSettings> {
                     'Reminder time',
                     style: Theme.of(context).textTheme.bodyText2,
                   ),
+                  trailing: Text(
+                    store.timeJournalReminder.format(context),
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                  onTap: () async {
+                    await store.update(
+                      timeJournalReminder: await showTimePicker(
+                        initialTime: store.timeJournalReminder,
+                        context: context,
+                      ),
+                    );
+                  },
                 ),
               ],
             )
