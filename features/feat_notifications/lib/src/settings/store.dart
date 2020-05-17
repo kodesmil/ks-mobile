@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:feat_auth/feat_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:lib_di/lib_di.dart';
 import 'package:lib_services/lib_services.dart';
 import 'package:mobx/mobx.dart';
@@ -12,6 +13,12 @@ class NotificationSettingsStore = _NotificationSettingsStore
     with _$NotificationSettingsStore;
 
 abstract class _NotificationSettingsStore with Store {
+  final noon = DateTime(
+    DateTime.now().year,
+    DateTime.now().month,
+    DateTime.now().day,
+    12,
+  ).toUtc();
   final ErrorStore errorStore;
   final UserStore userStore;
   final NotificationSettingsClient client;
@@ -42,12 +49,12 @@ abstract class _NotificationSettingsStore with Store {
 
   @action
   Future create() async {
-    final timestamp = Timestamp();
+    final timestamp = Timestamp.fromDateTime(DateTime.now());
     final payload = NotificationSetting()
       ..createdAt = timestamp
       ..updatedAt = timestamp
       ..enableNotifications = true
-      ..cronJournalReminder = '12 * * * * *'
+      ..cronJournalReminder = '${noon.hour} ${noon.minute} * * * *'
       ..enableJournalReminder = true;
     final request = CreateNotificationSettingRequest()..payload = payload;
     final response = await client.create(request);
@@ -55,10 +62,17 @@ abstract class _NotificationSettingsStore with Store {
   }
 
   @action
-  Future update() async {
-    final timestamp = Timestamp();
+  Future update({
+    bool enableNotifications,
+    bool enableJournalReminder,
+  }) async {
+    final timestamp = Timestamp.fromDateTime(DateTime.now());
     setting..updatedAt = timestamp;
-    final payload = setting;
+    final payload = setting
+      ..enableJournalReminder =
+          enableJournalReminder ?? setting.enableJournalReminder
+      ..enableNotifications = enableNotifications ?? setting.enableNotifications
+      ..cronJournalReminder = '${noon.hour} ${noon.minute} * * * *';
     final request = UpdateNotificationSettingRequest()..payload = payload;
     final response = await client.update(request);
     setting = response.result;

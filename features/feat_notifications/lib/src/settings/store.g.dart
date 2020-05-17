@@ -43,7 +43,10 @@ mixin _$NotificationSettingsStore on _NotificationSettingsStore, Store {
   final _$updateAsyncAction = AsyncAction('update');
 
   @override
-  Future<dynamic> update() {
-    return _$updateAsyncAction.run(() => super.update());
+  Future<dynamic> update(
+      {bool enableNotifications, bool enableJournalReminder}) {
+    return _$updateAsyncAction.run(() => super.update(
+        enableNotifications: enableNotifications,
+        enableJournalReminder: enableJournalReminder));
   }
 }

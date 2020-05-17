@@ -36,8 +36,7 @@ class _NotificationsSettingsState extends State<NotificationsSettings> {
                     style: Theme.of(context).textTheme.bodyText2,
                   ),
                   onChanged: (value) {
-                    store.setting.enableNotifications = value;
-                    store.update();
+                    store.update(enableNotifications: value);
                   },
                 ),
                 ListTile(
@@ -53,8 +52,7 @@ class _NotificationsSettingsState extends State<NotificationsSettings> {
                     style: Theme.of(context).textTheme.bodyText2,
                   ),
                   onChanged: (value) {
-                    store.setting.enableJournalReminder = value;
-                    store.update();
+                    store.update(enableJournalReminder: value);
                   },
                 ),
                 ListTile(
