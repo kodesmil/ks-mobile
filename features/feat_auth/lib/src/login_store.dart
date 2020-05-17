@@ -42,7 +42,7 @@ abstract class _LoginStore with Store {
   bool success = false;
 
   @observable
-  bool loading = true;
+  bool loading = false;
 
   @computed
   bool get canLogin => !formErrorStore.hasErrors;
@@ -110,6 +110,7 @@ abstract class _LoginStore with Store {
   @action
   Future reset() async {
      success = false;
+     loading = false;
   }
 
   @action
