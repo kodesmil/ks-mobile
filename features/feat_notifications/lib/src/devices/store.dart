@@ -21,13 +21,17 @@ abstract class _NotificationDevicesStore with Store {
   );
 
   @action
-  Future registerDeviceToken(String token) {
+  Future registerDeviceToken(String token) async {
     final timestamp = Timestamp();
     final payload = NotificationDevice()
       ..createdAt = timestamp
       ..updatedAt = timestamp
       ..deviceToken = token;
     final request = CreateNotificationDeviceRequest()..payload = payload;
-    return client.create(request);
+    try {
+      await client.create(request);
+    } catch (e) {
+      print(e);
+    }
   }
 }
