@@ -13,6 +13,42 @@ import 'package:grpc/service_api.dart' as $grpc;
 import 'service.pb.dart' as $0;
 export 'service.pb.dart';
 
+class ChatClient extends $grpc.Client {
+  static final _$stream =
+      $grpc.ClientMethod<$0.StreamChatEvent, $0.StreamChatEvent>(
+          '/service.Chat/Stream',
+          ($0.StreamChatEvent value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.StreamChatEvent.fromBuffer(value));
+
+  ChatClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
+      : super(channel, options: options);
+
+  $grpc.ResponseStream<$0.StreamChatEvent> stream(
+      $async.Stream<$0.StreamChatEvent> request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(_$stream, request, options: options);
+    return $grpc.ResponseStream(call);
+  }
+}
+
+abstract class ChatServiceBase extends $grpc.Service {
+  $core.String get $name => 'service.Chat';
+
+  ChatServiceBase() {
+    $addMethod($grpc.ServiceMethod<$0.StreamChatEvent, $0.StreamChatEvent>(
+        'Stream',
+        stream,
+        true,
+        true,
+        ($core.List<$core.int> value) => $0.StreamChatEvent.fromBuffer(value),
+        ($0.StreamChatEvent value) => value.writeToBuffer()));
+  }
+
+  $async.Stream<$0.StreamChatEvent> stream(
+      $grpc.ServiceCall call, $async.Stream<$0.StreamChatEvent> request);
+}
+
 class JournalEntriesClient extends $grpc.Client {
   static final _$create = $grpc.ClientMethod<$0.CreateJournalEntryRequest,
           $0.CreateJournalEntryResponse>(

@@ -20,6 +20,448 @@ import 'service.pbenum.dart';
 
 export 'service.pbenum.dart';
 
+class ChatMessage extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ChatMessage',
+      package: const $pb.PackageName('service'), createEmptyInstance: create)
+    ..aOM<$1.Identifier>(1, 'id', subBuilder: $1.Identifier.create)
+    ..aOM<$2.Timestamp>(2, 'createdAt', subBuilder: $2.Timestamp.create)
+    ..aOM<$2.Timestamp>(3, 'updatedAt', subBuilder: $2.Timestamp.create)
+    ..aOS(4, 'text')
+    ..aOM<Profile>(5, 'author', subBuilder: Profile.create)
+    ..hasRequiredFields = false;
+
+  ChatMessage._() : super();
+  factory ChatMessage() => create();
+  factory ChatMessage.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory ChatMessage.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  ChatMessage clone() => ChatMessage()..mergeFromMessage(this);
+  ChatMessage copyWith(void Function(ChatMessage) updates) =>
+      super.copyWith((message) => updates(message as ChatMessage));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ChatMessage create() => ChatMessage._();
+  ChatMessage createEmptyInstance() => create();
+  static $pb.PbList<ChatMessage> createRepeated() => $pb.PbList<ChatMessage>();
+  @$core.pragma('dart2js:noInline')
+  static ChatMessage getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ChatMessage>(create);
+  static ChatMessage _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $1.Identifier get id => $_getN(0);
+  @$pb.TagNumber(1)
+  set id($1.Identifier v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+  @$pb.TagNumber(1)
+  $1.Identifier ensureId() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $2.Timestamp get createdAt => $_getN(1);
+  @$pb.TagNumber(2)
+  set createdAt($2.Timestamp v) {
+    setField(2, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasCreatedAt() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCreatedAt() => clearField(2);
+  @$pb.TagNumber(2)
+  $2.Timestamp ensureCreatedAt() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $2.Timestamp get updatedAt => $_getN(2);
+  @$pb.TagNumber(3)
+  set updatedAt($2.Timestamp v) {
+    setField(3, v);
+  }
+
+  @$pb.TagNumber(3)
+  $core.bool hasUpdatedAt() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearUpdatedAt() => clearField(3);
+  @$pb.TagNumber(3)
+  $2.Timestamp ensureUpdatedAt() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  $core.String get text => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set text($core.String v) {
+    $_setString(3, v);
+  }
+
+  @$pb.TagNumber(4)
+  $core.bool hasText() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearText() => clearField(4);
+
+  @$pb.TagNumber(5)
+  Profile get author => $_getN(4);
+  @$pb.TagNumber(5)
+  set author(Profile v) {
+    setField(5, v);
+  }
+
+  @$pb.TagNumber(5)
+  $core.bool hasAuthor() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearAuthor() => clearField(5);
+  @$pb.TagNumber(5)
+  Profile ensureAuthor() => $_ensure(4);
+}
+
+enum StreamChatEvent_Event { none, join, leave, message, notSet }
+
+class StreamChatEvent extends $pb.GeneratedMessage {
+  static const $core.Map<$core.int, StreamChatEvent_Event>
+      _StreamChatEvent_EventByTag = {
+    1: StreamChatEvent_Event.none,
+    2: StreamChatEvent_Event.join,
+    3: StreamChatEvent_Event.leave,
+    4: StreamChatEvent_Event.message,
+    0: StreamChatEvent_Event.notSet
+  };
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('StreamChatEvent',
+      package: const $pb.PackageName('service'), createEmptyInstance: create)
+    ..oo(0, [1, 2, 3, 4])
+    ..aOM<EventNone>(1, 'none', subBuilder: EventNone.create)
+    ..aOM<EventJoin>(2, 'join', subBuilder: EventJoin.create)
+    ..aOM<EventLeave>(3, 'leave', subBuilder: EventLeave.create)
+    ..aOM<EventMessage>(4, 'message', subBuilder: EventMessage.create)
+    ..hasRequiredFields = false;
+
+  StreamChatEvent._() : super();
+  factory StreamChatEvent() => create();
+  factory StreamChatEvent.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory StreamChatEvent.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  StreamChatEvent clone() => StreamChatEvent()..mergeFromMessage(this);
+  StreamChatEvent copyWith(void Function(StreamChatEvent) updates) =>
+      super.copyWith((message) => updates(message as StreamChatEvent));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static StreamChatEvent create() => StreamChatEvent._();
+  StreamChatEvent createEmptyInstance() => create();
+  static $pb.PbList<StreamChatEvent> createRepeated() =>
+      $pb.PbList<StreamChatEvent>();
+  @$core.pragma('dart2js:noInline')
+  static StreamChatEvent getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<StreamChatEvent>(create);
+  static StreamChatEvent _defaultInstance;
+
+  StreamChatEvent_Event whichEvent() =>
+      _StreamChatEvent_EventByTag[$_whichOneof(0)];
+  void clearEvent() => clearField($_whichOneof(0));
+
+  @$pb.TagNumber(1)
+  EventNone get none => $_getN(0);
+  @$pb.TagNumber(1)
+  set none(EventNone v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasNone() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearNone() => clearField(1);
+  @$pb.TagNumber(1)
+  EventNone ensureNone() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  EventJoin get join => $_getN(1);
+  @$pb.TagNumber(2)
+  set join(EventJoin v) {
+    setField(2, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasJoin() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearJoin() => clearField(2);
+  @$pb.TagNumber(2)
+  EventJoin ensureJoin() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  EventLeave get leave => $_getN(2);
+  @$pb.TagNumber(3)
+  set leave(EventLeave v) {
+    setField(3, v);
+  }
+
+  @$pb.TagNumber(3)
+  $core.bool hasLeave() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearLeave() => clearField(3);
+  @$pb.TagNumber(3)
+  EventLeave ensureLeave() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  EventMessage get message => $_getN(3);
+  @$pb.TagNumber(4)
+  set message(EventMessage v) {
+    setField(4, v);
+  }
+
+  @$pb.TagNumber(4)
+  $core.bool hasMessage() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearMessage() => clearField(4);
+  @$pb.TagNumber(4)
+  EventMessage ensureMessage() => $_ensure(3);
+}
+
+class EventNone extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventNone',
+      package: const $pb.PackageName('service'), createEmptyInstance: create)
+    ..hasRequiredFields = false;
+
+  EventNone._() : super();
+  factory EventNone() => create();
+  factory EventNone.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory EventNone.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  EventNone clone() => EventNone()..mergeFromMessage(this);
+  EventNone copyWith(void Function(EventNone) updates) =>
+      super.copyWith((message) => updates(message as EventNone));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static EventNone create() => EventNone._();
+  EventNone createEmptyInstance() => create();
+  static $pb.PbList<EventNone> createRepeated() => $pb.PbList<EventNone>();
+  @$core.pragma('dart2js:noInline')
+  static EventNone getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EventNone>(create);
+  static EventNone _defaultInstance;
+}
+
+class EventJoin extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventJoin',
+      package: const $pb.PackageName('service'), createEmptyInstance: create)
+    ..aOM<Profile>(1, 'user', subBuilder: Profile.create)
+    ..hasRequiredFields = false;
+
+  EventJoin._() : super();
+  factory EventJoin() => create();
+  factory EventJoin.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory EventJoin.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  EventJoin clone() => EventJoin()..mergeFromMessage(this);
+  EventJoin copyWith(void Function(EventJoin) updates) =>
+      super.copyWith((message) => updates(message as EventJoin));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static EventJoin create() => EventJoin._();
+  EventJoin createEmptyInstance() => create();
+  static $pb.PbList<EventJoin> createRepeated() => $pb.PbList<EventJoin>();
+  @$core.pragma('dart2js:noInline')
+  static EventJoin getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EventJoin>(create);
+  static EventJoin _defaultInstance;
+
+  @$pb.TagNumber(1)
+  Profile get user => $_getN(0);
+  @$pb.TagNumber(1)
+  set user(Profile v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasUser() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUser() => clearField(1);
+  @$pb.TagNumber(1)
+  Profile ensureUser() => $_ensure(0);
+}
+
+class EventLeave extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventLeave',
+      package: const $pb.PackageName('service'), createEmptyInstance: create)
+    ..aOM<Profile>(1, 'user', subBuilder: Profile.create)
+    ..hasRequiredFields = false;
+
+  EventLeave._() : super();
+  factory EventLeave() => create();
+  factory EventLeave.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory EventLeave.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  EventLeave clone() => EventLeave()..mergeFromMessage(this);
+  EventLeave copyWith(void Function(EventLeave) updates) =>
+      super.copyWith((message) => updates(message as EventLeave));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static EventLeave create() => EventLeave._();
+  EventLeave createEmptyInstance() => create();
+  static $pb.PbList<EventLeave> createRepeated() => $pb.PbList<EventLeave>();
+  @$core.pragma('dart2js:noInline')
+  static EventLeave getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<EventLeave>(create);
+  static EventLeave _defaultInstance;
+
+  @$pb.TagNumber(1)
+  Profile get user => $_getN(0);
+  @$pb.TagNumber(1)
+  set user(Profile v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasUser() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUser() => clearField(1);
+  @$pb.TagNumber(1)
+  Profile ensureUser() => $_ensure(0);
+}
+
+class EventMessage extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventMessage',
+      package: const $pb.PackageName('service'), createEmptyInstance: create)
+    ..aOM<ChatMessage>(1, 'payload', subBuilder: ChatMessage.create)
+    ..hasRequiredFields = false;
+
+  EventMessage._() : super();
+  factory EventMessage() => create();
+  factory EventMessage.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory EventMessage.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  EventMessage clone() => EventMessage()..mergeFromMessage(this);
+  EventMessage copyWith(void Function(EventMessage) updates) =>
+      super.copyWith((message) => updates(message as EventMessage));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static EventMessage create() => EventMessage._();
+  EventMessage createEmptyInstance() => create();
+  static $pb.PbList<EventMessage> createRepeated() =>
+      $pb.PbList<EventMessage>();
+  @$core.pragma('dart2js:noInline')
+  static EventMessage getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<EventMessage>(create);
+  static EventMessage _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ChatMessage get payload => $_getN(0);
+  @$pb.TagNumber(1)
+  set payload(ChatMessage v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasPayload() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPayload() => clearField(1);
+  @$pb.TagNumber(1)
+  ChatMessage ensurePayload() => $_ensure(0);
+}
+
+class LogActivity extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('LogActivity',
+      package: const $pb.PackageName('service'), createEmptyInstance: create)
+    ..aOM<$1.Identifier>(1, 'id', subBuilder: $1.Identifier.create)
+    ..aOM<$2.Timestamp>(2, 'createdAt', subBuilder: $2.Timestamp.create)
+    ..aOM<$2.Timestamp>(3, 'updatedAt', subBuilder: $2.Timestamp.create)
+    ..aOS(4, 'ip')
+    ..hasRequiredFields = false;
+
+  LogActivity._() : super();
+  factory LogActivity() => create();
+  factory LogActivity.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory LogActivity.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  LogActivity clone() => LogActivity()..mergeFromMessage(this);
+  LogActivity copyWith(void Function(LogActivity) updates) =>
+      super.copyWith((message) => updates(message as LogActivity));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static LogActivity create() => LogActivity._();
+  LogActivity createEmptyInstance() => create();
+  static $pb.PbList<LogActivity> createRepeated() => $pb.PbList<LogActivity>();
+  @$core.pragma('dart2js:noInline')
+  static LogActivity getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<LogActivity>(create);
+  static LogActivity _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $1.Identifier get id => $_getN(0);
+  @$pb.TagNumber(1)
+  set id($1.Identifier v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+  @$pb.TagNumber(1)
+  $1.Identifier ensureId() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $2.Timestamp get createdAt => $_getN(1);
+  @$pb.TagNumber(2)
+  set createdAt($2.Timestamp v) {
+    setField(2, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasCreatedAt() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCreatedAt() => clearField(2);
+  @$pb.TagNumber(2)
+  $2.Timestamp ensureCreatedAt() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $2.Timestamp get updatedAt => $_getN(2);
+  @$pb.TagNumber(3)
+  set updatedAt($2.Timestamp v) {
+    setField(3, v);
+  }
+
+  @$pb.TagNumber(3)
+  $core.bool hasUpdatedAt() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearUpdatedAt() => clearField(3);
+  @$pb.TagNumber(3)
+  $2.Timestamp ensureUpdatedAt() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  $core.String get ip => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set ip($core.String v) {
+    $_setString(3, v);
+  }
+
+  @$pb.TagNumber(4)
+  $core.bool hasIp() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearIp() => clearField(4);
+}
+
 class JournalSubject extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('JournalSubject',
       package: const $pb.PackageName('service'), createEmptyInstance: create)

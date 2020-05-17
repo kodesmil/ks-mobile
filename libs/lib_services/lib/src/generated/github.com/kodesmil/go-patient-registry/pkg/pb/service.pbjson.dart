@@ -5,6 +5,171 @@
 // @dart = 2.3
 // ignore_for_file: camel_case_types,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type
 
+const ChatMessage$json = const {
+  '1': 'ChatMessage',
+  '2': const [
+    const {
+      '1': 'id',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.atlas.rpc.Identifier',
+      '8': const {},
+      '10': 'id'
+    },
+    const {
+      '1': 'created_at',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.google.protobuf.Timestamp',
+      '10': 'createdAt'
+    },
+    const {
+      '1': 'updated_at',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.google.protobuf.Timestamp',
+      '10': 'updatedAt'
+    },
+    const {'1': 'text', '3': 4, '4': 1, '5': 9, '10': 'text'},
+    const {
+      '1': 'author',
+      '3': 5,
+      '4': 1,
+      '5': 11,
+      '6': '.service.Profile',
+      '10': 'author'
+    },
+  ],
+  '7': const {},
+};
+
+const StreamChatEvent$json = const {
+  '1': 'StreamChatEvent',
+  '2': const [
+    const {
+      '1': 'none',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.service.EventNone',
+      '9': 0,
+      '10': 'none'
+    },
+    const {
+      '1': 'join',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.service.EventJoin',
+      '9': 0,
+      '10': 'join'
+    },
+    const {
+      '1': 'leave',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.service.EventLeave',
+      '9': 0,
+      '10': 'leave'
+    },
+    const {
+      '1': 'message',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.service.EventMessage',
+      '9': 0,
+      '10': 'message'
+    },
+  ],
+  '8': const [
+    const {'1': 'event'},
+  ],
+};
+
+const EventNone$json = const {
+  '1': 'EventNone',
+};
+
+const EventJoin$json = const {
+  '1': 'EventJoin',
+  '2': const [
+    const {
+      '1': 'user',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.service.Profile',
+      '10': 'user'
+    },
+  ],
+};
+
+const EventLeave$json = const {
+  '1': 'EventLeave',
+  '2': const [
+    const {
+      '1': 'user',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.service.Profile',
+      '10': 'user'
+    },
+  ],
+};
+
+const EventMessage$json = const {
+  '1': 'EventMessage',
+  '2': const [
+    const {
+      '1': 'payload',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.service.ChatMessage',
+      '10': 'payload'
+    },
+  ],
+};
+
+const LogActivity$json = const {
+  '1': 'LogActivity',
+  '2': const [
+    const {
+      '1': 'id',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.atlas.rpc.Identifier',
+      '8': const {},
+      '10': 'id'
+    },
+    const {
+      '1': 'created_at',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.google.protobuf.Timestamp',
+      '10': 'createdAt'
+    },
+    const {
+      '1': 'updated_at',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.google.protobuf.Timestamp',
+      '10': 'updatedAt'
+    },
+    const {'1': 'ip', '3': 4, '4': 1, '5': 9, '10': 'ip'},
+  ],
+  '7': const {},
+};
+
 const JournalSubject$json = const {
   '1': 'JournalSubject',
   '2': const [
