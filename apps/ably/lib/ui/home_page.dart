@@ -1,4 +1,5 @@
 import 'package:ably/ui/hello_page.dart';
+import 'package:feat_chat/feat_chat.dart';
 import 'package:feat_feed/feat_feed.dart';
 import 'package:feat_journal/feat_journal.dart';
 import 'package:feat_notifications/feat_notifications.dart';
@@ -13,11 +14,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   void didChangeDependencies() {
     final store = Provider.of<FeedStore>(context);
-    store.fetchArticles("");
+    store.fetchArticles('');
     super.didChangeDependencies();
   }
 
@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
       ProfilePage(),
       JournalPage(),
       HelloPage(),
-      JournalPage(),
+      ChatPage(),
       JournalPage(),
     ];
     return NotificationContainer(

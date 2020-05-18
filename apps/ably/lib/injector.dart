@@ -1,4 +1,5 @@
 import 'package:feat_auth/feat_auth.dart';
+import 'package:feat_chat/feat_chat.dart';
 import 'package:feat_feed/feat_feed.dart';
 import 'package:feat_journal/feat_journal.dart';
 import 'package:feat_notifications/feat_notifications.dart';
@@ -149,6 +150,12 @@ class _AppInjectorState extends State<AppInjector> {
             options: dep,
           ),
         ),
+        ProxyProvider<CallOptions, ChatClient>(
+          update: (_, dep, __) => ChatClient(
+            channel,
+            options: dep,
+          ),
+        ),
         ProxyProvider2<UserStore, ProfilesClient, ProfileStore>(
           update: (_, dep, dep2, __) => ProfileStore(
             ErrorStore(),
@@ -179,6 +186,12 @@ class _AppInjectorState extends State<AppInjector> {
         ),
         ProxyProvider<FeedArticlesClient, FeedStore>(
           update: (_, dep, __) => FeedStore(
+            ErrorStore(),
+            dep,
+          ),
+        ),
+        ProxyProvider<ChatClient, ChatStore>(
+          update: (_, dep, __) => ChatStore(
             ErrorStore(),
             dep,
           ),

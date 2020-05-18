@@ -28,6 +28,7 @@ class ChatMessage extends $pb.GeneratedMessage {
     ..aOM<$2.Timestamp>(3, 'updatedAt', subBuilder: $2.Timestamp.create)
     ..aOS(4, 'text')
     ..aOM<Profile>(5, 'author', subBuilder: Profile.create)
+    ..aOM<$1.Identifier>(6, 'authorId', subBuilder: $1.Identifier.create)
     ..hasRequiredFields = false;
 
   ChatMessage._() : super();
@@ -118,9 +119,31 @@ class ChatMessage extends $pb.GeneratedMessage {
   void clearAuthor() => clearField(5);
   @$pb.TagNumber(5)
   Profile ensureAuthor() => $_ensure(4);
+
+  @$pb.TagNumber(6)
+  $1.Identifier get authorId => $_getN(5);
+  @$pb.TagNumber(6)
+  set authorId($1.Identifier v) {
+    setField(6, v);
+  }
+
+  @$pb.TagNumber(6)
+  $core.bool hasAuthorId() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearAuthorId() => clearField(6);
+  @$pb.TagNumber(6)
+  $1.Identifier ensureAuthorId() => $_ensure(5);
 }
 
-enum StreamChatEvent_Event { none, join, leave, message, notSet }
+enum StreamChatEvent_Event {
+  none,
+  join,
+  leave,
+  message,
+  messages,
+  forceClose,
+  notSet
+}
 
 class StreamChatEvent extends $pb.GeneratedMessage {
   static const $core.Map<$core.int, StreamChatEvent_Event>
@@ -129,15 +152,19 @@ class StreamChatEvent extends $pb.GeneratedMessage {
     2: StreamChatEvent_Event.join,
     3: StreamChatEvent_Event.leave,
     4: StreamChatEvent_Event.message,
+    5: StreamChatEvent_Event.messages,
+    6: StreamChatEvent_Event.forceClose,
     0: StreamChatEvent_Event.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('StreamChatEvent',
       package: const $pb.PackageName('service'), createEmptyInstance: create)
-    ..oo(0, [1, 2, 3, 4])
+    ..oo(0, [1, 2, 3, 4, 5, 6])
     ..aOM<EventNone>(1, 'none', subBuilder: EventNone.create)
     ..aOM<EventJoin>(2, 'join', subBuilder: EventJoin.create)
     ..aOM<EventLeave>(3, 'leave', subBuilder: EventLeave.create)
     ..aOM<EventMessage>(4, 'message', subBuilder: EventMessage.create)
+    ..aOM<EventMessages>(5, 'messages', subBuilder: EventMessages.create)
+    ..aOM<EventForceClose>(6, 'forceClose', subBuilder: EventForceClose.create)
     ..hasRequiredFields = false;
 
   StreamChatEvent._() : super();
@@ -221,6 +248,34 @@ class StreamChatEvent extends $pb.GeneratedMessage {
   void clearMessage() => clearField(4);
   @$pb.TagNumber(4)
   EventMessage ensureMessage() => $_ensure(3);
+
+  @$pb.TagNumber(5)
+  EventMessages get messages => $_getN(4);
+  @$pb.TagNumber(5)
+  set messages(EventMessages v) {
+    setField(5, v);
+  }
+
+  @$pb.TagNumber(5)
+  $core.bool hasMessages() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearMessages() => clearField(5);
+  @$pb.TagNumber(5)
+  EventMessages ensureMessages() => $_ensure(4);
+
+  @$pb.TagNumber(6)
+  EventForceClose get forceClose => $_getN(5);
+  @$pb.TagNumber(6)
+  set forceClose(EventForceClose v) {
+    setField(6, v);
+  }
+
+  @$pb.TagNumber(6)
+  $core.bool hasForceClose() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearForceClose() => clearField(6);
+  @$pb.TagNumber(6)
+  EventForceClose ensureForceClose() => $_ensure(5);
 }
 
 class EventNone extends $pb.GeneratedMessage {
@@ -375,6 +430,67 @@ class EventMessage extends $pb.GeneratedMessage {
   void clearPayload() => clearField(1);
   @$pb.TagNumber(1)
   ChatMessage ensurePayload() => $_ensure(0);
+}
+
+class EventMessages extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventMessages',
+      package: const $pb.PackageName('service'), createEmptyInstance: create)
+    ..pc<ChatMessage>(1, 'payload', $pb.PbFieldType.PM,
+        subBuilder: ChatMessage.create)
+    ..hasRequiredFields = false;
+
+  EventMessages._() : super();
+  factory EventMessages() => create();
+  factory EventMessages.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory EventMessages.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  EventMessages clone() => EventMessages()..mergeFromMessage(this);
+  EventMessages copyWith(void Function(EventMessages) updates) =>
+      super.copyWith((message) => updates(message as EventMessages));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static EventMessages create() => EventMessages._();
+  EventMessages createEmptyInstance() => create();
+  static $pb.PbList<EventMessages> createRepeated() =>
+      $pb.PbList<EventMessages>();
+  @$core.pragma('dart2js:noInline')
+  static EventMessages getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<EventMessages>(create);
+  static EventMessages _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<ChatMessage> get payload => $_getList(0);
+}
+
+class EventForceClose extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventForceClose',
+      package: const $pb.PackageName('service'), createEmptyInstance: create)
+    ..hasRequiredFields = false;
+
+  EventForceClose._() : super();
+  factory EventForceClose() => create();
+  factory EventForceClose.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory EventForceClose.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  EventForceClose clone() => EventForceClose()..mergeFromMessage(this);
+  EventForceClose copyWith(void Function(EventForceClose) updates) =>
+      super.copyWith((message) => updates(message as EventForceClose));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static EventForceClose create() => EventForceClose._();
+  EventForceClose createEmptyInstance() => create();
+  static $pb.PbList<EventForceClose> createRepeated() =>
+      $pb.PbList<EventForceClose>();
+  @$core.pragma('dart2js:noInline')
+  static EventForceClose getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<EventForceClose>(create);
+  static EventForceClose _defaultInstance;
 }
 
 class LogActivity extends $pb.GeneratedMessage {

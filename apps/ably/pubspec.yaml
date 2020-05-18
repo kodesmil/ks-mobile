@@ -36,6 +36,8 @@ dependencies:
     path: ../../features/feat_auth
   feat_splash:
     path: ../../features/feat_splash
+  feat_chat:
+    path: ../../features/feat_chat
   feat_onboarding:
     path: ../../features/feat_onboarding
   feat_profile:

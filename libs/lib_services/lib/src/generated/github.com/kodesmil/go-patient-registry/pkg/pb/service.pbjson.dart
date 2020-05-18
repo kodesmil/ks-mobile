@@ -40,7 +40,16 @@ const ChatMessage$json = const {
       '4': 1,
       '5': 11,
       '6': '.service.Profile',
+      '8': const {},
       '10': 'author'
+    },
+    const {
+      '1': 'author_id',
+      '3': 6,
+      '4': 1,
+      '5': 11,
+      '6': '.atlas.rpc.Identifier',
+      '10': 'authorId'
     },
   ],
   '7': const {},
@@ -84,6 +93,24 @@ const StreamChatEvent$json = const {
       '6': '.service.EventMessage',
       '9': 0,
       '10': 'message'
+    },
+    const {
+      '1': 'messages',
+      '3': 5,
+      '4': 1,
+      '5': 11,
+      '6': '.service.EventMessages',
+      '9': 0,
+      '10': 'messages'
+    },
+    const {
+      '1': 'force_close',
+      '3': 6,
+      '4': 1,
+      '5': 11,
+      '6': '.service.EventForceClose',
+      '9': 0,
+      '10': 'forceClose'
     },
   ],
   '8': const [
@@ -135,6 +162,24 @@ const EventMessage$json = const {
       '10': 'payload'
     },
   ],
+};
+
+const EventMessages$json = const {
+  '1': 'EventMessages',
+  '2': const [
+    const {
+      '1': 'payload',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.service.ChatMessage',
+      '10': 'payload'
+    },
+  ],
+};
+
+const EventForceClose$json = const {
+  '1': 'EventForceClose',
 };
 
 const LogActivity$json = const {
