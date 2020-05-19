@@ -36,20 +36,20 @@ abstract class _JournalStore with Store {
 
   @action
   Future createJournal() async {
-    final payload = JournalEntry.create()
+    final payload = JournalEntry()
       ..severity = JournalEntry_Severity.NONE;
-    final request = CreateJournalEntryRequest.create()..payload = payload;
+    final request = CreateJournalEntryRequest()..payload = payload;
     final response = await jeClient.create(request);
     journalEntry = response.result;
   }
 
   @action
   Future fetchJournalSubjectActivities(JournalSubject_Type type) async {
-    final condition = NumberCondition.create()
+    final condition = NumberCondition()
       ..fieldPath.add('type')
       ..value = type.value.toDouble();
-    final filter = Filtering.create()..numberCondition = condition;
-    final request = ListJournalSubjectRequest.create()..filter = filter;
+    final filter = Filtering()..numberCondition = condition;
+    final request = ListJournalSubjectRequest()..filter = filter;
     final response = await jsClient.list(request);
     journalActivities = response.results;
   }

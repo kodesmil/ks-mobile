@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:lib_lego/lib_lego.dart';
+import 'package:lib_services/lib_services.dart';
 import 'package:provider/provider.dart';
 
 class ChatPage extends StatefulWidget {
@@ -35,24 +36,24 @@ class _ChatPageState extends State<ChatPage> {
             child: Material(
               child: Column(
                 children: <Widget>[
-                  KsSpace.m(),
-                  Text('Send messages here'),
-                  KsSpace.m(),
-                  RaisedButton(
-                    child: Text('Send message'),
-                    onPressed: () => store.sendMessage(),
-                  ),
-                  KsSpace.m(),
                   Observer(
-                    builder: (context) => Container(
-                      height: 300,
+                    builder: (context) => SafeArea(
                       child: ListView(
-                        children: store.messages
+                        shrinkWrap: true,
+                        children: store.rooms
                             .map(
                               (e) => ListTile(
-                                title: Text(e.text),
+                                title: Text(
+                                  e.participants
+                                      .map((e) => e.firstName)
+                                      .join(', '),
+                                ),
                                 subtitle: Text(
-                                  '${e.author.firstName} ${e.author.lastName}',
+                                  '${e.participants.length} participants',
+                                ),
+                                onTap: () => navigateToChatRoomPage(
+                                  context,
+                                  e,
                                 ),
                               ),
                             )
@@ -65,6 +66,96 @@ class _ChatPageState extends State<ChatPage> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Future navigateToChatRoomPage(BuildContext context, ChatRoom chatRoom) {
+    return Navigator.of(context, rootNavigator: true).push(
+      CupertinoPageRoute<void>(
+        builder: (BuildContext context) {
+          return ChatRoomPage(chatRoom: chatRoom);
+        },
+      ),
+    );
+  }
+}
+
+class ChatRoomPage extends StatefulWidget {
+  final ChatRoom chatRoom;
+
+  const ChatRoomPage({Key key, this.chatRoom}) : super(key: key);
+
+  @override
+  _ChatRoomPageState createState() => _ChatRoomPageState();
+}
+
+class _ChatRoomPageState extends State<ChatRoomPage> {
+  final _messageController = TextEditingController();
+
+  @override
+  void didChangeDependencies() {
+    final store = Provider.of<ChatStore>(context);
+    store.loadRoom(widget.chatRoom);
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final store = Provider.of<ChatStore>(context);
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text('Messages'),
+      ),
+      child: SafeArea(
+        child: Material(
+          child: Column(
+            children: [
+              Flexible(
+                child: Observer(
+                  builder: (context) => ListView(
+                    reverse: true,
+                    children: store.selectedMessages
+                        .map(
+                          (e) => ListTile(
+                            title: Text(e.text),
+                            subtitle: Text(
+                              '${e.author.firstName} ${e.author.lastName}',
+                            ),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
+              ),
+              Container(
+                color: Colors.white,
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: TextField(
+                        controller: _messageController,
+                        textInputAction: TextInputAction.send,
+                        style: Theme.of(context).textTheme.bodyText2,
+                        decoration: InputDecoration(
+                          hintText: 'Send message',
+                          border: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.send),
+                      onPressed: () =>
+                          store.sendMessage(_messageController.text),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

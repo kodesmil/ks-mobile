@@ -190,10 +190,11 @@ class _AppInjectorState extends State<AppInjector> {
             dep,
           ),
         ),
-        ProxyProvider<ChatClient, ChatStore>(
-          update: (_, dep, __) => ChatStore(
+        ProxyProvider2<UserStore, ChatClient, ChatStore>(
+          update: (_, dep, dep2, __) => ChatStore(
             ErrorStore(),
             dep,
+            dep2,
           ),
         ),
       ],

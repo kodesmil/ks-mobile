@@ -18,6 +18,8 @@ dependencies:
   rxdart: ^0.24.1
   uuid: ^2.0.4
 
+  feat_auth:
+    path: ../feat_auth
   lib_di:
     path: ../../libs/lib_di
   lib_lego:

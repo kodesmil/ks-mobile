@@ -1,10 +1,9 @@
 import 'dart:async';
-import 'package:grpc/grpc.dart';
+import 'package:feat_auth/feat_auth.dart';
 import 'package:lib_di/lib_di.dart';
 import 'package:lib_services/lib_services.dart';
 import 'package:mobx/mobx.dart';
 import 'package:uuid/uuid.dart';
-import 'dart:math' show Random;
 
 part 'store.g.dart';
 
@@ -12,6 +11,7 @@ class ChatStore = _ChatStore with _$ChatStore;
 
 abstract class _ChatStore with Store {
   final ErrorStore _errorStore;
+  final UserStore _userStore;
   final ChatClient _client;
   final _inputController = StreamController<StreamChatEvent>();
 
@@ -21,11 +21,18 @@ abstract class _ChatStore with Store {
 
   _ChatStore(
     this._errorStore,
+    this._userStore,
     this._client,
   );
 
   @observable
-  List<ChatMessage> messages = [];
+  List<ChatRoom> rooms = [];
+
+  @observable
+  ChatRoom selectedRoom;
+
+  @observable
+  List<ChatMessage> selectedMessages = [];
 
   @action
   Future connect() async {
@@ -33,50 +40,78 @@ abstract class _ChatStore with Store {
       (value) {
         switch (value.whichEvent()) {
           case StreamChatEvent_Event.none:
+            // TODO: Handle this case.
             break;
-          case StreamChatEvent_Event.join:
+          case StreamChatEvent_Event.loadRoom:
+            // TODO: Handle this case.
             break;
-          case StreamChatEvent_Event.leave:
+          case StreamChatEvent_Event.loadRooms:
+            // TODO: Handle this case.
             break;
-          case StreamChatEvent_Event.message:
-            messages.add(value.message.payload);
-            messages = messages.toList();
+          case StreamChatEvent_Event.leaveRoom:
+            // TODO: Handle this case.
             break;
-          case StreamChatEvent_Event.messages:
-            messages = value.messages.payload;
+          case StreamChatEvent_Event.leaveRooms:
+            // TODO: Handle this case.
+            break;
+          case StreamChatEvent_Event.sendRooms:
+            rooms = value.sendRooms.rooms;
+            break;
+          case StreamChatEvent_Event.sendMessage:
+            selectedMessages.add(value.sendMessage.payload);
+            selectedMessages = selectedMessages.toList();
+            break;
+          case StreamChatEvent_Event.sendMessages:
+            selectedMessages = value.sendMessages.payload;
             break;
           case StreamChatEvent_Event.forceClose:
+            // TODO: Handle this case.
+            break;
+          case StreamChatEvent_Event.inviteProfile:
+            // TODO: Handle this case.
             break;
           case StreamChatEvent_Event.notSet:
+            // TODO: Handle this case.
             break;
         }
       },
       onError: (error) => print(error),
     );
-    await join();
+    await loadRooms();
   }
 
   @action
-  Future join() async {
-    final event = EventJoin();
-    final streamEvent = StreamChatEvent()..join = event;
+  Future loadRooms() async {
+    final event = EventLoadRooms();
+    final streamEvent = StreamChatEvent()..loadRooms = event;
     _input.add(streamEvent);
   }
 
   @action
-  Future sendMessage() async {
+  Future loadRoom(ChatRoom room) async {
+    selectedMessages = [];
+    selectedRoom = room;
+    final event = EventLoadRoom()..room = room;
+    final streamEvent = StreamChatEvent()..loadRoom = event;
+    _input.add(streamEvent);
+  }
+
+  @action
+  Future sendMessage(String text) async {
     final timestamp = Timestamp.fromDateTime(DateTime.now());
     final id = Identifier()..resourceId = Uuid().v4();
-    final authorId = Identifier()..resourceId = 'aniqWjEXizNEOcSjZoG3CatvrWq1';
-    final r1 = Uuid().v4();
+    final authorId = Identifier()
+      ..resourceType = 'profiles'
+      ..resourceId = _userStore.user.uid;
     final payload = ChatMessage()
       ..createdAt = timestamp
       ..updatedAt = timestamp
+      ..chatRoom = selectedRoom
       ..id = id
       ..authorId = authorId
-      ..text = 'Hello $r1!';
-    final event = EventMessage()..payload = payload;
-    final streamEvent = StreamChatEvent()..message = event;
+      ..text = text;
+    final event = EventSendMessage()..payload = payload;
+    final streamEvent = StreamChatEvent()..sendMessage = event;
     _input.add(streamEvent);
   }
 

@@ -29,6 +29,8 @@ class ChatMessage extends $pb.GeneratedMessage {
     ..aOS(4, 'text')
     ..aOM<Profile>(5, 'author', subBuilder: Profile.create)
     ..aOM<$1.Identifier>(6, 'authorId', subBuilder: $1.Identifier.create)
+    ..aOM<ChatRoom>(7, 'chatRoom', subBuilder: ChatRoom.create)
+    ..aOM<$1.Identifier>(8, 'chatRoomId', subBuilder: $1.Identifier.create)
     ..hasRequiredFields = false;
 
   ChatMessage._() : super();
@@ -133,15 +135,124 @@ class ChatMessage extends $pb.GeneratedMessage {
   void clearAuthorId() => clearField(6);
   @$pb.TagNumber(6)
   $1.Identifier ensureAuthorId() => $_ensure(5);
+
+  @$pb.TagNumber(7)
+  ChatRoom get chatRoom => $_getN(6);
+  @$pb.TagNumber(7)
+  set chatRoom(ChatRoom v) {
+    setField(7, v);
+  }
+
+  @$pb.TagNumber(7)
+  $core.bool hasChatRoom() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearChatRoom() => clearField(7);
+  @$pb.TagNumber(7)
+  ChatRoom ensureChatRoom() => $_ensure(6);
+
+  @$pb.TagNumber(8)
+  $1.Identifier get chatRoomId => $_getN(7);
+  @$pb.TagNumber(8)
+  set chatRoomId($1.Identifier v) {
+    setField(8, v);
+  }
+
+  @$pb.TagNumber(8)
+  $core.bool hasChatRoomId() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearChatRoomId() => clearField(8);
+  @$pb.TagNumber(8)
+  $1.Identifier ensureChatRoomId() => $_ensure(7);
+}
+
+class ChatRoom extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ChatRoom',
+      package: const $pb.PackageName('service'), createEmptyInstance: create)
+    ..aOM<$1.Identifier>(1, 'id', subBuilder: $1.Identifier.create)
+    ..aOM<$2.Timestamp>(2, 'createdAt', subBuilder: $2.Timestamp.create)
+    ..aOM<$2.Timestamp>(3, 'updatedAt', subBuilder: $2.Timestamp.create)
+    ..pc<Profile>(4, 'participants', $pb.PbFieldType.PM,
+        subBuilder: Profile.create)
+    ..hasRequiredFields = false;
+
+  ChatRoom._() : super();
+  factory ChatRoom() => create();
+  factory ChatRoom.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory ChatRoom.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  ChatRoom clone() => ChatRoom()..mergeFromMessage(this);
+  ChatRoom copyWith(void Function(ChatRoom) updates) =>
+      super.copyWith((message) => updates(message as ChatRoom));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ChatRoom create() => ChatRoom._();
+  ChatRoom createEmptyInstance() => create();
+  static $pb.PbList<ChatRoom> createRepeated() => $pb.PbList<ChatRoom>();
+  @$core.pragma('dart2js:noInline')
+  static ChatRoom getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ChatRoom>(create);
+  static ChatRoom _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $1.Identifier get id => $_getN(0);
+  @$pb.TagNumber(1)
+  set id($1.Identifier v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+  @$pb.TagNumber(1)
+  $1.Identifier ensureId() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $2.Timestamp get createdAt => $_getN(1);
+  @$pb.TagNumber(2)
+  set createdAt($2.Timestamp v) {
+    setField(2, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasCreatedAt() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCreatedAt() => clearField(2);
+  @$pb.TagNumber(2)
+  $2.Timestamp ensureCreatedAt() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $2.Timestamp get updatedAt => $_getN(2);
+  @$pb.TagNumber(3)
+  set updatedAt($2.Timestamp v) {
+    setField(3, v);
+  }
+
+  @$pb.TagNumber(3)
+  $core.bool hasUpdatedAt() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearUpdatedAt() => clearField(3);
+  @$pb.TagNumber(3)
+  $2.Timestamp ensureUpdatedAt() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  $core.List<Profile> get participants => $_getList(3);
 }
 
 enum StreamChatEvent_Event {
   none,
-  join,
-  leave,
-  message,
-  messages,
+  loadRoom,
+  loadRooms,
+  leaveRoom,
+  leaveRooms,
+  sendRooms,
+  sendMessage,
+  sendMessages,
   forceClose,
+  inviteProfile,
   notSet
 }
 
@@ -149,22 +260,33 @@ class StreamChatEvent extends $pb.GeneratedMessage {
   static const $core.Map<$core.int, StreamChatEvent_Event>
       _StreamChatEvent_EventByTag = {
     1: StreamChatEvent_Event.none,
-    2: StreamChatEvent_Event.join,
-    3: StreamChatEvent_Event.leave,
-    4: StreamChatEvent_Event.message,
-    5: StreamChatEvent_Event.messages,
-    6: StreamChatEvent_Event.forceClose,
+    2: StreamChatEvent_Event.loadRoom,
+    3: StreamChatEvent_Event.loadRooms,
+    4: StreamChatEvent_Event.leaveRoom,
+    5: StreamChatEvent_Event.leaveRooms,
+    6: StreamChatEvent_Event.sendRooms,
+    7: StreamChatEvent_Event.sendMessage,
+    8: StreamChatEvent_Event.sendMessages,
+    9: StreamChatEvent_Event.forceClose,
+    10: StreamChatEvent_Event.inviteProfile,
     0: StreamChatEvent_Event.notSet
   };
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('StreamChatEvent',
       package: const $pb.PackageName('service'), createEmptyInstance: create)
-    ..oo(0, [1, 2, 3, 4, 5, 6])
+    ..oo(0, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
     ..aOM<EventNone>(1, 'none', subBuilder: EventNone.create)
-    ..aOM<EventJoin>(2, 'join', subBuilder: EventJoin.create)
-    ..aOM<EventLeave>(3, 'leave', subBuilder: EventLeave.create)
-    ..aOM<EventMessage>(4, 'message', subBuilder: EventMessage.create)
-    ..aOM<EventMessages>(5, 'messages', subBuilder: EventMessages.create)
-    ..aOM<EventForceClose>(6, 'forceClose', subBuilder: EventForceClose.create)
+    ..aOM<EventLoadRoom>(2, 'loadRoom', subBuilder: EventLoadRoom.create)
+    ..aOM<EventLoadRooms>(3, 'loadRooms', subBuilder: EventLoadRooms.create)
+    ..aOM<EventLeaveRoom>(4, 'leaveRoom', subBuilder: EventLeaveRoom.create)
+    ..aOM<EventLeaveRooms>(5, 'leaveRooms', subBuilder: EventLeaveRooms.create)
+    ..aOM<EventSendRooms>(6, 'sendRooms', subBuilder: EventSendRooms.create)
+    ..aOM<EventSendMessage>(7, 'sendMessage',
+        subBuilder: EventSendMessage.create)
+    ..aOM<EventSendMessages>(8, 'sendMessages',
+        subBuilder: EventSendMessages.create)
+    ..aOM<EventForceClose>(9, 'forceClose', subBuilder: EventForceClose.create)
+    ..aOM<EventInviteProfile>(10, 'inviteProfile',
+        subBuilder: EventInviteProfile.create)
     ..hasRequiredFields = false;
 
   StreamChatEvent._() : super();
@@ -208,74 +330,130 @@ class StreamChatEvent extends $pb.GeneratedMessage {
   EventNone ensureNone() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  EventJoin get join => $_getN(1);
+  EventLoadRoom get loadRoom => $_getN(1);
   @$pb.TagNumber(2)
-  set join(EventJoin v) {
+  set loadRoom(EventLoadRoom v) {
     setField(2, v);
   }
 
   @$pb.TagNumber(2)
-  $core.bool hasJoin() => $_has(1);
+  $core.bool hasLoadRoom() => $_has(1);
   @$pb.TagNumber(2)
-  void clearJoin() => clearField(2);
+  void clearLoadRoom() => clearField(2);
   @$pb.TagNumber(2)
-  EventJoin ensureJoin() => $_ensure(1);
+  EventLoadRoom ensureLoadRoom() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  EventLeave get leave => $_getN(2);
+  EventLoadRooms get loadRooms => $_getN(2);
   @$pb.TagNumber(3)
-  set leave(EventLeave v) {
+  set loadRooms(EventLoadRooms v) {
     setField(3, v);
   }
 
   @$pb.TagNumber(3)
-  $core.bool hasLeave() => $_has(2);
+  $core.bool hasLoadRooms() => $_has(2);
   @$pb.TagNumber(3)
-  void clearLeave() => clearField(3);
+  void clearLoadRooms() => clearField(3);
   @$pb.TagNumber(3)
-  EventLeave ensureLeave() => $_ensure(2);
+  EventLoadRooms ensureLoadRooms() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  EventMessage get message => $_getN(3);
+  EventLeaveRoom get leaveRoom => $_getN(3);
   @$pb.TagNumber(4)
-  set message(EventMessage v) {
+  set leaveRoom(EventLeaveRoom v) {
     setField(4, v);
   }
 
   @$pb.TagNumber(4)
-  $core.bool hasMessage() => $_has(3);
+  $core.bool hasLeaveRoom() => $_has(3);
   @$pb.TagNumber(4)
-  void clearMessage() => clearField(4);
+  void clearLeaveRoom() => clearField(4);
   @$pb.TagNumber(4)
-  EventMessage ensureMessage() => $_ensure(3);
+  EventLeaveRoom ensureLeaveRoom() => $_ensure(3);
 
   @$pb.TagNumber(5)
-  EventMessages get messages => $_getN(4);
+  EventLeaveRooms get leaveRooms => $_getN(4);
   @$pb.TagNumber(5)
-  set messages(EventMessages v) {
+  set leaveRooms(EventLeaveRooms v) {
     setField(5, v);
   }
 
   @$pb.TagNumber(5)
-  $core.bool hasMessages() => $_has(4);
+  $core.bool hasLeaveRooms() => $_has(4);
   @$pb.TagNumber(5)
-  void clearMessages() => clearField(5);
+  void clearLeaveRooms() => clearField(5);
   @$pb.TagNumber(5)
-  EventMessages ensureMessages() => $_ensure(4);
+  EventLeaveRooms ensureLeaveRooms() => $_ensure(4);
 
   @$pb.TagNumber(6)
-  EventForceClose get forceClose => $_getN(5);
+  EventSendRooms get sendRooms => $_getN(5);
   @$pb.TagNumber(6)
-  set forceClose(EventForceClose v) {
+  set sendRooms(EventSendRooms v) {
     setField(6, v);
   }
 
   @$pb.TagNumber(6)
-  $core.bool hasForceClose() => $_has(5);
+  $core.bool hasSendRooms() => $_has(5);
   @$pb.TagNumber(6)
-  void clearForceClose() => clearField(6);
+  void clearSendRooms() => clearField(6);
   @$pb.TagNumber(6)
-  EventForceClose ensureForceClose() => $_ensure(5);
+  EventSendRooms ensureSendRooms() => $_ensure(5);
+
+  @$pb.TagNumber(7)
+  EventSendMessage get sendMessage => $_getN(6);
+  @$pb.TagNumber(7)
+  set sendMessage(EventSendMessage v) {
+    setField(7, v);
+  }
+
+  @$pb.TagNumber(7)
+  $core.bool hasSendMessage() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearSendMessage() => clearField(7);
+  @$pb.TagNumber(7)
+  EventSendMessage ensureSendMessage() => $_ensure(6);
+
+  @$pb.TagNumber(8)
+  EventSendMessages get sendMessages => $_getN(7);
+  @$pb.TagNumber(8)
+  set sendMessages(EventSendMessages v) {
+    setField(8, v);
+  }
+
+  @$pb.TagNumber(8)
+  $core.bool hasSendMessages() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearSendMessages() => clearField(8);
+  @$pb.TagNumber(8)
+  EventSendMessages ensureSendMessages() => $_ensure(7);
+
+  @$pb.TagNumber(9)
+  EventForceClose get forceClose => $_getN(8);
+  @$pb.TagNumber(9)
+  set forceClose(EventForceClose v) {
+    setField(9, v);
+  }
+
+  @$pb.TagNumber(9)
+  $core.bool hasForceClose() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearForceClose() => clearField(9);
+  @$pb.TagNumber(9)
+  EventForceClose ensureForceClose() => $_ensure(8);
+
+  @$pb.TagNumber(10)
+  EventInviteProfile get inviteProfile => $_getN(9);
+  @$pb.TagNumber(10)
+  set inviteProfile(EventInviteProfile v) {
+    setField(10, v);
+  }
+
+  @$pb.TagNumber(10)
+  $core.bool hasInviteProfile() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearInviteProfile() => clearField(10);
+  @$pb.TagNumber(10)
+  EventInviteProfile ensureInviteProfile() => $_ensure(9);
 }
 
 class EventNone extends $pb.GeneratedMessage {
@@ -305,117 +483,175 @@ class EventNone extends $pb.GeneratedMessage {
   static EventNone _defaultInstance;
 }
 
-class EventJoin extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventJoin',
+class EventLoadRoom extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventLoadRoom',
       package: const $pb.PackageName('service'), createEmptyInstance: create)
-    ..aOM<Profile>(1, 'user', subBuilder: Profile.create)
+    ..aOM<ChatRoom>(1, 'room', subBuilder: ChatRoom.create)
     ..hasRequiredFields = false;
 
-  EventJoin._() : super();
-  factory EventJoin() => create();
-  factory EventJoin.fromBuffer($core.List<$core.int> i,
+  EventLoadRoom._() : super();
+  factory EventLoadRoom() => create();
+  factory EventLoadRoom.fromBuffer($core.List<$core.int> i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(i, r);
-  factory EventJoin.fromJson($core.String i,
+  factory EventLoadRoom.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
-  EventJoin clone() => EventJoin()..mergeFromMessage(this);
-  EventJoin copyWith(void Function(EventJoin) updates) =>
-      super.copyWith((message) => updates(message as EventJoin));
+  EventLoadRoom clone() => EventLoadRoom()..mergeFromMessage(this);
+  EventLoadRoom copyWith(void Function(EventLoadRoom) updates) =>
+      super.copyWith((message) => updates(message as EventLoadRoom));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static EventJoin create() => EventJoin._();
-  EventJoin createEmptyInstance() => create();
-  static $pb.PbList<EventJoin> createRepeated() => $pb.PbList<EventJoin>();
+  static EventLoadRoom create() => EventLoadRoom._();
+  EventLoadRoom createEmptyInstance() => create();
+  static $pb.PbList<EventLoadRoom> createRepeated() =>
+      $pb.PbList<EventLoadRoom>();
   @$core.pragma('dart2js:noInline')
-  static EventJoin getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EventJoin>(create);
-  static EventJoin _defaultInstance;
+  static EventLoadRoom getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<EventLoadRoom>(create);
+  static EventLoadRoom _defaultInstance;
 
   @$pb.TagNumber(1)
-  Profile get user => $_getN(0);
+  ChatRoom get room => $_getN(0);
   @$pb.TagNumber(1)
-  set user(Profile v) {
+  set room(ChatRoom v) {
     setField(1, v);
   }
 
   @$pb.TagNumber(1)
-  $core.bool hasUser() => $_has(0);
+  $core.bool hasRoom() => $_has(0);
   @$pb.TagNumber(1)
-  void clearUser() => clearField(1);
+  void clearRoom() => clearField(1);
   @$pb.TagNumber(1)
-  Profile ensureUser() => $_ensure(0);
+  ChatRoom ensureRoom() => $_ensure(0);
 }
 
-class EventLeave extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventLeave',
+class EventLoadRooms extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventLoadRooms',
       package: const $pb.PackageName('service'), createEmptyInstance: create)
-    ..aOM<Profile>(1, 'user', subBuilder: Profile.create)
     ..hasRequiredFields = false;
 
-  EventLeave._() : super();
-  factory EventLeave() => create();
-  factory EventLeave.fromBuffer($core.List<$core.int> i,
+  EventLoadRooms._() : super();
+  factory EventLoadRooms() => create();
+  factory EventLoadRooms.fromBuffer($core.List<$core.int> i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(i, r);
-  factory EventLeave.fromJson($core.String i,
+  factory EventLoadRooms.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
-  EventLeave clone() => EventLeave()..mergeFromMessage(this);
-  EventLeave copyWith(void Function(EventLeave) updates) =>
-      super.copyWith((message) => updates(message as EventLeave));
+  EventLoadRooms clone() => EventLoadRooms()..mergeFromMessage(this);
+  EventLoadRooms copyWith(void Function(EventLoadRooms) updates) =>
+      super.copyWith((message) => updates(message as EventLoadRooms));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static EventLeave create() => EventLeave._();
-  EventLeave createEmptyInstance() => create();
-  static $pb.PbList<EventLeave> createRepeated() => $pb.PbList<EventLeave>();
+  static EventLoadRooms create() => EventLoadRooms._();
+  EventLoadRooms createEmptyInstance() => create();
+  static $pb.PbList<EventLoadRooms> createRepeated() =>
+      $pb.PbList<EventLoadRooms>();
   @$core.pragma('dart2js:noInline')
-  static EventLeave getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<EventLeave>(create);
-  static EventLeave _defaultInstance;
+  static EventLoadRooms getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<EventLoadRooms>(create);
+  static EventLoadRooms _defaultInstance;
+}
+
+class EventLeaveRoom extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventLeaveRoom',
+      package: const $pb.PackageName('service'), createEmptyInstance: create)
+    ..aOM<ChatRoom>(1, 'room', subBuilder: ChatRoom.create)
+    ..hasRequiredFields = false;
+
+  EventLeaveRoom._() : super();
+  factory EventLeaveRoom() => create();
+  factory EventLeaveRoom.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory EventLeaveRoom.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  EventLeaveRoom clone() => EventLeaveRoom()..mergeFromMessage(this);
+  EventLeaveRoom copyWith(void Function(EventLeaveRoom) updates) =>
+      super.copyWith((message) => updates(message as EventLeaveRoom));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static EventLeaveRoom create() => EventLeaveRoom._();
+  EventLeaveRoom createEmptyInstance() => create();
+  static $pb.PbList<EventLeaveRoom> createRepeated() =>
+      $pb.PbList<EventLeaveRoom>();
+  @$core.pragma('dart2js:noInline')
+  static EventLeaveRoom getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<EventLeaveRoom>(create);
+  static EventLeaveRoom _defaultInstance;
 
   @$pb.TagNumber(1)
-  Profile get user => $_getN(0);
+  ChatRoom get room => $_getN(0);
   @$pb.TagNumber(1)
-  set user(Profile v) {
+  set room(ChatRoom v) {
     setField(1, v);
   }
 
   @$pb.TagNumber(1)
-  $core.bool hasUser() => $_has(0);
+  $core.bool hasRoom() => $_has(0);
   @$pb.TagNumber(1)
-  void clearUser() => clearField(1);
+  void clearRoom() => clearField(1);
   @$pb.TagNumber(1)
-  Profile ensureUser() => $_ensure(0);
+  ChatRoom ensureRoom() => $_ensure(0);
 }
 
-class EventMessage extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventMessage',
+class EventLeaveRooms extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventLeaveRooms',
+      package: const $pb.PackageName('service'), createEmptyInstance: create)
+    ..hasRequiredFields = false;
+
+  EventLeaveRooms._() : super();
+  factory EventLeaveRooms() => create();
+  factory EventLeaveRooms.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory EventLeaveRooms.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  EventLeaveRooms clone() => EventLeaveRooms()..mergeFromMessage(this);
+  EventLeaveRooms copyWith(void Function(EventLeaveRooms) updates) =>
+      super.copyWith((message) => updates(message as EventLeaveRooms));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static EventLeaveRooms create() => EventLeaveRooms._();
+  EventLeaveRooms createEmptyInstance() => create();
+  static $pb.PbList<EventLeaveRooms> createRepeated() =>
+      $pb.PbList<EventLeaveRooms>();
+  @$core.pragma('dart2js:noInline')
+  static EventLeaveRooms getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<EventLeaveRooms>(create);
+  static EventLeaveRooms _defaultInstance;
+}
+
+class EventSendMessage extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventSendMessage',
       package: const $pb.PackageName('service'), createEmptyInstance: create)
     ..aOM<ChatMessage>(1, 'payload', subBuilder: ChatMessage.create)
     ..hasRequiredFields = false;
 
-  EventMessage._() : super();
-  factory EventMessage() => create();
-  factory EventMessage.fromBuffer($core.List<$core.int> i,
+  EventSendMessage._() : super();
+  factory EventSendMessage() => create();
+  factory EventSendMessage.fromBuffer($core.List<$core.int> i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(i, r);
-  factory EventMessage.fromJson($core.String i,
+  factory EventSendMessage.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
-  EventMessage clone() => EventMessage()..mergeFromMessage(this);
-  EventMessage copyWith(void Function(EventMessage) updates) =>
-      super.copyWith((message) => updates(message as EventMessage));
+  EventSendMessage clone() => EventSendMessage()..mergeFromMessage(this);
+  EventSendMessage copyWith(void Function(EventSendMessage) updates) =>
+      super.copyWith((message) => updates(message as EventSendMessage));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static EventMessage create() => EventMessage._();
-  EventMessage createEmptyInstance() => create();
-  static $pb.PbList<EventMessage> createRepeated() =>
-      $pb.PbList<EventMessage>();
+  static EventSendMessage create() => EventSendMessage._();
+  EventSendMessage createEmptyInstance() => create();
+  static $pb.PbList<EventSendMessage> createRepeated() =>
+      $pb.PbList<EventSendMessage>();
   @$core.pragma('dart2js:noInline')
-  static EventMessage getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<EventMessage>(create);
-  static EventMessage _defaultInstance;
+  static EventSendMessage getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<EventSendMessage>(create);
+  static EventSendMessage _defaultInstance;
 
   @$pb.TagNumber(1)
   ChatMessage get payload => $_getN(0);
@@ -432,37 +668,112 @@ class EventMessage extends $pb.GeneratedMessage {
   ChatMessage ensurePayload() => $_ensure(0);
 }
 
-class EventMessages extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventMessages',
+class EventSendMessages extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventSendMessages',
       package: const $pb.PackageName('service'), createEmptyInstance: create)
     ..pc<ChatMessage>(1, 'payload', $pb.PbFieldType.PM,
         subBuilder: ChatMessage.create)
     ..hasRequiredFields = false;
 
-  EventMessages._() : super();
-  factory EventMessages() => create();
-  factory EventMessages.fromBuffer($core.List<$core.int> i,
+  EventSendMessages._() : super();
+  factory EventSendMessages() => create();
+  factory EventSendMessages.fromBuffer($core.List<$core.int> i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(i, r);
-  factory EventMessages.fromJson($core.String i,
+  factory EventSendMessages.fromJson($core.String i,
           [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(i, r);
-  EventMessages clone() => EventMessages()..mergeFromMessage(this);
-  EventMessages copyWith(void Function(EventMessages) updates) =>
-      super.copyWith((message) => updates(message as EventMessages));
+  EventSendMessages clone() => EventSendMessages()..mergeFromMessage(this);
+  EventSendMessages copyWith(void Function(EventSendMessages) updates) =>
+      super.copyWith((message) => updates(message as EventSendMessages));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static EventMessages create() => EventMessages._();
-  EventMessages createEmptyInstance() => create();
-  static $pb.PbList<EventMessages> createRepeated() =>
-      $pb.PbList<EventMessages>();
+  static EventSendMessages create() => EventSendMessages._();
+  EventSendMessages createEmptyInstance() => create();
+  static $pb.PbList<EventSendMessages> createRepeated() =>
+      $pb.PbList<EventSendMessages>();
   @$core.pragma('dart2js:noInline')
-  static EventMessages getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<EventMessages>(create);
-  static EventMessages _defaultInstance;
+  static EventSendMessages getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<EventSendMessages>(create);
+  static EventSendMessages _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.List<ChatMessage> get payload => $_getList(0);
+}
+
+class EventSendRooms extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventSendRooms',
+      package: const $pb.PackageName('service'), createEmptyInstance: create)
+    ..pc<ChatRoom>(1, 'rooms', $pb.PbFieldType.PM, subBuilder: ChatRoom.create)
+    ..hasRequiredFields = false;
+
+  EventSendRooms._() : super();
+  factory EventSendRooms() => create();
+  factory EventSendRooms.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory EventSendRooms.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  EventSendRooms clone() => EventSendRooms()..mergeFromMessage(this);
+  EventSendRooms copyWith(void Function(EventSendRooms) updates) =>
+      super.copyWith((message) => updates(message as EventSendRooms));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static EventSendRooms create() => EventSendRooms._();
+  EventSendRooms createEmptyInstance() => create();
+  static $pb.PbList<EventSendRooms> createRepeated() =>
+      $pb.PbList<EventSendRooms>();
+  @$core.pragma('dart2js:noInline')
+  static EventSendRooms getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<EventSendRooms>(create);
+  static EventSendRooms _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<ChatRoom> get rooms => $_getList(0);
+}
+
+class EventInviteProfile extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventInviteProfile',
+      package: const $pb.PackageName('service'), createEmptyInstance: create)
+    ..aOM<Profile>(1, 'participant', subBuilder: Profile.create)
+    ..hasRequiredFields = false;
+
+  EventInviteProfile._() : super();
+  factory EventInviteProfile() => create();
+  factory EventInviteProfile.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory EventInviteProfile.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  EventInviteProfile clone() => EventInviteProfile()..mergeFromMessage(this);
+  EventInviteProfile copyWith(void Function(EventInviteProfile) updates) =>
+      super.copyWith((message) => updates(message as EventInviteProfile));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static EventInviteProfile create() => EventInviteProfile._();
+  EventInviteProfile createEmptyInstance() => create();
+  static $pb.PbList<EventInviteProfile> createRepeated() =>
+      $pb.PbList<EventInviteProfile>();
+  @$core.pragma('dart2js:noInline')
+  static EventInviteProfile getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<EventInviteProfile>(create);
+  static EventInviteProfile _defaultInstance;
+
+  @$pb.TagNumber(1)
+  Profile get participant => $_getN(0);
+  @$pb.TagNumber(1)
+  set participant(Profile v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasParticipant() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearParticipant() => clearField(1);
+  @$pb.TagNumber(1)
+  Profile ensureParticipant() => $_ensure(0);
 }
 
 class EventForceClose extends $pb.GeneratedMessage {
@@ -491,6 +802,253 @@ class EventForceClose extends $pb.GeneratedMessage {
   static EventForceClose getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<EventForceClose>(create);
   static EventForceClose _defaultInstance;
+}
+
+class ListChatMessageRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ListChatMessageRequest',
+      package: const $pb.PackageName('service'), createEmptyInstance: create)
+    ..aOM<$3.Filtering>(1, 'filter', subBuilder: $3.Filtering.create)
+    ..aOM<$3.Sorting>(2, 'orderBy', subBuilder: $3.Sorting.create)
+    ..aOM<$3.FieldSelection>(3, 'fields', subBuilder: $3.FieldSelection.create)
+    ..aOM<$3.Pagination>(4, 'paging', subBuilder: $3.Pagination.create)
+    ..hasRequiredFields = false;
+
+  ListChatMessageRequest._() : super();
+  factory ListChatMessageRequest() => create();
+  factory ListChatMessageRequest.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory ListChatMessageRequest.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  ListChatMessageRequest clone() =>
+      ListChatMessageRequest()..mergeFromMessage(this);
+  ListChatMessageRequest copyWith(
+          void Function(ListChatMessageRequest) updates) =>
+      super.copyWith((message) => updates(message as ListChatMessageRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListChatMessageRequest create() => ListChatMessageRequest._();
+  ListChatMessageRequest createEmptyInstance() => create();
+  static $pb.PbList<ListChatMessageRequest> createRepeated() =>
+      $pb.PbList<ListChatMessageRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListChatMessageRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ListChatMessageRequest>(create);
+  static ListChatMessageRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $3.Filtering get filter => $_getN(0);
+  @$pb.TagNumber(1)
+  set filter($3.Filtering v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasFilter() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFilter() => clearField(1);
+  @$pb.TagNumber(1)
+  $3.Filtering ensureFilter() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $3.Sorting get orderBy => $_getN(1);
+  @$pb.TagNumber(2)
+  set orderBy($3.Sorting v) {
+    setField(2, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasOrderBy() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearOrderBy() => clearField(2);
+  @$pb.TagNumber(2)
+  $3.Sorting ensureOrderBy() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $3.FieldSelection get fields => $_getN(2);
+  @$pb.TagNumber(3)
+  set fields($3.FieldSelection v) {
+    setField(3, v);
+  }
+
+  @$pb.TagNumber(3)
+  $core.bool hasFields() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFields() => clearField(3);
+  @$pb.TagNumber(3)
+  $3.FieldSelection ensureFields() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  $3.Pagination get paging => $_getN(3);
+  @$pb.TagNumber(4)
+  set paging($3.Pagination v) {
+    setField(4, v);
+  }
+
+  @$pb.TagNumber(4)
+  $core.bool hasPaging() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearPaging() => clearField(4);
+  @$pb.TagNumber(4)
+  $3.Pagination ensurePaging() => $_ensure(3);
+}
+
+class ListChatMessageResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ListChatMessageResponse',
+      package: const $pb.PackageName('service'), createEmptyInstance: create)
+    ..pc<ChatMessage>(1, 'results', $pb.PbFieldType.PM,
+        subBuilder: ChatMessage.create)
+    ..hasRequiredFields = false;
+
+  ListChatMessageResponse._() : super();
+  factory ListChatMessageResponse() => create();
+  factory ListChatMessageResponse.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory ListChatMessageResponse.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  ListChatMessageResponse clone() =>
+      ListChatMessageResponse()..mergeFromMessage(this);
+  ListChatMessageResponse copyWith(
+          void Function(ListChatMessageResponse) updates) =>
+      super.copyWith((message) => updates(message as ListChatMessageResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListChatMessageResponse create() => ListChatMessageResponse._();
+  ListChatMessageResponse createEmptyInstance() => create();
+  static $pb.PbList<ListChatMessageResponse> createRepeated() =>
+      $pb.PbList<ListChatMessageResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListChatMessageResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ListChatMessageResponse>(create);
+  static ListChatMessageResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<ChatMessage> get results => $_getList(0);
+}
+
+class ListChatRoomRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ListChatRoomRequest',
+      package: const $pb.PackageName('service'), createEmptyInstance: create)
+    ..aOM<$3.Filtering>(1, 'filter', subBuilder: $3.Filtering.create)
+    ..aOM<$3.Sorting>(2, 'orderBy', subBuilder: $3.Sorting.create)
+    ..aOM<$3.FieldSelection>(3, 'fields', subBuilder: $3.FieldSelection.create)
+    ..aOM<$3.Pagination>(4, 'paging', subBuilder: $3.Pagination.create)
+    ..hasRequiredFields = false;
+
+  ListChatRoomRequest._() : super();
+  factory ListChatRoomRequest() => create();
+  factory ListChatRoomRequest.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory ListChatRoomRequest.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  ListChatRoomRequest clone() => ListChatRoomRequest()..mergeFromMessage(this);
+  ListChatRoomRequest copyWith(void Function(ListChatRoomRequest) updates) =>
+      super.copyWith((message) => updates(message as ListChatRoomRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListChatRoomRequest create() => ListChatRoomRequest._();
+  ListChatRoomRequest createEmptyInstance() => create();
+  static $pb.PbList<ListChatRoomRequest> createRepeated() =>
+      $pb.PbList<ListChatRoomRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListChatRoomRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ListChatRoomRequest>(create);
+  static ListChatRoomRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $3.Filtering get filter => $_getN(0);
+  @$pb.TagNumber(1)
+  set filter($3.Filtering v) {
+    setField(1, v);
+  }
+
+  @$pb.TagNumber(1)
+  $core.bool hasFilter() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFilter() => clearField(1);
+  @$pb.TagNumber(1)
+  $3.Filtering ensureFilter() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $3.Sorting get orderBy => $_getN(1);
+  @$pb.TagNumber(2)
+  set orderBy($3.Sorting v) {
+    setField(2, v);
+  }
+
+  @$pb.TagNumber(2)
+  $core.bool hasOrderBy() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearOrderBy() => clearField(2);
+  @$pb.TagNumber(2)
+  $3.Sorting ensureOrderBy() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $3.FieldSelection get fields => $_getN(2);
+  @$pb.TagNumber(3)
+  set fields($3.FieldSelection v) {
+    setField(3, v);
+  }
+
+  @$pb.TagNumber(3)
+  $core.bool hasFields() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFields() => clearField(3);
+  @$pb.TagNumber(3)
+  $3.FieldSelection ensureFields() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  $3.Pagination get paging => $_getN(3);
+  @$pb.TagNumber(4)
+  set paging($3.Pagination v) {
+    setField(4, v);
+  }
+
+  @$pb.TagNumber(4)
+  $core.bool hasPaging() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearPaging() => clearField(4);
+  @$pb.TagNumber(4)
+  $3.Pagination ensurePaging() => $_ensure(3);
+}
+
+class ListChatRoomResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ListChatRoomResponse',
+      package: const $pb.PackageName('service'), createEmptyInstance: create)
+    ..pc<ChatRoom>(1, 'results', $pb.PbFieldType.PM,
+        subBuilder: ChatRoom.create)
+    ..hasRequiredFields = false;
+
+  ListChatRoomResponse._() : super();
+  factory ListChatRoomResponse() => create();
+  factory ListChatRoomResponse.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory ListChatRoomResponse.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
+  ListChatRoomResponse clone() =>
+      ListChatRoomResponse()..mergeFromMessage(this);
+  ListChatRoomResponse copyWith(void Function(ListChatRoomResponse) updates) =>
+      super.copyWith((message) => updates(message as ListChatRoomResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListChatRoomResponse create() => ListChatRoomResponse._();
+  ListChatRoomResponse createEmptyInstance() => create();
+  static $pb.PbList<ListChatRoomResponse> createRepeated() =>
+      $pb.PbList<ListChatRoomResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListChatRoomResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ListChatRoomResponse>(create);
+  static ListChatRoomResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<ChatRoom> get results => $_getList(0);
 }
 
 class LogActivity extends $pb.GeneratedMessage {

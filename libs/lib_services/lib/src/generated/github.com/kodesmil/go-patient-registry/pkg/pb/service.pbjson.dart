@@ -51,6 +51,64 @@ const ChatMessage$json = const {
       '6': '.atlas.rpc.Identifier',
       '10': 'authorId'
     },
+    const {
+      '1': 'chat_room',
+      '3': 7,
+      '4': 1,
+      '5': 11,
+      '6': '.service.ChatRoom',
+      '8': const {},
+      '10': 'chatRoom'
+    },
+    const {
+      '1': 'chat_room_id',
+      '3': 8,
+      '4': 1,
+      '5': 11,
+      '6': '.atlas.rpc.Identifier',
+      '10': 'chatRoomId'
+    },
+  ],
+  '7': const {},
+};
+
+const ChatRoom$json = const {
+  '1': 'ChatRoom',
+  '2': const [
+    const {
+      '1': 'id',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.atlas.rpc.Identifier',
+      '8': const {},
+      '10': 'id'
+    },
+    const {
+      '1': 'created_at',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.google.protobuf.Timestamp',
+      '10': 'createdAt'
+    },
+    const {
+      '1': 'updated_at',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.google.protobuf.Timestamp',
+      '10': 'updatedAt'
+    },
+    const {
+      '1': 'participants',
+      '3': 4,
+      '4': 3,
+      '5': 11,
+      '6': '.service.Profile',
+      '8': const {},
+      '10': 'participants'
+    },
   ],
   '7': const {},
 };
@@ -68,49 +126,85 @@ const StreamChatEvent$json = const {
       '10': 'none'
     },
     const {
-      '1': 'join',
+      '1': 'load_room',
       '3': 2,
       '4': 1,
       '5': 11,
-      '6': '.service.EventJoin',
+      '6': '.service.EventLoadRoom',
       '9': 0,
-      '10': 'join'
+      '10': 'loadRoom'
     },
     const {
-      '1': 'leave',
+      '1': 'load_rooms',
       '3': 3,
       '4': 1,
       '5': 11,
-      '6': '.service.EventLeave',
+      '6': '.service.EventLoadRooms',
       '9': 0,
-      '10': 'leave'
+      '10': 'loadRooms'
     },
     const {
-      '1': 'message',
+      '1': 'leave_room',
       '3': 4,
       '4': 1,
       '5': 11,
-      '6': '.service.EventMessage',
+      '6': '.service.EventLeaveRoom',
       '9': 0,
-      '10': 'message'
+      '10': 'leaveRoom'
     },
     const {
-      '1': 'messages',
+      '1': 'leave_rooms',
       '3': 5,
       '4': 1,
       '5': 11,
-      '6': '.service.EventMessages',
+      '6': '.service.EventLeaveRooms',
       '9': 0,
-      '10': 'messages'
+      '10': 'leaveRooms'
+    },
+    const {
+      '1': 'send_rooms',
+      '3': 6,
+      '4': 1,
+      '5': 11,
+      '6': '.service.EventSendRooms',
+      '9': 0,
+      '10': 'sendRooms'
+    },
+    const {
+      '1': 'send_message',
+      '3': 7,
+      '4': 1,
+      '5': 11,
+      '6': '.service.EventSendMessage',
+      '9': 0,
+      '10': 'sendMessage'
+    },
+    const {
+      '1': 'send_messages',
+      '3': 8,
+      '4': 1,
+      '5': 11,
+      '6': '.service.EventSendMessages',
+      '9': 0,
+      '10': 'sendMessages'
     },
     const {
       '1': 'force_close',
-      '3': 6,
+      '3': 9,
       '4': 1,
       '5': 11,
       '6': '.service.EventForceClose',
       '9': 0,
       '10': 'forceClose'
+    },
+    const {
+      '1': 'invite_profile',
+      '3': 10,
+      '4': 1,
+      '5': 11,
+      '6': '.service.EventInviteProfile',
+      '9': 0,
+      '10': 'inviteProfile'
     },
   ],
   '8': const [
@@ -122,36 +216,44 @@ const EventNone$json = const {
   '1': 'EventNone',
 };
 
-const EventJoin$json = const {
-  '1': 'EventJoin',
+const EventLoadRoom$json = const {
+  '1': 'EventLoadRoom',
   '2': const [
     const {
-      '1': 'user',
+      '1': 'room',
       '3': 1,
       '4': 1,
       '5': 11,
-      '6': '.service.Profile',
-      '10': 'user'
+      '6': '.service.ChatRoom',
+      '10': 'room'
     },
   ],
 };
 
-const EventLeave$json = const {
-  '1': 'EventLeave',
+const EventLoadRooms$json = const {
+  '1': 'EventLoadRooms',
+};
+
+const EventLeaveRoom$json = const {
+  '1': 'EventLeaveRoom',
   '2': const [
     const {
-      '1': 'user',
+      '1': 'room',
       '3': 1,
       '4': 1,
       '5': 11,
-      '6': '.service.Profile',
-      '10': 'user'
+      '6': '.service.ChatRoom',
+      '10': 'room'
     },
   ],
 };
 
-const EventMessage$json = const {
-  '1': 'EventMessage',
+const EventLeaveRooms$json = const {
+  '1': 'EventLeaveRooms',
+};
+
+const EventSendMessage$json = const {
+  '1': 'EventSendMessage',
   '2': const [
     const {
       '1': 'payload',
@@ -164,8 +266,8 @@ const EventMessage$json = const {
   ],
 };
 
-const EventMessages$json = const {
-  '1': 'EventMessages',
+const EventSendMessages$json = const {
+  '1': 'EventSendMessages',
   '2': const [
     const {
       '1': 'payload',
@@ -178,8 +280,140 @@ const EventMessages$json = const {
   ],
 };
 
+const EventSendRooms$json = const {
+  '1': 'EventSendRooms',
+  '2': const [
+    const {
+      '1': 'rooms',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.service.ChatRoom',
+      '10': 'rooms'
+    },
+  ],
+};
+
+const EventInviteProfile$json = const {
+  '1': 'EventInviteProfile',
+  '2': const [
+    const {
+      '1': 'participant',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.service.Profile',
+      '10': 'participant'
+    },
+  ],
+};
+
 const EventForceClose$json = const {
   '1': 'EventForceClose',
+};
+
+const ListChatMessageRequest$json = const {
+  '1': 'ListChatMessageRequest',
+  '2': const [
+    const {
+      '1': 'filter',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.infoblox.api.Filtering',
+      '10': 'filter'
+    },
+    const {
+      '1': 'order_by',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.infoblox.api.Sorting',
+      '10': 'orderBy'
+    },
+    const {
+      '1': 'fields',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.infoblox.api.FieldSelection',
+      '10': 'fields'
+    },
+    const {
+      '1': 'paging',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.infoblox.api.Pagination',
+      '10': 'paging'
+    },
+  ],
+};
+
+const ListChatMessageResponse$json = const {
+  '1': 'ListChatMessageResponse',
+  '2': const [
+    const {
+      '1': 'results',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.service.ChatMessage',
+      '10': 'results'
+    },
+  ],
+};
+
+const ListChatRoomRequest$json = const {
+  '1': 'ListChatRoomRequest',
+  '2': const [
+    const {
+      '1': 'filter',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.infoblox.api.Filtering',
+      '10': 'filter'
+    },
+    const {
+      '1': 'order_by',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.infoblox.api.Sorting',
+      '10': 'orderBy'
+    },
+    const {
+      '1': 'fields',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.infoblox.api.FieldSelection',
+      '10': 'fields'
+    },
+    const {
+      '1': 'paging',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.infoblox.api.Pagination',
+      '10': 'paging'
+    },
+  ],
+};
+
+const ListChatRoomResponse$json = const {
+  '1': 'ListChatRoomResponse',
+  '2': const [
+    const {
+      '1': 'results',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.service.ChatRoom',
+      '10': 'results'
+    },
+  ],
 };
 
 const LogActivity$json = const {
