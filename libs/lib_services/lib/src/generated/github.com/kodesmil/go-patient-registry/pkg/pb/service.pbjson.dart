@@ -66,6 +66,7 @@ const ChatMessage$json = const {
       '4': 1,
       '5': 11,
       '6': '.atlas.rpc.Identifier',
+      '8': const {},
       '10': 'chatRoomId'
     },
   ],
@@ -1264,6 +1265,13 @@ const Profile$json = const {
       '5': 11,
       '6': '.service.Group',
       '10': 'groups'
+    },
+    const {
+      '1': 'profile_picture_url',
+      '3': 7,
+      '4': 1,
+      '5': 9,
+      '10': 'profilePictureUrl'
     },
   ],
   '7': const {},

@@ -47,13 +47,18 @@ class _ChatPageState extends State<ChatPage> {
                                   e.participants
                                       .map((e) => e.firstName)
                                       .join(', '),
+                                  style: Theme.of(context).textTheme.bodyText2,
                                 ),
                                 subtitle: Text(
                                   '${e.participants.length} participants',
+                                  style: Theme.of(context).textTheme.caption,
                                 ),
                                 onTap: () => navigateToChatRoomPage(
                                   context,
                                   e,
+                                ),
+                                trailing: OverlappedImages(
+                                  profiles: e.participants,
                                 ),
                               ),
                             )
@@ -101,6 +106,11 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final store = Provider.of<ChatStore>(context);
     return CupertinoPageScaffold(
@@ -117,11 +127,11 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                     reverse: true,
                     children: store.selectedMessages
                         .map(
-                          (e) => ListTile(
-                            title: Text(e.text),
-                            subtitle: Text(
-                              '${e.author.firstName} ${e.author.lastName}',
-                            ),
+                          (e) => MyListTile(
+                            text: e.text,
+                            subtitle: '${e.author.firstName}',
+                            left: store.userStore.user.uid ==
+                                e.author.id.resourceId,
                           ),
                         )
                         .toList(),
@@ -129,14 +139,19 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                 ),
               ),
               Container(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.surface,
                 child: Row(
                   children: <Widget>[
                     Expanded(
                       child: TextField(
                         controller: _messageController,
+                        autofocus: true,
                         textInputAction: TextInputAction.send,
                         style: Theme.of(context).textTheme.bodyText2,
+                        onSubmitted: (String text) {
+                          store.sendMessage(text);
+                          _messageController.clear();
+                        },
                         decoration: InputDecoration(
                           hintText: 'Send message',
                           border: InputBorder.none,
@@ -147,8 +162,10 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                     ),
                     IconButton(
                       icon: Icon(Icons.send),
-                      onPressed: () =>
-                          store.sendMessage(_messageController.text),
+                      onPressed: () {
+                        store.sendMessage(_messageController.text);
+                        _messageController.clear();
+                      },
                     )
                   ],
                 ),
@@ -156,6 +173,104 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class OverlappedImages extends StatelessWidget {
+  final List<Profile> profiles;
+
+  const OverlappedImages({Key key, this.profiles}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final overlap = 25;
+
+    final items = profiles
+        .map((e) => CircleAvatar(
+              backgroundImage: NetworkImage(e.profilePictureUrl),
+              child: Text(
+                '${e.firstName[0]} ${e.lastName[0]}',
+                style: Theme.of(context).textTheme.caption,
+              ),
+            ))
+        .toList();
+
+    var stackLayers = List<Widget>.generate(items.length, (index) {
+      return Padding(
+        padding: EdgeInsets.fromLTRB(index.toDouble() * overlap, 0, 0, 0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+          ),
+          padding: EdgeInsets.all(2),
+          child: items[index],
+        ),
+      );
+    });
+
+    return Stack(children: stackLayers);
+  }
+}
+
+class MyListTile extends StatelessWidget {
+  final String text;
+  final String subtitle;
+  final bool left;
+
+  const MyListTile({
+    Key key,
+    this.text,
+    this.subtitle,
+    this.left = true,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment:
+            left ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+        children: <Widget>[
+          Container(
+            padding: left
+                ? const EdgeInsets.only(
+                    left: 15,
+                    right: 20,
+                    top: 10,
+                    bottom: 10,
+                  )
+                : const EdgeInsets.only(
+                    left: 20,
+                    right: 15,
+                    top: 10,
+                    bottom: 10,
+                  ),
+            margin: const EdgeInsets.only(top: 10, bottom: 5),
+            decoration: BoxDecoration(
+              borderRadius: left
+                  ? BorderRadius.only(topRight: Radius.circular(10))
+                  : BorderRadius.only(topLeft: Radius.circular(10)),
+              color: Theme.of(context).colorScheme.surface,
+            ),
+            child: Text(
+              text,
+              style: Theme.of(context).textTheme.bodyText2,
+            ),
+          ),
+          Padding(
+            padding: left
+                ? const EdgeInsets.only(left: 15, bottom: 20)
+                : const EdgeInsets.only(right: 15, bottom: 20),
+            child: Text(
+              subtitle,
+              style: Theme.of(context).textTheme.caption,
+            ),
+          ),
+        ],
       ),
     );
   }

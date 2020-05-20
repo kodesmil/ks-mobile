@@ -10,8 +10,8 @@ part 'store.g.dart';
 class ChatStore = _ChatStore with _$ChatStore;
 
 abstract class _ChatStore with Store {
-  final ErrorStore _errorStore;
-  final UserStore _userStore;
+  final ErrorStore errorStore;
+  final UserStore userStore;
   final ChatClient _client;
   final _inputController = StreamController<StreamChatEvent>();
 
@@ -20,8 +20,8 @@ abstract class _ChatStore with Store {
   StreamSubscription<StreamChatEvent> _output;
 
   _ChatStore(
-    this._errorStore,
-    this._userStore,
+    this.errorStore,
+    this.userStore,
     this._client,
   );
 
@@ -58,7 +58,7 @@ abstract class _ChatStore with Store {
             rooms = value.sendRooms.rooms;
             break;
           case StreamChatEvent_Event.sendMessage:
-            selectedMessages.add(value.sendMessage.payload);
+            selectedMessages.insert(0, value.sendMessage.payload);
             selectedMessages = selectedMessages.toList();
             break;
           case StreamChatEvent_Event.sendMessages:
@@ -102,7 +102,7 @@ abstract class _ChatStore with Store {
     final id = Identifier()..resourceId = Uuid().v4();
     final authorId = Identifier()
       ..resourceType = 'profiles'
-      ..resourceId = _userStore.user.uid;
+      ..resourceId = userStore.user.uid;
     final payload = ChatMessage()
       ..createdAt = timestamp
       ..updatedAt = timestamp

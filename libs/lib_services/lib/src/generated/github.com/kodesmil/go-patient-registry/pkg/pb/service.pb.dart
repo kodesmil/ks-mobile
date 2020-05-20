@@ -3345,6 +3345,7 @@ class Profile extends $pb.GeneratedMessage {
     ..aOS(4, 'lastName')
     ..aOS(5, 'primaryEmail')
     ..pc<Group>(6, 'groups', $pb.PbFieldType.PM, subBuilder: Group.create)
+    ..aOS(7, 'profilePictureUrl')
     ..hasRequiredFields = false;
 
   Profile._() : super();
@@ -3432,6 +3433,18 @@ class Profile extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(6)
   $core.List<Group> get groups => $_getList(5);
+
+  @$pb.TagNumber(7)
+  $core.String get profilePictureUrl => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set profilePictureUrl($core.String v) {
+    $_setString(6, v);
+  }
+
+  @$pb.TagNumber(7)
+  $core.bool hasProfilePictureUrl() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearProfilePictureUrl() => clearField(7);
 }
 
 class CreateProfileRequest extends $pb.GeneratedMessage {
