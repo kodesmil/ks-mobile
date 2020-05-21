@@ -32,6 +32,8 @@ dependencies:
   google_sign_in: ^4.1.4
   firebase_auth: ^0.15.5+3
 
+  feat_storage:
+    path: ../../features/feat_storage
   feat_auth:
     path: ../../features/feat_auth
   feat_splash:

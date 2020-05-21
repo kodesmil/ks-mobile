@@ -5,6 +5,7 @@ import 'package:feat_journal/feat_journal.dart';
 import 'package:feat_notifications/feat_notifications.dart';
 import 'package:feat_onboarding/feat_onboarding.dart';
 import 'package:feat_profile/feat_profile.dart';
+import 'package:feat_storage/feat_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -188,6 +189,11 @@ class _AppInjectorState extends State<AppInjector> {
           update: (_, dep, __) => FeedStore(
             ErrorStore(),
             dep,
+          ),
+        ),
+        ProxyProvider0(
+          update: (_, __) => StorageStore(
+            ErrorStore(),
           ),
         ),
         ProxyProvider2<UserStore, ChatClient, ChatStore>(
