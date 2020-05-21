@@ -36,48 +36,50 @@ abstract class _ChatStore with Store {
 
   @action
   Future connect() async {
-    _output = _client.stream(_inputController.stream).listen(
-      (value) {
-        switch (value.whichEvent()) {
-          case StreamChatEvent_Event.none:
+    if (_output == null) {
+      _output = _client.stream(_inputController.stream).listen(
+            (value) {
+          switch (value.whichEvent()) {
+            case StreamChatEvent_Event.none:
             // TODO: Handle this case.
-            break;
-          case StreamChatEvent_Event.loadRoom:
+              break;
+            case StreamChatEvent_Event.loadRoom:
             // TODO: Handle this case.
-            break;
-          case StreamChatEvent_Event.loadRooms:
+              break;
+            case StreamChatEvent_Event.loadRooms:
             // TODO: Handle this case.
-            break;
-          case StreamChatEvent_Event.leaveRoom:
+              break;
+            case StreamChatEvent_Event.leaveRoom:
             // TODO: Handle this case.
-            break;
-          case StreamChatEvent_Event.leaveRooms:
+              break;
+            case StreamChatEvent_Event.leaveRooms:
             // TODO: Handle this case.
-            break;
-          case StreamChatEvent_Event.sendRooms:
-            rooms = value.sendRooms.rooms;
-            break;
-          case StreamChatEvent_Event.sendMessage:
-            selectedMessages.insert(0, value.sendMessage.payload);
-            selectedMessages = selectedMessages.toList();
-            break;
-          case StreamChatEvent_Event.sendMessages:
-            selectedMessages = value.sendMessages.payload;
-            break;
-          case StreamChatEvent_Event.forceClose:
+              break;
+            case StreamChatEvent_Event.sendRooms:
+              rooms = value.sendRooms.rooms;
+              break;
+            case StreamChatEvent_Event.sendMessage:
+              selectedMessages.insert(0, value.sendMessage.payload);
+              selectedMessages = selectedMessages.toList();
+              break;
+            case StreamChatEvent_Event.sendMessages:
+              selectedMessages = value.sendMessages.payload;
+              break;
+            case StreamChatEvent_Event.forceClose:
             // TODO: Handle this case.
-            break;
-          case StreamChatEvent_Event.inviteProfile:
+              break;
+            case StreamChatEvent_Event.inviteProfile:
             // TODO: Handle this case.
-            break;
-          case StreamChatEvent_Event.notSet:
+              break;
+            case StreamChatEvent_Event.notSet:
             // TODO: Handle this case.
-            break;
-        }
-      },
-      onError: (error) => print(error),
-    );
-    await loadRooms();
+              break;
+          }
+        },
+        onError: (error) => print(error),
+      );
+      await loadRooms();
+    }
   }
 
   @action
@@ -117,7 +119,7 @@ abstract class _ChatStore with Store {
 
   @action
   Future dispose() async {
-    await _output.cancel();
-    await _input.close();
+    // await _output.cancel();
+    // await _input.close();
   }
 }

@@ -50,7 +50,7 @@ class _ChatPageState extends State<ChatPage> {
                                   style: Theme.of(context).textTheme.bodyText2,
                                 ),
                                 subtitle: Text(
-                                  '${e.participants.length} participants',
+                                  '${e.participants.length} participant/s',
                                   style: Theme.of(context).textTheme.caption,
                                 ),
                                 onTap: () => navigateToChatRoomPage(
@@ -103,11 +103,6 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
     final store = Provider.of<ChatStore>(context);
     store.loadRoom(widget.chatRoom);
     super.didChangeDependencies();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   @override
