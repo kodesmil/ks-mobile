@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="apps - ably" type="FlutterRunConfigurationType" factoryName="Flutter" singleton="false">
-    <option name="additionalArgs" value="--flavor=dev" />
-    <option name="buildFlavor" value="dev" />
+    <option name="additionalArgs" value="--flavor=qa" />
+    <option name="buildFlavor" value="qa" />
     <option name="filePath" value="$PROJECT_DIR$/apps/ably/lib/main_dev.dart" />
     <method v="2" />
   </configuration>
