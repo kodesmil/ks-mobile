@@ -31,8 +31,7 @@ class _ProfilePageState extends State<ProfilePage> {
               'Profile',
               style: Theme.of(context).textTheme.headline5,
             ),
-            middle: Container(),
-            backgroundColor: Colors.transparent,
+            backgroundColor: Colors.black26,
           ),
           SliverToBoxAdapter(
             child: Material(

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:lib_lego/lib_lego.dart';
@@ -23,15 +24,21 @@ class FeedScroll extends StatefulWidget {
 }
 
 class _FeedScrollState extends State<FeedScroll> {
-
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        KsSpace.xs(),
-        ListTile(
-          leading: Text(
+        SizedBox.fromSize(size: Size.fromHeight(5)),
+        Padding(
+          padding: const EdgeInsets.only(
+            left: 18,
+            top: 15,
+            bottom: 5,
+          ),
+          child: Text(
             widget.title,
+            textAlign: TextAlign.left,
             style: Theme.of(context).textTheme.headline6,
           ),
         ),
@@ -53,63 +60,67 @@ class DailyFeed extends StatelessWidget {
   Widget build(BuildContext context) {
     final store = Provider.of<FeedStore>(context);
     return Container(
-      height: 200,
-      padding: EdgeInsets.only(left: 10),
+      height: 160,
       child: Observer(
         builder: (context) {
           final articles = getArticlesFromKey(store, feedKey);
-          return ListView.separated(
-            itemCount: articles.length,
-            separatorBuilder: (context, index) => KsSpace.xxs(),
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              final article = articles[index];
-              return InkWell(
-                onTap: () => newPageStart(context, article),
-                child: Container(
-                  width: 300,
-                  child: Card(
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    shape: BeveledRectangleBorder(
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: Stack(
-                      children: <Widget>[
-                        Image.network(
-                          article.coverPictureUrl,
-                          fit: BoxFit.cover,
-                          width: 300,
-                        ),
-                        Flex(
-                          direction: Axis.vertical,
-                          children: [
-                            Expanded(
-                              child: Container(
-                                color: Colors.black26,
-                              ),
-                            ),
-                          ],
-                        ),
-                        ListTile(
-                          title: Text(
-                            article.title,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText2
-                                .copyWith(color: Colors.white, shadows: [
-                              BoxShadow(
-                                blurRadius: 20,
-                                spreadRadius: 5,
-                              )
-                            ]),
+          return Padding(
+            padding: EdgeInsets.only(left: 15),
+            child: ListView.separated(
+              itemCount: articles.length,
+              separatorBuilder: (context, index) => SizedBox.fromSize(
+                size: Size.fromWidth(1),
+              ),
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                final article = articles[index];
+                return InkWell(
+                  onTap: () => newPageStart(context, article),
+                  child: Container(
+                    width: 260,
+                    child: Card(
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      shape: BeveledRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Stack(
+                        children: <Widget>[
+                          Image.network(
+                            article.coverPictureUrl,
+                            fit: BoxFit.cover,
+                            width: 260,
                           ),
-                        ),
-                      ],
+                          Flex(
+                            direction: Axis.vertical,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  color: Colors.black26,
+                                ),
+                              ),
+                            ],
+                          ),
+                          ListTile(
+                            title: Text(
+                              article.title,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText2
+                                  .copyWith(color: Colors.white, shadows: [
+                                BoxShadow(
+                                  blurRadius: 20,
+                                  spreadRadius: 5,
+                                )
+                              ]),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           );
         },
       ),
@@ -135,7 +146,13 @@ Future newPageStart(BuildContext context, FeedArticle article) {
       builder: (BuildContext context) {
         return CupertinoPageScaffold(
           navigationBar: CupertinoNavigationBar(
-            middle: Text(article.title),
+            middle: Text(
+              article.title,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline6,
+            ),
+            backgroundColor: Colors.black26,
           ),
           child: SafeArea(
             child: Markdown(

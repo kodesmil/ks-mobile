@@ -14,8 +14,8 @@ class JournalPage extends StatelessWidget {
             largeTitle: Text(
               'Journal',
               style: Theme.of(context).textTheme.headline5,
-              textScaleFactor: MediaQuery.textScaleFactorOf(context),
             ),
+            backgroundColor: Colors.black26,
           ),
           SliverToBoxAdapter(
             child: Material(

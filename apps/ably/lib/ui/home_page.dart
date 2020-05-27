@@ -33,7 +33,11 @@ class _HomePageState extends State<HomePage> {
     ];
     return NotificationContainer(
       child: CupertinoTabScaffold(
+        backgroundColor: Colors.black26,
         tabBar: CupertinoTabBar(
+          backgroundColor: Colors.black38,
+          activeColor: Colors.black,
+          inactiveColor: Colors.white,
           currentIndex: 2,
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.store)),

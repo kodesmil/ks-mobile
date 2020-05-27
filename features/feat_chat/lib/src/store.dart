@@ -38,41 +38,40 @@ abstract class _ChatStore with Store {
   Future connect() async {
     if (_output == null) {
       _output = _client.stream(_inputController.stream).listen(
-            (value) {
+        (value) {
           switch (value.whichEvent()) {
             case StreamChatEvent_Event.none:
-            // TODO: Handle this case.
+              // TODO: Handle this case.
               break;
             case StreamChatEvent_Event.loadRoom:
-            // TODO: Handle this case.
+              // TODO: Handle this case.
               break;
             case StreamChatEvent_Event.loadRooms:
-            // TODO: Handle this case.
+              // TODO: Handle this case.
               break;
             case StreamChatEvent_Event.leaveRoom:
-            // TODO: Handle this case.
+              // TODO: Handle this case.
               break;
             case StreamChatEvent_Event.leaveRooms:
-            // TODO: Handle this case.
+              // TODO: Handle this case.
               break;
             case StreamChatEvent_Event.sendRooms:
               rooms = value.sendRooms.rooms;
               break;
             case StreamChatEvent_Event.sendMessage:
-              selectedMessages.insert(0, value.sendMessage.payload);
-              selectedMessages = selectedMessages.toList();
+              _addNewMessage(value);
               break;
             case StreamChatEvent_Event.sendMessages:
               selectedMessages = value.sendMessages.payload;
               break;
             case StreamChatEvent_Event.forceClose:
-            // TODO: Handle this case.
+              // TODO: Handle this case.
               break;
             case StreamChatEvent_Event.inviteProfile:
-            // TODO: Handle this case.
+              // TODO: Handle this case.
               break;
             case StreamChatEvent_Event.notSet:
-            // TODO: Handle this case.
+              // TODO: Handle this case.
               break;
           }
         },
@@ -80,6 +79,15 @@ abstract class _ChatStore with Store {
       );
       await loadRooms();
     }
+  }
+
+  void _addNewMessage(StreamChatEvent value) {
+    selectedMessages.removeWhere(
+      (element) =>
+          value.sendMessage.payload.id.resourceId == element.id.resourceId,
+    );
+    selectedMessages.insert(0, value.sendMessage.payload);
+    selectedMessages = selectedMessages.toList();
   }
 
   @action
@@ -109,11 +117,13 @@ abstract class _ChatStore with Store {
       ..createdAt = timestamp
       ..updatedAt = timestamp
       ..chatRoom = selectedRoom
+      ..chatRoomId = selectedRoom.id
       ..id = id
       ..authorId = authorId
       ..text = text;
     final event = EventSendMessage()..payload = payload;
     final streamEvent = StreamChatEvent()..sendMessage = event;
+    _addNewMessage(streamEvent);
     _input.add(streamEvent);
   }
 

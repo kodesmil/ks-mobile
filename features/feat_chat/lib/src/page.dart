@@ -5,6 +5,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:lib_lego/lib_lego.dart';
 import 'package:lib_services/lib_services.dart';
 import 'package:provider/provider.dart';
+import 'package:more/collection.dart';
+import 'package:more/iterable.dart';
 
 class ChatPage extends StatefulWidget {
   @override
@@ -29,8 +31,8 @@ class _ChatPageState extends State<ChatPage> {
             largeTitle: Text(
               'Chat',
               style: Theme.of(context).textTheme.headline5,
-              textScaleFactor: MediaQuery.textScaleFactorOf(context),
             ),
+            backgroundColor: Colors.black26,
           ),
           SliverToBoxAdapter(
             child: Material(
@@ -111,6 +113,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         middle: Text('Messages'),
+        backgroundColor: Colors.black26,
       ),
       child: SafeArea(
         child: Material(
@@ -121,12 +124,20 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                   builder: (context) => ListView(
                     reverse: true,
                     children: store.selectedMessages
+                        .indexed()
                         .map(
                           (e) => MyListTile(
-                            text: e.text,
-                            subtitle: '${e.author.firstName}',
+                            text: e.value.text,
+                            subtitle: '${e.value.author.firstName}',
+                            detailed: e.index > 0
+                                ? store.selectedMessages
+                                        ?.elementAt(e.index - 1)
+                                        ?.authorId
+                                        ?.resourceId !=
+                                    e.value.authorId.resourceId
+                                : true,
                             left: store.userStore.user.uid ==
-                                e.author.id.resourceId,
+                                e.value.authorId.resourceId,
                           ),
                         )
                         .toList(),
@@ -214,12 +225,14 @@ class MyListTile extends StatelessWidget {
   final String text;
   final String subtitle;
   final bool left;
+  final bool detailed;
 
   const MyListTile({
     Key key,
     this.text,
     this.subtitle,
     this.left = true,
+    this.detailed,
   }) : super(key: key);
 
   @override
@@ -232,19 +245,21 @@ class MyListTile extends StatelessWidget {
         children: <Widget>[
           Container(
             padding: left
-                ? const EdgeInsets.only(
+                ? EdgeInsets.only(
                     left: 15,
                     right: 20,
                     top: 10,
                     bottom: 10,
                   )
-                : const EdgeInsets.only(
+                :  EdgeInsets.only(
                     left: 20,
                     right: 15,
                     top: 10,
                     bottom: 10,
                   ),
-            margin: const EdgeInsets.only(top: 10, bottom: 5),
+            margin: left
+                ? EdgeInsets.only(top: 5, bottom: detailed ? 5 : 0, right: 50)
+                : EdgeInsets.only(top: 5, bottom: detailed ? 5 : 0, left: 50),
             decoration: BoxDecoration(
               borderRadius: left
                   ? BorderRadius.only(topRight: Radius.circular(10))
@@ -256,13 +271,16 @@ class MyListTile extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyText2,
             ),
           ),
-          Padding(
-            padding: left
-                ? const EdgeInsets.only(left: 15, bottom: 20)
-                : const EdgeInsets.only(right: 15, bottom: 20),
-            child: Text(
-              subtitle,
-              style: Theme.of(context).textTheme.caption,
+          Visibility(
+            visible: detailed,
+            child: Padding(
+              padding: left
+                  ? const EdgeInsets.only(left: 15, bottom: 20)
+                  : const EdgeInsets.only(right: 15, bottom: 20),
+              child: Text(
+                subtitle,
+                style: Theme.of(context).textTheme.caption,
+              ),
             ),
           ),
         ],

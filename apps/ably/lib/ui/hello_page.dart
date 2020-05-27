@@ -14,9 +14,8 @@ class HelloPage extends StatelessWidget {
             largeTitle: Text(
               'Hello',
               style: Theme.of(context).textTheme.headline5,
-              textScaleFactor: MediaQuery.textScaleFactorOf(context),
             ),
-            middle: Container(),
+            backgroundColor: Colors.black26,
           ),
           SliverToBoxAdapter(
             child: Material(
