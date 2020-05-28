@@ -41,19 +41,14 @@ abstract class _ChatStore with Store {
         (value) {
           switch (value.whichEvent()) {
             case StreamChatEvent_Event.none:
-              // TODO: Handle this case.
               break;
             case StreamChatEvent_Event.loadRoom:
-              // TODO: Handle this case.
               break;
             case StreamChatEvent_Event.loadRooms:
-              // TODO: Handle this case.
               break;
             case StreamChatEvent_Event.leaveRoom:
-              // TODO: Handle this case.
               break;
             case StreamChatEvent_Event.leaveRooms:
-              // TODO: Handle this case.
               break;
             case StreamChatEvent_Event.sendRooms:
               rooms = value.sendRooms.rooms;
@@ -62,16 +57,13 @@ abstract class _ChatStore with Store {
               _addNewMessage(value);
               break;
             case StreamChatEvent_Event.sendMessages:
-              selectedMessages = value.sendMessages.payload;
+              selectedMessages = value.sendMessages.messages;
               break;
             case StreamChatEvent_Event.forceClose:
-              // TODO: Handle this case.
               break;
             case StreamChatEvent_Event.inviteProfile:
-              // TODO: Handle this case.
               break;
             case StreamChatEvent_Event.notSet:
-              // TODO: Handle this case.
               break;
           }
         },
@@ -84,9 +76,9 @@ abstract class _ChatStore with Store {
   void _addNewMessage(StreamChatEvent value) {
     selectedMessages.removeWhere(
       (element) =>
-          value.sendMessage.payload.id.resourceId == element.id.resourceId,
+          value.sendMessage.message.id.resourceId == element.id.resourceId,
     );
-    selectedMessages.insert(0, value.sendMessage.payload);
+    selectedMessages.insert(0, value.sendMessage.message);
     selectedMessages = selectedMessages.toList();
   }
 
@@ -116,12 +108,10 @@ abstract class _ChatStore with Store {
     final payload = ChatMessage()
       ..createdAt = timestamp
       ..updatedAt = timestamp
-      ..chatRoom = selectedRoom
-      ..chatRoomId = selectedRoom.id
       ..id = id
       ..authorId = authorId
       ..text = text;
-    final event = EventSendMessage()..payload = payload;
+    final event = EventSendMessage()..message = payload;
     final streamEvent = StreamChatEvent()..sendMessage = event;
     _addNewMessage(streamEvent);
     _input.add(streamEvent);

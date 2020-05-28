@@ -12,12 +12,20 @@ const ChatMessage$json = const {
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
     const {'1': 'text', '3': 4, '4': 1, '5': 9, '10': 'text'},
-    const {'1': 'author', '3': 5, '4': 1, '5': 11, '6': '.model.Profile', '8': const {}, '10': 'author'},
+    const {'1': 'author', '3': 5, '4': 1, '5': 11, '6': '.model.ChatRoomParticipant', '8': const {}, '10': 'author'},
     const {'1': 'author_id', '3': 6, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '10': 'authorId'},
-    const {'1': 'chat_room', '3': 7, '4': 1, '5': 11, '6': '.model.ChatRoom', '8': const {}, '10': 'chatRoom'},
-    const {'1': 'chat_room_id', '3': 8, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'chatRoomId'},
+    const {'1': 'status', '3': 7, '4': 1, '5': 14, '6': '.model.ChatMessage.Status', '8': const {}, '10': 'status'},
   ],
+  '4': const [ChatMessage_Status$json],
   '7': const {},
+};
+
+const ChatMessage_Status$json = const {
+  '1': 'Status',
+  '2': const [
+    const {'1': 'NOT_DELIVERED', '2': 0},
+    const {'1': 'DELIVERED', '2': 1},
+  ],
 };
 
 const ChatRoom$json = const {
@@ -26,7 +34,21 @@ const ChatRoom$json = const {
     const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'id'},
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
-    const {'1': 'participants', '3': 4, '4': 3, '5': 11, '6': '.model.Profile', '8': const {}, '10': 'participants'},
+    const {'1': 'participants', '3': 4, '4': 3, '5': 11, '6': '.model.ChatRoomParticipant', '10': 'participants'},
+    const {'1': 'name', '3': 5, '4': 1, '5': 9, '10': 'name'},
+  ],
+  '7': const {},
+};
+
+const ChatRoomParticipant$json = const {
+  '1': 'ChatRoomParticipant',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'id'},
+    const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
+    const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
+    const {'1': 'last_seen_at', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'lastSeenAt'},
+    const {'1': 'profile', '3': 5, '4': 1, '5': 11, '6': '.model.Profile', '8': const {}, '10': 'profile'},
+    const {'1': 'chat_room', '3': 6, '4': 1, '5': 11, '6': '.model.ChatRoom', '8': const {}, '10': 'chatRoom'},
   ],
   '7': const {},
 };
@@ -58,6 +80,7 @@ const EventLoadRoom$json = const {
   '1': 'EventLoadRoom',
   '2': const [
     const {'1': 'room', '3': 1, '4': 1, '5': 11, '6': '.model.ChatRoom', '10': 'room'},
+    const {'1': 'me', '3': 2, '4': 1, '5': 11, '6': '.model.ChatRoomParticipant', '10': 'me'},
   ],
 };
 
@@ -79,14 +102,14 @@ const EventLeaveRooms$json = const {
 const EventSendMessage$json = const {
   '1': 'EventSendMessage',
   '2': const [
-    const {'1': 'payload', '3': 1, '4': 1, '5': 11, '6': '.model.ChatMessage', '10': 'payload'},
+    const {'1': 'message', '3': 1, '4': 1, '5': 11, '6': '.model.ChatMessage', '10': 'message'},
   ],
 };
 
 const EventSendMessages$json = const {
   '1': 'EventSendMessages',
   '2': const [
-    const {'1': 'payload', '3': 1, '4': 3, '5': 11, '6': '.model.ChatMessage', '10': 'payload'},
+    const {'1': 'messages', '3': 1, '4': 3, '5': 11, '6': '.model.ChatMessage', '10': 'messages'},
   ],
 };
 
@@ -100,7 +123,7 @@ const EventSendRooms$json = const {
 const EventInviteProfile$json = const {
   '1': 'EventInviteProfile',
   '2': const [
-    const {'1': 'participant', '3': 1, '4': 1, '5': 11, '6': '.model.Profile', '10': 'participant'},
+    const {'1': 'user', '3': 1, '4': 1, '5': 11, '6': '.model.Profile', '10': 'user'},
   ],
 };
 

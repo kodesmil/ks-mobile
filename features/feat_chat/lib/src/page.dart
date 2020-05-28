@@ -46,9 +46,10 @@ class _ChatPageState extends State<ChatPage> {
                             .map(
                               (e) => ListTile(
                                 title: Text(
-                                  e.participants
-                                      .map((e) => e.firstName)
-                                      .join(', '),
+                                  e.name ??
+                                      e.participants
+                                          .map((e) => e.profile.firstName)
+                                          .join(', '),
                                   style: Theme.of(context).textTheme.bodyText2,
                                 ),
                                 subtitle: Text(
@@ -128,7 +129,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                         .map(
                           (e) => MyListTile(
                             text: e.value.text,
-                            subtitle: '${e.value.author.firstName}',
+                            subtitle: '${e.value.author.profile.firstName}',
                             detailed: e.index > 0
                                 ? store.selectedMessages
                                         ?.elementAt(e.index - 1)
@@ -185,7 +186,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
 }
 
 class OverlappedImages extends StatelessWidget {
-  final List<Profile> profiles;
+  final List<ChatRoomParticipant> profiles;
 
   const OverlappedImages({Key key, this.profiles}) : super(key: key);
 
@@ -195,9 +196,9 @@ class OverlappedImages extends StatelessWidget {
 
     final items = profiles
         .map((e) => CircleAvatar(
-              backgroundImage: NetworkImage(e.profilePictureUrl),
+              backgroundImage: NetworkImage(e.profile.profilePictureUrl),
               child: Text(
-                '${e.firstName[0]} ${e.lastName[0]}',
+                '${e.profile.firstName[0]} ${e.profile.lastName[0]}',
                 style: Theme.of(context).textTheme.caption,
               ),
             ))
@@ -251,7 +252,7 @@ class MyListTile extends StatelessWidget {
                     top: 10,
                     bottom: 10,
                   )
-                :  EdgeInsets.only(
+                : EdgeInsets.only(
                     left: 20,
                     right: 15,
                     top: 10,

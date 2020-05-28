@@ -14,16 +14,19 @@ import '../../../google/protobuf/timestamp.pb.dart' as $8;
 import 'profile.pb.dart' as $1;
 import '../../infobloxopen/atlas-app-toolkit/query/collection_operators.pb.dart' as $7;
 
+import 'chat.pbenum.dart';
+
+export 'chat.pbenum.dart';
+
 class ChatMessage extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ChatMessage', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..aOM<$6.Identifier>(1, 'id', subBuilder: $6.Identifier.create)
     ..aOM<$8.Timestamp>(2, 'createdAt', subBuilder: $8.Timestamp.create)
     ..aOM<$8.Timestamp>(3, 'updatedAt', subBuilder: $8.Timestamp.create)
     ..aOS(4, 'text')
-    ..aOM<$1.Profile>(5, 'author', subBuilder: $1.Profile.create)
+    ..aOM<ChatRoomParticipant>(5, 'author', subBuilder: ChatRoomParticipant.create)
     ..aOM<$6.Identifier>(6, 'authorId', subBuilder: $6.Identifier.create)
-    ..aOM<ChatRoom>(7, 'chatRoom', subBuilder: ChatRoom.create)
-    ..aOM<$6.Identifier>(8, 'chatRoomId', subBuilder: $6.Identifier.create)
+    ..e<ChatMessage_Status>(7, 'status', $pb.PbFieldType.OE, defaultOrMaker: ChatMessage_Status.NOT_DELIVERED, valueOf: ChatMessage_Status.valueOf, enumValues: ChatMessage_Status.values)
     ..hasRequiredFields = false
   ;
 
@@ -85,15 +88,15 @@ class ChatMessage extends $pb.GeneratedMessage {
   void clearText() => clearField(4);
 
   @$pb.TagNumber(5)
-  $1.Profile get author => $_getN(4);
+  ChatRoomParticipant get author => $_getN(4);
   @$pb.TagNumber(5)
-  set author($1.Profile v) { setField(5, v); }
+  set author(ChatRoomParticipant v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasAuthor() => $_has(4);
   @$pb.TagNumber(5)
   void clearAuthor() => clearField(5);
   @$pb.TagNumber(5)
-  $1.Profile ensureAuthor() => $_ensure(4);
+  ChatRoomParticipant ensureAuthor() => $_ensure(4);
 
   @$pb.TagNumber(6)
   $6.Identifier get authorId => $_getN(5);
@@ -107,26 +110,13 @@ class ChatMessage extends $pb.GeneratedMessage {
   $6.Identifier ensureAuthorId() => $_ensure(5);
 
   @$pb.TagNumber(7)
-  ChatRoom get chatRoom => $_getN(6);
+  ChatMessage_Status get status => $_getN(6);
   @$pb.TagNumber(7)
-  set chatRoom(ChatRoom v) { setField(7, v); }
+  set status(ChatMessage_Status v) { setField(7, v); }
   @$pb.TagNumber(7)
-  $core.bool hasChatRoom() => $_has(6);
+  $core.bool hasStatus() => $_has(6);
   @$pb.TagNumber(7)
-  void clearChatRoom() => clearField(7);
-  @$pb.TagNumber(7)
-  ChatRoom ensureChatRoom() => $_ensure(6);
-
-  @$pb.TagNumber(8)
-  $6.Identifier get chatRoomId => $_getN(7);
-  @$pb.TagNumber(8)
-  set chatRoomId($6.Identifier v) { setField(8, v); }
-  @$pb.TagNumber(8)
-  $core.bool hasChatRoomId() => $_has(7);
-  @$pb.TagNumber(8)
-  void clearChatRoomId() => clearField(8);
-  @$pb.TagNumber(8)
-  $6.Identifier ensureChatRoomId() => $_ensure(7);
+  void clearStatus() => clearField(7);
 }
 
 class ChatRoom extends $pb.GeneratedMessage {
@@ -134,7 +124,8 @@ class ChatRoom extends $pb.GeneratedMessage {
     ..aOM<$6.Identifier>(1, 'id', subBuilder: $6.Identifier.create)
     ..aOM<$8.Timestamp>(2, 'createdAt', subBuilder: $8.Timestamp.create)
     ..aOM<$8.Timestamp>(3, 'updatedAt', subBuilder: $8.Timestamp.create)
-    ..pc<$1.Profile>(4, 'participants', $pb.PbFieldType.PM, subBuilder: $1.Profile.create)
+    ..pc<ChatRoomParticipant>(4, 'participants', $pb.PbFieldType.PM, subBuilder: ChatRoomParticipant.create)
+    ..aOS(5, 'name')
     ..hasRequiredFields = false
   ;
 
@@ -187,7 +178,109 @@ class ChatRoom extends $pb.GeneratedMessage {
   $8.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $core.List<$1.Profile> get participants => $_getList(3);
+  $core.List<ChatRoomParticipant> get participants => $_getList(3);
+
+  @$pb.TagNumber(5)
+  $core.String get name => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set name($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasName() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearName() => clearField(5);
+}
+
+class ChatRoomParticipant extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ChatRoomParticipant', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..aOM<$6.Identifier>(1, 'id', subBuilder: $6.Identifier.create)
+    ..aOM<$8.Timestamp>(2, 'createdAt', subBuilder: $8.Timestamp.create)
+    ..aOM<$8.Timestamp>(3, 'updatedAt', subBuilder: $8.Timestamp.create)
+    ..aOM<$8.Timestamp>(4, 'lastSeenAt', subBuilder: $8.Timestamp.create)
+    ..aOM<$1.Profile>(5, 'profile', subBuilder: $1.Profile.create)
+    ..aOM<ChatRoom>(6, 'chatRoom', subBuilder: ChatRoom.create)
+    ..hasRequiredFields = false
+  ;
+
+  ChatRoomParticipant._() : super();
+  factory ChatRoomParticipant() => create();
+  factory ChatRoomParticipant.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ChatRoomParticipant.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  ChatRoomParticipant clone() => ChatRoomParticipant()..mergeFromMessage(this);
+  ChatRoomParticipant copyWith(void Function(ChatRoomParticipant) updates) => super.copyWith((message) => updates(message as ChatRoomParticipant));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ChatRoomParticipant create() => ChatRoomParticipant._();
+  ChatRoomParticipant createEmptyInstance() => create();
+  static $pb.PbList<ChatRoomParticipant> createRepeated() => $pb.PbList<ChatRoomParticipant>();
+  @$core.pragma('dart2js:noInline')
+  static ChatRoomParticipant getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ChatRoomParticipant>(create);
+  static ChatRoomParticipant _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $6.Identifier get id => $_getN(0);
+  @$pb.TagNumber(1)
+  set id($6.Identifier v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+  @$pb.TagNumber(1)
+  $6.Identifier ensureId() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $8.Timestamp get createdAt => $_getN(1);
+  @$pb.TagNumber(2)
+  set createdAt($8.Timestamp v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCreatedAt() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCreatedAt() => clearField(2);
+  @$pb.TagNumber(2)
+  $8.Timestamp ensureCreatedAt() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $8.Timestamp get updatedAt => $_getN(2);
+  @$pb.TagNumber(3)
+  set updatedAt($8.Timestamp v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasUpdatedAt() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearUpdatedAt() => clearField(3);
+  @$pb.TagNumber(3)
+  $8.Timestamp ensureUpdatedAt() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  $8.Timestamp get lastSeenAt => $_getN(3);
+  @$pb.TagNumber(4)
+  set lastSeenAt($8.Timestamp v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasLastSeenAt() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearLastSeenAt() => clearField(4);
+  @$pb.TagNumber(4)
+  $8.Timestamp ensureLastSeenAt() => $_ensure(3);
+
+  @$pb.TagNumber(5)
+  $1.Profile get profile => $_getN(4);
+  @$pb.TagNumber(5)
+  set profile($1.Profile v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasProfile() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearProfile() => clearField(5);
+  @$pb.TagNumber(5)
+  $1.Profile ensureProfile() => $_ensure(4);
+
+  @$pb.TagNumber(6)
+  ChatRoom get chatRoom => $_getN(5);
+  @$pb.TagNumber(6)
+  set chatRoom(ChatRoom v) { setField(6, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasChatRoom() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearChatRoom() => clearField(6);
+  @$pb.TagNumber(6)
+  ChatRoom ensureChatRoom() => $_ensure(5);
 }
 
 enum StreamChatEvent_Event {
@@ -386,6 +479,7 @@ class EventNone extends $pb.GeneratedMessage {
 class EventLoadRoom extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventLoadRoom', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..aOM<ChatRoom>(1, 'room', subBuilder: ChatRoom.create)
+    ..aOM<ChatRoomParticipant>(2, 'me', subBuilder: ChatRoomParticipant.create)
     ..hasRequiredFields = false
   ;
 
@@ -414,6 +508,17 @@ class EventLoadRoom extends $pb.GeneratedMessage {
   void clearRoom() => clearField(1);
   @$pb.TagNumber(1)
   ChatRoom ensureRoom() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  ChatRoomParticipant get me => $_getN(1);
+  @$pb.TagNumber(2)
+  set me(ChatRoomParticipant v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasMe() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearMe() => clearField(2);
+  @$pb.TagNumber(2)
+  ChatRoomParticipant ensureMe() => $_ensure(1);
 }
 
 class EventLoadRooms extends $pb.GeneratedMessage {
@@ -493,7 +598,7 @@ class EventLeaveRooms extends $pb.GeneratedMessage {
 
 class EventSendMessage extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventSendMessage', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<ChatMessage>(1, 'payload', subBuilder: ChatMessage.create)
+    ..aOM<ChatMessage>(1, 'message', subBuilder: ChatMessage.create)
     ..hasRequiredFields = false
   ;
 
@@ -513,20 +618,20 @@ class EventSendMessage extends $pb.GeneratedMessage {
   static EventSendMessage _defaultInstance;
 
   @$pb.TagNumber(1)
-  ChatMessage get payload => $_getN(0);
+  ChatMessage get message => $_getN(0);
   @$pb.TagNumber(1)
-  set payload(ChatMessage v) { setField(1, v); }
+  set message(ChatMessage v) { setField(1, v); }
   @$pb.TagNumber(1)
-  $core.bool hasPayload() => $_has(0);
+  $core.bool hasMessage() => $_has(0);
   @$pb.TagNumber(1)
-  void clearPayload() => clearField(1);
+  void clearMessage() => clearField(1);
   @$pb.TagNumber(1)
-  ChatMessage ensurePayload() => $_ensure(0);
+  ChatMessage ensureMessage() => $_ensure(0);
 }
 
 class EventSendMessages extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventSendMessages', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..pc<ChatMessage>(1, 'payload', $pb.PbFieldType.PM, subBuilder: ChatMessage.create)
+    ..pc<ChatMessage>(1, 'messages', $pb.PbFieldType.PM, subBuilder: ChatMessage.create)
     ..hasRequiredFields = false
   ;
 
@@ -546,7 +651,7 @@ class EventSendMessages extends $pb.GeneratedMessage {
   static EventSendMessages _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<ChatMessage> get payload => $_getList(0);
+  $core.List<ChatMessage> get messages => $_getList(0);
 }
 
 class EventSendRooms extends $pb.GeneratedMessage {
@@ -576,7 +681,7 @@ class EventSendRooms extends $pb.GeneratedMessage {
 
 class EventInviteProfile extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventInviteProfile', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$1.Profile>(1, 'participant', subBuilder: $1.Profile.create)
+    ..aOM<$1.Profile>(1, 'user', subBuilder: $1.Profile.create)
     ..hasRequiredFields = false
   ;
 
@@ -596,15 +701,15 @@ class EventInviteProfile extends $pb.GeneratedMessage {
   static EventInviteProfile _defaultInstance;
 
   @$pb.TagNumber(1)
-  $1.Profile get participant => $_getN(0);
+  $1.Profile get user => $_getN(0);
   @$pb.TagNumber(1)
-  set participant($1.Profile v) { setField(1, v); }
+  set user($1.Profile v) { setField(1, v); }
   @$pb.TagNumber(1)
-  $core.bool hasParticipant() => $_has(0);
+  $core.bool hasUser() => $_has(0);
   @$pb.TagNumber(1)
-  void clearParticipant() => clearField(1);
+  void clearUser() => clearField(1);
   @$pb.TagNumber(1)
-  $1.Profile ensureParticipant() => $_ensure(0);
+  $1.Profile ensureUser() => $_ensure(0);
 }
 
 class EventForceClose extends $pb.GeneratedMessage {
