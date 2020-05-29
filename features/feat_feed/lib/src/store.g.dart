@@ -13,76 +13,85 @@ mixin _$FeedStore on _FeedStore, Store {
 
   @override
   List<FeedArticle> get dailyArticles => (_$dailyArticlesComputed ??=
-          Computed<List<FeedArticle>>(() => super.dailyArticles))
+          Computed<List<FeedArticle>>(() => super.dailyArticles,
+              name: '_FeedStore.dailyArticles'))
       .value;
   Computed<List<FeedArticle>> _$reliefArticlesComputed;
 
   @override
   List<FeedArticle> get reliefArticles => (_$reliefArticlesComputed ??=
-          Computed<List<FeedArticle>>(() => super.reliefArticles))
+          Computed<List<FeedArticle>>(() => super.reliefArticles,
+              name: '_FeedStore.reliefArticles'))
       .value;
   Computed<List<FeedArticle>> _$updatesArticlesComputed;
 
   @override
   List<FeedArticle> get updatesArticles => (_$updatesArticlesComputed ??=
-          Computed<List<FeedArticle>>(() => super.updatesArticles))
+          Computed<List<FeedArticle>>(() => super.updatesArticles,
+              name: '_FeedStore.updatesArticles'))
       .value;
 
   final _$successAtom = Atom(name: '_FeedStore.success');
 
   @override
   bool get success {
-    _$successAtom.context.enforceReadPolicy(_$successAtom);
-    _$successAtom.reportObserved();
+    _$successAtom.reportRead();
     return super.success;
   }
 
   @override
   set success(bool value) {
-    _$successAtom.context.conditionallyRunInAction(() {
+    _$successAtom.reportWrite(value, super.success, () {
       super.success = value;
-      _$successAtom.reportChanged();
-    }, _$successAtom, name: '${_$successAtom.name}_set');
+    });
   }
 
   final _$loadingAtom = Atom(name: '_FeedStore.loading');
 
   @override
   bool get loading {
-    _$loadingAtom.context.enforceReadPolicy(_$loadingAtom);
-    _$loadingAtom.reportObserved();
+    _$loadingAtom.reportRead();
     return super.loading;
   }
 
   @override
   set loading(bool value) {
-    _$loadingAtom.context.conditionallyRunInAction(() {
+    _$loadingAtom.reportWrite(value, super.loading, () {
       super.loading = value;
-      _$loadingAtom.reportChanged();
-    }, _$loadingAtom, name: '${_$loadingAtom.name}_set');
+    });
   }
 
   final _$articlesAtom = Atom(name: '_FeedStore.articles');
 
   @override
   List<FeedArticle> get articles {
-    _$articlesAtom.context.enforceReadPolicy(_$articlesAtom);
-    _$articlesAtom.reportObserved();
+    _$articlesAtom.reportRead();
     return super.articles;
   }
 
   @override
   set articles(List<FeedArticle> value) {
-    _$articlesAtom.context.conditionallyRunInAction(() {
+    _$articlesAtom.reportWrite(value, super.articles, () {
       super.articles = value;
-      _$articlesAtom.reportChanged();
-    }, _$articlesAtom, name: '${_$articlesAtom.name}_set');
+    });
   }
 
-  final _$fetchArticlesAsyncAction = AsyncAction('fetchArticles');
+  final _$fetchArticlesAsyncAction = AsyncAction('_FeedStore.fetchArticles');
 
   @override
   Future<dynamic> fetchArticles(String tagKey) {
     return _$fetchArticlesAsyncAction.run(() => super.fetchArticles(tagKey));
+  }
+
+  @override
+  String toString() {
+    return '''
+success: ${success},
+loading: ${loading},
+articles: ${articles},
+dailyArticles: ${dailyArticles},
+reliefArticles: ${reliefArticles},
+updatesArticles: ${updatesArticles}
+    ''';
   }
 }

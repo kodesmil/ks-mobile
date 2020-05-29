@@ -240,7 +240,7 @@ class MyListTile extends StatelessWidget {
       padding: EdgeInsets.only(
         top: place == ChatMessagePlace.FIRST ||
                 place == ChatMessagePlace.LAST_SINGLE
-            ? 20
+            ? 10
             : 0,
       ),
       child: Column(

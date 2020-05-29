@@ -12,92 +12,85 @@ mixin _$SignUpStore on _SignUpStore, Store {
   Computed<bool> _$canSignUpComputed;
 
   @override
-  bool get canSignUp =>
-      (_$canSignUpComputed ??= Computed<bool>(() => super.canSignUp)).value;
+  bool get canSignUp => (_$canSignUpComputed ??=
+          Computed<bool>(() => super.canSignUp, name: '_SignUpStore.canSignUp'))
+      .value;
 
   final _$emailAtom = Atom(name: '_SignUpStore.email');
 
   @override
   String get email {
-    _$emailAtom.context.enforceReadPolicy(_$emailAtom);
-    _$emailAtom.reportObserved();
+    _$emailAtom.reportRead();
     return super.email;
   }
 
   @override
   set email(String value) {
-    _$emailAtom.context.conditionallyRunInAction(() {
+    _$emailAtom.reportWrite(value, super.email, () {
       super.email = value;
-      _$emailAtom.reportChanged();
-    }, _$emailAtom, name: '${_$emailAtom.name}_set');
+    });
   }
 
   final _$passwordAtom = Atom(name: '_SignUpStore.password');
 
   @override
   String get password {
-    _$passwordAtom.context.enforceReadPolicy(_$passwordAtom);
-    _$passwordAtom.reportObserved();
+    _$passwordAtom.reportRead();
     return super.password;
   }
 
   @override
   set password(String value) {
-    _$passwordAtom.context.conditionallyRunInAction(() {
+    _$passwordAtom.reportWrite(value, super.password, () {
       super.password = value;
-      _$passwordAtom.reportChanged();
-    }, _$passwordAtom, name: '${_$passwordAtom.name}_set');
+    });
   }
 
   final _$successAtom = Atom(name: '_SignUpStore.success');
 
   @override
   bool get success {
-    _$successAtom.context.enforceReadPolicy(_$successAtom);
-    _$successAtom.reportObserved();
+    _$successAtom.reportRead();
     return super.success;
   }
 
   @override
   set success(bool value) {
-    _$successAtom.context.conditionallyRunInAction(() {
+    _$successAtom.reportWrite(value, super.success, () {
       super.success = value;
-      _$successAtom.reportChanged();
-    }, _$successAtom, name: '${_$successAtom.name}_set');
+    });
   }
 
   final _$loadingAtom = Atom(name: '_SignUpStore.loading');
 
   @override
   bool get loading {
-    _$loadingAtom.context.enforceReadPolicy(_$loadingAtom);
-    _$loadingAtom.reportObserved();
+    _$loadingAtom.reportRead();
     return super.loading;
   }
 
   @override
   set loading(bool value) {
-    _$loadingAtom.context.conditionallyRunInAction(() {
+    _$loadingAtom.reportWrite(value, super.loading, () {
       super.loading = value;
-      _$loadingAtom.reportChanged();
-    }, _$loadingAtom, name: '${_$loadingAtom.name}_set');
+    });
   }
 
-  final _$resetAsyncAction = AsyncAction('reset');
+  final _$resetAsyncAction = AsyncAction('_SignUpStore.reset');
 
   @override
   Future<dynamic> reset() {
     return _$resetAsyncAction.run(() => super.reset());
   }
 
-  final _$signUpAsyncAction = AsyncAction('signUp');
+  final _$signUpAsyncAction = AsyncAction('_SignUpStore.signUp');
 
   @override
   Future<dynamic> signUp() {
     return _$signUpAsyncAction.run(() => super.signUp());
   }
 
-  final _$logoutAsyncAction = AsyncAction('logout');
+  final _$logoutAsyncAction = AsyncAction('_SignUpStore.logout');
 
   @override
   Future<dynamic> logout() {
@@ -108,7 +101,8 @@ mixin _$SignUpStore on _SignUpStore, Store {
 
   @override
   void setEmail(String value) {
-    final _$actionInfo = _$_SignUpStoreActionController.startAction();
+    final _$actionInfo = _$_SignUpStoreActionController.startAction(
+        name: '_SignUpStore.setEmail');
     try {
       return super.setEmail(value);
     } finally {
@@ -118,7 +112,8 @@ mixin _$SignUpStore on _SignUpStore, Store {
 
   @override
   void setPassword(String value) {
-    final _$actionInfo = _$_SignUpStoreActionController.startAction();
+    final _$actionInfo = _$_SignUpStoreActionController.startAction(
+        name: '_SignUpStore.setPassword');
     try {
       return super.setPassword(value);
     } finally {
@@ -128,7 +123,8 @@ mixin _$SignUpStore on _SignUpStore, Store {
 
   @override
   void validateEmail(String value) {
-    final _$actionInfo = _$_SignUpStoreActionController.startAction();
+    final _$actionInfo = _$_SignUpStoreActionController.startAction(
+        name: '_SignUpStore.validateEmail');
     try {
       return super.validateEmail(value);
     } finally {
@@ -138,7 +134,8 @@ mixin _$SignUpStore on _SignUpStore, Store {
 
   @override
   void validatePassword(String value) {
-    final _$actionInfo = _$_SignUpStoreActionController.startAction();
+    final _$actionInfo = _$_SignUpStoreActionController.startAction(
+        name: '_SignUpStore.validatePassword');
     try {
       return super.validatePassword(value);
     } finally {
@@ -148,12 +145,24 @@ mixin _$SignUpStore on _SignUpStore, Store {
 
   @override
   void validateAll() {
-    final _$actionInfo = _$_SignUpStoreActionController.startAction();
+    final _$actionInfo = _$_SignUpStoreActionController.startAction(
+        name: '_SignUpStore.validateAll');
     try {
       return super.validateAll();
     } finally {
       _$_SignUpStoreActionController.endAction(_$actionInfo);
     }
+  }
+
+  @override
+  String toString() {
+    return '''
+email: ${email},
+password: ${password},
+success: ${success},
+loading: ${loading},
+canSignUp: ${canSignUp}
+    ''';
   }
 }
 
@@ -162,39 +171,46 @@ mixin _$SignUpErrorStore on _SignUpErrorStore, Store {
 
   @override
   bool get hasErrors =>
-      (_$hasErrorsComputed ??= Computed<bool>(() => super.hasErrors)).value;
+      (_$hasErrorsComputed ??= Computed<bool>(() => super.hasErrors,
+              name: '_SignUpErrorStore.hasErrors'))
+          .value;
 
   final _$emailAtom = Atom(name: '_SignUpErrorStore.email');
 
   @override
   String get email {
-    _$emailAtom.context.enforceReadPolicy(_$emailAtom);
-    _$emailAtom.reportObserved();
+    _$emailAtom.reportRead();
     return super.email;
   }
 
   @override
   set email(String value) {
-    _$emailAtom.context.conditionallyRunInAction(() {
+    _$emailAtom.reportWrite(value, super.email, () {
       super.email = value;
-      _$emailAtom.reportChanged();
-    }, _$emailAtom, name: '${_$emailAtom.name}_set');
+    });
   }
 
   final _$passwordAtom = Atom(name: '_SignUpErrorStore.password');
 
   @override
   String get password {
-    _$passwordAtom.context.enforceReadPolicy(_$passwordAtom);
-    _$passwordAtom.reportObserved();
+    _$passwordAtom.reportRead();
     return super.password;
   }
 
   @override
   set password(String value) {
-    _$passwordAtom.context.conditionallyRunInAction(() {
+    _$passwordAtom.reportWrite(value, super.password, () {
       super.password = value;
-      _$passwordAtom.reportChanged();
-    }, _$passwordAtom, name: '${_$passwordAtom.name}_set');
+    });
+  }
+
+  @override
+  String toString() {
+    return '''
+email: ${email},
+password: ${password},
+hasErrors: ${hasErrors}
+    ''';
   }
 }

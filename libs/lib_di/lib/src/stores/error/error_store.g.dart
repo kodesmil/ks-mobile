@@ -13,33 +13,37 @@ mixin _$ErrorStore on _ErrorStore, Store {
 
   @override
   String get errorMessage {
-    _$errorMessageAtom.context.enforceReadPolicy(_$errorMessageAtom);
-    _$errorMessageAtom.reportObserved();
+    _$errorMessageAtom.reportRead();
     return super.errorMessage;
   }
 
   @override
   set errorMessage(String value) {
-    _$errorMessageAtom.context.conditionallyRunInAction(() {
+    _$errorMessageAtom.reportWrite(value, super.errorMessage, () {
       super.errorMessage = value;
-      _$errorMessageAtom.reportChanged();
-    }, _$errorMessageAtom, name: '${_$errorMessageAtom.name}_set');
+    });
   }
 
   final _$showErrorAtom = Atom(name: '_ErrorStore.showError');
 
   @override
   bool get showError {
-    _$showErrorAtom.context.enforceReadPolicy(_$showErrorAtom);
-    _$showErrorAtom.reportObserved();
+    _$showErrorAtom.reportRead();
     return super.showError;
   }
 
   @override
   set showError(bool value) {
-    _$showErrorAtom.context.conditionallyRunInAction(() {
+    _$showErrorAtom.reportWrite(value, super.showError, () {
       super.showError = value;
-      _$showErrorAtom.reportChanged();
-    }, _$showErrorAtom, name: '${_$showErrorAtom.name}_set');
+    });
+  }
+
+  @override
+  String toString() {
+    return '''
+errorMessage: ${errorMessage},
+showError: ${showError}
+    ''';
   }
 }

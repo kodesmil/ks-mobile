@@ -13,34 +13,30 @@ mixin _$SensorsStore on _SensorsStore, Store {
 
   @override
   bool get success {
-    _$successAtom.context.enforceReadPolicy(_$successAtom);
-    _$successAtom.reportObserved();
+    _$successAtom.reportRead();
     return super.success;
   }
 
   @override
   set success(bool value) {
-    _$successAtom.context.conditionallyRunInAction(() {
+    _$successAtom.reportWrite(value, super.success, () {
       super.success = value;
-      _$successAtom.reportChanged();
-    }, _$successAtom, name: '${_$successAtom.name}_set');
+    });
   }
 
   final _$loadingAtom = Atom(name: '_SensorsStore.loading');
 
   @override
   bool get loading {
-    _$loadingAtom.context.enforceReadPolicy(_$loadingAtom);
-    _$loadingAtom.reportObserved();
+    _$loadingAtom.reportRead();
     return super.loading;
   }
 
   @override
   set loading(bool value) {
-    _$loadingAtom.context.conditionallyRunInAction(() {
+    _$loadingAtom.reportWrite(value, super.loading, () {
       super.loading = value;
-      _$loadingAtom.reportChanged();
-    }, _$loadingAtom, name: '${_$loadingAtom.name}_set');
+    });
   }
 
   final _$accelerometerEventsAtom =
@@ -48,36 +44,30 @@ mixin _$SensorsStore on _SensorsStore, Store {
 
   @override
   List<AblySensorEvent> get accelerometerEvents {
-    _$accelerometerEventsAtom.context
-        .enforceReadPolicy(_$accelerometerEventsAtom);
-    _$accelerometerEventsAtom.reportObserved();
+    _$accelerometerEventsAtom.reportRead();
     return super.accelerometerEvents;
   }
 
   @override
   set accelerometerEvents(List<AblySensorEvent> value) {
-    _$accelerometerEventsAtom.context.conditionallyRunInAction(() {
+    _$accelerometerEventsAtom.reportWrite(value, super.accelerometerEvents, () {
       super.accelerometerEvents = value;
-      _$accelerometerEventsAtom.reportChanged();
-    }, _$accelerometerEventsAtom,
-        name: '${_$accelerometerEventsAtom.name}_set');
+    });
   }
 
   final _$gyroscopeEventsAtom = Atom(name: '_SensorsStore.gyroscopeEvents');
 
   @override
   List<AblySensorEvent> get gyroscopeEvents {
-    _$gyroscopeEventsAtom.context.enforceReadPolicy(_$gyroscopeEventsAtom);
-    _$gyroscopeEventsAtom.reportObserved();
+    _$gyroscopeEventsAtom.reportRead();
     return super.gyroscopeEvents;
   }
 
   @override
   set gyroscopeEvents(List<AblySensorEvent> value) {
-    _$gyroscopeEventsAtom.context.conditionallyRunInAction(() {
+    _$gyroscopeEventsAtom.reportWrite(value, super.gyroscopeEvents, () {
       super.gyroscopeEvents = value;
-      _$gyroscopeEventsAtom.reportChanged();
-    }, _$gyroscopeEventsAtom, name: '${_$gyroscopeEventsAtom.name}_set');
+    });
   }
 
   final _$magnetometerEventsAtom =
@@ -85,28 +75,26 @@ mixin _$SensorsStore on _SensorsStore, Store {
 
   @override
   List<AblySensorEvent> get magnetometerEvents {
-    _$magnetometerEventsAtom.context
-        .enforceReadPolicy(_$magnetometerEventsAtom);
-    _$magnetometerEventsAtom.reportObserved();
+    _$magnetometerEventsAtom.reportRead();
     return super.magnetometerEvents;
   }
 
   @override
   set magnetometerEvents(List<AblySensorEvent> value) {
-    _$magnetometerEventsAtom.context.conditionallyRunInAction(() {
+    _$magnetometerEventsAtom.reportWrite(value, super.magnetometerEvents, () {
       super.magnetometerEvents = value;
-      _$magnetometerEventsAtom.reportChanged();
-    }, _$magnetometerEventsAtom, name: '${_$magnetometerEventsAtom.name}_set');
+    });
   }
 
-  final _$sendAsEmailAsyncAction = AsyncAction('sendAsEmail');
+  final _$sendAsEmailAsyncAction = AsyncAction('_SensorsStore.sendAsEmail');
 
   @override
   Future<dynamic> sendAsEmail() {
     return _$sendAsEmailAsyncAction.run(() => super.sendAsEmail());
   }
 
-  final _$startAccelerometerAsyncAction = AsyncAction('startAccelerometer');
+  final _$startAccelerometerAsyncAction =
+      AsyncAction('_SensorsStore.startAccelerometer');
 
   @override
   Future<dynamic> startAccelerometer() {
@@ -114,45 +102,60 @@ mixin _$SensorsStore on _SensorsStore, Store {
         .run(() => super.startAccelerometer());
   }
 
-  final _$stopAccelerometerAsyncAction = AsyncAction('stopAccelerometer');
+  final _$stopAccelerometerAsyncAction =
+      AsyncAction('_SensorsStore.stopAccelerometer');
 
   @override
   Future<dynamic> stopAccelerometer() {
     return _$stopAccelerometerAsyncAction.run(() => super.stopAccelerometer());
   }
 
-  final _$startGyroscopeAsyncAction = AsyncAction('startGyroscope');
+  final _$startGyroscopeAsyncAction =
+      AsyncAction('_SensorsStore.startGyroscope');
 
   @override
   Future<dynamic> startGyroscope() {
     return _$startGyroscopeAsyncAction.run(() => super.startGyroscope());
   }
 
-  final _$stopGyroscopeAsyncAction = AsyncAction('stopGyroscope');
+  final _$stopGyroscopeAsyncAction = AsyncAction('_SensorsStore.stopGyroscope');
 
   @override
   Future<dynamic> stopGyroscope() {
     return _$stopGyroscopeAsyncAction.run(() => super.stopGyroscope());
   }
 
-  final _$startMagnetometerAsyncAction = AsyncAction('startMagnetometer');
+  final _$startMagnetometerAsyncAction =
+      AsyncAction('_SensorsStore.startMagnetometer');
 
   @override
   Future<dynamic> startMagnetometer() {
     return _$startMagnetometerAsyncAction.run(() => super.startMagnetometer());
   }
 
-  final _$stopMagnetometerAsyncAction = AsyncAction('stopMagnetometer');
+  final _$stopMagnetometerAsyncAction =
+      AsyncAction('_SensorsStore.stopMagnetometer');
 
   @override
   Future<dynamic> stopMagnetometer() {
     return _$stopMagnetometerAsyncAction.run(() => super.stopMagnetometer());
   }
 
-  final _$closeAsyncAction = AsyncAction('close');
+  final _$closeAsyncAction = AsyncAction('_SensorsStore.close');
 
   @override
   Future<dynamic> close() {
     return _$closeAsyncAction.run(() => super.close());
+  }
+
+  @override
+  String toString() {
+    return '''
+success: ${success},
+loading: ${loading},
+accelerometerEvents: ${accelerometerEvents},
+gyroscopeEvents: ${gyroscopeEvents},
+magnetometerEvents: ${magnetometerEvents}
+    ''';
   }
 }

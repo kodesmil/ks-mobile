@@ -13,27 +13,26 @@ mixin _$GoogleSignInStore on _GoogleSignInStore, Store {
 
   @override
   GoogleSignInAccount get currentUser {
-    _$currentUserAtom.context.enforceReadPolicy(_$currentUserAtom);
-    _$currentUserAtom.reportObserved();
+    _$currentUserAtom.reportRead();
     return super.currentUser;
   }
 
   @override
   set currentUser(GoogleSignInAccount value) {
-    _$currentUserAtom.context.conditionallyRunInAction(() {
+    _$currentUserAtom.reportWrite(value, super.currentUser, () {
       super.currentUser = value;
-      _$currentUserAtom.reportChanged();
-    }, _$currentUserAtom, name: '${_$currentUserAtom.name}_set');
+    });
   }
 
-  final _$signInSilentlyAsyncAction = AsyncAction('signInSilently');
+  final _$signInSilentlyAsyncAction =
+      AsyncAction('_GoogleSignInStore.signInSilently');
 
   @override
   Future<void> signInSilently() {
     return _$signInSilentlyAsyncAction.run(() => super.signInSilently());
   }
 
-  final _$signInAsyncAction = AsyncAction('signIn');
+  final _$signInAsyncAction = AsyncAction('_GoogleSignInStore.signIn');
 
   @override
   Future<void> signIn() {
@@ -45,7 +44,8 @@ mixin _$GoogleSignInStore on _GoogleSignInStore, Store {
 
   @override
   Future<void> signOut() {
-    final _$actionInfo = _$_GoogleSignInStoreActionController.startAction();
+    final _$actionInfo = _$_GoogleSignInStoreActionController.startAction(
+        name: '_GoogleSignInStore.signOut');
     try {
       return super.signOut();
     } finally {
@@ -55,11 +55,19 @@ mixin _$GoogleSignInStore on _GoogleSignInStore, Store {
 
   @override
   Future<void> dispose() {
-    final _$actionInfo = _$_GoogleSignInStoreActionController.startAction();
+    final _$actionInfo = _$_GoogleSignInStoreActionController.startAction(
+        name: '_GoogleSignInStore.dispose');
     try {
       return super.dispose();
     } finally {
       _$_GoogleSignInStoreActionController.endAction(_$actionInfo);
     }
+  }
+
+  @override
+  String toString() {
+    return '''
+currentUser: ${currentUser}
+    ''';
   }
 }

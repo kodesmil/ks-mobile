@@ -13,57 +13,60 @@ mixin _$FitStore on _FitStore, Store {
 
   @override
   FitsList get fits {
-    _$fitsAtom.context.enforceReadPolicy(_$fitsAtom);
-    _$fitsAtom.reportObserved();
+    _$fitsAtom.reportRead();
     return super.fits;
   }
 
   @override
   set fits(FitsList value) {
-    _$fitsAtom.context.conditionallyRunInAction(() {
+    _$fitsAtom.reportWrite(value, super.fits, () {
       super.fits = value;
-      _$fitsAtom.reportChanged();
-    }, _$fitsAtom, name: '${_$fitsAtom.name}_set');
+    });
   }
 
   final _$successAtom = Atom(name: '_FitStore.success');
 
   @override
   bool get success {
-    _$successAtom.context.enforceReadPolicy(_$successAtom);
-    _$successAtom.reportObserved();
+    _$successAtom.reportRead();
     return super.success;
   }
 
   @override
   set success(bool value) {
-    _$successAtom.context.conditionallyRunInAction(() {
+    _$successAtom.reportWrite(value, super.success, () {
       super.success = value;
-      _$successAtom.reportChanged();
-    }, _$successAtom, name: '${_$successAtom.name}_set');
+    });
   }
 
   final _$loadingAtom = Atom(name: '_FitStore.loading');
 
   @override
   bool get loading {
-    _$loadingAtom.context.enforceReadPolicy(_$loadingAtom);
-    _$loadingAtom.reportObserved();
+    _$loadingAtom.reportRead();
     return super.loading;
   }
 
   @override
   set loading(bool value) {
-    _$loadingAtom.context.conditionallyRunInAction(() {
+    _$loadingAtom.reportWrite(value, super.loading, () {
       super.loading = value;
-      _$loadingAtom.reportChanged();
-    }, _$loadingAtom, name: '${_$loadingAtom.name}_set');
+    });
   }
 
-  final _$getFitsAsyncAction = AsyncAction('getFits');
+  final _$getFitsAsyncAction = AsyncAction('_FitStore.getFits');
 
   @override
   Future<dynamic> getFits() {
     return _$getFitsAsyncAction.run(() => super.getFits());
+  }
+
+  @override
+  String toString() {
+    return '''
+fits: ${fits},
+success: ${success},
+loading: ${loading}
+    ''';
   }
 }

@@ -13,88 +13,78 @@ mixin _$JournalStore on _JournalStore, Store {
 
   @override
   bool get success {
-    _$successAtom.context.enforceReadPolicy(_$successAtom);
-    _$successAtom.reportObserved();
+    _$successAtom.reportRead();
     return super.success;
   }
 
   @override
   set success(bool value) {
-    _$successAtom.context.conditionallyRunInAction(() {
+    _$successAtom.reportWrite(value, super.success, () {
       super.success = value;
-      _$successAtom.reportChanged();
-    }, _$successAtom, name: '${_$successAtom.name}_set');
+    });
   }
 
   final _$loadingAtom = Atom(name: '_JournalStore.loading');
 
   @override
   bool get loading {
-    _$loadingAtom.context.enforceReadPolicy(_$loadingAtom);
-    _$loadingAtom.reportObserved();
+    _$loadingAtom.reportRead();
     return super.loading;
   }
 
   @override
   set loading(bool value) {
-    _$loadingAtom.context.conditionallyRunInAction(() {
+    _$loadingAtom.reportWrite(value, super.loading, () {
       super.loading = value;
-      _$loadingAtom.reportChanged();
-    }, _$loadingAtom, name: '${_$loadingAtom.name}_set');
+    });
   }
 
   final _$journalEntryAtom = Atom(name: '_JournalStore.journalEntry');
 
   @override
   JournalEntry get journalEntry {
-    _$journalEntryAtom.context.enforceReadPolicy(_$journalEntryAtom);
-    _$journalEntryAtom.reportObserved();
+    _$journalEntryAtom.reportRead();
     return super.journalEntry;
   }
 
   @override
   set journalEntry(JournalEntry value) {
-    _$journalEntryAtom.context.conditionallyRunInAction(() {
+    _$journalEntryAtom.reportWrite(value, super.journalEntry, () {
       super.journalEntry = value;
-      _$journalEntryAtom.reportChanged();
-    }, _$journalEntryAtom, name: '${_$journalEntryAtom.name}_set');
+    });
   }
 
   final _$journalActivitiesAtom = Atom(name: '_JournalStore.journalActivities');
 
   @override
   List<JournalSubject> get journalActivities {
-    _$journalActivitiesAtom.context.enforceReadPolicy(_$journalActivitiesAtom);
-    _$journalActivitiesAtom.reportObserved();
+    _$journalActivitiesAtom.reportRead();
     return super.journalActivities;
   }
 
   @override
   set journalActivities(List<JournalSubject> value) {
-    _$journalActivitiesAtom.context.conditionallyRunInAction(() {
+    _$journalActivitiesAtom.reportWrite(value, super.journalActivities, () {
       super.journalActivities = value;
-      _$journalActivitiesAtom.reportChanged();
-    }, _$journalActivitiesAtom, name: '${_$journalActivitiesAtom.name}_set');
+    });
   }
 
   final _$entriesAtom = Atom(name: '_JournalStore.entries');
 
   @override
   List<JournalEntry> get entries {
-    _$entriesAtom.context.enforceReadPolicy(_$entriesAtom);
-    _$entriesAtom.reportObserved();
+    _$entriesAtom.reportRead();
     return super.entries;
   }
 
   @override
   set entries(List<JournalEntry> value) {
-    _$entriesAtom.context.conditionallyRunInAction(() {
+    _$entriesAtom.reportWrite(value, super.entries, () {
       super.entries = value;
-      _$entriesAtom.reportChanged();
-    }, _$entriesAtom, name: '${_$entriesAtom.name}_set');
+    });
   }
 
-  final _$createJournalAsyncAction = AsyncAction('createJournal');
+  final _$createJournalAsyncAction = AsyncAction('_JournalStore.createJournal');
 
   @override
   Future<dynamic> createJournal() {
@@ -102,7 +92,7 @@ mixin _$JournalStore on _JournalStore, Store {
   }
 
   final _$fetchJournalSubjectActivitiesAsyncAction =
-      AsyncAction('fetchJournalSubjectActivities');
+      AsyncAction('_JournalStore.fetchJournalSubjectActivities');
 
   @override
   Future<dynamic> fetchJournalSubjectActivities(JournalSubject_Type type) {
@@ -110,11 +100,23 @@ mixin _$JournalStore on _JournalStore, Store {
         .run(() => super.fetchJournalSubjectActivities(type));
   }
 
-  final _$fetchJournalEntriesAsyncAction = AsyncAction('fetchJournalEntries');
+  final _$fetchJournalEntriesAsyncAction =
+      AsyncAction('_JournalStore.fetchJournalEntries');
 
   @override
   Future<dynamic> fetchJournalEntries() {
     return _$fetchJournalEntriesAsyncAction
         .run(() => super.fetchJournalEntries());
+  }
+
+  @override
+  String toString() {
+    return '''
+success: ${success},
+loading: ${loading},
+journalEntry: ${journalEntry},
+journalActivities: ${journalActivities},
+entries: ${entries}
+    ''';
   }
 }

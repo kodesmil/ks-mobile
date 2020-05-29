@@ -13,95 +13,98 @@ mixin _$SurveyStore on _SurveyStore, Store {
 
   @override
   bool get success {
-    _$successAtom.context.enforceReadPolicy(_$successAtom);
-    _$successAtom.reportObserved();
+    _$successAtom.reportRead();
     return super.success;
   }
 
   @override
   set success(bool value) {
-    _$successAtom.context.conditionallyRunInAction(() {
+    _$successAtom.reportWrite(value, super.success, () {
       super.success = value;
-      _$successAtom.reportChanged();
-    }, _$successAtom, name: '${_$successAtom.name}_set');
+    });
   }
 
   final _$loadingAtom = Atom(name: '_SurveyStore.loading');
 
   @override
   bool get loading {
-    _$loadingAtom.context.enforceReadPolicy(_$loadingAtom);
-    _$loadingAtom.reportObserved();
+    _$loadingAtom.reportRead();
     return super.loading;
   }
 
   @override
   set loading(bool value) {
-    _$loadingAtom.context.conditionallyRunInAction(() {
+    _$loadingAtom.reportWrite(value, super.loading, () {
       super.loading = value;
-      _$loadingAtom.reportChanged();
-    }, _$loadingAtom, name: '${_$loadingAtom.name}_set');
+    });
   }
 
   final _$questionsAtom = Atom(name: '_SurveyStore.questions');
 
   @override
   List<Question> get questions {
-    _$questionsAtom.context.enforceReadPolicy(_$questionsAtom);
-    _$questionsAtom.reportObserved();
+    _$questionsAtom.reportRead();
     return super.questions;
   }
 
   @override
   set questions(List<Question> value) {
-    _$questionsAtom.context.conditionallyRunInAction(() {
+    _$questionsAtom.reportWrite(value, super.questions, () {
       super.questions = value;
-      _$questionsAtom.reportChanged();
-    }, _$questionsAtom, name: '${_$questionsAtom.name}_set');
+    });
   }
 
   final _$answersAtom = Atom(name: '_SurveyStore.answers');
 
   @override
   Map<Question, Answer> get answers {
-    _$answersAtom.context.enforceReadPolicy(_$answersAtom);
-    _$answersAtom.reportObserved();
+    _$answersAtom.reportRead();
     return super.answers;
   }
 
   @override
   set answers(Map<Question, Answer> value) {
-    _$answersAtom.context.conditionallyRunInAction(() {
+    _$answersAtom.reportWrite(value, super.answers, () {
       super.answers = value;
-      _$answersAtom.reportChanged();
-    }, _$answersAtom, name: '${_$answersAtom.name}_set');
+    });
   }
 
-  final _$saveAnswerAsyncAction = AsyncAction('saveAnswer');
+  final _$saveAnswerAsyncAction = AsyncAction('_SurveyStore.saveAnswer');
 
   @override
   Future<dynamic> saveAnswer(Question question, double value) {
     return _$saveAnswerAsyncAction.run(() => super.saveAnswer(question, value));
   }
 
-  final _$sendAnswersAsyncAction = AsyncAction('sendAnswers');
+  final _$sendAnswersAsyncAction = AsyncAction('_SurveyStore.sendAnswers');
 
   @override
   Future<dynamic> sendAnswers() {
     return _$sendAnswersAsyncAction.run(() => super.sendAnswers());
   }
 
-  final _$fetchQuestionsAsyncAction = AsyncAction('fetchQuestions');
+  final _$fetchQuestionsAsyncAction =
+      AsyncAction('_SurveyStore.fetchQuestions');
 
   @override
   Future<dynamic> fetchQuestions() {
     return _$fetchQuestionsAsyncAction.run(() => super.fetchQuestions());
   }
 
-  final _$closeAsyncAction = AsyncAction('close');
+  final _$closeAsyncAction = AsyncAction('_SurveyStore.close');
 
   @override
   Future<dynamic> close() {
     return _$closeAsyncAction.run(() => super.close());
+  }
+
+  @override
+  String toString() {
+    return '''
+success: ${success},
+loading: ${loading},
+questions: ${questions},
+answers: ${answers}
+    ''';
   }
 }

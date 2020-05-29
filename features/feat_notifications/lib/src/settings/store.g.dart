@@ -13,41 +13,41 @@ mixin _$NotificationSettingsStore on _NotificationSettingsStore, Store {
 
   @override
   TimeOfDay get timeJournalReminder => (_$timeJournalReminderComputed ??=
-          Computed<TimeOfDay>(() => super.timeJournalReminder))
+          Computed<TimeOfDay>(() => super.timeJournalReminder,
+              name: '_NotificationSettingsStore.timeJournalReminder'))
       .value;
 
   final _$settingAtom = Atom(name: '_NotificationSettingsStore.setting');
 
   @override
   NotificationSetting get setting {
-    _$settingAtom.context.enforceReadPolicy(_$settingAtom);
-    _$settingAtom.reportObserved();
+    _$settingAtom.reportRead();
     return super.setting;
   }
 
   @override
   set setting(NotificationSetting value) {
-    _$settingAtom.context.conditionallyRunInAction(() {
+    _$settingAtom.reportWrite(value, super.setting, () {
       super.setting = value;
-      _$settingAtom.reportChanged();
-    }, _$settingAtom, name: '${_$settingAtom.name}_set');
+    });
   }
 
-  final _$readOrCreateAsyncAction = AsyncAction('readOrCreate');
+  final _$readOrCreateAsyncAction =
+      AsyncAction('_NotificationSettingsStore.readOrCreate');
 
   @override
   Future<dynamic> readOrCreate() {
     return _$readOrCreateAsyncAction.run(() => super.readOrCreate());
   }
 
-  final _$createAsyncAction = AsyncAction('create');
+  final _$createAsyncAction = AsyncAction('_NotificationSettingsStore.create');
 
   @override
   Future<dynamic> create() {
     return _$createAsyncAction.run(() => super.create());
   }
 
-  final _$updateAsyncAction = AsyncAction('update');
+  final _$updateAsyncAction = AsyncAction('_NotificationSettingsStore.update');
 
   @override
   Future<dynamic> update(
@@ -58,5 +58,13 @@ mixin _$NotificationSettingsStore on _NotificationSettingsStore, Store {
         enableNotifications: enableNotifications,
         enableJournalReminder: enableJournalReminder,
         timeJournalReminder: timeJournalReminder));
+  }
+
+  @override
+  String toString() {
+    return '''
+setting: ${setting},
+timeJournalReminder: ${timeJournalReminder}
+    ''';
   }
 }

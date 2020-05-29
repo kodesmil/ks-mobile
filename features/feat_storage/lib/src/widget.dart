@@ -18,6 +18,8 @@ class StorageWidget extends StatefulWidget {
 }
 
 class _StorageWidgetState extends State<StorageWidget> {
+  final picker = ImagePicker();
+
   @override
   void didChangeDependencies() {
     final store = Provider.of<StorageStore>(context);
@@ -27,12 +29,16 @@ class _StorageWidgetState extends State<StorageWidget> {
   File _image;
 
   Future getImage() async {
-    final store = Provider.of<StorageStore>(context);
-    var image = await ImagePicker.pickImage(source: ImageSource.camera);
-    setState(() {
-      _image = image;
-      store.upload(image);
-    });
+    try {
+      var image = await picker.getImage(source: ImageSource.gallery);
+      setState(() {
+        _image = File(image.path);
+        final store = Provider.of<StorageStore>(context);
+        store.upload(_image);
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -42,7 +48,7 @@ class _StorageWidgetState extends State<StorageWidget> {
       child: Center(
         child: _image == null
             ? RaisedButton(
-                onPressed: getImage,
+                onPressed: () => getImage(),
                 child: Icon(Icons.add_a_photo),
               )
             : Image.file(_image),

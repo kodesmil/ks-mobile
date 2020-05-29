@@ -13,54 +13,48 @@ mixin _$ProfileStore on _ProfileStore, Store {
 
   @override
   bool get success {
-    _$successAtom.context.enforceReadPolicy(_$successAtom);
-    _$successAtom.reportObserved();
+    _$successAtom.reportRead();
     return super.success;
   }
 
   @override
   set success(bool value) {
-    _$successAtom.context.conditionallyRunInAction(() {
+    _$successAtom.reportWrite(value, super.success, () {
       super.success = value;
-      _$successAtom.reportChanged();
-    }, _$successAtom, name: '${_$successAtom.name}_set');
+    });
   }
 
   final _$loadingAtom = Atom(name: '_ProfileStore.loading');
 
   @override
   bool get loading {
-    _$loadingAtom.context.enforceReadPolicy(_$loadingAtom);
-    _$loadingAtom.reportObserved();
+    _$loadingAtom.reportRead();
     return super.loading;
   }
 
   @override
   set loading(bool value) {
-    _$loadingAtom.context.conditionallyRunInAction(() {
+    _$loadingAtom.reportWrite(value, super.loading, () {
       super.loading = value;
-      _$loadingAtom.reportChanged();
-    }, _$loadingAtom, name: '${_$loadingAtom.name}_set');
+    });
   }
 
   final _$profileAtom = Atom(name: '_ProfileStore.profile');
 
   @override
   Profile get profile {
-    _$profileAtom.context.enforceReadPolicy(_$profileAtom);
-    _$profileAtom.reportObserved();
+    _$profileAtom.reportRead();
     return super.profile;
   }
 
   @override
   set profile(Profile value) {
-    _$profileAtom.context.conditionallyRunInAction(() {
+    _$profileAtom.reportWrite(value, super.profile, () {
       super.profile = value;
-      _$profileAtom.reportChanged();
-    }, _$profileAtom, name: '${_$profileAtom.name}_set');
+    });
   }
 
-  final _$fetchProfileAsyncAction = AsyncAction('fetchProfile');
+  final _$fetchProfileAsyncAction = AsyncAction('_ProfileStore.fetchProfile');
 
   @override
   Future<dynamic> fetchProfile() {
@@ -68,7 +62,7 @@ mixin _$ProfileStore on _ProfileStore, Store {
   }
 
   final _$createOrUpdateProfileAsyncAction =
-      AsyncAction('createOrUpdateProfile');
+      AsyncAction('_ProfileStore.createOrUpdateProfile');
 
   @override
   Future<dynamic> createOrUpdateProfile() {
@@ -76,31 +70,40 @@ mixin _$ProfileStore on _ProfileStore, Store {
         .run(() => super.createOrUpdateProfile());
   }
 
-  final _$createProfileAsyncAction = AsyncAction('createProfile');
+  final _$createProfileAsyncAction = AsyncAction('_ProfileStore.createProfile');
 
   @override
   Future<dynamic> createProfile() {
     return _$createProfileAsyncAction.run(() => super.createProfile());
   }
 
-  final _$updateProfileAsyncAction = AsyncAction('updateProfile');
+  final _$updateProfileAsyncAction = AsyncAction('_ProfileStore.updateProfile');
 
   @override
   Future<dynamic> updateProfile() {
     return _$updateProfileAsyncAction.run(() => super.updateProfile());
   }
 
-  final _$signOutAsyncAction = AsyncAction('signOut');
+  final _$signOutAsyncAction = AsyncAction('_ProfileStore.signOut');
 
   @override
   Future<dynamic> signOut() {
     return _$signOutAsyncAction.run(() => super.signOut());
   }
 
-  final _$deleteUserAsyncAction = AsyncAction('deleteUser');
+  final _$deleteUserAsyncAction = AsyncAction('_ProfileStore.deleteUser');
 
   @override
   Future<dynamic> deleteUser() {
     return _$deleteUserAsyncAction.run(() => super.deleteUser());
+  }
+
+  @override
+  String toString() {
+    return '''
+success: ${success},
+loading: ${loading},
+profile: ${profile}
+    ''';
   }
 }

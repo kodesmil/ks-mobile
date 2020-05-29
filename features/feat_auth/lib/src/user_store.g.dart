@@ -13,37 +13,42 @@ mixin _$UserStore on _UserStore, Store {
 
   @override
   FirebaseUser get user {
-    _$userAtom.context.enforceReadPolicy(_$userAtom);
-    _$userAtom.reportObserved();
+    _$userAtom.reportRead();
     return super.user;
   }
 
   @override
   set user(FirebaseUser value) {
-    _$userAtom.context.conditionallyRunInAction(() {
+    _$userAtom.reportWrite(value, super.user, () {
       super.user = value;
-      _$userAtom.reportChanged();
-    }, _$userAtom, name: '${_$userAtom.name}_set');
+    });
   }
 
-  final _$signInSilentlyAsyncAction = AsyncAction('signInSilently');
+  final _$signInSilentlyAsyncAction = AsyncAction('_UserStore.signInSilently');
 
   @override
   Future<FirebaseUser> signInSilently() {
     return _$signInSilentlyAsyncAction.run(() => super.signInSilently());
   }
 
-  final _$signOutAsyncAction = AsyncAction('signOut');
+  final _$signOutAsyncAction = AsyncAction('_UserStore.signOut');
 
   @override
   Future<dynamic> signOut() {
     return _$signOutAsyncAction.run(() => super.signOut());
   }
 
-  final _$deleteUserAsyncAction = AsyncAction('deleteUser');
+  final _$deleteUserAsyncAction = AsyncAction('_UserStore.deleteUser');
 
   @override
   Future<dynamic> deleteUser() {
     return _$deleteUserAsyncAction.run(() => super.deleteUser());
+  }
+
+  @override
+  String toString() {
+    return '''
+user: ${user}
+    ''';
   }
 }

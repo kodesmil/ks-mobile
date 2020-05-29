@@ -13,47 +13,51 @@ mixin _$ActivitiesStore on _ActivitiesStore, Store {
 
   @override
   bool get success {
-    _$successAtom.context.enforceReadPolicy(_$successAtom);
-    _$successAtom.reportObserved();
+    _$successAtom.reportRead();
     return super.success;
   }
 
   @override
   set success(bool value) {
-    _$successAtom.context.conditionallyRunInAction(() {
+    _$successAtom.reportWrite(value, super.success, () {
       super.success = value;
-      _$successAtom.reportChanged();
-    }, _$successAtom, name: '${_$successAtom.name}_set');
+    });
   }
 
   final _$loadingAtom = Atom(name: '_ActivitiesStore.loading');
 
   @override
   bool get loading {
-    _$loadingAtom.context.enforceReadPolicy(_$loadingAtom);
-    _$loadingAtom.reportObserved();
+    _$loadingAtom.reportRead();
     return super.loading;
   }
 
   @override
   set loading(bool value) {
-    _$loadingAtom.context.conditionallyRunInAction(() {
+    _$loadingAtom.reportWrite(value, super.loading, () {
       super.loading = value;
-      _$loadingAtom.reportChanged();
-    }, _$loadingAtom, name: '${_$loadingAtom.name}_set');
+    });
   }
 
-  final _$sendDataAsyncAction = AsyncAction('sendData');
+  final _$sendDataAsyncAction = AsyncAction('_ActivitiesStore.sendData');
 
   @override
   Future<dynamic> sendData() {
     return _$sendDataAsyncAction.run(() => super.sendData());
   }
 
-  final _$closeAsyncAction = AsyncAction('close');
+  final _$closeAsyncAction = AsyncAction('_ActivitiesStore.close');
 
   @override
   Future<dynamic> close() {
     return _$closeAsyncAction.run(() => super.close());
+  }
+
+  @override
+  String toString() {
+    return '''
+success: ${success},
+loading: ${loading}
+    ''';
   }
 }
