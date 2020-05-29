@@ -119,22 +119,26 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
             children: [
               Flexible(
                 child: Observer(
-                  builder: (context) => ListView(
-                    reverse: true,
-                    children: store.selectedMessages
-                        .indexed()
-                        .map(
-                          (e) => MyListTile(
-                            text: e.value.text,
-                            subtitle: e.value.caption,
-                            place:
-                                store.chatMessagePlaces[e.value.id.resourceId],
-                            left: store.selectedMyParticipation.id.resourceId ==
-                                e.value.authorId.resourceId,
-                            status: e.value.status,
-                          ),
-                        )
-                        .toList(),
+                  builder: (context) => Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: ListView(
+                      reverse: true,
+                      children: store.selectedMessages
+                          .indexed()
+                          .map(
+                            (e) => MyListTile(
+                              text: e.value.text,
+                              subtitle: e.value.caption,
+                              place: store
+                                  .chatMessagePlaces[e.value.id.resourceId],
+                              left:
+                                  store.selectedMyParticipation.id.resourceId ==
+                                      e.value.authorId.resourceId,
+                              status: e.value.status,
+                            ),
+                          )
+                          .toList(),
+                    ),
                   ),
                 ),
               ),
@@ -186,7 +190,6 @@ class OverlappedImages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final overlap = 25;
-
     final items = profiles
         .map((e) => CircleAvatar(
               backgroundImage: NetworkImage(e.profile.profilePictureUrl),
@@ -234,12 +237,19 @@ class MyListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(
+        top: place == ChatMessagePlace.FIRST ||
+                place == ChatMessagePlace.LAST_SINGLE
+            ? 20
+            : 0,
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment:
             left ? CrossAxisAlignment.start : CrossAxisAlignment.end,
         children: <Widget>[
           Container(
+            width: MediaQuery.of(context).size.width * 0.6,
             padding: left
                 ? EdgeInsets.only(
                     left: 15,
@@ -253,9 +263,6 @@ class MyListTile extends StatelessWidget {
                     top: 10,
                     bottom: 10,
                   ),
-            margin: left
-                ? EdgeInsets.only(top: 5, bottom: 0, right: 50)
-                : EdgeInsets.only(top: 5, bottom: 0, left: 50),
             decoration: BoxDecoration(
               borderRadius: calculateBorderRadius(left, place),
               color: Theme.of(context).colorScheme.surface,
@@ -266,11 +273,12 @@ class MyListTile extends StatelessWidget {
             ),
           ),
           Visibility(
-            visible: false,
+            visible: place == ChatMessagePlace.LAST ||
+                place == ChatMessagePlace.LAST_SINGLE,
             child: Padding(
               padding: left
-                  ? const EdgeInsets.only(left: 15, bottom: 20)
-                  : const EdgeInsets.only(right: 15, bottom: 20),
+                  ? const EdgeInsets.only(top: 5, left: 15, bottom: 20)
+                  : const EdgeInsets.only(top: 5, right: 15, bottom: 20),
               child: Text(
                 subtitle,
                 style: Theme.of(context).textTheme.caption,

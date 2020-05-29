@@ -3,6 +3,7 @@ import 'package:feat_auth/feat_auth.dart';
 import 'package:lib_di/lib_di.dart';
 import 'package:lib_services/lib_services.dart';
 import 'package:mobx/mobx.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:uuid/uuid.dart';
 import 'package:more/collection.dart';
 import 'package:more/iterable.dart';
@@ -15,7 +16,7 @@ abstract class _ChatStore with Store {
   final ErrorStore errorStore;
   final UserStore userStore;
   final ChatClient _client;
-  final _inputController = StreamController<StreamChatEvent>();
+  final _inputController = BehaviorSubject<StreamChatEvent>();
 
   StreamSink<StreamChatEvent> get _input => _inputController.sink;
 
@@ -143,15 +144,12 @@ abstract class _ChatStore with Store {
   Future sendMessage(String text) async {
     final timestamp = Timestamp.fromDateTime(DateTime.now());
     final id = Identifier()..resourceId = Uuid().v4();
-    final participationId = Identifier()
-      ..resourceType = 'chat_room_participants'
-      ..resourceId = selectedMyParticipation.id.resourceId;
     final payload = ChatMessage()
       ..createdAt = timestamp
       ..updatedAt = timestamp
       ..id = id
       ..status = ChatMessage_Status.NOT_DELIVERED
-      ..authorId = participationId
+      ..authorId = selectedMyParticipation.id
       ..text = text;
     final event = EventSendMessage()..message = payload;
     final streamEvent = StreamChatEvent()..sendMessage = event;
