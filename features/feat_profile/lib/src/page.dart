@@ -23,6 +23,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<ProfileStore>(context);
+    final appState = Provider.of<AppStateNotifier>(context);
     return CupertinoPageScaffold(
       child: CustomScrollView(
         slivers: <Widget>[
@@ -32,6 +33,23 @@ class _ProfilePageState extends State<ProfilePage> {
               style: Theme.of(context).textTheme.headline5,
             ),
             backgroundColor: Colors.black26,
+            trailing: Material(
+              color: Colors.transparent,
+              child: IconButton(
+                icon: Icon(
+                  appState.mode == ThemeMode.light
+                      ? Icons.brightness_3
+                      : Icons.wb_sunny,
+                ),
+                onPressed: () {
+                  appState.updateTheme(
+                    appState.mode == ThemeMode.dark
+                        ? ThemeMode.light
+                        : ThemeMode.dark,
+                  );
+                },
+              ),
+            ),
           ),
           SliverToBoxAdapter(
             child: Material(
@@ -78,7 +96,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     onTap: () async {
                       await store.deleteUser();
-                      await Navigator.of(context).pushReplacementNamed('/splash');
+                      await Navigator.of(context)
+                          .pushReplacementNamed('/splash');
                     },
                   ),
                   ListTile(
@@ -88,7 +107,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     onTap: () async {
                       await store.signOut();
-                      await Navigator.of(context).pushReplacementNamed('/splash');
+                      await Navigator.of(context)
+                          .pushReplacementNamed('/splash');
                     },
                   ),
                   KsSpace.l(),

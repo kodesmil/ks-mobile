@@ -46,14 +46,11 @@ class _ChatPageState extends State<ChatPage> {
                             .map(
                               (e) => ListTile(
                                 title: Text(
-                                  e.name ??
-                                      e.participants
-                                          .map((e) => e.profile.firstName)
-                                          .join(', '),
+                                  e.tileTitle,
                                   style: Theme.of(context).textTheme.bodyText2,
                                 ),
                                 subtitle: Text(
-                                  '${e.participants.length} participant/s',
+                                  e.tileCaption,
                                   style: Theme.of(context).textTheme.caption,
                                 ),
                                 onTap: () => navigateToChatRoomPage(
@@ -129,16 +126,12 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                         .map(
                           (e) => MyListTile(
                             text: e.value.text,
-                            subtitle: '${e.value.author.profile.firstName}',
-                            detailed: e.index > 0
-                                ? store.selectedMessages
-                                        ?.elementAt(e.index - 1)
-                                        ?.authorId
-                                        ?.resourceId !=
-                                    e.value.authorId.resourceId
-                                : true,
-                            left: store.userStore.user.uid ==
+                            subtitle: e.value.caption,
+                            place:
+                                store.chatMessagePlaces[e.value.id.resourceId],
+                            left: store.selectedMyParticipation.id.resourceId ==
                                 e.value.authorId.resourceId,
+                            status: e.value.status,
                           ),
                         )
                         .toList(),
@@ -198,7 +191,7 @@ class OverlappedImages extends StatelessWidget {
         .map((e) => CircleAvatar(
               backgroundImage: NetworkImage(e.profile.profilePictureUrl),
               child: Text(
-                '${e.profile.firstName[0]} ${e.profile.lastName[0]}',
+                e.profile.initials,
                 style: Theme.of(context).textTheme.caption,
               ),
             ))
@@ -226,14 +219,16 @@ class MyListTile extends StatelessWidget {
   final String text;
   final String subtitle;
   final bool left;
-  final bool detailed;
+  final ChatMessagePlace place;
+  final ChatMessage_Status status;
 
   const MyListTile({
     Key key,
     this.text,
     this.subtitle,
     this.left = true,
-    this.detailed,
+    this.place,
+    this.status,
   }) : super(key: key);
 
   @override
@@ -259,12 +254,10 @@ class MyListTile extends StatelessWidget {
                     bottom: 10,
                   ),
             margin: left
-                ? EdgeInsets.only(top: 5, bottom: detailed ? 5 : 0, right: 50)
-                : EdgeInsets.only(top: 5, bottom: detailed ? 5 : 0, left: 50),
+                ? EdgeInsets.only(top: 5, bottom: 0, right: 50)
+                : EdgeInsets.only(top: 5, bottom: 0, left: 50),
             decoration: BoxDecoration(
-              borderRadius: left
-                  ? BorderRadius.only(topRight: Radius.circular(10))
-                  : BorderRadius.only(topLeft: Radius.circular(10)),
+              borderRadius: calculateBorderRadius(left, place),
               color: Theme.of(context).colorScheme.surface,
             ),
             child: Text(
@@ -273,7 +266,7 @@ class MyListTile extends StatelessWidget {
             ),
           ),
           Visibility(
-            visible: detailed,
+            visible: false,
             child: Padding(
               padding: left
                   ? const EdgeInsets.only(left: 15, bottom: 20)
@@ -284,8 +277,68 @@ class MyListTile extends StatelessWidget {
               ),
             ),
           ),
+          Visibility(
+            visible: false,
+            child: Padding(
+              padding: left
+                  ? const EdgeInsets.only(left: 15, bottom: 20)
+                  : const EdgeInsets.only(right: 15, bottom: 20),
+              child: Text(
+                status == ChatMessage_Status.DELIVERED
+                    ? 'Delivered'
+                    : 'Not delivered',
+                style: Theme.of(context).textTheme.caption,
+              ),
+            ),
+          ),
         ],
       ),
     );
+  }
+
+  BorderRadius calculateBorderRadius(bool left, ChatMessagePlace place) {
+    if (left) {
+      switch (place) {
+        case ChatMessagePlace.MIDDLE:
+          return BorderRadius.zero;
+        case ChatMessagePlace.FIRST:
+          return BorderRadius.only(
+            topRight: Radius.circular(10),
+            topLeft: Radius.circular(10),
+          );
+        case ChatMessagePlace.LAST:
+          return BorderRadius.only(
+            bottomRight: Radius.circular(10),
+          );
+        case ChatMessagePlace.LAST_SINGLE:
+          return BorderRadius.only(
+            topRight: Radius.circular(10),
+            topLeft: Radius.circular(10),
+            bottomRight: Radius.circular(10),
+          );
+      }
+    } else {
+      switch (place) {
+        case ChatMessagePlace.MIDDLE:
+          return BorderRadius.zero;
+        case ChatMessagePlace.FIRST:
+          return BorderRadius.only(
+            topRight: Radius.circular(10),
+            topLeft: Radius.circular(10),
+          );
+        case ChatMessagePlace.LAST:
+          return BorderRadius.only(
+            bottomLeft: Radius.circular(10),
+          );
+          break;
+        case ChatMessagePlace.LAST_SINGLE:
+          return BorderRadius.only(
+            topRight: Radius.circular(10),
+            topLeft: Radius.circular(10),
+            bottomLeft: Radius.circular(10),
+          );
+      }
+    }
+    return null;
   }
 }

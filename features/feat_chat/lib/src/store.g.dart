@@ -9,6 +9,21 @@ part of 'store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ChatStore on _ChatStore, Store {
+  Computed<ChatRoomParticipant> _$selectedMyParticipationComputed;
+
+  @override
+  ChatRoomParticipant get selectedMyParticipation =>
+      (_$selectedMyParticipationComputed ??= Computed<ChatRoomParticipant>(
+              () => super.selectedMyParticipation))
+          .value;
+  Computed<Map<String, ChatMessagePlace>> _$chatMessagePlacesComputed;
+
+  @override
+  Map<String, ChatMessagePlace> get chatMessagePlaces =>
+      (_$chatMessagePlacesComputed ??= Computed<Map<String, ChatMessagePlace>>(
+              () => super.chatMessagePlaces))
+          .value;
+
   final _$roomsAtom = Atom(name: '_ChatStore.rooms');
 
   @override

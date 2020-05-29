@@ -11,3 +11,6 @@ export 'src/generated/google/protobuf/timestamp.pb.dart';
 
 export 'src/generated/github.com/infobloxopen/atlas-app-toolkit/query/collection_operators.pb.dart';
 export 'src/generated/github.com/infobloxopen/atlas-app-toolkit/rpc/resource/resource.pb.dart';
+
+export 'src/chat.dart';
+export 'src/profile.dart';

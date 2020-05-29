@@ -10,12 +10,12 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 class ChatMessage_Status extends $pb.ProtobufEnum {
-  static const ChatMessage_Status NOT_DELIVERED = ChatMessage_Status._(0, 'NOT_DELIVERED');
-  static const ChatMessage_Status DELIVERED = ChatMessage_Status._(1, 'DELIVERED');
+  static const ChatMessage_Status DELIVERED = ChatMessage_Status._(0, 'DELIVERED');
+  static const ChatMessage_Status NOT_DELIVERED = ChatMessage_Status._(1, 'NOT_DELIVERED');
 
   static const $core.List<ChatMessage_Status> values = <ChatMessage_Status> [
-    NOT_DELIVERED,
     DELIVERED,
+    NOT_DELIVERED,
   ];
 
   static final $core.Map<$core.int, ChatMessage_Status> _byValue = $pb.ProtobufEnum.initByValue(values);

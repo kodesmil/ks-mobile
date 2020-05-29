@@ -26,7 +26,7 @@ class ChatMessage extends $pb.GeneratedMessage {
     ..aOS(4, 'text')
     ..aOM<ChatRoomParticipant>(5, 'author', subBuilder: ChatRoomParticipant.create)
     ..aOM<$6.Identifier>(6, 'authorId', subBuilder: $6.Identifier.create)
-    ..e<ChatMessage_Status>(7, 'status', $pb.PbFieldType.OE, defaultOrMaker: ChatMessage_Status.NOT_DELIVERED, valueOf: ChatMessage_Status.valueOf, enumValues: ChatMessage_Status.values)
+    ..e<ChatMessage_Status>(7, 'status', $pb.PbFieldType.OE, defaultOrMaker: ChatMessage_Status.DELIVERED, valueOf: ChatMessage_Status.valueOf, enumValues: ChatMessage_Status.values)
     ..hasRequiredFields = false
   ;
 

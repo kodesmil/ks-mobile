@@ -6,6 +6,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:kodesmil_locale/localizations.dart';
 import 'package:lib_lego/lib_lego.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:provider/provider.dart';
 
 import 'routes.dart';
 
@@ -30,13 +32,16 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return AppInjector(
-      child: MaterialApp(
-        localizationsDelegates: KsLoc.localizationsDelegates,
-        supportedLocales: KsLoc.supportedLocales,
-        theme: KsTheme.ablyLight(),
-        darkTheme: KsTheme.ablyDark(),
-        initialRoute: '/splash',
-        routes: Routes.routes,
+      child: Consumer<AppStateNotifier>(
+        builder: (context, appState, child) => MaterialApp(
+            localizationsDelegates: KsLoc.localizationsDelegates,
+            supportedLocales: KsLoc.supportedLocales,
+            theme: KsTheme.ablyLight(),
+            darkTheme: KsTheme.ablyDark(),
+            initialRoute: '/splash',
+            routes: Routes.routes,
+            themeMode: appState.mode,
+          ),
       ),
     );
   }

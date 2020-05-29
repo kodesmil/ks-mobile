@@ -23,8 +23,8 @@ const ChatMessage$json = const {
 const ChatMessage_Status$json = const {
   '1': 'Status',
   '2': const [
-    const {'1': 'NOT_DELIVERED', '2': 0},
-    const {'1': 'DELIVERED', '2': 1},
+    const {'1': 'DELIVERED', '2': 0},
+    const {'1': 'NOT_DELIVERED', '2': 1},
   ],
 };
 

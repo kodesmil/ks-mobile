@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:grpc/grpc.dart';
 import 'package:lib_di/lib_di.dart';
+import 'package:lib_lego/lib_lego.dart';
 import 'package:lib_services/lib_services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -38,6 +39,9 @@ class _AppInjectorState extends State<AppInjector> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(
+          create: (_) => AppStateNotifier(),
+        ),
         ProxyProvider0(
           update: (_, __) => FirebaseAuth.instance,
         ),
@@ -170,7 +174,8 @@ class _AppInjectorState extends State<AppInjector> {
             dep,
           ),
         ),
-        ProxyProvider2<UserStore, NotificationSettingsClient, NotificationSettingsStore>(
+        ProxyProvider2<UserStore, NotificationSettingsClient,
+            NotificationSettingsStore>(
           update: (_, dep, dep2, __) => NotificationSettingsStore(
             ErrorStore(),
             dep,

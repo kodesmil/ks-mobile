@@ -3,6 +3,15 @@ import 'package:flutter/material.dart';
 
 import 'color_schemes.dart';
 
+class AppStateNotifier extends ChangeNotifier {
+  ThemeMode mode;
+
+  void updateTheme(ThemeMode mode) {
+    this.mode = mode;
+    notifyListeners();
+  }
+}
+
 class KsTheme {
   static ThemeData motimLight() => KsTheme.base(
         KsColorScheme.motimLight(),
