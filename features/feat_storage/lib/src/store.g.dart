@@ -12,7 +12,7 @@ mixin _$StorageStore on _StorageStore, Store {
   final _$uploadAsyncAction = AsyncAction('_StorageStore.upload');
 
   @override
-  Future<dynamic> upload(File file) {
+  Future<String> upload(File file) {
     return _$uploadAsyncAction.run(() => super.upload(file));
   }
 

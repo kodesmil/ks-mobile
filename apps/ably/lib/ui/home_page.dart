@@ -29,8 +29,9 @@ class _HomePageState extends State<HomePage> {
       JournalPage(),
       HelloPage(),
       ChatPage(),
-      StorageWidget(),
+      ChatPage(),
     ];
+    final store = Provider.of<StorageStore>(context);
     return NotificationContainer(
       child: CupertinoTabScaffold(
         backgroundColor: Colors.black26,

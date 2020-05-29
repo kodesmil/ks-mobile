@@ -34,8 +34,7 @@ abstract class _ProfileStore with Store {
     if (userStore.user != null) {
       try {
         final id = Identifier()..resourceId = userStore.user.uid;
-        final request = ReadProfileRequest()
-          ..id = id;
+        final request = ReadProfileRequest()..id = id;
         final response = await client.read(request);
         profile = response.result;
       } catch (e) {
@@ -61,7 +60,12 @@ abstract class _ProfileStore with Store {
   }
 
   @action
-  Future updateProfile() async {
+  Future updateProfile({
+    String url,
+  }) async {
+    if (url != null) {
+      profile = profile..profilePictureUrl = url;
+    }
     final request = UpdateProfileRequest()..payload = profile;
     final response = await client.update(request);
     profile = response.result;

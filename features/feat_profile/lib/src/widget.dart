@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:lib_lego/lib_lego.dart';
 import 'package:provider/provider.dart';
+import 'package:feat_storage/feat_storage.dart';
 
 import 'store.dart';
 
-class ProfileWidget extends StatefulWidget {
-  ProfileWidget();
+class ProfileSettingsTile extends StatefulWidget {
+  ProfileSettingsTile();
 
   @override
-  _ProfileWidgetState createState() => _ProfileWidgetState();
+  _ProfileSettingsTileState createState() => _ProfileSettingsTileState();
 }
 
-class _ProfileWidgetState extends State<ProfileWidget> {
-
+class _ProfileSettingsTileState extends State<ProfileSettingsTile> {
   final _emailController = TextEditingController();
 
   @override
@@ -29,15 +29,18 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<ProfileStore>(context);
-    return Column(
-      children: <Widget>[
-        Observer(
-          builder: (context) => Text(
-            'Welcome',
-            style: Theme.of(context).textTheme.bodyText1,
+    return Observer(
+      builder: (context) => ListTile(
+        leading: Text(store.profile.firstName + " " + store.profile.lastName),
+        trailing: StorageWidget(
+          onFileUploaded: (url) => store.updateProfile(url: url),
+          child: CircleAvatar(
+            backgroundImage: NetworkImage(
+              store.profile.profilePictureUrl,
+            ),
           ),
         ),
-      ],
+      ),
     );
   }
 }

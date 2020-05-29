@@ -45,6 +45,11 @@ class _AppInjectorState extends State<AppInjector> {
         ProxyProvider0(
           update: (_, __) => FirebaseAuth.instance,
         ),
+        ProxyProvider0(
+          update: (_, __) => StorageStore(
+            ErrorStore(),
+          ),
+        ),
         ProxyProvider<FirebaseAuth, UserStore>(
           update: (_, dep, old) {
             return old ?? UserStore(dep);
@@ -194,11 +199,6 @@ class _AppInjectorState extends State<AppInjector> {
           update: (_, dep, __) => FeedStore(
             ErrorStore(),
             dep,
-          ),
-        ),
-        ProxyProvider0(
-          update: (_, __) => StorageStore(
-            ErrorStore(),
           ),
         ),
         ProxyProvider2<UserStore, ChatClient, ChatStore>(

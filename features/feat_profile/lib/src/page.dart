@@ -56,6 +56,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Column(
                 children: [
                   KsSpace.xs(),
+                  ProfileSettingsTile(),
                   NotificationsSettings(),
                   ListTile(
                     leading: Text(

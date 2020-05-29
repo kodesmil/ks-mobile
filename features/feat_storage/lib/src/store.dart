@@ -16,13 +16,14 @@ abstract class _StorageStore with Store {
   );
 
   @action
-  Future upload(File file) async {
+  Future<String> upload(File file) async {
     final storageReference = FirebaseStorage().ref().child('profile_pictures');
-    final uploadTask = storageReference.putFile(file);
+    final uploadTask = await storageReference.putFile(file);
     final streamSubscription = uploadTask.events.listen((event) {
       print('EVENT ${event.type}');
     });
     await uploadTask.onComplete;
     await streamSubscription.cancel();
+    return await storageReference.getDownloadURL();
   }
 }

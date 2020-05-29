@@ -80,8 +80,8 @@ mixin _$ProfileStore on _ProfileStore, Store {
   final _$updateProfileAsyncAction = AsyncAction('_ProfileStore.updateProfile');
 
   @override
-  Future<dynamic> updateProfile() {
-    return _$updateProfileAsyncAction.run(() => super.updateProfile());
+  Future<dynamic> updateProfile({String url}) {
+    return _$updateProfileAsyncAction.run(() => super.updateProfile(url: url));
   }
 
   final _$signOutAsyncAction = AsyncAction('_ProfileStore.signOut');
