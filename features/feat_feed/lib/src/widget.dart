@@ -145,14 +145,9 @@ Future newPageStart(BuildContext context, FeedArticle article) {
     CupertinoPageRoute<void>(
       builder: (BuildContext context) {
         return CupertinoPageScaffold(
-          navigationBar: CupertinoNavigationBar(
-            middle: Text(
-              article.title,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline6,
-            ),
-            backgroundColor: Colors.black26,
+          navigationBar: KsSmallNavigationBar(
+            context: context,
+            title: article.title,
           ),
           child: SafeArea(
             child: Markdown(

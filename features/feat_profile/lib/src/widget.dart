@@ -35,9 +35,7 @@ class _ProfileSettingsTileState extends State<ProfileSettingsTile> {
         trailing: StorageWidget(
           onFileUploaded: (url) => store.updateProfile(url: url),
           child: CircleAvatar(
-            backgroundImage: NetworkImage(
-              store.profile.profilePictureUrl,
-            ),
+            backgroundImage: NetworkImage(store.profile.profilePictureUrl),
           ),
         ),
       ),

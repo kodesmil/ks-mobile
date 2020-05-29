@@ -10,13 +10,7 @@ class JournalPage extends StatelessWidget {
     return CupertinoPageScaffold(
       child: CustomScrollView(
         slivers: <Widget>[
-          CupertinoSliverNavigationBar(
-            largeTitle: Text(
-              'Journal',
-              style: Theme.of(context).textTheme.headline5,
-            ),
-            backgroundColor: Colors.black26,
-          ),
+          KsNavigationBar(title: 'Journal'),
           SliverToBoxAdapter(
             child: Material(
               child: Column(

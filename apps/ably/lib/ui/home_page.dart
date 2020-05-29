@@ -34,11 +34,13 @@ class _HomePageState extends State<HomePage> {
     final store = Provider.of<StorageStore>(context);
     return NotificationContainer(
       child: CupertinoTabScaffold(
-        backgroundColor: Colors.black26,
         tabBar: CupertinoTabBar(
-          backgroundColor: Colors.black38,
-          activeColor: Colors.black,
-          inactiveColor: Colors.white,
+          backgroundColor:
+              Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+          activeColor:
+              Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
+          inactiveColor:
+              Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
           currentIndex: 2,
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.store)),

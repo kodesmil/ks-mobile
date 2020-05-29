@@ -79,6 +79,7 @@ class KsTheme {
       dividerTheme: DividerThemeData(
         thickness: 1,
       ),
+      disabledColor: colorScheme.background.withAlpha(128),
       hintColor: colorScheme.onBackground,
       cursorColor: colorScheme.onSurface,
       backgroundColor: colorScheme.background,
@@ -92,11 +93,17 @@ class KsTheme {
       popupMenuTheme: PopupMenuThemeData(
         color: Colors.white,
       ),
+      bottomAppBarTheme: BottomAppBarTheme(color: colorScheme.primary),
       buttonTheme: ButtonThemeData(
         shape: StadiumBorder(),
         height: 40,
         textTheme: ButtonTextTheme.primary,
         colorScheme: colorScheme,
+      ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: colorScheme.primary,
+        unselectedItemColor: colorScheme.background.withAlpha(128),
+        selectedItemColor: colorScheme.background,
       ),
       inputDecorationTheme: InputDecorationTheme(
         labelStyle: TextStyle(
@@ -104,7 +111,7 @@ class KsTheme {
           color: colorScheme.onBackground,
         ),
         filled: true,
-        fillColor: colorScheme.surface,
+        fillColor: Colors.white60,
         border: InputBorder.none,
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(

@@ -24,20 +24,47 @@ class StorageWidget extends StatefulWidget {
 class _StorageWidgetState extends State<StorageWidget> {
   final picker = ImagePicker();
 
-  Future<PickedFile> getImage() async {
-    return await picker.getImage(source: ImageSource.camera);
+  Future<PickedFile> getImage(ImageSource source) async {
+    return await picker.getImage(source: source);
   }
 
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<StorageStore>(context);
     return GestureDetector(
-      onTap: () async {
-        final picked = await getImage();
-        final url = await store.upload(File(picked.path));
-        widget.onFileUploaded(url);
-      },
+      onTap: () => selectPicture(context, store),
       child: widget.child,
     );
+  }
+
+  Future<void> selectPicture(BuildContext context, StorageStore store) async {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            title: Text('Select profile picture'),
+            titlePadding: EdgeInsets.only(top: 25, left: 15),
+            children: <Widget>[
+              ListTile(
+                leading: Text('From gallery'),
+                onTap: () async {
+                  final picked = await getImage(ImageSource.gallery);
+                  if (picked == null) return;
+                  final url = await store.upload(File(picked.path));
+                  widget.onFileUploaded(url);
+                },
+              ),
+              ListTile(
+                leading: Text('Take new picture'),
+                onTap: () async {
+                  final picked = await getImage(ImageSource.camera);
+                  if (picked == null) return;
+                  final url = await store.upload(File(picked.path));
+                  widget.onFileUploaded(url);
+                },
+              )
+            ],
+          );
+        });
   }
 }

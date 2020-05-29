@@ -27,13 +27,7 @@ class _ChatPageState extends State<ChatPage> {
     return CupertinoPageScaffold(
       child: CustomScrollView(
         slivers: <Widget>[
-          CupertinoSliverNavigationBar(
-            largeTitle: Text(
-              'Chat',
-              style: Theme.of(context).textTheme.headline5,
-            ),
-            backgroundColor: Colors.black26,
-          ),
+          KsNavigationBar(title: 'Chat'),
           SliverToBoxAdapter(
             child: Material(
               child: Column(
@@ -109,10 +103,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
   Widget build(BuildContext context) {
     final store = Provider.of<ChatStore>(context);
     return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        middle: Text('Messages'),
-        backgroundColor: Colors.black26,
-      ),
+      navigationBar: KsSmallNavigationBar(context: context, title: 'Messages'),
       child: SafeArea(
         child: Material(
           child: Column(
@@ -127,12 +118,13 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                           .indexed()
                           .map(
                             (e) => MyListTile(
+                              message: e.value,
                               text: e.value.text,
                               subtitle: e.value.caption,
                               place: store
                                   .chatMessagePlaces[e.value.id.resourceId],
                               left:
-                                  store.selectedMyParticipation.id.resourceId ==
+                                  store.selectedMyParticipation.id.resourceId !=
                                       e.value.authorId.resourceId,
                               status: e.value.status,
                             ),
@@ -224,6 +216,7 @@ class MyListTile extends StatelessWidget {
   final bool left;
   final ChatMessagePlace place;
   final ChatMessage_Status status;
+  final ChatMessage message;
 
   const MyListTile({
     Key key,
@@ -232,6 +225,7 @@ class MyListTile extends StatelessWidget {
     this.left = true,
     this.place,
     this.status,
+    this.message,
   }) : super(key: key);
 
   @override
@@ -265,23 +259,35 @@ class MyListTile extends StatelessWidget {
                   ),
             decoration: BoxDecoration(
               borderRadius: calculateBorderRadius(left, place),
-              color: Theme.of(context).colorScheme.surface,
+              color: Theme.of(context).colorScheme.surface.withAlpha(128),
             ),
             child: Text(
               text,
               style: Theme.of(context).textTheme.bodyText2,
             ),
           ),
-          Visibility(
-            visible: place == ChatMessagePlace.LAST ||
-                place == ChatMessagePlace.LAST_SINGLE,
-            child: Padding(
-              padding: left
-                  ? const EdgeInsets.only(top: 5, left: 15, bottom: 20)
-                  : const EdgeInsets.only(top: 5, right: 15, bottom: 20),
-              child: Text(
-                subtitle,
-                style: Theme.of(context).textTheme.caption,
+          Padding(
+            padding: const EdgeInsets.only(top: 5, bottom: 10),
+            child: Visibility(
+              visible: left &&
+                  (place == ChatMessagePlace.LAST ||
+                      place == ChatMessagePlace.LAST_SINGLE),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CircleAvatar(
+                    radius: 10,
+                    backgroundImage:
+                        NetworkImage(message.author.profile.profilePictureUrl),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5),
+                    child: Text(
+                      subtitle,
+                      style: Theme.of(context).textTheme.caption,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

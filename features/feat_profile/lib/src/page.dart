@@ -23,34 +23,10 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<ProfileStore>(context);
-    final appState = Provider.of<AppStateNotifier>(context);
     return CupertinoPageScaffold(
       child: CustomScrollView(
         slivers: <Widget>[
-          CupertinoSliverNavigationBar(
-            largeTitle: Text(
-              'Profile',
-              style: Theme.of(context).textTheme.headline5,
-            ),
-            backgroundColor: Colors.black26,
-            trailing: Material(
-              color: Colors.transparent,
-              child: IconButton(
-                icon: Icon(
-                  appState.mode == ThemeMode.light
-                      ? Icons.brightness_3
-                      : Icons.wb_sunny,
-                ),
-                onPressed: () {
-                  appState.updateTheme(
-                    appState.mode == ThemeMode.dark
-                        ? ThemeMode.light
-                        : ThemeMode.dark,
-                  );
-                },
-              ),
-            ),
-          ),
+          KsNavigationBar(title: 'Profile'),
           SliverToBoxAdapter(
             child: Material(
               child: Column(
