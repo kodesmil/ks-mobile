@@ -29,7 +29,6 @@ class _HomePageState extends State<HomePage> {
       JournalPage(),
       HelloPage(),
       ChatPage(),
-      ChatPage(),
     ];
     final store = Provider.of<StorageStore>(context);
     return NotificationContainer(
@@ -43,11 +42,10 @@ class _HomePageState extends State<HomePage> {
               Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
           currentIndex: 2,
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.store)),
-            BottomNavigationBarItem(icon: Icon(Icons.hot_tub)),
-            BottomNavigationBarItem(icon: Icon(Icons.home)),
-            BottomNavigationBarItem(icon: Icon(Icons.people)),
-            BottomNavigationBarItem(icon: Icon(Icons.ac_unit)),
+            BottomNavigationBarItem(icon: Icon(Icons.person), title: Text('Profile')),
+            BottomNavigationBarItem(icon: Icon(Icons.calendar_today), title: Text('Journal')),
+            BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Feed')),
+            BottomNavigationBarItem(icon: Icon(Icons.people), title: Text('Chat')),
           ],
         ),
         tabBuilder: (BuildContext context, int index) {

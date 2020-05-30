@@ -18,7 +18,6 @@ class KsNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appState = Provider.of<AppStateNotifier>(context);
     return CupertinoSliverNavigationBar(
       largeTitle: Text(
         title,
@@ -28,20 +27,6 @@ class KsNavigationBar extends StatelessWidget {
       middle: Container(),
       trailing: Material(
         color: Colors.transparent,
-        child: IconButton(
-          icon: Icon(
-            Theme.of(context).brightness == Brightness.light
-                ? Icons.brightness_3
-                : Icons.wb_sunny,
-          ),
-          onPressed: () {
-            appState.updateTheme(
-              Theme.of(context).brightness == Brightness.dark
-                  ? ThemeMode.light
-                  : ThemeMode.dark,
-            );
-          },
-        ),
       ),
     );
   }

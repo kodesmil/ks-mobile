@@ -23,6 +23,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<ProfileStore>(context);
+    final appState = Provider.of<AppStateNotifier>(context);
     return CupertinoPageScaffold(
       child: CustomScrollView(
         slivers: <Widget>[
@@ -34,6 +35,26 @@ class _ProfilePageState extends State<ProfilePage> {
                   KsSpace.xs(),
                   ProfileSettingsTile(),
                   NotificationsSettings(),
+                  ListTile(
+                    leading: Text(
+                      'Application',
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                  ),
+                  SwitchListTile(
+                    title: Text(
+                      'Dark Theme',
+                      style: Theme.of(context).textTheme.bodyText2,
+                    ),
+                    value: appState != null
+                        ? appState.mode == ThemeMode.dark
+                        : Brightness.dark == Theme.of(context).brightness,
+                    onChanged: (value) {
+                      appState.updateTheme(
+                        value ? ThemeMode.dark : ThemeMode.light,
+                      );
+                    },
+                  ),
                   ListTile(
                     leading: Text(
                       'Support',

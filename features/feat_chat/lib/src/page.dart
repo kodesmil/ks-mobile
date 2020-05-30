@@ -259,7 +259,9 @@ class MyListTile extends StatelessWidget {
                   ),
             decoration: BoxDecoration(
               borderRadius: calculateBorderRadius(left, place),
-              color: Theme.of(context).colorScheme.surface.withAlpha(128),
+              color: left
+                  ? Theme.of(context).colorScheme.secondary.withAlpha(64)
+                  : Theme.of(context).colorScheme.primary.withAlpha(16),
             ),
             child: Text(
               text,

@@ -80,11 +80,11 @@ class _LoginPageState extends State<LoginPage> {
                     style: Theme.of(context).textTheme.headline6,
                   ),
                   Text(
-                    'motim fit',
+                    'Swanly Care',
                     style: Theme.of(context).textTheme.headline2,
                   ),
                   Text(
-                    'find your motivation',
+                    'women\'s health platform',
                     style: Theme.of(context).textTheme.bodyText2,
                   ),
                 ],

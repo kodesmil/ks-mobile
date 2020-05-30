@@ -48,6 +48,7 @@ class _StorageWidgetState extends State<StorageWidget> {
               ListTile(
                 leading: Text('From gallery'),
                 onTap: () async {
+                  Navigator.pop(context);
                   final picked = await getImage(ImageSource.gallery);
                   if (picked == null) return;
                   final url = await store.upload(File(picked.path));
@@ -57,6 +58,7 @@ class _StorageWidgetState extends State<StorageWidget> {
               ListTile(
                 leading: Text('Take new picture'),
                 onTap: () async {
+                  Navigator.pop(context);
                   final picked = await getImage(ImageSource.camera);
                   if (picked == null) return;
                   final url = await store.upload(File(picked.path));

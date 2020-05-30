@@ -32,18 +32,18 @@ class KsColorScheme extends ColorScheme {
         );
 
   factory KsColorScheme.motimLight() => KsColorScheme(
-        primary: const Color(0xFF272343),
-        primaryVariant: const Color(0xFF00BFA6),
-        secondary: const Color(0xFFEFF3F3),
-        secondaryVariant: const Color(0xFFFAFBFB),
-        background: const Color(0xFFfefefe),
-        surface: const Color(0xFF8edce6),
+        primary: const Color(0xFF000000),
+        primaryVariant: const Color(0xFF000000),
+        secondary: const Color(0xFF00BFA6),
+        secondaryVariant: const Color(0xFF00BFA6),
+        background: const Color(0xFFf5ffff),
+        surface: Colors.white,
         onBackground: Colors.black,
         error: Colors.black,
         onError: Colors.black,
         onPrimary: Colors.white,
         onSecondary: Colors.black,
-        onSurface: const Color(0xFF272343),
+        onSurface: const Color(0xFF000000),
         brightness: Brightness.light,
       );
 
