@@ -111,7 +111,6 @@ class KsTheme {
           color: colorScheme.onBackground,
         ),
         filled: true,
-        fillColor: Colors.white60,
         border: InputBorder.none,
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
