@@ -49,7 +49,7 @@ dependencies:
     path: ../../features/feat_journal
   feat_notifications:
     path: ../../features/feat_notifications
-  feat_feed:
+  feat_feed:K
     path: ../../features/feat_feed
   lib_di:
     path: ../../libs/lib_di
