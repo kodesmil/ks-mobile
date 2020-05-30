@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:lib_di/lib_di.dart';
 import 'package:mobx/mobx.dart';
+import 'package:uuid/uuid.dart';
 
 part 'store.g.dart';
 
@@ -17,7 +18,9 @@ abstract class _StorageStore with Store {
 
   @action
   Future<String> upload(File file) async {
-    final storageReference = FirebaseStorage().ref().child('profile_pictures');
+    final storageReference = FirebaseStorage().ref().child(
+          'profile_pictures/${Uuid().v4()}',
+        );
     final uploadTask = await storageReference.putFile(file);
     final streamSubscription = uploadTask.events.listen((event) {
       print('EVENT ${event.type}');
