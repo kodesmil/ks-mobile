@@ -25,44 +25,39 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     final store = Provider.of<ChatStore>(context);
     return CupertinoPageScaffold(
-      child: CustomScrollView(
-        slivers: <Widget>[
-          KsNavigationBar(title: 'Chat'),
-          SliverToBoxAdapter(
-            child: Material(
-              child: Column(
-                children: <Widget>[
-                  Observer(
-                    builder: (context) => ListView(
-                      shrinkWrap: true,
-                      children: store.rooms
-                          .map(
-                            (e) => ListTile(
-                              title: Text(
-                                e.tileTitle,
-                                style: Theme.of(context).textTheme.bodyText2,
-                              ),
-                              subtitle: Text(
-                                e.tileCaption,
-                                style: Theme.of(context).textTheme.caption,
-                              ),
-                              onTap: () => navigateToChatRoomPage(
-                                context,
-                                e,
-                              ),
-                              trailing: OverlappedImages(
-                                profiles: e.participants,
-                              ),
-                            ),
-                          )
-                          .toList(),
+      child: Observer(
+        builder: (context) => CustomScrollView(
+          slivers: <Widget>[
+            KsNavigationBar(title: 'Chat'),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  final e = store.rooms[index];
+                  return Material(
+                    child: ListTile(
+                      title: Text(
+                        e.tileTitle,
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
+                      subtitle: Text(
+                        e.tileCaption,
+                        style: Theme.of(context).textTheme.caption,
+                      ),
+                      onTap: () => navigateToChatRoomPage(
+                        context,
+                        e,
+                      ),
+                      trailing: OverlappedImages(
+                        profiles: e.participants,
+                      ),
                     ),
-                  ),
-                ],
+                  );
+                },
+                childCount: store.rooms.length,
               ),
-            ),
-          ),
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -118,11 +113,10 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                             message: e.value,
                             text: e.value.text,
                             subtitle: e.value.caption,
-                            place: store
-                                .chatMessagePlaces[e.value.id.resourceId],
-                            left:
-                                store.selectedMyParticipation.id.resourceId !=
-                                    e.value.authorId.resourceId,
+                            place:
+                                store.chatMessagePlaces[e.value.id.resourceId],
+                            left: store.selectedMyParticipation.id.resourceId !=
+                                e.value.authorId.resourceId,
                             status: e.value.status,
                           ),
                         )
