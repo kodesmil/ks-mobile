@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lib_lego/src/themes.dart';
 import 'package:provider/provider.dart';
 
@@ -18,15 +19,41 @@ class KsNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoSliverNavigationBar(
-      largeTitle: Text(
-        title,
-        style: Theme.of(context).textTheme.headline5,
-      ),
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      middle: Container(),
-      trailing: Material(
-        color: Colors.transparent,
+    return SliverAppBar(
+      expandedHeight: 120.0,
+      floating: true,
+      flexibleSpace: FlexibleSpaceBar(
+        titlePadding: EdgeInsets.only(
+          left: 15,
+          bottom: 5,
+          top: 20,
+        ),
+        title: FittedBox(
+          child: Text(
+            title,
+            style: Theme.of(context).textTheme.bodyText2.copyWith(
+                  fontSize: 32,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 0,
+                ),
+          ),
+        ),
+        background: Padding(
+          padding: EdgeInsets.only(
+            right: 15,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              SvgPicture.asset(
+                'assets/images/onboarding1.svg',
+                height: 100,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
