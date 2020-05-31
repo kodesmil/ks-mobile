@@ -93,6 +93,7 @@ class _JournalPageState extends State<JournalPage> {
     final dayDiff = date.difference(weekYearStartDate).inDays;
     return ((dayDiff + 1) / 7).ceil();
   }
+
   DateTime getWeekYearStartDateForDate(DateTime date) {
     var weekYear = getWeekYear(date);
     return getWeekYearStartDate(weekYear);
@@ -101,11 +102,11 @@ class _JournalPageState extends State<JournalPage> {
   int getWeekYear(DateTime date) {
     assert(date.isUtc);
     final weekYearStartDate = getWeekYearStartDate(date.year);
-    if(weekYearStartDate.isAfter(date)) {
+    if (weekYearStartDate.isAfter(date)) {
       return date.year - 1;
     }
     final nextWeekYearStartDate = getWeekYearStartDate(date.year + 1);
-    if(!date.isAfter(nextWeekYearStartDate)) {
+    if (!date.isAfter(nextWeekYearStartDate)) {
       return date.year + 1;
     }
     return date.year;
@@ -114,100 +115,147 @@ class _JournalPageState extends State<JournalPage> {
   DateTime getWeekYearStartDate(int year) {
     final firstDayOfYear = DateTime.utc(year, 1, 1);
     final dayOfWeek = firstDayOfYear.weekday;
-    if(dayOfWeek <= DateTime.thursday) {
+    if (dayOfWeek <= DateTime.thursday) {
       return firstDayOfYear.add(Duration(days: 1 - dayOfWeek));
-    }
-    else {
+    } else {
       return firstDayOfYear.add(Duration(days: 8 - dayOfWeek));
     }
   }
 
+  final controller = ScrollController();
+
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      child: CustomScrollView(
-        slivers: <Widget>[
-          KsNavigationBar(title: 'Journal'),
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: _SliverAppBarDelegate(
-              minHeight: 45,
-              maxHeight: 45,
-              child: Material(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: weekDays
-                        .map(
-                          (e) => Center(
-                            child: Text(
-                              e,
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.caption,
-                            ),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                ),
-              ),
-            ),
+    return Scaffold(
+      body: Stack(
+        children: [
+          CustomScrollView(
+            slivers: <Widget>[
+              KsNavigationBar(title: 'Journal'),
+            ],
           ),
-          SliverPadding(
-            padding: const EdgeInsets.only(top: 10, right: 10),
-            sliver: SliverStaggeredGrid.count(
-              crossAxisCount: 8,
-              staggeredTiles: days
-                  .indexed()
-                  .map((e) => StaggeredTile.count(1, e.value.verticalSpan))
-                  .toList(),
-              children: days.indexed().map(
-                (e) {
-                  switch (e.value.type) {
-                    case Type.MONTH:
-                      return Material(
-                        child: Center(
-                          child: RotatedBox(
-                            quarterTurns: -1,
-                            child: Text(
-                              df.format(e.value.time),
-                              style: Theme.of(context).textTheme.bodyText1,
+          SizedBox.expand(
+            child: DraggableScrollableSheet(
+              initialChildSize: 0.075,
+              maxChildSize: 0.5,
+              minChildSize: 0.075,
+              builder:
+                  (BuildContext context, ScrollController scrollController) {
+                return CustomScrollView(
+                  controller: scrollController,
+                  slivers: [
+                    SliverPersistentHeader(
+                      pinned: true,
+                      delegate: _SliverAppBarDelegate(
+                        minHeight: 64,
+                        maxHeight: 64,
+                        child: Material(
+                          child: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 15.0),
+                              child: Text(
+                                'Calendar',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6
+                                    .copyWith(fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
                         ),
-                      );
-                    case Type.DAY:
-                      return Material(
-                        color: e.value.time.month % 2 == 0
-                            ? Theme.of(context)
-                                .colorScheme
-                                .surface
-                                .withAlpha(128)
-                            : Theme.of(context)
-                                .colorScheme
-                                .background
-                                .withAlpha(128),
-                        child: Container(
-                          height: 150,
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              Text(
-                                e.value.time.day.toString(),
-                                style: Theme.of(context).textTheme.bodyText1,
-                              ),
-                            ],
+                      ),
+                    ),
+                    SliverPersistentHeader(
+                      pinned: true,
+                      delegate: _SliverAppBarDelegate(
+                        minHeight: 45,
+                        maxHeight: 45,
+                        child: Material(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 20, right: 20),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: weekDays
+                                  .map(
+                                    (e) => Center(
+                                      child: Text(
+                                        e,
+                                        textAlign: TextAlign.center,
+                                        style:
+                                            Theme.of(context).textTheme.caption,
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
                           ),
                         ),
-                      );
-                    case Type.EMPTY:
-                      return SizedBox();
-                  }
-                  return SizedBox();
-                },
-              ).toList(),
+                      ),
+                    ),
+                    SliverPadding(
+                      padding: const EdgeInsets.only(top: 10, right: 10),
+                      sliver: SliverStaggeredGrid.count(
+                        crossAxisCount: 8,
+                        staggeredTiles: days
+                            .indexed()
+                            .map((e) =>
+                                StaggeredTile.count(1, e.value.verticalSpan))
+                            .toList(),
+                        children: days.indexed().map(
+                          (e) {
+                            switch (e.value.type) {
+                              case Type.MONTH:
+                                return Material(
+                                  child: Center(
+                                    child: RotatedBox(
+                                      quarterTurns: -1,
+                                      child: Text(
+                                        df.format(e.value.time),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              case Type.DAY:
+                                return Material(
+                                  color: e.value.time.month % 2 == 0
+                                      ? Theme.of(context)
+                                          .colorScheme
+                                          .surface
+                                          .withAlpha(128)
+                                      : Theme.of(context)
+                                          .colorScheme
+                                          .background
+                                          .withAlpha(128),
+                                  child: Container(
+                                    height: 150,
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          e.value.time.day.toString(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              case Type.EMPTY:
+                                return SizedBox();
+                            }
+                            return SizedBox();
+                          },
+                        ).toList(),
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
           ),
         ],
