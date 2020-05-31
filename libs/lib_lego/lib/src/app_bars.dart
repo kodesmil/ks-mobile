@@ -21,7 +21,7 @@ class KsNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       expandedHeight: 120.0,
-      floating: true,
+      pinned: true,
       flexibleSpace: FlexibleSpaceBar(
         titlePadding: EdgeInsets.only(
           left: 15,

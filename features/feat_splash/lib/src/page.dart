@@ -8,19 +8,29 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-
   @override
   Widget build(BuildContext context) {
     return Material(
       child: Container(
         constraints: BoxConstraints.expand(),
-        color: Colors.white,
         child: Center(
-          child: Container(
-            child: Image.asset(
-              'assets/images/women/dancing.png',
-              height: MediaQuery.of(context).size.height * 0.3,
-            ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                child: Image.asset(
+                  'assets/icons/ic_launcher.png',
+                  height: MediaQuery.of(context).size.height * 0.2,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Swanly',
+                  style: Theme.of(context).textTheme.headline5,
+                ),
+              ),
+            ],
           ),
         ),
       ),

@@ -80,7 +80,7 @@ class DailyFeed extends StatelessWidget {
                     width: 260,
                     child: Card(
                       clipBehavior: Clip.antiAliasWithSaveLayer,
-                      shape: BeveledRectangleBorder(
+                      shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Stack(

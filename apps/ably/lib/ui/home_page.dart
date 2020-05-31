@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
               Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
           inactiveColor:
               Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
-          currentIndex: 2,
+          currentIndex: 1,
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.person), title: Text('Profile')),
             BottomNavigationBarItem(icon: Icon(Icons.calendar_today), title: Text('Journal')),

@@ -33,31 +33,29 @@ class _ChatPageState extends State<ChatPage> {
               child: Column(
                 children: <Widget>[
                   Observer(
-                    builder: (context) => SafeArea(
-                      child: ListView(
-                        shrinkWrap: true,
-                        children: store.rooms
-                            .map(
-                              (e) => ListTile(
-                                title: Text(
-                                  e.tileTitle,
-                                  style: Theme.of(context).textTheme.bodyText2,
-                                ),
-                                subtitle: Text(
-                                  e.tileCaption,
-                                  style: Theme.of(context).textTheme.caption,
-                                ),
-                                onTap: () => navigateToChatRoomPage(
-                                  context,
-                                  e,
-                                ),
-                                trailing: OverlappedImages(
-                                  profiles: e.participants,
-                                ),
+                    builder: (context) => ListView(
+                      shrinkWrap: true,
+                      children: store.rooms
+                          .map(
+                            (e) => ListTile(
+                              title: Text(
+                                e.tileTitle,
+                                style: Theme.of(context).textTheme.bodyText2,
                               ),
-                            )
-                            .toList(),
-                      ),
+                              subtitle: Text(
+                                e.tileCaption,
+                                style: Theme.of(context).textTheme.caption,
+                              ),
+                              onTap: () => navigateToChatRoomPage(
+                                context,
+                                e,
+                              ),
+                              trailing: OverlappedImages(
+                                profiles: e.participants,
+                              ),
+                            ),
+                          )
+                          .toList(),
                     ),
                   ),
                 ],
@@ -104,70 +102,68 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
     final store = Provider.of<ChatStore>(context);
     return CupertinoPageScaffold(
       navigationBar: KsSmallNavigationBar(context: context, title: 'Messages'),
-      child: SafeArea(
-        child: Material(
-          child: Column(
-            children: [
-              Flexible(
-                child: Observer(
-                  builder: (context) => Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: ListView(
-                      reverse: true,
-                      children: store.selectedMessages
-                          .indexed()
-                          .map(
-                            (e) => MyListTile(
-                              message: e.value,
-                              text: e.value.text,
-                              subtitle: e.value.caption,
-                              place: store
-                                  .chatMessagePlaces[e.value.id.resourceId],
-                              left:
-                                  store.selectedMyParticipation.id.resourceId !=
-                                      e.value.authorId.resourceId,
-                              status: e.value.status,
-                            ),
-                          )
-                          .toList(),
-                    ),
+      child: Material(
+        child: Column(
+          children: [
+            Flexible(
+              child: Observer(
+                builder: (context) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: ListView(
+                    reverse: true,
+                    children: store.selectedMessages
+                        .indexed()
+                        .map(
+                          (e) => MyListTile(
+                            message: e.value,
+                            text: e.value.text,
+                            subtitle: e.value.caption,
+                            place: store
+                                .chatMessagePlaces[e.value.id.resourceId],
+                            left:
+                                store.selectedMyParticipation.id.resourceId !=
+                                    e.value.authorId.resourceId,
+                            status: e.value.status,
+                          ),
+                        )
+                        .toList(),
                   ),
                 ),
               ),
-              Container(
-                color: Theme.of(context).colorScheme.surface,
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: TextField(
-                        controller: _messageController,
-                        autofocus: true,
-                        textInputAction: TextInputAction.send,
-                        style: Theme.of(context).textTheme.bodyText2,
-                        onSubmitted: (String text) {
-                          store.sendMessage(text);
-                          _messageController.clear();
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Send message',
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.send),
-                      onPressed: () {
-                        store.sendMessage(_messageController.text);
+            ),
+            Container(
+              color: Theme.of(context).colorScheme.surface,
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: TextField(
+                      controller: _messageController,
+                      autofocus: true,
+                      textInputAction: TextInputAction.send,
+                      style: Theme.of(context).textTheme.bodyText2,
+                      onSubmitted: (String text) {
+                        store.sendMessage(text);
                         _messageController.clear();
                       },
-                    )
-                  ],
-                ),
+                      decoration: InputDecoration(
+                        hintText: 'Send message',
+                        border: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.send),
+                    onPressed: () {
+                      store.sendMessage(_messageController.text);
+                      _messageController.clear();
+                    },
+                  )
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

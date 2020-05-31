@@ -15,8 +15,8 @@ class KsProgressIndicator extends StatelessWidget {
       child: Center(
         child: Container(
           child: Image.asset(
-            'assets/images/women/dancing.png',
-            height: MediaQuery.of(context).size.height * 0.3,
+            'assets/icons/ic_launcher.png',
+            height: MediaQuery.of(context).size.height * 0.2,
           ),
         ),
       ),
