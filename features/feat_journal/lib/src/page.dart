@@ -28,9 +28,9 @@ class _Tile {
 }
 
 class _JournalPageState extends State<JournalPage> {
-  List<_Tile> days;
-  final weekDays = ['   ', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
+  final weekDays = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
   final df = DateFormat().add_yMMM();
+  final start = DateTime(2018);
 
   AutoScrollController controller;
 
@@ -38,61 +38,12 @@ class _JournalPageState extends State<JournalPage> {
 
   @override
   void initState() {
-    final start = DateTime(2018);
-    final end = DateTime.now().add(Duration(days: 730));
-    final month_5 = [1, 14, 27, 40];
-    final month_4 = [6, 10, 19, 23, 32, 36, 45, 49];
     final now = DateTime.now();
     todayCount = now.difference(start).inDays;
-    days = List.generate(
-      end.difference(start).inDays,
-      (i) => _Tile(
-        Type.DAY,
-        DateTime(
-          start.year,
-          start.month,
-          start.day + (i),
-        ),
-        1,
-      ),
-    ).expand((element) {
-      final week = isoWeekNumber(element.time);
-      if (element.time.weekday == 1 && month_4.contains(week)) {
-        return [
-          _Tile(Type.MONTH, element.time.add(Duration(days: 7)), 4),
-          element
-        ];
-      } else if (element.time.weekday == 1 && month_5.contains(week)) {
-        return [
-          _Tile(Type.MONTH, element.time.add(Duration(days: 7)), 5),
-          element
-        ];
-      } else if (element.time.weekday == 1 && week == 53) {
-        return [
-          _Tile(Type.EMPTY, element.time.add(Duration(days: 7)), 1),
-          element
-        ];
-      } else {
-        return [element];
-      }
-    }).toList();
     controller = PageAutoScrollController(
       initialPage: todayCount,
     );
     super.initState();
-  }
-
-  int dayOfYear(DateTime date) {
-    return date.difference(DateTime(date.year, 1, 1)).inDays;
-  }
-
-  int isoWeekNumber(DateTime date) {
-    var daysToAdd = DateTime.thursday - date.weekday;
-    var thursdayDate = daysToAdd > 0
-        ? date.add(Duration(days: daysToAdd))
-        : date.subtract(Duration(days: daysToAdd.abs()));
-    var dayOfYearThursday = dayOfYear(thursdayDate);
-    return 1 + ((dayOfYearThursday - 1) / 7).floor();
   }
 
   @override
@@ -110,7 +61,7 @@ class _JournalPageState extends State<JournalPage> {
               ),
             ],
           ),
-          Calendar(weekDays: weekDays, days: days, df: df),
+          Calendar(weekDays: weekDays, start: start, df: df, controller: controller,),
         ],
       ),
     );
@@ -189,7 +140,8 @@ class __DayWidgetState extends State<_DayWidget> {
                         padding: EdgeInsets.only(top: 10),
                         child: OutlineButton(
                           child: Text('Jump to now'),
-                          onPressed: () => widget.controller.jumpToPage(todayCount),
+                          onPressed: () =>
+                              widget.controller.jumpToPage(todayCount),
                         ),
                       ),
                     ],
@@ -210,11 +162,15 @@ class Calendar extends StatelessWidget {
     @required this.weekDays,
     @required this.days,
     @required this.df,
+    @required this.controller,
+    this.start,
   }) : super(key: key);
 
   final List<String> weekDays;
   final List<_Tile> days;
   final DateFormat df;
+  final DateTime start;
+  final PageAutoScrollController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -236,7 +192,6 @@ class Calendar extends StatelessWidget {
             ],
           ),
           child: CustomScrollView(
-            physics: PageScrollPhysics(),
             controller: scrollController,
             slivers: [
               SliverPersistentHeader(
@@ -289,58 +244,45 @@ class Calendar extends StatelessWidget {
               ),
               SliverPadding(
                 padding: const EdgeInsets.only(top: 10, right: 10),
-                sliver: SliverStaggeredGrid.count(
-                  crossAxisCount: 8,
-                  staggeredTiles: days
-                      .indexed()
-                      .map((e) => StaggeredTile.count(1, e.value.verticalSpan))
-                      .toList(),
-                  children: days.indexed().map(
-                    (e) {
-                      switch (e.value.type) {
-                        case Type.MONTH:
-                          return Material(
-                            child: Center(
-                              child: RotatedBox(
-                                quarterTurns: -1,
-                                child: Text(
-                                  df.format(e.value.time),
+                sliver: SliverGrid(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 7),
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      final date = start.add(Duration(
+                        days: index,
+                      ));
+                      return Material(
+                        color: date.month % 2 == 0
+                            ? Theme.of(context)
+                                .colorScheme
+                                .surface
+                                .withAlpha(128)
+                            : Theme.of(context)
+                                .colorScheme
+                                .background
+                                .withAlpha(128),
+                        child: GestureDetector(
+                          onTap: () => controller.jumpToPage(index),
+                          child: Container(
+                            padding: const EdgeInsets.all(8.0),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.white),
+                              borderRadius: BorderRadius.all(Radius.circular(50)),
+                            ),
+                            child: Column(
+                              children: [
+                                Text(
+                                  date.day.toString(),
                                   style: Theme.of(context).textTheme.bodyText1,
                                 ),
-                              ),
+                              ],
                             ),
-                          );
-                        case Type.DAY:
-                          return Material(
-                            color: e.value.time.month % 2 == 0
-                                ? Theme.of(context)
-                                    .colorScheme
-                                    .surface
-                                    .withAlpha(128)
-                                : Theme.of(context)
-                                    .colorScheme
-                                    .background
-                                    .withAlpha(128),
-                            child: Container(
-                              height: 150,
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                children: [
-                                  Text(
-                                    e.value.time.day.toString(),
-                                    style:
-                                        Theme.of(context).textTheme.bodyText1,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        case Type.EMPTY:
-                          return SizedBox();
-                      }
-                      return SizedBox();
+                          ),
+                        ),
+                      );
                     },
-                  ).toList(),
+                  ),
                 ),
               ),
             ],
@@ -380,12 +322,4 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
         minHeight != oldDelegate.minHeight ||
         child != oldDelegate.child;
   }
-}
-
-class KsTableCalendar extends TableCalendar {
-  KsTableCalendar({
-    CalendarController controller,
-  }) : super(
-          calendarController: controller,
-        );
 }
