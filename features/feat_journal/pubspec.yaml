@@ -24,6 +24,7 @@ dependencies:
   more: ^2.3.1
   jiffy: ^3.0.1
   scrollable_positioned_list: ^0.1.6
+  scroll_to_index: ^1.0.6
 
   lib_di:
     path: ../../libs/lib_di

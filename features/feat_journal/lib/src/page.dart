@@ -10,6 +10,7 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 
 class JournalPage extends StatefulWidget {
   @override
@@ -30,6 +31,8 @@ class _JournalPageState extends State<JournalPage> {
   List<_Tile> days;
   final weekDays = ['   ', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
   final df = DateFormat().add_yMMM();
+
+  AutoScrollController controller;
 
   @override
   void initState() {
@@ -69,6 +72,11 @@ class _JournalPageState extends State<JournalPage> {
         return [element];
       }
     }).toList();
+    controller = AutoScrollController(
+        viewportBoundaryGetter: () =>
+            Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.bottom),
+        axis: Axis.horizontal,
+        suggestedRowHeight: 200);
     super.initState();
   }
 
@@ -85,18 +93,21 @@ class _JournalPageState extends State<JournalPage> {
     return 1 + ((dayOfYearThursday - 1) / 7).floor();
   }
 
-  final controller = ScrollController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
           CustomScrollView(
+            physics: PageScrollPhysics(),
             controller: controller,
             slivers: <Widget>[
               KsNavigationBar(title: 'Journal'),
-              _DayWidget(controller: controller,)
+              SliverSafeArea(
+                sliver: _DayWidget(
+                  controller: controller,
+                ),
+              )
             ],
           ),
           Calendar(weekDays: weekDays, days: days, df: df),
@@ -107,7 +118,7 @@ class _JournalPageState extends State<JournalPage> {
 }
 
 class _DayWidget extends StatefulWidget {
-  final ScrollController controller;
+  final AutoScrollController controller;
 
   const _DayWidget({
     Key key,
@@ -129,50 +140,62 @@ class __DayWidgetState extends State<_DayWidget> {
     super.initState();
   }
 
-  final itemScrollController = ItemScrollController();
-  final itemPositionsListener = ItemPositionsListener.create();
-
   @override
   Widget build(BuildContext context) {
-    return ScrollablePositionedList.builder(
-      physics: PageScrollPhysics(),
-      itemCount: 100,
-      itemScrollController: itemScrollController,
-      itemPositionsListener: itemPositionsListener,
-      // delegate: SliverChildBuilderDelegate((context, index) {
-      itemBuilder: (context, index) {
-        return Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          padding: const EdgeInsets.all(25),
-          decoration: BoxDecoration(
-            // color: Theme.of(context).colorScheme.surface,
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(15)),
-            boxShadow: [
-              BoxShadow(
-                color: Theme.of(context).colorScheme.primary.withOpacity(0.25),
-                spreadRadius: 0.25,
-                blurRadius: 20,
-                offset: Offset(0, 3),
-              ),
-            ],
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              children: [
-                Text(
-                  DateFormat.yMMMMEEEEd().format(start.add(Duration(
-                    days: index,
-                  ))),
-                  style: Theme.of(context).textTheme.headline5.copyWith(),
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          return AutoScrollTag(
+            key: ValueKey(index),
+            controller: widget.controller,
+            index: index,
+            child: SafeArea(
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.only(top: 50, left: 25, right: 25,),
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  decoration: BoxDecoration(
+                    // color: Theme.of(context).colorScheme.surface,
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                    boxShadow: [
+                      BoxShadow(
+                        color:
+                            Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                        spreadRadius: 0.01,
+                        blurRadius: 5,
+                        offset: Offset(0, 1),
+                      ),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      children: [
+                        Text(
+                          DateFormat.yMMMMEEEEd().format(start.add(Duration(
+                            days: index,
+                          ))),
+                          style: Theme.of(context).textTheme.subtitle1.copyWith(),
+                        ),
+                        Padding(
+                          padding:EdgeInsets.only(top: 25),
+                          child: OutlineButton(
+                            child: Text('Scroll to April 11 2018'),
+                            onPressed: () => widget.controller.scrollToIndex(100),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-              ],
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
@@ -209,6 +232,7 @@ class Calendar extends StatelessWidget {
             ],
           ),
           child: CustomScrollView(
+            physics: PageScrollPhysics(),
             controller: scrollController,
             slivers: [
               SliverPersistentHeader(
