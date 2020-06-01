@@ -34,12 +34,16 @@ class _JournalPageState extends State<JournalPage> {
 
   AutoScrollController controller;
 
+  int todayCount;
+
   @override
   void initState() {
     final start = DateTime(2018);
     final end = DateTime.now().add(Duration(days: 730));
     final month_5 = [1, 14, 27, 40];
     final month_4 = [6, 10, 19, 23, 32, 36, 45, 49];
+    final now = DateTime.now();
+    todayCount = now.difference(start).inDays;
     days = List.generate(
       end.difference(start).inDays,
       (i) => _Tile(
@@ -72,11 +76,9 @@ class _JournalPageState extends State<JournalPage> {
         return [element];
       }
     }).toList();
-    controller = AutoScrollController(
-        viewportBoundaryGetter: () =>
-            Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.bottom),
-        axis: Axis.horizontal,
-        suggestedRowHeight: 200);
+    controller = PageAutoScrollController(
+      initialPage: todayCount,
+    );
     super.initState();
   }
 
@@ -103,11 +105,9 @@ class _JournalPageState extends State<JournalPage> {
             controller: controller,
             slivers: <Widget>[
               KsNavigationBar(title: 'Journal'),
-              SliverSafeArea(
-                sliver: _DayWidget(
-                  controller: controller,
-                ),
-              )
+              _DayWidget(
+                controller: controller,
+              ),
             ],
           ),
           Calendar(weekDays: weekDays, days: days, df: df),
@@ -118,7 +118,7 @@ class _JournalPageState extends State<JournalPage> {
 }
 
 class _DayWidget extends StatefulWidget {
-  final AutoScrollController controller;
+  final PageAutoScrollController controller;
 
   const _DayWidget({
     Key key,
@@ -142,53 +142,57 @@ class __DayWidgetState extends State<_DayWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SliverList(
+    return SliverFillViewport(
       delegate: SliverChildBuilderDelegate(
         (context, index) {
           return AutoScrollTag(
             key: ValueKey(index),
             controller: widget.controller,
             index: index,
-            child: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 25, right: 25, left: 25),
               child: Container(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.only(top: 50, left: 25, right: 25,),
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  decoration: BoxDecoration(
-                    // color: Theme.of(context).colorScheme.surface,
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(15)),
-                    boxShadow: [
-                      BoxShadow(
-                        color:
-                            Theme.of(context).colorScheme.primary.withOpacity(0.1),
-                        spreadRadius: 0.01,
-                        blurRadius: 5,
-                        offset: Offset(0, 1),
+                decoration: BoxDecoration(
+                  // color: Theme.of(context).colorScheme.surface,
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .primary
+                          .withOpacity(0.1),
+                      spreadRadius: 0.01,
+                      blurRadius: 5,
+                      offset: Offset(0, 1),
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    children: [
+                      Text(
+                        DateFormat.yMMMMEEEEd().format(start.add(Duration(
+                          days: index,
+                        ))),
+                        style: Theme.of(context).textTheme.subtitle1.copyWith(),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 25),
+                        child: OutlineButton(
+                          child: Text('Travel in time'),
+                          onPressed: () => widget.controller.jumpToPage(100),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 10),
+                        child: OutlineButton(
+                          child: Text('Jump to now'),
+                          onPressed: () => widget.controller.jumpToPage(todayCount),
+                        ),
                       ),
                     ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      children: [
-                        Text(
-                          DateFormat.yMMMMEEEEd().format(start.add(Duration(
-                            days: index,
-                          ))),
-                          style: Theme.of(context).textTheme.subtitle1.copyWith(),
-                        ),
-                        Padding(
-                          padding:EdgeInsets.only(top: 25),
-                          child: OutlineButton(
-                            child: Text('Scroll to April 11 2018'),
-                            onPressed: () => widget.controller.scrollToIndex(100),
-                          ),
-                        ),
-                      ],
-                    ),
                   ),
                 ),
               ),
