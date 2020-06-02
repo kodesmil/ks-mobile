@@ -210,149 +210,161 @@ class _CalendarState extends State<Calendar> {
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-      initialChildSize: 0.075,
+      initialChildSize: 0.1,
       maxChildSize: 0.4,
-      minChildSize: 0.075,
+      minChildSize: 0.1,
       builder: (BuildContext context, ScrollController scrollController) {
-        return ListView(
-          controller: scrollController,
-          children: [
-            Center(
-              child: Container(
-                padding: EdgeInsets.only(bottom: 10),
-                child: Text(
-                  'Calendar',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline6
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.only(
-                top: 10,
-                bottom: 10,
-                right: 5,
-                left: 5,
-              ),
-              margin: EdgeInsets.only(bottom: 1),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color:
-                        Theme.of(context).colorScheme.primary.withOpacity(0.1),
-                    spreadRadius: 0.25,
-                    blurRadius: 5,
+        return Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: ListView(
+            controller: scrollController,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color:
+                          Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                      spreadRadius: 0.25,
+                      blurRadius: 5,
+                    ),
+                  ],
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.elliptical(40, 40),
                   ),
-                ],
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: widget.weekDays
-                    .map(
-                      (e) => Center(
-                        child: Text(
-                          e,
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.caption,
-                        ),
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(
+                        bottom: 10,
+                        top: 10,
                       ),
-                    )
-                    .toList(),
-              ),
-            ),
-            Container(),
-            Material(
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.3,
-                padding: EdgeInsets.only(left: 20, right: 20, top: 5),
-                child: CustomScrollView(
-                  controller: widget.controllerCalendar,
-                  slivers: [
-                    SliverGrid(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 7,
+                      child: Text(
+                        'Calendar',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline6
+                            .copyWith(fontWeight: FontWeight.bold),
                       ),
-                      delegate: SliverChildBuilderDelegate(
-                        (context, index) {
-                          final date = widget.start.add(Duration(
-                            days: index,
-                          ));
-                          return AutoScrollTag(
-                            key: ValueKey(index),
-                            controller: widget.controllerCalendar,
-                            index: index,
-                            child: Container(
-                              padding: const EdgeInsets.all(4),
-                              child: InkWell(
-                                splashColor: Colors.black12,
-                                onTap: () {
-                                  widget.controllerDay.jumpToPage(index);
-                                },
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                                child: Container(
-                                  padding: const EdgeInsets.all(4),
-                                  decoration: BoxDecoration(
-                                    color: [6, 7].contains(date.weekday)
-                                        ? Color(0xFFFFEEEE)
-                                        : Colors.white,
-                                    border: Border.all(
-                                      width: 0.5,
-                                      color: Colors.transparent,
-                                    ),
-                                    borderRadius: BorderRadius.vertical(
-                                      bottom: Radius.elliptical(10, 10),
-                                      top: Radius.elliptical(2, 2),
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: date.isToday()
-                                            ? Theme.of(context)
-                                                .colorScheme
-                                                .primary
-                                                .withOpacity(0.3)
-                                            : Theme.of(context)
-                                                .colorScheme
-                                                .primary
-                                                .withOpacity(0.1),
-                                        spreadRadius: 0.25,
-                                        blurRadius: 2,
-                                      ),
-                                    ],
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        date.day.toString(),
-                                        style:
-                                            Theme.of(context).textTheme.bodyText1,
-                                      ),
-                                      Text(
-                                        widget.df.format(date).toUpperCase(),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .caption
-                                            .copyWith(fontSize: 7),
-                                      ),
-                                    ],
-                                  ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(
+                        top: 10,
+                        bottom: 10,
+                        right: 5,
+                        left: 5,
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: widget.weekDays
+                            .map(
+                              (e) => Center(
+                                child: Text(
+                                  e,
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context).textTheme.caption,
                                 ),
                               ),
-                            ),
-                          );
-                        },
+                            )
+                            .toList(),
                       ),
                     ),
                   ],
                 ),
               ),
-            ),
-          ],
+              Material(
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.25,
+                  padding: EdgeInsets.only(left: 20, right: 20, top: 5),
+                  child: CustomScrollView(
+                    controller: widget.controllerCalendar,
+                    slivers: [
+                      SliverGrid(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 7,
+                        ),
+                        delegate: SliverChildBuilderDelegate(
+                          (context, index) {
+                            final date = widget.start.add(Duration(
+                              days: index,
+                            ));
+                            return AutoScrollTag(
+                              key: ValueKey(index),
+                              controller: widget.controllerCalendar,
+                              index: index,
+                              child: Container(
+                                padding: const EdgeInsets.all(4),
+                                child: InkWell(
+                                  splashColor: Colors.black12,
+                                  onTap: () {
+                                    widget.controllerDay.jumpToPage(index);
+                                  },
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
+                                  child: Container(
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: BoxDecoration(
+                                      color: [6, 7].contains(date.weekday)
+                                          ? Color(0xFFFFEEEE)
+                                          : Colors.white,
+                                      border: Border.all(
+                                        width: 0.5,
+                                        color: Colors.transparent,
+                                      ),
+                                      borderRadius: BorderRadius.vertical(
+                                        bottom: Radius.elliptical(5, 5),
+                                        top: Radius.elliptical(2, 2),
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: date.isToday()
+                                              ? Theme.of(context)
+                                                  .colorScheme
+                                                  .primary
+                                                  .withOpacity(0.3)
+                                              : Theme.of(context)
+                                                  .colorScheme
+                                                  .primary
+                                                  .withOpacity(0.1),
+                                          spreadRadius: 0.25,
+                                          blurRadius: 2,
+                                        ),
+                                      ],
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          date.day.toString(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1,
+                                        ),
+                                        Text(
+                                          widget.df.format(date).toUpperCase(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .caption
+                                              .copyWith(fontSize: 7),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         );
       },
     );
