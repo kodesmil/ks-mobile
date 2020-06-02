@@ -76,6 +76,8 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/images/women/
+    - assets/images/peach/
+    - assets/images/peach/example/
   fonts:
     - family: SourceSansPro
       fonts:
