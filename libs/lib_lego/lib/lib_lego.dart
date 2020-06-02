@@ -20,4 +20,5 @@ export 'src/snack_bars.dart';
 export 'src/spaces.dart';
 export 'src/textfields.dart';
 export 'src/texts.dart';
+export 'src/extensions.dart';
 export 'src/themes.dart';

@@ -5,11 +5,6 @@ import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 import 'package:lib_lego/lib_lego.dart';
 import 'dart:math' as math;
-import 'package:more/iterable.dart';
-import 'package:table_calendar/table_calendar.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:jiffy/jiffy.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 class JournalPage extends StatefulWidget {
@@ -29,21 +24,33 @@ class _Tile {
 
 class _JournalPageState extends State<JournalPage> {
   final weekDays = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
-  final df = DateFormat().add_yMMM();
+  final df = DateFormat().add_MMM();
   final start = DateTime(2018);
 
-  AutoScrollController controller;
-
   int todayCount;
+
+  PageAutoScrollController controllerDay;
+  AutoScrollController controllerCalendar;
 
   @override
   void initState() {
     final now = DateTime.now();
     todayCount = now.difference(start).inDays;
-    controller = PageAutoScrollController(
+    controllerDay = PageAutoScrollController(
       initialPage: todayCount,
     );
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    final size = MediaQuery.of(context).size;
+    final itemHeight = (size.width - 40) / 7;
+    final weeks = todayCount ~/ 7 - 1;
+    controllerCalendar = AutoScrollController(
+      initialScrollOffset: itemHeight * weeks,
+    );
+    super.didChangeDependencies();
   }
 
   @override
@@ -53,15 +60,22 @@ class _JournalPageState extends State<JournalPage> {
         children: [
           CustomScrollView(
             physics: PageScrollPhysics(),
-            controller: controller,
+            controller: controllerDay,
             slivers: <Widget>[
               KsNavigationBar(title: 'Journal'),
               _DayWidget(
-                controller: controller,
+                controllerDay: controllerDay,
+                controllerCalendar: controllerCalendar,
               ),
             ],
           ),
-          Calendar(weekDays: weekDays, start: start, df: df, controller: controller,),
+          Calendar(
+            weekDays: weekDays,
+            start: start,
+            df: df,
+            controllerDay: controllerDay,
+            controllerCalendar: controllerCalendar,
+          ),
         ],
       ),
     );
@@ -69,11 +83,13 @@ class _JournalPageState extends State<JournalPage> {
 }
 
 class _DayWidget extends StatefulWidget {
-  final PageAutoScrollController controller;
+  final PageAutoScrollController controllerDay;
+  final AutoScrollController controllerCalendar;
 
   const _DayWidget({
     Key key,
-    this.controller,
+    this.controllerDay,
+    this.controllerCalendar,
   }) : super(key: key);
 
   @override
@@ -98,7 +114,7 @@ class __DayWidgetState extends State<_DayWidget> {
         (context, index) {
           return AutoScrollTag(
             key: ValueKey(index),
-            controller: widget.controller,
+            controller: widget.controllerDay,
             index: index,
             child: Padding(
               padding: EdgeInsets.only(bottom: 25, right: 25, left: 25),
@@ -133,15 +149,20 @@ class __DayWidgetState extends State<_DayWidget> {
                         padding: EdgeInsets.only(top: 25),
                         child: OutlineButton(
                           child: Text('Travel in time'),
-                          onPressed: () => widget.controller.jumpToPage(100),
+                          onPressed: () {
+                            widget.controllerDay.jumpToPage(100);
+                            widget.controllerCalendar.scrollToIndex(100);
+                          },
                         ),
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: 10),
                         child: OutlineButton(
                           child: Text('Jump to now'),
-                          onPressed: () =>
-                              widget.controller.jumpToPage(todayCount),
+                          onPressed: () {
+                            widget.controllerDay.jumpToPage(todayCount);
+                            widget.controllerCalendar.scrollToIndex(todayCount);
+                          },
                         ),
                       ),
                     ],
@@ -156,137 +177,182 @@ class __DayWidgetState extends State<_DayWidget> {
   }
 }
 
-class Calendar extends StatelessWidget {
+class Calendar extends StatefulWidget {
   const Calendar({
     Key key,
     @required this.weekDays,
-    @required this.days,
     @required this.df,
-    @required this.controller,
+    @required this.controllerDay,
+    @required this.controllerCalendar,
     this.start,
   }) : super(key: key);
 
   final List<String> weekDays;
-  final List<_Tile> days;
   final DateFormat df;
   final DateTime start;
-  final PageAutoScrollController controller;
+  final PageAutoScrollController controllerDay;
+  final AutoScrollController controllerCalendar;
+
+  @override
+  _CalendarState createState() => _CalendarState();
+}
+
+class _CalendarState extends State<Calendar> {
+  int todayCount;
+
+  @override
+  void initState() {
+    final now = DateTime.now();
+    todayCount = now.difference(widget.start).inDays;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
       initialChildSize: 0.075,
-      maxChildSize: 0.5,
+      maxChildSize: 0.4,
       minChildSize: 0.075,
       builder: (BuildContext context, ScrollController scrollController) {
-        return Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.background,
-            boxShadow: [
-              BoxShadow(
-                color: Theme.of(context).colorScheme.primary.withOpacity(0.25),
-                spreadRadius: 0.25,
-                blurRadius: 20,
-                offset: Offset(0, 3),
-              ),
-            ],
-          ),
-          child: CustomScrollView(
-            controller: scrollController,
-            slivers: [
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: _SliverAppBarDelegate(
-                  minHeight: 64,
-                  maxHeight: 64,
-                  child: Material(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 0),
-                        child: Text(
-                          'Calendar',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline6
-                              .copyWith(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                  ),
+        return ListView(
+          controller: scrollController,
+          children: [
+            Center(
+              child: Container(
+                padding: EdgeInsets.only(bottom: 10),
+                child: Text(
+                  'Calendar',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline6
+                      .copyWith(fontWeight: FontWeight.bold),
                 ),
               ),
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: _SliverAppBarDelegate(
-                  minHeight: 45,
-                  maxHeight: 45,
-                  child: Material(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20, right: 20),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: weekDays
-                            .map(
-                              (e) => Center(
-                                child: Text(
-                                  e,
-                                  textAlign: TextAlign.center,
-                                  style: Theme.of(context).textTheme.caption,
+            ),
+            Container(
+              padding: EdgeInsets.only(
+                top: 10,
+                bottom: 10,
+                right: 5,
+                left: 5,
+              ),
+              margin: EdgeInsets.only(bottom: 1),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color:
+                        Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                    spreadRadius: 0.25,
+                    blurRadius: 5,
+                  ),
+                ],
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: widget.weekDays
+                    .map(
+                      (e) => Center(
+                        child: Text(
+                          e,
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.caption,
+                        ),
+                      ),
+                    )
+                    .toList(),
+              ),
+            ),
+            Container(),
+            Material(
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.3,
+                padding: EdgeInsets.only(left: 20, right: 20, top: 5),
+                child: CustomScrollView(
+                  controller: widget.controllerCalendar,
+                  slivers: [
+                    SliverGrid(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 7,
+                      ),
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          final date = widget.start.add(Duration(
+                            days: index,
+                          ));
+                          return AutoScrollTag(
+                            key: ValueKey(index),
+                            controller: widget.controllerCalendar,
+                            index: index,
+                            child: Container(
+                              padding: const EdgeInsets.all(4),
+                              child: InkWell(
+                                splashColor: Colors.black12,
+                                onTap: () {
+                                  widget.controllerDay.jumpToPage(index);
+                                },
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                                child: Container(
+                                  padding: const EdgeInsets.all(4),
+                                  decoration: BoxDecoration(
+                                    color: [6, 7].contains(date.weekday)
+                                        ? Color(0xFFFFEEEE)
+                                        : Colors.white,
+                                    border: Border.all(
+                                      width: 0.5,
+                                      color: Colors.transparent,
+                                    ),
+                                    borderRadius: BorderRadius.vertical(
+                                      bottom: Radius.elliptical(10, 10),
+                                      top: Radius.elliptical(2, 2),
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: date.isToday()
+                                            ? Theme.of(context)
+                                                .colorScheme
+                                                .primary
+                                                .withOpacity(0.3)
+                                            : Theme.of(context)
+                                                .colorScheme
+                                                .primary
+                                                .withOpacity(0.1),
+                                        spreadRadius: 0.25,
+                                        blurRadius: 2,
+                                      ),
+                                    ],
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        date.day.toString(),
+                                        style:
+                                            Theme.of(context).textTheme.bodyText1,
+                                      ),
+                                      Text(
+                                        widget.df.format(date).toUpperCase(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .caption
+                                            .copyWith(fontSize: 7),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            )
-                            .toList(),
+                            ),
+                          );
+                        },
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ),
-              SliverPadding(
-                padding: const EdgeInsets.only(top: 10, right: 10),
-                sliver: SliverGrid(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 7),
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      final date = start.add(Duration(
-                        days: index,
-                      ));
-                      return Material(
-                        color: date.month % 2 == 0
-                            ? Theme.of(context)
-                                .colorScheme
-                                .surface
-                                .withAlpha(128)
-                            : Theme.of(context)
-                                .colorScheme
-                                .background
-                                .withAlpha(128),
-                        child: GestureDetector(
-                          onTap: () => controller.jumpToPage(index),
-                          child: Container(
-                            padding: const EdgeInsets.all(8.0),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.white),
-                              borderRadius: BorderRadius.all(Radius.circular(50)),
-                            ),
-                            child: Column(
-                              children: [
-                                Text(
-                                  date.day.toString(),
-                                  style: Theme.of(context).textTheme.bodyText1,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         );
       },
     );
