@@ -1,14 +1,14 @@
+import 'package:feat_journal/src/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
-import 'package:websafe_svg/websafe_svg.dart';
+import 'package:lib_lego/lib_lego.dart';
 
 class SingleJournalPage extends StatelessWidget {
   const SingleJournalPage({
     Key key,
-    @required this.start,
     @required this.controllerDay,
     @required this.controllerCalendar,
     @required this.todayCount,
@@ -17,13 +17,12 @@ class SingleJournalPage extends StatelessWidget {
 
   final PageAutoScrollController controllerDay;
   final AutoScrollController controllerCalendar;
-  final DateTime start;
   final int todayCount;
   final int index;
 
   @override
   Widget build(BuildContext context) {
-    final date = start.add(Duration(
+    final date = initialDate.add(Duration(
       days: index,
     ));
     return Padding(
@@ -34,12 +33,7 @@ class SingleJournalPage extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(40)),
           boxShadow: [
-            BoxShadow(
-              color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-              spreadRadius: 0.01,
-              blurRadius: 5,
-              offset: Offset(0, 1),
-            ),
+            context.shadow1(),
           ],
         ),
         child: Stack(

@@ -39,7 +39,6 @@ abstract class _FitStore with Store {
         loading = false;
         success = false;
         errorStore.showError = true;
-        errorStore.errorMessage = DioErrorUtil.handleError(e);
         print(e);
       }
     }

@@ -1,3 +1,4 @@
+import 'package:feat_journal/src/common.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -17,9 +18,6 @@ class JournalPage extends StatefulWidget {
 enum Type { MONTH, DAY, EMPTY }
 
 class _JournalPageState extends State<JournalPage> {
-  final weekDays = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
-  final df = DateFormat().add_MMM();
-  final start = DateTime(2018);
 
   int todayCount;
 
@@ -27,18 +25,13 @@ class _JournalPageState extends State<JournalPage> {
   AutoScrollController controllerCalendar;
 
   @override
-  void initState() {
+  void didChangeDependencies() {
     final now = DateTime.now();
-    todayCount = now.difference(start).inDays;
+    todayCount = now.difference(initialDate).inDays;
     controllerDay = PageAutoScrollController(
       initialPage: todayCount,
       viewportFraction: 0.75,
     );
-    super.initState();
-  }
-
-  @override
-  void didChangeDependencies() {
     final size = MediaQuery.of(context).size;
     final itemHeight = (size.width - 40) / 7;
     final weeks = todayCount ~/ 7 - 1;
@@ -65,9 +58,6 @@ class _JournalPageState extends State<JournalPage> {
             ],
           ),
           Calendar(
-            weekDays: weekDays,
-            start: start,
-            df: df,
             controllerDay: controllerDay,
             controllerCalendar: controllerCalendar,
           ),
@@ -92,13 +82,12 @@ class _DayWidget extends StatefulWidget {
 }
 
 class __DayWidgetState extends State<_DayWidget> {
-  final start = DateTime(2018);
   int todayCount;
 
   @override
   void initState() {
     final now = DateTime.now();
-    todayCount = now.difference(start).inDays;
+    todayCount = now.difference(initialDate).inDays;
     super.initState();
   }
 
@@ -115,7 +104,6 @@ class __DayWidgetState extends State<_DayWidget> {
             child: SingleJournalPage(
               controllerDay: widget.controllerDay,
               controllerCalendar: widget.controllerCalendar,
-              start: start,
               todayCount: todayCount,
               index: index,
             ),
