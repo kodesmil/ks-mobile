@@ -33,11 +33,11 @@ class _CalendarState extends State<Calendar> {
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
       initialChildSize: 0.1,
-      maxChildSize: 0.4,
+      maxChildSize: 0.5,
       minChildSize: 0.1,
       builder: (context, scrollController) {
         return Padding(
-          padding: const EdgeInsets.only(top: 8.0),
+          padding: const EdgeInsets.only(top: 15.0),
           child: ListView(
             controller: scrollController,
             children: [
@@ -68,7 +68,7 @@ class CalendarBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.25,
+        height: MediaQuery.of(context).size.height * 0.28,
         padding: EdgeInsets.only(left: 20, right: 20, top: 5),
         child: CustomScrollView(
           controller: controllerCalendar,
@@ -112,6 +112,10 @@ class CalendarHeader extends StatelessWidget {
         boxShadow: [
           context.shadow2(),
         ],
+        border: Border.all(
+          color: Colors.black26,
+          width: 0.5,
+        ),
         borderRadius: BorderRadius.vertical(
           top: Radius.elliptical(40, 40),
         ),

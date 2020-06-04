@@ -26,7 +26,7 @@ dependencies:
   scrollable_positioned_list: ^0.1.6
   scroll_to_index: ^1.0.6
   flutter_svg: ^0.17.4
-  websafe_svg: ^1.1.0
+  dots_indicator: ^1.1.0
 
   lib_di:
     path: ../../libs/lib_di

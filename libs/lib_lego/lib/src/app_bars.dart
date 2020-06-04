@@ -68,12 +68,29 @@ class KsSmallNavigationBar extends CupertinoNavigationBar {
           key: key,
           middle: Text(
             title,
-            style: Theme.of(context)
-                .textTheme
-                .headline6
-                .apply(color: Theme.of(context).colorScheme.onPrimary),
+            style: Theme.of(context).textTheme.headline6.apply(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
           ),
           actionsForegroundColor: Theme.of(context).colorScheme.onPrimary,
           backgroundColor: Theme.of(context).colorScheme.primary,
+        );
+}
+
+class KsAppBar extends AppBar {
+  KsAppBar({
+    Key key,
+    BuildContext context,
+    String title,
+  }) : super(
+          key: key,
+          title: Text(
+            title,
+            style: Theme.of(context).textTheme.bodyText2.copyWith(
+              fontSize: 32,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 0,
+            ),
+          ),
         );
 }

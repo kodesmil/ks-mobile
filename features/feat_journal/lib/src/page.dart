@@ -18,7 +18,6 @@ class JournalPage extends StatefulWidget {
 enum Type { MONTH, DAY, EMPTY }
 
 class _JournalPageState extends State<JournalPage> {
-
   int todayCount;
 
   PageAutoScrollController controllerDay;
@@ -30,7 +29,6 @@ class _JournalPageState extends State<JournalPage> {
     todayCount = now.difference(initialDate).inDays;
     controllerDay = PageAutoScrollController(
       initialPage: todayCount,
-      viewportFraction: 0.75,
     );
     final size = MediaQuery.of(context).size;
     final itemHeight = (size.width - 40) / 7;
@@ -44,13 +42,16 @@ class _JournalPageState extends State<JournalPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: KsAppBar(
+        context: context,
+        title: 'Journal',
+      ),
       body: Stack(
         children: [
           CustomScrollView(
             physics: PageScrollPhysics(),
             controller: controllerDay,
             slivers: <Widget>[
-              KsNavigationBar(title: 'Journal'),
               _DayWidget(
                 controllerDay: controllerDay,
                 controllerCalendar: controllerCalendar,
@@ -93,22 +94,23 @@ class __DayWidgetState extends State<_DayWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SliverFillViewport(
-      viewportFraction: 0.75,
-      delegate: SliverChildBuilderDelegate(
-        (context, index) {
-          return AutoScrollTag(
-            key: ValueKey(index),
-            controller: widget.controllerDay,
-            index: index,
-            child: SingleJournalPage(
-              controllerDay: widget.controllerDay,
-              controllerCalendar: widget.controllerCalendar,
-              todayCount: todayCount,
+    return SliverSafeArea(
+      sliver: SliverFillViewport(
+        delegate: SliverChildBuilderDelegate(
+          (context, index) {
+            return AutoScrollTag(
+              key: ValueKey(index),
+              controller: widget.controllerDay,
               index: index,
-            ),
-          );
-        },
+              child: SingleJournalPage(
+                controllerDay: widget.controllerDay,
+                controllerCalendar: widget.controllerCalendar,
+                todayCount: todayCount,
+                index: index,
+              ),
+            );
+          },
+        ),
       ),
     );
   }
