@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:intl/intl.dart';
 import 'package:lib_lego/lib_lego.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
@@ -44,7 +45,7 @@ class _JournalPageState extends State<JournalPage> {
     return Scaffold(
       appBar: KsAppBar(
         context: context,
-        title: 'Journal',
+        title: FlutterI18n.translate(context, 'g.journal'),
       ),
       body: Stack(
         children: [

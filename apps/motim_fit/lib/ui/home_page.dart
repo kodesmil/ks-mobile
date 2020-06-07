@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
-import 'package:kodesmil_locale/localizations.dart';
+import 'package:ks_locale/ks_locale.dart';
 import 'package:lib_lego/lib_lego.dart';
 import 'package:motim_fit/ui/chart.dart';
 
@@ -94,7 +94,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             top: 64,
             bottom: 16,
           ),
-          child: KsText.headline3(KsLoc.of(context).gJournal()),
+          child: KsText.headline3(L.of(context).gJournal()),
         ),
         Expanded(
           child: Observer(

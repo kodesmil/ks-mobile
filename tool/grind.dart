@@ -6,7 +6,7 @@ import 'package:path/path.dart' as path;
 main(args) => grind(args);
 
 final apps = [
-  'translations/kodesmil_locale',
+  'translations/ks_locale',
   'libs/lib_lego',
   'libs/lib_di',
   'libs/lib_services',
@@ -241,8 +241,8 @@ Future<void> generatelocalizations() async {
       'pub',
       'run',
       'intl_translation:extract_to_arb',
-      '--output-dir=kodesmil_locale/lib',
-      'kodesmil_locale/lib/localizations.dart',
+      '--output-dir=ks_locale/lib',
+      'ks_locale/lib/main.dart',
     ],
   );
   _runProcess(
@@ -251,13 +251,13 @@ Future<void> generatelocalizations() async {
       'pub',
       'run',
       'intl_translation:generate_from_arb',
-      '--output-dir=kodesmil_locale/lib',
+      '--output-dir=ks_locale/lib',
       '--no-use-deferred-loading',
-      'translations/kodesmil_locale/lib/localizations.dart',
-      'translations/kodesmil_locale/lib/intl_messages.arb',
-      'translations/kodesmil_locale/lib/intl_en.arb',
-      'translations/kodesmil_locale/lib/intl_nb.arb',
-      'translations/kodesmil_locale/lib/intl_pl.arb',
+      'translations/ks_locale/lib/main.dart',
+      'translations/ks_locale/lib/intl_messages.arb',
+      'translations/ks_locale/lib/intl_en.arb',
+      'translations/ks_locale/lib/intl_nb.arb',
+      'translations/ks_locale/lib/intl_pl.arb',
     ],
   );
   await format();

@@ -1,9 +1,0 @@
-{
-  '@@last_modified': '2019-11-26T14:11:44.370673',
-  'test': 'test',
-  '@test': {
-    'description': '',
-    'type': 'text',
-    'placeholders': {}
-  }
-}

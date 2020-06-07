@@ -1,5 +1,7 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:feat_journal/src/common.dart';
+import 'package:feat_journal/src/widgets/period.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
@@ -164,6 +166,12 @@ class _SingleDayEditorState extends State<SingleDayEditor> {
               );
             }).toList(),
           ),
+          OutlineButton(
+            child: Text('Dialog'),
+            onPressed: () {
+              newPageStart(context);
+            },
+          ),
           Expanded(
             child: TabBarView(
               children: ['Symptoms', 'Period', 'Activity'].map((String text) {
@@ -188,4 +196,23 @@ class _SingleDayEditorState extends State<SingleDayEditor> {
       ),
     );
   }
+}
+
+Future newPageStart(BuildContext context) {
+  return Navigator.of(context).push(
+    CupertinoPageRoute<void>(
+      builder: (BuildContext context) {
+        return Scaffold(
+          appBar: KsSmallNavigationBar(
+            context: context,
+            title: 'Edit',
+          ),
+          body: EditJournalPage(
+            index: 0,
+            todayCount: 0,
+          ),
+        );
+      },
+    ),
+  );
 }

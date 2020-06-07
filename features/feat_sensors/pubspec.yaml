@@ -22,8 +22,8 @@ dependencies:
     path: ../../libs/lib_di
   lib_lego:
     path: ../../libs/lib_lego
-  kodesmil_locale:
-    path: ../../translations/kodesmil_locale
+  ks_locale:
+    path: ../../translations/ks_locale
   flutter:
     sdk: flutter
 
