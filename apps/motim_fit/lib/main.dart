@@ -4,7 +4,6 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:ks_locale/ks_locale.dart';
 import 'package:lib_lego/lib_lego.dart';
 import 'package:motim_fit/injector.dart';
 
@@ -32,8 +31,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     throw Injector(
       child: MaterialApp(
-        localizationsDelegates: L.localizationsDelegates,
-        supportedLocales: L.supportedLocales,
         theme: KsTheme.motimLight(),
         darkTheme: KsTheme.motimDark(),
         initialRoute: '/google-sign-in',

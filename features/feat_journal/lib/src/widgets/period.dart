@@ -1,10 +1,12 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:feat_journal/src/common.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:lib_lego/lib_lego.dart';
+import 'package:infinite_listview/infinite_listview.dart';
 
 class EditJournalPage extends StatefulWidget {
   const EditJournalPage({
@@ -21,7 +23,6 @@ class EditJournalPage extends StatefulWidget {
 }
 
 class _EditJournalPageState extends State<EditJournalPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,18 +36,14 @@ class Calendar extends StatefulWidget {
     Key key,
   }) : super(key: key);
 
-
   @override
   _CalendarState createState() => _CalendarState();
 }
 
 class _CalendarState extends State<Calendar> {
-  int todayCount;
-
   @override
   void initState() {
     final now = DateTime.now();
-    todayCount = now.difference(initialDate).inDays;
     super.initState();
   }
 
@@ -57,39 +54,6 @@ class _CalendarState extends State<Calendar> {
         CalendarHeader(),
         CalendarBody(),
       ],
-    );
-  }
-}
-
-class CalendarBody extends StatelessWidget {
-  const CalendarBody({
-    Key key,
-  }) : super(key: key);
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      child: Container(
-        height: MediaQuery.of(context).size.height * 0.28,
-        padding: EdgeInsets.only(left: 20, right: 20, top: 5),
-        child: CustomScrollView(
-          slivers: [
-            SliverGrid(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 7,
-              ),
-              delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                  return SingleCalendarItemWidget(
-                    index: index,
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
@@ -118,7 +82,6 @@ class CalendarHeader extends StatelessWidget {
       child: Column(
         children: [
           CalendarHeaderTitle(),
-          CalendarHeaderWeeks(),
         ],
       ),
     );
@@ -166,14 +129,132 @@ class CalendarHeaderWeeks extends StatelessWidget {
         children: weekDays
             .map(
               (e) => Center(
-            child: Text(
-              e,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.caption,
+                child: Text(
+                  e,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.caption,
+                ),
+              ),
+            )
+            .toList(),
+      ),
+    );
+  }
+}
+
+class CalendarBody extends StatefulWidget {
+  const CalendarBody({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  _CalendarBodyState createState() => _CalendarBodyState();
+}
+
+class _CalendarBodyState extends State<CalendarBody> {
+  final InfiniteScrollController _infiniteController = InfiniteScrollController(
+    initialScrollOffset: 0.0,
+  );
+
+  DateTime now = DateTime.now();
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      child: Container(
+        height: MediaQuery.of(context).size.height,
+        padding: EdgeInsets.only(left: 20, right: 20, top: 5),
+        child: InfiniteListView.builder(
+          key: PageStorageKey('Edit'),
+          controller: _infiniteController,
+          itemBuilder: (BuildContext context, int index) {
+            print('---------');
+            print(index);
+            print(now.year + index ~/ 12);
+            print((now.month + index) % 12 + 1);
+            return CalendarMonth(
+              month: DateTime(
+                now.year + (now.month + index) ~/ 12,
+                (now.month + index) % 12,
+                1,
+              ),
+              nextMonth: DateTime(
+                now.year + (index + 1) ~/ 12,
+                (now.month + index + 1) % 12,
+                1,
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class CalendarMonth extends StatelessWidget {
+  const CalendarMonth({
+    Key key,
+    this.month,
+    this.nextMonth,
+  }) : super(key: key);
+
+  final DateTime month;
+  final DateTime nextMonth;
+
+  @override
+  Widget build(BuildContext context) {
+    final days = nextMonth.difference(month).inDays;
+    final weeks = days ~/ 7;
+
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Text(
+            month.month == 1
+                ? DateFormat.yMMMM().format(month)
+                : DateFormat.MMMM().format(month),
+            style: Theme.of(context).textTheme.headline5,
+          ),
+          ...Iterable<int>.generate(
+            weeks,
+          ).map(
+            (e) => Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ...(e == 0
+                    ? Iterable<int>.generate(month.weekday - 1)
+                        .map((e) => Expanded(child: Container()))
+                    : []),
+                ...Iterable<DateTime>.generate(
+                  () {
+                    if (e == 0) {
+                      return 8 - month.weekday;
+                    } else if (e == weeks - 1) {
+                      return 7;
+                    } else {
+                      return 7;
+                    }
+                  }(),
+                  (days) => month.add(
+                    Duration(days: e * 7 + days),
+                  ),
+                )
+                    .map(
+                      (e) => Expanded(
+                        child: Center(
+                          child: Text(DateFormat.d().format(e)),
+                        ),
+                      ),
+                    )
+                    .toList()
+              ],
             ),
           ),
-        )
-            .toList(),
+        ],
       ),
     );
   }
@@ -196,8 +277,7 @@ class SingleCalendarItemWidget extends StatelessWidget {
       padding: const EdgeInsets.all(4),
       child: InkWell(
         splashColor: Colors.black12,
-        onTap: () {
-        },
+        onTap: () {},
         borderRadius: BorderRadius.all(
           Radius.circular(10),
         ),
@@ -251,8 +331,8 @@ class SingleCalendarItemContent extends StatelessWidget {
         Text(
           DateFormat().add_MMM().format(date).toUpperCase(),
           style: Theme.of(context).textTheme.caption.copyWith(
-            fontSize: 7,
-          ),
+                fontSize: 7,
+              ),
         ),
       ],
     );

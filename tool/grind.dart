@@ -6,11 +6,9 @@ import 'package:path/path.dart' as path;
 main(args) => grind(args);
 
 final apps = [
-  'translations/ks_locale',
   'libs/lib_lego',
   'libs/lib_di',
   'libs/lib_services',
-  'features/feat_activities',
   'features/feat_auth',
   'features/feat_fit',
   'features/feat_sensors',
@@ -19,17 +17,14 @@ final apps = [
   'features/feat_template',
   'features/feat_onboarding',
   'features/feat_splash',
-  'features/feat_survey',
   'features/feat_notifications',
   'features/feat_locations',
-  'features/feat_survey',
   'features/feat_profile',
   'features/feat_feed',
   'features/feat_journal',
   'apps/ably',
   'apps/motim_fit',
   'apps/legobook',
-  'landings/land_kodesmil',
 ];
 
 @Task('Get packages')

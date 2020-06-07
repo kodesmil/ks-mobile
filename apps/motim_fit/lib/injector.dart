@@ -1,5 +1,3 @@
-import 'package:dio/dio.dart';
-import 'package:feat_activities/feat_activities.dart';
 import 'package:feat_auth/feat_auth.dart';
 import 'package:feat_onboarding/feat_onboarding.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,16 +19,6 @@ class Injector extends StatelessWidget {
       providers: [
         Provider(create: (_) => AuthStorage(SharedPreferences.getInstance())),
         Provider(
-          create: (_) => ActivitiesApi(
-            DioClient(
-              Dio()
-                // ..options.baseUrl = 'http://10.0.2.2:5000'
-                ..options.baseUrl = 'http://activities.kodesmil.com'
-                ..interceptors.add(LogInterceptor(responseBody: true)),
-            ),
-          ),
-        ),
-        Provider(
           create: (_) => GoogleSignIn(
             scopes: <String>[
               'email',
@@ -48,13 +36,6 @@ class Injector extends StatelessWidget {
         ),
         ProxyProvider<GoogleSignIn, GoogleSignInStore>(
           update: (_, dep, __) => GoogleSignInStore(dep),
-        ),
-        ProxyProvider2<GoogleSignInStore, ActivitiesApi, ActivitiesStore>(
-          update: (_, dep, dep2, __) => ActivitiesStore(
-            ErrorStore(),
-            dep,
-            dep2,
-          ),
         ),
         ProxyProvider2<FirebaseAuth, UserStore, LoginStore>(
           update: (_, dep, dep2, __) => LoginStore(

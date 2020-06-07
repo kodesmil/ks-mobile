@@ -19,8 +19,6 @@ dependencies:
 
   lib_lego:
     path: ../../libs/lib_lego
-  ks_locale:
-    path: ../../translations/ks_locale
 
 dev_dependencies:
   build_runner: ^1.7.2
