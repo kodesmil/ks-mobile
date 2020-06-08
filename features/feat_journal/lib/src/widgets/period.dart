@@ -45,6 +45,12 @@ class _CalendarState extends State<Calendar> {
   @override
   void initState() {
     final now = DateTime.now();
+
+    Iterable<int>.generate(1000).map(
+          (e) => now.add(Duration(days: e))).forEach((element) {
+            print(element);
+            print(element.weekday);
+    });
     super.initState();
   }
 
@@ -210,8 +216,12 @@ class _CalendarMonthState extends State<CalendarMonth> {
 
   @override
   void initState() {
+    print("------------");
+    print(widget.month);
+    print(widget.nextMonth);
+    print(widget.month.weekday);
     final days = widget.nextMonth.difference(widget.month).inDays;
-    weeks = ((days + widget.month.weekday - 1) / 7.0).ceil();
+    weeks = ((days + widget.month.weekday) / 7.0).ceil();
     lastWeek = weeks * 7 - days - widget.month.weekday + 1;
 
     print(weeks);
@@ -220,12 +230,14 @@ class _CalendarMonthState extends State<CalendarMonth> {
 
     list = [
       ...Iterable<int>.generate(widget.month.weekday - 1).map(
-        (e) => widget.month.subtract(Duration(days: widget.month.weekday - e)),
+        (e) => widget.month.subtract(Duration(days: widget.month.weekday - e - 1)),
       ),
       ...Iterable<int>.generate(days + lastWeek).map(
         (e) => widget.month.add(Duration(days: e)),
       ),
     ];
+
+    print(list);
 
     super.initState();
   }
