@@ -46,10 +46,11 @@ class _CalendarState extends State<Calendar> {
   void initState() {
     final now = DateTime.now();
 
-    Iterable<int>.generate(1000).map(
-          (e) => now.add(Duration(days: e))).forEach((element) {
-            print(element);
-            print(element.weekday);
+    Iterable<int>.generate(1000)
+        .map((e) => now.add(Duration(days: e)))
+        .forEach((element) {
+      print(element);
+      print(element.weekday);
     });
     super.initState();
   }
@@ -216,29 +217,18 @@ class _CalendarMonthState extends State<CalendarMonth> {
 
   @override
   void initState() {
-    print("------------");
-    print(widget.month);
-    print(widget.nextMonth);
-    print(widget.month.weekday);
     final days = widget.nextMonth.difference(widget.month).inDays;
     weeks = ((days + widget.month.weekday) / 7.0).ceil();
     lastWeek = weeks * 7 - days - widget.month.weekday + 1;
-
-    print(weeks);
-    print(lastWeek);
-    print(days);
-
     list = [
       ...Iterable<int>.generate(widget.month.weekday - 1).map(
-        (e) => widget.month.subtract(Duration(days: widget.month.weekday - e - 1)),
+        (e) =>
+            widget.month.subtract(Duration(days: widget.month.weekday - e - 1)),
       ),
       ...Iterable<int>.generate(days + lastWeek).map(
         (e) => widget.month.add(Duration(days: e)),
       ),
     ];
-
-    print(list);
-
     super.initState();
   }
 
@@ -266,15 +256,7 @@ class _CalendarMonthState extends State<CalendarMonth> {
             children: list
                 .map(
                   (e) => e.month == widget.month.month
-                      ? Container(
-                          margin: EdgeInsets.all(2),
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(width: 1)),
-                          child: Center(
-                            child: Text(DateFormat.d().format(e)),
-                          ),
-                        )
+                      ? SingleDay(day: e)
                       : Container(),
                 )
                 .toList(),
@@ -285,81 +267,88 @@ class _CalendarMonthState extends State<CalendarMonth> {
   }
 }
 
-class SingleCalendarItemWidget extends StatelessWidget {
-  const SingleCalendarItemWidget({
+enum Volume {
+  none,
+  low,
+  high,
+}
+
+class SingleDay extends StatefulWidget {
+  const SingleDay({
     Key key,
-    @required this.index,
+    this.day,
   }) : super(key: key);
 
-  final int index;
+  final DateTime day;
+
+  @override
+  _SingleDayState createState() => _SingleDayState();
+}
+
+class _SingleDayState extends State<SingleDay> {
+  Volume volume = Volume.none;
 
   @override
   Widget build(BuildContext context) {
-    final date = initialDate.add(Duration(
-      days: index,
-    ));
     return Container(
-      padding: const EdgeInsets.all(4),
-      child: InkWell(
-        splashColor: Colors.black12,
-        onTap: () {},
-        borderRadius: BorderRadius.all(
-          Radius.circular(10),
+      margin: EdgeInsets.all(2),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: () {
+          switch (volume) {
+            case Volume.low:
+            case Volume.high:
+            case Volume.none:
+              return Colors.white;
+          }
+          return Colors.white;
+        }(),
+        border: Border.all(
+          width: calculateWidth(),
+          color: () {
+            switch (volume) {
+              case Volume.low:
+              case Volume.high:
+                return Colors.red;
+              case Volume.none:
+                return Colors.black26;
+            }
+            return Colors.black26;
+          }(),
         ),
-        child: Container(
-          padding: const EdgeInsets.all(4),
-          decoration: BoxDecoration(
-            color: [6, 7].contains(date.weekday)
-                ? Color(0xFFFFEEEE)
-                : Colors.white,
-            border: Border.all(
-              width: 0.5,
-              color: Colors.transparent,
-            ),
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.elliptical(5, 5),
-              top: Radius.elliptical(2, 2),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: date.isToday()
-                    ? Theme.of(context).colorScheme.primary.withOpacity(0.3)
-                    : Theme.of(context).colorScheme.primary.withOpacity(0.1),
-                spreadRadius: 0.25,
-                blurRadius: 2,
-              ),
-            ],
-          ),
-          child: SingleCalendarItemContent(date: date),
+      ),
+      child: InkWell(
+        onTap: () {
+          setState(() {
+            switch (volume) {
+              case Volume.none:
+                volume = Volume.low;
+                break;
+              case Volume.low:
+                volume = Volume.high;
+                break;
+              case Volume.high:
+                volume = Volume.none;
+                break;
+            }
+          });
+        },
+        child: Center(
+          child: Text(DateFormat.d().format(widget.day)),
         ),
       ),
     );
   }
-}
 
-class SingleCalendarItemContent extends StatelessWidget {
-  const SingleCalendarItemContent({
-    Key key,
-    @required this.date,
-  }) : super(key: key);
-
-  final DateTime date;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          date.day.toString(),
-          style: Theme.of(context).textTheme.bodyText1,
-        ),
-        Text(
-          DateFormat().add_MMM().format(date).toUpperCase(),
-          style: Theme.of(context).textTheme.caption.copyWith(
-                fontSize: 7,
-              ),
-        ),
-      ],
-    );
+  double calculateWidth() {
+    switch (volume) {
+      case Volume.low:
+        return 2.0;
+      case Volume.high:
+        return 5.0;
+      case Volume.none:
+        return 1.0;
+    }
+    return 1.0;
   }
 }
