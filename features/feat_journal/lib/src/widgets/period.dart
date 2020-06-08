@@ -1,5 +1,6 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:feat_journal/src/common.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
@@ -165,22 +166,19 @@ class _CalendarBodyState extends State<CalendarBody> {
         height: MediaQuery.of(context).size.height,
         padding: EdgeInsets.only(left: 20, right: 20, top: 5),
         child: InfiniteListView.builder(
-          key: PageStorageKey('Edit'),
+          addAutomaticKeepAlives: false,
           controller: _infiniteController,
           itemBuilder: (BuildContext context, int index) {
-            print('---------');
-            print(index);
-            print(now.year + index ~/ 12);
-            print((now.month + index) % 12 + 1);
+            print((now.month + index) ~/ 12);
             return CalendarMonth(
               month: DateTime(
                 now.year + (now.month + index) ~/ 12,
-                (now.month + index) % 12,
+                (now.month + index) % 12 + 1,
                 1,
               ),
               nextMonth: DateTime(
-                now.year + (index + 1) ~/ 12,
-                (now.month + index + 1) % 12,
+                now.year + (now.month + index + 1) ~/ 12,
+                (now.month + index + 1) % 12 + 1,
                 1,
               ),
             );
@@ -191,7 +189,7 @@ class _CalendarBodyState extends State<CalendarBody> {
   }
 }
 
-class CalendarMonth extends StatelessWidget {
+class CalendarMonth extends StatefulWidget {
   const CalendarMonth({
     Key key,
     this.month,
@@ -202,57 +200,72 @@ class CalendarMonth extends StatelessWidget {
   final DateTime nextMonth;
 
   @override
-  Widget build(BuildContext context) {
-    final days = nextMonth.difference(month).inDays;
-    final weeks = days ~/ 7;
+  _CalendarMonthState createState() => _CalendarMonthState();
+}
 
+class _CalendarMonthState extends State<CalendarMonth> {
+  List<DateTime> list;
+  int weeks;
+  int lastWeek;
+
+  @override
+  void initState() {
+    final days = widget.nextMonth.difference(widget.month).inDays;
+    weeks = ((days + widget.month.weekday - 1) / 7.0).ceil();
+    lastWeek = weeks * 7 - days - widget.month.weekday + 1;
+
+    print(weeks);
+    print(lastWeek);
+    print(days);
+
+    list = [
+      ...Iterable<int>.generate(widget.month.weekday - 1).map(
+        (e) => widget.month.subtract(Duration(days: widget.month.weekday - e)),
+      ),
+      ...Iterable<int>.generate(days + lastWeek).map(
+        (e) => widget.month.add(Duration(days: e)),
+      ),
+    ];
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Text(
-            month.month == 1
-                ? DateFormat.yMMMM().format(month)
-                : DateFormat.MMMM().format(month),
-            style: Theme.of(context).textTheme.headline5,
-          ),
-          ...Iterable<int>.generate(
-            weeks,
-          ).map(
-            (e) => Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ...(e == 0
-                    ? Iterable<int>.generate(month.weekday - 1)
-                        .map((e) => Expanded(child: Container()))
-                    : []),
-                ...Iterable<DateTime>.generate(
-                  () {
-                    if (e == 0) {
-                      return 8 - month.weekday;
-                    } else if (e == weeks - 1) {
-                      return 7;
-                    } else {
-                      return 7;
-                    }
-                  }(),
-                  (days) => month.add(
-                    Duration(days: e * 7 + days),
-                  ),
-                )
-                    .map(
-                      (e) => Expanded(
-                        child: Center(
-                          child: Text(DateFormat.d().format(e)),
-                        ),
-                      ),
-                    )
-                    .toList()
-              ],
+          Padding(
+            padding: const EdgeInsets.only(bottom: 15),
+            child: Text(
+              widget.month.month == 1
+                  ? DateFormat.yMMMM().format(widget.month)
+                  : DateFormat.MMMM().format(widget.month),
+              style: Theme.of(context).textTheme.headline5,
             ),
+          ),
+          GridView.count(
+            crossAxisCount: 7,
+            shrinkWrap: true,
+            primary: false,
+            children: list
+                .map(
+                  (e) => e.month == widget.month.month
+                      ? Container(
+                          margin: EdgeInsets.all(2),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(width: 1)),
+                          child: Center(
+                            child: Text(DateFormat.d().format(e)),
+                          ),
+                        )
+                      : Container(),
+                )
+                .toList(),
           ),
         ],
       ),
