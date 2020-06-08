@@ -166,19 +166,22 @@ class _SingleDayEditorState extends State<SingleDayEditor> {
               );
             }).toList(),
           ),
-          OutlineButton(
-            child: Text('Dialog'),
-            onPressed: () {
-              newPageStart(context);
-            },
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: OutlineButton(
+              child: Text('Edit period'),
+              onPressed: () {
+                newPageStart(context);
+              },
+            ),
           ),
           Expanded(
             child: TabBarView(
               children: ['Symptoms', 'Period', 'Activity'].map((String text) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 30,
-                    vertical: 15,
+                    horizontal: 50,
+                    vertical: 20,
                   ),
                   child: Text(
                     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do '
