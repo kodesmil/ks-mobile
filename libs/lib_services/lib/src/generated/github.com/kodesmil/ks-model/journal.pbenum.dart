@@ -9,21 +9,6 @@
 import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-class JournalSubject_Type extends $pb.ProtobufEnum {
-  static const JournalSubject_Type ACTIVITY = JournalSubject_Type._(0, 'ACTIVITY');
-  static const JournalSubject_Type SYMPTOM = JournalSubject_Type._(1, 'SYMPTOM');
-
-  static const $core.List<JournalSubject_Type> values = <JournalSubject_Type> [
-    ACTIVITY,
-    SYMPTOM,
-  ];
-
-  static final $core.Map<$core.int, JournalSubject_Type> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static JournalSubject_Type valueOf($core.int value) => _byValue[value];
-
-  const JournalSubject_Type._($core.int v, $core.String n) : super(v, n);
-}
-
 class JournalEntry_Severity extends $pb.ProtobufEnum {
   static const JournalEntry_Severity NONE = JournalEntry_Severity._(0, 'NONE');
   static const JournalEntry_Severity LOW = JournalEntry_Severity._(1, 'LOW');

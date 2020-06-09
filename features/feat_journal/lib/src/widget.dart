@@ -17,7 +17,7 @@ class _JournalWidgetState extends State<JournalWidget> {
   @override
   void didChangeDependencies() {
     final store = Provider.of<JournalStore>(context);
-    store.fetchJournalSubjectActivities(JournalSubject_Type.ACTIVITY);
+    store.fetchJournalSubjectActivities();
     store.fetchJournalEntries();
     super.didChangeDependencies();
   }

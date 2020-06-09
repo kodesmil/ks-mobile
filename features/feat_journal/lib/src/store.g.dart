@@ -95,9 +95,9 @@ mixin _$JournalStore on _JournalStore, Store {
       AsyncAction('_JournalStore.fetchJournalSubjectActivities');
 
   @override
-  Future<dynamic> fetchJournalSubjectActivities(JournalSubject_Type type) {
+  Future<dynamic> fetchJournalSubjectActivities() {
     return _$fetchJournalSubjectActivitiesAsyncAction
-        .run(() => super.fetchJournalSubjectActivities(type));
+        .run(() => super.fetchJournalSubjectActivities());
   }
 
   final _$fetchJournalEntriesAsyncAction =

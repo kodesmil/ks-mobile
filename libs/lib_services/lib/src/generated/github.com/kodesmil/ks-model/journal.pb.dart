@@ -7,23 +7,90 @@
 
 import 'dart:core' as $core;
 
-import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../infobloxopen/atlas-app-toolkit/rpc/resource/resource.pb.dart' as $6;
-import '../../../google/protobuf/timestamp.pb.dart' as $8;
-import '../../infobloxopen/atlas-app-toolkit/query/collection_operators.pb.dart' as $7;
+import '../../infobloxopen/atlas-app-toolkit/rpc/resource/resource.pb.dart' as $7;
+import '../../../google/protobuf/timestamp.pb.dart' as $9;
+import '../../infobloxopen/atlas-app-toolkit/query/collection_operators.pb.dart' as $8;
 
 import 'journal.pbenum.dart';
 
 export 'journal.pbenum.dart';
 
+class JournalSubjectType extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('JournalSubjectType', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..aOM<$7.Identifier>(1, 'id', subBuilder: $7.Identifier.create)
+    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
+    ..aOS(4, 'name')
+    ..hasRequiredFields = false
+  ;
+
+  JournalSubjectType._() : super();
+  factory JournalSubjectType() => create();
+  factory JournalSubjectType.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory JournalSubjectType.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  JournalSubjectType clone() => JournalSubjectType()..mergeFromMessage(this);
+  JournalSubjectType copyWith(void Function(JournalSubjectType) updates) => super.copyWith((message) => updates(message as JournalSubjectType));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static JournalSubjectType create() => JournalSubjectType._();
+  JournalSubjectType createEmptyInstance() => create();
+  static $pb.PbList<JournalSubjectType> createRepeated() => $pb.PbList<JournalSubjectType>();
+  @$core.pragma('dart2js:noInline')
+  static JournalSubjectType getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<JournalSubjectType>(create);
+  static JournalSubjectType _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $7.Identifier get id => $_getN(0);
+  @$pb.TagNumber(1)
+  set id($7.Identifier v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+  @$pb.TagNumber(1)
+  $7.Identifier ensureId() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $9.Timestamp get createdAt => $_getN(1);
+  @$pb.TagNumber(2)
+  set createdAt($9.Timestamp v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCreatedAt() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCreatedAt() => clearField(2);
+  @$pb.TagNumber(2)
+  $9.Timestamp ensureCreatedAt() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $9.Timestamp get updatedAt => $_getN(2);
+  @$pb.TagNumber(3)
+  set updatedAt($9.Timestamp v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasUpdatedAt() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearUpdatedAt() => clearField(3);
+  @$pb.TagNumber(3)
+  $9.Timestamp ensureUpdatedAt() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  $core.String get name => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set name($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasName() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearName() => clearField(4);
+}
+
 class JournalSubject extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('JournalSubject', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$6.Identifier>(1, 'id', subBuilder: $6.Identifier.create)
-    ..aOS(2, 'key')
-    ..aOS(3, 'name')
-    ..e<JournalSubject_Type>(4, 'type', $pb.PbFieldType.OE, defaultOrMaker: JournalSubject_Type.ACTIVITY, valueOf: JournalSubject_Type.valueOf, enumValues: JournalSubject_Type.values)
+    ..aOM<$7.Identifier>(1, 'id', subBuilder: $7.Identifier.create)
+    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
+    ..aOS(4, 'name')
+    ..pc<JournalSubjectType>(5, 'types', $pb.PbFieldType.PM, subBuilder: JournalSubjectType.create)
     ..hasRequiredFields = false
   ;
 
@@ -43,51 +110,59 @@ class JournalSubject extends $pb.GeneratedMessage {
   static JournalSubject _defaultInstance;
 
   @$pb.TagNumber(1)
-  $6.Identifier get id => $_getN(0);
+  $7.Identifier get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($6.Identifier v) { setField(1, v); }
+  set id($7.Identifier v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $6.Identifier ensureId() => $_ensure(0);
+  $7.Identifier ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $core.String get key => $_getSZ(1);
+  $9.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set key($core.String v) { $_setString(1, v); }
+  set createdAt($9.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasKey() => $_has(1);
+  $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
-  void clearKey() => clearField(2);
+  void clearCreatedAt() => clearField(2);
+  @$pb.TagNumber(2)
+  $9.Timestamp ensureCreatedAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $core.String get name => $_getSZ(2);
+  $9.Timestamp get updatedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set name($core.String v) { $_setString(2, v); }
+  set updatedAt($9.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
-  $core.bool hasName() => $_has(2);
+  $core.bool hasUpdatedAt() => $_has(2);
   @$pb.TagNumber(3)
-  void clearName() => clearField(3);
+  void clearUpdatedAt() => clearField(3);
+  @$pb.TagNumber(3)
+  $9.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  JournalSubject_Type get type => $_getN(3);
+  $core.String get name => $_getSZ(3);
   @$pb.TagNumber(4)
-  set type(JournalSubject_Type v) { setField(4, v); }
+  set name($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasType() => $_has(3);
+  $core.bool hasName() => $_has(3);
   @$pb.TagNumber(4)
-  void clearType() => clearField(4);
+  void clearName() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.List<JournalSubjectType> get types => $_getList(4);
 }
 
 class JournalEntry extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('JournalEntry', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$6.Identifier>(1, 'id', subBuilder: $6.Identifier.create)
-    ..e<JournalEntry_Severity>(2, 'severity', $pb.PbFieldType.OE, defaultOrMaker: JournalEntry_Severity.NONE, valueOf: JournalEntry_Severity.valueOf, enumValues: JournalEntry_Severity.values)
-    ..aOS(3, 'note')
-    ..aOM<$8.Timestamp>(4, 'createdAt', subBuilder: $8.Timestamp.create)
-    ..aInt64(5, 'journalSubjectId')
+    ..aOM<$7.Identifier>(1, 'id', subBuilder: $7.Identifier.create)
+    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(4, 'day', subBuilder: $9.Timestamp.create)
+    ..e<JournalEntry_Severity>(5, 'severity', $pb.PbFieldType.OE, defaultOrMaker: JournalEntry_Severity.NONE, valueOf: JournalEntry_Severity.valueOf, enumValues: JournalEntry_Severity.values)
+    ..aOS(7, 'note')
     ..hasRequiredFields = false
   ;
 
@@ -107,53 +182,66 @@ class JournalEntry extends $pb.GeneratedMessage {
   static JournalEntry _defaultInstance;
 
   @$pb.TagNumber(1)
-  $6.Identifier get id => $_getN(0);
+  $7.Identifier get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($6.Identifier v) { setField(1, v); }
+  set id($7.Identifier v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $6.Identifier ensureId() => $_ensure(0);
+  $7.Identifier ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  JournalEntry_Severity get severity => $_getN(1);
+  $9.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set severity(JournalEntry_Severity v) { setField(2, v); }
+  set createdAt($9.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasSeverity() => $_has(1);
+  $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
-  void clearSeverity() => clearField(2);
+  void clearCreatedAt() => clearField(2);
+  @$pb.TagNumber(2)
+  $9.Timestamp ensureCreatedAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $core.String get note => $_getSZ(2);
+  $9.Timestamp get updatedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set note($core.String v) { $_setString(2, v); }
+  set updatedAt($9.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
-  $core.bool hasNote() => $_has(2);
+  $core.bool hasUpdatedAt() => $_has(2);
   @$pb.TagNumber(3)
-  void clearNote() => clearField(3);
+  void clearUpdatedAt() => clearField(3);
+  @$pb.TagNumber(3)
+  $9.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $8.Timestamp get createdAt => $_getN(3);
+  $9.Timestamp get day => $_getN(3);
   @$pb.TagNumber(4)
-  set createdAt($8.Timestamp v) { setField(4, v); }
+  set day($9.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
-  $core.bool hasCreatedAt() => $_has(3);
+  $core.bool hasDay() => $_has(3);
   @$pb.TagNumber(4)
-  void clearCreatedAt() => clearField(4);
+  void clearDay() => clearField(4);
   @$pb.TagNumber(4)
-  $8.Timestamp ensureCreatedAt() => $_ensure(3);
+  $9.Timestamp ensureDay() => $_ensure(3);
 
   @$pb.TagNumber(5)
-  $fixnum.Int64 get journalSubjectId => $_getI64(4);
+  JournalEntry_Severity get severity => $_getN(4);
   @$pb.TagNumber(5)
-  set journalSubjectId($fixnum.Int64 v) { $_setInt64(4, v); }
+  set severity(JournalEntry_Severity v) { setField(5, v); }
   @$pb.TagNumber(5)
-  $core.bool hasJournalSubjectId() => $_has(4);
+  $core.bool hasSeverity() => $_has(4);
   @$pb.TagNumber(5)
-  void clearJournalSubjectId() => clearField(5);
+  void clearSeverity() => clearField(5);
+
+  @$pb.TagNumber(7)
+  $core.String get note => $_getSZ(5);
+  @$pb.TagNumber(7)
+  set note($core.String v) { $_setString(5, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasNote() => $_has(5);
+  @$pb.TagNumber(7)
+  void clearNote() => clearField(7);
 }
 
 class CreateJournalEntryRequest extends $pb.GeneratedMessage {
@@ -224,7 +312,7 @@ class CreateJournalEntryResponse extends $pb.GeneratedMessage {
 
 class ReadJournalEntryRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ReadJournalEntryRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$6.Identifier>(1, 'id', subBuilder: $6.Identifier.create)
+    ..aOM<$7.Identifier>(1, 'id', subBuilder: $7.Identifier.create)
     ..hasRequiredFields = false
   ;
 
@@ -244,15 +332,15 @@ class ReadJournalEntryRequest extends $pb.GeneratedMessage {
   static ReadJournalEntryRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $6.Identifier get id => $_getN(0);
+  $7.Identifier get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($6.Identifier v) { setField(1, v); }
+  set id($7.Identifier v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $6.Identifier ensureId() => $_ensure(0);
+  $7.Identifier ensureId() => $_ensure(0);
 }
 
 class ReadJournalEntryResponse extends $pb.GeneratedMessage {
@@ -356,7 +444,7 @@ class UpdateJournalEntryResponse extends $pb.GeneratedMessage {
 
 class DeleteJournalEntryRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteJournalEntryRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$6.Identifier>(1, 'id', subBuilder: $6.Identifier.create)
+    ..aOM<$7.Identifier>(1, 'id', subBuilder: $7.Identifier.create)
     ..hasRequiredFields = false
   ;
 
@@ -376,15 +464,15 @@ class DeleteJournalEntryRequest extends $pb.GeneratedMessage {
   static DeleteJournalEntryRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $6.Identifier get id => $_getN(0);
+  $7.Identifier get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($6.Identifier v) { setField(1, v); }
+  set id($7.Identifier v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $6.Identifier ensureId() => $_ensure(0);
+  $7.Identifier ensureId() => $_ensure(0);
 }
 
 class DeleteJournalEntryResponse extends $pb.GeneratedMessage {
@@ -410,10 +498,10 @@ class DeleteJournalEntryResponse extends $pb.GeneratedMessage {
 
 class ListJournalEntryRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ListJournalEntryRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$7.Filtering>(1, 'filter', subBuilder: $7.Filtering.create)
-    ..aOM<$7.Sorting>(2, 'orderBy', subBuilder: $7.Sorting.create)
-    ..aOM<$7.FieldSelection>(3, 'fields', subBuilder: $7.FieldSelection.create)
-    ..aOM<$7.Pagination>(4, 'paging', subBuilder: $7.Pagination.create)
+    ..aOM<$8.Filtering>(1, 'filter', subBuilder: $8.Filtering.create)
+    ..aOM<$8.Sorting>(2, 'orderBy', subBuilder: $8.Sorting.create)
+    ..aOM<$8.FieldSelection>(3, 'fields', subBuilder: $8.FieldSelection.create)
+    ..aOM<$8.Pagination>(4, 'paging', subBuilder: $8.Pagination.create)
     ..hasRequiredFields = false
   ;
 
@@ -433,48 +521,48 @@ class ListJournalEntryRequest extends $pb.GeneratedMessage {
   static ListJournalEntryRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $7.Filtering get filter => $_getN(0);
+  $8.Filtering get filter => $_getN(0);
   @$pb.TagNumber(1)
-  set filter($7.Filtering v) { setField(1, v); }
+  set filter($8.Filtering v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasFilter() => $_has(0);
   @$pb.TagNumber(1)
   void clearFilter() => clearField(1);
   @$pb.TagNumber(1)
-  $7.Filtering ensureFilter() => $_ensure(0);
+  $8.Filtering ensureFilter() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $7.Sorting get orderBy => $_getN(1);
+  $8.Sorting get orderBy => $_getN(1);
   @$pb.TagNumber(2)
-  set orderBy($7.Sorting v) { setField(2, v); }
+  set orderBy($8.Sorting v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasOrderBy() => $_has(1);
   @$pb.TagNumber(2)
   void clearOrderBy() => clearField(2);
   @$pb.TagNumber(2)
-  $7.Sorting ensureOrderBy() => $_ensure(1);
+  $8.Sorting ensureOrderBy() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $7.FieldSelection get fields => $_getN(2);
+  $8.FieldSelection get fields => $_getN(2);
   @$pb.TagNumber(3)
-  set fields($7.FieldSelection v) { setField(3, v); }
+  set fields($8.FieldSelection v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasFields() => $_has(2);
   @$pb.TagNumber(3)
   void clearFields() => clearField(3);
   @$pb.TagNumber(3)
-  $7.FieldSelection ensureFields() => $_ensure(2);
+  $8.FieldSelection ensureFields() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $7.Pagination get paging => $_getN(3);
+  $8.Pagination get paging => $_getN(3);
   @$pb.TagNumber(4)
-  set paging($7.Pagination v) { setField(4, v); }
+  set paging($8.Pagination v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasPaging() => $_has(3);
   @$pb.TagNumber(4)
   void clearPaging() => clearField(4);
   @$pb.TagNumber(4)
-  $7.Pagination ensurePaging() => $_ensure(3);
+  $8.Pagination ensurePaging() => $_ensure(3);
 }
 
 class ListJournalEntryResponse extends $pb.GeneratedMessage {
@@ -500,99 +588,5 @@ class ListJournalEntryResponse extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(1)
   $core.List<JournalEntry> get results => $_getList(0);
-}
-
-class ListJournalSubjectRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ListJournalSubjectRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$7.Filtering>(1, 'filter', subBuilder: $7.Filtering.create)
-    ..aOM<$7.Sorting>(2, 'orderBy', subBuilder: $7.Sorting.create)
-    ..aOM<$7.FieldSelection>(3, 'fields', subBuilder: $7.FieldSelection.create)
-    ..aOM<$7.Pagination>(4, 'paging', subBuilder: $7.Pagination.create)
-    ..hasRequiredFields = false
-  ;
-
-  ListJournalSubjectRequest._() : super();
-  factory ListJournalSubjectRequest() => create();
-  factory ListJournalSubjectRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ListJournalSubjectRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  ListJournalSubjectRequest clone() => ListJournalSubjectRequest()..mergeFromMessage(this);
-  ListJournalSubjectRequest copyWith(void Function(ListJournalSubjectRequest) updates) => super.copyWith((message) => updates(message as ListJournalSubjectRequest));
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static ListJournalSubjectRequest create() => ListJournalSubjectRequest._();
-  ListJournalSubjectRequest createEmptyInstance() => create();
-  static $pb.PbList<ListJournalSubjectRequest> createRepeated() => $pb.PbList<ListJournalSubjectRequest>();
-  @$core.pragma('dart2js:noInline')
-  static ListJournalSubjectRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListJournalSubjectRequest>(create);
-  static ListJournalSubjectRequest _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $7.Filtering get filter => $_getN(0);
-  @$pb.TagNumber(1)
-  set filter($7.Filtering v) { setField(1, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasFilter() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearFilter() => clearField(1);
-  @$pb.TagNumber(1)
-  $7.Filtering ensureFilter() => $_ensure(0);
-
-  @$pb.TagNumber(2)
-  $7.Sorting get orderBy => $_getN(1);
-  @$pb.TagNumber(2)
-  set orderBy($7.Sorting v) { setField(2, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasOrderBy() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearOrderBy() => clearField(2);
-  @$pb.TagNumber(2)
-  $7.Sorting ensureOrderBy() => $_ensure(1);
-
-  @$pb.TagNumber(3)
-  $7.FieldSelection get fields => $_getN(2);
-  @$pb.TagNumber(3)
-  set fields($7.FieldSelection v) { setField(3, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasFields() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearFields() => clearField(3);
-  @$pb.TagNumber(3)
-  $7.FieldSelection ensureFields() => $_ensure(2);
-
-  @$pb.TagNumber(4)
-  $7.Pagination get paging => $_getN(3);
-  @$pb.TagNumber(4)
-  set paging($7.Pagination v) { setField(4, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasPaging() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearPaging() => clearField(4);
-  @$pb.TagNumber(4)
-  $7.Pagination ensurePaging() => $_ensure(3);
-}
-
-class ListJournalSubjectResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ListJournalSubjectResponse', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..pc<JournalSubject>(1, 'results', $pb.PbFieldType.PM, subBuilder: JournalSubject.create)
-    ..hasRequiredFields = false
-  ;
-
-  ListJournalSubjectResponse._() : super();
-  factory ListJournalSubjectResponse() => create();
-  factory ListJournalSubjectResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ListJournalSubjectResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  ListJournalSubjectResponse clone() => ListJournalSubjectResponse()..mergeFromMessage(this);
-  ListJournalSubjectResponse copyWith(void Function(ListJournalSubjectResponse) updates) => super.copyWith((message) => updates(message as ListJournalSubjectResponse));
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static ListJournalSubjectResponse create() => ListJournalSubjectResponse._();
-  ListJournalSubjectResponse createEmptyInstance() => create();
-  static $pb.PbList<ListJournalSubjectResponse> createRepeated() => $pb.PbList<ListJournalSubjectResponse>();
-  @$core.pragma('dart2js:noInline')
-  static ListJournalSubjectResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListJournalSubjectResponse>(create);
-  static ListJournalSubjectResponse _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.List<JournalSubject> get results => $_getList(0);
 }
 

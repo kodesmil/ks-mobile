@@ -22,6 +22,7 @@ final apps = [
   'features/feat_profile',
   'features/feat_feed',
   'features/feat_journal',
+  'features/feat_period',
   'apps/ably',
   'apps/motim_fit',
   'apps/legobook',

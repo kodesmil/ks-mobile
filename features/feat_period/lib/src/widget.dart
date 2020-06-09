@@ -1,13 +1,14 @@
-import 'package:dots_indicator/dots_indicator.dart';
-import 'package:feat_journal/src/common.dart';
+import 'package:feat_period/feat_period.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
-import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:lib_lego/lib_lego.dart';
 import 'package:infinite_listview/infinite_listview.dart';
+import 'package:lib_services/lib_services.dart';
+import 'package:provider/provider.dart';
 
 class EditJournalPage extends StatefulWidget {
   const EditJournalPage({
@@ -24,6 +25,13 @@ class EditJournalPage extends StatefulWidget {
 }
 
 class _EditJournalPageState extends State<EditJournalPage> {
+  @override
+  void didChangeDependencies() {
+    final store = Provider.of<PeriodStore>(context);
+    store.fetchPeriodEntries();
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,19 +50,6 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
-  @override
-  void initState() {
-    final now = DateTime.now();
-
-    Iterable<int>.generate(1000)
-        .map((e) => now.add(Duration(days: e)))
-        .forEach((element) {
-      print(element);
-      print(element.weekday);
-    });
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -234,6 +229,7 @@ class _CalendarMonthState extends State<CalendarMonth> {
 
   @override
   Widget build(BuildContext context) {
+    final store = Provider.of<PeriodStore>(context);
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -256,7 +252,11 @@ class _CalendarMonthState extends State<CalendarMonth> {
             children: list
                 .map(
                   (e) => e.month == widget.month.month
-                      ? SingleDay(day: e)
+                      ? Observer(builder: (context) {
+                          final entry =
+                              store.entriesByDay[DateFormat.yMd().format(e)];
+                          return SingleDay(entry: entry, day: e);
+                        })
                       : Container(),
                 )
                 .toList(),
@@ -267,50 +267,48 @@ class _CalendarMonthState extends State<CalendarMonth> {
   }
 }
 
-enum Volume {
-  none,
-  low,
-  high,
-}
-
 class SingleDay extends StatefulWidget {
   const SingleDay({
     Key key,
     this.day,
+    this.entry,
   }) : super(key: key);
 
   final DateTime day;
+  final PeriodDailyEntry entry;
 
   @override
   _SingleDayState createState() => _SingleDayState();
 }
 
 class _SingleDayState extends State<SingleDay> {
-  Volume volume = Volume.none;
+  PeriodDailyEntry_Severity severity = PeriodDailyEntry_Severity.NONE;
+
+  @override
+  void initState() {
+    severity = widget?.entry?.severity ?? PeriodDailyEntry_Severity.NONE;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final store = Provider.of<PeriodStore>(context);
     return Container(
       margin: EdgeInsets.all(2),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: () {
-          switch (volume) {
-            case Volume.low:
-            case Volume.high:
-            case Volume.none:
-              return Colors.white;
-          }
           return Colors.white;
         }(),
         border: Border.all(
           width: calculateWidth(),
           color: () {
-            switch (volume) {
-              case Volume.low:
-              case Volume.high:
+            switch (severity) {
+              case PeriodDailyEntry_Severity.LOW:
+              case PeriodDailyEntry_Severity.HIGH:
+              case PeriodDailyEntry_Severity.MID:
                 return Colors.red;
-              case Volume.none:
+              case PeriodDailyEntry_Severity.NONE:
                 return Colors.black26;
             }
             return Colors.black26;
@@ -320,17 +318,22 @@ class _SingleDayState extends State<SingleDay> {
       child: InkWell(
         onTap: () {
           setState(() {
-            switch (volume) {
-              case Volume.none:
-                volume = Volume.low;
+            switch (severity) {
+              case PeriodDailyEntry_Severity.NONE:
+                severity = PeriodDailyEntry_Severity.LOW;
                 break;
-              case Volume.low:
-                volume = Volume.high;
+              case PeriodDailyEntry_Severity.LOW:
+                severity = PeriodDailyEntry_Severity.MID;
                 break;
-              case Volume.high:
-                volume = Volume.none;
+              case PeriodDailyEntry_Severity.MID:
+                severity = PeriodDailyEntry_Severity.NONE;
                 break;
             }
+            store.createOrUpdatePeriodDailyEntry(
+              widget.entry,
+              severity: severity,
+              day: widget.day,
+            );
           });
         },
         child: Center(
@@ -341,12 +344,12 @@ class _SingleDayState extends State<SingleDay> {
   }
 
   double calculateWidth() {
-    switch (volume) {
-      case Volume.low:
+    switch (severity) {
+      case PeriodDailyEntry_Severity.LOW:
         return 2.0;
-      case Volume.high:
+      case PeriodDailyEntry_Severity.MID:
         return 5.0;
-      case Volume.none:
+      case PeriodDailyEntry_Severity.NONE:
         return 1.0;
     }
     return 1.0;

@@ -10,13 +10,11 @@ class JournalStore = _JournalStore with _$JournalStore;
 abstract class _JournalStore with Store {
   final ErrorStore errorStore;
 
-  JournalSubjectsClient jsClient;
-  JournalEntriesClient jeClient;
+  JournalClient client;
 
   _JournalStore(
     this.errorStore,
-    this.jsClient,
-    this.jeClient,
+    this.client,
   );
 
   @observable
@@ -36,15 +34,15 @@ abstract class _JournalStore with Store {
 
   @action
   Future createJournal() async {
-    final payload = JournalEntry()
-      ..severity = JournalEntry_Severity.NONE;
+    final payload = JournalEntry()..severity = JournalEntry_Severity.NONE;
     final request = CreateJournalEntryRequest()..payload = payload;
-    final response = await jeClient.create(request);
+    final response = await client.createJournalEntry(request);
     journalEntry = response.result;
   }
 
   @action
-  Future fetchJournalSubjectActivities(JournalSubject_Type type) async {
+  Future fetchJournalSubjectActivities() async {
+    /*
     final condition = NumberCondition()
       ..fieldPath.add('type')
       ..value = type.value.toDouble();
@@ -52,12 +50,13 @@ abstract class _JournalStore with Store {
     final request = ListJournalSubjectRequest()..filter = filter;
     final response = await jsClient.list(request);
     journalActivities = response.results;
+     */
   }
 
   @action
   Future fetchJournalEntries() async {
     final request = ListJournalEntryRequest();
-    final response = await jeClient.list(request);
+    final response = await client.listJournalEntry(request);
     entries = response.results;
   }
 }

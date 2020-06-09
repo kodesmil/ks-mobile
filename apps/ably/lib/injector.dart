@@ -2,6 +2,7 @@ import 'package:feat_auth/feat_auth.dart';
 import 'package:feat_chat/feat_chat.dart';
 import 'package:feat_feed/feat_feed.dart';
 import 'package:feat_journal/feat_journal.dart';
+import 'package:feat_period/feat_period.dart';
 import 'package:feat_notifications/feat_notifications.dart';
 import 'package:feat_onboarding/feat_onboarding.dart';
 import 'package:feat_profile/feat_profile.dart';
@@ -124,14 +125,14 @@ class _AppInjectorState extends State<AppInjector> {
             options: dep,
           ),
         ),
-        ProxyProvider<CallOptions, JournalEntriesClient>(
-          update: (_, dep, __) => JournalEntriesClient(
+        ProxyProvider<CallOptions, JournalClient>(
+          update: (_, dep, __) => JournalClient(
             channel,
             options: dep,
           ),
         ),
-        ProxyProvider<CallOptions, JournalSubjectsClient>(
-          update: (_, dep, __) => JournalSubjectsClient(
+        ProxyProvider<CallOptions, PeriodClient>(
+          update: (_, dep, __) => PeriodClient(
             channel,
             options: dep,
           ),
@@ -187,12 +188,16 @@ class _AppInjectorState extends State<AppInjector> {
             dep2,
           ),
         ),
-        ProxyProvider2<JournalSubjectsClient, JournalEntriesClient,
-            JournalStore>(
-          update: (_, dep, dep2, __) => JournalStore(
+        ProxyProvider<JournalClient, JournalStore>(
+          update: (_, dep, __) => JournalStore(
             ErrorStore(),
             dep,
-            dep2,
+          ),
+        ),
+        ProxyProvider<PeriodClient, PeriodStore>(
+          update: (_, dep, __) => PeriodStore(
+            ErrorStore(),
+            dep,
           ),
         ),
         ProxyProvider<FeedArticlesClient, FeedStore>(
