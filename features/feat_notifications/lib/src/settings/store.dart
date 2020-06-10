@@ -66,8 +66,6 @@ abstract class _NotificationSettingsStore with Store {
   Future create() async {
     final timestamp = Timestamp.fromDateTime(DateTime.now());
     final payload = NotificationSetting()
-      ..createdAt = timestamp
-      ..updatedAt = timestamp
       ..enableNotifications = true
       ..cronJournalReminder = '${noon.hour} ${noon.minute} * * * *'
       ..enableJournalReminder = true;

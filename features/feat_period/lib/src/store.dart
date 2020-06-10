@@ -31,7 +31,7 @@ abstract class _PeriodStore with Store {
   Map<String, PeriodDailyEntry> get entriesByDay {
     final result = entries.asMap().map(
         (key, value) => MapEntry(
-          DateFormat.yMd().format(value.day.toDateTime()),
+          DateFormat.yMd().format(value.day.toDateTime().toLocal()),
           value,
         ),
       );
@@ -62,9 +62,7 @@ abstract class _PeriodStore with Store {
   }) async {
     final payload = PeriodDailyEntry()
       ..severity = severity
-      ..day = Timestamp.fromDateTime(day)
-      ..createdAt = Timestamp.fromDateTime(DateTime.now())
-      ..updatedAt = Timestamp.fromDateTime(DateTime.now());
+      ..day = Timestamp.fromDateTime(day.toUtc());
     final request = CreatePeriodDailyEntryRequest()..payload = payload;
     final response = await client.createPeriodDailyEntry(request);
     entries.add(response.result);

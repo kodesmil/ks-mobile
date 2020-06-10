@@ -171,16 +171,15 @@ class _CalendarBodyState extends State<CalendarBody> {
           addAutomaticKeepAlives: false,
           controller: _infiniteController,
           itemBuilder: (BuildContext context, int index) {
-            print((now.month + index) ~/ 12);
             return CalendarMonth(
               month: DateTime(
                 now.year + (now.month + index) ~/ 12,
-                (now.month + index) % 12 + 1,
+                (now.month + index - 1) % 12 + 1,
                 1,
               ),
               nextMonth: DateTime(
                 now.year + (now.month + index + 1) ~/ 12,
-                (now.month + index + 1) % 12 + 1,
+                (now.month + index) % 12 + 1,
                 1,
               ),
             );
@@ -231,7 +230,7 @@ class _CalendarMonthState extends State<CalendarMonth> {
   Widget build(BuildContext context) {
     final store = Provider.of<PeriodStore>(context);
     return Padding(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -298,7 +297,16 @@ class _SingleDayState extends State<SingleDay> {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: () {
-          return Colors.white;
+          if (widget.day.isToday()) {
+            return Color(0xFFEAEAFF);
+          }
+          switch (widget.day.weekday) {
+            case DateTime.saturday:
+            case DateTime.sunday:
+              return Color(0xFFFFEEEE);
+            default:
+              return Colors.white;
+          }
         }(),
         border: Border.all(
           width: calculateWidth(),
@@ -307,7 +315,7 @@ class _SingleDayState extends State<SingleDay> {
               case PeriodDailyEntry_Severity.LOW:
               case PeriodDailyEntry_Severity.HIGH:
               case PeriodDailyEntry_Severity.MID:
-                return Colors.red;
+                return Color(0xFFDD3333);
               case PeriodDailyEntry_Severity.NONE:
                 return Colors.black26;
             }
@@ -336,6 +344,26 @@ class _SingleDayState extends State<SingleDay> {
             );
           });
         },
+        onDoubleTap: () {
+          setState(() {
+            switch (severity) {
+              case PeriodDailyEntry_Severity.NONE:
+                severity = PeriodDailyEntry_Severity.MID;
+                break;
+              case PeriodDailyEntry_Severity.LOW:
+                severity = PeriodDailyEntry_Severity.NONE;
+                break;
+              case PeriodDailyEntry_Severity.MID:
+                severity = PeriodDailyEntry_Severity.LOW;
+                break;
+            }
+            store.createOrUpdatePeriodDailyEntry(
+              widget.entry,
+              severity: severity,
+              day: widget.day,
+            );
+          });
+        },
         child: Center(
           child: Text(DateFormat.d().format(widget.day)),
         ),
@@ -348,7 +376,7 @@ class _SingleDayState extends State<SingleDay> {
       case PeriodDailyEntry_Severity.LOW:
         return 2.0;
       case PeriodDailyEntry_Severity.MID:
-        return 5.0;
+        return 4.0;
       case PeriodDailyEntry_Severity.NONE:
         return 1.0;
     }

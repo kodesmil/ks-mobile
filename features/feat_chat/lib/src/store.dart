@@ -142,11 +142,8 @@ abstract class _ChatStore with Store {
 
   @action
   Future sendMessage(String text) async {
-    final timestamp = Timestamp.fromDateTime(DateTime.now());
     final id = Identifier()..resourceId = Uuid().v4();
     final payload = ChatMessage()
-      ..createdAt = timestamp
-      ..updatedAt = timestamp
       ..id = id
       ..status = ChatMessage_Status.NOT_DELIVERED
       ..authorId = selectedMyParticipation.id
