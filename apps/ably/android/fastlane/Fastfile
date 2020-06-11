@@ -54,7 +54,7 @@ platform :android do
         '--release',
         '--verbose',
         '--build-number',
-        '#{version_code}',
+        version_code,
       )
     end
   end
@@ -92,7 +92,7 @@ platform :android do
         '--release',
         '--verbose',
         '--build-number',
-        '#{version_code}',
+        version_code,
       )
 
       sh(
@@ -106,7 +106,7 @@ platform :android do
         '--release',
         '--verbose',
         '--build-number',
-        '#{version_code}',
+        version_code,
       )
 
       firebase_app_distribution(
