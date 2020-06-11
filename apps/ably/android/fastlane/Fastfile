@@ -39,8 +39,6 @@ platform :android do
 
   desc 'Deploy QA Build'
   lane :build_qa do
-    puts version_code
-    puts #{version_code}
 
     Dir.chdir('../../') do
       sh(
