@@ -2,7 +2,7 @@ import 'dart:collection';
 
 import 'package:fit_kit/fit_kit.dart';
 import 'package:intl/intl.dart';
-import 'package:lib_di/lib_di.dart';
+import 'package:lib_shared/lib_shared.dart';
 import 'package:mobx/mobx.dart';
 
 import 'models/fit.dart';

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:lib_di/lib_di.dart';
+import 'package:lib_shared/lib_shared.dart';
 import 'package:mobx/mobx.dart';
 import 'package:uuid/uuid.dart';
 

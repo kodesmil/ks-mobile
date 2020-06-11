@@ -17,36 +17,6 @@ mixin _$PeriodStore on _PeriodStore, Store {
               name: '_PeriodStore.entriesByDay'))
       .value;
 
-  final _$successAtom = Atom(name: '_PeriodStore.success');
-
-  @override
-  bool get success {
-    _$successAtom.reportRead();
-    return super.success;
-  }
-
-  @override
-  set success(bool value) {
-    _$successAtom.reportWrite(value, super.success, () {
-      super.success = value;
-    });
-  }
-
-  final _$loadingAtom = Atom(name: '_PeriodStore.loading');
-
-  @override
-  bool get loading {
-    _$loadingAtom.reportRead();
-    return super.loading;
-  }
-
-  @override
-  set loading(bool value) {
-    _$loadingAtom.reportWrite(value, super.loading, () {
-      super.loading = value;
-    });
-  }
-
   final _$entriesAtom = Atom(name: '_PeriodStore.entries');
 
   @override
@@ -104,8 +74,6 @@ mixin _$PeriodStore on _PeriodStore, Store {
   @override
   String toString() {
     return '''
-success: ${success},
-loading: ${loading},
 entries: ${entries},
 entriesByDay: ${entriesByDay}
     ''';

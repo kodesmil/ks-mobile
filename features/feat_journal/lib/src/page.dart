@@ -1,7 +1,9 @@
 import 'package:feat_journal/src/common.dart';
+import 'package:feat_period/feat_period.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lib_lego/lib_lego.dart';
+import 'package:provider/provider.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
@@ -23,6 +25,8 @@ class _JournalPageState extends State<JournalPage> {
 
   @override
   void didChangeDependencies() {
+    final store = Provider.of<PeriodStore>(context);
+    store.fetchPeriodEntries();
     final now = DateTime.now();
     todayCount = now.difference(initialDate).inDays;
     controllerDay = PageAutoScrollController(

@@ -39,8 +39,8 @@ dependencies:
     path: ../../features/feat_onboarding
   feat_fit:
     path: ../../features/feat_fit
-  lib_di:
-    path: ../../libs/lib_di
+  lib_shared:
+    path: ../../libs/lib_shared
   lib_lego:
     path: ../../libs/lib_lego
 

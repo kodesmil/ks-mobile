@@ -10,7 +10,7 @@
 .svn/
 
 # IntelliJ related
-module_sensors.iml
+lib_shared.iml
 *.ipr
 *.iws
 .idea/

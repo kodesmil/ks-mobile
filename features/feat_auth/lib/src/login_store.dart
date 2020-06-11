@@ -1,6 +1,6 @@
 import 'package:feat_auth/feat_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:lib_di/lib_di.dart';
+import 'package:lib_shared/lib_shared.dart';
 import 'package:mobx/mobx.dart';
 import 'package:validators/validators.dart';
 

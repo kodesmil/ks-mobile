@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:feat_auth/feat_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:lib_di/lib_di.dart';
+import 'package:lib_shared/lib_shared.dart';
 import 'package:lib_services/lib_services.dart';
 import 'package:mobx/mobx.dart';
 

@@ -26,8 +26,8 @@ dependencies:
   google_sign_in: ^4.1.4
   firebase_auth: ^0.16.1
 
-  lib_di:
-    path: ../../libs/lib_di
+  lib_shared:
+    path: ../../libs/lib_shared
   lib_lego:
     path: ../../libs/lib_lego
 

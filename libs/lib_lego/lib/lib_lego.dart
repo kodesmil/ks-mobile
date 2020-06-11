@@ -23,3 +23,5 @@ export 'src/texts.dart';
 export 'src/extensions.dart';
 export 'src/themes.dart';
 export 'src/shadows.dart';
+
+export 'src/loaders/circular_loader.dart';

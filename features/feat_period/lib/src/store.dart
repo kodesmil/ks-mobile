@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:intl/intl.dart';
-import 'package:lib_di/lib_di.dart';
+import 'package:lib_shared/lib_shared.dart';
 import 'package:lib_services/lib_services.dart';
 import 'package:mobx/mobx.dart';
 
@@ -10,19 +10,15 @@ class PeriodStore = _PeriodStore with _$PeriodStore;
 
 abstract class _PeriodStore with Store {
   final ErrorStore errorStore;
+  final LoadingStore loadingStore;
 
   PeriodClient client;
 
   _PeriodStore(
     this.errorStore,
+    this.loadingStore,
     this.client,
   );
-
-  @observable
-  bool success = false;
-
-  @observable
-  bool loading = false;
 
   @observable
   List<PeriodDailyEntry> entries = [];
@@ -86,9 +82,11 @@ abstract class _PeriodStore with Store {
 
   @action
   Future fetchPeriodEntries() async {
+    loadingStore.loading = true;
     final request = ListPeriodDailyEntryRequest();
     final response = await client.listPeriodDailyEntry(request);
     entries = response.results;
+    loadingStore.loading = false;
     entries = [...entries];
   }
 }

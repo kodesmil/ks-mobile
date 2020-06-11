@@ -57,8 +57,8 @@ dependencies:
     path: ../../features/feat_notifications
   feat_feed:
     path: ../../features/feat_feed
-  lib_di:
-    path: ../../libs/lib_di
+  lib_shared:
+    path: ../../libs/lib_shared
   lib_lego:
     path: ../../libs/lib_lego
   lib_services:

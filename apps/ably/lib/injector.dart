@@ -12,7 +12,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:grpc/grpc.dart';
-import 'package:lib_di/lib_di.dart';
+import 'package:lib_shared/lib_shared.dart';
 import 'package:lib_lego/lib_lego.dart';
 import 'package:lib_services/lib_services.dart';
 import 'package:provider/provider.dart';
@@ -197,6 +197,7 @@ class _AppInjectorState extends State<AppInjector> {
         ProxyProvider<PeriodClient, PeriodStore>(
           update: (_, dep, __) => PeriodStore(
             ErrorStore(),
+            LoadingStore(),
             dep,
           ),
         ),

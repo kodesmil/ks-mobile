@@ -6,7 +6,7 @@ import 'package:csv/csv.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_sensors/flutter_sensors.dart';
 import 'package:intl/intl.dart';
-import 'package:lib_di/lib_di.dart';
+import 'package:lib_shared/lib_shared.dart';
 import 'package:mobx/mobx.dart';
 import 'package:path_provider/path_provider.dart';
 
