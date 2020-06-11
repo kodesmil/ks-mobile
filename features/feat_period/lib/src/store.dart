@@ -26,11 +26,11 @@ abstract class _PeriodStore with Store {
   @computed
   Map<String, PeriodDailyEntry> get entriesByDay {
     final result = entries.asMap().map(
-        (key, value) => MapEntry(
-          DateFormat.yMd().format(value.day.toDateTime().toLocal()),
-          value,
-        ),
-      );
+          (key, value) => MapEntry(
+            DateFormat.yMd().format(value.day.toDateTime().toLocal()),
+            value,
+          ),
+        );
     return result;
   }
 
@@ -84,9 +84,12 @@ abstract class _PeriodStore with Store {
   Future fetchPeriodEntries() async {
     loadingStore.loading = true;
     final request = ListPeriodDailyEntryRequest();
-    final response = await client.listPeriodDailyEntry(request);
-    entries = response.results;
+    try {
+      final response = await client.listPeriodDailyEntry(request);
+      entries = response.results;
+    } catch (e) {
+      loadingStore.loading = false;
+    }
     loadingStore.loading = false;
-    entries = [...entries];
   }
 }
