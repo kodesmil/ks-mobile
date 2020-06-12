@@ -88,6 +88,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
   @override
   void didChangeDependencies() {
     final store = Provider.of<ChatStore>(context);
+    store.connect();
     store.loadRoom(widget.chatRoom);
     super.didChangeDependencies();
   }
