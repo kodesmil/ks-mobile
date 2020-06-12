@@ -7,6 +7,7 @@ import 'package:lib_services/lib_services.dart';
 import 'package:provider/provider.dart';
 import 'package:more/collection.dart';
 import 'package:more/iterable.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class ChatPage extends StatefulWidget {
   @override
@@ -174,13 +175,22 @@ class OverlappedImages extends StatelessWidget {
   Widget build(BuildContext context) {
     final overlap = 25;
     final items = profiles
-        .map((e) => CircleAvatar(
-              backgroundImage: NetworkImage(e.profile.profilePictureUrl),
-              child: Text(
-                e.profile.initials,
-                style: Theme.of(context).textTheme.caption,
+        .map(
+          (e) => Container(
+            width: 35,
+            height: 35,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+            ),
+            child: ClipOval(
+              child: FadeInImage.memoryNetwork(
+                placeholder: kTransparentImage,
+                image: e.profile.profilePictureUrl,
+                fit: BoxFit.cover,
               ),
-            ))
+            ),
+          ),
+        )
         .toList();
 
     var stackLayers = List<Widget>.generate(items.length, (index) {

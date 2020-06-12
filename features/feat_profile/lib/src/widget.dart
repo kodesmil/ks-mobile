@@ -3,6 +3,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:lib_lego/lib_lego.dart';
 import 'package:provider/provider.dart';
 import 'package:feat_storage/feat_storage.dart';
+import 'package:transparent_image/transparent_image.dart';
+import 'package:lib_services/lib_services.dart';
 
 import 'store.dart';
 
@@ -30,13 +32,38 @@ class _ProfileSettingsTileState extends State<ProfileSettingsTile> {
   Widget build(BuildContext context) {
     final store = Provider.of<ProfileStore>(context);
     return Observer(
-      builder: (context) => ListTile(
-        leading: Text(store.profile.firstName + " " + store.profile.lastName),
-        trailing: StorageWidget(
-          onFileUploaded: (url) => store.updateProfile(url: url),
-          child: CircleAvatar(
-            backgroundImage: NetworkImage(store.profile.profilePictureUrl),
-          ),
+      builder: (context) => Padding(
+        padding: const EdgeInsets.all(15),
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                store.profile.fullName,
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: StorageWidget(
+                onFileUploaded: (url) => store.updateProfile(url: url),
+                child: Container(
+                  width: 75,
+                  height: 75,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                  ),
+                  child: ClipOval(
+                    child: FadeInImage.memoryNetwork(
+                      placeholder: kTransparentImage,
+                      image: store.profile.profilePictureUrl,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
