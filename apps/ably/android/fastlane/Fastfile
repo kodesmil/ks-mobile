@@ -69,11 +69,11 @@ platform :android do
       firebase_cli_path: '/usr/local/bin/firebase',
     )
 
-    slack(
-      message: '[QA] #{app_name} for Android :rocket:
-            \n#{release_notes}',
-      success: true,
-    )
+    #slack(
+    #  message: '[QA] #{app_name} for Android :rocket:
+    #        \n#{release_notes}',
+    #  success: true,
+    #)
   end
 
   desc 'Deploy Prod Build'
@@ -123,10 +123,10 @@ platform :android do
       )
     end
 
-    slack(
-      message: '[Live] #{app_name} for Android :rocket:
-            \n#{release_notes}',
-      success: true,
-    )
+    #slack(
+    #  message: '[Live] #{app_name} for Android :rocket:
+    #        \n#{release_notes}',
+    #  success: true,
+    #)
   end
 end
