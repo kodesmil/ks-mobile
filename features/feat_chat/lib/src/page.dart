@@ -176,19 +176,9 @@ class OverlappedImages extends StatelessWidget {
     final overlap = 25;
     final items = profiles
         .map(
-          (e) => Container(
-            width: 35,
-            height: 35,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-            ),
-            child: ClipOval(
-              child: FadeInImage.memoryNetwork(
-                placeholder: kTransparentImage,
-                image: e.profile.profilePictureUrl,
-                fit: BoxFit.cover,
-              ),
-            ),
+          (e) => KsCircleAvatar(
+            size: 40,
+            image: e.profile.profilePictureUrl,
           ),
         )
         .toList();
@@ -278,10 +268,9 @@ class MyListTile extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  CircleAvatar(
-                    radius: 10,
-                    backgroundImage:
-                        NetworkImage(message.author.profile.profilePictureUrl),
+                  KsCircleAvatar(
+                    size: 30,
+                    image: message.author.profile.profilePictureUrl,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 5),
@@ -335,6 +324,7 @@ class MyListTile extends StatelessWidget {
           );
       }
     } else {
+
       switch (place) {
         case ChatMessagePlace.MIDDLE:
           return BorderRadius.zero;

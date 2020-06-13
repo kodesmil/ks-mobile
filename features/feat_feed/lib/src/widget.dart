@@ -85,10 +85,9 @@ class DailyFeed extends StatelessWidget {
                       ),
                       child: Stack(
                         children: <Widget>[
-                          Image.network(
-                            article.coverPictureUrl,
-                            fit: BoxFit.cover,
-                            width: 260,
+                          KsFadeInImage(
+                            image: article.coverPictureUrl,
+                            size: 260,
                           ),
                           Flex(
                             direction: Axis.vertical,

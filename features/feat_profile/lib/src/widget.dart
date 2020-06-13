@@ -3,7 +3,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:lib_lego/lib_lego.dart';
 import 'package:provider/provider.dart';
 import 'package:feat_storage/feat_storage.dart';
-import 'package:transparent_image/transparent_image.dart';
 import 'package:lib_services/lib_services.dart';
 
 import 'store.dart';
@@ -47,19 +46,9 @@ class _ProfileSettingsTileState extends State<ProfileSettingsTile> {
               alignment: Alignment.centerRight,
               child: StorageWidget(
                 onFileUploaded: (url) => store.updateProfile(url: url),
-                child: Container(
-                  width: 75,
-                  height: 75,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                  ),
-                  child: ClipOval(
-                    child: FadeInImage.memoryNetwork(
-                      placeholder: kTransparentImage,
-                      image: store.profile.profilePictureUrl,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                child: KsCircleAvatar(
+                  size: 75,
+                  image: store.profile.profilePictureUrl,
                 ),
               ),
             ),

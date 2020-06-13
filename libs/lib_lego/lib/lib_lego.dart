@@ -1,5 +1,6 @@
 export 'src/app_bars.dart';
 export 'src/app_icons.dart';
+export 'src/avatars.dart';
 export 'src/buttons.dart';
 export 'src/checkboxes.dart';
 export 'src/clip_paths.dart';
