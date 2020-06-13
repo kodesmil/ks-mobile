@@ -25,7 +25,7 @@ class _StorageWidgetState extends State<StorageWidget> {
   final picker = ImagePicker();
 
   Future<PickedFile> getImage(ImageSource source) async {
-    return await picker.getImage(source: source);
+    return await picker.getImage(source: source, imageQuality: 25);
   }
 
   @override
