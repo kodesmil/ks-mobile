@@ -15,6 +15,6 @@ dependencies:
   transparent_image: ^1.0.0
 
 dev_dependencies:
-  build_runner: ^1.7.2
+  build_runner: ^1.10.0
   flutter_test:
     sdk: flutter

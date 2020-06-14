@@ -136,8 +136,10 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                       textInputAction: TextInputAction.send,
                       style: Theme.of(context).textTheme.bodyText2,
                       onSubmitted: (String text) {
-                        store.sendMessage(text);
-                        _messageController.clear();
+                        if (text?.isNotEmpty == true) {
+                          store.sendMessage(text);
+                          _messageController.clear();
+                        }
                       },
                       decoration: InputDecoration(
                         hintText: 'Send message',
@@ -150,8 +152,10 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                   IconButton(
                     icon: Icon(Icons.send),
                     onPressed: () {
-                      store.sendMessage(_messageController.text);
-                      _messageController.clear();
+                      if (_messageController.text?.isNotEmpty == true) {
+                        store.sendMessage(_messageController.text);
+                        _messageController.clear();
+                      }
                     },
                   )
                 ],
@@ -238,80 +242,103 @@ class MyListTile extends StatelessWidget {
             : 0,
       ),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment:
-            left ? CrossAxisAlignment.start : CrossAxisAlignment.end,
-        children: <Widget>[
-          Container(
-            width: MediaQuery.of(context).size.width * 0.6,
-            padding: left
-                ? EdgeInsets.only(
-                    left: 15,
-                    right: 20,
-                    top: 10,
-                    bottom: 10,
-                  )
-                : EdgeInsets.only(
-                    left: 20,
-                    right: 15,
-                    top: 10,
-                    bottom: 10,
-                  ),
-            decoration: BoxDecoration(
-              borderRadius: calculateBorderRadius(left, info.place),
-              color: left
-                  ? Theme.of(context).colorScheme.secondary.withAlpha(64)
-                  : Theme.of(context).colorScheme.primary.withAlpha(16),
-            ),
-            child: Text(
-              text,
-              style: Theme.of(context).textTheme.bodyText2,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 5, bottom: 10),
-            child: Visibility(
-              visible: left &&
-                  (info.place == ChatMessagePlace.LAST ||
-                      info.place == ChatMessagePlace.LAST_SINGLE),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  KsCircleAvatar(
-                    size: 30,
-                    image: message.author.profile.profilePictureUrl,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 5),
-                    child: Text(
-                      subtitle,
-                      style: Theme.of(context).textTheme.caption,
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment:
+                left ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+            children: <Widget>[
+              Container(
+                width: MediaQuery.of(context).size.width * 0.6,
+                margin: left
+                    ? const EdgeInsets.only(left: 10, top: 5)
+                    : const EdgeInsets.only(top: 5),
+                padding: left
+                    ? EdgeInsets.only(
+                        left: 15,
+                        right: 20,
+                        top: 10,
+                        bottom: 10,
+                      )
+                    : EdgeInsets.only(
+                        left: 20,
+                        right: 15,
+                        top: 10,
+                        bottom: 10,
+                      ),
+                decoration: BoxDecoration(
+                  borderRadius: calculateBorderRadius(left, info.place),
+                  color: left
+                      ? Theme.of(context).colorScheme.secondary.withAlpha(64)
+                      : Theme.of(context).colorScheme.primary.withAlpha(16),
+                ),
+                child: Text(
+                  text,
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: Visibility(
+                  visible: left &&
+                      (info.place == ChatMessagePlace.LAST ||
+                          info.place == ChatMessagePlace.LAST_SINGLE),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 10, bottom: 10),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        KsCircleAvatar(
+                          size: 25,
+                          image: message.author.profile.profilePictureUrl,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: Text(
+                            subtitle,
+                            style: Theme.of(context).textTheme.caption,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
+                ),
+              ),
+            ],
+          ),
+          Visibility(
+            visible: info.status == ChatMessageStatus.NOT_DELIVERED,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 10, top: 10),
+              child: Icon(
+                Icons.radio_button_unchecked,
+                size: 15,
+                color: Colors.black26,
               ),
             ),
           ),
           Visibility(
-            visible: false,
+            visible: info.status == ChatMessageStatus.DELIVERED,
             child: Padding(
-              padding: left
-                  ? const EdgeInsets.only(left: 15, bottom: 20)
-                  : const EdgeInsets.only(right: 15, bottom: 20),
-              child: Text(
-                status == ChatMessage_Status.DELIVERED
-                    ? 'Delivered'
-                    : 'Not delivered',
-                style: Theme.of(context).textTheme.caption,
+              padding: const EdgeInsets.only(bottom: 10, top: 10),
+              child: Icon(
+                Icons.radio_button_checked,
+                size: 15,
+                color: Colors.black26,
               ),
             ),
           ),
           Visibility(
             visible: info.seenBy.isNotEmpty,
-            child: OverlappedImages(
-              profiles: info.seenBy,
-              imageSize: 15,
-              overlapSize: 5,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: OverlappedImages(
+                profiles: info.seenBy,
+                imageSize: 15,
+                overlapSize: 5,
+              ),
             ),
           ),
         ],

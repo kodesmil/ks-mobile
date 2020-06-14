@@ -49,8 +49,26 @@ abstract class _ChatStore with Store {
     final participants = selectedRoom.participants.where(
       (element) => element.profile.id.resourceId != userStore.user.uid,
     );
+    final latestSeen = participants.isNotEmpty
+        ? participants.reduce(
+            (value, element) {
+              if (value == null || value.lastSeenAt == null) {
+                return element;
+              }
+              if (element?.lastSeenAt
+                      ?.toDateTime()
+                      ?.isAfter(value.lastSeenAt.toDateTime()) ==
+                  true) {
+                return element;
+              } else {
+                return value;
+              }
+            },
+          )
+        : null;
+    final reversedMessages = selectedMessages.reversed;
     final result = <String, ChatMessageInfo>{};
-    selectedMessages.reversed
+    reversedMessages
         .indexed()
         .groupBy((v) => v.value.authorId.resourceId)
         .forEach((element) {
@@ -61,67 +79,82 @@ abstract class _ChatStore with Store {
           if (prev.second.index != element.index - 1) {
             result[currentKey] = ChatMessageInfo(
               place: ChatMessagePlace.LAST_SINGLE,
-              delivered: element.value.createdAt != null,
-              seenBy: participants
-                  .where((p) => p.lastSeenAt.toDateTime().isAfter(
-                        element.value.createdAt?.toDateTime(),
-                      ))
-                  .toList(),
+              message: element.value,
+              status: calculateStatus(element.value, latestSeen),
             );
           } else if (result[prevKey].place == ChatMessagePlace.LAST_SINGLE) {
             result[prevKey] = ChatMessageInfo(
               place: ChatMessagePlace.FIRST,
-              delivered: element.value.createdAt != null,
-              seenBy: participants
-                  .where((p) => p.lastSeenAt.toDateTime().isAfter(
-                        element.value.createdAt?.toDateTime(),
-                      ))
-                  .toList(),
+              message: prev.second.value,
+              status: ChatMessageStatus.NOT_PRESENT,
             );
             result[currentKey] = ChatMessageInfo(
               place: ChatMessagePlace.LAST,
-              delivered: element.value.createdAt != null,
-              seenBy: participants
-                  .where((p) => p.lastSeenAt.toDateTime().isAfter(
-                        element.value.createdAt?.toDateTime(),
-                      ))
-                  .toList(),
+              message: element.value,
+              status: calculateStatus(element.value, latestSeen),
             );
           } else if (prev.first?.index == element.index - 2) {
             result[prevKey] = ChatMessageInfo(
               place: ChatMessagePlace.MIDDLE,
-              delivered: element.value.createdAt != null,
-              seenBy: participants
-                  .where((p) => p.lastSeenAt.toDateTime().isAfter(
-                        element.value.createdAt?.toDateTime(),
-                      ))
-                  .toList(),
+              message: prev.second.value,
+              status: ChatMessageStatus.NOT_PRESENT,
             );
             result[currentKey] = ChatMessageInfo(
               place: ChatMessagePlace.LAST,
-              delivered: element.value.createdAt != null,
-              seenBy: participants
-                  .where((p) => p.lastSeenAt.toDateTime().isAfter(
-                        element.value.createdAt?.toDateTime(),
-                      ))
-                  .toList(),
+              message: element.value,
+              status: calculateStatus(element.value, latestSeen),
             );
           }
           return _Tuple(element, prev.second);
         } else {
           result[currentKey] = ChatMessageInfo(
             place: ChatMessagePlace.LAST_SINGLE,
-            delivered: element.value.createdAt != null,
-            seenBy: participants
-                .where((p) => p.lastSeenAt.toDateTime().isBefore(
-                      element.value.createdAt?.toDateTime(),
-                    ))
-                .toList(),
+            message: element.value,
+            status: calculateStatus(element.value, latestSeen),
           );
           return _Tuple(element, null);
         }
       });
     });
+    final seenByMap =
+        participants.fold<Map<String, List<ChatRoomParticipant>>>({}, (
+      prev,
+      participant,
+    ) {
+      if (participant.lastSeenAt == null) {
+        return prev;
+      }
+      final message = selectedMessages.firstWhere(
+        (message) => participant.lastSeenAt
+            .toDateTime()
+            .isAfter(message.createdAt.toDateTime()),
+        orElse: () => null,
+      );
+      if (message == null) {
+        return prev;
+      }
+      if (prev.containsKey(message.id.resourceId)) {
+        prev[message.id.resourceId] = [
+          ...prev[message.id.resourceId],
+          participant,
+        ];
+      } else {
+        prev[message.id.resourceId] = [
+          participant,
+        ];
+      }
+      return prev;
+    });
+
+    seenByMap.forEach((key, value) {
+      final element = result[key];
+      result[key] = ChatMessageInfo(
+        message: element.message,
+        place: element.place,
+        seenBy: value,
+      );
+    });
+
     return result;
   }
 
@@ -211,6 +244,24 @@ abstract class _ChatStore with Store {
   Future dispose() async {
     // await _output.cancel();
     // await _input.close();
+  }
+
+  ChatMessageStatus calculateStatus(
+      ChatMessage message, ChatRoomParticipant latestSeen) {
+    if (message.createdAt == null) {
+      return ChatMessageStatus.NOT_DELIVERED;
+    } else if (message.author.id.resourceId !=
+        selectedMyParticipation.id.resourceId) {
+      return ChatMessageStatus.NOT_PRESENT;
+    } else if (latestSeen == null) {
+      return ChatMessageStatus.NOT_PRESENT;
+    } else if (message.createdAt
+        .toDateTime()
+        .isBefore(latestSeen?.lastSeenAt?.toDateTime())) {
+      return ChatMessageStatus.NOT_PRESENT;
+    } else {
+      return ChatMessageStatus.DELIVERED;
+    }
   }
 }
 

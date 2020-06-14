@@ -15,15 +15,23 @@ extension ExChatMessages on List<ChatMessage> {}
 class ChatMessageInfo {
   final bool isFirstMessageOfDay;
   final ChatMessagePlace place;
-  final bool delivered;
+  final ChatMessage message;
+  final ChatMessageStatus status;
   final List<ChatRoomParticipant> seenBy;
 
   ChatMessageInfo({
     this.isFirstMessageOfDay,
     this.place,
-    this.delivered,
-    this.seenBy,
+    this.message,
+    this.status,
+    this.seenBy = const [],
   });
+}
+
+enum ChatMessageStatus {
+  NOT_DELIVERED,
+  NOT_PRESENT,
+  DELIVERED,
 }
 
 enum ChatMessagePlace {
