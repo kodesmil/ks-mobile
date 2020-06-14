@@ -108,21 +108,19 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: ListView(
                     reverse: true,
-                    children: store.selectedMessages
-                        .indexed()
-                        .map(
-                          (e) => MyListTile(
-                            message: e.value,
-                            text: e.value.text,
-                            subtitle: e.value.caption,
-                            place:
-                                store.chatMessagePlaces[e.value.id.resourceId],
-                            left: store.selectedMyParticipation.id.resourceId !=
-                                e.value.authorId.resourceId,
-                            status: e.value.status,
-                          ),
-                        )
-                        .toList(),
+                    children: store.selectedMessages.indexed().map(
+                      (e) {
+                        return MyListTile(
+                          message: e.value,
+                          text: e.value.text,
+                          subtitle: e.value.caption,
+                          info: store.chatMessagePlaces[e.value.id.resourceId],
+                          left: store.selectedMyParticipation.id.resourceId !=
+                              e.value.authorId.resourceId,
+                          status: e.value.status,
+                        );
+                      },
+                    ).toList(),
                   ),
                 ),
               ),
@@ -168,16 +166,22 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
 
 class OverlappedImages extends StatelessWidget {
   final List<ChatRoomParticipant> profiles;
+  final double imageSize;
+  final double overlapSize;
 
-  const OverlappedImages({Key key, this.profiles}) : super(key: key);
+  const OverlappedImages({
+    Key key,
+    this.profiles,
+    this.imageSize = 40,
+    this.overlapSize = 25,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final overlap = 25;
     final items = profiles
         .map(
           (e) => KsCircleAvatar(
-            size: 40,
+            size: imageSize,
             image: e.profile.profilePictureUrl,
           ),
         )
@@ -185,7 +189,12 @@ class OverlappedImages extends StatelessWidget {
 
     var stackLayers = List<Widget>.generate(items.length, (index) {
       return Padding(
-        padding: EdgeInsets.fromLTRB(index.toDouble() * overlap, 0, 0, 0),
+        padding: EdgeInsets.fromLTRB(
+          index.toDouble() * overlapSize,
+          0,
+          0,
+          0,
+        ),
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
@@ -205,7 +214,7 @@ class MyListTile extends StatelessWidget {
   final String text;
   final String subtitle;
   final bool left;
-  final ChatMessagePlace place;
+  final ChatMessageInfo info;
   final ChatMessage_Status status;
   final ChatMessage message;
 
@@ -214,7 +223,7 @@ class MyListTile extends StatelessWidget {
     this.text,
     this.subtitle,
     this.left = true,
-    this.place,
+    this.info,
     this.status,
     this.message,
   }) : super(key: key);
@@ -223,8 +232,8 @@ class MyListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-        top: place == ChatMessagePlace.FIRST ||
-                place == ChatMessagePlace.LAST_SINGLE
+        top: info.place == ChatMessagePlace.FIRST ||
+                info.place == ChatMessagePlace.LAST_SINGLE
             ? 10
             : 0,
       ),
@@ -249,7 +258,7 @@ class MyListTile extends StatelessWidget {
                     bottom: 10,
                   ),
             decoration: BoxDecoration(
-              borderRadius: calculateBorderRadius(left, place),
+              borderRadius: calculateBorderRadius(left, info.place),
               color: left
                   ? Theme.of(context).colorScheme.secondary.withAlpha(64)
                   : Theme.of(context).colorScheme.primary.withAlpha(16),
@@ -263,8 +272,8 @@ class MyListTile extends StatelessWidget {
             padding: const EdgeInsets.only(top: 5, bottom: 10),
             child: Visibility(
               visible: left &&
-                  (place == ChatMessagePlace.LAST ||
-                      place == ChatMessagePlace.LAST_SINGLE),
+                  (info.place == ChatMessagePlace.LAST ||
+                      info.place == ChatMessagePlace.LAST_SINGLE),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -297,6 +306,14 @@ class MyListTile extends StatelessWidget {
               ),
             ),
           ),
+          Visibility(
+            visible: info.seenBy.isNotEmpty,
+            child: OverlappedImages(
+              profiles: info.seenBy,
+              imageSize: 15,
+              overlapSize: 5,
+            ),
+          ),
         ],
       ),
     );
@@ -324,7 +341,6 @@ class MyListTile extends StatelessWidget {
           );
       }
     } else {
-
       switch (place) {
         case ChatMessagePlace.MIDDLE:
           return BorderRadius.zero;

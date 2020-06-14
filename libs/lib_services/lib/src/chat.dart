@@ -10,8 +10,20 @@ extension ExChatRoom on ChatRoom {
   }
 }
 
-extension ExChatMessages on List<ChatMessage> {
+extension ExChatMessages on List<ChatMessage> {}
 
+class ChatMessageInfo {
+  final bool isFirstMessageOfDay;
+  final ChatMessagePlace place;
+  final bool delivered;
+  final List<ChatRoomParticipant> seenBy;
+
+  ChatMessageInfo({
+    this.isFirstMessageOfDay,
+    this.place,
+    this.delivered,
+    this.seenBy,
+  });
 }
 
 enum ChatMessagePlace {

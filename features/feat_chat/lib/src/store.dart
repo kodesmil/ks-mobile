@@ -45,27 +45,79 @@ abstract class _ChatStore with Store {
   }
 
   @computed
-  Map<String, ChatMessagePlace> get chatMessagePlaces {
-    final result = <String, ChatMessagePlace>{};
+  Map<String, ChatMessageInfo> get chatMessagePlaces {
+    final participants = selectedRoom.participants.where(
+      (element) => element.profile.id.resourceId != userStore.user.uid,
+    );
+    final result = <String, ChatMessageInfo>{};
     selectedMessages.reversed
         .indexed()
         .groupBy((v) => v.value.authorId.resourceId)
         .forEach((element) {
       element.values.fold<_Tuple<Indexed<ChatMessage>>>(null, (prev, element) {
+        final currentKey = element.value.id.resourceId;
         if (prev != null) {
+          final prevKey = prev.second.value.id.resourceId;
           if (prev.second.index != element.index - 1) {
-            result[element.value.id.resourceId] = ChatMessagePlace.LAST_SINGLE;
-          } else if (result[prev.second.value.id.resourceId] ==
-              ChatMessagePlace.LAST_SINGLE) {
-            result[prev.second.value.id.resourceId] = ChatMessagePlace.FIRST;
-            result[element.value.id.resourceId] = ChatMessagePlace.LAST;
+            result[currentKey] = ChatMessageInfo(
+              place: ChatMessagePlace.LAST_SINGLE,
+              delivered: element.value.createdAt != null,
+              seenBy: participants
+                  .where((p) => p.lastSeenAt.toDateTime().isAfter(
+                        element.value.createdAt?.toDateTime(),
+                      ))
+                  .toList(),
+            );
+          } else if (result[prevKey].place == ChatMessagePlace.LAST_SINGLE) {
+            result[prevKey] = ChatMessageInfo(
+              place: ChatMessagePlace.FIRST,
+              delivered: element.value.createdAt != null,
+              seenBy: participants
+                  .where((p) => p.lastSeenAt.toDateTime().isAfter(
+                        element.value.createdAt?.toDateTime(),
+                      ))
+                  .toList(),
+            );
+            result[currentKey] = ChatMessageInfo(
+              place: ChatMessagePlace.LAST,
+              delivered: element.value.createdAt != null,
+              seenBy: participants
+                  .where((p) => p.lastSeenAt.toDateTime().isAfter(
+                        element.value.createdAt?.toDateTime(),
+                      ))
+                  .toList(),
+            );
           } else if (prev.first?.index == element.index - 2) {
-            result[prev.second.value.id.resourceId] = ChatMessagePlace.MIDDLE;
-            result[element.value.id.resourceId] = ChatMessagePlace.LAST;
+            result[prevKey] = ChatMessageInfo(
+              place: ChatMessagePlace.MIDDLE,
+              delivered: element.value.createdAt != null,
+              seenBy: participants
+                  .where((p) => p.lastSeenAt.toDateTime().isAfter(
+                        element.value.createdAt?.toDateTime(),
+                      ))
+                  .toList(),
+            );
+            result[currentKey] = ChatMessageInfo(
+              place: ChatMessagePlace.LAST,
+              delivered: element.value.createdAt != null,
+              seenBy: participants
+                  .where((p) => p.lastSeenAt.toDateTime().isAfter(
+                        element.value.createdAt?.toDateTime(),
+                      ))
+                  .toList(),
+            );
           }
           return _Tuple(element, prev.second);
         } else {
-          result[element.value.id.resourceId] = ChatMessagePlace.LAST_SINGLE;
+          result[currentKey] = ChatMessageInfo(
+            place: ChatMessagePlace.LAST_SINGLE,
+            delivered: element.value.createdAt != null,
+            seenBy: participants
+                .where((p) => p.lastSeenAt.toDateTime().isBefore(
+                      element.value.createdAt?.toDateTime(),
+                    ))
+                .toList(),
+          );
           return _Tuple(element, null);
         }
       });
@@ -135,7 +187,9 @@ abstract class _ChatStore with Store {
   Future loadRoom(ChatRoom room) async {
     selectedMessages = [];
     selectedRoom = room;
-    final event = EventLoadRoom()..room = room;
+    final event = EventLoadRoom()
+      ..me = selectedMyParticipation
+      ..room = room;
     final streamEvent = StreamChatEvent()..loadRoom = event;
     _input.add(streamEvent);
   }
@@ -145,7 +199,6 @@ abstract class _ChatStore with Store {
     final id = Identifier()..resourceId = Uuid().v4();
     final payload = ChatMessage()
       ..id = id
-      ..status = ChatMessage_Status.NOT_DELIVERED
       ..authorId = selectedMyParticipation.id
       ..text = text;
     final event = EventSendMessage()..message = payload;

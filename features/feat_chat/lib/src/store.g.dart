@@ -17,11 +17,11 @@ mixin _$ChatStore on _ChatStore, Store {
               () => super.selectedMyParticipation,
               name: '_ChatStore.selectedMyParticipation'))
           .value;
-  Computed<Map<String, ChatMessagePlace>> _$chatMessagePlacesComputed;
+  Computed<Map<String, ChatMessageInfo>> _$chatMessagePlacesComputed;
 
   @override
-  Map<String, ChatMessagePlace> get chatMessagePlaces =>
-      (_$chatMessagePlacesComputed ??= Computed<Map<String, ChatMessagePlace>>(
+  Map<String, ChatMessageInfo> get chatMessagePlaces =>
+      (_$chatMessagePlacesComputed ??= Computed<Map<String, ChatMessageInfo>>(
               () => super.chatMessagePlaces,
               name: '_ChatStore.chatMessagePlaces'))
           .value;
