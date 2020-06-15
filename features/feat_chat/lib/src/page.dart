@@ -104,24 +104,21 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
           children: [
             Flexible(
               child: Observer(
-                builder: (context) => Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: ListView(
-                    reverse: true,
-                    children: store.selectedMessages.indexed().map(
-                      (e) {
-                        return MyListTile(
-                          message: e.value,
-                          text: e.value.text,
-                          subtitle: e.value.caption,
-                          info: store.chatMessagePlaces[e.value.id.resourceId],
-                          left: store.selectedMyParticipation.id.resourceId !=
-                              e.value.authorId.resourceId,
-                          status: e.value.status,
-                        );
-                      },
-                    ).toList(),
-                  ),
+                builder: (context) => ListView(
+                  reverse: true,
+                  children: store.selectedMessages.indexed().map(
+                    (e) {
+                      return MyListTile(
+                        message: e.value,
+                        text: e.value.text,
+                        subtitle: e.value.caption,
+                        info: store.chatMessagePlaces[e.value.id.resourceId],
+                        left: store.selectedMyParticipation.id.resourceId !=
+                            e.value.authorId.resourceId,
+                        status: e.value.status,
+                      );
+                    },
+                  ).toList(),
                 ),
               ),
             ),
@@ -240,6 +237,12 @@ class MyListTile extends StatelessWidget {
                 info.place == ChatMessagePlace.LAST_SINGLE
             ? 10
             : 0,
+        bottom: info.place == ChatMessagePlace.LAST_SINGLE ||
+                info.place == ChatMessagePlace.LAST
+            ? 10
+            : 0,
+        right: 15,
+        left: 15,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.max,
