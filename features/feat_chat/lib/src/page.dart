@@ -2,6 +2,7 @@ import 'package:feat_chat/feat_chat.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:intl/intl.dart';
 import 'package:lib_lego/lib_lego.dart';
 import 'package:lib_services/lib_services.dart';
 import 'package:provider/provider.dart';
@@ -248,6 +249,19 @@ class MyListTile extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
+          Center(
+            child: Visibility(
+              visible: info.isFirstMessageOfDay,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 20, top: 40),
+                child: Text(
+                  DateFormat.yMMMMEEEEd().format(
+                    info.message.createdAt.toDateTime(),
+                  ),
+                ),
+              ),
+            ),
+          ),
           Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment:

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:feat_auth/feat_auth.dart';
+import 'package:intl/intl.dart';
 import 'package:lib_shared/lib_shared.dart';
 import 'package:lib_services/lib_services.dart';
 import 'package:mobx/mobx.dart';
@@ -116,6 +117,23 @@ abstract class _ChatStore with Store {
         }
       });
     });
+
+    selectedMessages
+        .groupBy((m) => DateFormat.yMd().format(m.createdAt.toDateTime()))
+        .forEach((element) {
+      final firstMessage = element.values?.first;
+      if (firstMessage != null) {
+        final i = result[firstMessage.id.resourceId];
+        result[firstMessage.id.resourceId] = ChatMessageInfo(
+          message: i.message,
+          place: i.place,
+          seenBy: i.seenBy,
+          status: i.status,
+          isFirstMessageOfDay: true,
+        );
+      }
+    });
+
     final seenByMap =
         participants.fold<Map<String, List<ChatRoomParticipant>>>({}, (
       prev,
@@ -125,9 +143,9 @@ abstract class _ChatStore with Store {
         return prev;
       }
       final message = selectedMessages.firstWhere(
-        (message) => participant.lastSeenAt
-            .toDateTime()
-            .isAfter(message.createdAt.toDateTime()),
+        (message) => participant.lastSeenAt.toDateTime().isAfter(
+              message.createdAt.toDateTime(),
+            ),
         orElse: () => null,
       );
       if (message == null) {
@@ -151,6 +169,8 @@ abstract class _ChatStore with Store {
       result[key] = ChatMessageInfo(
         message: element.message,
         place: element.place,
+        status: element.status,
+        isFirstMessageOfDay: element.isFirstMessageOfDay,
         seenBy: value,
       );
     });

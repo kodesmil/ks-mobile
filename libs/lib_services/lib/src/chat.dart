@@ -20,10 +20,10 @@ class ChatMessageInfo {
   final List<ChatRoomParticipant> seenBy;
 
   ChatMessageInfo({
-    this.isFirstMessageOfDay,
     this.place,
     this.message,
     this.status,
+    this.isFirstMessageOfDay = false,
     this.seenBy = const [],
   });
 }
