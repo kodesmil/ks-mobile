@@ -5,7 +5,7 @@ class ColorLoader3 extends StatefulWidget {
   final double radius;
   final double dotRadius;
 
-  ColorLoader3({this.radius = 35.0, this.dotRadius = 5.0});
+  ColorLoader3({this.radius = 35.0, this.dotRadius = 10.0});
 
   @override
   _ColorLoader3State createState() => _ColorLoader3State();
@@ -33,7 +33,7 @@ class _ColorLoader3State extends State<ColorLoader3>
     controller = AnimationController(
         lowerBound: 0.0,
         upperBound: 1.0,
-        duration: const Duration(milliseconds: 3000),
+        duration: const Duration(milliseconds: 2000),
         vsync: this);
 
     animation_rotation = Tween(begin: 0.0, end: 1.0).animate(

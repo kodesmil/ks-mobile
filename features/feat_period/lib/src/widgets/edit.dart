@@ -54,13 +54,6 @@ class CalendarHeader extends StatelessWidget {
         boxShadow: [
           context.shadow2(),
         ],
-        border: Border.all(
-          color: Colors.black26,
-          width: 0.5,
-        ),
-        borderRadius: BorderRadius.vertical(
-          top: Radius.elliptical(40, 40),
-        ),
       ),
       child: Column(
         children: [
@@ -188,6 +181,7 @@ class _CalendarMonthState extends State<CalendarMonth> {
   List<DateTime> list;
   int weeks;
   int lastWeek;
+  final DateTime now = DateTime.now();
 
   @override
   void initState() {
@@ -218,9 +212,9 @@ class _CalendarMonthState extends State<CalendarMonth> {
           Padding(
             padding: const EdgeInsets.only(bottom: 15),
             child: Text(
-              widget.month.month == 1
-                  ? DateFormat.yMMMM().format(widget.month)
-                  : DateFormat.MMMM().format(widget.month),
+              widget.month.month != 1 || widget.month.year != now.year
+                  ? DateFormat.MMMM().format(widget.month)
+                  : DateFormat.yMMMM().format(widget.month),
               style: Theme.of(context).textTheme.headline5,
             ),
           ),
@@ -228,17 +222,14 @@ class _CalendarMonthState extends State<CalendarMonth> {
             crossAxisCount: 7,
             shrinkWrap: true,
             primary: false,
-            children: list
-                .map(
-                  (e) => e.month == widget.month.month
-                      ? Observer(builder: (context) {
-                          final entry =
-                              store.entriesByDay[DateFormat.yMd().format(e)];
-                          return SingleDay(entry: entry, day: e);
-                        })
-                      : Container(),
-                )
-                .toList(),
+            children: list.map(
+              (e) {
+                final entry = store.entriesByDay[DateFormat.yMd().format(e)];
+                return e.month == widget.month.month
+                    ? SingleDay(entry: entry, day: e)
+                    : Container();
+              },
+            ).toList(),
           ),
         ],
       ),

@@ -13,15 +13,9 @@ import 'package:lib_lego/lib_lego.dart';
 class SingleJournalPage extends StatefulWidget {
   const SingleJournalPage({
     Key key,
-    @required this.controllerDay,
-    @required this.controllerCalendar,
-    @required this.todayCount,
     @required this.index,
   }) : super(key: key);
 
-  final PageAutoScrollController controllerDay;
-  final AutoScrollController controllerCalendar;
-  final int todayCount;
   final int index;
 
   @override
@@ -38,192 +32,189 @@ class _SingleJournalPageState extends State<SingleJournalPage> {
       days: widget.index,
     ));
     return Container(
-      margin: EdgeInsets.only(top: 25),
-      child: Container(
-        decoration: BoxDecoration(
-          // color: Theme.of(context).colorScheme.surface,
-          color: Colors.white,
-          boxShadow: [
-            context.shadow2(),
-          ],
-        ),
-        child: Observer(
-          builder: (context) => store.loadingStore.loading
-              ? ColorLoader3()
-              : Stack(
-                  children: [
-                    Positioned(
-                      child: Align(
-                        alignment: Alignment.topCenter,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 20),
-                          child: Observer(
-                            builder: (context) {
-                              final entry = store
-                                  .entriesByDay[DateFormat.yMd().format(date)];
-                              return Column(
+      decoration: BoxDecoration(
+        // color: Theme.of(context).colorScheme.surface,
+        color: Colors.white,
+        boxShadow: [
+          context.shadow2(),
+        ],
+      ),
+      child: Observer(
+        builder: (context) => store.loadingStore.loading
+            ? ColorLoader3()
+            : Stack(
+              children: [
+                Positioned(
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      child: Observer(
+                        builder: (context) {
+                          final entry = store
+                              .entriesByDay[DateFormat.yMd().format(date)];
+                          return Column(
+                            children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          height: 40,
-                                        ),
-                                      ),
-                                      Text(
-                                        DateFormat.yMMMMEEEEd().format(date),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1
-                                            .copyWith(),
-                                      ),
-                                      editable
-                                          ? Expanded(
-                                              child: IconButton(
-                                                icon:
-                                                    Icon(Icons.calendar_today),
-                                                onPressed: () => setState(
-                                                  () => editable = false,
-                                                ),
-                                              ),
-                                            )
-                                          : Expanded(
-                                              child: IconButton(
-                                                icon: Icon(Icons.edit),
-                                                onPressed: () => setState(
-                                                  () => editable = true,
-                                                ),
-                                              ),
-                                            ),
-                                    ],
-                                  ),
                                   Expanded(
                                     child: Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      margin: EdgeInsets.only(top: 20),
-                                      child: editable
-                                          ? SingleDayEditor()
-                                          : Column(
-                                              children: [
-                                                Text(
-                                                  DateFormat.d().format(date),
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .headline1
-                                                      .copyWith(),
-                                                ),
-                                                SizedBox(height: 20),
-                                                Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: () {
-                                                    if (entry == null) {
-                                                      return [
-                                                        Icon(
-                                                          Icons.favorite_border,
-                                                          color: Colors.red,
-                                                          size: 50,
-                                                        ),
-                                                        Icon(
-                                                          Icons.favorite_border,
-                                                          color: Colors.red,
-                                                          size: 50,
-                                                        )
-                                                      ];
-                                                    }
-                                                    switch (entry.severity) {
-                                                      case PeriodDailyEntry_Severity
-                                                          .NONE:
-                                                        return [
-                                                          Icon(
-                                                            Icons
-                                                                .favorite_border,
-                                                            color: Colors.red,
-                                                            size: 50,
-                                                          ),
-                                                          Icon(
-                                                            Icons
-                                                                .favorite_border,
-                                                            color: Colors.red,
-                                                            size: 50,
-                                                          )
-                                                        ];
-                                                      case PeriodDailyEntry_Severity
-                                                          .LOW:
-                                                        return [
-                                                          Icon(
-                                                            Icons.favorite,
-                                                            color: Colors.red,
-                                                            size: 50,
-                                                          ),
-                                                          Icon(
-                                                            Icons
-                                                                .favorite_border,
-                                                            color: Colors.red,
-                                                            size: 50,
-                                                          )
-                                                        ];
-                                                      case PeriodDailyEntry_Severity
-                                                          .MID:
-                                                        return [
-                                                          Icon(
-                                                            Icons.favorite,
-                                                            color: Colors.red,
-                                                            size: 50,
-                                                          ),
-                                                          Icon(
-                                                            Icons.favorite,
-                                                            color: Colors.red,
-                                                            size: 50,
-                                                          )
-                                                        ];
-                                                    }
-                                                    return [];
-                                                  }(),
-                                                )
-                                              ],
-                                            ),
+                                      height: 40,
                                     ),
                                   ),
+                                  Text(
+                                    DateFormat.yMMMMEEEEd().format(date),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .subtitle1
+                                        .copyWith(),
+                                  ),
+                                  editable
+                                      ? Expanded(
+                                          child: IconButton(
+                                            icon:
+                                                Icon(Icons.calendar_today),
+                                            onPressed: () => setState(
+                                              () => editable = false,
+                                            ),
+                                          ),
+                                        )
+                                      : Expanded(
+                                          child: IconButton(
+                                            icon: Icon(Icons.edit),
+                                            onPressed: () => setState(
+                                              () => editable = true,
+                                            ),
+                                          ),
+                                        ),
                                 ],
-                              );
+                              ),
+                              Expanded(
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  margin: EdgeInsets.only(top: 20),
+                                  child: editable
+                                      ? SingleDayEditor()
+                                      : Column(
+                                          children: [
+                                            Text(
+                                              DateFormat.d().format(date),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headline1
+                                                  .copyWith(),
+                                            ),
+                                            SizedBox(height: 20),
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: () {
+                                                if (entry == null) {
+                                                  return [
+                                                    Icon(
+                                                      Icons.favorite_border,
+                                                      color: Colors.red,
+                                                      size: 50,
+                                                    ),
+                                                    Icon(
+                                                      Icons.favorite_border,
+                                                      color: Colors.red,
+                                                      size: 50,
+                                                    )
+                                                  ];
+                                                }
+                                                switch (entry.severity) {
+                                                  case PeriodDailyEntry_Severity
+                                                      .NONE:
+                                                    return [
+                                                      Icon(
+                                                        Icons
+                                                            .favorite_border,
+                                                        color: Colors.red,
+                                                        size: 50,
+                                                      ),
+                                                      Icon(
+                                                        Icons
+                                                            .favorite_border,
+                                                        color: Colors.red,
+                                                        size: 50,
+                                                      )
+                                                    ];
+                                                  case PeriodDailyEntry_Severity
+                                                      .LOW:
+                                                    return [
+                                                      Icon(
+                                                        Icons.favorite,
+                                                        color: Colors.red,
+                                                        size: 50,
+                                                      ),
+                                                      Icon(
+                                                        Icons
+                                                            .favorite_border,
+                                                        color: Colors.red,
+                                                        size: 50,
+                                                      )
+                                                    ];
+                                                  case PeriodDailyEntry_Severity
+                                                      .MID:
+                                                    return [
+                                                      Icon(
+                                                        Icons.favorite,
+                                                        color: Colors.red,
+                                                        size: 50,
+                                                      ),
+                                                      Icon(
+                                                        Icons.favorite,
+                                                        color: Colors.red,
+                                                        size: 50,
+                                                      )
+                                                    ];
+                                                }
+                                                return [];
+                                              }(),
+                                            )
+                                          ],
+                                        ),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(bottom: 55),
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: OutlineButton(
+                            child: Text('Edit period'),
+                            onPressed: () {
+                              newPageStart(context);
                             },
                           ),
                         ),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(bottom: 55),
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 20),
-                              child: OutlineButton(
-                                child: Text('Edit period'),
-                                onPressed: () {
-                                  newPageStart(context);
-                                },
-                              ),
-                            ),
-                            Image.asset(
-                              'assets/images/peach/example/example-scene-${widget.index % 3 + 1}.png',
-                              height: 150,
-                            ),
-                          ],
+                        Image.asset(
+                          'assets/images/peach/example/example-scene-${widget.index % 3 + 1}.png',
+                          height: 150,
                         ),
-                      ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-        ),
+              ],
+            ),
       ),
     );
   }

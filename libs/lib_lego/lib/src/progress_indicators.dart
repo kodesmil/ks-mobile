@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lib_lego/lib_lego.dart';
 
 import 'dimensions.dart';
 
@@ -13,12 +14,7 @@ class KsProgressIndicator extends StatelessWidget {
       constraints: BoxConstraints.expand(),
       color: Colors.white,
       child: Center(
-        child: Container(
-          child: Image.asset(
-            'assets/icons/ic_launcher.png',
-            height: MediaQuery.of(context).size.height * 0.2,
-          ),
-        ),
+        child: ColorLoader3(),
       ),
     );
   }
