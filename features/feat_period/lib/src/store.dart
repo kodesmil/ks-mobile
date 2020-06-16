@@ -27,7 +27,7 @@ abstract class _PeriodStore with Store {
   Map<String, PeriodDailyEntry> get entriesByDay {
     final result = entries.asMap().map(
           (key, value) => MapEntry(
-            DateFormat.yMd().format(value.day.toDateTime().toLocal()),
+            DateFormat.yMd().format(value.day.toDateTime()),
             value,
           ),
         );

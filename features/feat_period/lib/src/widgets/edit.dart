@@ -128,9 +128,8 @@ class CalendarBody extends StatefulWidget {
 }
 
 class _CalendarBodyState extends State<CalendarBody> {
-  final InfiniteScrollController _infiniteController = InfiniteScrollController(
-    initialScrollOffset: 0.0,
-  );
+  final InfiniteScrollController _infiniteController =
+      InfiniteScrollController();
 
   DateTime now = DateTime.now();
 
@@ -145,12 +144,12 @@ class _CalendarBodyState extends State<CalendarBody> {
           controller: _infiniteController,
           itemBuilder: (BuildContext context, int index) {
             return CalendarMonth(
-              month: DateTime(
+              month: DateTime.utc(
                 now.year + (now.month + index - 1) ~/ 12,
                 (now.month + index - 1) % 12 + 1,
                 1,
               ),
-              nextMonth: DateTime(
+              nextMonth: DateTime.utc(
                 now.year + (now.month + index) ~/ 12,
                 (now.month + index) % 12 + 1,
                 1,
@@ -190,11 +189,12 @@ class _CalendarMonthState extends State<CalendarMonth> {
     lastWeek = weeks * 7 - days - widget.month.weekday + 1;
     list = [
       ...Iterable<int>.generate(widget.month.weekday - 1).map(
-        (e) =>
-            widget.month.subtract(Duration(days: widget.month.weekday - e - 1)),
+        (e) => widget.month
+            .toUtc()
+            .subtract(Duration(days: widget.month.weekday - e - 1)),
       ),
       ...Iterable<int>.generate(days + lastWeek).map(
-        (e) => widget.month.add(Duration(days: e)),
+        (e) => widget.month.toUtc().add(Duration(days: e)),
       ),
     ];
     super.initState();
@@ -218,18 +218,27 @@ class _CalendarMonthState extends State<CalendarMonth> {
               style: Theme.of(context).textTheme.headline5,
             ),
           ),
-          GridView.count(
-            crossAxisCount: 7,
-            shrinkWrap: true,
-            primary: false,
-            children: list.map(
-              (e) {
-                final entry = store.entriesByDay[DateFormat.yMd().format(e)];
-                return e.month == widget.month.month
-                    ? SingleDay(entry: entry, day: e)
-                    : Container();
-              },
-            ).toList(),
+          Observer(
+            builder: (context) {
+              final entriesByDay = store.entriesByDay;
+              return GridView.count(
+                crossAxisCount: 7,
+                shrinkWrap: true,
+                primary: false,
+                addAutomaticKeepAlives: true,
+                children: list.map(
+                  (e) {
+                    final entry = entriesByDay[DateFormat.yMd().format(e)];
+                    return e.month == widget.month.month
+                        ? const SingleDay(
+                            entry: entry,
+                            day: e.toLocal(),
+                          )
+                        : Container();
+                  },
+                ).toList(),
+              );
+            },
           ),
         ],
       ),

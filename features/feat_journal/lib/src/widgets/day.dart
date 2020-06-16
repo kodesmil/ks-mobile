@@ -28,8 +28,8 @@ class _SingleJournalPageState extends State<SingleJournalPage> {
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<PeriodStore>(context);
-    final date = initialDate.add(Duration(
-      days: widget.index,
+    final date = DateTime.now().add(Duration(
+      hours: widget.index * 24,
     ));
     return Container(
       decoration: BoxDecoration(
@@ -41,7 +41,7 @@ class _SingleJournalPageState extends State<SingleJournalPage> {
       ),
       child: Observer(
         builder: (context) => store.loadingStore.loading
-            ? ColorLoader3()
+            ? KsProgressIndicator()
             : Stack(
               children: [
                 Positioned(
