@@ -232,7 +232,6 @@ class _CalendarMonthState extends State<CalendarMonth> {
           ),
           Observer(
             builder: (context) {
-              final entriesByDay = store.entriesByDay;
               return GridView.count(
                 crossAxisCount: 7,
                 shrinkWrap: true,
@@ -244,7 +243,8 @@ class _CalendarMonthState extends State<CalendarMonth> {
                 addAutomaticKeepAlives: true,
                 children: list.map(
                   (e) {
-                    final entry = entriesByDay[DateFormat.yMd().format(e)];
+                    final entry =
+                        store.entriesByDay[DateFormat.yMd().format(e)];
                     return e.month == widget.month.month
                         ? SingleDay(
                             entry: entry,
@@ -267,10 +267,16 @@ class SingleDay extends StatefulWidget {
     Key key,
     this.day,
     this.entry,
+    this.showMonth = false,
+    this.showWeekday = false,
+    this.interactive = true,
   }) : super(key: key);
 
   final DateTime day;
   final PeriodDailyEntry entry;
+  final bool showMonth;
+  final bool showWeekday;
+  final bool interactive;
 
   @override
   _SingleDayState createState() => _SingleDayState();
@@ -290,6 +296,9 @@ class _SingleDayState extends State<SingleDay> {
     final store = Provider.of<PeriodStore>(context);
     return InkWell(
       onTap: () {
+        if (!widget.interactive) {
+          return;
+        }
         setState(() {
           switch (severity) {
             case PeriodDailyEntry_Severity.NONE:
@@ -310,6 +319,9 @@ class _SingleDayState extends State<SingleDay> {
         });
       },
       onDoubleTap: () {
+        if (!widget.interactive) {
+          return;
+        }
         setState(() {
           switch (severity) {
             case PeriodDailyEntry_Severity.NONE:
@@ -350,8 +362,29 @@ class _SingleDayState extends State<SingleDay> {
         ),
         child: Column(
           children: [
-            SizedBox(height: 4),
-            Text(DateFormat.d().format(widget.day)),
+            SizedBox(height: 5),
+            widget.showMonth
+                ? Text(
+                    DateFormat.MMMM().format(widget.day).toUpperCase(),
+                    style: Theme.of(context)
+                        .textTheme
+                        .caption
+                        .copyWith(fontSize: 8),
+                  )
+                : Container(),
+            Text(
+              DateFormat.d().format(widget.day),
+              style: Theme.of(context).textTheme.bodyText2.copyWith(
+                    fontWeight:
+                        widget.showMonth ? FontWeight.bold : FontWeight.normal,
+                  ),
+            ),
+            widget.showWeekday
+                ? Text(
+                    DateFormat.E().format(widget.day),
+                    style: Theme.of(context).textTheme.caption,
+                  )
+                : Container(),
             SizedBox(height: 2),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

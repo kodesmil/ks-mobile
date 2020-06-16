@@ -29,6 +29,7 @@ dependencies:
   dots_indicator: ^1.1.0
   flutter_translate: ^1.1.0
   infinite_listview: ^1.0.1+1
+  linked_scroll_controller: ^0.1.2
 
   feat_period:
     path: ../feat_period

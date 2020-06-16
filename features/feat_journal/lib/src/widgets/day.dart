@@ -28,9 +28,8 @@ class _SingleJournalPageState extends State<SingleJournalPage> {
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<PeriodStore>(context);
-    final date = DateTime.now().add(Duration(
-      hours: widget.index * 24,
-    ));
+    final date =
+        DateTime.now().toUtc().add(Duration(days: widget.index)).toLocal();
     return Container(
       decoration: BoxDecoration(
         // color: Theme.of(context).colorScheme.surface,
@@ -82,7 +81,7 @@ class _SingleJournalPageState extends State<SingleJournalPage> {
                                           )
                                         : Expanded(
                                             child: IconButton(
-                                              icon: Icon(Icons.edit),
+                                              icon: Icon(Icons.info),
                                               onPressed: () => setState(
                                                 () => editable = true,
                                               ),

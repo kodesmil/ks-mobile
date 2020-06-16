@@ -2,9 +2,11 @@ import 'package:feat_period/feat_period.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_listview/infinite_listview.dart';
+import 'package:intl/intl.dart';
 import 'package:lib_lego/lib_lego.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:linked_scroll_controller/linked_scroll_controller.dart';
 
 import 'widgets/day.dart';
 
@@ -43,23 +45,70 @@ class _DayWidget extends StatefulWidget {
 }
 
 class __DayWidgetState extends State<_DayWidget> {
-  final InfiniteScrollController _infiniteController =
-      InfiniteScrollController();
+  InfiniteScrollController _infiniteController;
+  InfiniteScrollController _infiniteController2;
+
+  LinkedScrollControllerGroup _controllers;
+  double weekSize;
+
+  @override
+  void didChangeDependencies() {
+    weekSize = MediaQuery.of(context).size.width / 7;
+    _infiniteController = InfiniteScrollController();
+    _infiniteController2 = InfiniteScrollController(
+      initialScrollOffset: -3 * weekSize,
+    );
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return InfiniteListView.builder(
-      physics: PageScrollPhysics(),
-      scrollDirection: Axis.horizontal,
-      controller: _infiniteController,
-      itemBuilder: (context, index) {
-        return Container(
-          width: MediaQuery.of(context).size.width,
-          child: SingleJournalPage(
-            index: index,
+    final store = Provider.of<PeriodStore>(context);
+    return Column(
+      children: [
+        Container(
+          height: weekSize * 1.5,
+          child: InfiniteListView.builder(
+            itemExtent: weekSize,
+            scrollDirection: Axis.horizontal,
+            controller: _infiniteController2,
+            itemBuilder: (context, index) {
+              final date =
+              DateTime.now().toUtc().add(Duration(days: index)).toLocal();
+              final entry = store.entriesByDay[DateFormat.yMd().format(date)];
+              return Container(
+                width: weekSize,
+                padding: EdgeInsets.symmetric(
+                  horizontal: 4,
+                  vertical: 8,
+                ),
+                child: SingleDay(
+                  day: date,
+                  entry: entry,
+                  showMonth: true,
+                  showWeekday: true,
+                  interactive: false,
+                ),
+              );
+            },
           ),
-        );
-      },
+        ),
+        Expanded(
+          child: InfiniteListView.builder(
+            physics: PageScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            controller: _infiniteController,
+            itemBuilder: (context, index) {
+              return Container(
+                width: MediaQuery.of(context).size.width,
+                child: SingleJournalPage(
+                  index: index,
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
