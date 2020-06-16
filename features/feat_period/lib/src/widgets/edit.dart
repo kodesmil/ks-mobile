@@ -28,12 +28,7 @@ class _CalendarState extends State<Calendar> {
         CalendarHeader(),
         Observer(
           builder: (context) => store.loadingStore.loading
-              ? Container(
-                  padding: EdgeInsets.all(100),
-                  child: Center(
-                    child: ColorLoader3(),
-                  ),
-                )
+              ? KsProgressIndicator()
               : CalendarBody(),
         ),
       ],
@@ -49,6 +44,7 @@ class CalendarHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(bottom: 2),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -75,13 +71,25 @@ class CalendarHeaderTitle extends StatelessWidget {
       padding: EdgeInsets.only(
         bottom: 10,
         top: 10,
+        right: 10,
+        left: 10,
       ),
-      child: Text(
-        'Calendar',
-        style: Theme.of(context)
-            .textTheme
-            .headline6
-            .copyWith(fontWeight: FontWeight.bold),
+      child: Column(
+        children: [
+          Text(
+            'Mark your period',
+            style: Theme.of(context).textTheme.bodyText2.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 4),
+          Text(
+            'Swanly will calculate your next period and ovulation days',
+            style: Theme.of(context).textTheme.bodyText2,
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
     );
   }
@@ -204,7 +212,7 @@ class _CalendarMonthState extends State<CalendarMonth> {
   Widget build(BuildContext context) {
     final store = Provider.of<PeriodStore>(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -212,10 +220,14 @@ class _CalendarMonthState extends State<CalendarMonth> {
           Padding(
             padding: const EdgeInsets.only(bottom: 15),
             child: Text(
-              widget.month.month != 1 || widget.month.year != now.year
-                  ? DateFormat.MMMM().format(widget.month)
-                  : DateFormat.yMMMM().format(widget.month),
-              style: Theme.of(context).textTheme.headline5,
+              widget.month.month == 1 || widget.month.year != now.year
+                  ? DateFormat.yMMMM().format(widget.month)
+                  : DateFormat.MMMM().format(widget.month),
+              style: Theme.of(context).textTheme.headline5.copyWith(
+                shadows: [
+                  context.shadow1(),
+                ],
+              ),
             ),
           ),
           Observer(
@@ -224,13 +236,17 @@ class _CalendarMonthState extends State<CalendarMonth> {
               return GridView.count(
                 crossAxisCount: 7,
                 shrinkWrap: true,
+                padding: EdgeInsets.all(2),
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                childAspectRatio: 0.75,
                 primary: false,
                 addAutomaticKeepAlives: true,
                 children: list.map(
                   (e) {
                     final entry = entriesByDay[DateFormat.yMd().format(e)];
                     return e.month == widget.month.month
-                        ? const SingleDay(
+                        ? SingleDay(
                             entry: entry,
                             day: e.toLocal(),
                           )
@@ -272,94 +288,112 @@ class _SingleDayState extends State<SingleDay> {
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<PeriodStore>(context);
-    return Container(
-      margin: EdgeInsets.all(2),
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: () {
-          if (widget.day.isToday()) {
-            return Color(0xFFEAEAFF);
+    return InkWell(
+      onTap: () {
+        setState(() {
+          switch (severity) {
+            case PeriodDailyEntry_Severity.NONE:
+              severity = PeriodDailyEntry_Severity.MID;
+              break;
+            case PeriodDailyEntry_Severity.MID:
+              severity = PeriodDailyEntry_Severity.HIGH;
+              break;
+            case PeriodDailyEntry_Severity.HIGH:
+              severity = PeriodDailyEntry_Severity.NONE;
+              break;
           }
-          switch (widget.day.weekday) {
-            case DateTime.saturday:
-            case DateTime.sunday:
-              return Color(0xFFFFEEEE);
-            default:
-              return Colors.white;
+          store.createOrUpdatePeriodDailyEntry(
+            widget.entry,
+            severity: severity,
+            day: widget.day,
+          );
+        });
+      },
+      onDoubleTap: () {
+        setState(() {
+          switch (severity) {
+            case PeriodDailyEntry_Severity.NONE:
+              severity = PeriodDailyEntry_Severity.HIGH;
+              break;
+            case PeriodDailyEntry_Severity.MID:
+              severity = PeriodDailyEntry_Severity.NONE;
+              break;
+            case PeriodDailyEntry_Severity.HIGH:
+              severity = PeriodDailyEntry_Severity.MID;
+              break;
           }
-        }(),
-        border: Border.all(
-          width: calculateWidth(),
+          store.createOrUpdatePeriodDailyEntry(
+            widget.entry,
+            severity: severity,
+            day: widget.day,
+          );
+        });
+      },
+      child: Container(
+        decoration: BoxDecoration(
           color: () {
-            switch (severity) {
-              case PeriodDailyEntry_Severity.LOW:
-              case PeriodDailyEntry_Severity.HIGH:
-              case PeriodDailyEntry_Severity.MID:
-                return Color(0xFFDD3333);
-              case PeriodDailyEntry_Severity.NONE:
-                return Colors.black26;
+            if (widget.day.isToday()) {
+              return Colors.tealAccent.withOpacity(0.25);
             }
-            return Colors.black26;
+            switch (widget.day.weekday) {
+              case DateTime.saturday:
+              case DateTime.sunday:
+                return Color(0xFFFFEEEE);
+              default:
+                return Colors.white;
+            }
           }(),
+          borderRadius: BorderRadius.all(Radius.circular(4)),
+          boxShadow: [
+            context.shadow1(),
+          ],
         ),
-      ),
-      child: InkWell(
-        onTap: () {
-          setState(() {
-            switch (severity) {
-              case PeriodDailyEntry_Severity.NONE:
-                severity = PeriodDailyEntry_Severity.LOW;
-                break;
-              case PeriodDailyEntry_Severity.LOW:
-                severity = PeriodDailyEntry_Severity.MID;
-                break;
-              case PeriodDailyEntry_Severity.MID:
-                severity = PeriodDailyEntry_Severity.NONE;
-                break;
-            }
-            store.createOrUpdatePeriodDailyEntry(
-              widget.entry,
-              severity: severity,
-              day: widget.day,
-            );
-          });
-        },
-        onDoubleTap: () {
-          setState(() {
-            switch (severity) {
-              case PeriodDailyEntry_Severity.NONE:
-                severity = PeriodDailyEntry_Severity.MID;
-                break;
-              case PeriodDailyEntry_Severity.LOW:
-                severity = PeriodDailyEntry_Severity.NONE;
-                break;
-              case PeriodDailyEntry_Severity.MID:
-                severity = PeriodDailyEntry_Severity.LOW;
-                break;
-            }
-            store.createOrUpdatePeriodDailyEntry(
-              widget.entry,
-              severity: severity,
-              day: widget.day,
-            );
-          });
-        },
-        child: Center(
-          child: Text(DateFormat.d().format(widget.day)),
+        child: Column(
+          children: [
+            SizedBox(height: 4),
+            Text(DateFormat.d().format(widget.day)),
+            SizedBox(height: 2),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: () {
+                switch (severity) {
+                  case PeriodDailyEntry_Severity.MID:
+                    return [
+                      _Dot(),
+                    ];
+                  case PeriodDailyEntry_Severity.HIGH:
+                    return [
+                      _Dot(),
+                      _Dot(),
+                    ];
+                }
+                return [
+                  Container(),
+                ];
+              }(),
+            ),
+          ],
         ),
       ),
     );
   }
+}
 
-  double calculateWidth() {
-    switch (severity) {
-      case PeriodDailyEntry_Severity.LOW:
-        return 2.0;
-      case PeriodDailyEntry_Severity.MID:
-        return 4.0;
-      case PeriodDailyEntry_Severity.NONE:
-        return 1.0;
-    }
-    return 1.0;
+class _Dot extends StatelessWidget {
+  const _Dot({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(2),
+      width: 6,
+      height: 6,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: Colors.pinkAccent,
+      ),
+    );
   }
 }

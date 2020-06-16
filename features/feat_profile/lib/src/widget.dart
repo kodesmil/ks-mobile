@@ -33,25 +33,23 @@ class _ProfileSettingsTileState extends State<ProfileSettingsTile> {
     return Observer(
       builder: (context) => Padding(
         padding: const EdgeInsets.all(15),
-        child: Stack(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                store.profile.fullName,
-                style: Theme.of(context).textTheme.bodyText2,
+            SizedBox(height: 15),
+            Text(
+              store.profile.fullName,
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            SizedBox(height: 25),
+            StorageWidget(
+              onFileUploaded: (url) => store.updateProfile(url: url),
+              child: KsCircleAvatar(
+                size: 150,
+                image: store.profile.profilePictureUrl,
               ),
             ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: StorageWidget(
-                onFileUploaded: (url) => store.updateProfile(url: url),
-                child: KsCircleAvatar(
-                  size: 75,
-                  image: store.profile.profilePictureUrl,
-                ),
-              ),
-            ),
+            SizedBox(height: 20),
           ],
         ),
       ),
