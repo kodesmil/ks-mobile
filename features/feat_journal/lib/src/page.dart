@@ -1,4 +1,4 @@
-import 'package:feat_period/feat_period.dart';
+import 'package:feat_health/feat_health.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_listview/infinite_listview.dart';
@@ -18,7 +18,7 @@ class JournalPage extends StatefulWidget {
 class _JournalPageState extends State<JournalPage> {
   @override
   void didChangeDependencies() {
-    final store = Provider.of<PeriodStore>(context);
+    final store = Provider.of<MenstruationStore>(context);
     store.fetchPeriodEntries();
     super.didChangeDependencies();
   }
@@ -63,7 +63,7 @@ class __DayWidgetState extends State<_DayWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final store = Provider.of<PeriodStore>(context);
+    final store = Provider.of<MenstruationStore>(context);
     return Column(
       children: [
         Container(

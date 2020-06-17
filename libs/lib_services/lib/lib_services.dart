@@ -4,7 +4,7 @@ export 'src/generated/github.com/kodesmil/ks-model/chat.pbgrpc.dart';
 export 'src/generated/github.com/kodesmil/ks-model/feed.pbgrpc.dart';
 export 'src/generated/github.com/kodesmil/ks-model/group.pbgrpc.dart';
 export 'src/generated/github.com/kodesmil/ks-model/journal.pbgrpc.dart';
-export 'src/generated/github.com/kodesmil/ks-model/period.pbgrpc.dart';
+export 'src/generated/github.com/kodesmil/ks-model/health.pbgrpc.dart';
 export 'src/generated/github.com/kodesmil/ks-model/notification.pbgrpc.dart';
 export 'src/generated/github.com/kodesmil/ks-model/profile.pbgrpc.dart';
 

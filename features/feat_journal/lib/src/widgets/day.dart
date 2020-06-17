@@ -1,5 +1,5 @@
 import 'package:feat_journal/src/common.dart';
-import 'package:feat_period/feat_period.dart';
+import 'package:feat_health/feat_health.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -27,7 +27,7 @@ class _SingleJournalPageState extends State<SingleJournalPage> {
 
   @override
   Widget build(BuildContext context) {
-    final store = Provider.of<PeriodStore>(context);
+    final store = Provider.of<MenstruationStore>(context);
     final date =
         DateTime.now().toUtc().add(Duration(days: widget.index)).toLocal();
     return Container(
@@ -116,19 +116,16 @@ class _SingleJournalPageState extends State<SingleJournalPage> {
                                                       Container(),
                                                     ];
                                                   }
-                                                  switch (entry.severity) {
-                                                    case PeriodDailyEntry_Severity
-                                                        .NONE:
+                                                  switch (entry.intensityPercentage) {
+                                                    case 0:
                                                       return [
                                                         Container(),
                                                       ];
-                                                    case PeriodDailyEntry_Severity
-                                                        .MID:
+                                                    case 50:
                                                       return [
                                                         _Dot(),
                                                       ];
-                                                    case PeriodDailyEntry_Severity
-                                                        .HIGH:
+                                                    case 100:
                                                       return [
                                                         _Dot(),
                                                         _Dot(),

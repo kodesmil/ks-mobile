@@ -6,25 +6,25 @@ import 'package:mobx/mobx.dart';
 
 part 'store.g.dart';
 
-class PeriodStore = _PeriodStore with _$PeriodStore;
+class MenstruationStore = _MenstruationStore with _$MenstruationStore;
 
-abstract class _PeriodStore with Store {
+abstract class _MenstruationStore with Store {
   final ErrorStore errorStore;
   final LoadingStore loadingStore;
 
-  PeriodClient client;
+  HealthClient client;
 
-  _PeriodStore(
+  _MenstruationStore(
     this.errorStore,
     this.loadingStore,
     this.client,
   );
 
   @observable
-  List<PeriodDailyEntry> entries = [];
+  List<HealthMenstruationDailyEntry> entries = [];
 
   @computed
-  Map<String, PeriodDailyEntry> get entriesByDay {
+  Map<String, HealthMenstruationDailyEntry> get entriesByDay {
     final result = entries.asMap().map(
           (key, value) => MapEntry(
             DateFormat.yMd().format(value.day.toDateTime()),
@@ -36,46 +36,48 @@ abstract class _PeriodStore with Store {
 
   @action
   Future createOrUpdatePeriodDailyEntry(
-    PeriodDailyEntry entry, {
-    PeriodDailyEntry_Severity severity,
+    HealthMenstruationDailyEntry entry, {
+    int intensityPercent,
     DateTime day,
   }) async =>
       entry?.id?.resourceId?.isNotEmpty == true
           ? await updatePeriodDailyEntry(
               entry,
-              severity: severity,
+              intensityPercent: intensityPercent,
               day: day,
             )
           : await createPeriodDailyEntry(
-              severity: severity,
+              intensityPercent: intensityPercent,
               day: day,
             );
 
   @action
   Future createPeriodDailyEntry({
-    PeriodDailyEntry_Severity severity,
+    int intensityPercent,
     DateTime day,
   }) async {
-    final payload = PeriodDailyEntry()
-      ..severity = severity
+    final payload = HealthMenstruationDailyEntry()
+      ..intensityPercentage = intensityPercent
       ..day = Timestamp.fromDateTime(day.toUtc());
-    final request = CreatePeriodDailyEntryRequest()..payload = payload;
-    final response = await client.createPeriodDailyEntry(request);
+    final request = CreateHealthMenstruationDailyEntryRequest()
+      ..payload = payload;
+    final response = await client.createHealthMenstruationDailyEntry(request);
     entries.add(response.result);
     entries = [...entries];
   }
 
   @action
   Future updatePeriodDailyEntry(
-    PeriodDailyEntry entry, {
-    PeriodDailyEntry_Severity severity,
+    HealthMenstruationDailyEntry entry, {
+    int intensityPercent,
     DateTime day,
   }) async {
     entry = entry
       ..day = Timestamp.fromDateTime(day.toUtc())
-      ..severity = severity;
-    final request = UpdatePeriodDailyEntryRequest()..payload = entry;
-    final response = await client.updatePeriodDailyEntry(request);
+      ..intensityPercentage = intensityPercent;
+    final request = UpdateHealthMenstruationDailyEntryRequest()
+      ..payload = entry;
+    final response = await client.updateHealthMenstruationDailyEntry(request);
     entries.add(response.result);
     entries = [...entries];
   }
@@ -83,9 +85,9 @@ abstract class _PeriodStore with Store {
   @action
   Future fetchPeriodEntries() async {
     loadingStore.loading = true;
-    final request = ListPeriodDailyEntryRequest();
+    final request = ListHealthMenstruationDailyEntryRequest();
     try {
-      final response = await client.listPeriodDailyEntry(request);
+      final response = await client.listHealthMenstruationDailyEntry(request);
       entries = response.results;
     } catch (e) {
       loadingStore.loading = false;

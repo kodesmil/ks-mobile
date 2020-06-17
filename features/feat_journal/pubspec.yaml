@@ -31,8 +31,8 @@ dependencies:
   infinite_listview: ^1.0.1+1
   linked_scroll_controller: ^0.1.2
 
-  feat_period:
-    path: ../feat_period
+  feat_health:
+    path: ../feat_health
   lib_shared:
     path: ../../libs/lib_shared
   lib_lego:

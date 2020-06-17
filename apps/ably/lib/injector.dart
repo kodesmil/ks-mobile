@@ -2,7 +2,7 @@ import 'package:feat_auth/feat_auth.dart';
 import 'package:feat_chat/feat_chat.dart';
 import 'package:feat_feed/feat_feed.dart';
 import 'package:feat_journal/feat_journal.dart';
-import 'package:feat_period/feat_period.dart';
+import 'package:feat_health/feat_health.dart';
 import 'package:feat_notifications/feat_notifications.dart';
 import 'package:feat_onboarding/feat_onboarding.dart';
 import 'package:feat_profile/feat_profile.dart';
@@ -131,8 +131,8 @@ class _AppInjectorState extends State<AppInjector> {
             options: dep,
           ),
         ),
-        ProxyProvider<CallOptions, PeriodClient>(
-          update: (_, dep, __) => PeriodClient(
+        ProxyProvider<CallOptions, HealthClient>(
+          update: (_, dep, __) => HealthClient(
             channel,
             options: dep,
           ),
@@ -194,8 +194,8 @@ class _AppInjectorState extends State<AppInjector> {
             dep,
           ),
         ),
-        ProxyProvider<PeriodClient, PeriodStore>(
-          update: (_, dep, __) => PeriodStore(
+        ProxyProvider<HealthClient, MenstruationStore>(
+          update: (_, dep, __) => MenstruationStore(
             ErrorStore(),
             LoadingStore(),
             dep,

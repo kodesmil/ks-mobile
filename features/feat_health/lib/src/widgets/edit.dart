@@ -1,4 +1,3 @@
-import 'package:feat_period/feat_period.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -9,6 +8,8 @@ import 'package:lib_lego/lib_lego.dart';
 import 'package:infinite_listview/infinite_listview.dart';
 import 'package:lib_services/lib_services.dart';
 import 'package:provider/provider.dart';
+
+import '../store.dart';
 
 class Calendar extends StatefulWidget {
   const Calendar({
@@ -22,7 +23,7 @@ class Calendar extends StatefulWidget {
 class _CalendarState extends State<Calendar> {
   @override
   Widget build(BuildContext context) {
-    final store = Provider.of<PeriodStore>(context);
+    final store = Provider.of<MenstruationStore>(context);
     return ListView(
       children: [
         CalendarHeader(),
@@ -210,7 +211,7 @@ class _CalendarMonthState extends State<CalendarMonth> {
 
   @override
   Widget build(BuildContext context) {
-    final store = Provider.of<PeriodStore>(context);
+    final store = Provider.of<MenstruationStore>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: Column(
@@ -273,7 +274,7 @@ class SingleDay extends StatefulWidget {
   }) : super(key: key);
 
   final DateTime day;
-  final PeriodDailyEntry entry;
+  final HealthMenstruationDailyEntry entry;
   final bool showMonth;
   final bool showWeekday;
   final bool interactive;
@@ -283,17 +284,17 @@ class SingleDay extends StatefulWidget {
 }
 
 class _SingleDayState extends State<SingleDay> {
-  PeriodDailyEntry_Severity severity = PeriodDailyEntry_Severity.NONE;
+  int severity = 0;
 
   @override
   void initState() {
-    severity = widget?.entry?.severity ?? PeriodDailyEntry_Severity.NONE;
+    severity = widget?.entry?.intensityPercentage ?? 0;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final store = Provider.of<PeriodStore>(context);
+    final store = Provider.of<MenstruationStore>(context);
     return InkWell(
       onTap: () {
         if (!widget.interactive) {
@@ -301,19 +302,19 @@ class _SingleDayState extends State<SingleDay> {
         }
         setState(() {
           switch (severity) {
-            case PeriodDailyEntry_Severity.NONE:
-              severity = PeriodDailyEntry_Severity.MID;
+            case 0:
+              severity = 50;
               break;
-            case PeriodDailyEntry_Severity.MID:
-              severity = PeriodDailyEntry_Severity.HIGH;
+            case 50:
+              severity = 100;
               break;
-            case PeriodDailyEntry_Severity.HIGH:
-              severity = PeriodDailyEntry_Severity.NONE;
+            case 100:
+              severity = 0;
               break;
           }
           store.createOrUpdatePeriodDailyEntry(
             widget.entry,
-            severity: severity,
+            intensityPercent: severity,
             day: widget.day,
           );
         });
@@ -324,19 +325,19 @@ class _SingleDayState extends State<SingleDay> {
         }
         setState(() {
           switch (severity) {
-            case PeriodDailyEntry_Severity.NONE:
-              severity = PeriodDailyEntry_Severity.HIGH;
+            case 0:
+              severity = 100;
               break;
-            case PeriodDailyEntry_Severity.MID:
-              severity = PeriodDailyEntry_Severity.NONE;
+            case 50:
+              severity = 0;
               break;
-            case PeriodDailyEntry_Severity.HIGH:
-              severity = PeriodDailyEntry_Severity.MID;
+            case 100:
+              severity = 50;
               break;
           }
           store.createOrUpdatePeriodDailyEntry(
             widget.entry,
-            severity: severity,
+            intensityPercent: severity,
             day: widget.day,
           );
         });
@@ -390,11 +391,11 @@ class _SingleDayState extends State<SingleDay> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: () {
                 switch (severity) {
-                  case PeriodDailyEntry_Severity.MID:
+                  case 50:
                     return [
                       _Dot(),
                     ];
-                  case PeriodDailyEntry_Severity.HIGH:
+                  case 100:
                     return [
                       _Dot(),
                       _Dot(),
