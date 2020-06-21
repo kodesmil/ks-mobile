@@ -71,71 +71,67 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget _buildRightSide(SignUpStore store) => Form(
         key: _formKey,
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 48.0),
+          padding: EdgeInsets.fromLTRB(50, 50, 50, 10),
           child: Column(
             children: <Widget>[
-              SizedBox(height: 48.0),
-              _buildEmailField(store),
-              _buildPasswordField(store),
-              SizedBox(height: 48.0),
-              _buildSignUpButton(store),
-              SizedBox(height: 16.0),
-              _buildLoginButton(store),
+              Text(
+                'Create User',
+                style: Theme.of(context).textTheme.headline4,
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 50),
+              Observer(
+                builder: (context) => KsTextField(
+                  hint: 'Email',
+                  icon: Icons.email,
+                  inputType: TextInputType.emailAddress,
+                  textController: _emailController,
+                  textCapitalization: TextCapitalization.none,
+                  focusNode: _emailFocusNode,
+                  padding: EdgeInsets.only(top: 16.0),
+                  inputAction: TextInputAction.next,
+                  onFieldSubmitted: (value) =>
+                      FocusScope.of(context).requestFocus(
+                    _passwordFocusNode,
+                  ),
+                  errorText: store.signUpErrorStore.email,
+                ),
+              ),
+              Observer(
+                builder: (context) => KsTextField(
+                  hint: 'Password',
+                  icon: Icons.lock,
+                  isObscure: true,
+                  padding: EdgeInsets.only(top: 20.0),
+                  textController: _passwordController,
+                  textCapitalization: TextCapitalization.none,
+                  focusNode: _passwordFocusNode,
+                  errorText: store.signUpErrorStore.password,
+                ),
+              ),
+              SizedBox(height: 30),
+              RaisedButton(
+                child: Text('Sign up'),
+                shape: StadiumBorder(),
+                onPressed: () async {
+                  store.validateAll();
+                  if (store.canSignUp) {
+                    await store.signUp();
+                  } else {
+                    ksShowErrorMessage(context, 'Please fill in all fields');
+                  }
+                },
+              ),
+              SizedBox(height: 40),
+              Observer(
+                builder: (context) => OutlineButton(
+                  child: Text('Back'),
+                  shape: StadiumBorder(),
+                  onPressed: () => Navigator.pushNamed(context, '/login'),
+                ),
+              ),
             ],
           ),
-        ),
-      );
-
-  Widget _buildEmailField(SignUpStore store) => Observer(
-        builder: (context) => KsTextField(
-          hint: 'Email',
-          icon: Icons.email,
-          inputType: TextInputType.emailAddress,
-          textController: _emailController,
-          textCapitalization: TextCapitalization.none,
-          focusNode: _emailFocusNode,
-          padding: EdgeInsets.only(top: 16.0),
-          inputAction: TextInputAction.next,
-          onFieldSubmitted: (value) => FocusScope.of(context).requestFocus(
-            _passwordFocusNode,
-          ),
-          errorText: store.signUpErrorStore.email,
-        ),
-      );
-
-  Widget _buildPasswordField(SignUpStore store) => Observer(
-        builder: (context) => KsTextField(
-          hint: 'Password',
-          icon: Icons.lock,
-          isObscure: true,
-          padding: EdgeInsets.only(top: 16.0),
-          textController: _passwordController,
-          textCapitalization: TextCapitalization.none,
-          focusNode: _passwordFocusNode,
-          errorText: store.signUpErrorStore.password,
-        ),
-      );
-
-  Widget _buildSignUpButton(SignUpStore store) {
-    return RaisedButton(
-      child: Text('Sign up'.toUpperCase()),
-      shape: StadiumBorder(),
-      onPressed: () async {
-        store.validateAll();
-        if (store.canSignUp) {
-          await store.signUp();
-        } else {
-          ksShowErrorMessage(context, 'Please fill in all fields');
-        }
-      },
-    );
-  }
-
-  Widget _buildLoginButton(SignUpStore store) => Observer(
-        builder: (context) => FlatButton(
-          child: Text('Login'.toUpperCase()),
-          shape: StadiumBorder(),
-          onPressed: () => Navigator.pushNamed(context, '/login'),
         ),
       );
 }

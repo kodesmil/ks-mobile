@@ -1,6 +1,7 @@
 import 'package:ably/ui/hello_page.dart';
 import 'package:feat_chat/feat_chat.dart';
 import 'package:feat_feed/feat_feed.dart';
+import 'package:feat_health/feat_health.dart';
 import 'package:feat_journal/feat_journal.dart';
 import 'package:feat_notifications/feat_notifications.dart';
 import 'package:feat_profile/feat_profile.dart';
@@ -32,29 +33,31 @@ class _HomePageState extends State<HomePage> {
     ];
     final store = Provider.of<StorageStore>(context);
     return NotificationContainer(
-      child: CupertinoTabScaffold(
-        tabBar: CupertinoTabBar(
-          backgroundColor:
-              Theme.of(context).bottomNavigationBarTheme.backgroundColor,
-          activeColor:
-              Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
-          inactiveColor:
-              Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
-          currentIndex: 1,
-          items: [
-            BottomNavigationBarItem(icon: Icon(Icons.person), title: Text('Profile')),
-            BottomNavigationBarItem(icon: Icon(Icons.calendar_today), title: Text('Journal')),
-            BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Feed')),
-            BottomNavigationBarItem(icon: Icon(Icons.people), title: Text('Chat')),
-          ],
+      child: MenstruationPersonalInfoWidget(
+        child: CupertinoTabScaffold(
+          tabBar: CupertinoTabBar(
+            backgroundColor:
+                Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+            activeColor:
+                Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
+            inactiveColor:
+                Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+            currentIndex: 1,
+            items: [
+              BottomNavigationBarItem(icon: Icon(Icons.person), title: Text('Profile')),
+              BottomNavigationBarItem(icon: Icon(Icons.calendar_today), title: Text('Journal')),
+              BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Feed')),
+              BottomNavigationBarItem(icon: Icon(Icons.people), title: Text('Chat')),
+            ],
+          ),
+          tabBuilder: (BuildContext context, int index) {
+            return CupertinoTabView(
+              builder: (BuildContext context) {
+                return pages[index];
+              },
+            );
+          },
         ),
-        tabBuilder: (BuildContext context, int index) {
-          return CupertinoTabView(
-            builder: (BuildContext context) {
-              return pages[index];
-            },
-          );
-        },
       ),
     );
   }

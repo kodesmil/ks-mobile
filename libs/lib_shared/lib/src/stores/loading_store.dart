@@ -8,4 +8,13 @@ abstract class _LoadingStore with Store {
 
   @observable
   bool loading = false;
+
+  @observable
+  bool success = false;
+
+  @observable
+  bool failure = false;
+
+  @observable
+  String failureMessage = '';
 }

@@ -4,17 +4,18 @@ import 'package:lib_shared/lib_shared.dart';
 import 'package:lib_services/lib_services.dart';
 import 'package:mobx/mobx.dart';
 
-part 'store.g.dart';
+part 'menstruation_daily_entry.g.dart';
 
-class MenstruationStore = _MenstruationStore with _$MenstruationStore;
+class MenstruationDailyEntryStore = _MenstruationDailyEntryStore with _$MenstruationDailyEntryStore;
 
-abstract class _MenstruationStore with Store {
+abstract class _MenstruationDailyEntryStore with Store {
   final ErrorStore errorStore;
   final LoadingStore loadingStore;
 
   HealthClient client;
 
-  _MenstruationStore(
+
+  _MenstruationDailyEntryStore(
     this.errorStore,
     this.loadingStore,
     this.client,
@@ -35,24 +36,25 @@ abstract class _MenstruationStore with Store {
   }
 
   @action
-  Future createOrUpdatePeriodDailyEntry(
+  Future createOrUpdate(
     HealthMenstruationDailyEntry entry, {
     int intensityPercent,
     DateTime day,
   }) async =>
       entry?.id?.resourceId?.isNotEmpty == true
-          ? await updatePeriodDailyEntry(
+          ? await update(
               entry,
               intensityPercent: intensityPercent,
               day: day,
             )
-          : await createPeriodDailyEntry(
+          : await create(
               intensityPercent: intensityPercent,
               day: day,
             );
 
+
   @action
-  Future createPeriodDailyEntry({
+  Future create({
     int intensityPercent,
     DateTime day,
   }) async {
@@ -67,13 +69,14 @@ abstract class _MenstruationStore with Store {
   }
 
   @action
-  Future updatePeriodDailyEntry(
+  Future update(
     HealthMenstruationDailyEntry entry, {
     int intensityPercent,
     DateTime day,
   }) async {
     entry = entry
       ..day = Timestamp.fromDateTime(day.toUtc())
+      ..manual = true
       ..intensityPercentage = intensityPercent;
     final request = UpdateHealthMenstruationDailyEntryRequest()
       ..payload = entry;
@@ -83,7 +86,7 @@ abstract class _MenstruationStore with Store {
   }
 
   @action
-  Future fetchPeriodEntries() async {
+  Future list() async {
     loadingStore.loading = true;
     final request = ListHealthMenstruationDailyEntryRequest();
     try {

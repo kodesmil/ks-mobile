@@ -34,9 +34,6 @@ class Injector extends StatelessWidget {
         Provider(
           create: (_) => FirebaseAuth.instance,
         ),
-        ProxyProvider<GoogleSignIn, GoogleSignInStore>(
-          update: (_, dep, __) => GoogleSignInStore(dep),
-        ),
         ProxyProvider2<FirebaseAuth, UserStore, LoginStore>(
           update: (_, dep, dep2, __) => LoginStore(
             ErrorStore(),

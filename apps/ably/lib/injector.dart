@@ -74,20 +74,22 @@ class _AppInjectorState extends State<AppInjector> {
             ],
           ),
         ),
-        ProxyProvider<GoogleSignIn, GoogleSignInStore>(
-          update: (_, dep, __) => GoogleSignInStore(dep),
-        ),
-        ProxyProvider2<FirebaseAuth, UserStore, LoginStore>(
-          update: (_, dep, dep2, __) => LoginStore(
+        ProxyProvider3<FirebaseAuth, GoogleSignIn, UserStore, LoginStore>(
+          update: (_, dep, dep2, dep3, __) => LoginStore(
             ErrorStore(),
             LoginErrorStore(),
             dep,
             dep2,
+            dep3,
           ),
         ),
         ProxyProvider2<FirebaseAuth, UserStore, SignUpStore>(
-          update: (_, dep, dep2, __) =>
-              SignUpStore(ErrorStore(), SignUpErrorStore(), dep, dep2),
+          update: (_, dep, dep2, __) => SignUpStore(
+            ErrorStore(),
+            SignUpErrorStore(),
+            dep,
+            dep2,
+          ),
         ),
         ProxyProvider<AuthStorage, OnboardingStore>(
           update: (_, dep, __) => OnboardingStore(
@@ -194,8 +196,15 @@ class _AppInjectorState extends State<AppInjector> {
             dep,
           ),
         ),
-        ProxyProvider<HealthClient, MenstruationStore>(
-          update: (_, dep, __) => MenstruationStore(
+        ProxyProvider<HealthClient, MenstruationDailyEntryStore>(
+          update: (_, dep, __) => MenstruationDailyEntryStore(
+            ErrorStore(),
+            LoadingStore(),
+            dep,
+          ),
+        ),
+        ProxyProvider<HealthClient, MenstruationPersonalInfoStore>(
+          update: (_, dep, __) => MenstruationPersonalInfoStore(
             ErrorStore(),
             LoadingStore(),
             dep,

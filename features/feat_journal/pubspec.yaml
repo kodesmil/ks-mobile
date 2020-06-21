@@ -29,7 +29,9 @@ dependencies:
   dots_indicator: ^1.1.0
   flutter_translate: ^1.1.0
   infinite_listview: ^1.0.1+1
+  indexed_list_view: ^1.0.9
   linked_scroll_controller: ^0.1.2
+  infinity_page_view: ^1.0.0
 
   feat_health:
     path: ../feat_health

@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class KsCircleAvatar extends StatelessWidget {
@@ -16,15 +16,20 @@ class KsCircleAvatar extends StatelessWidget {
         shape: BoxShape.circle,
       ),
       child: ClipOval(
-        child: FadeInImage.memoryNetwork(
-          placeholder: kTransparentImage,
-          image: image,
-          fit: BoxFit.cover,
-        ),
+        child: image?.isNotEmpty == true
+            ? FadeInImage.memoryNetwork(
+                placeholder: kTransparentImage,
+                image: image,
+                fit: BoxFit.cover,
+              )
+            : Container(
+                color: Colors.tealAccent.withOpacity(0.5),
+              ),
       ),
     );
   }
 }
+
 class KsFadeInImage extends StatelessWidget {
   final double size;
   final String image;

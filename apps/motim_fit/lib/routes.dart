@@ -14,6 +14,5 @@ class Routes {
     '/sign-up': (BuildContext context) => SignUpPage(),
     '/home': (BuildContext context) => HomePage(),
     '/onboarding': (BuildContext context) => OnboardingPage(),
-    '/google-sign-in': (BuildContext context) => GoogleSignInPage(),
   };
 }

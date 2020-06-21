@@ -1,3 +1,4 @@
+import 'package:feat_health/src/stores/menstruation_daily_entry.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -8,8 +9,6 @@ import 'package:lib_lego/lib_lego.dart';
 import 'package:infinite_listview/infinite_listview.dart';
 import 'package:lib_services/lib_services.dart';
 import 'package:provider/provider.dart';
-
-import '../store.dart';
 
 class Calendar extends StatefulWidget {
   const Calendar({
@@ -23,7 +22,7 @@ class Calendar extends StatefulWidget {
 class _CalendarState extends State<Calendar> {
   @override
   Widget build(BuildContext context) {
-    final store = Provider.of<MenstruationStore>(context);
+    final store = Provider.of<MenstruationDailyEntryStore>(context);
     return ListView(
       children: [
         CalendarHeader(),
@@ -211,7 +210,7 @@ class _CalendarMonthState extends State<CalendarMonth> {
 
   @override
   Widget build(BuildContext context) {
-    final store = Provider.of<MenstruationStore>(context);
+    final store = Provider.of<MenstruationDailyEntryStore>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: Column(
@@ -294,7 +293,7 @@ class _SingleDayState extends State<SingleDay> {
 
   @override
   Widget build(BuildContext context) {
-    final store = Provider.of<MenstruationStore>(context);
+    final store = Provider.of<MenstruationDailyEntryStore>(context);
     return InkWell(
       onTap: () {
         if (!widget.interactive) {
@@ -312,7 +311,7 @@ class _SingleDayState extends State<SingleDay> {
               severity = 0;
               break;
           }
-          store.createOrUpdatePeriodDailyEntry(
+          store.createOrUpdate(
             widget.entry,
             intensityPercent: severity,
             day: widget.day,
@@ -335,7 +334,7 @@ class _SingleDayState extends State<SingleDay> {
               severity = 50;
               break;
           }
-          store.createOrUpdatePeriodDailyEntry(
+          store.createOrUpdate(
             widget.entry,
             intensityPercent: severity,
             day: widget.day,
@@ -364,28 +363,20 @@ class _SingleDayState extends State<SingleDay> {
         child: Column(
           children: [
             SizedBox(height: 5),
-            widget.showMonth
-                ? Text(
-                    DateFormat.MMMM().format(widget.day).toUpperCase(),
-                    style: Theme.of(context)
-                        .textTheme
-                        .caption
-                        .copyWith(fontSize: 8),
-                  )
-                : Container(),
-            Text(
-              DateFormat.d().format(widget.day),
-              style: Theme.of(context).textTheme.bodyText2.copyWith(
-                    fontWeight:
-                        widget.showMonth ? FontWeight.bold : FontWeight.normal,
-                  ),
-            ),
             widget.showWeekday
                 ? Text(
                     DateFormat.E().format(widget.day),
                     style: Theme.of(context).textTheme.caption,
                   )
                 : Container(),
+            Text(
+              DateFormat.d().format(widget.day),
+              style: Theme.of(context).textTheme.bodyText2.copyWith(
+                    fontWeight: widget.showWeekday
+                        ? FontWeight.bold
+                        : FontWeight.normal,
+                  ),
+            ),
             SizedBox(height: 2),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

@@ -1,13 +1,10 @@
-import 'package:feat_journal/src/common.dart';
 import 'package:feat_health/feat_health.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
-import 'package:lib_services/lib_services.dart';
 import 'package:provider/provider.dart';
-import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:lib_lego/lib_lego.dart';
 
 class SingleJournalPage extends StatefulWidget {
@@ -27,7 +24,7 @@ class _SingleJournalPageState extends State<SingleJournalPage> {
 
   @override
   Widget build(BuildContext context) {
-    final store = Provider.of<MenstruationStore>(context);
+    final store = Provider.of<MenstruationDailyEntryStore>(context);
     final date =
         DateTime.now().toUtc().add(Duration(days: widget.index)).toLocal();
     return Container(

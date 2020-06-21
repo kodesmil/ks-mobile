@@ -1,5 +1,6 @@
 import 'package:feat_auth/feat_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lib_shared/lib_shared.dart';
 import 'package:mobx/mobx.dart';
 import 'package:validators/validators.dart';
@@ -12,12 +13,14 @@ abstract class _LoginStore with Store {
   final LoginErrorStore formErrorStore;
   final ErrorStore errorStore;
   final FirebaseAuth firebaseAuth;
+  final GoogleSignIn googleSignIn;
   final UserStore userStore;
 
   _LoginStore(
     this.errorStore,
     this.formErrorStore,
     this.firebaseAuth,
+    this.googleSignIn,
     this.userStore,
   ) {
     _setupValidations();
@@ -49,12 +52,12 @@ abstract class _LoginStore with Store {
 
   @action
   void setEmail(String value) {
-    email = value;
+    email = value.trim();
   }
 
   @action
   void setPassword(String value) {
-    password = value;
+    password = value.trim();
   }
 
   @action
@@ -103,14 +106,61 @@ abstract class _LoginStore with Store {
   }
 
   @action
+  Future continueWithGoogle() async {
+    loading = true;
+    try {
+      final googleSignInAccount = await googleSignIn.signIn();
+      final googleSignInAuthentication =
+          await googleSignInAccount.authentication;
+      final credential = GoogleAuthProvider.getCredential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
+      final result = await firebaseAuth.signInWithCredential(credential);
+      userStore.user = result.user;
+      loading = false;
+      success = true;
+      errorStore.showError = false;
+    } catch (e) {
+      loading = false;
+      success = false;
+      errorStore.showError = true;
+      errorStore.errorMessage = e.toString().contains('ERROR_USER_NOT_FOUND')
+          ? 'Username and password does not match'
+          : 'Something went wrong, please check your internet connection and try again';
+      print(e);
+    }
+  }
+
+  @action
+  Future continueAnonymously() async {
+    loading = true;
+    try {
+      final result = await firebaseAuth.signInAnonymously();
+      userStore.user = result.user;
+      loading = false;
+      success = true;
+      errorStore.showError = false;
+    } catch (e) {
+      loading = false;
+      success = false;
+      errorStore.showError = true;
+      errorStore.errorMessage = e.toString().contains('ERROR_USER_NOT_FOUND')
+          ? 'Username and password doesn\'t match'
+          : 'Something went wrong, please check your internet connection and try again';
+      print(e);
+    }
+  }
+
+  @action
   Future logout() async {
     loading = true;
   }
 
   @action
   Future reset() async {
-     success = false;
-     loading = false;
+    success = false;
+    loading = false;
   }
 
   @action

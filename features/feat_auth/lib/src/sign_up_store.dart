@@ -49,12 +49,12 @@ abstract class _SignUpStore with Store {
 
   @action
   void setEmail(String value) {
-    email = value;
+    email = value.trim();
   }
 
   @action
   void setPassword(String value) {
-    password = value;
+    password = value.trim();
   }
 
   @action

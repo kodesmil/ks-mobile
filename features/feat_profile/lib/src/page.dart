@@ -94,8 +94,10 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     onTap: () async {
                       await store.deleteUser();
-                      await Navigator.of(context)
-                          .pushReplacementNamed('/splash');
+                      await Navigator.of(
+                        context,
+                        rootNavigator: true,
+                      ).pushReplacementNamed('/splash');
                     },
                   ),
                   ListTile(
@@ -105,8 +107,10 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     onTap: () async {
                       await store.signOut();
-                      await Navigator.of(context)
-                          .pushReplacementNamed('/splash');
+                      await Navigator.of(
+                        context,
+                        rootNavigator: true,
+                      ).pushReplacementNamed('/splash');
                     },
                   ),
                   KsSpace.l(),

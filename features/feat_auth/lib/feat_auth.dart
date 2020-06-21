@@ -1,6 +1,4 @@
 export 'src/auth_storage.dart';
-export 'src/google_sign_in_page.dart';
-export 'src/google_sign_in_store.dart';
 export 'src/login_page.dart';
 export 'src/login_store.dart';
 export 'src/models/token.dart';

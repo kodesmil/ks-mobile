@@ -12,7 +12,7 @@ class KsProgressIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       constraints: BoxConstraints.expand(),
-      color: Colors.white,
+      color: Theme.of(context).colorScheme.background,
       child: Center(
         child: ColorLoader3(),
       ),

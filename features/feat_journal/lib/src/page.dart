@@ -1,12 +1,12 @@
 import 'package:feat_health/feat_health.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:infinite_listview/infinite_listview.dart';
 import 'package:intl/intl.dart';
 import 'package:lib_lego/lib_lego.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:linked_scroll_controller/linked_scroll_controller.dart';
+import 'package:indexed_list_view/indexed_list_view.dart';
 
 import 'widgets/day.dart';
 
@@ -18,8 +18,8 @@ class JournalPage extends StatefulWidget {
 class _JournalPageState extends State<JournalPage> {
   @override
   void didChangeDependencies() {
-    final store = Provider.of<MenstruationStore>(context);
-    store.fetchPeriodEntries();
+    final store = Provider.of<MenstruationDailyEntryStore>(context);
+    store.list();
     super.didChangeDependencies();
   }
 
@@ -44,9 +44,11 @@ class _DayWidget extends StatefulWidget {
   __DayWidgetState createState() => __DayWidgetState();
 }
 
+const kPageViewOffset = 1000;
+
 class __DayWidgetState extends State<_DayWidget> {
-  InfiniteScrollController _infiniteController;
-  InfiniteScrollController _infiniteController2;
+  PageController _infiniteController;
+  IndexedScrollController _infiniteController2;
 
   LinkedScrollControllerGroup _controllers;
   double weekSize;
@@ -54,38 +56,40 @@ class __DayWidgetState extends State<_DayWidget> {
   @override
   void didChangeDependencies() {
     weekSize = MediaQuery.of(context).size.width / 7;
-    _infiniteController = InfiniteScrollController();
-    _infiniteController2 = InfiniteScrollController(
-      initialScrollOffset: -3 * weekSize,
+    _infiniteController = PageController(initialPage: kPageViewOffset);
+    _infiniteController2 = IndexedScrollController(
+      initialIndex: kPageViewOffset - 3,
     );
     super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
-    final store = Provider.of<MenstruationStore>(context);
+    final store = Provider.of<MenstruationDailyEntryStore>(context);
     return Column(
       children: [
         Container(
-          height: weekSize * 1.5,
-          child: InfiniteListView.builder(
-            itemExtent: weekSize,
+          height: weekSize * 1.75,
+          child: IndexedListView.builder(
             scrollDirection: Axis.horizontal,
             controller: _infiniteController2,
+            itemExtent: weekSize,
             itemBuilder: (context, index) {
-              final date =
-              DateTime.now().toUtc().add(Duration(days: index)).toLocal();
+              final date = DateTime.now()
+                  .toUtc()
+                  .add(Duration(days: index - kPageViewOffset))
+                  .toLocal();
               final entry = store.entriesByDay[DateFormat.yMd().format(date)];
               return Container(
                 width: weekSize,
                 padding: EdgeInsets.symmetric(
-                  horizontal: 4,
-                  vertical: 8,
+                  horizontal: 5,
+                  vertical: 20,
                 ),
                 child: SingleDay(
                   day: date,
                   entry: entry,
-                  showMonth: true,
+                  showMonth: false,
                   showWeekday: true,
                   interactive: false,
                 ),
@@ -94,15 +98,17 @@ class __DayWidgetState extends State<_DayWidget> {
           ),
         ),
         Expanded(
-          child: InfiniteListView.builder(
-            physics: PageScrollPhysics(),
+          child: PageView.builder(
             scrollDirection: Axis.horizontal,
             controller: _infiniteController,
+            onPageChanged: (page) {
+              _infiniteController2.animateToIndex((page - 3));
+            },
             itemBuilder: (context, index) {
               return Container(
                 width: MediaQuery.of(context).size.width,
                 child: SingleJournalPage(
-                  index: index,
+                  index: index - kPageViewOffset,
                 ),
               );
             },
