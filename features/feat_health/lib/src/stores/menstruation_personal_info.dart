@@ -27,10 +27,10 @@ abstract class _MenstruationPersonalInfoStore with Store {
   @action
   Future read() async {
     loadingStore.loading = true;
-    final request = ReadHealthMenstruationPersonalInfoRequest();
+    final request = ListHealthMenstruationPersonalInfoRequest();
     try {
-      final response = await client.readHealthMenstruationPersonalInfo(request);
-      personalInfo = response.result;
+      final response = await client.listHealthMenstruationPersonalInfo(request);
+      personalInfo = response.results?.first;
       loadingStore.success = true;
     } catch (e) {
       loadingStore.loading = false;
