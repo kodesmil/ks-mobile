@@ -95,12 +95,7 @@ abstract class _LoginStore with Store {
       success = true;
       errorStore.showError = false;
     } catch (e) {
-      loading = false;
-      success = false;
-      errorStore.showError = true;
-      errorStore.errorMessage = e.toString().contains('ERROR_USER_NOT_FOUND')
-          ? 'Username and password doesn\'t match'
-          : 'Something went wrong, please check your internet connection and try again';
+      print("------");
       print(e);
     }
   }
@@ -122,12 +117,7 @@ abstract class _LoginStore with Store {
       success = true;
       errorStore.showError = false;
     } catch (e) {
-      loading = false;
-      success = false;
-      errorStore.showError = true;
-      errorStore.errorMessage = e.toString().contains('ERROR_USER_NOT_FOUND')
-          ? 'Username and password does not match'
-          : 'Something went wrong, please check your internet connection and try again';
+      print("---------");
       print(e);
     }
   }

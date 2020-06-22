@@ -78,3 +78,5 @@ android/app/ably-release.keystore
 .env
 /android/app/ably.keystore
 /android/app/google-services.json
+
+web/js/config.js

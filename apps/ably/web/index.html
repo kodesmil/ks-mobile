@@ -1,10 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>ably</title>
+    <meta charset="UTF-8">
+    <title>Swanly Care</title>
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="description" content="Swanly - Manage your health">
+
+    <!-- STEP 3: ADD YOUR CLIENT ID -->
+    <meta name="google-signin-client_id"
+          content="1024113237937-0ntbmkgid38pb11b8t4cll474mlahst6.apps.googleusercontent.com">
+
+    <!-- iOS meta tags & icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="flutter_web_firebase_googe_auth">
+    <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+
+    <title>flutter_web_firebase_googe_auth</title>
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
-  <script src="main.dart.js" type="application/javascript"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-analytics.js"></script>
+<script defer src="./js/config.js"></script>
+<script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('flutter_service_worker.js');
+      });
+    }
+</script>
+<script src="main.dart.js" type="application/javascript"></script>
 </body>
 </html>

@@ -17,15 +17,7 @@ void realMain() async {
     fallbackLocale: 'en_US',
     supportedLocales: ['en_US', 'nb_NO', 'pl_PL', 'te_IN', 'hi_IN'],
   );
-  Crashlytics.instance.enableInDevMode = true;
-  FlutterError.onError = Crashlytics.instance.recordFlutterError;
-  runZoned(
-    () {
-      WidgetsFlutterBinding.ensureInitialized();
-      runApp(LocalizedApp(delegate, MyApp()));
-    },
-    onError: Crashlytics.instance.recordError,
-  );
+  runApp(LocalizedApp(delegate, MyApp()));
 }
 
 class MyApp extends StatefulWidget {
