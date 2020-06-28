@@ -19,6 +19,8 @@ dependencies:
   uuid: ^2.0.4
   more: ^2.3.1
 
+  feat_ion:
+    path: ../feat_ion
   feat_auth:
     path: ../feat_auth
   lib_shared:

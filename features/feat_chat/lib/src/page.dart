@@ -2,7 +2,9 @@ import 'package:feat_chat/feat_chat.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_ion/flutter_ion.dart';
 import 'package:intl/intl.dart';
+import 'package:feat_ion/feat_ion.dart';
 import 'package:lib_lego/lib_lego.dart';
 import 'package:lib_services/lib_services.dart';
 import 'package:provider/provider.dart';
@@ -57,6 +59,9 @@ class _ChatPageState extends State<ChatPage> {
                 },
                 childCount: store.rooms.length,
               ),
+            ),
+            SliverFillRemaining(
+              child: ConnectToVideoButton(),
             )
           ],
         ),

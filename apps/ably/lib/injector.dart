@@ -1,5 +1,6 @@
 import 'package:feat_auth/feat_auth.dart';
 import 'package:feat_chat/feat_chat.dart';
+import 'package:feat_ion/feat_ion.dart';
 import 'package:feat_feed/feat_feed.dart';
 import 'package:feat_journal/feat_journal.dart';
 import 'package:feat_health/feat_health.dart';
@@ -50,6 +51,9 @@ class _AppInjectorState extends State<AppInjector> {
           update: (_, __) => StorageStore(
             ErrorStore(),
           ),
+        ),
+        ProxyProvider0(
+          update: (_, __) => IonHelper(),
         ),
         ProxyProvider<FirebaseAuth, UserStore>(
           update: (_, dep, old) {
