@@ -9,13 +9,13 @@ class IonHelper extends EventEmitter {
 
   get roomId => _rid;
 
-  connect(String host) async {
+  Future connect(String host, Function onConnected) async {
     if (_client == null) {
-      var url = 'http://$host:8443/ws';
+      var url = 'https://$host/ws';
       _client = Client(url);
 
       _client.on('transport-open', () {
-        this.emit('transport-open');
+        onConnected(true);
       });
     }
     await _client.connect();

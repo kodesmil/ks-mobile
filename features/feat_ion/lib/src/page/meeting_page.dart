@@ -31,7 +31,7 @@ class _MeetingPageState extends State<MeetingPage> {
 
   init() async {
     prefs = await SharedPreferences.getInstance();
-    final helper = Provider.of<IonHelper>(context);
+    final helper = Provider.of<IonHelper>(context, listen: false);
     var client = helper.client;
 
     client.on('peer-join', (rid, id, info) async {
@@ -100,7 +100,7 @@ class _MeetingPageState extends State<MeetingPage> {
   }
 
   _cleanUp() async {
-    final helper = Provider.of<IonHelper>(context);
+    final helper = Provider.of<IonHelper>(context, listen: false);
     var rid = helper.roomId;
     var client = helper.client;
 
@@ -179,12 +179,13 @@ class _MeetingPageState extends State<MeetingPage> {
   }
 
   List<Widget> _buildVideoViews() {
-    List<Widget> views = List<Widget>();
-    if (_remoteVideos.length > 1)
+    var views = <Widget>[];
+    if (_remoteVideos.length > 1) {
       _remoteVideos.getRange(1, _remoteVideos.length).forEach((adapter) {
         adapter.objectFit = RTCVideoViewObjectFit.RTCVideoViewObjectFitCover;
         views.add(_buildVideo(adapter));
       });
+    }
     return views;
   }
 
@@ -430,7 +431,7 @@ class _MeetingPageState extends State<MeetingPage> {
 
   @override
   Widget build(BuildContext context) {
-    final helper = Provider.of<IonHelper>(context);
+    final helper = Provider.of<IonHelper>(context, listen: false);
     return OrientationBuilder(builder: (context, orientation) {
       return SafeArea(
         child: Scaffold(
