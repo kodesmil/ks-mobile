@@ -122,7 +122,7 @@ class _MeetingPageState extends State<MeetingPage> {
     this.setState(() {});
     _remoteVideos.clear();
     await helper.close();
-    Navigator.of(context).pop();
+    Navigator.of(context, rootNavigator: true).pop();
   }
 
   Widget buildVideoView(VideoRendererAdapter adapter) {
