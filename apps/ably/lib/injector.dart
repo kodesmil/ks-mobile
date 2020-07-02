@@ -30,7 +30,7 @@ class AppInjector extends StatefulWidget {
 
 class _AppInjectorState extends State<AppInjector> {
   final channel = ClientChannel(
-    'grpc-clinic.qa.api.kodesmil.com',
+    'swanly.qa.api.kodesmil.com',
     port: 443,
     options: const ChannelOptions(
       credentials: ChannelCredentials.secure(),
