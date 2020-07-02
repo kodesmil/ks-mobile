@@ -6,8 +6,6 @@ import 'package:provider/provider.dart';
 import '../widget/video_render_adapter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'chat_page.dart';
-
 class MeetingPage extends StatefulWidget {
   @override
   _MeetingPageState createState() => _MeetingPageState();
@@ -48,7 +46,7 @@ class _MeetingPageState extends State<MeetingPage> {
       var stream = await client.subscribe(rid, mid, tracks, bandwidth);
       var adapter = VideoRendererAdapter(stream.mid, stream, false, mid);
       await adapter.setupSrcObject();
-      this.setState(() {
+      setState(() {
         _remoteVideos.add(adapter);
       });
       this._showSnackBar(":::stream-add [$mid]:::");
@@ -68,7 +66,7 @@ class _MeetingPageState extends State<MeetingPage> {
     client.on('broadcast', (rid, uid, info) async {
       print('message: ' + info.toString());
       _messages.add({"name": info['senderName'], "text": info['msg']});
-      this.setState(() {
+      setState(() {
         _messages = _messages;
       });
     });
@@ -86,7 +84,7 @@ class _MeetingPageState extends State<MeetingPage> {
         var localStream = stream.stream;
         MediaStreamTrack audioTrack = localStream.getAudioTracks()[0];
         audioTrack.enableSpeakerphone(true);
-        this.setState(() {
+        setState(() {
           _localVideo = adapter;
         });
       });
@@ -134,11 +132,12 @@ class _MeetingPageState extends State<MeetingPage> {
   }
 
   Widget _buildMainVideo() {
-    if (_remoteVideos.length == 0)
+    if (_remoteVideos.isEmpty) {
       return Image.asset(
         'assets/images/loading.jpeg',
         fit: BoxFit.cover,
       );
+    }
 
     var adapter = _remoteVideos[0];
     return GestureDetector(
@@ -222,12 +221,12 @@ class _MeetingPageState extends State<MeetingPage> {
 
   //Switch speaker/earpiece
   _switchSpeaker() {
-    this.setState(() {
+    setState(() {
       _speakerOn = !_speakerOn;
       MediaStreamTrack audioTrack = _localVideo.stream.getAudioTracks()[0];
       audioTrack.enableSpeakerphone(_speakerOn);
       _showSnackBar(
-          ":::Switch to " + (_speakerOn ? "speaker" : "earpiece") + ":::");
+          ":::Switch to " + (_speakerOn ? 'speaker' : 'earpiece') + ":::");
     });
   }
 
@@ -236,7 +235,7 @@ class _MeetingPageState extends State<MeetingPage> {
     if (_localVideo != null && _localVideo.stream.getVideoTracks().length > 0) {
       _localVideo.stream.getVideoTracks()[0].switchCamera();
     } else {
-      _showSnackBar(":::Unable to switch the camera:::");
+      _showSnackBar(':::Unable to switch the camera:::');
     }
   }
 
@@ -275,18 +274,18 @@ class _MeetingPageState extends State<MeetingPage> {
     showDialog(
         context: context,
         builder: (_) => AlertDialog(
-                title: Text("Hangup"),
-                content: Text("Are you sure to leave the room?"),
+                title: Text('Hangup'),
+                content: Text('Are you sure to leave the room?'),
                 actions: <Widget>[
                   FlatButton(
-                    child: Text("Cancel"),
+                    child: Text('Cancel'),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                   ),
                   FlatButton(
                     child: Text(
-                      "Hangup",
+                      'Hangup',
                       style: TextStyle(color: Colors.red),
                     ),
                     onPressed: () {
@@ -350,7 +349,7 @@ class _MeetingPageState extends State<MeetingPage> {
           ),
           child: Icon(
             MaterialCommunityIcons.getIconData(
-                _cameraOff ? "video-off" : "video"),
+                _cameraOff ? 'video-off' : 'video'),
             color: _cameraOff ? Colors.red : Colors.white,
           ),
           onPressed: _turnCamera,
@@ -367,7 +366,7 @@ class _MeetingPageState extends State<MeetingPage> {
             ),
           ),
           child: Icon(
-            MaterialCommunityIcons.getIconData("video-switch"),
+            MaterialCommunityIcons.getIconData('video-switch'),
             color: Colors.white,
           ),
           onPressed: _switchCamera,
@@ -385,7 +384,8 @@ class _MeetingPageState extends State<MeetingPage> {
           ),
           child: Icon(
             MaterialCommunityIcons.getIconData(
-                _microphoneOff ? "microphone-off" : "microphone"),
+              _microphoneOff ? 'microphone-off' : 'microphone',
+            ),
             color: _microphoneOff ? Colors.red : Colors.white,
           ),
           onPressed: _turnMicrophone,
@@ -403,7 +403,8 @@ class _MeetingPageState extends State<MeetingPage> {
           ),
           child: Icon(
             MaterialIcons.getIconData(
-                _speakerOn ? "volume-up" : "speaker-phone"),
+              _speakerOn ? 'volume-up' : 'speaker-phone',
+            ),
             color: Colors.white,
           ),
           onPressed: _switchSpeaker,
@@ -420,7 +421,7 @@ class _MeetingPageState extends State<MeetingPage> {
             ),
           ),
           child: Icon(
-            MaterialCommunityIcons.getIconData("phone-hangup"),
+            MaterialCommunityIcons.getIconData('phone-hangup'),
             color: Colors.red,
           ),
           onPressed: _hangUp,
@@ -483,9 +484,7 @@ class _MeetingPageState extends State<MeetingPage> {
                           ),
                         ),
                       ),
-                      (_remoteVideos.length == 0)
-                          ? _buildLoading()
-                          : Container(),
+                      (_remoteVideos.isEmpty) ? _buildLoading() : Container(),
                       Positioned(
                         left: 0,
                         right: 0,
@@ -529,47 +528,13 @@ class _MeetingPageState extends State<MeetingPage> {
                               margin: EdgeInsets.all(0.0),
                               child: Center(
                                 child: Text(
-                                  'Ion Flutter Demo',
+                                  '',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 18.0,
                                   ),
                                 ),
                               ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                IconButton(
-                                  icon: Icon(
-                                    Icons.people,
-                                    size: 28.0,
-                                    color: Colors.white,
-                                  ),
-                                  onPressed: () {},
-                                ),
-                                //Chat message
-                                IconButton(
-                                  icon: Icon(
-                                    Icons.chat_bubble_outline,
-                                    size: 28.0,
-                                    color: Colors.white,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => ChatPage(
-                                            helper.client,
-                                            this._messages,
-                                            this.name,
-                                            this.room),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ],
                             ),
                           ],
                         ),

@@ -1,6 +1,7 @@
 import 'package:feat_chat/feat_chat.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_ion/flutter_ion.dart';
 import 'package:intl/intl.dart';
@@ -60,9 +61,14 @@ class _ChatPageState extends State<ChatPage> {
                 childCount: store.rooms.length,
               ),
             ),
-            SliverFillRemaining(
-              child: ConnectToVideoButton(),
-            )
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 15),
+                child: Center(
+                  child: ConnectToVideoButton(),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -217,7 +223,7 @@ class OverlappedImages extends StatelessWidget {
   }
 }
 
-class MyListTile extends StatelessWidget {
+class MyListTile extends StatefulWidget {
   final String text;
   final String subtitle;
   final bool left;
@@ -236,134 +242,144 @@ class MyListTile extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _MyListTileState createState() => _MyListTileState();
+}
+
+class _MyListTileState extends State<MyListTile> {
+  bool showDetails = false;
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-        top: info.place == ChatMessagePlace.FIRST ||
-                info.place == ChatMessagePlace.LAST_SINGLE
+        top: widget.info.place == ChatMessagePlace.FIRST ||
+                widget.info.place == ChatMessagePlace.LAST_SINGLE
             ? 10
             : 0,
-        bottom: info.place == ChatMessagePlace.LAST_SINGLE ||
-                info.place == ChatMessagePlace.LAST
+        bottom: widget.info.place == ChatMessagePlace.LAST_SINGLE ||
+                widget.info.place == ChatMessagePlace.LAST
             ? 10
             : 0,
         right: 15,
         left: 15,
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Center(
-            child: Visibility(
-              visible: info.isFirstMessageOfDay,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 20, top: 40),
-                child: Text(
-                  DateFormat.yMMMMEEEEd().format(
-                    info.message.createdAt.toDateTime(),
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            showDetails = !showDetails;
+          });
+        },
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment:
+                  widget.left ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+              children: <Widget>[
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  margin: widget.left
+                      ? const EdgeInsets.only(left: 10, top: 5)
+                      : const EdgeInsets.only(top: 5),
+                  padding: widget.left
+                      ? EdgeInsets.only(
+                          left: 15,
+                          right: 20,
+                          top: 10,
+                          bottom: 10,
+                        )
+                      : EdgeInsets.only(
+                          left: 20,
+                          right: 15,
+                          top: 10,
+                          bottom: 10,
+                        ),
+                  decoration: BoxDecoration(
+                    borderRadius: calculateBorderRadius(widget.left, widget.info.place),
+                    color: widget.left
+                        ? Theme.of(context).colorScheme.secondary.withAlpha(64)
+                        : Theme.of(context).colorScheme.primary.withAlpha(16),
+                  ),
+                  child: Text(
+                    widget.text,
+                    style: Theme.of(context).textTheme.bodyText2,
                   ),
                 ),
-              ),
-            ),
-          ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment:
-                left ? CrossAxisAlignment.start : CrossAxisAlignment.end,
-            children: <Widget>[
-              Container(
-                width: MediaQuery.of(context).size.width * 0.6,
-                margin: left
-                    ? const EdgeInsets.only(left: 10, top: 5)
-                    : const EdgeInsets.only(top: 5),
-                padding: left
-                    ? EdgeInsets.only(
-                        left: 15,
-                        right: 20,
-                        top: 10,
-                        bottom: 10,
-                      )
-                    : EdgeInsets.only(
-                        left: 20,
-                        right: 15,
-                        top: 10,
-                        bottom: 10,
-                      ),
-                decoration: BoxDecoration(
-                  borderRadius: calculateBorderRadius(left, info.place),
-                  color: left
-                      ? Theme.of(context).colorScheme.secondary.withAlpha(64)
-                      : Theme.of(context).colorScheme.primary.withAlpha(16),
-                ),
-                child: Text(
-                  text,
-                  style: Theme.of(context).textTheme.bodyText2,
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomLeft,
-                child: Visibility(
-                  visible: left &&
-                      (info.place == ChatMessagePlace.LAST ||
-                          info.place == ChatMessagePlace.LAST_SINGLE),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 10, bottom: 10),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        KsCircleAvatar(
-                          size: 25,
-                          image: message.author.profile.profilePictureUrl,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 5),
-                          child: Text(
-                            subtitle,
-                            style: Theme.of(context).textTheme.caption,
+                Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Visibility(
+                    visible: widget.left &&
+                        (widget.info.place == ChatMessagePlace.LAST ||
+                            widget.info.place == ChatMessagePlace.LAST_SINGLE),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 10, bottom: 10),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          KsCircleAvatar(
+                            size: 25,
+                            image: widget.message.author.profile.profilePictureUrl,
                           ),
-                        ),
-                      ],
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5),
+                            child: Text(
+                              widget.subtitle,
+                              style: Theme.of(context).textTheme.caption,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          Visibility(
-            visible: info.status == ChatMessageStatus.NOT_DELIVERED,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 10, top: 10),
-              child: Icon(
-                Icons.radio_button_unchecked,
-                size: 15,
-                color: Colors.black26,
+                Visibility(
+                  visible: showDetails,
+                  child: Text(
+                    DateFormat.yMMMEd().add_Hm().format(
+                      widget.info.message.createdAt.toDateTime(),
+                    ),
+                    style: Theme.of(context).textTheme.caption,
+                  ),
+                ),
+              ],
+            ),
+            Visibility(
+              visible: widget.info.status == ChatMessageStatus.NOT_DELIVERED,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 10, top: 10),
+                child: Icon(
+                  Icons.radio_button_unchecked,
+                  size: 15,
+                  color: Colors.black26,
+                ),
               ),
             ),
-          ),
-          Visibility(
-            visible: info.status == ChatMessageStatus.DELIVERED,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 10, top: 10),
-              child: Icon(
-                Icons.radio_button_checked,
-                size: 15,
-                color: Colors.black26,
+            Visibility(
+              visible: widget.info.status == ChatMessageStatus.DELIVERED,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 10, top: 10),
+                child: Icon(
+                  Icons.radio_button_checked,
+                  size: 15,
+                  color: Colors.black26,
+                ),
               ),
             ),
-          ),
-          Visibility(
-            visible: info.seenBy.isNotEmpty,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: OverlappedImages(
-                profiles: info.seenBy,
-                imageSize: 15,
-                overlapSize: 5,
+            Visibility(
+              visible: widget.info.seenBy.isNotEmpty,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: OverlappedImages(
+                  profiles: widget.info.seenBy,
+                  imageSize: 15,
+                  overlapSize: 5,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

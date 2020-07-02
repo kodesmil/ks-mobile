@@ -23,7 +23,7 @@ class _ConnectToVideoButtonState extends State<ConnectToVideoButton> {
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
+    return OutlineButton(
       child: Text('Video Call'),
       onPressed: () async {
         return await handleJoin();

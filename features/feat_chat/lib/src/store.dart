@@ -119,6 +119,7 @@ abstract class _ChatStore with Store {
     });
 
     selectedMessages
+        .where((element) => element.createdAt != null)
         .groupBy((m) => DateFormat.yMd().format(m.createdAt.toDateTime()))
         .forEach((element) {
       final firstMessage = element.values?.first;
