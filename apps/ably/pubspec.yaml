@@ -58,6 +58,8 @@ dependencies:
     path: ../../features/feat_health
   feat_notifications:
     path: ../../features/feat_notifications
+  feat_services:
+    path: ../../features/feat_services
   feat_feed:
     path: ../../features/feat_feed
   lib_shared:

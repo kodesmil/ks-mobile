@@ -9,15 +9,15 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../infobloxopen/atlas-app-toolkit/rpc/resource/resource.pb.dart' as $7;
-import '../../../google/protobuf/timestamp.pb.dart' as $9;
-import '../../infobloxopen/atlas-app-toolkit/query/collection_operators.pb.dart' as $8;
+import '../../infobloxopen/atlas-app-toolkit/rpc/resource/resource.pb.dart' as $8;
+import '../../../google/protobuf/timestamp.pb.dart' as $10;
+import '../../infobloxopen/atlas-app-toolkit/query/collection_operators.pb.dart' as $9;
 
 class NotificationSetting extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('NotificationSetting', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$7.Identifier>(1, 'id', subBuilder: $7.Identifier.create)
-    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
-    ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$8.Identifier>(1, 'id', subBuilder: $8.Identifier.create)
+    ..aOM<$10.Timestamp>(2, 'createdAt', subBuilder: $10.Timestamp.create)
+    ..aOM<$10.Timestamp>(3, 'updatedAt', subBuilder: $10.Timestamp.create)
     ..aOB(4, 'enableNotifications')
     ..aOB(5, 'enableJournalReminder')
     ..aOS(6, 'cronJournalReminder')
@@ -40,37 +40,37 @@ class NotificationSetting extends $pb.GeneratedMessage {
   static NotificationSetting _defaultInstance;
 
   @$pb.TagNumber(1)
-  $7.Identifier get id => $_getN(0);
+  $8.Identifier get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($7.Identifier v) { setField(1, v); }
+  set id($8.Identifier v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $7.Identifier ensureId() => $_ensure(0);
+  $8.Identifier ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $9.Timestamp get createdAt => $_getN(1);
+  $10.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set createdAt($9.Timestamp v) { setField(2, v); }
+  set createdAt($10.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreatedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $9.Timestamp ensureCreatedAt() => $_ensure(1);
+  $10.Timestamp ensureCreatedAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $9.Timestamp get updatedAt => $_getN(2);
+  $10.Timestamp get updatedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set updatedAt($9.Timestamp v) { setField(3, v); }
+  set updatedAt($10.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasUpdatedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpdatedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $9.Timestamp ensureUpdatedAt() => $_ensure(2);
+  $10.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
   $core.bool get enableNotifications => $_getBF(3);
@@ -168,7 +168,7 @@ class CreateNotificationSettingResponse extends $pb.GeneratedMessage {
 
 class ReadNotificationSettingRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ReadNotificationSettingRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$7.Identifier>(1, 'id', subBuilder: $7.Identifier.create)
+    ..aOM<$8.Identifier>(1, 'id', subBuilder: $8.Identifier.create)
     ..hasRequiredFields = false
   ;
 
@@ -188,15 +188,15 @@ class ReadNotificationSettingRequest extends $pb.GeneratedMessage {
   static ReadNotificationSettingRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $7.Identifier get id => $_getN(0);
+  $8.Identifier get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($7.Identifier v) { setField(1, v); }
+  set id($8.Identifier v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $7.Identifier ensureId() => $_ensure(0);
+  $8.Identifier ensureId() => $_ensure(0);
 }
 
 class ReadNotificationSettingResponse extends $pb.GeneratedMessage {
@@ -300,7 +300,7 @@ class UpdateNotificationSettingResponse extends $pb.GeneratedMessage {
 
 class DeleteNotificationSettingRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteNotificationSettingRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$7.Identifier>(1, 'id', subBuilder: $7.Identifier.create)
+    ..aOM<$8.Identifier>(1, 'id', subBuilder: $8.Identifier.create)
     ..hasRequiredFields = false
   ;
 
@@ -320,15 +320,15 @@ class DeleteNotificationSettingRequest extends $pb.GeneratedMessage {
   static DeleteNotificationSettingRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $7.Identifier get id => $_getN(0);
+  $8.Identifier get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($7.Identifier v) { setField(1, v); }
+  set id($8.Identifier v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $7.Identifier ensureId() => $_ensure(0);
+  $8.Identifier ensureId() => $_ensure(0);
 }
 
 class DeleteNotificationSettingResponse extends $pb.GeneratedMessage {
@@ -354,10 +354,10 @@ class DeleteNotificationSettingResponse extends $pb.GeneratedMessage {
 
 class ListNotificationSettingRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ListNotificationSettingRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$8.Filtering>(1, 'filter', subBuilder: $8.Filtering.create)
-    ..aOM<$8.Sorting>(2, 'orderBy', subBuilder: $8.Sorting.create)
-    ..aOM<$8.FieldSelection>(3, 'fields', subBuilder: $8.FieldSelection.create)
-    ..aOM<$8.Pagination>(4, 'paging', subBuilder: $8.Pagination.create)
+    ..aOM<$9.Filtering>(1, 'filter', subBuilder: $9.Filtering.create)
+    ..aOM<$9.Sorting>(2, 'orderBy', subBuilder: $9.Sorting.create)
+    ..aOM<$9.FieldSelection>(3, 'fields', subBuilder: $9.FieldSelection.create)
+    ..aOM<$9.Pagination>(4, 'paging', subBuilder: $9.Pagination.create)
     ..hasRequiredFields = false
   ;
 
@@ -377,48 +377,48 @@ class ListNotificationSettingRequest extends $pb.GeneratedMessage {
   static ListNotificationSettingRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $8.Filtering get filter => $_getN(0);
+  $9.Filtering get filter => $_getN(0);
   @$pb.TagNumber(1)
-  set filter($8.Filtering v) { setField(1, v); }
+  set filter($9.Filtering v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasFilter() => $_has(0);
   @$pb.TagNumber(1)
   void clearFilter() => clearField(1);
   @$pb.TagNumber(1)
-  $8.Filtering ensureFilter() => $_ensure(0);
+  $9.Filtering ensureFilter() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $8.Sorting get orderBy => $_getN(1);
+  $9.Sorting get orderBy => $_getN(1);
   @$pb.TagNumber(2)
-  set orderBy($8.Sorting v) { setField(2, v); }
+  set orderBy($9.Sorting v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasOrderBy() => $_has(1);
   @$pb.TagNumber(2)
   void clearOrderBy() => clearField(2);
   @$pb.TagNumber(2)
-  $8.Sorting ensureOrderBy() => $_ensure(1);
+  $9.Sorting ensureOrderBy() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $8.FieldSelection get fields => $_getN(2);
+  $9.FieldSelection get fields => $_getN(2);
   @$pb.TagNumber(3)
-  set fields($8.FieldSelection v) { setField(3, v); }
+  set fields($9.FieldSelection v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasFields() => $_has(2);
   @$pb.TagNumber(3)
   void clearFields() => clearField(3);
   @$pb.TagNumber(3)
-  $8.FieldSelection ensureFields() => $_ensure(2);
+  $9.FieldSelection ensureFields() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $8.Pagination get paging => $_getN(3);
+  $9.Pagination get paging => $_getN(3);
   @$pb.TagNumber(4)
-  set paging($8.Pagination v) { setField(4, v); }
+  set paging($9.Pagination v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasPaging() => $_has(3);
   @$pb.TagNumber(4)
   void clearPaging() => clearField(4);
   @$pb.TagNumber(4)
-  $8.Pagination ensurePaging() => $_ensure(3);
+  $9.Pagination ensurePaging() => $_ensure(3);
 }
 
 class ListNotificationSettingResponse extends $pb.GeneratedMessage {
@@ -448,9 +448,9 @@ class ListNotificationSettingResponse extends $pb.GeneratedMessage {
 
 class NotificationDevice extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('NotificationDevice', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$7.Identifier>(1, 'id', subBuilder: $7.Identifier.create)
-    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
-    ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$8.Identifier>(1, 'id', subBuilder: $8.Identifier.create)
+    ..aOM<$10.Timestamp>(2, 'createdAt', subBuilder: $10.Timestamp.create)
+    ..aOM<$10.Timestamp>(3, 'updatedAt', subBuilder: $10.Timestamp.create)
     ..aOS(4, 'deviceToken')
     ..hasRequiredFields = false
   ;
@@ -471,37 +471,37 @@ class NotificationDevice extends $pb.GeneratedMessage {
   static NotificationDevice _defaultInstance;
 
   @$pb.TagNumber(1)
-  $7.Identifier get id => $_getN(0);
+  $8.Identifier get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($7.Identifier v) { setField(1, v); }
+  set id($8.Identifier v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $7.Identifier ensureId() => $_ensure(0);
+  $8.Identifier ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $9.Timestamp get createdAt => $_getN(1);
+  $10.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set createdAt($9.Timestamp v) { setField(2, v); }
+  set createdAt($10.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreatedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $9.Timestamp ensureCreatedAt() => $_ensure(1);
+  $10.Timestamp ensureCreatedAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $9.Timestamp get updatedAt => $_getN(2);
+  $10.Timestamp get updatedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set updatedAt($9.Timestamp v) { setField(3, v); }
+  set updatedAt($10.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasUpdatedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpdatedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $9.Timestamp ensureUpdatedAt() => $_ensure(2);
+  $10.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
   $core.String get deviceToken => $_getSZ(3);

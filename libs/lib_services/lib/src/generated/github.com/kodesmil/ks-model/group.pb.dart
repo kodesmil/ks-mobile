@@ -9,15 +9,15 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../infobloxopen/atlas-app-toolkit/rpc/resource/resource.pb.dart' as $7;
-import '../../infobloxopen/atlas-app-toolkit/query/collection_operators.pb.dart' as $8;
+import '../../infobloxopen/atlas-app-toolkit/rpc/resource/resource.pb.dart' as $8;
+import '../../infobloxopen/atlas-app-toolkit/query/collection_operators.pb.dart' as $9;
 
 class Group extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('Group', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$7.Identifier>(1, 'id', subBuilder: $7.Identifier.create)
+    ..aOM<$8.Identifier>(1, 'id', subBuilder: $8.Identifier.create)
     ..aOS(2, 'name')
     ..aOS(3, 'notes')
-    ..aOM<$7.Identifier>(4, 'profileId', subBuilder: $7.Identifier.create)
+    ..aOM<$8.Identifier>(4, 'profileId', subBuilder: $8.Identifier.create)
     ..hasRequiredFields = false
   ;
 
@@ -37,15 +37,15 @@ class Group extends $pb.GeneratedMessage {
   static Group _defaultInstance;
 
   @$pb.TagNumber(1)
-  $7.Identifier get id => $_getN(0);
+  $8.Identifier get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($7.Identifier v) { setField(1, v); }
+  set id($8.Identifier v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $7.Identifier ensureId() => $_ensure(0);
+  $8.Identifier ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get name => $_getSZ(1);
@@ -66,15 +66,15 @@ class Group extends $pb.GeneratedMessage {
   void clearNotes() => clearField(3);
 
   @$pb.TagNumber(4)
-  $7.Identifier get profileId => $_getN(3);
+  $8.Identifier get profileId => $_getN(3);
   @$pb.TagNumber(4)
-  set profileId($7.Identifier v) { setField(4, v); }
+  set profileId($8.Identifier v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasProfileId() => $_has(3);
   @$pb.TagNumber(4)
   void clearProfileId() => clearField(4);
   @$pb.TagNumber(4)
-  $7.Identifier ensureProfileId() => $_ensure(3);
+  $8.Identifier ensureProfileId() => $_ensure(3);
 }
 
 class CreateGroupRequest extends $pb.GeneratedMessage {
@@ -145,7 +145,7 @@ class CreateGroupResponse extends $pb.GeneratedMessage {
 
 class ReadGroupRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ReadGroupRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$7.Identifier>(1, 'id', subBuilder: $7.Identifier.create)
+    ..aOM<$8.Identifier>(1, 'id', subBuilder: $8.Identifier.create)
     ..hasRequiredFields = false
   ;
 
@@ -165,15 +165,15 @@ class ReadGroupRequest extends $pb.GeneratedMessage {
   static ReadGroupRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $7.Identifier get id => $_getN(0);
+  $8.Identifier get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($7.Identifier v) { setField(1, v); }
+  set id($8.Identifier v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $7.Identifier ensureId() => $_ensure(0);
+  $8.Identifier ensureId() => $_ensure(0);
 }
 
 class ReadGroupResponse extends $pb.GeneratedMessage {
@@ -277,7 +277,7 @@ class UpdateGroupResponse extends $pb.GeneratedMessage {
 
 class DeleteGroupRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteGroupRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$7.Identifier>(1, 'id', subBuilder: $7.Identifier.create)
+    ..aOM<$8.Identifier>(1, 'id', subBuilder: $8.Identifier.create)
     ..hasRequiredFields = false
   ;
 
@@ -297,15 +297,15 @@ class DeleteGroupRequest extends $pb.GeneratedMessage {
   static DeleteGroupRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $7.Identifier get id => $_getN(0);
+  $8.Identifier get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($7.Identifier v) { setField(1, v); }
+  set id($8.Identifier v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $7.Identifier ensureId() => $_ensure(0);
+  $8.Identifier ensureId() => $_ensure(0);
 }
 
 class DeleteGroupResponse extends $pb.GeneratedMessage {
@@ -331,10 +331,10 @@ class DeleteGroupResponse extends $pb.GeneratedMessage {
 
 class ListGroupRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ListGroupRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$8.Filtering>(1, 'filter', subBuilder: $8.Filtering.create)
-    ..aOM<$8.Sorting>(2, 'orderBy', subBuilder: $8.Sorting.create)
-    ..aOM<$8.FieldSelection>(3, 'fields', subBuilder: $8.FieldSelection.create)
-    ..aOM<$8.Pagination>(4, 'paging', subBuilder: $8.Pagination.create)
+    ..aOM<$9.Filtering>(1, 'filter', subBuilder: $9.Filtering.create)
+    ..aOM<$9.Sorting>(2, 'orderBy', subBuilder: $9.Sorting.create)
+    ..aOM<$9.FieldSelection>(3, 'fields', subBuilder: $9.FieldSelection.create)
+    ..aOM<$9.Pagination>(4, 'paging', subBuilder: $9.Pagination.create)
     ..hasRequiredFields = false
   ;
 
@@ -354,48 +354,48 @@ class ListGroupRequest extends $pb.GeneratedMessage {
   static ListGroupRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $8.Filtering get filter => $_getN(0);
+  $9.Filtering get filter => $_getN(0);
   @$pb.TagNumber(1)
-  set filter($8.Filtering v) { setField(1, v); }
+  set filter($9.Filtering v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasFilter() => $_has(0);
   @$pb.TagNumber(1)
   void clearFilter() => clearField(1);
   @$pb.TagNumber(1)
-  $8.Filtering ensureFilter() => $_ensure(0);
+  $9.Filtering ensureFilter() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $8.Sorting get orderBy => $_getN(1);
+  $9.Sorting get orderBy => $_getN(1);
   @$pb.TagNumber(2)
-  set orderBy($8.Sorting v) { setField(2, v); }
+  set orderBy($9.Sorting v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasOrderBy() => $_has(1);
   @$pb.TagNumber(2)
   void clearOrderBy() => clearField(2);
   @$pb.TagNumber(2)
-  $8.Sorting ensureOrderBy() => $_ensure(1);
+  $9.Sorting ensureOrderBy() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $8.FieldSelection get fields => $_getN(2);
+  $9.FieldSelection get fields => $_getN(2);
   @$pb.TagNumber(3)
-  set fields($8.FieldSelection v) { setField(3, v); }
+  set fields($9.FieldSelection v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasFields() => $_has(2);
   @$pb.TagNumber(3)
   void clearFields() => clearField(3);
   @$pb.TagNumber(3)
-  $8.FieldSelection ensureFields() => $_ensure(2);
+  $9.FieldSelection ensureFields() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $8.Pagination get paging => $_getN(3);
+  $9.Pagination get paging => $_getN(3);
   @$pb.TagNumber(4)
-  set paging($8.Pagination v) { setField(4, v); }
+  set paging($9.Pagination v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasPaging() => $_has(3);
   @$pb.TagNumber(4)
   void clearPaging() => clearField(4);
   @$pb.TagNumber(4)
-  $8.Pagination ensurePaging() => $_ensure(3);
+  $9.Pagination ensurePaging() => $_ensure(3);
 }
 
 class ListGroupResponse extends $pb.GeneratedMessage {

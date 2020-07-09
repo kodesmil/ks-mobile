@@ -16,6 +16,7 @@ import 'package:grpc/grpc.dart';
 import 'package:lib_shared/lib_shared.dart';
 import 'package:lib_lego/lib_lego.dart';
 import 'package:lib_services/lib_services.dart';
+import 'package:feat_services/feat_services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -125,6 +126,12 @@ class _AppInjectorState extends State<AppInjector> {
             options: dep,
           ),
         ),
+        ProxyProvider<CallOptions, ServicesClient>(
+          update: (_, dep, __) => ServicesClient(
+            channel,
+            options: dep,
+          ),
+        ),
         ProxyProvider<CallOptions, ProfilesClient>(
           update: (_, dep, __) => ProfilesClient(
             channel,
@@ -202,6 +209,69 @@ class _AppInjectorState extends State<AppInjector> {
         ),
         ProxyProvider<HealthClient, MenstruationDailyEntryStore>(
           update: (_, dep, __) => MenstruationDailyEntryStore(
+            ErrorStore(),
+            LoadingStore(),
+            dep,
+          ),
+        ),
+        ProxyProvider<HealthClient, MenstruationPersonalInfoStore>(
+          update: (_, dep, __) => MenstruationPersonalInfoStore(
+            ErrorStore(),
+            LoadingStore(),
+            dep,
+          ),
+        ),
+        ProxyProvider<ServicesClient, ServiceApplicationStore>(
+          update: (_, dep, __) => ServiceApplicationStore(
+            ErrorStore(),
+            LoadingStore(),
+            dep,
+          ),
+        ),
+        ProxyProvider<ServicesClient, ServiceSessionStore>(
+          update: (_, dep, __) => ServiceSessionStore(
+            ErrorStore(),
+            LoadingStore(),
+            dep,
+          ),
+        ),
+        ProxyProvider<ServicesClient, ServiceProviderStore>(
+          update: (_, dep, __) => ServiceProviderStore(
+            ErrorStore(),
+            LoadingStore(),
+            dep,
+          ),
+        ),
+        ProxyProvider<ServicesClient, ServiceTagStore>(
+          update: (_, dep, __) => ServiceTagStore(
+            ErrorStore(),
+            LoadingStore(),
+            dep,
+          ),
+        ),
+        ProxyProvider<ServicesClient, ServiceOfferStore>(
+          update: (_, dep, __) => ServiceOfferStore(
+            ErrorStore(),
+            LoadingStore(),
+            dep,
+          ),
+        ),
+        ProxyProvider<ServicesClient, ServiceStore>(
+          update: (_, dep, __) => ServiceStore(
+            ErrorStore(),
+            LoadingStore(),
+            dep,
+          ),
+        ),
+        ProxyProvider<ServicesClient, ServiceApplicationFileStore>(
+          update: (_, dep, __) => ServiceApplicationFileStore(
+            ErrorStore(),
+            LoadingStore(),
+            dep,
+          ),
+        ),
+        ProxyProvider<ServicesClient, ServiceInPersonStore>(
+          update: (_, dep, __) => ServiceInPersonStore(
             ErrorStore(),
             LoadingStore(),
             dep,
