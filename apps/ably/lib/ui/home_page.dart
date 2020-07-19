@@ -16,12 +16,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  @override
-  void didChangeDependencies() {
-    final store = Provider.of<FeedStore>(context);
-    store.fetchArticles('');
-    super.didChangeDependencies();
-  }
 
   @override
   Widget build(BuildContext context) {

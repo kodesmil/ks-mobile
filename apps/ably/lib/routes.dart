@@ -1,6 +1,7 @@
 import 'package:ably/ui/home_page.dart';
 import 'package:feat_auth/feat_auth.dart';
 import 'package:feat_onboarding/feat_onboarding.dart';
+import 'package:feat_services/feat_services.dart';
 import 'package:feat_splash/feat_splash.dart';
 import 'package:feat_ion/feat_ion.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -35,8 +36,10 @@ class Routes {
     },
     '/login': (BuildContext context) => LoginPage(),
     '/sign-up': (BuildContext context) => SignUpPage(),
-    '/home': (BuildContext context) => HomePage(),
+    '/home': (BuildContext context) => ServiceApplicationPage(),
     '/onboarding': (BuildContext context) => OnboardingPage(),
     '/meeting': (context) => MeetingPage(),
+    '/services': (context) => ServicePage(),
+    '/services/applications': (context) => ServiceApplicationPage(),
   };
 }

@@ -13,14 +13,17 @@ abstract class _ServiceStore with Store {
 
   ServicesClient client;
 
+  @observable
+  Service service;
+
+  @observable
+  List<Service> services = [];
+
   _ServiceStore(
     this.errorStore,
     this.loadingStore,
     this.client,
   );
-
-  @observable
-  List<Service> services = [];
 
   @action
   Future fetch(String tagKey) async {
@@ -28,5 +31,13 @@ abstract class _ServiceStore with Store {
     final response = await client.listService(request);
     loadingStore.success = true;
     services = response.results;
+  }
+
+  @action
+  Future create() async {
+    final request = CreateServiceRequest();
+    final response = await client.createService(request);
+    loadingStore.success = true;
+    service = response.result;
   }
 }

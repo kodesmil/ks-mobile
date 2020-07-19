@@ -9,33 +9,55 @@ part of 'store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ServiceApplicationStore on _ServiceApplicationStore, Store {
-  final _$ServiceApplicationAtom =
-      Atom(name: '_ServiceApplicationStore.ServiceApplication');
+  final _$subjectsAtom = Atom(name: '_ServiceApplicationStore.subjects');
 
   @override
-  List<Service> get ServiceApplication {
-    _$ServiceApplicationAtom.reportRead();
-    return super.ServiceApplication;
+  List<ServiceApplication> get subjects {
+    _$subjectsAtom.reportRead();
+    return super.subjects;
   }
 
   @override
-  set ServiceApplication(List<Service> value) {
-    _$ServiceApplicationAtom.reportWrite(value, super.ServiceApplication, () {
-      super.ServiceApplication = value;
+  set subjects(List<ServiceApplication> value) {
+    _$subjectsAtom.reportWrite(value, super.subjects, () {
+      super.subjects = value;
+    });
+  }
+
+  final _$subjectAtom = Atom(name: '_ServiceApplicationStore.subject');
+
+  @override
+  ServiceApplication get subject {
+    _$subjectAtom.reportRead();
+    return super.subject;
+  }
+
+  @override
+  set subject(ServiceApplication value) {
+    _$subjectAtom.reportWrite(value, super.subject, () {
+      super.subject = value;
     });
   }
 
   final _$fetchAsyncAction = AsyncAction('_ServiceApplicationStore.fetch');
 
   @override
-  Future<dynamic> fetch(String tagKey) {
-    return _$fetchAsyncAction.run(() => super.fetch(tagKey));
+  Future<dynamic> fetch() {
+    return _$fetchAsyncAction.run(() => super.fetch());
+  }
+
+  final _$createAsyncAction = AsyncAction('_ServiceApplicationStore.create');
+
+  @override
+  Future<dynamic> create() {
+    return _$createAsyncAction.run(() => super.create());
   }
 
   @override
   String toString() {
     return '''
-ServiceApplication: ${ServiceApplication}
+subjects: ${subjects},
+subject: ${subject}
     ''';
   }
 }

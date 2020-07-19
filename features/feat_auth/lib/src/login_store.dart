@@ -95,7 +95,6 @@ abstract class _LoginStore with Store {
       success = true;
       errorStore.showError = false;
     } catch (e) {
-      print("------");
       print(e);
     }
   }
@@ -117,7 +116,6 @@ abstract class _LoginStore with Store {
       success = true;
       errorStore.showError = false;
     } catch (e) {
-      print("---------");
       print(e);
     }
   }
