@@ -17,9 +17,9 @@ abstract class _StorageStore with Store {
   );
 
   @action
-  Future<String> upload(File file) async {
+  Future<String> upload(String folder, File file) async {
     final storageReference = FirebaseStorage().ref().child(
-          'profile_pictures/${Uuid().v4()}',
+          '$folder/${Uuid().v4()}',
         );
     final uploadTask = await storageReference.putFile(file);
     final streamSubscription = uploadTask.events.listen((event) {

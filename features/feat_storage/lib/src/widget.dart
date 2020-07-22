@@ -4,24 +4,27 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:file_picker/file_picker.dart';
 
 import 'store.dart';
 
-class StorageWidget extends StatefulWidget {
+class StoragePictureSelectWidget extends StatefulWidget {
   final Widget child;
   final Function(String url) onFileUploaded;
 
-  const StorageWidget({
+  const StoragePictureSelectWidget({
     Key key,
     this.child,
     this.onFileUploaded,
   }) : super(key: key);
 
   @override
-  _StorageWidgetState createState() => _StorageWidgetState();
+  _StoragePictureSelectWidgetState createState() =>
+      _StoragePictureSelectWidgetState();
 }
 
-class _StorageWidgetState extends State<StorageWidget> {
+class _StoragePictureSelectWidgetState
+    extends State<StoragePictureSelectWidget> {
   final picker = ImagePicker();
 
   Future<PickedFile> getImage(ImageSource source) async {
@@ -51,7 +54,7 @@ class _StorageWidgetState extends State<StorageWidget> {
                   Navigator.pop(context);
                   final picked = await getImage(ImageSource.gallery);
                   if (picked == null) return;
-                  final url = await store.upload(File(picked.path));
+                  final url = await store.upload('profile_pictures', File(picked.path));
                   widget.onFileUploaded(url);
                 },
               ),
@@ -61,12 +64,54 @@ class _StorageWidgetState extends State<StorageWidget> {
                   Navigator.pop(context);
                   final picked = await getImage(ImageSource.camera);
                   if (picked == null) return;
-                  final url = await store.upload(File(picked.path));
+                  final url = await store.upload('profile_pictures', File(picked.path));
                   widget.onFileUploaded(url);
                 },
               )
             ],
           );
         });
+  }
+}
+
+class StorageFileSelectWidget extends StatefulWidget {
+  final Widget child;
+  final Function(String url) onFileUploaded;
+
+  const StorageFileSelectWidget({
+    Key key,
+    this.child,
+    this.onFileUploaded,
+  }) : super(key: key);
+
+  @override
+  _StorageFileSelectWidgetState createState() =>
+      _StorageFileSelectWidgetState();
+}
+
+class _StorageFileSelectWidgetState extends State<StorageFileSelectWidget> {
+  final picker = ImagePicker();
+
+  @override
+  Widget build(BuildContext context) {
+    final store = Provider.of<StorageStore>(context);
+    return GestureDetector(
+      onTap: () => selectPicture(context, store),
+      child: widget.child,
+    );
+  }
+
+  Future<void> selectPicture(BuildContext context, StorageStore store) async {
+    final file = await FilePicker.getFile(
+      type: FileType.custom,
+      allowedExtensions: ['jpg', 'pdf', 'png'],
+    );
+    if (file == null) {
+      widget.onFileUploaded('');
+      return;
+    }
+    ;
+    final url = await store.upload('service_applications', file);
+    widget.onFileUploaded(url);
   }
 }

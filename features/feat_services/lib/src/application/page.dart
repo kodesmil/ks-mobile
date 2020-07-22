@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:lib_lego/lib_lego.dart';
+import 'package:feat_storage/feat_storage.dart';
 import 'package:provider/provider.dart';
 
 class ServiceApplicationPage extends StatefulWidget {
@@ -13,10 +14,16 @@ class ServiceApplicationPage extends StatefulWidget {
 class _ServiceApplicationPageState extends State<ServiceApplicationPage> {
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
+  final _companyController = TextEditingController();
+  final _addressController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _phoneController = TextEditingController();
   final _1FocusNode = FocusNode();
   final _2FocusNode = FocusNode();
   final _3FocusNode = FocusNode();
   final _4FocusNode = FocusNode();
+  final _5FocusNode = FocusNode();
+  final _6FocusNode = FocusNode();
 
   @override
   void didChangeDependencies() {
@@ -24,7 +31,22 @@ class _ServiceApplicationPageState extends State<ServiceApplicationPage> {
     store.fetch();
     _firstNameController.addListener(_firstNameListener);
     _lastNameController.addListener(_lastNameListener);
+    _emailController.addListener(_emailListener);
+    _phoneController.addListener(_phoneListener);
+    _addressController.addListener(_addressListener);
+    _companyController.addListener(_companyListener);
     super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    _firstNameController.removeListener(_firstNameListener);
+    _lastNameController.removeListener(_lastNameListener);
+    _emailController.removeListener(_emailListener);
+    _phoneController.removeListener(_phoneListener);
+    _addressController.removeListener(_addressListener);
+    _companyController.removeListener(_companyListener);
+    super.dispose();
   }
 
   @override
@@ -33,34 +55,90 @@ class _ServiceApplicationPageState extends State<ServiceApplicationPage> {
     return CupertinoPageScaffold(
       child: CustomScrollView(
         slivers: <Widget>[
-          CupertinoSliverNavigationBar(
-            largeTitle: Text(
-              'Join our program',
-              style: Theme.of(context).textTheme.headline5,
-              textScaleFactor: MediaQuery.textScaleFactorOf(context),
-            ),
-          ),
+          KsNavigationBar(title: 'Join program', withBackgroundImage: false),
           SliverToBoxAdapter(
             child: Material(
-              child: Column(
-                children: [
-                  TextField(
-                    textCapitalization: TextCapitalization.none,
-                    controller: _firstNameController,
-                    focusNode: _1FocusNode,
+              child: Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      TextField(
+                        textCapitalization: TextCapitalization.none,
+                        controller: _firstNameController,
+                        focusNode: _1FocusNode,
+                        decoration: InputDecoration(
+                          labelText: 'First Name',
+                        ),
+                      ),
+                      SizedBox(height: 15),
+                      TextField(
+                        textCapitalization: TextCapitalization.none,
+                        controller: _lastNameController,
+                        focusNode: _2FocusNode,
+                        decoration: InputDecoration(
+                          labelText: 'Last Name',
+                        ),
+                      ),
+                      SizedBox(height: 15),
+                      TextField(
+                        textCapitalization: TextCapitalization.none,
+                        controller: _emailController,
+                        focusNode: _3FocusNode,
+                        decoration: InputDecoration(
+                          labelText: 'Email',
+                        ),
+                      ),
+                      SizedBox(height: 15),
+                      TextField(
+                        textCapitalization: TextCapitalization.none,
+                        controller: _companyController,
+                        focusNode: _4FocusNode,
+                        decoration: InputDecoration(
+                          labelText: 'Company',
+                        ),
+                      ),
+                      SizedBox(height: 15),
+                      TextField(
+                        textCapitalization: TextCapitalization.none,
+                        controller: _addressController,
+                        focusNode: _5FocusNode,
+                        decoration: InputDecoration(
+                          labelText: 'Address',
+                        ),
+                      ),
+                      SizedBox(height: 15),
+                      TextField(
+                        textCapitalization: TextCapitalization.none,
+                        controller: _phoneController,
+                        focusNode: _6FocusNode,
+                        decoration: InputDecoration(
+                          labelText: 'Phone',
+                        ),
+                      ),
+                      SizedBox(height: 30),
+                      OutlineButton(
+                        child: Text('Apply'),
+                        shape: StadiumBorder(),
+                        onPressed: () => store.create(),
+                      ),
+                      Observer(
+                        builder: (context) => store.loadingStore.success
+                            ? ksNavigateAndRemoveUntil(
+                                context,
+                                CupertinoPageRoute(
+                                    builder: (context) =>
+                                        ServiceApplicationFilePage(
+                                          store.subject,
+                                        )))
+                            : ksShowErrorMessage(
+                                context,
+                                store.errorStore.errorMessage,
+                              ),
+                      ),
+                    ],
                   ),
-                  TextField(
-                    textCapitalization: TextCapitalization.none,
-                    controller: _lastNameController,
-                    focusNode: _2FocusNode,
-                  ),
-                  SizedBox(height: 20),
-                  OutlineButton(
-                    child: Text('Send application'),
-                    shape: StadiumBorder(),
-                    onPressed: () => store.create(),
-                  ),
-                ],
+                ),
               ),
             ),
           ),
@@ -77,7 +155,26 @@ class _ServiceApplicationPageState extends State<ServiceApplicationPage> {
 
   void _lastNameListener() {
     final store = Provider.of<ServiceApplicationStore>(context, listen: false);
-    store.subject.provider.serviceInPerson.firstName =
-        _firstNameController.text;
+    store.subject.provider.serviceInPerson.lastName = _lastNameController.text;
+  }
+
+  void _emailListener() {
+    final store = Provider.of<ServiceApplicationStore>(context, listen: false);
+    store.subject.provider.serviceInPerson.lastName = _lastNameController.text;
+  }
+
+  void _companyListener() {
+    final store = Provider.of<ServiceApplicationStore>(context, listen: false);
+    store.subject.provider.serviceInPerson.lastName = _lastNameController.text;
+  }
+
+  void _addressListener() {
+    final store = Provider.of<ServiceApplicationStore>(context, listen: false);
+    store.subject.provider.serviceInPerson.lastName = _lastNameController.text;
+  }
+
+  void _phoneListener() {
+    final store = Provider.of<ServiceApplicationStore>(context, listen: false);
+    store.subject.provider.serviceInPerson.lastName = _lastNameController.text;
   }
 }

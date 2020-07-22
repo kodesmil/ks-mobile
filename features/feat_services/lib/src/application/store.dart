@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:lib_services/lib_services.dart';
 import 'package:lib_shared/lib_shared.dart';
 import 'package:mobx/mobx.dart';
+import 'package:uuid/uuid.dart';
 
 part 'store.g.dart';
 
@@ -28,14 +29,15 @@ abstract class _ServiceApplicationStore with Store {
   @action
   Future fetch() async {
     try {
-      subject = ServiceApplication();
+      subject = ServiceApplication()
+        ..id = (Identifier()..resourceId = Uuid().v4());
       subject.provider = ServiceProvider();
-      subject.provider.serviceInPerson = ServiceInPerson();
+      subject.provider.serviceInPerson = ServiceInPerson()
+        ..id = (Identifier()..resourceId = Uuid().v4());
       // final request = ListServiceApplicationRequest();
       // final response = await client.listServiceApplication(request);
       // loadingStore.success = true;
       // subjects = response.results;
-
     } catch (e) {
       print(e);
     }

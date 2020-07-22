@@ -14,14 +14,22 @@ class KsEmptyAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 class KsNavigationBar extends StatelessWidget {
   final String title;
+  final bool withBackgroundImage;
 
-  const KsNavigationBar({Key key, this.title}) : super(key: key);
+  const KsNavigationBar({
+    Key key,
+    this.title,
+    this.withBackgroundImage,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
       expandedHeight: 120.0,
       pinned: true,
+      iconTheme: IconThemeData(
+        color: Theme.of(context).colorScheme.onSurface,
+      ),
       flexibleSpace: FlexibleSpaceBar(
         titlePadding: EdgeInsets.only(
           left: 15,
@@ -38,22 +46,24 @@ class KsNavigationBar extends StatelessWidget {
                 ),
           ),
         ),
-        background: Padding(
-          padding: EdgeInsets.only(
-            right: 15,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              SvgPicture.asset(
-                'assets/images/onboarding1.svg',
-                height: 100,
-              ),
-            ],
-          ),
-        ),
+        background: withBackgroundImage
+            ? Padding(
+                padding: EdgeInsets.only(
+                  right: 15,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    SvgPicture.asset(
+                      'assets/images/onboarding1.svg',
+                      height: 100,
+                    ),
+                  ],
+                ),
+              )
+            : Container(),
       ),
     );
   }
@@ -87,10 +97,10 @@ class KsAppBar extends AppBar {
           title: Text(
             title,
             style: Theme.of(context).textTheme.bodyText2.copyWith(
-              fontSize: 32,
-              fontWeight: FontWeight.w600,
-              letterSpacing: 0,
-            ),
+                  fontSize: 32,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 0,
+                ),
           ),
         );
 }

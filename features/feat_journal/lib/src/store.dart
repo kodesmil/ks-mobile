@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:lib_shared/lib_shared.dart';
 import 'package:lib_services/lib_services.dart';
 import 'package:mobx/mobx.dart';
+import 'package:uuid/uuid.dart';
 
 part 'store.g.dart';
 

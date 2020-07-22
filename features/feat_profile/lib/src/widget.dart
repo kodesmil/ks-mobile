@@ -42,7 +42,7 @@ class _ProfileSettingsTileState extends State<ProfileSettingsTile> {
               style: Theme.of(context).textTheme.headline6,
             ),
             SizedBox(height: 25),
-            StorageWidget(
+            StoragePictureSelectWidget(
               onFileUploaded: (url) => store.updateProfile(url: url),
               child: KsCircleAvatar(
                 size: 150,

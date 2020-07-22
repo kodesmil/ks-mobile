@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:lib_shared/lib_shared.dart';
 import 'package:lib_services/lib_services.dart';
 import 'package:mobx/mobx.dart';
+import 'package:uuid/uuid.dart';
 
 part 'store.g.dart';
 
@@ -20,13 +21,33 @@ abstract class _ServiceApplicationFileStore with Store {
   );
 
   @observable
-  List<Service> services = [];
+  ServiceApplicationFile subject;
 
   @action
-  Future fetch(String tagKey) async {
-    final request = ListServiceRequest();
-    final response = await client.listService(request);
-    loadingStore.success = true;
-    services = response.results;
+  Future fetch() async {
+    try {
+      subject = ServiceApplicationFile()
+        ..id = (Identifier()..resourceId = Uuid().v4());
+      // final request = ListServiceApplicationRequest();
+      // final response = await client.listServiceApplication(request);
+      // loadingStore.success = true;
+      // subjects = response.results;
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @action
+  Future create() async {
+    try {
+      final payload = subject;
+      final request = CreateServiceApplicationFileRequest();
+      request..payload = payload;
+      final response = await client.createServiceApplicationFile(request);
+      loadingStore.success = true;
+      subject = response.result;
+    } catch (e) {
+      print(e);
+    }
   }
 }
