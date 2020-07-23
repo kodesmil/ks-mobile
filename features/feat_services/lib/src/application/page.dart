@@ -2,6 +2,7 @@ import 'package:feat_services/feat_services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lib_lego/lib_lego.dart';
 import 'package:feat_storage/feat_storage.dart';
 import 'package:provider/provider.dart';
@@ -26,15 +27,18 @@ class _ServiceApplicationPageState extends State<ServiceApplicationPage> {
   final _6FocusNode = FocusNode();
 
   @override
-  void didChangeDependencies() {
+  void didChangeDependencies() async {
     final store = Provider.of<ServiceApplicationStore>(context, listen: false);
-    store.fetch();
+    await store.fetch();
     _firstNameController.addListener(_firstNameListener);
     _lastNameController.addListener(_lastNameListener);
     _emailController.addListener(_emailListener);
     _phoneController.addListener(_phoneListener);
     _addressController.addListener(_addressListener);
     _companyController.addListener(_companyListener);
+    final serviceInPerson = store.subject.provider.serviceInPerson;
+    _firstNameController.text = serviceInPerson.firstName;
+    _lastNameController.text = serviceInPerson.lastName;
     super.didChangeDependencies();
   }
 
@@ -120,21 +124,12 @@ class _ServiceApplicationPageState extends State<ServiceApplicationPage> {
                       OutlineButton(
                         child: Text('Apply'),
                         shape: StadiumBorder(),
-                        onPressed: () => store.create(),
-                      ),
-                      Observer(
-                        builder: (context) => store.loadingStore.success
-                            ? ksNavigateAndRemoveUntil(
-                                context,
-                                CupertinoPageRoute(
-                                    builder: (context) =>
-                                        ServiceApplicationFilePage(
-                                          store.subject,
-                                        )))
-                            : ksShowErrorMessage(
-                                context,
-                                store.errorStore.errorMessage,
-                              ),
+                        onPressed: () => ksNavigateAndRemoveUntil(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => ServiceApplicationFilePage(),
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -176,5 +171,125 @@ class _ServiceApplicationPageState extends State<ServiceApplicationPage> {
   void _phoneListener() {
     final store = Provider.of<ServiceApplicationStore>(context, listen: false);
     store.subject.provider.serviceInPerson.lastName = _lastNameController.text;
+  }
+}
+
+class ServiceApplicationSuccessPage extends StatefulWidget {
+  @override
+  _ServiceApplicationSuccessPageState createState() =>
+      _ServiceApplicationSuccessPageState();
+}
+
+class _ServiceApplicationSuccessPageState
+    extends State<ServiceApplicationSuccessPage> {
+  @override
+  Widget build(BuildContext context) {
+    final store = Provider.of<ServiceApplicationStore>(context);
+    return CupertinoPageScaffold(
+      child: CustomScrollView(
+        slivers: <Widget>[
+          KsNavigationBar(title: 'Success!', withBackgroundImage: false),
+          SliverToBoxAdapter(
+            child: Material(
+              child: Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(height: 30),
+                      SvgPicture.asset(
+                        'assets/images/peach/example/example-scene-3.svg',
+                        height: 300,
+                      ),
+                      SizedBox(height: 30),
+                      OutlineButton(
+                        child: Text('Go to main page'),
+                        shape: StadiumBorder(),
+                        onPressed: () => ksNavigateNamedAndRemoveUntil(
+                          context,
+                          '/home',
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ServiceApplicationFilePage extends StatefulWidget {
+  ServiceApplicationFilePage();
+
+  @override
+  _ServiceApplicationFilePageState createState() =>
+      _ServiceApplicationFilePageState();
+}
+
+class _ServiceApplicationFilePageState
+    extends State<ServiceApplicationFilePage> {
+  @override
+  Widget build(BuildContext context) {
+    final store = Provider.of<ServiceApplicationStore>(context);
+    return CupertinoPageScaffold(
+      child: CustomScrollView(
+        slivers: [
+          KsNavigationBar(title: 'ID confirmation', withBackgroundImage: false),
+          SliverToBoxAdapter(
+            child: Material(
+              child: Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      StorageFileSelectWidget(
+                        child: Column(
+                          children: [
+                            SizedBox(height: 30),
+                            SvgPicture.asset(
+                              'assets/images/peach/characters/woman-sitting-texting.svg',
+                              height: 300,
+                            ),
+                            SizedBox(height: 30),
+                            Text('Select file'),
+                          ],
+                        ),
+                        onFileUploaded: (url) {
+                          store.addApplicationFile(url);
+                        },
+                      ),
+                      SizedBox(height: 30),
+                      OutlineButton(
+                        child: Text('Send application file'),
+                        shape: StadiumBorder(),
+                        onPressed: () => store.createOrUpdate(),
+                      ),
+                      Observer(
+                        builder: (context) => store.loadingStore.success
+                            ? ksNavigateAndRemoveUntil(
+                                context,
+                                CupertinoPageRoute(
+                                  builder: (context) =>
+                                      ServiceApplicationSuccessPage(),
+                                ),
+                              )
+                            : ksShowErrorMessage(
+                                context,
+                                store.errorStore.errorMessage,
+                              ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

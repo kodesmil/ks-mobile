@@ -21,7 +21,7 @@ dependencies:
   mobx: ^1.2.1
   mobx_codegen: ^1.1.0
   json_serializable: ^3.2.3
-  flutter_svg: ^0.17.2
+  flutter_svg: ^0.18.0
 
   google_sign_in: ^4.1.4
   firebase_auth: ^0.16.1

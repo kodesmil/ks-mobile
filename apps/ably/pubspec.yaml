@@ -87,6 +87,7 @@ flutter:
     - assets/images/women/
     - assets/images/peach/
     - assets/images/peach/example/
+    - assets/images/peach/characters/
     - assets/i18n/
   fonts:
     - family: SourceSansPro

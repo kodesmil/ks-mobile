@@ -1,9 +1,6 @@
 export 'src/application/page.dart';
 export 'src/application/store.dart';
 export 'src/application/widget.dart';
-export 'src/application_file//page.dart';
-export 'src/application_file/store.dart';
-export 'src/application_file/widget.dart';
 export 'src/in_person//page.dart';
 export 'src/in_person/store.dart';
 export 'src/in_person/widget.dart';

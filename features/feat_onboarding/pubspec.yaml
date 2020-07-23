@@ -15,7 +15,7 @@ dependencies:
   intl: ^0.16.0
   google_sign_in: ^4.1.4
   provider: ^4.0.4
-  flutter_svg: ^0.17.2
+  flutter_svg: ^0.18.0
   clay_containers: ^0.2.2
 
   feat_auth:

@@ -46,6 +46,30 @@ mixin _$ServiceApplicationStore on _ServiceApplicationStore, Store {
     return _$fetchAsyncAction.run(() => super.fetch());
   }
 
+  final _$addApplicationFileAsyncAction =
+      AsyncAction('_ServiceApplicationStore.addApplicationFile');
+
+  @override
+  Future<dynamic> addApplicationFile(String url) {
+    return _$addApplicationFileAsyncAction
+        .run(() => super.addApplicationFile(url));
+  }
+
+  final _$createOrUpdateAsyncAction =
+      AsyncAction('_ServiceApplicationStore.createOrUpdate');
+
+  @override
+  Future<dynamic> createOrUpdate() {
+    return _$createOrUpdateAsyncAction.run(() => super.createOrUpdate());
+  }
+
+  final _$updateAsyncAction = AsyncAction('_ServiceApplicationStore.update');
+
+  @override
+  Future<dynamic> update() {
+    return _$updateAsyncAction.run(() => super.update());
+  }
+
   final _$createAsyncAction = AsyncAction('_ServiceApplicationStore.create');
 
   @override

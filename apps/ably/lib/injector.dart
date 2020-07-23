@@ -263,13 +263,6 @@ class _AppInjectorState extends State<AppInjector> {
             dep,
           ),
         ),
-        ProxyProvider<ServicesClient, ServiceApplicationFileStore>(
-          update: (_, dep, __) => ServiceApplicationFileStore(
-            ErrorStore(),
-            LoadingStore(),
-            dep,
-          ),
-        ),
         ProxyProvider<ServicesClient, ServiceInPersonStore>(
           update: (_, dep, __) => ServiceInPersonStore(
             ErrorStore(),
