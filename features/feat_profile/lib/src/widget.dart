@@ -31,28 +31,32 @@ class _ProfileSettingsTileState extends State<ProfileSettingsTile> {
   Widget build(BuildContext context) {
     final store = Provider.of<ProfileStore>(context);
     return Observer(
-      builder: (context) => Padding(
-        padding: const EdgeInsets.all(15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: 15),
-            Text(
-              store.profile.fullName,
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            SizedBox(height: 25),
-            StoragePictureSelectWidget(
-              onFileUploaded: (url) => store.updateProfile(url: url),
-              child: KsCircleAvatar(
-                size: 150,
-                image: store.profile.profilePictureUrl,
+      builder: (context) => store.profile == null
+          ? Container()
+          : Padding(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: 15),
+                  Text(
+                    store.profile?.fullName?.isNotEmpty == true
+                        ? store.profile.fullName
+                        : 'Anonymous',
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  SizedBox(height: 25),
+                  StoragePictureSelectWidget(
+                    onFileUploaded: (url) => store.updateProfile(url: url),
+                    child: KsCircleAvatar(
+                      size: 150,
+                      image: store.profile.profilePictureUrl,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                ],
               ),
             ),
-            SizedBox(height: 20),
-          ],
-        ),
-      ),
     );
   }
 }

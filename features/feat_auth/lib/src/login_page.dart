@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
           _buildRightSide(store),
           Observer(
             builder: (context) => store.success
-                ? ksNavigateNamedAndRemoveUntil(context, '/home')
+                ? ksNavigateNamedAndRemoveUntil(context, '/')
                 : ksShowErrorMessage(context, store.errorStore.errorMessage),
           ),
           Observer(

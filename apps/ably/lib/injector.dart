@@ -9,6 +9,7 @@ import 'package:feat_onboarding/feat_onboarding.dart';
 import 'package:feat_profile/feat_profile.dart';
 import 'package:feat_storage/feat_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluro/fluro.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -20,6 +21,8 @@ import 'package:feat_services/feat_services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'routes.dart';
+
 class AppInjector extends StatefulWidget {
   final Widget child;
 
@@ -29,6 +32,8 @@ class AppInjector extends StatefulWidget {
   _AppInjectorState createState() => _AppInjectorState();
 }
 
+final router = Router();
+
 class _AppInjectorState extends State<AppInjector> {
   final channel = ClientChannel(
     'swanly.qa.api.kodesmil.com',
@@ -37,6 +42,12 @@ class _AppInjectorState extends State<AppInjector> {
       credentials: ChannelCredentials.secure(),
     ),
   );
+
+  @override
+  void initState() {
+    Routes.configureRoutes(router);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

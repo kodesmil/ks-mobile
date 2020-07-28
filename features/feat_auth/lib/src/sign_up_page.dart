@@ -53,7 +53,7 @@ class _SignUpPageState extends State<SignUpPage> {
           _buildRightSide(store),
           Observer(
             builder: (context) => store.success
-                ? ksNavigateNamedAndRemoveUntil(context, '/home')
+                ? ksNavigateNamedAndRemoveUntil(context, '/')
                 : ksShowErrorMessage(
                     context,
                     store.errorStore.errorMessage,

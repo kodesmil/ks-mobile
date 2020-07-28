@@ -16,7 +16,7 @@ dependencies:
   validators: ^2.0.0+1
   dio: ^3.0.9
   flutter_dotenv: ^2.1.0
-
+  fluro: ^1.6.3
   flutter_mobx: ^1.1.0
   mobx: ^1.2.1
   mobx_codegen: ^1.1.0

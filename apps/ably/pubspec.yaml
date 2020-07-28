@@ -31,7 +31,7 @@ dependencies:
   flutter_mobx: ^1.1.0
   mobx: ^1.2.1
   mobx_codegen: ^1.1.0
-  json_serializable: ^3.2.3
+  fluro: ^1.6.3
 
   google_sign_in: ^4.1.4
   firebase_auth: ^0.16.1

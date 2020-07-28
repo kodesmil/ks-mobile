@@ -29,48 +29,49 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<ChatStore>(context);
-    return CupertinoPageScaffold(
-      child: Observer(
-        builder: (context) => CustomScrollView(
-          slivers: <Widget>[
-            KsNavigationBar(title: 'Chat'),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  final e = store.rooms[index];
-                  return Material(
-                    child: ListTile(
-                      title: Text(
-                        e.tileTitle,
-                        style: Theme.of(context).textTheme.bodyText2,
-                      ),
-                      subtitle: Text(
-                        e.tileCaption,
-                        style: Theme.of(context).textTheme.caption,
-                      ),
-                      onTap: () => navigateToChatRoomPage(
-                        context,
-                        e,
-                      ),
-                      trailing: OverlappedImages(
-                        profiles: e.participants,
-                      ),
+    return Scaffold(
+      appBar: KsAppBar(
+        context: context,
+        title: 'Chat',
+      ),
+      body: Column(
+        children: [
+          Observer(
+            builder: (context) => ListView.builder(
+              itemCount: store.rooms.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index){
+                final e = store.rooms[index];
+                return Container(
+                  height: 100,
+                  child: ListTile(
+                    title: Text(
+                      e.tileTitle,
+                      style: Theme.of(context).textTheme.bodyText2,
                     ),
-                  );
-                },
-                childCount: store.rooms.length,
-              ),
+                    subtitle: Text(
+                      e.tileCaption,
+                      style: Theme.of(context).textTheme.caption,
+                    ),
+                    onTap: () => navigateToChatRoomPage(
+                      context,
+                      e,
+                    ),
+                    trailing: OverlappedImages(
+                      profiles: e.participants,
+                    ),
+                  ),
+                );
+              },
             ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: Center(
-                  child: ConnectToVideoButton(),
-                ),
-              ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 15),
+            child: Center(
+              child: ConnectToVideoButton(),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -275,8 +276,9 @@ class _MyListTileState extends State<MyListTile> {
           children: [
             Column(
               mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment:
-                  widget.left ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+              crossAxisAlignment: widget.left
+                  ? CrossAxisAlignment.start
+                  : CrossAxisAlignment.end,
               children: <Widget>[
                 Container(
                   width: MediaQuery.of(context).size.width * 0.6,
@@ -297,7 +299,8 @@ class _MyListTileState extends State<MyListTile> {
                           bottom: 10,
                         ),
                   decoration: BoxDecoration(
-                    borderRadius: calculateBorderRadius(widget.left, widget.info.place),
+                    borderRadius:
+                        calculateBorderRadius(widget.left, widget.info.place),
                     color: widget.left
                         ? Theme.of(context).colorScheme.secondary.withAlpha(64)
                         : Theme.of(context).colorScheme.primary.withAlpha(16),
@@ -320,7 +323,8 @@ class _MyListTileState extends State<MyListTile> {
                         children: [
                           KsCircleAvatar(
                             size: 25,
-                            image: widget.message.author.profile.profilePictureUrl,
+                            image:
+                                widget.message.author.profile.profilePictureUrl,
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 5),
@@ -338,8 +342,8 @@ class _MyListTileState extends State<MyListTile> {
                   visible: showDetails,
                   child: Text(
                     DateFormat.yMMMEd().add_Hm().format(
-                      widget.info.message.createdAt.toDateTime(),
-                    ),
+                          widget.info.message.createdAt.toDateTime(),
+                        ),
                     style: Theme.of(context).textTheme.caption,
                   ),
                 ),

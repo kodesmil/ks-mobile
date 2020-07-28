@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mobx/mobx.dart';
 
@@ -13,9 +15,18 @@ abstract class _UserStore with Store {
   @observable
   FirebaseUser user;
 
+  final _controller = StreamController<FirebaseUser>();
+
+  Stream<FirebaseUser> get output => _controller.stream;
+
+  Sink<FirebaseUser> get input => _controller.sink;
+
   @action
   Future<FirebaseUser> signInSilently() async {
-    user = await firebaseAuth.currentUser();
+    if (user == null) {
+      user = await firebaseAuth.currentUser();
+      input.add(user);
+    }
     return user;
   }
 
@@ -23,11 +34,13 @@ abstract class _UserStore with Store {
   Future signOut() async {
     await firebaseAuth.signOut();
     user = null;
+    input.add(null);
   }
 
   @action
   Future deleteUser() async {
     await user.delete();
     user = null;
+    input.add(null);
   }
 }

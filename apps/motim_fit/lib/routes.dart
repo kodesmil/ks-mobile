@@ -12,7 +12,7 @@ class Routes {
     '/splash': (BuildContext context) => SplashPage(),
     '/login': (BuildContext context) => LoginPage(),
     '/sign-up': (BuildContext context) => SignUpPage(),
-    '/home': (BuildContext context) => HomePage(),
+    '/': (BuildContext context) => HomePage(),
     '/onboarding': (BuildContext context) => OnboardingPage(),
   };
 }

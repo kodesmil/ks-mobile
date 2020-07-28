@@ -1,16 +1,13 @@
 import 'dart:async';
 
 import 'package:ably/injector.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lib_lego/lib_lego.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-
-import 'routes.dart';
 
 void realMain() async {
   var delegate = await LocalizationDelegate.create(
@@ -28,8 +25,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    var localizationDelegate = LocalizedApp.of(context).delegate;
-
+    final localizationDelegate = LocalizedApp.of(context).delegate;
     return LocalizationProvider(
       state: LocalizationProvider.of(context).state,
       child: AppInjector(
@@ -44,9 +40,8 @@ class _MyAppState extends State<MyApp> {
             supportedLocales: localizationDelegate.supportedLocales,
             theme: KsTheme.ablyLight(),
             darkTheme: KsTheme.ablyDark(),
-            initialRoute: '/splash',
-            routes: Routes.routes,
             themeMode: appState.mode,
+            onGenerateRoute: router.generator,
           ),
         ),
       ),

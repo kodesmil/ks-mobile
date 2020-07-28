@@ -12,14 +12,14 @@ class KsEmptyAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => Size(0.0, 0.0);
 }
 
-class KsNavigationBar extends StatelessWidget {
+class KsNavigationBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool withBackgroundImage;
 
   const KsNavigationBar({
     Key key,
     this.title,
-    this.withBackgroundImage,
+    this.withBackgroundImage = false,
   }) : super(key: key);
 
   @override
@@ -67,6 +67,9 @@ class KsNavigationBar extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  Size get preferredSize => Size.fromHeight(120);
 }
 
 class KsSmallNavigationBar extends CupertinoNavigationBar {

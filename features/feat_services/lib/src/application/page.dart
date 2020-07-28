@@ -207,7 +207,7 @@ class _ServiceApplicationSuccessPageState
                         shape: StadiumBorder(),
                         onPressed: () => ksNavigateNamedAndRemoveUntil(
                           context,
-                          '/home',
+                          '/',
                         ),
                       ),
                     ],
@@ -250,8 +250,8 @@ class _ServiceApplicationFilePageState
                         child: Column(
                           children: [
                             SizedBox(height: 30),
-                            SvgPicture.asset(
-                              'assets/images/peach/characters/woman-sitting-texting.svg',
+                            Image.asset(
+                              'assets/images/peach/characters/woman-sitting-texting.png',
                               height: 300,
                             ),
                             SizedBox(height: 30),

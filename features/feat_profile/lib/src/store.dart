@@ -38,11 +38,8 @@ abstract class _ProfileStore with Store {
         final response = await client.read(request);
         profile = response.result;
       } catch (e) {
-        profile = Profile()..primaryEmail = userStore.user.email;
-        await createOrUpdateProfile();
+        print(e);
       }
-    } else {
-      await createOrUpdateProfile();
     }
   }
 
