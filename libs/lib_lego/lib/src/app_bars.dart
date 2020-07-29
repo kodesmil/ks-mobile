@@ -19,7 +19,7 @@ class KsNavigationBar extends StatelessWidget implements PreferredSizeWidget {
   const KsNavigationBar({
     Key key,
     this.title,
-    this.withBackgroundImage = false,
+    this.withBackgroundImage = true,
   }) : super(key: key);
 
   @override
@@ -97,6 +97,7 @@ class KsAppBar extends AppBar {
     String title,
   }) : super(
           key: key,
+          elevation: 0,
           title: Text(
             title,
             style: Theme.of(context).textTheme.bodyText2.copyWith(

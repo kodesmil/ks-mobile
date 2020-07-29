@@ -6,6 +6,7 @@ import 'package:feat_health/feat_health.dart';
 import 'package:feat_journal/feat_journal.dart';
 import 'package:feat_notifications/feat_notifications.dart';
 import 'package:feat_profile/feat_profile.dart';
+import 'package:feat_services/feat_services.dart';
 import 'package:feat_splash/feat_splash.dart';
 import 'package:feat_storage/feat_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,6 +22,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  @override
+  void didChangeDependencies() {
+    final store = Provider.of<FeedStore>(context);
+    store.fetchArticles('');
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     final pages = [
@@ -28,6 +37,8 @@ class _HomePageState extends State<HomePage> {
       JournalPage(),
       HelloPage(),
       ChatPage(),
+      ServiceApplicationPage(),
+      ServiceOfferPage(),
     ];
     return NotificationContainer(
       child: MenstruationPersonalInfoWidget(
@@ -42,13 +53,29 @@ class _HomePageState extends State<HomePage> {
             currentIndex: 2,
             items: [
               BottomNavigationBarItem(
-                  icon: Icon(Icons.person), title: Text('Profile')),
+                icon: Icon(Icons.person),
+                title: Text('Profile'),
+              ),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.calendar_today), title: Text('Journal')),
+                icon: Icon(Icons.calendar_today),
+                title: Text('Journal'),
+              ),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.home), title: Text('Feed')),
+                icon: Icon(Icons.home),
+                title: Text('Feed'),
+              ),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.people), title: Text('Chat')),
+                icon: Icon(Icons.people),
+                title: Text('Chat'),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.flag),
+                title: Text('Join'),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.card_travel),
+                title: Text('Services'),
+              ),
             ],
           ),
           tabBuilder: (BuildContext context, int index) {
