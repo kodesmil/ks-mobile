@@ -1,12 +1,11 @@
 export 'src/application/page.dart';
 export 'src/application/store.dart';
-export 'src/application/widget.dart';
 export 'src/in_person//page.dart';
 export 'src/in_person/store.dart';
 export 'src/in_person/widget.dart';
 export 'src/offer/page.dart';
 export 'src/offer/store.dart';
-export 'src/offer/widget.dart';
+export 'src/offer/page.dart';
 export 'src/provider/page.dart';
 export 'src/provider/store.dart';
 export 'src/provider/widget.dart';

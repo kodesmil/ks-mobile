@@ -1,7 +1,8 @@
 import 'dart:async';
-import 'package:lib_shared/lib_shared.dart';
 import 'package:lib_services/lib_services.dart';
+import 'package:lib_shared/lib_shared.dart';
 import 'package:mobx/mobx.dart';
+import 'package:uuid/uuid.dart';
 
 part 'store.g.dart';
 
@@ -10,8 +11,10 @@ class ServiceOfferStore = _ServiceOfferStore with _$ServiceOfferStore;
 abstract class _ServiceOfferStore with Store {
   final ErrorStore errorStore;
   final LoadingStore loadingStore;
+  final ServicesClient client;
 
-  ServicesClient client;
+  @observable
+  List<ServiceOffer> subjects = [];
 
   _ServiceOfferStore(
     this.errorStore,
@@ -19,14 +22,31 @@ abstract class _ServiceOfferStore with Store {
     this.client,
   );
 
-  @observable
-  List<Service> services = [];
+  @action
+  Future fetch() async {
+    try {
+      final request = ListServiceOfferRequest();
+      final response = await client.listServiceOffer(request);
+      subjects = response.results;
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @action
-  Future fetch(String tagKey) async {
-    final request = ListServiceRequest();
-    final response = await client.listService(request);
-    loadingStore.success = true;
-    services = response.results;
+  Future<ServiceSession> startSession(ServiceOffer offer) async {
+    try {
+      final payload = ServiceSession()
+        ..id = (Identifier()..resourceId = Uuid().v4())
+        ..offer = offer;
+      //..client
+      final request = CreateServiceSessionRequest();
+      request..payload = payload;
+      final response = await client.createServiceSession(request);
+      return response.result;
+    } catch (e) {
+      print(e);
+    }
+    return null;
   }
 }

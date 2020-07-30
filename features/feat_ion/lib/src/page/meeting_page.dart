@@ -7,6 +7,9 @@ import '../widget/video_render_adapter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MeetingPage extends StatefulWidget {
+
+  const MeetingPage({Key key}) : super(key: key);
+
   @override
   _MeetingPageState createState() => _MeetingPageState();
 }
@@ -19,7 +22,7 @@ class _MeetingPageState extends State<MeetingPage> {
   bool _cameraOff = false;
   bool _microphoneOff = false;
   bool _speakerOn = true;
-  var _scaffoldkey = GlobalKey<ScaffoldState>();
+  final _scaffoldkey = GlobalKey<ScaffoldState>();
   var _messages = [];
   var name;
   var room;

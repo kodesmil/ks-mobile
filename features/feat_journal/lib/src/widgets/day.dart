@@ -225,7 +225,6 @@ Future newPageStart(BuildContext context) {
       builder: (BuildContext context) {
         return Scaffold(
           appBar: KsSmallNavigationBar(
-            context: context,
             title: 'Edit',
           ),
           body: EditPeriodPage(),

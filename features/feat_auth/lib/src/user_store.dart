@@ -15,7 +15,7 @@ abstract class _UserStore with Store {
   @observable
   FirebaseUser user;
 
-  final _controller = StreamController<FirebaseUser>();
+  final _controller = StreamController<FirebaseUser>.broadcast();
 
   Stream<FirebaseUser> get output => _controller.stream;
 

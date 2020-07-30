@@ -72,22 +72,38 @@ class KsNavigationBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(120);
 }
 
-class KsSmallNavigationBar extends CupertinoNavigationBar {
+class KsSmallNavigationBar extends StatelessWidget implements ObstructingPreferredSizeWidget {
+  final String title;
+
   KsSmallNavigationBar({
     Key key,
-    BuildContext context,
-    String title,
-  }) : super(
-          key: key,
-          middle: Text(
-            title,
-            style: Theme.of(context).textTheme.headline6.apply(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
-          ),
-          actionsForegroundColor: Theme.of(context).colorScheme.onPrimary,
-          backgroundColor: Theme.of(context).colorScheme.primary,
-        );
+    this.title,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoNavigationBar(
+      middle: Text(
+        title,
+        style: Theme.of(context).textTheme.headline6.apply(
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
+      ),
+      actionsForegroundColor: Theme.of(context).colorScheme.onPrimary,
+      backgroundColor: Theme.of(context).colorScheme.primary,
+    );
+  }
+
+  @override
+  bool shouldFullyObstruct(BuildContext context) {
+    final color = CupertinoTheme.of(context).barBackgroundColor;
+    return color.alpha == 0xFF;
+  }
+
+  @override
+  Size get preferredSize {
+    return const Size.fromHeight(44);
+  }
 }
 
 class KsAppBar extends AppBar {

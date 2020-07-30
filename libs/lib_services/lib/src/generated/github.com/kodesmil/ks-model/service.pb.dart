@@ -23,7 +23,6 @@ class ServiceTag extends $pb.GeneratedMessage {
     ..aOM<$8.Identifier>(1, 'id', subBuilder: $8.Identifier.create)
     ..aOS(2, 'key')
     ..aOS(3, 'name')
-    ..pc<Service>(4, 'services', $pb.PbFieldType.PM, subBuilder: Service.create)
     ..hasRequiredFields = false
   ;
 
@@ -70,9 +69,6 @@ class ServiceTag extends $pb.GeneratedMessage {
   $core.bool hasName() => $_has(2);
   @$pb.TagNumber(3)
   void clearName() => clearField(3);
-
-  @$pb.TagNumber(4)
-  $core.List<Service> get services => $_getList(3);
 }
 
 class Service extends $pb.GeneratedMessage {
@@ -525,7 +521,6 @@ class ServiceProvider extends $pb.GeneratedMessage {
     ..aOM<$8.Identifier>(1, 'id', subBuilder: $8.Identifier.create)
     ..aOM<$10.Timestamp>(2, 'createdAt', subBuilder: $10.Timestamp.create)
     ..aOM<$10.Timestamp>(3, 'updatedAt', subBuilder: $10.Timestamp.create)
-    ..pc<ServiceOffer>(4, 'offers', $pb.PbFieldType.PM, subBuilder: ServiceOffer.create)
     ..aOM<ServiceInPerson>(5, 'serviceInPerson', subBuilder: ServiceInPerson.create)
     ..hasRequiredFields = false
   ;
@@ -578,19 +573,16 @@ class ServiceProvider extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $10.Timestamp ensureUpdatedAt() => $_ensure(2);
 
-  @$pb.TagNumber(4)
-  $core.List<ServiceOffer> get offers => $_getList(3);
-
   @$pb.TagNumber(5)
-  ServiceInPerson get serviceInPerson => $_getN(4);
+  ServiceInPerson get serviceInPerson => $_getN(3);
   @$pb.TagNumber(5)
   set serviceInPerson(ServiceInPerson v) { setField(5, v); }
   @$pb.TagNumber(5)
-  $core.bool hasServiceInPerson() => $_has(4);
+  $core.bool hasServiceInPerson() => $_has(3);
   @$pb.TagNumber(5)
   void clearServiceInPerson() => clearField(5);
   @$pb.TagNumber(5)
-  ServiceInPerson ensureServiceInPerson() => $_ensure(4);
+  ServiceInPerson ensureServiceInPerson() => $_ensure(3);
 }
 
 class ServiceSession extends $pb.GeneratedMessage {

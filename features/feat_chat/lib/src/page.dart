@@ -110,7 +110,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
   Widget build(BuildContext context) {
     final store = Provider.of<ChatStore>(context);
     return CupertinoPageScaffold(
-      navigationBar: KsSmallNavigationBar(context: context, title: 'Messages'),
+      navigationBar: KsSmallNavigationBar(title: 'Messages'),
       child: Material(
         child: Column(
           children: [

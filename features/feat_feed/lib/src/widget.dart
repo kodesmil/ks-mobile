@@ -145,7 +145,6 @@ Future newPageStart(BuildContext context, FeedArticle article) {
       builder: (BuildContext context) {
         return CupertinoPageScaffold(
           navigationBar: KsSmallNavigationBar(
-            context: context,
             title: article.title,
           ),
           child: SafeArea(
