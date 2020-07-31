@@ -18,7 +18,19 @@ abstract class _ServiceApplicationStore with Store {
   List<ServiceApplication> subjects = [];
 
   @observable
-  ServiceApplication subject;
+  ServiceApplication application;
+
+  @observable
+  ServiceDetails details;
+
+  @observable
+  ServiceDetailsContact contact;
+
+  @observable
+  ServiceDetailsCompany company;
+
+  @observable
+  ServiceProvider provider;
 
   _ServiceApplicationStore(
     this.errorStore,
@@ -32,13 +44,19 @@ abstract class _ServiceApplicationStore with Store {
       final request = ListServiceApplicationRequest();
       final response = await client.listServiceApplication(request);
       if (response.results.isEmpty) {
-        subject = ServiceApplication()
+        details = ServiceDetails();
+        company = ServiceDetailsCompany();
+        contact = ServiceDetailsContact();
+        provider = ServiceProvider()
           ..id = (Identifier()..resourceId = Uuid().v4());
-        subject.provider = ServiceProvider();
-        subject.provider.serviceInPerson = ServiceInPerson()
+        application = ServiceApplication()
           ..id = (Identifier()..resourceId = Uuid().v4());
       } else {
-        subject = response.results.first;
+        application = response.results.first;
+        provider = application.provider;
+        details = provider.details;
+        company = details.company;
+        contact = details.contact;
       }
     } catch (e) {
       print(e);
@@ -50,24 +68,26 @@ abstract class _ServiceApplicationStore with Store {
     final file = ServiceApplicationFile()
       ..id = (Identifier()..resourceId = Uuid().v4())
       ..url = url;
-    subject.files.add(file);
+    application.files.add(file);
   }
 
   @action
   Future createOrUpdate() async =>
-      subject?.updatedAt != null
-          ? await update()
-          : await create();
+      application?.updatedAt != null ? await update() : await create();
 
   @action
   Future update() async {
     try {
-      final payload = subject;
+      final payload = application
+        ..provider = (provider
+          ..details = (details
+            ..contact = contact
+            ..company = company));
       final request = UpdateServiceApplicationRequest();
       request..payload = payload;
       final response = await client.updateServiceApplication(request);
       loadingStore.success = true;
-      subject = response.result;
+      application = response.result;
     } catch (e) {
       print(e);
     }
@@ -76,12 +96,16 @@ abstract class _ServiceApplicationStore with Store {
   @action
   Future create() async {
     try {
-      final payload = subject;
+      final payload = application
+        ..provider = (provider
+          ..details = (details
+            ..contact = contact
+            ..company = company));
       final request = CreateServiceApplicationRequest();
       request..payload = payload;
       final response = await client.createServiceApplication(request);
       loadingStore.success = true;
-      subject = response.result;
+      application = response.result;
     } catch (e) {
       print(e);
     }

@@ -52,14 +52,41 @@ const ServiceOffer$json = const {
   '7': const {},
 };
 
-const ServiceInPerson$json = const {
-  '1': 'ServiceInPerson',
+const ServiceDetailsContact$json = const {
+  '1': 'ServiceDetailsContact',
   '2': const [
     const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'id'},
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
     const {'1': 'first_name', '3': 4, '4': 1, '5': 9, '10': 'firstName'},
     const {'1': 'last_name', '3': 5, '4': 1, '5': 9, '10': 'lastName'},
+    const {'1': 'email', '3': 6, '4': 1, '5': 9, '10': 'email'},
+    const {'1': 'phone', '3': 7, '4': 1, '5': 9, '10': 'phone'},
+  ],
+  '7': const {},
+};
+
+const ServiceDetailsCompany$json = const {
+  '1': 'ServiceDetailsCompany',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'id'},
+    const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
+    const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
+    const {'1': 'name', '3': 4, '4': 1, '5': 9, '10': 'name'},
+    const {'1': 'address', '3': 5, '4': 1, '5': 9, '10': 'address'},
+    const {'1': 'phone', '3': 6, '4': 1, '5': 9, '10': 'phone'},
+  ],
+  '7': const {},
+};
+
+const ServiceDetails$json = const {
+  '1': 'ServiceDetails',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'id'},
+    const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
+    const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
+    const {'1': 'company', '3': 4, '4': 1, '5': 11, '6': '.model.ServiceDetailsCompany', '10': 'company'},
+    const {'1': 'contact', '3': 5, '4': 1, '5': 11, '6': '.model.ServiceDetailsContact', '10': 'contact'},
   ],
   '7': const {},
 };
@@ -96,7 +123,7 @@ const ServiceProvider$json = const {
     const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'id'},
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
-    const {'1': 'service_in_person', '3': 5, '4': 1, '5': 11, '6': '.model.ServiceInPerson', '10': 'serviceInPerson'},
+    const {'1': 'details', '3': 5, '4': 1, '5': 11, '6': '.model.ServiceDetails', '10': 'details'},
   ],
   '7': const {},
 };
@@ -109,7 +136,6 @@ const ServiceSession$json = const {
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
     const {'1': 'scheduled_at', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'scheduledAt'},
     const {'1': 'finished_at', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'finishedAt'},
-    const {'1': 'client', '3': 6, '4': 1, '5': 11, '6': '.model.Profile', '10': 'client'},
     const {'1': 'offer', '3': 7, '4': 1, '5': 11, '6': '.model.ServiceOffer', '8': const {}, '10': 'offer'},
   ],
   '7': const {},
@@ -535,61 +561,61 @@ const ListServiceOfferResponse$json = const {
   ],
 };
 
-const CreateServiceInPersonRequest$json = const {
-  '1': 'CreateServiceInPersonRequest',
+const CreateServiceDetailsRequest$json = const {
+  '1': 'CreateServiceDetailsRequest',
   '2': const [
-    const {'1': 'payload', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceInPerson', '10': 'payload'},
+    const {'1': 'payload', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceDetails', '10': 'payload'},
   ],
 };
 
-const CreateServiceInPersonResponse$json = const {
-  '1': 'CreateServiceInPersonResponse',
+const CreateServiceDetailsResponse$json = const {
+  '1': 'CreateServiceDetailsResponse',
   '2': const [
-    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceInPerson', '10': 'result'},
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceDetails', '10': 'result'},
   ],
 };
 
-const ReadServiceInPersonRequest$json = const {
-  '1': 'ReadServiceInPersonRequest',
-  '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '10': 'id'},
-  ],
-};
-
-const ReadServiceInPersonResponse$json = const {
-  '1': 'ReadServiceInPersonResponse',
-  '2': const [
-    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceInPerson', '10': 'result'},
-  ],
-};
-
-const UpdateServiceInPersonRequest$json = const {
-  '1': 'UpdateServiceInPersonRequest',
-  '2': const [
-    const {'1': 'payload', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceInPerson', '10': 'payload'},
-  ],
-};
-
-const UpdateServiceInPersonResponse$json = const {
-  '1': 'UpdateServiceInPersonResponse',
-  '2': const [
-    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceInPerson', '10': 'result'},
-  ],
-};
-
-const DeleteServiceInPersonRequest$json = const {
-  '1': 'DeleteServiceInPersonRequest',
+const ReadServiceDetailsRequest$json = const {
+  '1': 'ReadServiceDetailsRequest',
   '2': const [
     const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '10': 'id'},
   ],
 };
 
-const DeleteServiceInPersonResponse$json = const {
-  '1': 'DeleteServiceInPersonResponse',
+const ReadServiceDetailsResponse$json = const {
+  '1': 'ReadServiceDetailsResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceDetails', '10': 'result'},
+  ],
 };
 
-const ListServiceInPersonRequest$json = const {
-  '1': 'ListServiceInPersonRequest',
+const UpdateServiceDetailsRequest$json = const {
+  '1': 'UpdateServiceDetailsRequest',
+  '2': const [
+    const {'1': 'payload', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceDetails', '10': 'payload'},
+  ],
+};
+
+const UpdateServiceDetailsResponse$json = const {
+  '1': 'UpdateServiceDetailsResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceDetails', '10': 'result'},
+  ],
+};
+
+const DeleteServiceDetailsRequest$json = const {
+  '1': 'DeleteServiceDetailsRequest',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '10': 'id'},
+  ],
+};
+
+const DeleteServiceDetailsResponse$json = const {
+  '1': 'DeleteServiceDetailsResponse',
+};
+
+const ListServiceDetailsRequest$json = const {
+  '1': 'ListServiceDetailsRequest',
   '2': const [
     const {'1': 'filter', '3': 1, '4': 1, '5': 11, '6': '.infoblox.api.Filtering', '10': 'filter'},
     const {'1': 'order_by', '3': 2, '4': 1, '5': 11, '6': '.infoblox.api.Sorting', '10': 'orderBy'},
@@ -598,10 +624,10 @@ const ListServiceInPersonRequest$json = const {
   ],
 };
 
-const ListServiceInPersonResponse$json = const {
-  '1': 'ListServiceInPersonResponse',
+const ListServiceDetailsResponse$json = const {
+  '1': 'ListServiceDetailsResponse',
   '2': const [
-    const {'1': 'results', '3': 1, '4': 3, '5': 11, '6': '.model.ServiceInPerson', '10': 'results'},
+    const {'1': 'results', '3': 1, '4': 3, '5': 11, '6': '.model.ServiceDetails', '10': 'results'},
   ],
 };
 

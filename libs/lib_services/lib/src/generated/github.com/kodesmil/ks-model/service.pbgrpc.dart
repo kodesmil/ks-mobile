@@ -104,36 +104,6 @@ class ServicesClient extends $grpc.Client {
       ($6.DeleteServiceTagRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $6.DeleteServiceTagResponse.fromBuffer(value));
-  static final _$listServiceInPerson = $grpc.ClientMethod<
-          $6.ListServiceInPersonRequest, $6.ListServiceInPersonResponse>(
-      '/model.Services/ListServiceInPerson',
-      ($6.ListServiceInPersonRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) =>
-          $6.ListServiceInPersonResponse.fromBuffer(value));
-  static final _$createServiceInPerson = $grpc.ClientMethod<
-          $6.CreateServiceInPersonRequest, $6.CreateServiceInPersonResponse>(
-      '/model.Services/CreateServiceInPerson',
-      ($6.CreateServiceInPersonRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) =>
-          $6.CreateServiceInPersonResponse.fromBuffer(value));
-  static final _$readServiceInPerson = $grpc.ClientMethod<
-          $6.ReadServiceInPersonRequest, $6.ReadServiceInPersonResponse>(
-      '/model.Services/ReadServiceInPerson',
-      ($6.ReadServiceInPersonRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) =>
-          $6.ReadServiceInPersonResponse.fromBuffer(value));
-  static final _$updateServiceInPerson = $grpc.ClientMethod<
-          $6.UpdateServiceInPersonRequest, $6.UpdateServiceInPersonResponse>(
-      '/model.Services/UpdateServiceInPerson',
-      ($6.UpdateServiceInPersonRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) =>
-          $6.UpdateServiceInPersonResponse.fromBuffer(value));
-  static final _$deleteServiceInPerson = $grpc.ClientMethod<
-          $6.DeleteServiceInPersonRequest, $6.DeleteServiceInPersonResponse>(
-      '/model.Services/DeleteServiceInPerson',
-      ($6.DeleteServiceInPersonRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) =>
-          $6.DeleteServiceInPersonResponse.fromBuffer(value));
   static final _$listServiceOffer = $grpc.ClientMethod<
           $6.ListServiceOfferRequest, $6.ListServiceOfferResponse>(
       '/model.Services/ListServiceOffer',
@@ -164,41 +134,6 @@ class ServicesClient extends $grpc.Client {
       ($6.DeleteServiceOfferRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $6.DeleteServiceOfferResponse.fromBuffer(value));
-  static final _$listServiceApplicationFile = $grpc.ClientMethod<
-          $6.ListServiceApplicationFileRequest,
-          $6.ListServiceApplicationFileResponse>(
-      '/model.Services/ListServiceApplicationFile',
-      ($6.ListServiceApplicationFileRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) =>
-          $6.ListServiceApplicationFileResponse.fromBuffer(value));
-  static final _$createServiceApplicationFile = $grpc.ClientMethod<
-          $6.CreateServiceApplicationFileRequest,
-          $6.CreateServiceApplicationFileResponse>(
-      '/model.Services/CreateServiceApplicationFile',
-      ($6.CreateServiceApplicationFileRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) =>
-          $6.CreateServiceApplicationFileResponse.fromBuffer(value));
-  static final _$readServiceApplicationFile = $grpc.ClientMethod<
-          $6.ReadServiceApplicationFileRequest,
-          $6.ReadServiceApplicationFileResponse>(
-      '/model.Services/ReadServiceApplicationFile',
-      ($6.ReadServiceApplicationFileRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) =>
-          $6.ReadServiceApplicationFileResponse.fromBuffer(value));
-  static final _$updateServiceApplicationFile = $grpc.ClientMethod<
-          $6.UpdateServiceApplicationFileRequest,
-          $6.UpdateServiceApplicationFileResponse>(
-      '/model.Services/UpdateServiceApplicationFile',
-      ($6.UpdateServiceApplicationFileRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) =>
-          $6.UpdateServiceApplicationFileResponse.fromBuffer(value));
-  static final _$deleteServiceApplicationFile = $grpc.ClientMethod<
-          $6.DeleteServiceApplicationFileRequest,
-          $6.DeleteServiceApplicationFileResponse>(
-      '/model.Services/DeleteServiceApplicationFile',
-      ($6.DeleteServiceApplicationFileRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) =>
-          $6.DeleteServiceApplicationFileResponse.fromBuffer(value));
   static final _$listServiceApplication = $grpc.ClientMethod<
           $6.ListServiceApplicationRequest, $6.ListServiceApplicationResponse>(
       '/model.Services/ListServiceApplication',
@@ -401,51 +336,6 @@ class ServicesClient extends $grpc.Client {
     return $grpc.ResponseFuture(call);
   }
 
-  $grpc.ResponseFuture<$6.ListServiceInPersonResponse> listServiceInPerson(
-      $6.ListServiceInPersonRequest request,
-      {$grpc.CallOptions options}) {
-    final call = $createCall(
-        _$listServiceInPerson, $async.Stream.fromIterable([request]),
-        options: options);
-    return $grpc.ResponseFuture(call);
-  }
-
-  $grpc.ResponseFuture<$6.CreateServiceInPersonResponse> createServiceInPerson(
-      $6.CreateServiceInPersonRequest request,
-      {$grpc.CallOptions options}) {
-    final call = $createCall(
-        _$createServiceInPerson, $async.Stream.fromIterable([request]),
-        options: options);
-    return $grpc.ResponseFuture(call);
-  }
-
-  $grpc.ResponseFuture<$6.ReadServiceInPersonResponse> readServiceInPerson(
-      $6.ReadServiceInPersonRequest request,
-      {$grpc.CallOptions options}) {
-    final call = $createCall(
-        _$readServiceInPerson, $async.Stream.fromIterable([request]),
-        options: options);
-    return $grpc.ResponseFuture(call);
-  }
-
-  $grpc.ResponseFuture<$6.UpdateServiceInPersonResponse> updateServiceInPerson(
-      $6.UpdateServiceInPersonRequest request,
-      {$grpc.CallOptions options}) {
-    final call = $createCall(
-        _$updateServiceInPerson, $async.Stream.fromIterable([request]),
-        options: options);
-    return $grpc.ResponseFuture(call);
-  }
-
-  $grpc.ResponseFuture<$6.DeleteServiceInPersonResponse> deleteServiceInPerson(
-      $6.DeleteServiceInPersonRequest request,
-      {$grpc.CallOptions options}) {
-    final call = $createCall(
-        _$deleteServiceInPerson, $async.Stream.fromIterable([request]),
-        options: options);
-    return $grpc.ResponseFuture(call);
-  }
-
   $grpc.ResponseFuture<$6.ListServiceOfferResponse> listServiceOffer(
       $6.ListServiceOfferRequest request,
       {$grpc.CallOptions options}) {
@@ -487,54 +377,6 @@ class ServicesClient extends $grpc.Client {
       {$grpc.CallOptions options}) {
     final call = $createCall(
         _$deleteServiceOffer, $async.Stream.fromIterable([request]),
-        options: options);
-    return $grpc.ResponseFuture(call);
-  }
-
-  $grpc.ResponseFuture<$6.ListServiceApplicationFileResponse>
-      listServiceApplicationFile($6.ListServiceApplicationFileRequest request,
-          {$grpc.CallOptions options}) {
-    final call = $createCall(
-        _$listServiceApplicationFile, $async.Stream.fromIterable([request]),
-        options: options);
-    return $grpc.ResponseFuture(call);
-  }
-
-  $grpc.ResponseFuture<$6.CreateServiceApplicationFileResponse>
-      createServiceApplicationFile(
-          $6.CreateServiceApplicationFileRequest request,
-          {$grpc.CallOptions options}) {
-    final call = $createCall(
-        _$createServiceApplicationFile, $async.Stream.fromIterable([request]),
-        options: options);
-    return $grpc.ResponseFuture(call);
-  }
-
-  $grpc.ResponseFuture<$6.ReadServiceApplicationFileResponse>
-      readServiceApplicationFile($6.ReadServiceApplicationFileRequest request,
-          {$grpc.CallOptions options}) {
-    final call = $createCall(
-        _$readServiceApplicationFile, $async.Stream.fromIterable([request]),
-        options: options);
-    return $grpc.ResponseFuture(call);
-  }
-
-  $grpc.ResponseFuture<$6.UpdateServiceApplicationFileResponse>
-      updateServiceApplicationFile(
-          $6.UpdateServiceApplicationFileRequest request,
-          {$grpc.CallOptions options}) {
-    final call = $createCall(
-        _$updateServiceApplicationFile, $async.Stream.fromIterable([request]),
-        options: options);
-    return $grpc.ResponseFuture(call);
-  }
-
-  $grpc.ResponseFuture<$6.DeleteServiceApplicationFileResponse>
-      deleteServiceApplicationFile(
-          $6.DeleteServiceApplicationFileRequest request,
-          {$grpc.CallOptions options}) {
-    final call = $createCall(
-        _$deleteServiceApplicationFile, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -769,51 +611,6 @@ abstract class ServicesServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $6.DeleteServiceTagRequest.fromBuffer(value),
         ($6.DeleteServiceTagResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$6.ListServiceInPersonRequest,
-            $6.ListServiceInPersonResponse>(
-        'ListServiceInPerson',
-        listServiceInPerson_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) =>
-            $6.ListServiceInPersonRequest.fromBuffer(value),
-        ($6.ListServiceInPersonResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$6.CreateServiceInPersonRequest,
-            $6.CreateServiceInPersonResponse>(
-        'CreateServiceInPerson',
-        createServiceInPerson_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) =>
-            $6.CreateServiceInPersonRequest.fromBuffer(value),
-        ($6.CreateServiceInPersonResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$6.ReadServiceInPersonRequest,
-            $6.ReadServiceInPersonResponse>(
-        'ReadServiceInPerson',
-        readServiceInPerson_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) =>
-            $6.ReadServiceInPersonRequest.fromBuffer(value),
-        ($6.ReadServiceInPersonResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$6.UpdateServiceInPersonRequest,
-            $6.UpdateServiceInPersonResponse>(
-        'UpdateServiceInPerson',
-        updateServiceInPerson_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) =>
-            $6.UpdateServiceInPersonRequest.fromBuffer(value),
-        ($6.UpdateServiceInPersonResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$6.DeleteServiceInPersonRequest,
-            $6.DeleteServiceInPersonResponse>(
-        'DeleteServiceInPerson',
-        deleteServiceInPerson_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) =>
-            $6.DeleteServiceInPersonRequest.fromBuffer(value),
-        ($6.DeleteServiceInPersonResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$6.ListServiceOfferRequest,
             $6.ListServiceOfferResponse>(
         'ListServiceOffer',
@@ -859,56 +656,6 @@ abstract class ServicesServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $6.DeleteServiceOfferRequest.fromBuffer(value),
         ($6.DeleteServiceOfferResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$6.ListServiceApplicationFileRequest,
-            $6.ListServiceApplicationFileResponse>(
-        'ListServiceApplicationFile',
-        listServiceApplicationFile_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) =>
-            $6.ListServiceApplicationFileRequest.fromBuffer(value),
-        ($6.ListServiceApplicationFileResponse value) =>
-            value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$6.CreateServiceApplicationFileRequest,
-            $6.CreateServiceApplicationFileResponse>(
-        'CreateServiceApplicationFile',
-        createServiceApplicationFile_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) =>
-            $6.CreateServiceApplicationFileRequest.fromBuffer(value),
-        ($6.CreateServiceApplicationFileResponse value) =>
-            value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$6.ReadServiceApplicationFileRequest,
-            $6.ReadServiceApplicationFileResponse>(
-        'ReadServiceApplicationFile',
-        readServiceApplicationFile_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) =>
-            $6.ReadServiceApplicationFileRequest.fromBuffer(value),
-        ($6.ReadServiceApplicationFileResponse value) =>
-            value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$6.UpdateServiceApplicationFileRequest,
-            $6.UpdateServiceApplicationFileResponse>(
-        'UpdateServiceApplicationFile',
-        updateServiceApplicationFile_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) =>
-            $6.UpdateServiceApplicationFileRequest.fromBuffer(value),
-        ($6.UpdateServiceApplicationFileResponse value) =>
-            value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$6.DeleteServiceApplicationFileRequest,
-            $6.DeleteServiceApplicationFileResponse>(
-        'DeleteServiceApplicationFile',
-        deleteServiceApplicationFile_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) =>
-            $6.DeleteServiceApplicationFileRequest.fromBuffer(value),
-        ($6.DeleteServiceApplicationFileResponse value) =>
-            value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$6.ListServiceApplicationRequest,
             $6.ListServiceApplicationResponse>(
         'ListServiceApplication',
@@ -1089,36 +836,6 @@ abstract class ServicesServiceBase extends $grpc.Service {
     return deleteServiceTag(call, await request);
   }
 
-  $async.Future<$6.ListServiceInPersonResponse> listServiceInPerson_Pre(
-      $grpc.ServiceCall call,
-      $async.Future<$6.ListServiceInPersonRequest> request) async {
-    return listServiceInPerson(call, await request);
-  }
-
-  $async.Future<$6.CreateServiceInPersonResponse> createServiceInPerson_Pre(
-      $grpc.ServiceCall call,
-      $async.Future<$6.CreateServiceInPersonRequest> request) async {
-    return createServiceInPerson(call, await request);
-  }
-
-  $async.Future<$6.ReadServiceInPersonResponse> readServiceInPerson_Pre(
-      $grpc.ServiceCall call,
-      $async.Future<$6.ReadServiceInPersonRequest> request) async {
-    return readServiceInPerson(call, await request);
-  }
-
-  $async.Future<$6.UpdateServiceInPersonResponse> updateServiceInPerson_Pre(
-      $grpc.ServiceCall call,
-      $async.Future<$6.UpdateServiceInPersonRequest> request) async {
-    return updateServiceInPerson(call, await request);
-  }
-
-  $async.Future<$6.DeleteServiceInPersonResponse> deleteServiceInPerson_Pre(
-      $grpc.ServiceCall call,
-      $async.Future<$6.DeleteServiceInPersonRequest> request) async {
-    return deleteServiceInPerson(call, await request);
-  }
-
   $async.Future<$6.ListServiceOfferResponse> listServiceOffer_Pre(
       $grpc.ServiceCall call,
       $async.Future<$6.ListServiceOfferRequest> request) async {
@@ -1147,36 +864,6 @@ abstract class ServicesServiceBase extends $grpc.Service {
       $grpc.ServiceCall call,
       $async.Future<$6.DeleteServiceOfferRequest> request) async {
     return deleteServiceOffer(call, await request);
-  }
-
-  $async.Future<$6.ListServiceApplicationFileResponse>
-      listServiceApplicationFile_Pre($grpc.ServiceCall call,
-          $async.Future<$6.ListServiceApplicationFileRequest> request) async {
-    return listServiceApplicationFile(call, await request);
-  }
-
-  $async.Future<$6.CreateServiceApplicationFileResponse>
-      createServiceApplicationFile_Pre($grpc.ServiceCall call,
-          $async.Future<$6.CreateServiceApplicationFileRequest> request) async {
-    return createServiceApplicationFile(call, await request);
-  }
-
-  $async.Future<$6.ReadServiceApplicationFileResponse>
-      readServiceApplicationFile_Pre($grpc.ServiceCall call,
-          $async.Future<$6.ReadServiceApplicationFileRequest> request) async {
-    return readServiceApplicationFile(call, await request);
-  }
-
-  $async.Future<$6.UpdateServiceApplicationFileResponse>
-      updateServiceApplicationFile_Pre($grpc.ServiceCall call,
-          $async.Future<$6.UpdateServiceApplicationFileRequest> request) async {
-    return updateServiceApplicationFile(call, await request);
-  }
-
-  $async.Future<$6.DeleteServiceApplicationFileResponse>
-      deleteServiceApplicationFile_Pre($grpc.ServiceCall call,
-          $async.Future<$6.DeleteServiceApplicationFileRequest> request) async {
-    return deleteServiceApplicationFile(call, await request);
   }
 
   $async.Future<$6.ListServiceApplicationResponse> listServiceApplication_Pre(
@@ -1269,16 +956,6 @@ abstract class ServicesServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $6.UpdateServiceTagRequest request);
   $async.Future<$6.DeleteServiceTagResponse> deleteServiceTag(
       $grpc.ServiceCall call, $6.DeleteServiceTagRequest request);
-  $async.Future<$6.ListServiceInPersonResponse> listServiceInPerson(
-      $grpc.ServiceCall call, $6.ListServiceInPersonRequest request);
-  $async.Future<$6.CreateServiceInPersonResponse> createServiceInPerson(
-      $grpc.ServiceCall call, $6.CreateServiceInPersonRequest request);
-  $async.Future<$6.ReadServiceInPersonResponse> readServiceInPerson(
-      $grpc.ServiceCall call, $6.ReadServiceInPersonRequest request);
-  $async.Future<$6.UpdateServiceInPersonResponse> updateServiceInPerson(
-      $grpc.ServiceCall call, $6.UpdateServiceInPersonRequest request);
-  $async.Future<$6.DeleteServiceInPersonResponse> deleteServiceInPerson(
-      $grpc.ServiceCall call, $6.DeleteServiceInPersonRequest request);
   $async.Future<$6.ListServiceOfferResponse> listServiceOffer(
       $grpc.ServiceCall call, $6.ListServiceOfferRequest request);
   $async.Future<$6.CreateServiceOfferResponse> createServiceOffer(
@@ -1289,21 +966,6 @@ abstract class ServicesServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $6.UpdateServiceOfferRequest request);
   $async.Future<$6.DeleteServiceOfferResponse> deleteServiceOffer(
       $grpc.ServiceCall call, $6.DeleteServiceOfferRequest request);
-  $async.Future<$6.ListServiceApplicationFileResponse>
-      listServiceApplicationFile(
-          $grpc.ServiceCall call, $6.ListServiceApplicationFileRequest request);
-  $async.Future<$6.CreateServiceApplicationFileResponse>
-      createServiceApplicationFile($grpc.ServiceCall call,
-          $6.CreateServiceApplicationFileRequest request);
-  $async.Future<$6.ReadServiceApplicationFileResponse>
-      readServiceApplicationFile(
-          $grpc.ServiceCall call, $6.ReadServiceApplicationFileRequest request);
-  $async.Future<$6.UpdateServiceApplicationFileResponse>
-      updateServiceApplicationFile($grpc.ServiceCall call,
-          $6.UpdateServiceApplicationFileRequest request);
-  $async.Future<$6.DeleteServiceApplicationFileResponse>
-      deleteServiceApplicationFile($grpc.ServiceCall call,
-          $6.DeleteServiceApplicationFileRequest request);
   $async.Future<$6.ListServiceApplicationResponse> listServiceApplication(
       $grpc.ServiceCall call, $6.ListServiceApplicationRequest request);
   $async.Future<$6.CreateServiceApplicationResponse> createServiceApplication(

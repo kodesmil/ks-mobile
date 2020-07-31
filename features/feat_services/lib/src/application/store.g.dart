@@ -24,18 +24,48 @@ mixin _$ServiceApplicationStore on _ServiceApplicationStore, Store {
     });
   }
 
-  final _$subjectAtom = Atom(name: '_ServiceApplicationStore.subject');
+  final _$applicationAtom = Atom(name: '_ServiceApplicationStore.application');
 
   @override
-  ServiceApplication get subject {
-    _$subjectAtom.reportRead();
-    return super.subject;
+  ServiceApplication get application {
+    _$applicationAtom.reportRead();
+    return super.application;
   }
 
   @override
-  set subject(ServiceApplication value) {
-    _$subjectAtom.reportWrite(value, super.subject, () {
-      super.subject = value;
+  set application(ServiceApplication value) {
+    _$applicationAtom.reportWrite(value, super.application, () {
+      super.application = value;
+    });
+  }
+
+  final _$detailsAtom = Atom(name: '_ServiceApplicationStore.details');
+
+  @override
+  ServiceDetails get details {
+    _$detailsAtom.reportRead();
+    return super.details;
+  }
+
+  @override
+  set details(ServiceDetails value) {
+    _$detailsAtom.reportWrite(value, super.details, () {
+      super.details = value;
+    });
+  }
+
+  final _$providerAtom = Atom(name: '_ServiceApplicationStore.provider');
+
+  @override
+  ServiceProvider get provider {
+    _$providerAtom.reportRead();
+    return super.provider;
+  }
+
+  @override
+  set provider(ServiceProvider value) {
+    _$providerAtom.reportWrite(value, super.provider, () {
+      super.provider = value;
     });
   }
 
@@ -81,7 +111,9 @@ mixin _$ServiceApplicationStore on _ServiceApplicationStore, Store {
   String toString() {
     return '''
 subjects: ${subjects},
-subject: ${subject}
+application: ${application},
+details: ${details},
+provider: ${provider}
     ''';
   }
 }

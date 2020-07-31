@@ -36,9 +36,9 @@ class _ServiceApplicationPageState extends State<ServiceApplicationPage> {
     _phoneController.addListener(_phoneListener);
     _addressController.addListener(_addressListener);
     _companyController.addListener(_companyListener);
-    final serviceInPerson = store.subject.provider.serviceInPerson;
-    _firstNameController.text = serviceInPerson.firstName;
-    _lastNameController.text = serviceInPerson.lastName;
+    final contact = store.contact;
+    _firstNameController.text = contact.firstName;
+    _lastNameController.text = contact.lastName;
     super.didChangeDependencies();
   }
 
@@ -144,33 +144,40 @@ class _ServiceApplicationPageState extends State<ServiceApplicationPage> {
 
   void _firstNameListener() {
     final store = Provider.of<ServiceApplicationStore>(context, listen: false);
-    store.subject.provider.serviceInPerson.firstName =
-        _firstNameController.text;
+    store.contact = store.contact.copyWith((e) {
+      e.firstName = _firstNameController.text;
+    });
   }
 
   void _lastNameListener() {
     final store = Provider.of<ServiceApplicationStore>(context, listen: false);
-    store.subject.provider.serviceInPerson.lastName = _lastNameController.text;
+    store.contact = store.contact.copyWith((e) {
+      e.lastName = _lastNameController.text;
+    });
   }
 
   void _emailListener() {
     final store = Provider.of<ServiceApplicationStore>(context, listen: false);
-    store.subject.provider.serviceInPerson.lastName = _lastNameController.text;
+    store.application.provider.details.contact.lastName =
+        _lastNameController.text;
   }
 
   void _companyListener() {
     final store = Provider.of<ServiceApplicationStore>(context, listen: false);
-    store.subject.provider.serviceInPerson.lastName = _lastNameController.text;
+    store.application.provider.details.contact.lastName =
+        _lastNameController.text;
   }
 
   void _addressListener() {
     final store = Provider.of<ServiceApplicationStore>(context, listen: false);
-    store.subject.provider.serviceInPerson.lastName = _lastNameController.text;
+    store.application.provider.details.contact.lastName =
+        _lastNameController.text;
   }
 
   void _phoneListener() {
     final store = Provider.of<ServiceApplicationStore>(context, listen: false);
-    store.subject.provider.serviceInPerson.lastName = _lastNameController.text;
+    store.application.provider.details.contact.lastName =
+        _lastNameController.text;
   }
 }
 

@@ -12,6 +12,7 @@ class ServiceOfferPage extends StatefulWidget {
 }
 
 class _ServiceOfferPageState extends State<ServiceOfferPage> {
+
   @override
   void didChangeDependencies() async {
     final store = Provider.of<ServiceOfferStore>(context, listen: false);
@@ -31,6 +32,7 @@ class _ServiceOfferPageState extends State<ServiceOfferPage> {
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
                   final e = store.subjects[index];
+                  final contact = e.provider.details.contact;
                   return ListTile(
                     title: Text(
                       e.description,
@@ -39,7 +41,7 @@ class _ServiceOfferPageState extends State<ServiceOfferPage> {
                       '${e.price} ${e.currency}',
                     ),
                     trailing: Text(
-                      '${e.provider.serviceInPerson.firstName} ${e.provider.serviceInPerson.lastName}',
+                      '${contact.firstName} ${contact.lastName}',
                     ),
                     onTap: () {
                       Navigator.of(context).push(
@@ -68,6 +70,7 @@ class ServiceOfferDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<ServiceOfferStore>(context);
+    final contact = offer.provider.details.contact;
     return Scaffold(
       appBar: KsSmallNavigationBar(
         title: 'Details',
@@ -77,8 +80,8 @@ class ServiceOfferDetailsPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: 60),
-            Text(offer.provider.serviceInPerson.firstName),
-            Text(offer.provider.serviceInPerson.lastName),
+            Text(contact.firstName),
+            Text(contact.lastName),
             SizedBox(height: 40),
             Text(offer.description),
             SizedBox(height: 20),

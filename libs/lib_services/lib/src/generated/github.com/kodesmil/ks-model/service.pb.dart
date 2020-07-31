@@ -263,30 +263,32 @@ class ServiceOffer extends $pb.GeneratedMessage {
   ServiceProvider ensureProvider() => $_ensure(7);
 }
 
-class ServiceInPerson extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ServiceInPerson', package: const $pb.PackageName('model'), createEmptyInstance: create)
+class ServiceDetailsContact extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ServiceDetailsContact', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..aOM<$8.Identifier>(1, 'id', subBuilder: $8.Identifier.create)
     ..aOM<$10.Timestamp>(2, 'createdAt', subBuilder: $10.Timestamp.create)
     ..aOM<$10.Timestamp>(3, 'updatedAt', subBuilder: $10.Timestamp.create)
     ..aOS(4, 'firstName')
     ..aOS(5, 'lastName')
+    ..aOS(6, 'email')
+    ..aOS(7, 'phone')
     ..hasRequiredFields = false
   ;
 
-  ServiceInPerson._() : super();
-  factory ServiceInPerson() => create();
-  factory ServiceInPerson.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ServiceInPerson.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  ServiceInPerson clone() => ServiceInPerson()..mergeFromMessage(this);
-  ServiceInPerson copyWith(void Function(ServiceInPerson) updates) => super.copyWith((message) => updates(message as ServiceInPerson));
+  ServiceDetailsContact._() : super();
+  factory ServiceDetailsContact() => create();
+  factory ServiceDetailsContact.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ServiceDetailsContact.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  ServiceDetailsContact clone() => ServiceDetailsContact()..mergeFromMessage(this);
+  ServiceDetailsContact copyWith(void Function(ServiceDetailsContact) updates) => super.copyWith((message) => updates(message as ServiceDetailsContact));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static ServiceInPerson create() => ServiceInPerson._();
-  ServiceInPerson createEmptyInstance() => create();
-  static $pb.PbList<ServiceInPerson> createRepeated() => $pb.PbList<ServiceInPerson>();
+  static ServiceDetailsContact create() => ServiceDetailsContact._();
+  ServiceDetailsContact createEmptyInstance() => create();
+  static $pb.PbList<ServiceDetailsContact> createRepeated() => $pb.PbList<ServiceDetailsContact>();
   @$core.pragma('dart2js:noInline')
-  static ServiceInPerson getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ServiceInPerson>(create);
-  static ServiceInPerson _defaultInstance;
+  static ServiceDetailsContact getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ServiceDetailsContact>(create);
+  static ServiceDetailsContact _defaultInstance;
 
   @$pb.TagNumber(1)
   $8.Identifier get id => $_getN(0);
@@ -338,6 +340,192 @@ class ServiceInPerson extends $pb.GeneratedMessage {
   $core.bool hasLastName() => $_has(4);
   @$pb.TagNumber(5)
   void clearLastName() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get email => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set email($core.String v) { $_setString(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasEmail() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearEmail() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.String get phone => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set phone($core.String v) { $_setString(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasPhone() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearPhone() => clearField(7);
+}
+
+class ServiceDetailsCompany extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ServiceDetailsCompany', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..aOM<$8.Identifier>(1, 'id', subBuilder: $8.Identifier.create)
+    ..aOM<$10.Timestamp>(2, 'createdAt', subBuilder: $10.Timestamp.create)
+    ..aOM<$10.Timestamp>(3, 'updatedAt', subBuilder: $10.Timestamp.create)
+    ..aOS(4, 'name')
+    ..aOS(5, 'address')
+    ..aOS(6, 'phone')
+    ..hasRequiredFields = false
+  ;
+
+  ServiceDetailsCompany._() : super();
+  factory ServiceDetailsCompany() => create();
+  factory ServiceDetailsCompany.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ServiceDetailsCompany.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  ServiceDetailsCompany clone() => ServiceDetailsCompany()..mergeFromMessage(this);
+  ServiceDetailsCompany copyWith(void Function(ServiceDetailsCompany) updates) => super.copyWith((message) => updates(message as ServiceDetailsCompany));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ServiceDetailsCompany create() => ServiceDetailsCompany._();
+  ServiceDetailsCompany createEmptyInstance() => create();
+  static $pb.PbList<ServiceDetailsCompany> createRepeated() => $pb.PbList<ServiceDetailsCompany>();
+  @$core.pragma('dart2js:noInline')
+  static ServiceDetailsCompany getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ServiceDetailsCompany>(create);
+  static ServiceDetailsCompany _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $8.Identifier get id => $_getN(0);
+  @$pb.TagNumber(1)
+  set id($8.Identifier v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+  @$pb.TagNumber(1)
+  $8.Identifier ensureId() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $10.Timestamp get createdAt => $_getN(1);
+  @$pb.TagNumber(2)
+  set createdAt($10.Timestamp v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCreatedAt() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCreatedAt() => clearField(2);
+  @$pb.TagNumber(2)
+  $10.Timestamp ensureCreatedAt() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $10.Timestamp get updatedAt => $_getN(2);
+  @$pb.TagNumber(3)
+  set updatedAt($10.Timestamp v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasUpdatedAt() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearUpdatedAt() => clearField(3);
+  @$pb.TagNumber(3)
+  $10.Timestamp ensureUpdatedAt() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  $core.String get name => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set name($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasName() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearName() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get address => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set address($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasAddress() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearAddress() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get phone => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set phone($core.String v) { $_setString(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasPhone() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearPhone() => clearField(6);
+}
+
+class ServiceDetails extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ServiceDetails', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..aOM<$8.Identifier>(1, 'id', subBuilder: $8.Identifier.create)
+    ..aOM<$10.Timestamp>(2, 'createdAt', subBuilder: $10.Timestamp.create)
+    ..aOM<$10.Timestamp>(3, 'updatedAt', subBuilder: $10.Timestamp.create)
+    ..aOM<ServiceDetailsCompany>(4, 'company', subBuilder: ServiceDetailsCompany.create)
+    ..aOM<ServiceDetailsContact>(5, 'contact', subBuilder: ServiceDetailsContact.create)
+    ..hasRequiredFields = false
+  ;
+
+  ServiceDetails._() : super();
+  factory ServiceDetails() => create();
+  factory ServiceDetails.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ServiceDetails.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  ServiceDetails clone() => ServiceDetails()..mergeFromMessage(this);
+  ServiceDetails copyWith(void Function(ServiceDetails) updates) => super.copyWith((message) => updates(message as ServiceDetails));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ServiceDetails create() => ServiceDetails._();
+  ServiceDetails createEmptyInstance() => create();
+  static $pb.PbList<ServiceDetails> createRepeated() => $pb.PbList<ServiceDetails>();
+  @$core.pragma('dart2js:noInline')
+  static ServiceDetails getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ServiceDetails>(create);
+  static ServiceDetails _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $8.Identifier get id => $_getN(0);
+  @$pb.TagNumber(1)
+  set id($8.Identifier v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+  @$pb.TagNumber(1)
+  $8.Identifier ensureId() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $10.Timestamp get createdAt => $_getN(1);
+  @$pb.TagNumber(2)
+  set createdAt($10.Timestamp v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCreatedAt() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCreatedAt() => clearField(2);
+  @$pb.TagNumber(2)
+  $10.Timestamp ensureCreatedAt() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $10.Timestamp get updatedAt => $_getN(2);
+  @$pb.TagNumber(3)
+  set updatedAt($10.Timestamp v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasUpdatedAt() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearUpdatedAt() => clearField(3);
+  @$pb.TagNumber(3)
+  $10.Timestamp ensureUpdatedAt() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  ServiceDetailsCompany get company => $_getN(3);
+  @$pb.TagNumber(4)
+  set company(ServiceDetailsCompany v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasCompany() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearCompany() => clearField(4);
+  @$pb.TagNumber(4)
+  ServiceDetailsCompany ensureCompany() => $_ensure(3);
+
+  @$pb.TagNumber(5)
+  ServiceDetailsContact get contact => $_getN(4);
+  @$pb.TagNumber(5)
+  set contact(ServiceDetailsContact v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasContact() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearContact() => clearField(5);
+  @$pb.TagNumber(5)
+  ServiceDetailsContact ensureContact() => $_ensure(4);
 }
 
 class ServiceApplication extends $pb.GeneratedMessage {
@@ -521,7 +709,7 @@ class ServiceProvider extends $pb.GeneratedMessage {
     ..aOM<$8.Identifier>(1, 'id', subBuilder: $8.Identifier.create)
     ..aOM<$10.Timestamp>(2, 'createdAt', subBuilder: $10.Timestamp.create)
     ..aOM<$10.Timestamp>(3, 'updatedAt', subBuilder: $10.Timestamp.create)
-    ..aOM<ServiceInPerson>(5, 'serviceInPerson', subBuilder: ServiceInPerson.create)
+    ..aOM<ServiceDetails>(5, 'details', subBuilder: ServiceDetails.create)
     ..hasRequiredFields = false
   ;
 
@@ -574,15 +762,15 @@ class ServiceProvider extends $pb.GeneratedMessage {
   $10.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(5)
-  ServiceInPerson get serviceInPerson => $_getN(3);
+  ServiceDetails get details => $_getN(3);
   @$pb.TagNumber(5)
-  set serviceInPerson(ServiceInPerson v) { setField(5, v); }
+  set details(ServiceDetails v) { setField(5, v); }
   @$pb.TagNumber(5)
-  $core.bool hasServiceInPerson() => $_has(3);
+  $core.bool hasDetails() => $_has(3);
   @$pb.TagNumber(5)
-  void clearServiceInPerson() => clearField(5);
+  void clearDetails() => clearField(5);
   @$pb.TagNumber(5)
-  ServiceInPerson ensureServiceInPerson() => $_ensure(3);
+  ServiceDetails ensureDetails() => $_ensure(3);
 }
 
 class ServiceSession extends $pb.GeneratedMessage {
@@ -592,7 +780,6 @@ class ServiceSession extends $pb.GeneratedMessage {
     ..aOM<$10.Timestamp>(3, 'updatedAt', subBuilder: $10.Timestamp.create)
     ..aOM<$10.Timestamp>(4, 'scheduledAt', subBuilder: $10.Timestamp.create)
     ..aOM<$10.Timestamp>(5, 'finishedAt', subBuilder: $10.Timestamp.create)
-    ..aOM<$1.Profile>(6, 'client', subBuilder: $1.Profile.create)
     ..aOM<ServiceOffer>(7, 'offer', subBuilder: ServiceOffer.create)
     ..hasRequiredFields = false
   ;
@@ -667,27 +854,16 @@ class ServiceSession extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   $10.Timestamp ensureFinishedAt() => $_ensure(4);
 
-  @$pb.TagNumber(6)
-  $1.Profile get client => $_getN(5);
-  @$pb.TagNumber(6)
-  set client($1.Profile v) { setField(6, v); }
-  @$pb.TagNumber(6)
-  $core.bool hasClient() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearClient() => clearField(6);
-  @$pb.TagNumber(6)
-  $1.Profile ensureClient() => $_ensure(5);
-
   @$pb.TagNumber(7)
-  ServiceOffer get offer => $_getN(6);
+  ServiceOffer get offer => $_getN(5);
   @$pb.TagNumber(7)
   set offer(ServiceOffer v) { setField(7, v); }
   @$pb.TagNumber(7)
-  $core.bool hasOffer() => $_has(6);
+  $core.bool hasOffer() => $_has(5);
   @$pb.TagNumber(7)
   void clearOffer() => clearField(7);
   @$pb.TagNumber(7)
-  ServiceOffer ensureOffer() => $_ensure(6);
+  ServiceOffer ensureOffer() => $_ensure(5);
 }
 
 class CreateServiceSessionRequest extends $pb.GeneratedMessage {
@@ -2766,92 +2942,92 @@ class ListServiceOfferResponse extends $pb.GeneratedMessage {
   $core.List<ServiceOffer> get results => $_getList(0);
 }
 
-class CreateServiceInPersonRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('CreateServiceInPersonRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<ServiceInPerson>(1, 'payload', subBuilder: ServiceInPerson.create)
+class CreateServiceDetailsRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('CreateServiceDetailsRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..aOM<ServiceDetails>(1, 'payload', subBuilder: ServiceDetails.create)
     ..hasRequiredFields = false
   ;
 
-  CreateServiceInPersonRequest._() : super();
-  factory CreateServiceInPersonRequest() => create();
-  factory CreateServiceInPersonRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory CreateServiceInPersonRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  CreateServiceInPersonRequest clone() => CreateServiceInPersonRequest()..mergeFromMessage(this);
-  CreateServiceInPersonRequest copyWith(void Function(CreateServiceInPersonRequest) updates) => super.copyWith((message) => updates(message as CreateServiceInPersonRequest));
+  CreateServiceDetailsRequest._() : super();
+  factory CreateServiceDetailsRequest() => create();
+  factory CreateServiceDetailsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CreateServiceDetailsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  CreateServiceDetailsRequest clone() => CreateServiceDetailsRequest()..mergeFromMessage(this);
+  CreateServiceDetailsRequest copyWith(void Function(CreateServiceDetailsRequest) updates) => super.copyWith((message) => updates(message as CreateServiceDetailsRequest));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static CreateServiceInPersonRequest create() => CreateServiceInPersonRequest._();
-  CreateServiceInPersonRequest createEmptyInstance() => create();
-  static $pb.PbList<CreateServiceInPersonRequest> createRepeated() => $pb.PbList<CreateServiceInPersonRequest>();
+  static CreateServiceDetailsRequest create() => CreateServiceDetailsRequest._();
+  CreateServiceDetailsRequest createEmptyInstance() => create();
+  static $pb.PbList<CreateServiceDetailsRequest> createRepeated() => $pb.PbList<CreateServiceDetailsRequest>();
   @$core.pragma('dart2js:noInline')
-  static CreateServiceInPersonRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateServiceInPersonRequest>(create);
-  static CreateServiceInPersonRequest _defaultInstance;
+  static CreateServiceDetailsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateServiceDetailsRequest>(create);
+  static CreateServiceDetailsRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  ServiceInPerson get payload => $_getN(0);
+  ServiceDetails get payload => $_getN(0);
   @$pb.TagNumber(1)
-  set payload(ServiceInPerson v) { setField(1, v); }
+  set payload(ServiceDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPayload() => $_has(0);
   @$pb.TagNumber(1)
   void clearPayload() => clearField(1);
   @$pb.TagNumber(1)
-  ServiceInPerson ensurePayload() => $_ensure(0);
+  ServiceDetails ensurePayload() => $_ensure(0);
 }
 
-class CreateServiceInPersonResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('CreateServiceInPersonResponse', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<ServiceInPerson>(1, 'result', subBuilder: ServiceInPerson.create)
+class CreateServiceDetailsResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('CreateServiceDetailsResponse', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..aOM<ServiceDetails>(1, 'result', subBuilder: ServiceDetails.create)
     ..hasRequiredFields = false
   ;
 
-  CreateServiceInPersonResponse._() : super();
-  factory CreateServiceInPersonResponse() => create();
-  factory CreateServiceInPersonResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory CreateServiceInPersonResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  CreateServiceInPersonResponse clone() => CreateServiceInPersonResponse()..mergeFromMessage(this);
-  CreateServiceInPersonResponse copyWith(void Function(CreateServiceInPersonResponse) updates) => super.copyWith((message) => updates(message as CreateServiceInPersonResponse));
+  CreateServiceDetailsResponse._() : super();
+  factory CreateServiceDetailsResponse() => create();
+  factory CreateServiceDetailsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CreateServiceDetailsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  CreateServiceDetailsResponse clone() => CreateServiceDetailsResponse()..mergeFromMessage(this);
+  CreateServiceDetailsResponse copyWith(void Function(CreateServiceDetailsResponse) updates) => super.copyWith((message) => updates(message as CreateServiceDetailsResponse));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static CreateServiceInPersonResponse create() => CreateServiceInPersonResponse._();
-  CreateServiceInPersonResponse createEmptyInstance() => create();
-  static $pb.PbList<CreateServiceInPersonResponse> createRepeated() => $pb.PbList<CreateServiceInPersonResponse>();
+  static CreateServiceDetailsResponse create() => CreateServiceDetailsResponse._();
+  CreateServiceDetailsResponse createEmptyInstance() => create();
+  static $pb.PbList<CreateServiceDetailsResponse> createRepeated() => $pb.PbList<CreateServiceDetailsResponse>();
   @$core.pragma('dart2js:noInline')
-  static CreateServiceInPersonResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateServiceInPersonResponse>(create);
-  static CreateServiceInPersonResponse _defaultInstance;
+  static CreateServiceDetailsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateServiceDetailsResponse>(create);
+  static CreateServiceDetailsResponse _defaultInstance;
 
   @$pb.TagNumber(1)
-  ServiceInPerson get result => $_getN(0);
+  ServiceDetails get result => $_getN(0);
   @$pb.TagNumber(1)
-  set result(ServiceInPerson v) { setField(1, v); }
+  set result(ServiceDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasResult() => $_has(0);
   @$pb.TagNumber(1)
   void clearResult() => clearField(1);
   @$pb.TagNumber(1)
-  ServiceInPerson ensureResult() => $_ensure(0);
+  ServiceDetails ensureResult() => $_ensure(0);
 }
 
-class ReadServiceInPersonRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ReadServiceInPersonRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
+class ReadServiceDetailsRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ReadServiceDetailsRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..aOM<$8.Identifier>(1, 'id', subBuilder: $8.Identifier.create)
     ..hasRequiredFields = false
   ;
 
-  ReadServiceInPersonRequest._() : super();
-  factory ReadServiceInPersonRequest() => create();
-  factory ReadServiceInPersonRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ReadServiceInPersonRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  ReadServiceInPersonRequest clone() => ReadServiceInPersonRequest()..mergeFromMessage(this);
-  ReadServiceInPersonRequest copyWith(void Function(ReadServiceInPersonRequest) updates) => super.copyWith((message) => updates(message as ReadServiceInPersonRequest));
+  ReadServiceDetailsRequest._() : super();
+  factory ReadServiceDetailsRequest() => create();
+  factory ReadServiceDetailsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ReadServiceDetailsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  ReadServiceDetailsRequest clone() => ReadServiceDetailsRequest()..mergeFromMessage(this);
+  ReadServiceDetailsRequest copyWith(void Function(ReadServiceDetailsRequest) updates) => super.copyWith((message) => updates(message as ReadServiceDetailsRequest));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static ReadServiceInPersonRequest create() => ReadServiceInPersonRequest._();
-  ReadServiceInPersonRequest createEmptyInstance() => create();
-  static $pb.PbList<ReadServiceInPersonRequest> createRepeated() => $pb.PbList<ReadServiceInPersonRequest>();
+  static ReadServiceDetailsRequest create() => ReadServiceDetailsRequest._();
+  ReadServiceDetailsRequest createEmptyInstance() => create();
+  static $pb.PbList<ReadServiceDetailsRequest> createRepeated() => $pb.PbList<ReadServiceDetailsRequest>();
   @$core.pragma('dart2js:noInline')
-  static ReadServiceInPersonRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ReadServiceInPersonRequest>(create);
-  static ReadServiceInPersonRequest _defaultInstance;
+  static ReadServiceDetailsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ReadServiceDetailsRequest>(create);
+  static ReadServiceDetailsRequest _defaultInstance;
 
   @$pb.TagNumber(1)
   $8.Identifier get id => $_getN(0);
@@ -2865,125 +3041,125 @@ class ReadServiceInPersonRequest extends $pb.GeneratedMessage {
   $8.Identifier ensureId() => $_ensure(0);
 }
 
-class ReadServiceInPersonResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ReadServiceInPersonResponse', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<ServiceInPerson>(1, 'result', subBuilder: ServiceInPerson.create)
+class ReadServiceDetailsResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ReadServiceDetailsResponse', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..aOM<ServiceDetails>(1, 'result', subBuilder: ServiceDetails.create)
     ..hasRequiredFields = false
   ;
 
-  ReadServiceInPersonResponse._() : super();
-  factory ReadServiceInPersonResponse() => create();
-  factory ReadServiceInPersonResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ReadServiceInPersonResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  ReadServiceInPersonResponse clone() => ReadServiceInPersonResponse()..mergeFromMessage(this);
-  ReadServiceInPersonResponse copyWith(void Function(ReadServiceInPersonResponse) updates) => super.copyWith((message) => updates(message as ReadServiceInPersonResponse));
+  ReadServiceDetailsResponse._() : super();
+  factory ReadServiceDetailsResponse() => create();
+  factory ReadServiceDetailsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ReadServiceDetailsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  ReadServiceDetailsResponse clone() => ReadServiceDetailsResponse()..mergeFromMessage(this);
+  ReadServiceDetailsResponse copyWith(void Function(ReadServiceDetailsResponse) updates) => super.copyWith((message) => updates(message as ReadServiceDetailsResponse));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static ReadServiceInPersonResponse create() => ReadServiceInPersonResponse._();
-  ReadServiceInPersonResponse createEmptyInstance() => create();
-  static $pb.PbList<ReadServiceInPersonResponse> createRepeated() => $pb.PbList<ReadServiceInPersonResponse>();
+  static ReadServiceDetailsResponse create() => ReadServiceDetailsResponse._();
+  ReadServiceDetailsResponse createEmptyInstance() => create();
+  static $pb.PbList<ReadServiceDetailsResponse> createRepeated() => $pb.PbList<ReadServiceDetailsResponse>();
   @$core.pragma('dart2js:noInline')
-  static ReadServiceInPersonResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ReadServiceInPersonResponse>(create);
-  static ReadServiceInPersonResponse _defaultInstance;
+  static ReadServiceDetailsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ReadServiceDetailsResponse>(create);
+  static ReadServiceDetailsResponse _defaultInstance;
 
   @$pb.TagNumber(1)
-  ServiceInPerson get result => $_getN(0);
+  ServiceDetails get result => $_getN(0);
   @$pb.TagNumber(1)
-  set result(ServiceInPerson v) { setField(1, v); }
+  set result(ServiceDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasResult() => $_has(0);
   @$pb.TagNumber(1)
   void clearResult() => clearField(1);
   @$pb.TagNumber(1)
-  ServiceInPerson ensureResult() => $_ensure(0);
+  ServiceDetails ensureResult() => $_ensure(0);
 }
 
-class UpdateServiceInPersonRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('UpdateServiceInPersonRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<ServiceInPerson>(1, 'payload', subBuilder: ServiceInPerson.create)
+class UpdateServiceDetailsRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('UpdateServiceDetailsRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..aOM<ServiceDetails>(1, 'payload', subBuilder: ServiceDetails.create)
     ..hasRequiredFields = false
   ;
 
-  UpdateServiceInPersonRequest._() : super();
-  factory UpdateServiceInPersonRequest() => create();
-  factory UpdateServiceInPersonRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory UpdateServiceInPersonRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  UpdateServiceInPersonRequest clone() => UpdateServiceInPersonRequest()..mergeFromMessage(this);
-  UpdateServiceInPersonRequest copyWith(void Function(UpdateServiceInPersonRequest) updates) => super.copyWith((message) => updates(message as UpdateServiceInPersonRequest));
+  UpdateServiceDetailsRequest._() : super();
+  factory UpdateServiceDetailsRequest() => create();
+  factory UpdateServiceDetailsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateServiceDetailsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  UpdateServiceDetailsRequest clone() => UpdateServiceDetailsRequest()..mergeFromMessage(this);
+  UpdateServiceDetailsRequest copyWith(void Function(UpdateServiceDetailsRequest) updates) => super.copyWith((message) => updates(message as UpdateServiceDetailsRequest));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static UpdateServiceInPersonRequest create() => UpdateServiceInPersonRequest._();
-  UpdateServiceInPersonRequest createEmptyInstance() => create();
-  static $pb.PbList<UpdateServiceInPersonRequest> createRepeated() => $pb.PbList<UpdateServiceInPersonRequest>();
+  static UpdateServiceDetailsRequest create() => UpdateServiceDetailsRequest._();
+  UpdateServiceDetailsRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateServiceDetailsRequest> createRepeated() => $pb.PbList<UpdateServiceDetailsRequest>();
   @$core.pragma('dart2js:noInline')
-  static UpdateServiceInPersonRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateServiceInPersonRequest>(create);
-  static UpdateServiceInPersonRequest _defaultInstance;
+  static UpdateServiceDetailsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateServiceDetailsRequest>(create);
+  static UpdateServiceDetailsRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  ServiceInPerson get payload => $_getN(0);
+  ServiceDetails get payload => $_getN(0);
   @$pb.TagNumber(1)
-  set payload(ServiceInPerson v) { setField(1, v); }
+  set payload(ServiceDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPayload() => $_has(0);
   @$pb.TagNumber(1)
   void clearPayload() => clearField(1);
   @$pb.TagNumber(1)
-  ServiceInPerson ensurePayload() => $_ensure(0);
+  ServiceDetails ensurePayload() => $_ensure(0);
 }
 
-class UpdateServiceInPersonResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('UpdateServiceInPersonResponse', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<ServiceInPerson>(1, 'result', subBuilder: ServiceInPerson.create)
+class UpdateServiceDetailsResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('UpdateServiceDetailsResponse', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..aOM<ServiceDetails>(1, 'result', subBuilder: ServiceDetails.create)
     ..hasRequiredFields = false
   ;
 
-  UpdateServiceInPersonResponse._() : super();
-  factory UpdateServiceInPersonResponse() => create();
-  factory UpdateServiceInPersonResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory UpdateServiceInPersonResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  UpdateServiceInPersonResponse clone() => UpdateServiceInPersonResponse()..mergeFromMessage(this);
-  UpdateServiceInPersonResponse copyWith(void Function(UpdateServiceInPersonResponse) updates) => super.copyWith((message) => updates(message as UpdateServiceInPersonResponse));
+  UpdateServiceDetailsResponse._() : super();
+  factory UpdateServiceDetailsResponse() => create();
+  factory UpdateServiceDetailsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateServiceDetailsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  UpdateServiceDetailsResponse clone() => UpdateServiceDetailsResponse()..mergeFromMessage(this);
+  UpdateServiceDetailsResponse copyWith(void Function(UpdateServiceDetailsResponse) updates) => super.copyWith((message) => updates(message as UpdateServiceDetailsResponse));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static UpdateServiceInPersonResponse create() => UpdateServiceInPersonResponse._();
-  UpdateServiceInPersonResponse createEmptyInstance() => create();
-  static $pb.PbList<UpdateServiceInPersonResponse> createRepeated() => $pb.PbList<UpdateServiceInPersonResponse>();
+  static UpdateServiceDetailsResponse create() => UpdateServiceDetailsResponse._();
+  UpdateServiceDetailsResponse createEmptyInstance() => create();
+  static $pb.PbList<UpdateServiceDetailsResponse> createRepeated() => $pb.PbList<UpdateServiceDetailsResponse>();
   @$core.pragma('dart2js:noInline')
-  static UpdateServiceInPersonResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateServiceInPersonResponse>(create);
-  static UpdateServiceInPersonResponse _defaultInstance;
+  static UpdateServiceDetailsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateServiceDetailsResponse>(create);
+  static UpdateServiceDetailsResponse _defaultInstance;
 
   @$pb.TagNumber(1)
-  ServiceInPerson get result => $_getN(0);
+  ServiceDetails get result => $_getN(0);
   @$pb.TagNumber(1)
-  set result(ServiceInPerson v) { setField(1, v); }
+  set result(ServiceDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasResult() => $_has(0);
   @$pb.TagNumber(1)
   void clearResult() => clearField(1);
   @$pb.TagNumber(1)
-  ServiceInPerson ensureResult() => $_ensure(0);
+  ServiceDetails ensureResult() => $_ensure(0);
 }
 
-class DeleteServiceInPersonRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteServiceInPersonRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
+class DeleteServiceDetailsRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteServiceDetailsRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..aOM<$8.Identifier>(1, 'id', subBuilder: $8.Identifier.create)
     ..hasRequiredFields = false
   ;
 
-  DeleteServiceInPersonRequest._() : super();
-  factory DeleteServiceInPersonRequest() => create();
-  factory DeleteServiceInPersonRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory DeleteServiceInPersonRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  DeleteServiceInPersonRequest clone() => DeleteServiceInPersonRequest()..mergeFromMessage(this);
-  DeleteServiceInPersonRequest copyWith(void Function(DeleteServiceInPersonRequest) updates) => super.copyWith((message) => updates(message as DeleteServiceInPersonRequest));
+  DeleteServiceDetailsRequest._() : super();
+  factory DeleteServiceDetailsRequest() => create();
+  factory DeleteServiceDetailsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DeleteServiceDetailsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  DeleteServiceDetailsRequest clone() => DeleteServiceDetailsRequest()..mergeFromMessage(this);
+  DeleteServiceDetailsRequest copyWith(void Function(DeleteServiceDetailsRequest) updates) => super.copyWith((message) => updates(message as DeleteServiceDetailsRequest));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static DeleteServiceInPersonRequest create() => DeleteServiceInPersonRequest._();
-  DeleteServiceInPersonRequest createEmptyInstance() => create();
-  static $pb.PbList<DeleteServiceInPersonRequest> createRepeated() => $pb.PbList<DeleteServiceInPersonRequest>();
+  static DeleteServiceDetailsRequest create() => DeleteServiceDetailsRequest._();
+  DeleteServiceDetailsRequest createEmptyInstance() => create();
+  static $pb.PbList<DeleteServiceDetailsRequest> createRepeated() => $pb.PbList<DeleteServiceDetailsRequest>();
   @$core.pragma('dart2js:noInline')
-  static DeleteServiceInPersonRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteServiceInPersonRequest>(create);
-  static DeleteServiceInPersonRequest _defaultInstance;
+  static DeleteServiceDetailsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteServiceDetailsRequest>(create);
+  static DeleteServiceDetailsRequest _defaultInstance;
 
   @$pb.TagNumber(1)
   $8.Identifier get id => $_getN(0);
@@ -2997,29 +3173,29 @@ class DeleteServiceInPersonRequest extends $pb.GeneratedMessage {
   $8.Identifier ensureId() => $_ensure(0);
 }
 
-class DeleteServiceInPersonResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteServiceInPersonResponse', package: const $pb.PackageName('model'), createEmptyInstance: create)
+class DeleteServiceDetailsResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteServiceDetailsResponse', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..hasRequiredFields = false
   ;
 
-  DeleteServiceInPersonResponse._() : super();
-  factory DeleteServiceInPersonResponse() => create();
-  factory DeleteServiceInPersonResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory DeleteServiceInPersonResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  DeleteServiceInPersonResponse clone() => DeleteServiceInPersonResponse()..mergeFromMessage(this);
-  DeleteServiceInPersonResponse copyWith(void Function(DeleteServiceInPersonResponse) updates) => super.copyWith((message) => updates(message as DeleteServiceInPersonResponse));
+  DeleteServiceDetailsResponse._() : super();
+  factory DeleteServiceDetailsResponse() => create();
+  factory DeleteServiceDetailsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DeleteServiceDetailsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  DeleteServiceDetailsResponse clone() => DeleteServiceDetailsResponse()..mergeFromMessage(this);
+  DeleteServiceDetailsResponse copyWith(void Function(DeleteServiceDetailsResponse) updates) => super.copyWith((message) => updates(message as DeleteServiceDetailsResponse));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static DeleteServiceInPersonResponse create() => DeleteServiceInPersonResponse._();
-  DeleteServiceInPersonResponse createEmptyInstance() => create();
-  static $pb.PbList<DeleteServiceInPersonResponse> createRepeated() => $pb.PbList<DeleteServiceInPersonResponse>();
+  static DeleteServiceDetailsResponse create() => DeleteServiceDetailsResponse._();
+  DeleteServiceDetailsResponse createEmptyInstance() => create();
+  static $pb.PbList<DeleteServiceDetailsResponse> createRepeated() => $pb.PbList<DeleteServiceDetailsResponse>();
   @$core.pragma('dart2js:noInline')
-  static DeleteServiceInPersonResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteServiceInPersonResponse>(create);
-  static DeleteServiceInPersonResponse _defaultInstance;
+  static DeleteServiceDetailsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteServiceDetailsResponse>(create);
+  static DeleteServiceDetailsResponse _defaultInstance;
 }
 
-class ListServiceInPersonRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ListServiceInPersonRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
+class ListServiceDetailsRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ListServiceDetailsRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..aOM<$9.Filtering>(1, 'filter', subBuilder: $9.Filtering.create)
     ..aOM<$9.Sorting>(2, 'orderBy', subBuilder: $9.Sorting.create)
     ..aOM<$9.FieldSelection>(3, 'fields', subBuilder: $9.FieldSelection.create)
@@ -3027,20 +3203,20 @@ class ListServiceInPersonRequest extends $pb.GeneratedMessage {
     ..hasRequiredFields = false
   ;
 
-  ListServiceInPersonRequest._() : super();
-  factory ListServiceInPersonRequest() => create();
-  factory ListServiceInPersonRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ListServiceInPersonRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  ListServiceInPersonRequest clone() => ListServiceInPersonRequest()..mergeFromMessage(this);
-  ListServiceInPersonRequest copyWith(void Function(ListServiceInPersonRequest) updates) => super.copyWith((message) => updates(message as ListServiceInPersonRequest));
+  ListServiceDetailsRequest._() : super();
+  factory ListServiceDetailsRequest() => create();
+  factory ListServiceDetailsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListServiceDetailsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  ListServiceDetailsRequest clone() => ListServiceDetailsRequest()..mergeFromMessage(this);
+  ListServiceDetailsRequest copyWith(void Function(ListServiceDetailsRequest) updates) => super.copyWith((message) => updates(message as ListServiceDetailsRequest));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static ListServiceInPersonRequest create() => ListServiceInPersonRequest._();
-  ListServiceInPersonRequest createEmptyInstance() => create();
-  static $pb.PbList<ListServiceInPersonRequest> createRepeated() => $pb.PbList<ListServiceInPersonRequest>();
+  static ListServiceDetailsRequest create() => ListServiceDetailsRequest._();
+  ListServiceDetailsRequest createEmptyInstance() => create();
+  static $pb.PbList<ListServiceDetailsRequest> createRepeated() => $pb.PbList<ListServiceDetailsRequest>();
   @$core.pragma('dart2js:noInline')
-  static ListServiceInPersonRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListServiceInPersonRequest>(create);
-  static ListServiceInPersonRequest _defaultInstance;
+  static ListServiceDetailsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListServiceDetailsRequest>(create);
+  static ListServiceDetailsRequest _defaultInstance;
 
   @$pb.TagNumber(1)
   $9.Filtering get filter => $_getN(0);
@@ -3087,29 +3263,29 @@ class ListServiceInPersonRequest extends $pb.GeneratedMessage {
   $9.Pagination ensurePaging() => $_ensure(3);
 }
 
-class ListServiceInPersonResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ListServiceInPersonResponse', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..pc<ServiceInPerson>(1, 'results', $pb.PbFieldType.PM, subBuilder: ServiceInPerson.create)
+class ListServiceDetailsResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ListServiceDetailsResponse', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..pc<ServiceDetails>(1, 'results', $pb.PbFieldType.PM, subBuilder: ServiceDetails.create)
     ..hasRequiredFields = false
   ;
 
-  ListServiceInPersonResponse._() : super();
-  factory ListServiceInPersonResponse() => create();
-  factory ListServiceInPersonResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ListServiceInPersonResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  ListServiceInPersonResponse clone() => ListServiceInPersonResponse()..mergeFromMessage(this);
-  ListServiceInPersonResponse copyWith(void Function(ListServiceInPersonResponse) updates) => super.copyWith((message) => updates(message as ListServiceInPersonResponse));
+  ListServiceDetailsResponse._() : super();
+  factory ListServiceDetailsResponse() => create();
+  factory ListServiceDetailsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListServiceDetailsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  ListServiceDetailsResponse clone() => ListServiceDetailsResponse()..mergeFromMessage(this);
+  ListServiceDetailsResponse copyWith(void Function(ListServiceDetailsResponse) updates) => super.copyWith((message) => updates(message as ListServiceDetailsResponse));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static ListServiceInPersonResponse create() => ListServiceInPersonResponse._();
-  ListServiceInPersonResponse createEmptyInstance() => create();
-  static $pb.PbList<ListServiceInPersonResponse> createRepeated() => $pb.PbList<ListServiceInPersonResponse>();
+  static ListServiceDetailsResponse create() => ListServiceDetailsResponse._();
+  ListServiceDetailsResponse createEmptyInstance() => create();
+  static $pb.PbList<ListServiceDetailsResponse> createRepeated() => $pb.PbList<ListServiceDetailsResponse>();
   @$core.pragma('dart2js:noInline')
-  static ListServiceInPersonResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListServiceInPersonResponse>(create);
-  static ListServiceInPersonResponse _defaultInstance;
+  static ListServiceDetailsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListServiceDetailsResponse>(create);
+  static ListServiceDetailsResponse _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<ServiceInPerson> get results => $_getList(0);
+  $core.List<ServiceDetails> get results => $_getList(0);
 }
 
 class CreateServiceRequest extends $pb.GeneratedMessage {

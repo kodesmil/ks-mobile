@@ -39,6 +39,7 @@ class _HomePageState extends State<HomePage> {
       ChatPage(),
       ServiceApplicationPage(),
       ServiceOfferPage(),
+      ServiceSessionArchivePage(),
     ];
     return NotificationContainer(
       child: MenstruationPersonalInfoWidget(
@@ -75,6 +76,10 @@ class _HomePageState extends State<HomePage> {
               BottomNavigationBarItem(
                 icon: Icon(Icons.card_travel),
                 title: Text('Services'),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.archive),
+                title: Text('Archive'),
               ),
             ],
           ),

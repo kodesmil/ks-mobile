@@ -20,13 +20,13 @@ abstract class _ServiceSessionStore with Store {
   );
 
   @observable
-  List<Service> services = [];
+  List<ServiceSession> sessions = [];
 
   @action
-  Future fetch(String tagKey) async {
-    final request = ListServiceRequest();
-    final response = await client.listService(request);
+  Future fetch() async {
+    final request = ListServiceSessionRequest();
+    final response = await client.listServiceSession(request);
     loadingStore.success = true;
-    services = response.results;
+    sessions = response.results;
   }
 }

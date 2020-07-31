@@ -9,32 +9,32 @@ part of 'store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ServiceSessionStore on _ServiceSessionStore, Store {
-  final _$servicesAtom = Atom(name: '_ServiceSessionStore.services');
+  final _$sessionsAtom = Atom(name: '_ServiceSessionStore.sessions');
 
   @override
-  List<Service> get services {
-    _$servicesAtom.reportRead();
-    return super.services;
+  List<ServiceSession> get sessions {
+    _$sessionsAtom.reportRead();
+    return super.sessions;
   }
 
   @override
-  set services(List<Service> value) {
-    _$servicesAtom.reportWrite(value, super.services, () {
-      super.services = value;
+  set sessions(List<ServiceSession> value) {
+    _$sessionsAtom.reportWrite(value, super.sessions, () {
+      super.sessions = value;
     });
   }
 
   final _$fetchAsyncAction = AsyncAction('_ServiceSessionStore.fetch');
 
   @override
-  Future<dynamic> fetch(String tagKey) {
-    return _$fetchAsyncAction.run(() => super.fetch(tagKey));
+  Future<dynamic> fetch() {
+    return _$fetchAsyncAction.run(() => super.fetch());
   }
 
   @override
   String toString() {
     return '''
-services: ${services}
+sessions: ${sessions}
     ''';
   }
 }

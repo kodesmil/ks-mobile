@@ -38,6 +38,7 @@ abstract class _ServiceOfferStore with Store {
     try {
       final payload = ServiceSession()
         ..id = (Identifier()..resourceId = Uuid().v4())
+        ..scheduledAt = Timestamp.fromDateTime(DateTime.now())
         ..offer = offer;
       //..client
       final request = CreateServiceSessionRequest();

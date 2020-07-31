@@ -54,10 +54,10 @@ Widget authGuarded(
   Widget page,
 ) {
   final store = Provider.of<UserStore>(context);
-  store.signInSilently();
   if (store.user != null) {
     return page;
   }
+  store.signInSilently();
   return StreamBuilder(
     stream: store.output,
     builder: (context, snap) {
