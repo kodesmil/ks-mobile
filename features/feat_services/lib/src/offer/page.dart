@@ -33,23 +33,35 @@ class _ServiceOfferPageState extends State<ServiceOfferPage> {
                 (context, index) {
                   final e = store.subjects[index];
                   final contact = e.provider.details.contact;
-                  return ListTile(
-                    title: Text(
-                      e.description,
+                  final company = e.provider.details.company;
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 15),
+                    child: ListTile(
+                      title: Text(
+                        e.description,
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                      subtitle: Text(
+                        '${e.price} ${e.currency}',
+                      ),
+                      trailing: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(company.name),
+                          Text(
+                            '${contact.firstName} ${contact.lastName}',
+                            style: Theme.of(context).textTheme.caption,
+                          ),
+                        ],
+                      ),
+                      onTap: () {
+                        Navigator.of(context, rootNavigator: true).push(
+                          CupertinoPageRoute(
+                            builder: (context) => ServiceOfferDetailsPage(e),
+                          ),
+                        );
+                      },
                     ),
-                    subtitle: Text(
-                      '${e.price} ${e.currency}',
-                    ),
-                    trailing: Text(
-                      '${contact.firstName} ${contact.lastName}',
-                    ),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        CupertinoPageRoute(
-                          builder: (context) => ServiceOfferDetailsPage(e),
-                        ),
-                      );
-                    },
                   );
                 },
                 childCount: store.subjects.length,
@@ -71,34 +83,36 @@ class ServiceOfferDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final store = Provider.of<ServiceOfferStore>(context);
     final contact = offer.provider.details.contact;
-    return Scaffold(
-      appBar: KsSmallNavigationBar(
-        title: 'Details',
-      ),
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: 60),
-            Text(contact.firstName),
-            Text(contact.lastName),
-            SizedBox(height: 40),
-            Text(offer.description),
-            SizedBox(height: 20),
-            Text('${offer.price} ${offer.currency}'),
-            SizedBox(height: 40),
-            RaisedButton(
-              child: Text('Start session'),
-              onPressed: () async {
-                final session = await store.startSession(offer);
-                await Navigator.of(context).push(
-                  CupertinoPageRoute(
-                    builder: (context) => ServiceSessionPage(session),
-                  ),
-                );
-              },
+    return CupertinoPageScaffold(
+      navigationBar: KsSmallNavigationBar(title: 'Details'),
+      child: Material(
+        child: SafeArea(
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: 60),
+                Text(contact.firstName),
+                Text(contact.lastName),
+                SizedBox(height: 40),
+                Text(offer.description),
+                SizedBox(height: 20),
+                Text('${offer.price} ${offer.currency}'),
+                SizedBox(height: 40),
+                RaisedButton(
+                  child: Text('Start session'),
+                  onPressed: () async {
+                    final session = await store.startSession(offer);
+                    await Navigator.of(context).pushReplacement(
+                      CupertinoPageRoute(
+                        builder: (context) => ServiceSessionPage(session),
+                      ),
+                    );
+                  },
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

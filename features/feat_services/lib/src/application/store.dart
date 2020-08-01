@@ -53,10 +53,11 @@ abstract class _ServiceApplicationStore with Store {
           ..id = (Identifier()..resourceId = Uuid().v4());
       } else {
         application = response.results.first;
-        provider = application.provider;
-        details = provider.details;
-        company = details.company;
-        contact = details.contact;
+        provider = application.provider ?? ServiceProvider()
+          ..id = (Identifier()..resourceId = Uuid().v4());
+        details = provider.details ?? ServiceDetails();
+        company = details.company ?? ServiceDetailsCompany();
+        contact = details.contact ?? ServiceDetailsContact();
       }
     } catch (e) {
       print(e);

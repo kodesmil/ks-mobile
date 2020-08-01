@@ -54,6 +54,36 @@ mixin _$ServiceApplicationStore on _ServiceApplicationStore, Store {
     });
   }
 
+  final _$contactAtom = Atom(name: '_ServiceApplicationStore.contact');
+
+  @override
+  ServiceDetailsContact get contact {
+    _$contactAtom.reportRead();
+    return super.contact;
+  }
+
+  @override
+  set contact(ServiceDetailsContact value) {
+    _$contactAtom.reportWrite(value, super.contact, () {
+      super.contact = value;
+    });
+  }
+
+  final _$companyAtom = Atom(name: '_ServiceApplicationStore.company');
+
+  @override
+  ServiceDetailsCompany get company {
+    _$companyAtom.reportRead();
+    return super.company;
+  }
+
+  @override
+  set company(ServiceDetailsCompany value) {
+    _$companyAtom.reportWrite(value, super.company, () {
+      super.company = value;
+    });
+  }
+
   final _$providerAtom = Atom(name: '_ServiceApplicationStore.provider');
 
   @override
@@ -113,6 +143,8 @@ mixin _$ServiceApplicationStore on _ServiceApplicationStore, Store {
 subjects: ${subjects},
 application: ${application},
 details: ${details},
+contact: ${contact},
+company: ${company},
 provider: ${provider}
     ''';
   }

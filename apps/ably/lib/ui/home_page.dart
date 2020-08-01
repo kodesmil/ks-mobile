@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.card_travel),
-                title: Text('Services'),
+                title: Text('Offers'),
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.archive),

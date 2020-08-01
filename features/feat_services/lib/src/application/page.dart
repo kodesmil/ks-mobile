@@ -39,6 +39,11 @@ class _ServiceApplicationPageState extends State<ServiceApplicationPage> {
     final contact = store.contact;
     _firstNameController.text = contact.firstName;
     _lastNameController.text = contact.lastName;
+    _emailController.text = contact.email;
+    _phoneController.text = contact.phone;
+    final company = store.company;
+    _companyController.text = company.name;
+    _addressController.text = company.address;
     super.didChangeDependencies();
   }
 
@@ -156,28 +161,35 @@ class _ServiceApplicationPageState extends State<ServiceApplicationPage> {
     });
   }
 
-  void _emailListener() {
-    final store = Provider.of<ServiceApplicationStore>(context, listen: false);
-    store.application.provider.details.contact.lastName =
-        _lastNameController.text;
-  }
-
   void _companyListener() {
     final store = Provider.of<ServiceApplicationStore>(context, listen: false);
-    store.application.provider.details.contact.lastName =
-        _lastNameController.text;
+    store.company = store.company.copyWith((e) {
+      e.name = _companyController.text;
+    });
   }
 
   void _addressListener() {
     final store = Provider.of<ServiceApplicationStore>(context, listen: false);
-    store.application.provider.details.contact.lastName =
-        _lastNameController.text;
+    store.company = store.company.copyWith((e) {
+      e.address = _addressController.text;
+    });
+  }
+
+  void _emailListener() {
+    final store = Provider.of<ServiceApplicationStore>(context, listen: false);
+    store.contact = store.contact.copyWith((e) {
+      e.email = _emailController.text;
+    });
   }
 
   void _phoneListener() {
     final store = Provider.of<ServiceApplicationStore>(context, listen: false);
-    store.application.provider.details.contact.lastName =
-        _lastNameController.text;
+    store.contact = store.contact.copyWith((e) {
+      e.phone = _phoneController.text;
+    });
+    store.company = store.company.copyWith((e) {
+      e.phone = _phoneController.text;
+    });
   }
 }
 

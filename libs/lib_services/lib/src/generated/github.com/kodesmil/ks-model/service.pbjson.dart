@@ -123,9 +123,34 @@ const ServiceProvider$json = const {
     const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'id'},
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
-    const {'1': 'details', '3': 5, '4': 1, '5': 11, '6': '.model.ServiceDetails', '10': 'details'},
+    const {'1': 'details', '3': 4, '4': 1, '5': 11, '6': '.model.ServiceDetails', '10': 'details'},
   ],
   '7': const {},
+};
+
+const ServiceProviderSessionEvaluation$json = const {
+  '1': 'ServiceProviderSessionEvaluation',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'id'},
+    const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
+    const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
+    const {'1': 'session', '3': 4, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'session'},
+    const {'1': 'comment', '3': 5, '4': 1, '5': 9, '10': 'comment'},
+    const {'1': 'recommendation_rate', '3': 6, '4': 1, '5': 14, '6': '.model.ServiceProviderSessionEvaluation.RecommendationRate', '10': 'recommendationRate'},
+  ],
+  '4': const [ServiceProviderSessionEvaluation_RecommendationRate$json],
+  '7': const {},
+};
+
+const ServiceProviderSessionEvaluation_RecommendationRate$json = const {
+  '1': 'RecommendationRate',
+  '2': const [
+    const {'1': 'NO', '2': 0},
+    const {'1': 'RATHER_NO', '2': 1},
+    const {'1': 'MAYBE', '2': 2},
+    const {'1': 'RATHER_YES', '2': 3},
+    const {'1': 'YES', '2': 4},
+  ],
 };
 
 const ServiceSession$json = const {
@@ -136,7 +161,21 @@ const ServiceSession$json = const {
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
     const {'1': 'scheduled_at', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'scheduledAt'},
     const {'1': 'finished_at', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'finishedAt'},
-    const {'1': 'offer', '3': 7, '4': 1, '5': 11, '6': '.model.ServiceOffer', '8': const {}, '10': 'offer'},
+    const {'1': 'offer', '3': 6, '4': 1, '5': 11, '6': '.model.ServiceOffer', '8': const {}, '10': 'offer'},
+    const {'1': 'notes', '3': 7, '4': 3, '5': 11, '6': '.model.ServiceSessionNote', '10': 'notes'},
+    const {'1': 'evaluation', '3': 8, '4': 1, '5': 11, '6': '.model.ServiceProviderSessionEvaluation', '10': 'evaluation'},
+  ],
+  '7': const {},
+};
+
+const ServiceSessionNote$json = const {
+  '1': 'ServiceSessionNote',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'id'},
+    const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
+    const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
+    const {'1': 'session', '3': 4, '4': 3, '5': 11, '6': '.model.ServiceSession', '10': 'session'},
+    const {'1': 'text', '3': 5, '4': 1, '5': 9, '10': 'text'},
   ],
   '7': const {},
 };

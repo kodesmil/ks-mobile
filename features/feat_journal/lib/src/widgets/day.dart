@@ -223,11 +223,10 @@ Future newPageStart(BuildContext context) {
   return Navigator.of(context).push(
     CupertinoPageRoute<void>(
       builder: (BuildContext context) {
-        return Scaffold(
-          appBar: KsSmallNavigationBar(
-            title: 'Edit',
+        return CupertinoPageScaffold(
+          navigationBar: KsSmallNavigationBar(title: 'Edit'
           ),
-          body: EditPeriodPage(),
+          child: EditPeriodPage(),
         );
       },
     ),

@@ -22,7 +22,6 @@ abstract class _NotificationDevicesStore with Store {
 
   @action
   Future registerDeviceToken(String token) async {
-    final timestamp = Timestamp();
     final payload = NotificationDevice()
       ..deviceToken = token;
     final request = CreateNotificationDeviceRequest()..payload = payload;
