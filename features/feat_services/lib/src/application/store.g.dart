@@ -8,38 +8,8 @@ part of 'store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$ServiceApplicationStore on _ServiceApplicationStore, Store {
-  final _$subjectsAtom = Atom(name: '_ServiceApplicationStore.subjects');
-
-  @override
-  List<ServiceApplication> get subjects {
-    _$subjectsAtom.reportRead();
-    return super.subjects;
-  }
-
-  @override
-  set subjects(List<ServiceApplication> value) {
-    _$subjectsAtom.reportWrite(value, super.subjects, () {
-      super.subjects = value;
-    });
-  }
-
-  final _$applicationAtom = Atom(name: '_ServiceApplicationStore.application');
-
-  @override
-  ServiceApplication get application {
-    _$applicationAtom.reportRead();
-    return super.application;
-  }
-
-  @override
-  set application(ServiceApplication value) {
-    _$applicationAtom.reportWrite(value, super.application, () {
-      super.application = value;
-    });
-  }
-
-  final _$detailsAtom = Atom(name: '_ServiceApplicationStore.details');
+mixin _$ServiceApplicationJoinStore on _ServiceApplicationJoinStore, Store {
+  final _$detailsAtom = Atom(name: '_ServiceApplicationJoinStore.details');
 
   @override
   ServiceDetails get details {
@@ -54,7 +24,7 @@ mixin _$ServiceApplicationStore on _ServiceApplicationStore, Store {
     });
   }
 
-  final _$contactAtom = Atom(name: '_ServiceApplicationStore.contact');
+  final _$contactAtom = Atom(name: '_ServiceApplicationJoinStore.contact');
 
   @override
   ServiceDetailsContact get contact {
@@ -69,7 +39,7 @@ mixin _$ServiceApplicationStore on _ServiceApplicationStore, Store {
     });
   }
 
-  final _$companyAtom = Atom(name: '_ServiceApplicationStore.company');
+  final _$companyAtom = Atom(name: '_ServiceApplicationJoinStore.company');
 
   @override
   ServiceDetailsCompany get company {
@@ -84,7 +54,7 @@ mixin _$ServiceApplicationStore on _ServiceApplicationStore, Store {
     });
   }
 
-  final _$providerAtom = Atom(name: '_ServiceApplicationStore.provider');
+  final _$providerAtom = Atom(name: '_ServiceApplicationJoinStore.provider');
 
   @override
   ServiceProvider get provider {
@@ -99,15 +69,8 @@ mixin _$ServiceApplicationStore on _ServiceApplicationStore, Store {
     });
   }
 
-  final _$fetchAsyncAction = AsyncAction('_ServiceApplicationStore.fetch');
-
-  @override
-  Future<dynamic> fetch() {
-    return _$fetchAsyncAction.run(() => super.fetch());
-  }
-
   final _$addApplicationFileAsyncAction =
-      AsyncAction('_ServiceApplicationStore.addApplicationFile');
+      AsyncAction('_ServiceApplicationJoinStore.addApplicationFile');
 
   @override
   Future<dynamic> addApplicationFile(String url) {
@@ -116,36 +79,68 @@ mixin _$ServiceApplicationStore on _ServiceApplicationStore, Store {
   }
 
   final _$createOrUpdateAsyncAction =
-      AsyncAction('_ServiceApplicationStore.createOrUpdate');
+      AsyncAction('_ServiceApplicationJoinStore.createOrUpdate');
 
   @override
-  Future<dynamic> createOrUpdate() {
-    return _$createOrUpdateAsyncAction.run(() => super.createOrUpdate());
+  Future<dynamic> createOrUpdate(ServiceApplication application) {
+    return _$createOrUpdateAsyncAction
+        .run(() => super.createOrUpdate(application));
   }
 
-  final _$updateAsyncAction = AsyncAction('_ServiceApplicationStore.update');
+  final _$updateAsyncAction =
+      AsyncAction('_ServiceApplicationJoinStore.update');
 
   @override
-  Future<dynamic> update() {
-    return _$updateAsyncAction.run(() => super.update());
+  Future<dynamic> update(ServiceApplication application) {
+    return _$updateAsyncAction.run(() => super.update(application));
   }
 
-  final _$createAsyncAction = AsyncAction('_ServiceApplicationStore.create');
+  final _$createAsyncAction =
+      AsyncAction('_ServiceApplicationJoinStore.create');
 
   @override
-  Future<dynamic> create() {
-    return _$createAsyncAction.run(() => super.create());
+  Future<dynamic> create(ServiceApplication application) {
+    return _$createAsyncAction.run(() => super.create(application));
   }
 
   @override
   String toString() {
     return '''
-subjects: ${subjects},
-application: ${application},
 details: ${details},
 contact: ${contact},
 company: ${company},
 provider: ${provider}
+    ''';
+  }
+}
+
+mixin _$ServiceApplicationListStore on _ServiceApplicationListStore, Store {
+  final _$subjectsAtom = Atom(name: '_ServiceApplicationListStore.subjects');
+
+  @override
+  List<ServiceApplication> get subjects {
+    _$subjectsAtom.reportRead();
+    return super.subjects;
+  }
+
+  @override
+  set subjects(List<ServiceApplication> value) {
+    _$subjectsAtom.reportWrite(value, super.subjects, () {
+      super.subjects = value;
+    });
+  }
+
+  final _$fetchAsyncAction = AsyncAction('_ServiceApplicationListStore.fetch');
+
+  @override
+  Future<dynamic> fetch() {
+    return _$fetchAsyncAction.run(() => super.fetch());
+  }
+
+  @override
+  String toString() {
+    return '''
+subjects: ${subjects}
     ''';
   }
 }

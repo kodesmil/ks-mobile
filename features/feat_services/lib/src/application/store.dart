@@ -6,19 +6,13 @@ import 'package:uuid/uuid.dart';
 
 part 'store.g.dart';
 
-class ServiceApplicationStore = _ServiceApplicationStore
-    with _$ServiceApplicationStore;
+class ServiceApplicationJoinStore = _ServiceApplicationJoinStore
+    with _$ServiceApplicationJoinStore;
 
-abstract class _ServiceApplicationStore with Store {
+abstract class _ServiceApplicationJoinStore with Store {
   final ErrorStore errorStore;
   final LoadingStore loadingStore;
   final ServicesClient client;
-
-  @observable
-  List<ServiceApplication> subjects = [];
-
-  @observable
-  ServiceApplication application;
 
   @observable
   ServiceDetails details;
@@ -32,52 +26,28 @@ abstract class _ServiceApplicationStore with Store {
   @observable
   ServiceProvider provider;
 
-  _ServiceApplicationStore(
+  _ServiceApplicationJoinStore(
     this.errorStore,
     this.loadingStore,
     this.client,
   );
 
   @action
-  Future fetch() async {
-    try {
-      final request = ListServiceApplicationRequest();
-      final response = await client.listServiceApplication(request);
-      if (response.results.isEmpty) {
-        details = ServiceDetails();
-        company = ServiceDetailsCompany();
-        contact = ServiceDetailsContact();
-        provider = ServiceProvider()
-          ..id = (Identifier()..resourceId = Uuid().v4());
-        application = ServiceApplication()
-          ..id = (Identifier()..resourceId = Uuid().v4());
-      } else {
-        application = response.results.first;
-        provider = application.provider ?? ServiceProvider()
-          ..id = (Identifier()..resourceId = Uuid().v4());
-        details = provider.details ?? ServiceDetails();
-        company = details.company ?? ServiceDetailsCompany();
-        contact = details.contact ?? ServiceDetailsContact();
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  @action
   Future addApplicationFile(String url) async {
     final file = ServiceApplicationFile()
       ..id = (Identifier()..resourceId = Uuid().v4())
       ..url = url;
-    application.files.add(file);
+    // application.files.add(file);
   }
 
   @action
-  Future createOrUpdate() async =>
-      application?.updatedAt != null ? await update() : await create();
+  Future createOrUpdate(ServiceApplication application) async =>
+      application?.updatedAt != null
+          ? await update(application)
+          : await create(application);
 
   @action
-  Future update() async {
+  Future update(ServiceApplication application) async {
     try {
       final payload = application
         ..provider = (provider
@@ -95,7 +65,7 @@ abstract class _ServiceApplicationStore with Store {
   }
 
   @action
-  Future create() async {
+  Future create(ServiceApplication application) async {
     try {
       final payload = application
         ..provider = (provider
@@ -107,6 +77,35 @@ abstract class _ServiceApplicationStore with Store {
       final response = await client.createServiceApplication(request);
       loadingStore.success = true;
       application = response.result;
+    } catch (e) {
+      print(e);
+    }
+  }
+}
+
+class ServiceApplicationListStore = _ServiceApplicationListStore
+    with _$ServiceApplicationListStore;
+
+abstract class _ServiceApplicationListStore with Store {
+  final ErrorStore errorStore;
+  final LoadingStore loadingStore;
+  final ServicesClient client;
+
+  @observable
+  List<ServiceApplication> subjects = [];
+
+  _ServiceApplicationListStore(
+    this.errorStore,
+    this.loadingStore,
+    this.client,
+  );
+
+  @action
+  Future fetch() async {
+    try {
+      final request = ListServiceApplicationRequest();
+      final response = await client.listServiceApplication(request);
+      subjects = response.results;
     } catch (e) {
       print(e);
     }

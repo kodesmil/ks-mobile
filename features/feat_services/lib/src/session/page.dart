@@ -5,6 +5,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 import 'package:lib_lego/lib_lego.dart';
 import 'package:lib_services/lib_services.dart';
+import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 
@@ -190,60 +191,53 @@ class _ServiceSessionArchivePageState extends State<ServiceSessionArchivePage> {
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<ServiceSessionStore>(context);
-    return CupertinoPageScaffold(
-      child: CustomScrollView(
-        slivers: [
-          KsNavigationBar(title: 'Archive'),
-          Observer(
-            builder: (context) => SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final e = store.sessions[index];
-                  final contact = e.offer.provider.details.contact;
-                  final company = e.offer.provider.details.company;
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 20),
-                    child: ListTile(
-                      title: Text(
-                        e.offer.description,
-                        style: Theme.of(context).textTheme.headline6,
-                      ),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'From: ${_presentDate(e.scheduledAt)}',
-                          ),
-                          Text(
-                            'To: ${_presentDate(e.finishedAt)}',
-                          ),
-                          Text('Paid: ${e.offer.price} ${e.offer.currency}'),
-                          e.evaluation.comment?.isNotEmpty == true
-                              ? Text('Comment: ${e.evaluation.comment}')
-                              : Container(),
-                          SmoothStarRating(
-                            starCount: 5,
-                            rating: e.evaluation.recommendationRate,
-                            size: 30,
-                            isReadOnly: true,
-                            color: Colors.yellow,
-                            borderColor: Colors.yellow.withOpacity(0.5),
-                            spacing: 0,
-                          ),
-                        ],
-                      ),
-                      trailing: CompanyWidget(
-                        company: company,
-                        contact: contact,
-                      ),
+    return Observer(
+      builder: (context) => SliverList(
+        delegate: SliverChildBuilderDelegate(
+          (context, index) {
+            final e = store.sessions[index];
+            final contact = e.offer.provider.details.contact;
+            final company = e.offer.provider.details.company;
+            return Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: ListTile(
+                title: Text(
+                  e.offer.description,
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'From: ${_presentDate(e.scheduledAt)}',
                     ),
-                  );
-                },
-                childCount: store.sessions.length,
+                    Text(
+                      'To: ${_presentDate(e.finishedAt)}',
+                    ),
+                    Text('Paid: ${e.offer.price} ${e.offer.currency}'),
+                    e.evaluation.comment?.isNotEmpty == true
+                        ? Text('Comment: ${e.evaluation.comment}')
+                        : Container(),
+                    SmoothStarRating(
+                      starCount: 5,
+                      rating: e.evaluation.recommendationRate,
+                      size: 30,
+                      isReadOnly: true,
+                      color: Colors.yellow,
+                      borderColor: Colors.yellow.withOpacity(0.5),
+                      spacing: 0,
+                    ),
+                  ],
+                ),
+                trailing: CompanyWidget(
+                  company: company,
+                  contact: contact,
+                ),
               ),
-            ),
-          ),
-        ],
+            );
+          },
+          childCount: store.sessions.length,
+        ),
       ),
     );
   }

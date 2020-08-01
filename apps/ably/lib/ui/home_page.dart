@@ -12,6 +12,7 @@ import 'package:feat_storage/feat_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lib_lego/lib_lego.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -22,7 +23,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  Widget build(BuildContext context) {
+    final appState = Provider.of<AppStateNotifier>(context);
+    return appState.appMode == AppMode.client
+        ? HomeClientPage()
+        : HomeBusinessPage();
+  }
+}
 
+class HomeClientPage extends StatefulWidget {
+  const HomeClientPage({Key key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _HomeClientPageState();
+}
+
+class _HomeClientPageState extends State<HomeClientPage> {
   @override
   void didChangeDependencies() {
     final store = Provider.of<FeedStore>(context);
@@ -32,65 +49,131 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<AppStateNotifier>(context);
+    final titles = [
+      'Journal',
+      'Hi!',
+      'Chat',
+      'Offers',
+      'Archive',
+    ];
     final pages = [
-      ProfilePage(),
-      JournalPage(),
-      HelloPage(),
-      ChatPage(),
-      ServiceApplicationPage(),
+      SliverPage(child: JournalPage()),
+      SliverPage(child: HelloPage()),
+      SliverPage(child: ChatPage()),
       ServiceOfferPage(),
       ServiceSessionArchivePage(),
     ];
+    final items = [
+      BottomNavigationBarItem(
+        icon: Icon(Icons.calendar_today),
+        title: Text('Journal'),
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.home),
+        title: Text('Feed'),
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.people),
+        title: Text('Chat'),
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.card_travel),
+        title: Text('Offers'),
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.archive),
+        title: Text('Archive'),
+      ),
+    ];
+    var theme = Theme.of(context).bottomNavigationBarTheme;
     return NotificationContainer(
       child: MenstruationPersonalInfoWidget(
         child: CupertinoTabScaffold(
           tabBar: CupertinoTabBar(
-            backgroundColor:
-                Theme.of(context).bottomNavigationBarTheme.backgroundColor,
-            activeColor:
-                Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
-            inactiveColor:
-                Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
-            currentIndex: 2,
-            items: [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                title: Text('Profile'),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.calendar_today),
-                title: Text('Journal'),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                title: Text('Feed'),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.people),
-                title: Text('Chat'),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.flag),
-                title: Text('Join'),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.card_travel),
-                title: Text('Offers'),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.archive),
-                title: Text('Archive'),
-              ),
-            ],
+            backgroundColor: theme.backgroundColor,
+            activeColor: theme.selectedItemColor,
+            inactiveColor: theme.unselectedItemColor,
+            currentIndex: 1,
+            items: items,
           ),
           tabBuilder: (BuildContext context, int index) {
             return CupertinoTabView(
               builder: (BuildContext context) {
-                return pages[index];
+                return CupertinoPageScaffold(
+                  child: CustomScrollView(
+                    slivers: [
+                      KsNavigationBar(
+                        leading: GestureDetector(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: SizedBox(
+                              width: 40,
+                              height: 40,
+                              child: ProfileAvatar(),
+                            ),
+                          ),
+                          onTap: () {
+                            Navigator.of(context, rootNavigator: true).push(
+                              CupertinoPageRoute(
+                                fullscreenDialog: true,
+                                builder: (context) => ProfilePage(),
+                              ),
+                            );
+                          },
+                        ),
+                        title: titles[index],
+                      ),
+                      pages[index],
+                    ],
+                  ),
+                );
               },
             );
           },
         ),
+      ),
+    );
+  }
+}
+
+class HomeBusinessPage extends StatefulWidget {
+  const HomeBusinessPage({Key key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _HomeBusinessPageState();
+}
+
+class _HomeBusinessPageState extends State<HomeBusinessPage> {
+
+  @override
+  Widget build(BuildContext context) {
+    return  CupertinoPageScaffold(
+      child: CustomScrollView(
+        slivers: [
+          KsNavigationBar(
+            leading: GestureDetector(
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: SizedBox(
+                  width: 40,
+                  height: 40,
+                  child: ProfileAvatar(),
+                ),
+              ),
+              onTap: () {
+                Navigator.of(context, rootNavigator: true).push(
+                  CupertinoPageRoute(
+                    fullscreenDialog: true,
+                    builder: (context) => ProfilePage(),
+                  ),
+                );
+              },
+            ),
+            title: 'Services',
+          ),
+          ServiceApplicationPage(),
+        ],
       ),
     );
   }

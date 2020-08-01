@@ -11,42 +11,17 @@ import 'package:indexed_list_view/indexed_list_view.dart';
 import 'widgets/day.dart';
 
 class JournalPage extends StatefulWidget {
-  @override
-  _JournalPageState createState() => _JournalPageState();
-}
-
-class _JournalPageState extends State<JournalPage> {
-  @override
-  void didChangeDependencies() {
-    final store = Provider.of<MenstruationDailyEntryStore>(context);
-    store.list();
-    super.didChangeDependencies();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: KsAppBar(
-        context: context,
-        title: translate('g.journal'),
-      ),
-      body: _DayWidget(),
-    );
-  }
-}
-
-class _DayWidget extends StatefulWidget {
-  const _DayWidget({
+  const JournalPage({
     Key key,
   }) : super(key: key);
 
   @override
-  __DayWidgetState createState() => __DayWidgetState();
+  _JournalPageState createState() => _JournalPageState();
 }
 
 const kPageViewOffset = 1000;
 
-class __DayWidgetState extends State<_DayWidget> {
+class _JournalPageState extends State<JournalPage> {
   PageController _infiniteController;
   IndexedScrollController _infiniteController2;
 
@@ -60,61 +35,66 @@ class __DayWidgetState extends State<_DayWidget> {
     _infiniteController2 = IndexedScrollController(
       initialIndex: kPageViewOffset - 3,
     );
+    final store = Provider.of<MenstruationDailyEntryStore>(context);
+    store.list();
     super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<MenstruationDailyEntryStore>(context);
-    return Column(
-      children: [
-        Container(
-          height: weekSize * 1.75,
-          child: IndexedListView.builder(
-            scrollDirection: Axis.horizontal,
-            controller: _infiniteController2,
-            itemExtent: weekSize,
-            itemBuilder: (context, index) {
-              final date = DateTime.now()
-                  .toUtc()
-                  .add(Duration(days: index - kPageViewOffset))
-                  .toLocal();
-              final entry = store.entriesByDay[DateFormat.yMd().format(date)];
-              return Container(
-                width: weekSize,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 5,
-                  vertical: 20,
-                ),
-                child: SingleDay(
-                  day: date,
-                  entry: entry,
-                  showMonth: false,
-                  showWeekday: true,
-                  interactive: false,
-                ),
-              );
-            },
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      child: Column(
+        children: [
+          Container(
+            height: weekSize * 1.75,
+            child: IndexedListView.builder(
+              scrollDirection: Axis.horizontal,
+              controller: _infiniteController2,
+              itemExtent: weekSize,
+              itemBuilder: (context, index) {
+                final date = DateTime.now()
+                    .toUtc()
+                    .add(Duration(days: index - kPageViewOffset))
+                    .toLocal();
+                final entry = store.entriesByDay[DateFormat.yMd().format(date)];
+                return Container(
+                  width: weekSize,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 5,
+                    vertical: 20,
+                  ),
+                  child: SingleDay(
+                    day: date,
+                    entry: entry,
+                    showMonth: false,
+                    showWeekday: true,
+                    interactive: false,
+                  ),
+                );
+              },
+            ),
           ),
-        ),
-        Expanded(
-          child: PageView.builder(
-            scrollDirection: Axis.horizontal,
-            controller: _infiniteController,
-            onPageChanged: (page) {
-              _infiniteController2.animateToIndex((page - 3));
-            },
-            itemBuilder: (context, index) {
-              return Container(
-                width: MediaQuery.of(context).size.width,
-                child: SingleJournalPage(
-                  index: index - kPageViewOffset,
-                ),
-              );
-            },
+          Expanded(
+            child: PageView.builder(
+              scrollDirection: Axis.horizontal,
+              controller: _infiniteController,
+              onPageChanged: (page) {
+                _infiniteController2.animateToIndex((page - 3));
+              },
+              itemBuilder: (context, index) {
+                return Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: SingleJournalPage(
+                    index: index - kPageViewOffset,
+                  ),
+                );
+              },
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

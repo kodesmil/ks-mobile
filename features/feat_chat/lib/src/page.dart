@@ -29,48 +29,42 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<ChatStore>(context);
-    return Scaffold(
-      body: Observer(
-        builder: (context) => CustomScrollView(
-          slivers: <Widget>[
-            KsNavigationBar(title: 'Chat'),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                  final e = store.rooms[index];
-                  return Material(
-                    child: ListTile(
-                      title: Text(
-                        e.tileTitle,
-                        style: Theme.of(context).textTheme.bodyText2,
-                      ),
-                      subtitle: Text(
-                        e.tileCaption,
-                        style: Theme.of(context).textTheme.caption,
-                      ),
-                      onTap: () => navigateToChatRoomPage(
-                        context,
-                        e,
-                      ),
-                      trailing: OverlappedImages(
-                        profiles: e.participants,
-                      ),
-                    ),
-                  );
-                },
-                childCount: store.rooms.length,
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: Center(
-                  child: ConnectToVideoButton(),
+    return Observer(
+      builder: (context) => Column(
+        children: <Widget>[
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: store.rooms.length,
+            itemBuilder: (BuildContext context, int index) {
+              final e = store.rooms[index];
+              return Material(
+                child: ListTile(
+                  title: Text(
+                    e.tileTitle,
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                  subtitle: Text(
+                    e.tileCaption,
+                    style: Theme.of(context).textTheme.caption,
+                  ),
+                  onTap: () => navigateToChatRoomPage(
+                    context,
+                    e,
+                  ),
+                  trailing: OverlappedImages(
+                    profiles: e.participants,
+                  ),
                 ),
-              ),
+              );
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 15),
+            child: Center(
+              child: ConnectToVideoButton(),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -119,7 +113,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                 builder: (context) => ListView(
                   reverse: true,
                   children: store.selectedMessages.indexed().map(
-                        (e) {
+                    (e) {
                       return MyListTile(
                         message: e.value,
                         text: e.value.text,
@@ -194,10 +188,10 @@ class OverlappedImages extends StatelessWidget {
     final items = profiles
         .map(
           (e) => KsCircleAvatar(
-        size: imageSize,
-        image: e.profile.profilePictureUrl,
-      ),
-    )
+            size: imageSize,
+            image: e.profile.profilePictureUrl,
+          ),
+        )
         .toList();
 
     var stackLayers = List<Widget>.generate(items.length, (index) {
@@ -253,11 +247,11 @@ class _MyListTileState extends State<MyListTile> {
     return Container(
       padding: EdgeInsets.only(
         top: widget.info.place == ChatMessagePlace.FIRST ||
-            widget.info.place == ChatMessagePlace.LAST_SINGLE
+                widget.info.place == ChatMessagePlace.LAST_SINGLE
             ? 10
             : 0,
         bottom: widget.info.place == ChatMessagePlace.LAST_SINGLE ||
-            widget.info.place == ChatMessagePlace.LAST
+                widget.info.place == ChatMessagePlace.LAST
             ? 10
             : 0,
         right: 15,
@@ -275,8 +269,9 @@ class _MyListTileState extends State<MyListTile> {
           children: [
             Column(
               mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment:
-              widget.left ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+              crossAxisAlignment: widget.left
+                  ? CrossAxisAlignment.start
+                  : CrossAxisAlignment.end,
               children: <Widget>[
                 Container(
                   width: MediaQuery.of(context).size.width * 0.6,
@@ -285,19 +280,20 @@ class _MyListTileState extends State<MyListTile> {
                       : const EdgeInsets.only(top: 5),
                   padding: widget.left
                       ? EdgeInsets.only(
-                    left: 15,
-                    right: 20,
-                    top: 10,
-                    bottom: 10,
-                  )
+                          left: 15,
+                          right: 20,
+                          top: 10,
+                          bottom: 10,
+                        )
                       : EdgeInsets.only(
-                    left: 20,
-                    right: 15,
-                    top: 10,
-                    bottom: 10,
-                  ),
+                          left: 20,
+                          right: 15,
+                          top: 10,
+                          bottom: 10,
+                        ),
                   decoration: BoxDecoration(
-                    borderRadius: calculateBorderRadius(widget.left, widget.info.place),
+                    borderRadius:
+                        calculateBorderRadius(widget.left, widget.info.place),
                     color: widget.left
                         ? Theme.of(context).colorScheme.secondary.withAlpha(64)
                         : Theme.of(context).colorScheme.primary.withAlpha(16),
@@ -320,7 +316,8 @@ class _MyListTileState extends State<MyListTile> {
                         children: [
                           KsCircleAvatar(
                             size: 25,
-                            image: widget.message.author.profile.profilePictureUrl,
+                            image:
+                                widget.message.author.profile.profilePictureUrl,
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 5),
@@ -338,8 +335,8 @@ class _MyListTileState extends State<MyListTile> {
                   visible: showDetails,
                   child: Text(
                     DateFormat.yMMMEd().add_Hm().format(
-                      widget.info.message.createdAt.toDateTime(),
-                    ),
+                          widget.info.message.createdAt.toDateTime(),
+                        ),
                     style: Theme.of(context).textTheme.caption,
                   ),
                 ),

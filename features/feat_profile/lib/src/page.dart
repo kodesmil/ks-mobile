@@ -24,10 +24,10 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     final store = Provider.of<ProfileStore>(context);
     final appState = Provider.of<AppStateNotifier>(context);
-    return Scaffold(
-      body: CustomScrollView(
+    return CupertinoPageScaffold(
+      navigationBar: KsSmallNavigationBar(title: 'Profile'),
+      child: CustomScrollView(
         slivers: <Widget>[
-          KsNavigationBar(title: 'Profile'),
           SliverToBoxAdapter(
             child: Material(
               child: Column(
@@ -47,12 +47,28 @@ class _ProfilePageState extends State<ProfilePage> {
                       style: Theme.of(context).textTheme.bodyText2,
                     ),
                     value: appState != null
-                        ? appState.mode == ThemeMode.dark
+                        ? appState.themeMode == ThemeMode.dark
                         : Brightness.dark == Theme.of(context).brightness,
                     onChanged: (value) {
                       appState.updateTheme(
                         value ? ThemeMode.dark : ThemeMode.light,
                       );
+                    },
+                  ),
+                  ListTile(
+                    title: Text(
+                      appState.appMode == AppMode.client
+                          ? 'Show business mode'
+                          : 'Show client mode',
+                      style: Theme.of(context).textTheme.bodyText2,
+                    ),
+                    onTap: () {
+                      appState.updateAppMode(
+                        appState.appMode == AppMode.client
+                            ? AppMode.business
+                            : AppMode.client,
+                      );
+                      Navigator.of(context).pop();
                     },
                   ),
                   ListTile(
@@ -122,26 +138,4 @@ Future<void> openUrl(String url) async {
   } else {
     throw 'Could not launch $url';
   }
-}
-
-Future newPageStart(BuildContext context) {
-  return Navigator.of(context).push(
-    CupertinoPageRoute<void>(
-      builder: (BuildContext context) {
-        return CupertinoPageScaffold(
-          navigationBar: CupertinoNavigationBar(
-            middle: Text('New Ome'),
-          ),
-          child: Center(
-            child: CupertinoButton(
-              child: const Text('Back'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ),
-        );
-      },
-    ),
-  );
 }

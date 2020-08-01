@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
             supportedLocales: localizationDelegate.supportedLocales,
             theme: KsTheme.ablyLight(),
             darkTheme: KsTheme.ablyDark(),
-            themeMode: appState.mode,
+            themeMode: appState.themeMode,
             onGenerateRoute: router.generator,
           ),
         ),

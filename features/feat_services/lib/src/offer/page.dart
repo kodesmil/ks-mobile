@@ -22,46 +22,39 @@ class _ServiceOfferPageState extends State<ServiceOfferPage> {
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<ServiceOfferStore>(context);
-    return CupertinoPageScaffold(
-      child: CustomScrollView(
-        slivers: <Widget>[
-          KsNavigationBar(title: 'Offers'),
-          Observer(
-            builder: (context) => SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final e = store.subjects[index];
-                  final contact = e.provider.details.contact;
-                  final company = e.provider.details.company;
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 15),
-                    child: ListTile(
-                      title: Text(
-                        e.description,
-                        style: Theme.of(context).textTheme.headline6,
-                      ),
-                      subtitle: Text(
-                        '${e.price} ${e.currency}',
-                      ),
-                      trailing: CompanyWidget(
-                        company: company,
-                        contact: contact,
-                      ),
-                      onTap: () {
-                        Navigator.of(context, rootNavigator: true).push(
-                          CupertinoPageRoute(
-                            builder: (context) => ServiceOfferDetailsPage(e),
-                          ),
-                        );
-                      },
+    return Observer(
+      builder: (context) => SliverList(
+        delegate: SliverChildBuilderDelegate(
+          (context, index) {
+            final e = store.subjects[index];
+            final contact = e.provider.details.contact;
+            final company = e.provider.details.company;
+            return Padding(
+              padding: const EdgeInsets.only(top: 15),
+              child: ListTile(
+                title: Text(
+                  e.description,
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+                subtitle: Text(
+                  '${e.price} ${e.currency}',
+                ),
+                trailing: CompanyWidget(
+                  company: company,
+                  contact: contact,
+                ),
+                onTap: () {
+                  Navigator.of(context, rootNavigator: true).push(
+                    CupertinoPageRoute(
+                      builder: (context) => ServiceOfferDetailsPage(e),
                     ),
                   );
                 },
-                childCount: store.subjects.length,
               ),
-            ),
-          ),
-        ],
+            );
+          },
+          childCount: store.subjects.length,
+        ),
       ),
     );
   }

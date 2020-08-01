@@ -60,3 +60,29 @@ class _ProfileSettingsTileState extends State<ProfileSettingsTile> {
     );
   }
 }
+
+class ProfileAvatar extends StatefulWidget {
+  ProfileAvatar();
+
+  @override
+  _ProfileAvatarState createState() => _ProfileAvatarState();
+}
+
+class _ProfileAvatarState extends State<ProfileAvatar> {
+
+  @override
+  void didChangeDependencies() {
+    final store = Provider.of<ProfileStore>(context);
+    store.fetchProfile();
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final store = Provider.of<ProfileStore>(context);
+    return KsCircleAvatar(
+      size: 150,
+      image: store.profile?.profilePictureUrl ?? '',
+    );
+  }
+}

@@ -124,6 +124,7 @@ const ServiceProvider$json = const {
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
     const {'1': 'details', '3': 4, '4': 1, '5': 11, '6': '.model.ServiceDetails', '10': 'details'},
+    const {'1': 'offers', '3': 5, '4': 3, '5': 11, '6': '.model.ServiceOffer', '10': 'offers'},
   ],
   '7': const {},
 };

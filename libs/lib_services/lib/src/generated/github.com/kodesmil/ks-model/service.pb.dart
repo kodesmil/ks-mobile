@@ -710,6 +710,7 @@ class ServiceProvider extends $pb.GeneratedMessage {
     ..aOM<$10.Timestamp>(2, 'createdAt', subBuilder: $10.Timestamp.create)
     ..aOM<$10.Timestamp>(3, 'updatedAt', subBuilder: $10.Timestamp.create)
     ..aOM<ServiceDetails>(4, 'details', subBuilder: ServiceDetails.create)
+    ..pc<ServiceOffer>(5, 'offers', $pb.PbFieldType.PM, subBuilder: ServiceOffer.create)
     ..hasRequiredFields = false
   ;
 
@@ -771,6 +772,9 @@ class ServiceProvider extends $pb.GeneratedMessage {
   void clearDetails() => clearField(4);
   @$pb.TagNumber(4)
   ServiceDetails ensureDetails() => $_ensure(3);
+
+  @$pb.TagNumber(5)
+  $core.List<ServiceOffer> get offers => $_getList(4);
 }
 
 class ServiceProviderSessionEvaluation extends $pb.GeneratedMessage {

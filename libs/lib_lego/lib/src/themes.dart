@@ -3,11 +3,22 @@ import 'package:flutter/material.dart';
 
 import 'color_schemes.dart';
 
+enum AppMode {
+  client,
+  business,
+}
+
 class AppStateNotifier extends ChangeNotifier {
-  ThemeMode mode;
+  ThemeMode themeMode;
+  AppMode appMode = AppMode.client;
 
   void updateTheme(ThemeMode mode) {
-    this.mode = mode;
+    themeMode = mode;
+    notifyListeners();
+  }
+
+  void updateAppMode(AppMode mode) {
+    appMode = mode;
     notifyListeners();
   }
 }

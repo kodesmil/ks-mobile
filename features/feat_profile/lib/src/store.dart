@@ -30,8 +30,7 @@ abstract class _ProfileStore with Store {
 
   @action
   Future fetchProfile() async {
-    profile = Profile();
-    if (userStore.user != null) {
+    if (profile == null && userStore.user != null) {
       try {
         final id = Identifier()..resourceId = userStore.user.uid;
         final request = ReadProfileRequest()..id = id;
