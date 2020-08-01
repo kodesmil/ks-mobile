@@ -14,13 +14,13 @@ class KsEmptyAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 class KsNavigationBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  final Widget leading;
+  final Widget action;
   final bool withBackgroundImage;
 
   const KsNavigationBar({
     Key key,
     this.title,
-    this.leading,
+    this.action,
     this.withBackgroundImage = true,
   }) : super(key: key);
 
@@ -32,7 +32,13 @@ class KsNavigationBar extends StatelessWidget implements PreferredSizeWidget {
       iconTheme: IconThemeData(
         color: Theme.of(context).colorScheme.onSurface,
       ),
-      actions: [leading],
+      actions: [
+        action,
+        SizedBox(
+          width: 10,
+        )
+      ],
+      shape: RoundedRectangleBorder(),
       flexibleSpace: FlexibleSpaceBar(
         titlePadding: EdgeInsets.only(
           left: 15,
@@ -75,7 +81,8 @@ class KsNavigationBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(120);
 }
 
-class KsSmallNavigationBar extends StatelessWidget implements ObstructingPreferredSizeWidget {
+class KsSmallNavigationBar extends StatelessWidget
+    implements ObstructingPreferredSizeWidget {
   final String title;
 
   KsSmallNavigationBar({

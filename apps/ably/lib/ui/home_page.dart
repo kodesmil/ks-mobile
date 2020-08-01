@@ -104,13 +104,16 @@ class _HomeClientPageState extends State<HomeClientPage> {
                   child: CustomScrollView(
                     slivers: [
                       KsNavigationBar(
-                        leading: GestureDetector(
-                          child: Padding(
+                        withBackgroundImage: false,
+                        action: GestureDetector(
+                          child: Container(
                             padding: const EdgeInsets.all(8),
                             child: SizedBox(
                               width: 40,
                               height: 40,
-                              child: ProfileAvatar(),
+                              child: Container(
+                                child: ProfileAvatar(),
+                              ),
                             ),
                           ),
                           onTap: () {
@@ -145,14 +148,14 @@ class HomeBusinessPage extends StatefulWidget {
 }
 
 class _HomeBusinessPageState extends State<HomeBusinessPage> {
-
   @override
   Widget build(BuildContext context) {
-    return  CupertinoPageScaffold(
+    return CupertinoPageScaffold(
       child: CustomScrollView(
         slivers: [
           KsNavigationBar(
-            leading: GestureDetector(
+            withBackgroundImage: false,
+            action: GestureDetector(
               child: Padding(
                 padding: const EdgeInsets.all(8),
                 child: SizedBox(
