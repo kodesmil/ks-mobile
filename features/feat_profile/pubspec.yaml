@@ -15,7 +15,7 @@ dependencies:
   intl: ^0.16.0
   google_sign_in: ^4.1.4
   provider: ^4.0.4
-  smooth_star_rating: ^1.0.4+2
+  smooth_star_rating: ^1.1.1
   url_launcher: ^5.4.7
   crossplat_objectid: ^2.1.4
   firebase_auth: ^0.16.1

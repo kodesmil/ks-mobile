@@ -97,7 +97,7 @@ const ServiceApplication$json = const {
     const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'id'},
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
-    const {'1': 'provider', '3': 4, '4': 1, '5': 11, '6': '.model.ServiceProvider', '10': 'provider'},
+    const {'1': 'provider', '3': 4, '4': 1, '5': 11, '6': '.model.ServiceProvider', '8': const {}, '10': 'provider'},
     const {'1': 'files', '3': 5, '4': 3, '5': 11, '6': '.model.ServiceApplicationFile', '10': 'files'},
     const {'1': 'applied_at', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'appliedAt'},
     const {'1': 'approved_at', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'approvedAt'},
@@ -136,21 +136,9 @@ const ServiceProviderSessionEvaluation$json = const {
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
     const {'1': 'session', '3': 4, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'session'},
     const {'1': 'comment', '3': 5, '4': 1, '5': 9, '10': 'comment'},
-    const {'1': 'recommendation_rate', '3': 6, '4': 1, '5': 14, '6': '.model.ServiceProviderSessionEvaluation.RecommendationRate', '10': 'recommendationRate'},
+    const {'1': 'recommendation_rate', '3': 6, '4': 1, '5': 1, '10': 'recommendationRate'},
   ],
-  '4': const [ServiceProviderSessionEvaluation_RecommendationRate$json],
   '7': const {},
-};
-
-const ServiceProviderSessionEvaluation_RecommendationRate$json = const {
-  '1': 'RecommendationRate',
-  '2': const [
-    const {'1': 'NO', '2': 0},
-    const {'1': 'RATHER_NO', '2': 1},
-    const {'1': 'MAYBE', '2': 2},
-    const {'1': 'RATHER_YES', '2': 3},
-    const {'1': 'YES', '2': 4},
-  ],
 };
 
 const ServiceSession$json = const {

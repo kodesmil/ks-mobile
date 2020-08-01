@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:lib_lego/lib_lego.dart';
 import 'package:lib_services/lib_services.dart';
 import 'package:provider/provider.dart';
+import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 import '../../feat_services.dart';
 
@@ -15,7 +16,9 @@ class ServiceSessionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final contact = session.offer.provider.details.contact;
+    final offer = session.offer;
+    final contact = offer.provider.details.contact;
+    final company = offer.provider.details.company;
     return CupertinoPageScaffold(
       navigationBar: KsSmallNavigationBar(title: 'Session'),
       child: Material(
@@ -25,11 +28,16 @@ class ServiceSessionPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(height: 60),
-                Text(contact.firstName),
-                Text(contact.lastName),
+                CompanyWidget(
+                  company: company,
+                  contact: contact,
+                ),
                 SizedBox(height: 40),
-                Text(session.offer.description),
-                SizedBox(height: 20),
+                Text(
+                  offer.description,
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+                SizedBox(height: 40),
                 RaisedButton(
                   child: Text('Start video call'),
                   onPressed: () {
@@ -74,6 +82,7 @@ class ServiceSessionEvaluationPage extends StatefulWidget {
 class _ServiceSessionEvaluationPageState
     extends State<ServiceSessionEvaluationPage> {
   final _commentController = TextEditingController();
+  double _recommendationRate = 0.0;
 
   @override
   void didChangeDependencies() async {
@@ -82,6 +91,7 @@ class _ServiceSessionEvaluationPageState
         widget.session.evaluation ?? ServiceProviderSessionEvaluation();
     _commentController.addListener(_commentListener);
     _commentController.text = store.evaluation.comment;
+    _recommendationRate = store.evaluation.recommendationRate;
     super.didChangeDependencies();
   }
 
@@ -123,6 +133,24 @@ class _ServiceSessionEvaluationPageState
                             decoration: InputDecoration(
                               labelText: 'Comment',
                             ),
+                          ),
+                          SizedBox(height: 30),
+                          SmoothStarRating(
+                            onRated: (v) {
+                              setState(() {
+                                _recommendationRate = v;
+                                store.evaluation =
+                                    store.evaluation.copyWith((e) {
+                                  e.recommendationRate = v;
+                                });
+                              });
+                            },
+                            starCount: 5,
+                            rating: _recommendationRate,
+                            size: 40,
+                            color: Colors.yellow,
+                            borderColor: Colors.yellow.withOpacity(0.5),
+                            spacing: 5,
                           ),
                           SizedBox(height: 30),
                           OutlineButton(
@@ -178,6 +206,8 @@ class _ServiceSessionArchivePageState extends State<ServiceSessionArchivePage> {
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
                   final e = store.sessions[index];
+                  final contact = e.offer.provider.details.contact;
+                  final company = e.offer.provider.details.company;
                   return Padding(
                     padding: const EdgeInsets.only(top: 20),
                     child: ListTile(
@@ -189,16 +219,29 @@ class _ServiceSessionArchivePageState extends State<ServiceSessionArchivePage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'From: ${DateFormat.yMMMd().add_Hm().format(e.scheduledAt.toDateTime())}',
+                            'From: ${_presentDate(e.scheduledAt)}',
                           ),
                           Text(
-                            'To: ${DateFormat.yMMMd().add_Hm().format(e.finishedAt.toDateTime())}',
+                            'To: ${_presentDate(e.finishedAt)}',
                           ),
                           Text('Paid: ${e.offer.price} ${e.offer.currency}'),
                           e.evaluation.comment?.isNotEmpty == true
                               ? Text('Comment: ${e.evaluation.comment}')
                               : Container(),
+                          SmoothStarRating(
+                            starCount: 5,
+                            rating: e.evaluation.recommendationRate,
+                            size: 30,
+                            isReadOnly: true,
+                            color: Colors.yellow,
+                            borderColor: Colors.yellow.withOpacity(0.5),
+                            spacing: 0,
+                          ),
                         ],
+                      ),
+                      trailing: CompanyWidget(
+                        company: company,
+                        contact: contact,
                       ),
                     ),
                   );
@@ -211,4 +254,7 @@ class _ServiceSessionArchivePageState extends State<ServiceSessionArchivePage> {
       ),
     );
   }
+
+  String _presentDate(Timestamp date) =>
+      DateFormat.yMMMd().add_Hm().format(date.toDateTime().toLocal());
 }

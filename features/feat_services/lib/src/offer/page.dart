@@ -12,7 +12,6 @@ class ServiceOfferPage extends StatefulWidget {
 }
 
 class _ServiceOfferPageState extends State<ServiceOfferPage> {
-
   @override
   void didChangeDependencies() async {
     final store = Provider.of<ServiceOfferStore>(context, listen: false);
@@ -44,15 +43,9 @@ class _ServiceOfferPageState extends State<ServiceOfferPage> {
                       subtitle: Text(
                         '${e.price} ${e.currency}',
                       ),
-                      trailing: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(company.name),
-                          Text(
-                            '${contact.firstName} ${contact.lastName}',
-                            style: Theme.of(context).textTheme.caption,
-                          ),
-                        ],
+                      trailing: CompanyWidget(
+                        company: company,
+                        contact: contact,
                       ),
                       onTap: () {
                         Navigator.of(context, rootNavigator: true).push(
@@ -74,6 +67,31 @@ class _ServiceOfferPageState extends State<ServiceOfferPage> {
   }
 }
 
+class CompanyWidget extends StatelessWidget {
+  const CompanyWidget({
+    Key key,
+    @required this.company,
+    @required this.contact,
+  }) : super(key: key);
+
+  final ServiceDetailsCompany company;
+  final ServiceDetailsContact contact;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Text(company.name),
+        Text(
+          '${contact.firstName} ${contact.lastName}',
+          style: Theme.of(context).textTheme.caption,
+        ),
+      ],
+    );
+  }
+}
+
 class ServiceOfferDetailsPage extends StatelessWidget {
   final ServiceOffer offer;
 
@@ -83,6 +101,7 @@ class ServiceOfferDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final store = Provider.of<ServiceOfferStore>(context);
     final contact = offer.provider.details.contact;
+    final company = offer.provider.details.company;
     return CupertinoPageScaffold(
       navigationBar: KsSmallNavigationBar(title: 'Details'),
       child: Material(
@@ -92,10 +111,15 @@ class ServiceOfferDetailsPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(height: 60),
-                Text(contact.firstName),
-                Text(contact.lastName),
+                CompanyWidget(
+                  company: company,
+                  contact: contact,
+                ),
                 SizedBox(height: 40),
-                Text(offer.description),
+                Text(
+                  offer.description,
+                  style: Theme.of(context).textTheme.headline6,
+                ),
                 SizedBox(height: 20),
                 Text('${offer.price} ${offer.currency}'),
                 SizedBox(height: 40),

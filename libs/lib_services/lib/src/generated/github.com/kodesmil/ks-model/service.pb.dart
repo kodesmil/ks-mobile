@@ -780,7 +780,7 @@ class ServiceProviderSessionEvaluation extends $pb.GeneratedMessage {
     ..aOM<$10.Timestamp>(3, 'updatedAt', subBuilder: $10.Timestamp.create)
     ..aOM<ServiceSession>(4, 'session', subBuilder: ServiceSession.create)
     ..aOS(5, 'comment')
-    ..e<ServiceProviderSessionEvaluation_RecommendationRate>(6, 'recommendationRate', $pb.PbFieldType.OE, defaultOrMaker: ServiceProviderSessionEvaluation_RecommendationRate.NO, valueOf: ServiceProviderSessionEvaluation_RecommendationRate.valueOf, enumValues: ServiceProviderSessionEvaluation_RecommendationRate.values)
+    ..a<$core.double>(6, 'recommendationRate', $pb.PbFieldType.OD)
     ..hasRequiredFields = false
   ;
 
@@ -853,9 +853,9 @@ class ServiceProviderSessionEvaluation extends $pb.GeneratedMessage {
   void clearComment() => clearField(5);
 
   @$pb.TagNumber(6)
-  ServiceProviderSessionEvaluation_RecommendationRate get recommendationRate => $_getN(5);
+  $core.double get recommendationRate => $_getN(5);
   @$pb.TagNumber(6)
-  set recommendationRate(ServiceProviderSessionEvaluation_RecommendationRate v) { setField(6, v); }
+  set recommendationRate($core.double v) { $_setDouble(5, v); }
   @$pb.TagNumber(6)
   $core.bool hasRecommendationRate() => $_has(5);
   @$pb.TagNumber(6)

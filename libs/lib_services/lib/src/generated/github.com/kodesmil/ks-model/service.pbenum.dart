@@ -24,24 +24,3 @@ class Service_Type extends $pb.ProtobufEnum {
   const Service_Type._($core.int v, $core.String n) : super(v, n);
 }
 
-class ServiceProviderSessionEvaluation_RecommendationRate extends $pb.ProtobufEnum {
-  static const ServiceProviderSessionEvaluation_RecommendationRate NO = ServiceProviderSessionEvaluation_RecommendationRate._(0, 'NO');
-  static const ServiceProviderSessionEvaluation_RecommendationRate RATHER_NO = ServiceProviderSessionEvaluation_RecommendationRate._(1, 'RATHER_NO');
-  static const ServiceProviderSessionEvaluation_RecommendationRate MAYBE = ServiceProviderSessionEvaluation_RecommendationRate._(2, 'MAYBE');
-  static const ServiceProviderSessionEvaluation_RecommendationRate RATHER_YES = ServiceProviderSessionEvaluation_RecommendationRate._(3, 'RATHER_YES');
-  static const ServiceProviderSessionEvaluation_RecommendationRate YES = ServiceProviderSessionEvaluation_RecommendationRate._(4, 'YES');
-
-  static const $core.List<ServiceProviderSessionEvaluation_RecommendationRate> values = <ServiceProviderSessionEvaluation_RecommendationRate> [
-    NO,
-    RATHER_NO,
-    MAYBE,
-    RATHER_YES,
-    YES,
-  ];
-
-  static final $core.Map<$core.int, ServiceProviderSessionEvaluation_RecommendationRate> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static ServiceProviderSessionEvaluation_RecommendationRate valueOf($core.int value) => _byValue[value];
-
-  const ServiceProviderSessionEvaluation_RecommendationRate._($core.int v, $core.String n) : super(v, n);
-}
-
