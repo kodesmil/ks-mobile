@@ -21,6 +21,8 @@ dependencies:
   uuid: ^2.0.4
   feat_storage:
     path: ../feat_storage
+  feat_ion:
+    path: ../feat_ion
   lib_shared:
     path: ../../libs/lib_shared
   lib_lego:

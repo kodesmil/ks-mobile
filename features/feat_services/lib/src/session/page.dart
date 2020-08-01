@@ -1,3 +1,4 @@
+import 'package:feat_ion/feat_ion.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -38,15 +39,7 @@ class ServiceSessionPage extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline6,
                 ),
                 SizedBox(height: 40),
-                RaisedButton(
-                  child: Text('Start video call'),
-                  onPressed: () {
-                    Navigator.of(
-                      context,
-                      rootNavigator: true,
-                    ).pushNamed('/meeting');
-                  },
-                ),
+                ConnectToVideoButton(),
                 SizedBox(height: 10),
                 OutlineButton(
                   child: Text('Finish session'),

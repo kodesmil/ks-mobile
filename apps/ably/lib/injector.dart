@@ -65,7 +65,9 @@ class _AppInjectorState extends State<AppInjector> {
           ),
         ),
         ProxyProvider0(
-          update: (_, __) => IonHelper(),
+          update: (_, __) {
+            return IonHelper();
+          },
         ),
         ProxyProvider<FirebaseAuth, UserStore>(
           update: (_, dep, old) {

@@ -15,8 +15,7 @@ class _ConnectToVideoButtonState extends State<ConnectToVideoButton> {
     final helper = Provider.of<IonHelper>(context, listen: false);
     await helper.connect('ion.qa.api.kodesmil.com', (result) {
       if (result) {
-        Navigator.of(context, rootNavigator: true)
-            .pushNamed('/meeting');
+        Navigator.of(context, rootNavigator: true).pushNamed('/meeting');
       }
     });
   }
@@ -24,7 +23,7 @@ class _ConnectToVideoButtonState extends State<ConnectToVideoButton> {
   @override
   Widget build(BuildContext context) {
     return OutlineButton(
-      child: Text('Video Call'),
+      child: Text(widget.title ?? 'Start Video Call'),
       onPressed: () async {
         return await handleJoin();
       },
