@@ -1,17 +1,48 @@
 import 'package:feat_services/feat_services.dart';
+import 'package:feat_services/src/offer_details_page.dart';
+import 'package:feat_services/src/offer_store.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:lib_lego/lib_lego.dart';
+import 'package:lib_services/lib_services.dart';
 import 'package:lib_services/src/generated/github.com/kodesmil/ks-model/service.pb.dart';
+import 'package:lib_shared/lib_shared.dart';
 import 'package:provider/provider.dart';
 
 class ServiceOfferPage extends StatefulWidget {
+  final ServiceOffer offer;
+
+  ServiceOfferPage(this.offer);
+
   @override
-  _ServiceOfferPageState createState() => _ServiceOfferPageState();
+  ServiceOfferPageState createState() => ServiceOfferPageState();
 }
 
-class _ServiceOfferPageState extends State<ServiceOfferPage> {
+class ServiceOfferPageState extends State<ServiceOfferPage> {
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ProxyProvider<ServicesClient, ServiceOfferStore>(
+          update: (_, dep, __) => ServiceOfferStore(
+            ErrorStore(),
+            LoadingStore(),
+            dep,
+          ),
+        ),
+      ],
+      child: ServiceOfferContent(),
+    );
+  }
+}
+
+class ServiceOfferContent extends StatefulWidget {
+  @override
+  _ServiceOfferContentState createState() => _ServiceOfferContentState();
+}
+
+class _ServiceOfferContentState extends State<ServiceOfferContent> {
   @override
   void didChangeDependencies() async {
     final store = Provider.of<ServiceOfferStore>(context, listen: false);
@@ -44,7 +75,7 @@ class _ServiceOfferPageState extends State<ServiceOfferPage> {
                 onTap: () {
                   Navigator.of(context, rootNavigator: true).push(
                     CupertinoPageRoute(
-                      builder: (context) => ServiceOfferDetailsPage(e),
+                      builder: (context) => ServiceOfferDetailsContent(e),
                     ),
                   );
                 },
@@ -73,55 +104,6 @@ class DetailsWidget extends StatelessWidget {
       children: [
         Text(details.name),
       ],
-    );
-  }
-}
-
-class ServiceOfferDetailsPage extends StatelessWidget {
-  final ServiceOffer offer;
-
-  ServiceOfferDetailsPage(this.offer);
-
-  @override
-  Widget build(BuildContext context) {
-    final store = Provider.of<ServiceOfferStore>(context);
-    final details = offer.provider.details;
-    return CupertinoPageScaffold(
-      navigationBar: KsSmallNavigationBar(title: 'Details'),
-      child: Material(
-        child: SafeArea(
-          child: Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: 60),
-                DetailsWidget(
-                  details: details,
-                ),
-                SizedBox(height: 40),
-                Text(
-                  offer.description,
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-                SizedBox(height: 20),
-                Text('${offer.price} ${offer.currency}'),
-                SizedBox(height: 40),
-                RaisedButton(
-                  child: Text('Start session'),
-                  onPressed: () async {
-                    final session = await store.startSession(offer);
-                    await Navigator.of(context).pushReplacement(
-                      CupertinoPageRoute(
-                        builder: (context) => ServiceSessionPage(session),
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

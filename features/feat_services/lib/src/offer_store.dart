@@ -4,7 +4,7 @@ import 'package:lib_shared/lib_shared.dart';
 import 'package:mobx/mobx.dart';
 import 'package:uuid/uuid.dart';
 
-part 'store.g.dart';
+part 'offer_store.g.dart';
 
 class ServiceOfferStore = _ServiceOfferStore with _$ServiceOfferStore;
 

@@ -61,8 +61,8 @@ class _HomeClientPageState extends State<HomeClientPage> {
       SliverPage(child: JournalPage()),
       SliverPage(child: HelloPage()),
       SliverPage(child: ChatPage()),
-      ServiceOfferPage(),
-      ServiceSessionArchivePage(),
+      ServiceOfferContent(),
+      ServiceSessionArchiveContent(),
     ];
     final items = [
       BottomNavigationBarItem(
@@ -150,7 +150,7 @@ class HomeBusinessPage extends StatefulWidget {
 class _HomeBusinessPageState extends State<HomeBusinessPage> {
   @override
   Widget build(BuildContext context) {
-    return ServiceApplicationPage(
+    return ServiceApplicationListPage(
       navigationBar: KsNavigationBar(
         withBackgroundImage: false,
         action: GestureDetector(

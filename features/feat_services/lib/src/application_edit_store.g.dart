@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'store.dart';
+part of 'application_edit_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -103,37 +103,6 @@ mixin _$ServiceApplicationJoinStore on _ServiceApplicationJoinStore, Store {
 details: ${details},
 employment: ${employment},
 file: ${file}
-    ''';
-  }
-}
-
-mixin _$ServiceApplicationListStore on _ServiceApplicationListStore, Store {
-  final _$subjectsAtom = Atom(name: '_ServiceApplicationListStore.subjects');
-
-  @override
-  List<ServiceApplication> get subjects {
-    _$subjectsAtom.reportRead();
-    return super.subjects;
-  }
-
-  @override
-  set subjects(List<ServiceApplication> value) {
-    _$subjectsAtom.reportWrite(value, super.subjects, () {
-      super.subjects = value;
-    });
-  }
-
-  final _$fetchAsyncAction = AsyncAction('_ServiceApplicationListStore.fetch');
-
-  @override
-  Future<dynamic> fetch() {
-    return _$fetchAsyncAction.run(() => super.fetch());
-  }
-
-  @override
-  String toString() {
-    return '''
-subjects: ${subjects}
     ''';
   }
 }

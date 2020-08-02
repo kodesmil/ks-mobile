@@ -4,9 +4,9 @@ import 'package:lib_shared/lib_shared.dart';
 import 'package:mobx/mobx.dart';
 import 'package:uuid/uuid.dart';
 
-part 'store.g.dart';
+part 'application_edit_store.g.dart';
 
-class ServiceApplicationJoinStore = _ServiceApplicationJoinStore
+class ServiceApplicationEditStore = _ServiceApplicationJoinStore
     with _$ServiceApplicationJoinStore;
 
 abstract class _ServiceApplicationJoinStore with Store {
@@ -29,7 +29,10 @@ abstract class _ServiceApplicationJoinStore with Store {
     this.errorStore,
     this.loadingStore,
     this.client,
-  );
+    this._application,
+  ) {
+    setApplication(_application);
+  }
 
   @action
   Future addApplicationFile(String url) async =>
@@ -94,10 +97,10 @@ abstract class _ServiceApplicationJoinStore with Store {
       final request = CreateServiceApplicationRequest()
         ..payload = _application.copyWith((e1) {
           e1.provider = e1.provider.copyWith(
-                (p) {
+            (p) {
               p.employments.clear();
               p.employments.addAll(p.employments.map(
-                    (e) => hasSameId(e, employment) ? employment : e,
+                (e) => hasSameId(e, employment) ? employment : e,
               ));
               p.details = details;
             },
@@ -114,33 +117,4 @@ abstract class _ServiceApplicationJoinStore with Store {
   }
 
   bool hasSameId(e, other) => e.id.resourceId == other?.id?.resourceId;
-}
-
-class ServiceApplicationListStore = _ServiceApplicationListStore
-    with _$ServiceApplicationListStore;
-
-abstract class _ServiceApplicationListStore with Store {
-  final ErrorStore errorStore;
-  final LoadingStore loadingStore;
-  final ServicesClient client;
-
-  @observable
-  List<ServiceApplication> subjects = [];
-
-  _ServiceApplicationListStore(
-    this.errorStore,
-    this.loadingStore,
-    this.client,
-  );
-
-  @action
-  Future fetch() async {
-    try {
-      final request = ListServiceApplicationRequest();
-      final response = await client.listServiceApplication(request);
-      subjects = response.results;
-    } catch (e) {
-      print(e);
-    }
-  }
 }
