@@ -10,11 +10,9 @@ import 'package:lib_shared/lib_shared.dart';
 import 'package:provider/provider.dart';
 
 class ServiceApplicationListPage extends StatefulWidget {
-  final ServiceApplication application;
   final Widget navigationBar;
 
   ServiceApplicationListPage({
-    this.application,
     this.navigationBar,
   });
 
@@ -77,7 +75,7 @@ class _ServiceApplicationListContentState
         onPressed: () {
           Navigator.of(context, rootNavigator: true).push(
             CupertinoPageRoute(
-              builder: (context) => ServiceApplicationListPage(),
+              builder: (context) => ServiceApplicationEditPage(),
             ),
           );
         },
@@ -119,7 +117,7 @@ class _ServiceApplicationListContentState
                                       .push(
                                     CupertinoPageRoute(
                                       builder: (context) =>
-                                          ServiceApplicationListPage(
+                                          ServiceApplicationEditPage(
                                         application: e,
                                       ),
                                     ),

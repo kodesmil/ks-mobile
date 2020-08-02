@@ -86,7 +86,7 @@ class __ServiceOfferEditPageState extends State<_ServiceOfferEditPage> {
   Widget build(BuildContext context) {
     final store = Provider.of<ServiceOfferEditStore>(context);
     return CupertinoPageScaffold(
-      navigationBar: KsSmallNavigationBar(title: 'Join program'),
+      navigationBar: KsSmallNavigationBar(title: 'Edit offer'),
       child: SafeArea(
         child: Material(
           child: Padding(

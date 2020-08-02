@@ -14,9 +14,7 @@ import 'package:provider/provider.dart';
 class ServiceApplicationFilePage extends StatefulWidget {
   final ServiceApplication application;
 
-  ServiceApplicationFilePage({
-    this.application,
-  });
+  ServiceApplicationFilePage(this.application);
 
   @override
   ServiceApplicationFilePageState createState() =>
@@ -95,7 +93,7 @@ class _ServiceApplicationFileContentState
                             context,
                             CupertinoPageRoute(
                               builder: (context) =>
-                                  ServiceApplicationSuccessContent(),
+                                  ServiceApplicationSuccessPage(),
                             ),
                           )
                         : ksShowErrorMessage(

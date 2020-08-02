@@ -14,7 +14,8 @@ abstract class _ServiceApplicationJoinStore with Store {
   final LoadingStore loadingStore;
   final ServicesClient client;
 
-  ServiceApplication _application;
+  @observable
+  ServiceApplication application;
 
   @observable
   ServiceDetails details;
@@ -29,9 +30,9 @@ abstract class _ServiceApplicationJoinStore with Store {
     this.errorStore,
     this.loadingStore,
     this.client,
-    this._application,
+    this.application,
   ) {
-    setApplication(_application);
+    setApplication(application);
   }
 
   @action
@@ -39,38 +40,38 @@ abstract class _ServiceApplicationJoinStore with Store {
       file = file.copyWith((e) => e.url = url);
 
   @action
-  Future setApplication(ServiceApplication application) async {
-    _application = application ??
+  Future setApplication(ServiceApplication a) async {
+    application = a ??
         (ServiceApplication()..id = (Identifier()..resourceId = Uuid().v4()));
-    _application = _application
-      ..provider = (application?.provider ??
+    application = application
+      ..provider = (a?.provider ??
           (ServiceProvider()..id = (Identifier()..resourceId = Uuid().v4()))
-        ..details = application?.provider?.details ?? ServiceDetails());
+        ..details = a?.provider?.details ?? ServiceDetails());
 
-    if (_application.provider.employments.isEmpty) {
-      _application.provider.employments.add(ServiceEmployment());
+    if (application.provider.employments.isEmpty) {
+      application.provider.employments.add(ServiceEmployment());
     }
 
-    if (_application.files.isEmpty) {
-      _application.files.add(
+    if (application.files.isEmpty) {
+      application.files.add(
         ServiceApplicationFile()..id = (Identifier()..resourceId = Uuid().v4()),
       );
     }
 
-    details = _application.provider.details;
-    employment = _application.provider.employments[0];
-    file = _application.files[0];
+    details = application.provider.details;
+    employment = application.provider.employments[0];
+    file = application.files[0];
   }
 
   @action
   Future createOrUpdate() async =>
-      _application?.updatedAt != null ? await update() : await create();
+      application?.updatedAt != null ? await update() : await create();
 
   @action
   Future update() async {
     try {
       final request = UpdateServiceApplicationRequest()
-        ..payload = _application.copyWith((e1) {
+        ..payload = application.copyWith((e1) {
           e1.provider = e1.provider.copyWith(
             (p) {
               p.employments.clear();
@@ -85,7 +86,7 @@ abstract class _ServiceApplicationJoinStore with Store {
         });
       final response = await client.updateServiceApplication(request);
       loadingStore.success = true;
-      _application = response.result;
+      application = response.result;
     } catch (e) {
       print(e);
     }
@@ -95,7 +96,7 @@ abstract class _ServiceApplicationJoinStore with Store {
   Future create() async {
     try {
       final request = CreateServiceApplicationRequest()
-        ..payload = _application.copyWith((e1) {
+        ..payload = application.copyWith((e1) {
           e1.provider = e1.provider.copyWith(
             (p) {
               p.employments.clear();
@@ -110,7 +111,7 @@ abstract class _ServiceApplicationJoinStore with Store {
         });
       final response = await client.createServiceApplication(request);
       loadingStore.success = true;
-      _application = response.result;
+      application = response.result;
     } catch (e) {
       print(e);
     }

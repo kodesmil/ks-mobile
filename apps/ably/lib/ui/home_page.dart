@@ -61,8 +61,8 @@ class _HomeClientPageState extends State<HomeClientPage> {
       SliverPage(child: JournalPage()),
       SliverPage(child: HelloPage()),
       SliverPage(child: ChatPage()),
-      ServiceOfferContent(),
-      ServiceSessionArchiveContent(),
+      ServiceOfferPage(),
+      ServiceSessionArchivePage(),
     ];
     final items = [
       BottomNavigationBarItem(

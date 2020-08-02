@@ -11,9 +11,7 @@ import 'package:lib_shared/lib_shared.dart';
 import 'package:provider/provider.dart';
 
 class ServiceOfferPage extends StatefulWidget {
-  final ServiceOffer offer;
-
-  ServiceOfferPage(this.offer);
+  ServiceOfferPage();
 
   @override
   ServiceOfferPageState createState() => ServiceOfferPageState();
@@ -62,9 +60,15 @@ class _ServiceOfferContentState extends State<ServiceOfferContent> {
             return Padding(
               padding: const EdgeInsets.only(top: 15),
               child: ListTile(
-                title: Text(
-                  e.description,
-                  style: Theme.of(context).textTheme.headline6,
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      e.title,
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                    Text(e.description),
+                  ],
                 ),
                 subtitle: Text(
                   '${e.price} ${e.currency}',
@@ -75,7 +79,7 @@ class _ServiceOfferContentState extends State<ServiceOfferContent> {
                 onTap: () {
                   Navigator.of(context, rootNavigator: true).push(
                     CupertinoPageRoute(
-                      builder: (context) => ServiceOfferDetailsContent(e),
+                      builder: (context) => ServiceOfferDetailsPage(e),
                     ),
                   );
                 },

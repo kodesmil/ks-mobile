@@ -11,9 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 class ServiceSessionArchivePage extends StatefulWidget {
-  final ServiceOffer offer;
-
-  ServiceSessionArchivePage(this.offer);
+  ServiceSessionArchivePage();
 
   @override
   ServiceSessionArchivePageState createState() =>
@@ -68,7 +66,7 @@ class _ServiceSessionArchiveContentState
               padding: const EdgeInsets.only(top: 20),
               child: ListTile(
                 title: Text(
-                  e.offer.description,
+                  e.offer.title,
                   style: Theme.of(context).textTheme.headline6,
                 ),
                 subtitle: Column(
@@ -107,6 +105,7 @@ class _ServiceSessionArchiveContentState
     );
   }
 
-  String _presentDate(Timestamp date) =>
-      DateFormat.yMMMd().add_Hm().format(date.toDateTime().toLocal());
+  String _presentDate(Timestamp date) => DateFormat.yMMMd().add_Hm().format(
+        date.toDateTime().toLocal(),
+      );
 }

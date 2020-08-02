@@ -50,33 +50,40 @@ class ServiceOfferDetailsContent extends StatelessWidget {
       child: Material(
         child: SafeArea(
           child: Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: 60),
-                DetailsWidget(
-                  details: details,
-                ),
-                SizedBox(height: 40),
-                Text(
-                  offer.description,
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-                SizedBox(height: 20),
-                Text('${offer.price} ${offer.currency}'),
-                SizedBox(height: 40),
-                RaisedButton(
-                  child: Text('Start session'),
-                  onPressed: () async {
-                    final session = await store.startSession(offer);
-                    await Navigator.of(context).pushReplacement(
-                      CupertinoPageRoute(
-                        builder: (context) => ServiceSessionPage(session),
-                      ),
-                    );
-                  },
-                ),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.all(30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: 30),
+                  DetailsWidget(
+                    details: details,
+                  ),
+                  SizedBox(height: 40),
+                  Text(
+                    offer.title,
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    offer.description,
+                  ),
+                  SizedBox(height: 20),
+                  Text('${offer.price} ${offer.currency}'),
+                  SizedBox(height: 40),
+                  RaisedButton(
+                    child: Text('Start session'),
+                    onPressed: () async {
+                      final session = await store.startSession(offer);
+                      await Navigator.of(context).pushReplacement(
+                        CupertinoPageRoute(
+                          builder: (context) => ServiceSessionPage(session),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -19,10 +19,7 @@ class ServiceSessionPage extends StatefulWidget {
 class ServiceSessionPageState extends State<ServiceSessionPage> {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [],
-      child: ServiceSessionContent(widget.session),
-    );
+    return ServiceSessionContent(widget.session);
   }
 }
 
@@ -40,34 +37,37 @@ class ServiceSessionContent extends StatelessWidget {
       child: Material(
         child: SafeArea(
           child: Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: 60),
-                DetailsWidget(
-                  details: details,
-                ),
-                SizedBox(height: 40),
-                Text(
-                  offer.description,
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-                SizedBox(height: 40),
-                ConnectToVideoButton(),
-                SizedBox(height: 10),
-                OutlineButton(
-                  child: Text('Finish session'),
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      CupertinoPageRoute(
-                        builder: (context) => ServiceSessionEvaluationContent(
-                          session,
+            child: Padding(
+              padding: const EdgeInsets.all(30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: 30),
+                  DetailsWidget(
+                    details: details,
+                  ),
+                  SizedBox(height: 40),
+                  Text(
+                    offer.description,
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  SizedBox(height: 40),
+                  ConnectToVideoButton(),
+                  SizedBox(height: 10),
+                  OutlineButton(
+                    child: Text('Finish session'),
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(
+                        CupertinoPageRoute(
+                          builder: (context) => ServiceSessionEvaluationContent(
+                            session,
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                ),
-              ],
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),

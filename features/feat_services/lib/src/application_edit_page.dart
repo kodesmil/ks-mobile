@@ -104,6 +104,7 @@ class _ServiceApplicationEditContentState
 
   @override
   Widget build(BuildContext context) {
+    final store = Provider.of<ServiceApplicationEditStore>(context);
     return CupertinoPageScaffold(
       navigationBar: KsSmallNavigationBar(title: 'Join program'),
       child: SafeArea(
@@ -170,14 +171,17 @@ class _ServiceApplicationEditContentState
                   OutlineButton(
                     child: Text('Apply'),
                     shape: StadiumBorder(),
-                    onPressed: () => ksNavigateAndRemoveUntil(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (context) => ServiceApplicationFileContent(
-                          widget.application,
+                    onPressed: () async {
+                      await store.createOrUpdate();
+                      return ksNavigateAndRemoveUntil(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => ServiceApplicationFilePage(
+                            store.application,
+                          ),
                         ),
-                      ),
-                    ),
+                      );
+                    },
                   ),
                 ],
               ),
