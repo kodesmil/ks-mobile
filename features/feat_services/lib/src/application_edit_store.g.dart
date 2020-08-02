@@ -8,8 +8,24 @@ part of 'application_edit_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$ServiceApplicationJoinStore on _ServiceApplicationJoinStore, Store {
-  final _$detailsAtom = Atom(name: '_ServiceApplicationJoinStore.details');
+mixin _$ServiceApplicationEditStore on _ServiceApplicationEditStore, Store {
+  final _$applicationAtom =
+      Atom(name: '_ServiceApplicationEditStore.application');
+
+  @override
+  ServiceApplication get application {
+    _$applicationAtom.reportRead();
+    return super.application;
+  }
+
+  @override
+  set application(ServiceApplication value) {
+    _$applicationAtom.reportWrite(value, super.application, () {
+      super.application = value;
+    });
+  }
+
+  final _$detailsAtom = Atom(name: '_ServiceApplicationEditStore.details');
 
   @override
   ServiceDetails get details {
@@ -25,7 +41,7 @@ mixin _$ServiceApplicationJoinStore on _ServiceApplicationJoinStore, Store {
   }
 
   final _$employmentAtom =
-      Atom(name: '_ServiceApplicationJoinStore.employment');
+      Atom(name: '_ServiceApplicationEditStore.employment');
 
   @override
   ServiceEmployment get employment {
@@ -40,7 +56,7 @@ mixin _$ServiceApplicationJoinStore on _ServiceApplicationJoinStore, Store {
     });
   }
 
-  final _$fileAtom = Atom(name: '_ServiceApplicationJoinStore.file');
+  final _$fileAtom = Atom(name: '_ServiceApplicationEditStore.file');
 
   @override
   ServiceApplicationFile get file {
@@ -56,7 +72,7 @@ mixin _$ServiceApplicationJoinStore on _ServiceApplicationJoinStore, Store {
   }
 
   final _$addApplicationFileAsyncAction =
-      AsyncAction('_ServiceApplicationJoinStore.addApplicationFile');
+      AsyncAction('_ServiceApplicationEditStore.addApplicationFile');
 
   @override
   Future<dynamic> addApplicationFile(String url) {
@@ -65,16 +81,15 @@ mixin _$ServiceApplicationJoinStore on _ServiceApplicationJoinStore, Store {
   }
 
   final _$setApplicationAsyncAction =
-      AsyncAction('_ServiceApplicationJoinStore.setApplication');
+      AsyncAction('_ServiceApplicationEditStore.setApplication');
 
   @override
-  Future<dynamic> setApplication(ServiceApplication application) {
-    return _$setApplicationAsyncAction
-        .run(() => super.setApplication(application));
+  Future<dynamic> setApplication(ServiceApplication a) {
+    return _$setApplicationAsyncAction.run(() => super.setApplication(a));
   }
 
   final _$createOrUpdateAsyncAction =
-      AsyncAction('_ServiceApplicationJoinStore.createOrUpdate');
+      AsyncAction('_ServiceApplicationEditStore.createOrUpdate');
 
   @override
   Future<dynamic> createOrUpdate() {
@@ -82,7 +97,7 @@ mixin _$ServiceApplicationJoinStore on _ServiceApplicationJoinStore, Store {
   }
 
   final _$updateAsyncAction =
-      AsyncAction('_ServiceApplicationJoinStore.update');
+      AsyncAction('_ServiceApplicationEditStore.update');
 
   @override
   Future<dynamic> update() {
@@ -90,7 +105,7 @@ mixin _$ServiceApplicationJoinStore on _ServiceApplicationJoinStore, Store {
   }
 
   final _$createAsyncAction =
-      AsyncAction('_ServiceApplicationJoinStore.create');
+      AsyncAction('_ServiceApplicationEditStore.create');
 
   @override
   Future<dynamic> create() {
@@ -100,6 +115,7 @@ mixin _$ServiceApplicationJoinStore on _ServiceApplicationJoinStore, Store {
   @override
   String toString() {
     return '''
+application: ${application},
 details: ${details},
 employment: ${employment},
 file: ${file}

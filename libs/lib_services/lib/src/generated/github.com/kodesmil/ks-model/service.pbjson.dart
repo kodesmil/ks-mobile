@@ -653,6 +653,76 @@ const ListServiceDetailsResponse$json = const {
   ],
 };
 
+const CreateServiceEmploymentRequest$json = const {
+  '1': 'CreateServiceEmploymentRequest',
+  '2': const [
+    const {'1': 'payload', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceEmployment', '10': 'payload'},
+  ],
+};
+
+const CreateServiceEmploymentResponse$json = const {
+  '1': 'CreateServiceEmploymentResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceEmployment', '10': 'result'},
+  ],
+};
+
+const ReadServiceEmploymentRequest$json = const {
+  '1': 'ReadServiceEmploymentRequest',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '10': 'id'},
+  ],
+};
+
+const ReadServiceEmploymentResponse$json = const {
+  '1': 'ReadServiceEmploymentResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceEmployment', '10': 'result'},
+  ],
+};
+
+const UpdateServiceEmploymentRequest$json = const {
+  '1': 'UpdateServiceEmploymentRequest',
+  '2': const [
+    const {'1': 'payload', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceEmployment', '10': 'payload'},
+  ],
+};
+
+const UpdateServiceEmploymentResponse$json = const {
+  '1': 'UpdateServiceEmploymentResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceEmployment', '10': 'result'},
+  ],
+};
+
+const DeleteServiceEmploymentRequest$json = const {
+  '1': 'DeleteServiceEmploymentRequest',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '10': 'id'},
+  ],
+};
+
+const DeleteServiceEmploymentResponse$json = const {
+  '1': 'DeleteServiceEmploymentResponse',
+};
+
+const ListServiceEmploymentRequest$json = const {
+  '1': 'ListServiceEmploymentRequest',
+  '2': const [
+    const {'1': 'filter', '3': 1, '4': 1, '5': 11, '6': '.infoblox.api.Filtering', '10': 'filter'},
+    const {'1': 'order_by', '3': 2, '4': 1, '5': 11, '6': '.infoblox.api.Sorting', '10': 'orderBy'},
+    const {'1': 'fields', '3': 3, '4': 1, '5': 11, '6': '.infoblox.api.FieldSelection', '10': 'fields'},
+    const {'1': 'paging', '3': 4, '4': 1, '5': 11, '6': '.infoblox.api.Pagination', '10': 'paging'},
+  ],
+};
+
+const ListServiceEmploymentResponse$json = const {
+  '1': 'ListServiceEmploymentResponse',
+  '2': const [
+    const {'1': 'results', '3': 1, '4': 3, '5': 11, '6': '.model.ServiceEmployment', '10': 'results'},
+  ],
+};
+
 const CreateServiceRequest$json = const {
   '1': 'CreateServiceRequest',
   '2': const [

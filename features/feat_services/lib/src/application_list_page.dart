@@ -1,5 +1,6 @@
 import 'package:feat_services/feat_services.dart';
 import 'package:feat_services/src/application_list_store.dart';
+import 'package:feat_services/src/employment_edit_page.dart';
 import 'package:feat_services/src/offer_edit_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -180,13 +181,46 @@ class _ServiceApplicationListContentState
                             SizedBox(height: 20),
                             ListTile(
                               leading: Text(
-                                'Contact',
+                                'Team',
                                 style: Theme.of(context).textTheme.headline6,
                               ),
                               trailing: IconButton(
-                                icon: Icon(Icons.edit),
-                                onPressed: () {},
+                                icon: Icon(Icons.add),
+                                onPressed: () {
+                                    Navigator.of(context, rootNavigator: true)
+                                        .push(
+                                      CupertinoPageRoute(
+                                        builder: (context) =>
+                                            ServiceEmploymentEditPage(
+                                          e.provider,
+                                        ),
+                                      ),
+                                    );
+                                },
                               ),
+                            ),
+                            Column(
+                              children: e.provider.employments
+                                  .map(
+                                    (o) => ListTile(
+                                      title:
+                                          Text('${o.firstName} ${o.lastName}'),
+                                      onTap: () {
+                                        Navigator.of(context,
+                                                rootNavigator: true)
+                                            .push(
+                                          CupertinoPageRoute(
+                                            builder: (context) =>
+                                                ServiceEmploymentEditPage(
+                                              e.provider,
+                                              employment: o,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  )
+                                  .toList(),
                             ),
                           ],
                         ),

@@ -29,22 +29,23 @@ class _ServiceOfferEditPageState extends State<ServiceOfferEditPage> {
           ),
         ),
       ],
-      child: _ServiceOfferEditPage(widget.provider, offer: widget.offer),
+      child: ServiceOfferEditContent(widget.provider, offer: widget.offer),
     );
   }
 }
 
-class _ServiceOfferEditPage extends StatefulWidget {
+class ServiceOfferEditContent extends StatefulWidget {
   final ServiceProvider provider;
   final ServiceOffer offer;
 
-  _ServiceOfferEditPage(this.provider, {this.offer});
+  ServiceOfferEditContent(this.provider, {this.offer});
 
   @override
-  __ServiceOfferEditPageState createState() => __ServiceOfferEditPageState();
+  __ServiceOfferEditContentState createState() =>
+      __ServiceOfferEditContentState();
 }
 
-class __ServiceOfferEditPageState extends State<_ServiceOfferEditPage> {
+class __ServiceOfferEditContentState extends State<ServiceOfferEditContent> {
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _priceController = TextEditingController();

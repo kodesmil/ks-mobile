@@ -134,6 +134,69 @@ class ServicesClient extends $grpc.Client {
       ($6.DeleteServiceOfferRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $6.DeleteServiceOfferResponse.fromBuffer(value));
+  static final _$listServiceEmployment = $grpc.ClientMethod<
+          $6.ListServiceEmploymentRequest, $6.ListServiceEmploymentResponse>(
+      '/model.Services/ListServiceEmployment',
+      ($6.ListServiceEmploymentRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $6.ListServiceEmploymentResponse.fromBuffer(value));
+  static final _$createServiceEmployment = $grpc.ClientMethod<
+          $6.CreateServiceEmploymentRequest,
+          $6.CreateServiceEmploymentResponse>(
+      '/model.Services/CreateServiceEmployment',
+      ($6.CreateServiceEmploymentRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $6.CreateServiceEmploymentResponse.fromBuffer(value));
+  static final _$readServiceEmployment = $grpc.ClientMethod<
+          $6.ReadServiceEmploymentRequest, $6.ReadServiceEmploymentResponse>(
+      '/model.Services/ReadServiceEmployment',
+      ($6.ReadServiceEmploymentRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $6.ReadServiceEmploymentResponse.fromBuffer(value));
+  static final _$updateServiceEmployment = $grpc.ClientMethod<
+          $6.UpdateServiceEmploymentRequest,
+          $6.UpdateServiceEmploymentResponse>(
+      '/model.Services/UpdateServiceEmployment',
+      ($6.UpdateServiceEmploymentRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $6.UpdateServiceEmploymentResponse.fromBuffer(value));
+  static final _$deleteServiceEmployment = $grpc.ClientMethod<
+          $6.DeleteServiceEmploymentRequest,
+          $6.DeleteServiceEmploymentResponse>(
+      '/model.Services/DeleteServiceEmployment',
+      ($6.DeleteServiceEmploymentRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $6.DeleteServiceEmploymentResponse.fromBuffer(value));
+  static final _$listServiceDetails = $grpc.ClientMethod<
+          $6.ListServiceDetailsRequest, $6.ListServiceDetailsResponse>(
+      '/model.Services/ListServiceDetails',
+      ($6.ListServiceDetailsRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $6.ListServiceDetailsResponse.fromBuffer(value));
+  static final _$createServiceDetails = $grpc.ClientMethod<
+          $6.CreateServiceDetailsRequest, $6.CreateServiceDetailsResponse>(
+      '/model.Services/CreateServiceDetails',
+      ($6.CreateServiceDetailsRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $6.CreateServiceDetailsResponse.fromBuffer(value));
+  static final _$readServiceDetails = $grpc.ClientMethod<
+          $6.ReadServiceDetailsRequest, $6.ReadServiceDetailsResponse>(
+      '/model.Services/ReadServiceDetails',
+      ($6.ReadServiceDetailsRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $6.ReadServiceDetailsResponse.fromBuffer(value));
+  static final _$updateServiceDetails = $grpc.ClientMethod<
+          $6.UpdateServiceDetailsRequest, $6.UpdateServiceDetailsResponse>(
+      '/model.Services/UpdateServiceDetails',
+      ($6.UpdateServiceDetailsRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $6.UpdateServiceDetailsResponse.fromBuffer(value));
+  static final _$deleteServiceDetails = $grpc.ClientMethod<
+          $6.DeleteServiceDetailsRequest, $6.DeleteServiceDetailsResponse>(
+      '/model.Services/DeleteServiceDetails',
+      ($6.DeleteServiceDetailsRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $6.DeleteServiceDetailsResponse.fromBuffer(value));
   static final _$listServiceApplication = $grpc.ClientMethod<
           $6.ListServiceApplicationRequest, $6.ListServiceApplicationResponse>(
       '/model.Services/ListServiceApplication',
@@ -377,6 +440,96 @@ class ServicesClient extends $grpc.Client {
       {$grpc.CallOptions options}) {
     final call = $createCall(
         _$deleteServiceOffer, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$6.ListServiceEmploymentResponse> listServiceEmployment(
+      $6.ListServiceEmploymentRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$listServiceEmployment, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$6.CreateServiceEmploymentResponse>
+      createServiceEmployment($6.CreateServiceEmploymentRequest request,
+          {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$createServiceEmployment, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$6.ReadServiceEmploymentResponse> readServiceEmployment(
+      $6.ReadServiceEmploymentRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$readServiceEmployment, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$6.UpdateServiceEmploymentResponse>
+      updateServiceEmployment($6.UpdateServiceEmploymentRequest request,
+          {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$updateServiceEmployment, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$6.DeleteServiceEmploymentResponse>
+      deleteServiceEmployment($6.DeleteServiceEmploymentRequest request,
+          {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$deleteServiceEmployment, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$6.ListServiceDetailsResponse> listServiceDetails(
+      $6.ListServiceDetailsRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$listServiceDetails, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$6.CreateServiceDetailsResponse> createServiceDetails(
+      $6.CreateServiceDetailsRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$createServiceDetails, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$6.ReadServiceDetailsResponse> readServiceDetails(
+      $6.ReadServiceDetailsRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$readServiceDetails, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$6.UpdateServiceDetailsResponse> updateServiceDetails(
+      $6.UpdateServiceDetailsRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$updateServiceDetails, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$6.DeleteServiceDetailsResponse> deleteServiceDetails(
+      $6.DeleteServiceDetailsRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$deleteServiceDetails, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -656,6 +809,96 @@ abstract class ServicesServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $6.DeleteServiceOfferRequest.fromBuffer(value),
         ($6.DeleteServiceOfferResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$6.ListServiceEmploymentRequest,
+            $6.ListServiceEmploymentResponse>(
+        'ListServiceEmployment',
+        listServiceEmployment_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $6.ListServiceEmploymentRequest.fromBuffer(value),
+        ($6.ListServiceEmploymentResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$6.CreateServiceEmploymentRequest,
+            $6.CreateServiceEmploymentResponse>(
+        'CreateServiceEmployment',
+        createServiceEmployment_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $6.CreateServiceEmploymentRequest.fromBuffer(value),
+        ($6.CreateServiceEmploymentResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$6.ReadServiceEmploymentRequest,
+            $6.ReadServiceEmploymentResponse>(
+        'ReadServiceEmployment',
+        readServiceEmployment_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $6.ReadServiceEmploymentRequest.fromBuffer(value),
+        ($6.ReadServiceEmploymentResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$6.UpdateServiceEmploymentRequest,
+            $6.UpdateServiceEmploymentResponse>(
+        'UpdateServiceEmployment',
+        updateServiceEmployment_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $6.UpdateServiceEmploymentRequest.fromBuffer(value),
+        ($6.UpdateServiceEmploymentResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$6.DeleteServiceEmploymentRequest,
+            $6.DeleteServiceEmploymentResponse>(
+        'DeleteServiceEmployment',
+        deleteServiceEmployment_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $6.DeleteServiceEmploymentRequest.fromBuffer(value),
+        ($6.DeleteServiceEmploymentResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$6.ListServiceDetailsRequest,
+            $6.ListServiceDetailsResponse>(
+        'ListServiceDetails',
+        listServiceDetails_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $6.ListServiceDetailsRequest.fromBuffer(value),
+        ($6.ListServiceDetailsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$6.CreateServiceDetailsRequest,
+            $6.CreateServiceDetailsResponse>(
+        'CreateServiceDetails',
+        createServiceDetails_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $6.CreateServiceDetailsRequest.fromBuffer(value),
+        ($6.CreateServiceDetailsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$6.ReadServiceDetailsRequest,
+            $6.ReadServiceDetailsResponse>(
+        'ReadServiceDetails',
+        readServiceDetails_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $6.ReadServiceDetailsRequest.fromBuffer(value),
+        ($6.ReadServiceDetailsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$6.UpdateServiceDetailsRequest,
+            $6.UpdateServiceDetailsResponse>(
+        'UpdateServiceDetails',
+        updateServiceDetails_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $6.UpdateServiceDetailsRequest.fromBuffer(value),
+        ($6.UpdateServiceDetailsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$6.DeleteServiceDetailsRequest,
+            $6.DeleteServiceDetailsResponse>(
+        'DeleteServiceDetails',
+        deleteServiceDetails_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $6.DeleteServiceDetailsRequest.fromBuffer(value),
+        ($6.DeleteServiceDetailsResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$6.ListServiceApplicationRequest,
             $6.ListServiceApplicationResponse>(
         'ListServiceApplication',
@@ -866,6 +1109,66 @@ abstract class ServicesServiceBase extends $grpc.Service {
     return deleteServiceOffer(call, await request);
   }
 
+  $async.Future<$6.ListServiceEmploymentResponse> listServiceEmployment_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$6.ListServiceEmploymentRequest> request) async {
+    return listServiceEmployment(call, await request);
+  }
+
+  $async.Future<$6.CreateServiceEmploymentResponse> createServiceEmployment_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$6.CreateServiceEmploymentRequest> request) async {
+    return createServiceEmployment(call, await request);
+  }
+
+  $async.Future<$6.ReadServiceEmploymentResponse> readServiceEmployment_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$6.ReadServiceEmploymentRequest> request) async {
+    return readServiceEmployment(call, await request);
+  }
+
+  $async.Future<$6.UpdateServiceEmploymentResponse> updateServiceEmployment_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$6.UpdateServiceEmploymentRequest> request) async {
+    return updateServiceEmployment(call, await request);
+  }
+
+  $async.Future<$6.DeleteServiceEmploymentResponse> deleteServiceEmployment_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$6.DeleteServiceEmploymentRequest> request) async {
+    return deleteServiceEmployment(call, await request);
+  }
+
+  $async.Future<$6.ListServiceDetailsResponse> listServiceDetails_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$6.ListServiceDetailsRequest> request) async {
+    return listServiceDetails(call, await request);
+  }
+
+  $async.Future<$6.CreateServiceDetailsResponse> createServiceDetails_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$6.CreateServiceDetailsRequest> request) async {
+    return createServiceDetails(call, await request);
+  }
+
+  $async.Future<$6.ReadServiceDetailsResponse> readServiceDetails_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$6.ReadServiceDetailsRequest> request) async {
+    return readServiceDetails(call, await request);
+  }
+
+  $async.Future<$6.UpdateServiceDetailsResponse> updateServiceDetails_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$6.UpdateServiceDetailsRequest> request) async {
+    return updateServiceDetails(call, await request);
+  }
+
+  $async.Future<$6.DeleteServiceDetailsResponse> deleteServiceDetails_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$6.DeleteServiceDetailsRequest> request) async {
+    return deleteServiceDetails(call, await request);
+  }
+
   $async.Future<$6.ListServiceApplicationResponse> listServiceApplication_Pre(
       $grpc.ServiceCall call,
       $async.Future<$6.ListServiceApplicationRequest> request) async {
@@ -966,6 +1269,26 @@ abstract class ServicesServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $6.UpdateServiceOfferRequest request);
   $async.Future<$6.DeleteServiceOfferResponse> deleteServiceOffer(
       $grpc.ServiceCall call, $6.DeleteServiceOfferRequest request);
+  $async.Future<$6.ListServiceEmploymentResponse> listServiceEmployment(
+      $grpc.ServiceCall call, $6.ListServiceEmploymentRequest request);
+  $async.Future<$6.CreateServiceEmploymentResponse> createServiceEmployment(
+      $grpc.ServiceCall call, $6.CreateServiceEmploymentRequest request);
+  $async.Future<$6.ReadServiceEmploymentResponse> readServiceEmployment(
+      $grpc.ServiceCall call, $6.ReadServiceEmploymentRequest request);
+  $async.Future<$6.UpdateServiceEmploymentResponse> updateServiceEmployment(
+      $grpc.ServiceCall call, $6.UpdateServiceEmploymentRequest request);
+  $async.Future<$6.DeleteServiceEmploymentResponse> deleteServiceEmployment(
+      $grpc.ServiceCall call, $6.DeleteServiceEmploymentRequest request);
+  $async.Future<$6.ListServiceDetailsResponse> listServiceDetails(
+      $grpc.ServiceCall call, $6.ListServiceDetailsRequest request);
+  $async.Future<$6.CreateServiceDetailsResponse> createServiceDetails(
+      $grpc.ServiceCall call, $6.CreateServiceDetailsRequest request);
+  $async.Future<$6.ReadServiceDetailsResponse> readServiceDetails(
+      $grpc.ServiceCall call, $6.ReadServiceDetailsRequest request);
+  $async.Future<$6.UpdateServiceDetailsResponse> updateServiceDetails(
+      $grpc.ServiceCall call, $6.UpdateServiceDetailsRequest request);
+  $async.Future<$6.DeleteServiceDetailsResponse> deleteServiceDetails(
+      $grpc.ServiceCall call, $6.DeleteServiceDetailsRequest request);
   $async.Future<$6.ListServiceApplicationResponse> listServiceApplication(
       $grpc.ServiceCall call, $6.ListServiceApplicationRequest request);
   $async.Future<$6.CreateServiceApplicationResponse> createServiceApplication(

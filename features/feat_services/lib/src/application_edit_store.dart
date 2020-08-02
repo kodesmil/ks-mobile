@@ -6,10 +6,10 @@ import 'package:uuid/uuid.dart';
 
 part 'application_edit_store.g.dart';
 
-class ServiceApplicationEditStore = _ServiceApplicationJoinStore
-    with _$ServiceApplicationJoinStore;
+class ServiceApplicationEditStore = _ServiceApplicationEditStore
+    with _$ServiceApplicationEditStore;
 
-abstract class _ServiceApplicationJoinStore with Store {
+abstract class _ServiceApplicationEditStore with Store {
   final ErrorStore errorStore;
   final LoadingStore loadingStore;
   final ServicesClient client;
@@ -26,7 +26,7 @@ abstract class _ServiceApplicationJoinStore with Store {
   @observable
   ServiceApplicationFile file;
 
-  _ServiceApplicationJoinStore(
+  _ServiceApplicationEditStore(
     this.errorStore,
     this.loadingStore,
     this.client,

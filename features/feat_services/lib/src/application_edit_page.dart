@@ -53,18 +53,11 @@ class ServiceApplicationEditContent extends StatefulWidget {
 
 class _ServiceApplicationEditContentState
     extends State<ServiceApplicationEditContent> {
-  final _firstNameController = TextEditingController();
-  final _lastNameController = TextEditingController();
   final _companyController = TextEditingController();
   final _addressController = TextEditingController();
-  final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
   final _1FocusNode = FocusNode();
   final _2FocusNode = FocusNode();
-  final _3FocusNode = FocusNode();
-  final _4FocusNode = FocusNode();
-  final _5FocusNode = FocusNode();
-  final _6FocusNode = FocusNode();
 
   @override
   void didChangeDependencies() async {
@@ -72,18 +65,11 @@ class _ServiceApplicationEditContentState
       context,
       listen: false,
     );
-    await store.setApplication(widget.application);
 
-    _firstNameController.addListener(_firstNameListener);
-    _lastNameController.addListener(_lastNameListener);
-    _emailController.addListener(_emailListener);
     _phoneController.addListener(_phoneListener);
     _addressController.addListener(_addressListener);
     _companyController.addListener(_companyListener);
 
-    _firstNameController.text = store.employment.firstName;
-    _lastNameController.text = store.employment.lastName;
-    _emailController.text = store.employment.email;
     _phoneController.text = store.employment.phone;
     _companyController.text = store.details.name;
     _addressController.text = store.details.address;
@@ -93,9 +79,6 @@ class _ServiceApplicationEditContentState
 
   @override
   void dispose() {
-    _firstNameController.removeListener(_firstNameListener);
-    _lastNameController.removeListener(_lastNameListener);
-    _emailController.removeListener(_emailListener);
     _phoneController.removeListener(_phoneListener);
     _addressController.removeListener(_addressListener);
     _companyController.removeListener(_companyListener);
@@ -114,46 +97,20 @@ class _ServiceApplicationEditContentState
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  SizedBox(height: 30),
                   TextField(
-                    textCapitalization: TextCapitalization.none,
-                    controller: _firstNameController,
-                    focusNode: _1FocusNode,
-                    decoration: InputDecoration(
-                      labelText: 'First Name',
-                    ),
-                  ),
-                  SizedBox(height: 15),
-                  TextField(
-                    textCapitalization: TextCapitalization.none,
-                    controller: _lastNameController,
-                    focusNode: _2FocusNode,
-                    decoration: InputDecoration(
-                      labelText: 'Last Name',
-                    ),
-                  ),
-                  SizedBox(height: 15),
-                  TextField(
-                    textCapitalization: TextCapitalization.none,
-                    controller: _emailController,
-                    focusNode: _3FocusNode,
-                    decoration: InputDecoration(
-                      labelText: 'Email',
-                    ),
-                  ),
-                  SizedBox(height: 15),
-                  TextField(
-                    textCapitalization: TextCapitalization.none,
+                    textCapitalization: TextCapitalization.words,
                     controller: _companyController,
-                    focusNode: _4FocusNode,
+                    focusNode: _1FocusNode,
                     decoration: InputDecoration(
                       labelText: 'Company',
                     ),
                   ),
                   SizedBox(height: 15),
                   TextField(
-                    textCapitalization: TextCapitalization.none,
+                    textCapitalization: TextCapitalization.sentences,
                     controller: _addressController,
-                    focusNode: _5FocusNode,
+                    focusNode: _2FocusNode,
                     decoration: InputDecoration(
                       labelText: 'Address',
                     ),
@@ -162,7 +119,6 @@ class _ServiceApplicationEditContentState
                   TextField(
                     textCapitalization: TextCapitalization.none,
                     controller: _phoneController,
-                    focusNode: _6FocusNode,
                     decoration: InputDecoration(
                       labelText: 'Phone',
                     ),
@@ -192,22 +148,6 @@ class _ServiceApplicationEditContentState
     );
   }
 
-  void _firstNameListener() {
-    final store =
-        Provider.of<ServiceApplicationEditStore>(context, listen: false);
-    store.employment = store.employment.copyWith((e) {
-      e.firstName = _firstNameController.text;
-    });
-  }
-
-  void _lastNameListener() {
-    final store =
-        Provider.of<ServiceApplicationEditStore>(context, listen: false);
-    store.employment = store.employment.copyWith((e) {
-      e.lastName = _lastNameController.text;
-    });
-  }
-
   void _companyListener() {
     final store =
         Provider.of<ServiceApplicationEditStore>(context, listen: false);
@@ -221,14 +161,6 @@ class _ServiceApplicationEditContentState
         Provider.of<ServiceApplicationEditStore>(context, listen: false);
     store.details = store.details.copyWith((e) {
       e.address = _addressController.text;
-    });
-  }
-
-  void _emailListener() {
-    final store =
-        Provider.of<ServiceApplicationEditStore>(context, listen: false);
-    store.employment = store.employment.copyWith((e) {
-      e.email = _emailController.text;
     });
   }
 

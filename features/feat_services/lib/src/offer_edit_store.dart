@@ -6,7 +6,6 @@ import 'package:uuid/uuid.dart';
 
 part 'offer_edit_store.g.dart';
 
-
 class ServiceOfferEditStore = _ServiceOfferEditStore
     with _$ServiceOfferEditStore;
 
@@ -15,13 +14,8 @@ abstract class _ServiceOfferEditStore with Store {
   final LoadingStore loadingStore;
   final ServicesClient client;
 
-  ServiceProvider _provider;
-
   @observable
   ServiceOffer offer;
-
-  @observable
-  ServiceEmployment employment;
 
   _ServiceOfferEditStore(
     this.errorStore,
@@ -31,9 +25,11 @@ abstract class _ServiceOfferEditStore with Store {
 
   @action
   Future setApplication(ServiceProvider p, ServiceOffer o) async {
-    _provider = p;
     offer =
         o ?? (ServiceOffer()..id = (Identifier()..resourceId = Uuid().v4()));
+    offer = offer.copyWith((e) {
+      e.provider = p;
+    });
   }
 
   @action
