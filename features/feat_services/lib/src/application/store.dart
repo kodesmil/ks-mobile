@@ -18,13 +18,13 @@ abstract class _ServiceApplicationJoinStore with Store {
   ServiceDetails details;
 
   @observable
-  ServiceDetailsContact contact;
-
-  @observable
-  ServiceDetailsCompany company;
+  ServiceEmployment employment;
 
   @observable
   ServiceProvider provider;
+
+  @observable
+  ServiceApplicationFile file;
 
   _ServiceApplicationJoinStore(
     this.errorStore,
@@ -34,10 +34,9 @@ abstract class _ServiceApplicationJoinStore with Store {
 
   @action
   Future addApplicationFile(String url) async {
-    final file = ServiceApplicationFile()
+    file = ServiceApplicationFile()
       ..id = (Identifier()..resourceId = Uuid().v4())
       ..url = url;
-    // application.files.add(file);
   }
 
   @action
@@ -50,10 +49,10 @@ abstract class _ServiceApplicationJoinStore with Store {
   Future update(ServiceApplication application) async {
     try {
       final payload = application
+        ..files.add(file)
         ..provider = (provider
-          ..details = (details
-            ..contact = contact
-            ..company = company));
+          ..employments.add(employment)
+          ..details = details);
       final request = UpdateServiceApplicationRequest();
       request..payload = payload;
       final response = await client.updateServiceApplication(request);
@@ -68,10 +67,10 @@ abstract class _ServiceApplicationJoinStore with Store {
   Future create(ServiceApplication application) async {
     try {
       final payload = application
+        ..files.add(file)
         ..provider = (provider
-          ..details = (details
-            ..contact = contact
-            ..company = company));
+          ..employments.add(employment)
+          ..details = details);
       final request = CreateServiceApplicationRequest();
       request..payload = payload;
       final response = await client.createServiceApplication(request);

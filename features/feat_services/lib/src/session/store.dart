@@ -47,7 +47,7 @@ abstract class _ServiceSessionEvaluationStore with Store {
   );
 
   @observable
-  ServiceProviderSessionEvaluation evaluation;
+  ServiceSessionEvaluation evaluation;
 
   @action
   Future create(ServiceSession session) async {

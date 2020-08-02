@@ -61,7 +61,7 @@ Widget authGuarded(
   return StreamBuilder(
     stream: store.output,
     builder: (context, snap) {
-      if (snap.hasData) {
+      if (snap.data != null) {
         return page;
       } else {
         return LoginPage();

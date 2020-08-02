@@ -46,14 +46,16 @@ const ServiceOffer$json = const {
     const {'1': 'price', '3': 4, '4': 1, '5': 2, '10': 'price'},
     const {'1': 'currency', '3': 5, '4': 1, '5': 9, '10': 'currency'},
     const {'1': 'service', '3': 6, '4': 1, '5': 11, '6': '.model.Service', '8': const {}, '10': 'service'},
-    const {'1': 'description', '3': 7, '4': 1, '5': 9, '10': 'description'},
-    const {'1': 'provider', '3': 8, '4': 1, '5': 11, '6': '.model.ServiceProvider', '8': const {}, '10': 'provider'},
+    const {'1': 'provider', '3': 7, '4': 1, '5': 11, '6': '.model.ServiceProvider', '8': const {}, '10': 'provider'},
+    const {'1': 'description', '3': 8, '4': 1, '5': 9, '10': 'description'},
+    const {'1': 'title', '3': 9, '4': 1, '5': 9, '10': 'title'},
+    const {'1': 'picture_url', '3': 10, '4': 1, '5': 9, '10': 'pictureUrl'},
   ],
   '7': const {},
 };
 
-const ServiceDetailsContact$json = const {
-  '1': 'ServiceDetailsContact',
+const ServiceEmployment$json = const {
+  '1': 'ServiceEmployment',
   '2': const [
     const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'id'},
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
@@ -62,19 +64,7 @@ const ServiceDetailsContact$json = const {
     const {'1': 'last_name', '3': 5, '4': 1, '5': 9, '10': 'lastName'},
     const {'1': 'email', '3': 6, '4': 1, '5': 9, '10': 'email'},
     const {'1': 'phone', '3': 7, '4': 1, '5': 9, '10': 'phone'},
-  ],
-  '7': const {},
-};
-
-const ServiceDetailsCompany$json = const {
-  '1': 'ServiceDetailsCompany',
-  '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'id'},
-    const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
-    const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
-    const {'1': 'name', '3': 4, '4': 1, '5': 9, '10': 'name'},
-    const {'1': 'address', '3': 5, '4': 1, '5': 9, '10': 'address'},
-    const {'1': 'phone', '3': 6, '4': 1, '5': 9, '10': 'phone'},
+    const {'1': 'can_be_contacted', '3': 8, '4': 1, '5': 8, '10': 'canBeContacted'},
   ],
   '7': const {},
 };
@@ -85,8 +75,11 @@ const ServiceDetails$json = const {
     const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'id'},
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
-    const {'1': 'company', '3': 4, '4': 1, '5': 11, '6': '.model.ServiceDetailsCompany', '10': 'company'},
-    const {'1': 'contact', '3': 5, '4': 1, '5': 11, '6': '.model.ServiceDetailsContact', '10': 'contact'},
+    const {'1': 'name', '3': 4, '4': 1, '5': 9, '10': 'name'},
+    const {'1': 'address', '3': 5, '4': 1, '5': 9, '10': 'address'},
+    const {'1': 'phone', '3': 6, '4': 1, '5': 9, '10': 'phone'},
+    const {'1': 'logo_url', '3': 7, '4': 1, '5': 9, '10': 'logoUrl'},
+    const {'1': 'email', '3': 8, '4': 1, '5': 9, '10': 'email'},
   ],
   '7': const {},
 };
@@ -125,12 +118,13 @@ const ServiceProvider$json = const {
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
     const {'1': 'details', '3': 4, '4': 1, '5': 11, '6': '.model.ServiceDetails', '10': 'details'},
     const {'1': 'offers', '3': 5, '4': 3, '5': 11, '6': '.model.ServiceOffer', '10': 'offers'},
+    const {'1': 'employments', '3': 6, '4': 3, '5': 11, '6': '.model.ServiceEmployment', '10': 'employments'},
   ],
   '7': const {},
 };
 
-const ServiceProviderSessionEvaluation$json = const {
-  '1': 'ServiceProviderSessionEvaluation',
+const ServiceSessionEvaluation$json = const {
+  '1': 'ServiceSessionEvaluation',
   '2': const [
     const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'id'},
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
@@ -152,7 +146,7 @@ const ServiceSession$json = const {
     const {'1': 'finished_at', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'finishedAt'},
     const {'1': 'offer', '3': 6, '4': 1, '5': 11, '6': '.model.ServiceOffer', '8': const {}, '10': 'offer'},
     const {'1': 'notes', '3': 7, '4': 3, '5': 11, '6': '.model.ServiceSessionNote', '10': 'notes'},
-    const {'1': 'evaluation', '3': 8, '4': 1, '5': 11, '6': '.model.ServiceProviderSessionEvaluation', '10': 'evaluation'},
+    const {'1': 'evaluation', '3': 8, '4': 1, '5': 11, '6': '.model.ServiceSessionEvaluation', '10': 'evaluation'},
   ],
   '7': const {},
 };

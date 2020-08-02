@@ -27,8 +27,7 @@ class _ServiceOfferPageState extends State<ServiceOfferPage> {
         delegate: SliverChildBuilderDelegate(
           (context, index) {
             final e = store.subjects[index];
-            final contact = e.provider.details.contact;
-            final company = e.provider.details.company;
+            final details = e.provider.details;
             return Padding(
               padding: const EdgeInsets.only(top: 15),
               child: ListTile(
@@ -39,9 +38,8 @@ class _ServiceOfferPageState extends State<ServiceOfferPage> {
                 subtitle: Text(
                   '${e.price} ${e.currency}',
                 ),
-                trailing: CompanyWidget(
-                  company: company,
-                  contact: contact,
+                trailing: DetailsWidget(
+                  details: details,
                 ),
                 onTap: () {
                   Navigator.of(context, rootNavigator: true).push(
@@ -60,26 +58,20 @@ class _ServiceOfferPageState extends State<ServiceOfferPage> {
   }
 }
 
-class CompanyWidget extends StatelessWidget {
-  const CompanyWidget({
+class DetailsWidget extends StatelessWidget {
+  const DetailsWidget({
     Key key,
-    @required this.company,
-    @required this.contact,
+    @required this.details,
   }) : super(key: key);
 
-  final ServiceDetailsCompany company;
-  final ServiceDetailsContact contact;
+  final ServiceDetails details;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Text(company.name),
-        Text(
-          '${contact.firstName} ${contact.lastName}',
-          style: Theme.of(context).textTheme.caption,
-        ),
+        Text(details.name),
       ],
     );
   }
@@ -93,8 +85,7 @@ class ServiceOfferDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<ServiceOfferStore>(context);
-    final contact = offer.provider.details.contact;
-    final company = offer.provider.details.company;
+    final details = offer.provider.details;
     return CupertinoPageScaffold(
       navigationBar: KsSmallNavigationBar(title: 'Details'),
       child: Material(
@@ -104,9 +95,8 @@ class ServiceOfferDetailsPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(height: 60),
-                CompanyWidget(
-                  company: company,
-                  contact: contact,
+                DetailsWidget(
+                  details: details,
                 ),
                 SizedBox(height: 40),
                 Text(

@@ -44,13 +44,13 @@ mixin _$ServiceSessionEvaluationStore on _ServiceSessionEvaluationStore, Store {
       Atom(name: '_ServiceSessionEvaluationStore.evaluation');
 
   @override
-  ServiceProviderSessionEvaluation get evaluation {
+  ServiceSessionEvaluation get evaluation {
     _$evaluationAtom.reportRead();
     return super.evaluation;
   }
 
   @override
-  set evaluation(ServiceProviderSessionEvaluation value) {
+  set evaluation(ServiceSessionEvaluation value) {
     _$evaluationAtom.reportWrite(value, super.evaluation, () {
       super.evaluation = value;
     });

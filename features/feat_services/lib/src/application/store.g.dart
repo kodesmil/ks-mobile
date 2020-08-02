@@ -24,33 +24,19 @@ mixin _$ServiceApplicationJoinStore on _ServiceApplicationJoinStore, Store {
     });
   }
 
-  final _$contactAtom = Atom(name: '_ServiceApplicationJoinStore.contact');
+  final _$employmentAtom =
+      Atom(name: '_ServiceApplicationJoinStore.employment');
 
   @override
-  ServiceDetailsContact get contact {
-    _$contactAtom.reportRead();
-    return super.contact;
+  ServiceEmployment get employment {
+    _$employmentAtom.reportRead();
+    return super.employment;
   }
 
   @override
-  set contact(ServiceDetailsContact value) {
-    _$contactAtom.reportWrite(value, super.contact, () {
-      super.contact = value;
-    });
-  }
-
-  final _$companyAtom = Atom(name: '_ServiceApplicationJoinStore.company');
-
-  @override
-  ServiceDetailsCompany get company {
-    _$companyAtom.reportRead();
-    return super.company;
-  }
-
-  @override
-  set company(ServiceDetailsCompany value) {
-    _$companyAtom.reportWrite(value, super.company, () {
-      super.company = value;
+  set employment(ServiceEmployment value) {
+    _$employmentAtom.reportWrite(value, super.employment, () {
+      super.employment = value;
     });
   }
 
@@ -66,6 +52,21 @@ mixin _$ServiceApplicationJoinStore on _ServiceApplicationJoinStore, Store {
   set provider(ServiceProvider value) {
     _$providerAtom.reportWrite(value, super.provider, () {
       super.provider = value;
+    });
+  }
+
+  final _$fileAtom = Atom(name: '_ServiceApplicationJoinStore.file');
+
+  @override
+  ServiceApplicationFile get file {
+    _$fileAtom.reportRead();
+    return super.file;
+  }
+
+  @override
+  set file(ServiceApplicationFile value) {
+    _$fileAtom.reportWrite(value, super.file, () {
+      super.file = value;
     });
   }
 
@@ -107,9 +108,9 @@ mixin _$ServiceApplicationJoinStore on _ServiceApplicationJoinStore, Store {
   String toString() {
     return '''
 details: ${details},
-contact: ${contact},
-company: ${company},
-provider: ${provider}
+employment: ${employment},
+provider: ${provider},
+file: ${file}
     ''';
   }
 }

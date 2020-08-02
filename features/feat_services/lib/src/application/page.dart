@@ -32,8 +32,7 @@ class _ServiceApplicationPageState extends State<ServiceApplicationPage> {
         delegate: SliverChildBuilderDelegate(
           (context, index) {
             final e = store.subjects[index];
-            final contact = e.provider.details.contact;
-            final company = e.provider.details.company;
+            final details = e.provider.details;
             return Material(
               child: Padding(
                 padding: const EdgeInsets.all(30),
@@ -45,12 +44,8 @@ class _ServiceApplicationPageState extends State<ServiceApplicationPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            company.name,
+                            details.name,
                             style: Theme.of(context).textTheme.headline4,
-                          ),
-                          Text(
-                            '${contact.firstName} ${contact.lastName}',
-                            style: Theme.of(context).textTheme.caption,
                           ),
                         ],
                       ),
@@ -135,17 +130,16 @@ class _ServiceApplicationEditPageState
 
     store.provider = widget.application.provider ?? ServiceProvider();
     store.details = widget.application.provider?.details ?? ServiceDetails();
-    store.contact = widget.application?.provider?.details?.contact ??
-        ServiceDetailsContact();
-    store.company = widget.application?.provider?.details?.company ??
-        ServiceDetailsCompany();
+    store.employment =
+        widget.application?.provider?.employments?.elementAt(0) ??
+            ServiceEmployment();
 
-    _firstNameController.text = store.contact.firstName;
-    _lastNameController.text = store.contact.lastName;
-    _emailController.text = store.contact.email;
-    _phoneController.text = store.contact.phone;
-    _companyController.text = store.company.name;
-    _addressController.text = store.company.address;
+    _firstNameController.text = store.employment.firstName;
+    _lastNameController.text = store.employment.lastName;
+    _emailController.text = store.employment.email;
+    _phoneController.text = store.employment.phone;
+    _companyController.text = store.details.name;
+    _addressController.text = store.details.address;
 
     super.didChangeDependencies();
   }
@@ -250,7 +244,7 @@ class _ServiceApplicationEditPageState
   void _firstNameListener() {
     final store =
         Provider.of<ServiceApplicationJoinStore>(context, listen: false);
-    store.contact = store.contact.copyWith((e) {
+    store.employment = store.employment.copyWith((e) {
       e.firstName = _firstNameController.text;
     });
   }
@@ -258,7 +252,7 @@ class _ServiceApplicationEditPageState
   void _lastNameListener() {
     final store =
         Provider.of<ServiceApplicationJoinStore>(context, listen: false);
-    store.contact = store.contact.copyWith((e) {
+    store.employment = store.employment.copyWith((e) {
       e.lastName = _lastNameController.text;
     });
   }
@@ -266,7 +260,7 @@ class _ServiceApplicationEditPageState
   void _companyListener() {
     final store =
         Provider.of<ServiceApplicationJoinStore>(context, listen: false);
-    store.company = store.company.copyWith((e) {
+    store.details = store.details.copyWith((e) {
       e.name = _companyController.text;
     });
   }
@@ -274,7 +268,7 @@ class _ServiceApplicationEditPageState
   void _addressListener() {
     final store =
         Provider.of<ServiceApplicationJoinStore>(context, listen: false);
-    store.company = store.company.copyWith((e) {
+    store.details = store.details.copyWith((e) {
       e.address = _addressController.text;
     });
   }
@@ -282,7 +276,7 @@ class _ServiceApplicationEditPageState
   void _emailListener() {
     final store =
         Provider.of<ServiceApplicationJoinStore>(context, listen: false);
-    store.contact = store.contact.copyWith((e) {
+    store.employment = store.employment.copyWith((e) {
       e.email = _emailController.text;
     });
   }
@@ -290,10 +284,10 @@ class _ServiceApplicationEditPageState
   void _phoneListener() {
     final store =
         Provider.of<ServiceApplicationJoinStore>(context, listen: false);
-    store.contact = store.contact.copyWith((e) {
+    store.employment = store.employment.copyWith((e) {
       e.phone = _phoneController.text;
     });
-    store.company = store.company.copyWith((e) {
+    store.details = store.details.copyWith((e) {
       e.phone = _phoneController.text;
     });
   }

@@ -19,8 +19,7 @@ class ServiceSessionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final offer = session.offer;
-    final contact = offer.provider.details.contact;
-    final company = offer.provider.details.company;
+    final details = offer.provider.details;
     return CupertinoPageScaffold(
       navigationBar: KsSmallNavigationBar(title: 'Session'),
       child: Material(
@@ -30,9 +29,8 @@ class ServiceSessionPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(height: 60),
-                CompanyWidget(
-                  company: company,
-                  contact: contact,
+                DetailsWidget(
+                  details: details,
                 ),
                 SizedBox(height: 40),
                 Text(
@@ -81,8 +79,7 @@ class _ServiceSessionEvaluationPageState
   @override
   void didChangeDependencies() async {
     final store = Provider.of<ServiceSessionEvaluationStore>(context);
-    store.evaluation =
-        widget.session.evaluation ?? ServiceProviderSessionEvaluation();
+    store.evaluation = widget.session.evaluation ?? ServiceSessionEvaluation();
     _commentController.addListener(_commentListener);
     _commentController.text = store.evaluation.comment;
     _recommendationRate = store.evaluation.recommendationRate;
@@ -196,8 +193,7 @@ class _ServiceSessionArchivePageState extends State<ServiceSessionArchivePage> {
         delegate: SliverChildBuilderDelegate(
           (context, index) {
             final e = store.sessions[index];
-            final contact = e.offer.provider.details.contact;
-            final company = e.offer.provider.details.company;
+            final details = e.offer.provider.details;
             return Padding(
               padding: const EdgeInsets.only(top: 20),
               child: ListTile(
@@ -229,9 +225,8 @@ class _ServiceSessionArchivePageState extends State<ServiceSessionArchivePage> {
                     ),
                   ],
                 ),
-                trailing: CompanyWidget(
-                  company: company,
-                  contact: contact,
+                trailing: DetailsWidget(
+                  details: details,
                 ),
               ),
             );

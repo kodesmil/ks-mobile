@@ -110,6 +110,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     onTap: () async {
                       await store.deleteUser();
+                      Navigator.of(context).pop();
                     },
                   ),
                   ListTile(
@@ -119,6 +120,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     onTap: () async {
                       await store.signOut();
+                      Navigator.of(context).pop();
                     },
                   ),
                   KsSpace.l(),
