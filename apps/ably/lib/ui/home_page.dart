@@ -150,33 +150,28 @@ class HomeBusinessPage extends StatefulWidget {
 class _HomeBusinessPageState extends State<HomeBusinessPage> {
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      child: CustomScrollView(
-        slivers: [
-          KsNavigationBar(
-            withBackgroundImage: false,
-            action: GestureDetector(
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: SizedBox(
-                  width: 40,
-                  height: 40,
-                  child: ProfileAvatar(),
-                ),
-              ),
-              onTap: () {
-                Navigator.of(context, rootNavigator: true).push(
-                  CupertinoPageRoute(
-                    fullscreenDialog: true,
-                    builder: (context) => ProfilePage(),
-                  ),
-                );
-              },
+    return ServiceApplicationPage(
+      navigationBar: KsNavigationBar(
+        withBackgroundImage: false,
+        action: GestureDetector(
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: SizedBox(
+              width: 40,
+              height: 40,
+              child: ProfileAvatar(),
             ),
-            title: 'Services',
           ),
-          ServiceApplicationPage(),
-        ],
+          onTap: () {
+            Navigator.of(context, rootNavigator: true).push(
+              CupertinoPageRoute(
+                fullscreenDialog: true,
+                builder: (context) => ProfilePage(),
+              ),
+            );
+          },
+        ),
+        title: 'Services',
       ),
     );
   }

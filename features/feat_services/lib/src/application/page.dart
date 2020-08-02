@@ -11,6 +11,10 @@ import 'package:lib_services/src/generated/github.com/kodesmil/ks-model/service.
 import 'package:provider/provider.dart';
 
 class ServiceApplicationPage extends StatefulWidget {
+  final Widget navigationBar;
+
+  const ServiceApplicationPage({Key key, this.navigationBar}) : super(key: key);
+
   @override
   _ServiceApplicationPageState createState() => _ServiceApplicationPageState();
 }
@@ -27,66 +31,117 @@ class _ServiceApplicationPageState extends State<ServiceApplicationPage> {
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<ServiceApplicationListStore>(context);
-    return Observer(
-      builder: (context) => SliverList(
-        delegate: SliverChildBuilderDelegate(
-          (context, index) {
-            final e = store.subjects[index];
-            final details = e.provider.details;
-            return Material(
-              child: Padding(
-                padding: const EdgeInsets.all(30),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    GestureDetector(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            details.name,
-                            style: Theme.of(context).textTheme.headline4,
-                          ),
-                        ],
-                      ),
-                      onTap: () {
-                        Navigator.of(context, rootNavigator: true).push(
-                          CupertinoPageRoute(
-                            builder: (context) => ServiceApplicationEditPage(e),
-                          ),
-                        );
-                      },
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+        onPressed: () {
+          Navigator.of(context, rootNavigator: true).push(
+            CupertinoPageRoute(
+              builder: (context) => ServiceApplicationEditPage(),
+            ),
+          );
+        },
+      ),
+      body: CustomScrollView(
+        slivers: [
+          widget.navigationBar,
+          Observer(
+            builder: (context) => SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  final e = store.subjects[index];
+                  final details = e.provider.details;
+                  return Padding(
+                    padding: const EdgeInsets.only(
+                      top: 15,
+                      right: 15,
+                      left: 15,
                     ),
-                    SizedBox(height: 10),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: e.provider.offers
-                          .map((o) => Text(o.description))
-                          .toList(),
-                    ),
-                    SizedBox(height: 40),
-                    Align(
-                      alignment: Alignment.center,
-                      child: OutlineButton(
-                        child: Text('Add new service'),
-                        onPressed: () {
-                          Navigator.of(context, rootNavigator: true).push(
-                            CupertinoPageRoute(
-                              builder: (context) => ServiceApplicationEditPage(
-                                ServiceApplication(),
+                    child: Card(
+                      shape: BeveledRectangleBorder(),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ListTile(
+                              title: Text(
+                                details.name,
+                                style: Theme.of(context).textTheme.headline4,
+                              ),
+                              subtitle: Text(
+                                details.address,
+                              ),
+                              trailing: IconButton(
+                                icon: Icon(Icons.edit),
+                                onPressed: () {
+                                  Navigator.of(context, rootNavigator: true)
+                                      .push(
+                                    CupertinoPageRoute(
+                                      builder: (context) =>
+                                          ServiceApplicationEditPage(
+                                              application: e),
+                                    ),
+                                  );
+                                },
                               ),
                             ),
-                          );
-                        },
+                            SizedBox(height: 20),
+                            ListTile(
+                              title: Text(
+                                'Offers',
+                                style: Theme.of(context).textTheme.headline6,
+                              ),
+                              trailing: IconButton(
+                                icon: Icon(Icons.add),
+                                onPressed: () {},
+                              ),
+                            ),
+                            Column(
+                              children: e.provider.offers
+                                  .map(
+                                    (o) => ListTile(
+                                      title: Text(o.title),
+                                      subtitle: Text(
+                                        o.description,
+                                        maxLines: 2,
+                                        style:
+                                            Theme.of(context).textTheme.caption,
+                                      ),
+                                      trailing: Text(
+                                        '${o.price} ${o.currency}',
+                                        style:
+                                            Theme.of(context).textTheme.caption,
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
+                            SizedBox(height: 20),
+                            ListTile(
+                              leading: Text(
+                                'Contact',
+                                style: Theme.of(context).textTheme.headline6,
+                              ),
+                              trailing: IconButton(
+                                icon: Icon(Icons.edit),
+                                onPressed: () {},
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    )
-                  ],
-                ),
+                    ),
+                  );
+                },
+                childCount: store.subjects.length,
               ),
-            );
-          },
-          childCount: store.subjects.length,
-        ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -95,7 +150,9 @@ class _ServiceApplicationPageState extends State<ServiceApplicationPage> {
 class ServiceApplicationEditPage extends StatefulWidget {
   final ServiceApplication application;
 
-  ServiceApplicationEditPage(this.application);
+  ServiceApplicationEditPage({
+    this.application,
+  });
 
   @override
   _ServiceApplicationEditPageState createState() =>
@@ -119,20 +176,18 @@ class _ServiceApplicationEditPageState
 
   @override
   void didChangeDependencies() async {
-    final store =
-        Provider.of<ServiceApplicationJoinStore>(context, listen: false);
+    final store = Provider.of<ServiceApplicationJoinStore>(
+      context,
+      listen: false,
+    );
+    await store.setApplication(widget.application);
+
     _firstNameController.addListener(_firstNameListener);
     _lastNameController.addListener(_lastNameListener);
     _emailController.addListener(_emailListener);
     _phoneController.addListener(_phoneListener);
     _addressController.addListener(_addressListener);
     _companyController.addListener(_companyListener);
-
-    store.provider = widget.application.provider ?? ServiceProvider();
-    store.details = widget.application.provider?.details ?? ServiceDetails();
-    store.employment =
-        widget.application?.provider?.employments?.elementAt(0) ??
-            ServiceEmployment();
 
     _firstNameController.text = store.employment.firstName;
     _lastNameController.text = store.employment.lastName;
@@ -293,6 +348,173 @@ class _ServiceApplicationEditPageState
   }
 }
 
+class ServiceApplicationEditPage extends StatefulWidget {
+  final ServiceApplication application;
+
+  ServiceApplicationEditPage({
+    this.application,
+  });
+
+  @override
+  _ServiceApplicationEditPageState createState() =>
+      _ServiceApplicationEditPageState();
+}
+
+class _ServiceOfferEditPageState extends State<ServiceApplicationEditPage> {
+  final _titleController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  final _priceController = TextEditingController();
+  final _currencyController = TextEditingController();
+  final _1FocusNode = FocusNode();
+  final _2FocusNode = FocusNode();
+  final _3FocusNode = FocusNode();
+
+  @override
+  void didChangeDependencies() async {
+    final store = Provider.of<ServiceApplicationJoinStore>(
+      context,
+      listen: false,
+    );
+    await store.setApplication(widget.application);
+    _titleController.addListener(_titleListener);
+    _descriptionController.addListener(_descriptionListener);
+    _currencyController.addListener(_currencyListener);
+    _priceController.addListener(_priceListener);
+
+    _titleController.text = store.employment.firstName;
+    _descriptionController.text = store.employment.lastName;
+    _priceController.text = store.details.name;
+    _currencyController.text = store.details.address;
+
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    _titleController.removeListener(_titleListener);
+    _descriptionController.removeListener(_descriptionListener);
+    _currencyController.removeListener(_currencyListener);
+    _priceController.removeListener(_priceListener);
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      navigationBar: KsSmallNavigationBar(title: 'Join program'),
+      child: SafeArea(
+        child: Material(
+          child: Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  TextField(
+                    textCapitalization: TextCapitalization.none,
+                    controller: _titleController,
+                    focusNode: _1FocusNode,
+                    decoration: InputDecoration(
+                      labelText: 'First Name',
+                    ),
+                  ),
+                  SizedBox(height: 15),
+                  TextField(
+                    textCapitalization: TextCapitalization.none,
+                    controller: _descriptionController,
+                    focusNode: _2FocusNode,
+                    decoration: InputDecoration(
+                      labelText: 'Last Name',
+                    ),
+                  ),
+                  SizedBox(height: 15),
+                  TextField(
+                    textCapitalization: TextCapitalization.none,
+                    controller: _priceController,
+                    focusNode: _3FocusNode,
+                    keyboardType: TextInputType.numberWithOptions(
+                      decimal: true,
+                    ),
+                    decoration: InputDecoration(
+                      labelText: 'Price',
+                    ),
+                  ),
+                  SizedBox(height: 15),
+                  TextField(
+                    textCapitalization: TextCapitalization.none,
+                    controller: _priceController,
+                    decoration: InputDecoration(
+                      labelText: 'Currency',
+                    ),
+                  ),
+                  SizedBox(height: 30),
+                  OutlineButton(
+                    child: Text('Save'),
+                    shape: StadiumBorder(),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _titleListener() {
+    final store =
+        Provider.of<ServiceApplicationJoinStore>(context, listen: false);
+    store.employment = store.employment.copyWith((e) {
+      e.firstName = _titleController.text;
+    });
+  }
+
+  void _descriptionListener() {
+    final store =
+        Provider.of<ServiceApplicationJoinStore>(context, listen: false);
+    store.employment = store.employment.copyWith((e) {
+      e.lastName = _descriptionController.text;
+    });
+  }
+
+  void _priceListener() {
+    final store =
+        Provider.of<ServiceApplicationJoinStore>(context, listen: false);
+    store.details = store.details.copyWith((e) {
+      e.name = _priceController.text;
+    });
+  }
+
+  void _currencyListener() {
+    final store =
+        Provider.of<ServiceApplicationJoinStore>(context, listen: false);
+    store.details = store.details.copyWith((e) {
+      e.address = _currencyController.text;
+    });
+  }
+
+  void _emailListener() {
+    final store =
+        Provider.of<ServiceApplicationJoinStore>(context, listen: false);
+    store.employment = store.employment.copyWith((e) {
+      e.email = _emailController.text;
+    });
+  }
+
+  void _phoneListener() {
+    final store =
+        Provider.of<ServiceApplicationJoinStore>(context, listen: false);
+    store.employment = store.employment.copyWith((e) {
+      e.phone = _phoneController.text;
+    });
+    store.details = store.details.copyWith((e) {
+      e.phone = _phoneController.text;
+    });
+  }
+}
+
 class ServiceApplicationSuccessPage extends StatefulWidget {
   @override
   _ServiceApplicationSuccessPageState createState() =>
@@ -381,9 +603,7 @@ class _ServiceApplicationFilePageState
                   OutlineButton(
                     child: Text('Send application file'),
                     shape: StadiumBorder(),
-                    onPressed: () => store.createOrUpdate(
-                      widget.application,
-                    ),
+                    onPressed: () => store.createOrUpdate(),
                   ),
                   Observer(
                     builder: (context) => store.loadingStore.success

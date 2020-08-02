@@ -40,21 +40,6 @@ mixin _$ServiceApplicationJoinStore on _ServiceApplicationJoinStore, Store {
     });
   }
 
-  final _$providerAtom = Atom(name: '_ServiceApplicationJoinStore.provider');
-
-  @override
-  ServiceProvider get provider {
-    _$providerAtom.reportRead();
-    return super.provider;
-  }
-
-  @override
-  set provider(ServiceProvider value) {
-    _$providerAtom.reportWrite(value, super.provider, () {
-      super.provider = value;
-    });
-  }
-
   final _$fileAtom = Atom(name: '_ServiceApplicationJoinStore.file');
 
   @override
@@ -79,29 +64,37 @@ mixin _$ServiceApplicationJoinStore on _ServiceApplicationJoinStore, Store {
         .run(() => super.addApplicationFile(url));
   }
 
+  final _$setApplicationAsyncAction =
+      AsyncAction('_ServiceApplicationJoinStore.setApplication');
+
+  @override
+  Future<dynamic> setApplication(ServiceApplication application) {
+    return _$setApplicationAsyncAction
+        .run(() => super.setApplication(application));
+  }
+
   final _$createOrUpdateAsyncAction =
       AsyncAction('_ServiceApplicationJoinStore.createOrUpdate');
 
   @override
-  Future<dynamic> createOrUpdate(ServiceApplication application) {
-    return _$createOrUpdateAsyncAction
-        .run(() => super.createOrUpdate(application));
+  Future<dynamic> createOrUpdate() {
+    return _$createOrUpdateAsyncAction.run(() => super.createOrUpdate());
   }
 
   final _$updateAsyncAction =
       AsyncAction('_ServiceApplicationJoinStore.update');
 
   @override
-  Future<dynamic> update(ServiceApplication application) {
-    return _$updateAsyncAction.run(() => super.update(application));
+  Future<dynamic> update() {
+    return _$updateAsyncAction.run(() => super.update());
   }
 
   final _$createAsyncAction =
       AsyncAction('_ServiceApplicationJoinStore.create');
 
   @override
-  Future<dynamic> create(ServiceApplication application) {
-    return _$createAsyncAction.run(() => super.create(application));
+  Future<dynamic> create() {
+    return _$createAsyncAction.run(() => super.create());
   }
 
   @override
@@ -109,7 +102,6 @@ mixin _$ServiceApplicationJoinStore on _ServiceApplicationJoinStore, Store {
     return '''
 details: ${details},
 employment: ${employment},
-provider: ${provider},
 file: ${file}
     ''';
   }
