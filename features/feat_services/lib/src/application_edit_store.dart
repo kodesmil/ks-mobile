@@ -41,46 +41,37 @@ abstract class _ServiceApplicationEditStore with Store {
 
   @action
   Future setApplication(ServiceApplication a) async {
-    application = a ??
-        (ServiceApplication()..id = (Identifier()..resourceId = Uuid().v4()));
-    application = application
-      ..provider = (a?.provider ??
-          (ServiceProvider()..id = (Identifier()..resourceId = Uuid().v4()))
-        ..details = a?.provider?.details ?? ServiceDetails());
+    application = a ?? ServiceApplication();
 
     if (application.provider.employments.isEmpty) {
-      application.provider.employments.add(ServiceEmployment());
+      var provider = application.provider.clone();
+      provider.employments.add(ServiceEmployment());
+      application.provider = provider;
     }
 
     if (application.files.isEmpty) {
-      application.files.add(
-        ServiceApplicationFile()..id = (Identifier()..resourceId = Uuid().v4()),
-      );
+      application.files.add(ServiceApplicationFile());
     }
 
-    details = application.provider.details;
-    employment = application.provider.employments[0];
-    file = application.files[0];
+    details = application.provider.details.clone();
+    employment = application.provider.employments[0].clone();
+    file = application.files[0].clone();
   }
 
   @action
   Future createOrUpdate() async =>
-      application?.updatedAt != null ? await update() : await create();
+      application?.id?.value?.isNotEmpty == true ? await update() : await create();
 
   @action
   Future update() async {
     try {
       final request = UpdateServiceApplicationRequest()
         ..payload = application.copyWith((e1) {
-          e1.provider = e1.provider.copyWith(
-            (p) {
-              p.employments.clear();
-              p.employments.addAll(p.employments.map(
-                (e) => hasSameId(e, employment) ? employment : e,
-              ));
-              p.details = details;
-            },
-          );
+          var provider = e1.provider.clone();
+          provider.details = details;
+          provider.employments.clear();
+          provider.employments.addAll(provider.employments.map((e) => hasSameId(e, employment) ? employment : e));
+          e1.provider = provider;
           e1.files.clear();
           e1.files.addAll(e1.files.map((e) => hasSameId(e, file) ? file : e));
         });
@@ -97,15 +88,11 @@ abstract class _ServiceApplicationEditStore with Store {
     try {
       final request = CreateServiceApplicationRequest()
         ..payload = application.copyWith((e1) {
-          e1.provider = e1.provider.copyWith(
-            (p) {
-              p.employments.clear();
-              p.employments.addAll(p.employments.map(
-                (e) => hasSameId(e, employment) ? employment : e,
-              ));
-              p.details = details;
-            },
-          );
+          var provider = e1.provider.clone();
+          provider.details = details;
+          provider.employments.clear();
+          provider.employments.addAll(provider.employments.map((e) => hasSameId(e, employment) ? employment : e));
+          e1.provider = provider;
           e1.files.clear();
           e1.files.addAll(e1.files.map((e) => hasSameId(e, file) ? file : e));
         });

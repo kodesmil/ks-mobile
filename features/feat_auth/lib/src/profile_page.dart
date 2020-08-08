@@ -1,5 +1,6 @@
+import 'package:feat_auth/feat_auth.dart';
+import 'package:feat_auth/src/profile_store.dart';
 import 'package:feat_notifications/feat_notifications.dart';
-import 'package:feat_profile/feat_profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lib_lego/lib_lego.dart';
@@ -16,7 +17,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void didChangeDependencies() {
     final store = Provider.of<ProfileStore>(context);
-    store.fetchProfile();
+    store.fetchOrCreateProfile();
     super.didChangeDependencies();
   }
 
@@ -109,7 +110,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       style: Theme.of(context).textTheme.bodyText2,
                     ),
                     onTap: () async {
-                      await store.deleteUser();
+                      await store.deleteProfile();
                       Navigator.of(context).pop();
                     },
                   ),

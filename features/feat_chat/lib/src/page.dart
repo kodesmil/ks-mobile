@@ -118,9 +118,9 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                         message: e.value,
                         text: e.value.text,
                         subtitle: e.value.caption,
-                        info: store.chatMessagePlaces[e.value.id.resourceId],
-                        left: store.selectedMyParticipation.id.resourceId !=
-                            e.value.authorId.resourceId,
+                        info: store.chatMessagePlaces[e.value.id.value],
+                        left: store.selectedMyParticipation.id.value !=
+                            e.value.author.id.value,
                         status: e.value.status,
                       );
                     },

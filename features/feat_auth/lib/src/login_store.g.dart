@@ -6,7 +6,7 @@ part of 'login_store.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$LoginStore on _LoginStore, Store {
   Computed<bool> _$canLoginComputed;
@@ -81,6 +81,24 @@ mixin _$LoginStore on _LoginStore, Store {
   @override
   Future<dynamic> login() {
     return _$loginAsyncAction.run(() => super.login());
+  }
+
+  final _$continueWithGoogleAsyncAction =
+      AsyncAction('_LoginStore.continueWithGoogle');
+
+  @override
+  Future<dynamic> continueWithGoogle() {
+    return _$continueWithGoogleAsyncAction
+        .run(() => super.continueWithGoogle());
+  }
+
+  final _$continueAnonymouslyAsyncAction =
+      AsyncAction('_LoginStore.continueAnonymously');
+
+  @override
+  Future<dynamic> continueAnonymously() {
+    return _$continueAnonymouslyAsyncAction
+        .run(() => super.continueAnonymously());
   }
 
   final _$logoutAsyncAction = AsyncAction('_LoginStore.logout');

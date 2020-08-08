@@ -10,22 +10,22 @@ import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
-import 'chat.pb.dart' as $2;
+import 'chat.pb.dart' as $3;
 export 'chat.pb.dart';
 
 class ChatMessagesClient extends $grpc.Client {
   static final _$list =
-      $grpc.ClientMethod<$2.ListChatMessageRequest, $2.ListChatMessageResponse>(
+      $grpc.ClientMethod<$3.ListChatMessageRequest, $3.ListChatMessageResponse>(
           '/model.ChatMessages/List',
-          ($2.ListChatMessageRequest value) => value.writeToBuffer(),
+          ($3.ListChatMessageRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
-              $2.ListChatMessageResponse.fromBuffer(value));
+              $3.ListChatMessageResponse.fromBuffer(value));
 
   ChatMessagesClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
 
-  $grpc.ResponseFuture<$2.ListChatMessageResponse> list(
-      $2.ListChatMessageRequest request,
+  $grpc.ResponseFuture<$3.ListChatMessageResponse> list(
+      $3.ListChatMessageRequest request,
       {$grpc.CallOptions options}) {
     final call = $createCall(_$list, $async.Stream.fromIterable([request]),
         options: options);
@@ -37,39 +37,39 @@ abstract class ChatMessagesServiceBase extends $grpc.Service {
   $core.String get $name => 'model.ChatMessages';
 
   ChatMessagesServiceBase() {
-    $addMethod($grpc.ServiceMethod<$2.ListChatMessageRequest,
-            $2.ListChatMessageResponse>(
+    $addMethod($grpc.ServiceMethod<$3.ListChatMessageRequest,
+            $3.ListChatMessageResponse>(
         'List',
         list_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $2.ListChatMessageRequest.fromBuffer(value),
-        ($2.ListChatMessageResponse value) => value.writeToBuffer()));
+            $3.ListChatMessageRequest.fromBuffer(value),
+        ($3.ListChatMessageResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$2.ListChatMessageResponse> list_Pre($grpc.ServiceCall call,
-      $async.Future<$2.ListChatMessageRequest> request) async {
+  $async.Future<$3.ListChatMessageResponse> list_Pre($grpc.ServiceCall call,
+      $async.Future<$3.ListChatMessageRequest> request) async {
     return list(call, await request);
   }
 
-  $async.Future<$2.ListChatMessageResponse> list(
-      $grpc.ServiceCall call, $2.ListChatMessageRequest request);
+  $async.Future<$3.ListChatMessageResponse> list(
+      $grpc.ServiceCall call, $3.ListChatMessageRequest request);
 }
 
 class ChatRoomsClient extends $grpc.Client {
   static final _$list =
-      $grpc.ClientMethod<$2.ListChatRoomRequest, $2.ListChatRoomResponse>(
+      $grpc.ClientMethod<$3.ListChatRoomRequest, $3.ListChatRoomResponse>(
           '/model.ChatRooms/List',
-          ($2.ListChatRoomRequest value) => value.writeToBuffer(),
+          ($3.ListChatRoomRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
-              $2.ListChatRoomResponse.fromBuffer(value));
+              $3.ListChatRoomResponse.fromBuffer(value));
 
   ChatRoomsClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
 
-  $grpc.ResponseFuture<$2.ListChatRoomResponse> list(
-      $2.ListChatRoomRequest request,
+  $grpc.ResponseFuture<$3.ListChatRoomResponse> list(
+      $3.ListChatRoomRequest request,
       {$grpc.CallOptions options}) {
     final call = $createCall(_$list, $async.Stream.fromIterable([request]),
         options: options);
@@ -82,38 +82,38 @@ abstract class ChatRoomsServiceBase extends $grpc.Service {
 
   ChatRoomsServiceBase() {
     $addMethod(
-        $grpc.ServiceMethod<$2.ListChatRoomRequest, $2.ListChatRoomResponse>(
+        $grpc.ServiceMethod<$3.ListChatRoomRequest, $3.ListChatRoomResponse>(
             'List',
             list_Pre,
             false,
             false,
             ($core.List<$core.int> value) =>
-                $2.ListChatRoomRequest.fromBuffer(value),
-            ($2.ListChatRoomResponse value) => value.writeToBuffer()));
+                $3.ListChatRoomRequest.fromBuffer(value),
+            ($3.ListChatRoomResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$2.ListChatRoomResponse> list_Pre($grpc.ServiceCall call,
-      $async.Future<$2.ListChatRoomRequest> request) async {
+  $async.Future<$3.ListChatRoomResponse> list_Pre($grpc.ServiceCall call,
+      $async.Future<$3.ListChatRoomRequest> request) async {
     return list(call, await request);
   }
 
-  $async.Future<$2.ListChatRoomResponse> list(
-      $grpc.ServiceCall call, $2.ListChatRoomRequest request);
+  $async.Future<$3.ListChatRoomResponse> list(
+      $grpc.ServiceCall call, $3.ListChatRoomRequest request);
 }
 
 class ChatClient extends $grpc.Client {
   static final _$stream =
-      $grpc.ClientMethod<$2.StreamChatEvent, $2.StreamChatEvent>(
+      $grpc.ClientMethod<$3.StreamChatEvent, $3.StreamChatEvent>(
           '/model.Chat/Stream',
-          ($2.StreamChatEvent value) => value.writeToBuffer(),
+          ($3.StreamChatEvent value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
-              $2.StreamChatEvent.fromBuffer(value));
+              $3.StreamChatEvent.fromBuffer(value));
 
   ChatClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
 
-  $grpc.ResponseStream<$2.StreamChatEvent> stream(
-      $async.Stream<$2.StreamChatEvent> request,
+  $grpc.ResponseStream<$3.StreamChatEvent> stream(
+      $async.Stream<$3.StreamChatEvent> request,
       {$grpc.CallOptions options}) {
     final call = $createCall(_$stream, request, options: options);
     return $grpc.ResponseStream(call);
@@ -124,15 +124,15 @@ abstract class ChatServiceBase extends $grpc.Service {
   $core.String get $name => 'model.Chat';
 
   ChatServiceBase() {
-    $addMethod($grpc.ServiceMethod<$2.StreamChatEvent, $2.StreamChatEvent>(
+    $addMethod($grpc.ServiceMethod<$3.StreamChatEvent, $3.StreamChatEvent>(
         'Stream',
         stream,
         true,
         true,
-        ($core.List<$core.int> value) => $2.StreamChatEvent.fromBuffer(value),
-        ($2.StreamChatEvent value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $3.StreamChatEvent.fromBuffer(value),
+        ($3.StreamChatEvent value) => value.writeToBuffer()));
   }
 
-  $async.Stream<$2.StreamChatEvent> stream(
-      $grpc.ServiceCall call, $async.Stream<$2.StreamChatEvent> request);
+  $async.Stream<$3.StreamChatEvent> stream(
+      $grpc.ServiceCall call, $async.Stream<$3.StreamChatEvent> request);
 }

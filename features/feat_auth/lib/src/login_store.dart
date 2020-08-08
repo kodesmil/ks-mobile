@@ -86,11 +86,11 @@ abstract class _LoginStore with Store {
   Future login() async {
     loading = true;
     try {
-      final result = await firebaseAuth.signInWithEmailAndPassword(
+      await firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      userStore.user = result.user;
+      await userStore.signInSilently();
       loading = false;
       success = true;
       errorStore.showError = false;
@@ -110,8 +110,8 @@ abstract class _LoginStore with Store {
         accessToken: googleSignInAuthentication.accessToken,
         idToken: googleSignInAuthentication.idToken,
       );
-      final result = await firebaseAuth.signInWithCredential(credential);
-      userStore.user = result.user;
+      await firebaseAuth.signInWithCredential(credential);
+      await userStore.signInSilently();
       loading = false;
       success = true;
       errorStore.showError = false;
@@ -124,8 +124,8 @@ abstract class _LoginStore with Store {
   Future continueAnonymously() async {
     loading = true;
     try {
-      final result = await firebaseAuth.signInAnonymously();
-      userStore.user = result.user;
+      await firebaseAuth.signInAnonymously();
+      await userStore.signInSilently();
       loading = false;
       success = true;
       errorStore.showError = false;

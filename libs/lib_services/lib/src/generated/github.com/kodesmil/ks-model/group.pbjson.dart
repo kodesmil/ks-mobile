@@ -8,7 +8,7 @@
 const Group$json = const {
   '1': 'Group',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'id'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.gorm.types.UUIDValue', '8': const {}, '10': 'id'},
     const {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
     const {'1': 'notes', '3': 3, '4': 1, '5': 9, '10': 'notes'},
     const {'1': 'profile_id', '3': 4, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '10': 'profileId'},
@@ -33,7 +33,7 @@ const CreateGroupResponse$json = const {
 const ReadGroupRequest$json = const {
   '1': 'ReadGroupRequest',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '10': 'id'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.gorm.types.UUIDValue', '10': 'id'},
   ],
 };
 
@@ -61,7 +61,7 @@ const UpdateGroupResponse$json = const {
 const DeleteGroupRequest$json = const {
   '1': 'DeleteGroupRequest',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '10': 'id'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.gorm.types.UUIDValue', '10': 'id'},
   ],
 };
 

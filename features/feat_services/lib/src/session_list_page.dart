@@ -59,7 +59,7 @@ class ServiceSessionContent extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).pushReplacement(
                         CupertinoPageRoute(
-                          builder: (context) => ServiceSessionEvaluationContent(
+                          builder: (context) => ServiceSessionEvaluationPage(
                             session,
                           ),
                         ),

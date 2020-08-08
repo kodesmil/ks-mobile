@@ -8,12 +8,11 @@
 const ChatMessage$json = const {
   '1': 'ChatMessage',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'id'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.gorm.types.UUIDValue', '8': const {}, '10': 'id'},
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
     const {'1': 'text', '3': 4, '4': 1, '5': 9, '10': 'text'},
     const {'1': 'author', '3': 5, '4': 1, '5': 11, '6': '.model.ChatRoomParticipant', '8': const {}, '10': 'author'},
-    const {'1': 'author_id', '3': 6, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '10': 'authorId'},
     const {'1': 'status', '3': 7, '4': 1, '5': 14, '6': '.model.ChatMessage.Status', '8': const {}, '10': 'status'},
   ],
   '4': const [ChatMessage_Status$json],
@@ -31,7 +30,7 @@ const ChatMessage_Status$json = const {
 const ChatRoom$json = const {
   '1': 'ChatRoom',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'id'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.gorm.types.UUIDValue', '8': const {}, '10': 'id'},
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
     const {'1': 'participants', '3': 4, '4': 3, '5': 11, '6': '.model.ChatRoomParticipant', '10': 'participants'},
@@ -43,7 +42,7 @@ const ChatRoom$json = const {
 const ChatRoomParticipant$json = const {
   '1': 'ChatRoomParticipant',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'id'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.gorm.types.UUIDValue', '8': const {}, '10': 'id'},
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
     const {'1': 'last_seen_at', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'lastSeenAt'},

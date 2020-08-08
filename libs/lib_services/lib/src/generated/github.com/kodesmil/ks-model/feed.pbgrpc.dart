@@ -10,22 +10,22 @@ import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
-import 'feed.pb.dart' as $3;
+import 'feed.pb.dart' as $4;
 export 'feed.pb.dart';
 
 class FeedArticlesClient extends $grpc.Client {
   static final _$list =
-      $grpc.ClientMethod<$3.ListFeedArticleRequest, $3.ListFeedArticleResponse>(
+      $grpc.ClientMethod<$4.ListFeedArticleRequest, $4.ListFeedArticleResponse>(
           '/model.FeedArticles/List',
-          ($3.ListFeedArticleRequest value) => value.writeToBuffer(),
+          ($4.ListFeedArticleRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
-              $3.ListFeedArticleResponse.fromBuffer(value));
+              $4.ListFeedArticleResponse.fromBuffer(value));
 
   FeedArticlesClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
 
-  $grpc.ResponseFuture<$3.ListFeedArticleResponse> list(
-      $3.ListFeedArticleRequest request,
+  $grpc.ResponseFuture<$4.ListFeedArticleResponse> list(
+      $4.ListFeedArticleRequest request,
       {$grpc.CallOptions options}) {
     final call = $createCall(_$list, $async.Stream.fromIterable([request]),
         options: options);
@@ -37,40 +37,40 @@ abstract class FeedArticlesServiceBase extends $grpc.Service {
   $core.String get $name => 'model.FeedArticles';
 
   FeedArticlesServiceBase() {
-    $addMethod($grpc.ServiceMethod<$3.ListFeedArticleRequest,
-            $3.ListFeedArticleResponse>(
+    $addMethod($grpc.ServiceMethod<$4.ListFeedArticleRequest,
+            $4.ListFeedArticleResponse>(
         'List',
         list_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $3.ListFeedArticleRequest.fromBuffer(value),
-        ($3.ListFeedArticleResponse value) => value.writeToBuffer()));
+            $4.ListFeedArticleRequest.fromBuffer(value),
+        ($4.ListFeedArticleResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$3.ListFeedArticleResponse> list_Pre($grpc.ServiceCall call,
-      $async.Future<$3.ListFeedArticleRequest> request) async {
+  $async.Future<$4.ListFeedArticleResponse> list_Pre($grpc.ServiceCall call,
+      $async.Future<$4.ListFeedArticleRequest> request) async {
     return list(call, await request);
   }
 
-  $async.Future<$3.ListFeedArticleResponse> list(
-      $grpc.ServiceCall call, $3.ListFeedArticleRequest request);
+  $async.Future<$4.ListFeedArticleResponse> list(
+      $grpc.ServiceCall call, $4.ListFeedArticleRequest request);
 }
 
 class FeedArticleDetailsClient extends $grpc.Client {
-  static final _$read = $grpc.ClientMethod<$3.ReadFeedArticleDetailsRequest,
-          $3.ReadFeedArticleDetailsResponse>(
+  static final _$read = $grpc.ClientMethod<$4.ReadFeedArticleDetailsRequest,
+          $4.ReadFeedArticleDetailsResponse>(
       '/model.FeedArticleDetails/Read',
-      ($3.ReadFeedArticleDetailsRequest value) => value.writeToBuffer(),
+      ($4.ReadFeedArticleDetailsRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
-          $3.ReadFeedArticleDetailsResponse.fromBuffer(value));
+          $4.ReadFeedArticleDetailsResponse.fromBuffer(value));
 
   FeedArticleDetailsClient($grpc.ClientChannel channel,
       {$grpc.CallOptions options})
       : super(channel, options: options);
 
-  $grpc.ResponseFuture<$3.ReadFeedArticleDetailsResponse> read(
-      $3.ReadFeedArticleDetailsRequest request,
+  $grpc.ResponseFuture<$4.ReadFeedArticleDetailsResponse> read(
+      $4.ReadFeedArticleDetailsRequest request,
       {$grpc.CallOptions options}) {
     final call = $createCall(_$read, $async.Stream.fromIterable([request]),
         options: options);
@@ -82,23 +82,23 @@ abstract class FeedArticleDetailsServiceBase extends $grpc.Service {
   $core.String get $name => 'model.FeedArticleDetails';
 
   FeedArticleDetailsServiceBase() {
-    $addMethod($grpc.ServiceMethod<$3.ReadFeedArticleDetailsRequest,
-            $3.ReadFeedArticleDetailsResponse>(
+    $addMethod($grpc.ServiceMethod<$4.ReadFeedArticleDetailsRequest,
+            $4.ReadFeedArticleDetailsResponse>(
         'Read',
         read_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $3.ReadFeedArticleDetailsRequest.fromBuffer(value),
-        ($3.ReadFeedArticleDetailsResponse value) => value.writeToBuffer()));
+            $4.ReadFeedArticleDetailsRequest.fromBuffer(value),
+        ($4.ReadFeedArticleDetailsResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$3.ReadFeedArticleDetailsResponse> read_Pre(
+  $async.Future<$4.ReadFeedArticleDetailsResponse> read_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$3.ReadFeedArticleDetailsRequest> request) async {
+      $async.Future<$4.ReadFeedArticleDetailsRequest> request) async {
     return read(call, await request);
   }
 
-  $async.Future<$3.ReadFeedArticleDetailsResponse> read(
-      $grpc.ServiceCall call, $3.ReadFeedArticleDetailsRequest request);
+  $async.Future<$4.ReadFeedArticleDetailsResponse> read(
+      $grpc.ServiceCall call, $4.ReadFeedArticleDetailsRequest request);
 }

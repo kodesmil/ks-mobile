@@ -9,10 +9,10 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../infobloxopen/atlas-app-toolkit/rpc/resource/resource.pb.dart' as $8;
-import '../../../google/protobuf/timestamp.pb.dart' as $10;
+import '../../infobloxopen/protoc-gen-gorm/types/types.pb.dart' as $8;
+import '../../../google/protobuf/timestamp.pb.dart' as $11;
 import 'profile.pb.dart' as $1;
-import '../../infobloxopen/atlas-app-toolkit/query/collection_operators.pb.dart' as $9;
+import '../../infobloxopen/atlas-app-toolkit/query/collection_operators.pb.dart' as $10;
 
 import 'chat.pbenum.dart';
 
@@ -20,12 +20,11 @@ export 'chat.pbenum.dart';
 
 class ChatMessage extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ChatMessage', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$8.Identifier>(1, 'id', subBuilder: $8.Identifier.create)
-    ..aOM<$10.Timestamp>(2, 'createdAt', subBuilder: $10.Timestamp.create)
-    ..aOM<$10.Timestamp>(3, 'updatedAt', subBuilder: $10.Timestamp.create)
+    ..aOM<$8.UUIDValue>(1, 'id', subBuilder: $8.UUIDValue.create)
+    ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
+    ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
     ..aOS(4, 'text')
     ..aOM<ChatRoomParticipant>(5, 'author', subBuilder: ChatRoomParticipant.create)
-    ..aOM<$8.Identifier>(6, 'authorId', subBuilder: $8.Identifier.create)
     ..e<ChatMessage_Status>(7, 'status', $pb.PbFieldType.OE, defaultOrMaker: ChatMessage_Status.DELIVERED, valueOf: ChatMessage_Status.valueOf, enumValues: ChatMessage_Status.values)
     ..hasRequiredFields = false
   ;
@@ -46,37 +45,37 @@ class ChatMessage extends $pb.GeneratedMessage {
   static ChatMessage _defaultInstance;
 
   @$pb.TagNumber(1)
-  $8.Identifier get id => $_getN(0);
+  $8.UUIDValue get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($8.Identifier v) { setField(1, v); }
+  set id($8.UUIDValue v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $8.Identifier ensureId() => $_ensure(0);
+  $8.UUIDValue ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $10.Timestamp get createdAt => $_getN(1);
+  $11.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set createdAt($10.Timestamp v) { setField(2, v); }
+  set createdAt($11.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreatedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $10.Timestamp ensureCreatedAt() => $_ensure(1);
+  $11.Timestamp ensureCreatedAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $10.Timestamp get updatedAt => $_getN(2);
+  $11.Timestamp get updatedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set updatedAt($10.Timestamp v) { setField(3, v); }
+  set updatedAt($11.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasUpdatedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpdatedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $10.Timestamp ensureUpdatedAt() => $_ensure(2);
+  $11.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
   $core.String get text => $_getSZ(3);
@@ -98,32 +97,21 @@ class ChatMessage extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   ChatRoomParticipant ensureAuthor() => $_ensure(4);
 
-  @$pb.TagNumber(6)
-  $8.Identifier get authorId => $_getN(5);
-  @$pb.TagNumber(6)
-  set authorId($8.Identifier v) { setField(6, v); }
-  @$pb.TagNumber(6)
-  $core.bool hasAuthorId() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearAuthorId() => clearField(6);
-  @$pb.TagNumber(6)
-  $8.Identifier ensureAuthorId() => $_ensure(5);
-
   @$pb.TagNumber(7)
-  ChatMessage_Status get status => $_getN(6);
+  ChatMessage_Status get status => $_getN(5);
   @$pb.TagNumber(7)
   set status(ChatMessage_Status v) { setField(7, v); }
   @$pb.TagNumber(7)
-  $core.bool hasStatus() => $_has(6);
+  $core.bool hasStatus() => $_has(5);
   @$pb.TagNumber(7)
   void clearStatus() => clearField(7);
 }
 
 class ChatRoom extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ChatRoom', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$8.Identifier>(1, 'id', subBuilder: $8.Identifier.create)
-    ..aOM<$10.Timestamp>(2, 'createdAt', subBuilder: $10.Timestamp.create)
-    ..aOM<$10.Timestamp>(3, 'updatedAt', subBuilder: $10.Timestamp.create)
+    ..aOM<$8.UUIDValue>(1, 'id', subBuilder: $8.UUIDValue.create)
+    ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
+    ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
     ..pc<ChatRoomParticipant>(4, 'participants', $pb.PbFieldType.PM, subBuilder: ChatRoomParticipant.create)
     ..aOS(5, 'name')
     ..hasRequiredFields = false
@@ -145,37 +133,37 @@ class ChatRoom extends $pb.GeneratedMessage {
   static ChatRoom _defaultInstance;
 
   @$pb.TagNumber(1)
-  $8.Identifier get id => $_getN(0);
+  $8.UUIDValue get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($8.Identifier v) { setField(1, v); }
+  set id($8.UUIDValue v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $8.Identifier ensureId() => $_ensure(0);
+  $8.UUIDValue ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $10.Timestamp get createdAt => $_getN(1);
+  $11.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set createdAt($10.Timestamp v) { setField(2, v); }
+  set createdAt($11.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreatedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $10.Timestamp ensureCreatedAt() => $_ensure(1);
+  $11.Timestamp ensureCreatedAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $10.Timestamp get updatedAt => $_getN(2);
+  $11.Timestamp get updatedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set updatedAt($10.Timestamp v) { setField(3, v); }
+  set updatedAt($11.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasUpdatedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpdatedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $10.Timestamp ensureUpdatedAt() => $_ensure(2);
+  $11.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
   $core.List<ChatRoomParticipant> get participants => $_getList(3);
@@ -192,10 +180,10 @@ class ChatRoom extends $pb.GeneratedMessage {
 
 class ChatRoomParticipant extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ChatRoomParticipant', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$8.Identifier>(1, 'id', subBuilder: $8.Identifier.create)
-    ..aOM<$10.Timestamp>(2, 'createdAt', subBuilder: $10.Timestamp.create)
-    ..aOM<$10.Timestamp>(3, 'updatedAt', subBuilder: $10.Timestamp.create)
-    ..aOM<$10.Timestamp>(4, 'lastSeenAt', subBuilder: $10.Timestamp.create)
+    ..aOM<$8.UUIDValue>(1, 'id', subBuilder: $8.UUIDValue.create)
+    ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
+    ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
+    ..aOM<$11.Timestamp>(4, 'lastSeenAt', subBuilder: $11.Timestamp.create)
     ..aOM<$1.Profile>(5, 'profile', subBuilder: $1.Profile.create)
     ..aOM<ChatRoom>(6, 'chatRoom', subBuilder: ChatRoom.create)
     ..hasRequiredFields = false
@@ -217,48 +205,48 @@ class ChatRoomParticipant extends $pb.GeneratedMessage {
   static ChatRoomParticipant _defaultInstance;
 
   @$pb.TagNumber(1)
-  $8.Identifier get id => $_getN(0);
+  $8.UUIDValue get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($8.Identifier v) { setField(1, v); }
+  set id($8.UUIDValue v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $8.Identifier ensureId() => $_ensure(0);
+  $8.UUIDValue ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $10.Timestamp get createdAt => $_getN(1);
+  $11.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set createdAt($10.Timestamp v) { setField(2, v); }
+  set createdAt($11.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreatedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $10.Timestamp ensureCreatedAt() => $_ensure(1);
+  $11.Timestamp ensureCreatedAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $10.Timestamp get updatedAt => $_getN(2);
+  $11.Timestamp get updatedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set updatedAt($10.Timestamp v) { setField(3, v); }
+  set updatedAt($11.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasUpdatedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpdatedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $10.Timestamp ensureUpdatedAt() => $_ensure(2);
+  $11.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $10.Timestamp get lastSeenAt => $_getN(3);
+  $11.Timestamp get lastSeenAt => $_getN(3);
   @$pb.TagNumber(4)
-  set lastSeenAt($10.Timestamp v) { setField(4, v); }
+  set lastSeenAt($11.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasLastSeenAt() => $_has(3);
   @$pb.TagNumber(4)
   void clearLastSeenAt() => clearField(4);
   @$pb.TagNumber(4)
-  $10.Timestamp ensureLastSeenAt() => $_ensure(3);
+  $11.Timestamp ensureLastSeenAt() => $_ensure(3);
 
   @$pb.TagNumber(5)
   $1.Profile get profile => $_getN(4);
@@ -735,10 +723,10 @@ class EventForceClose extends $pb.GeneratedMessage {
 
 class ListChatMessageRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ListChatMessageRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Filtering>(1, 'filter', subBuilder: $9.Filtering.create)
-    ..aOM<$9.Sorting>(2, 'orderBy', subBuilder: $9.Sorting.create)
-    ..aOM<$9.FieldSelection>(3, 'fields', subBuilder: $9.FieldSelection.create)
-    ..aOM<$9.Pagination>(4, 'paging', subBuilder: $9.Pagination.create)
+    ..aOM<$10.Filtering>(1, 'filter', subBuilder: $10.Filtering.create)
+    ..aOM<$10.Sorting>(2, 'orderBy', subBuilder: $10.Sorting.create)
+    ..aOM<$10.FieldSelection>(3, 'fields', subBuilder: $10.FieldSelection.create)
+    ..aOM<$10.Pagination>(4, 'paging', subBuilder: $10.Pagination.create)
     ..hasRequiredFields = false
   ;
 
@@ -758,48 +746,48 @@ class ListChatMessageRequest extends $pb.GeneratedMessage {
   static ListChatMessageRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Filtering get filter => $_getN(0);
+  $10.Filtering get filter => $_getN(0);
   @$pb.TagNumber(1)
-  set filter($9.Filtering v) { setField(1, v); }
+  set filter($10.Filtering v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasFilter() => $_has(0);
   @$pb.TagNumber(1)
   void clearFilter() => clearField(1);
   @$pb.TagNumber(1)
-  $9.Filtering ensureFilter() => $_ensure(0);
+  $10.Filtering ensureFilter() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $9.Sorting get orderBy => $_getN(1);
+  $10.Sorting get orderBy => $_getN(1);
   @$pb.TagNumber(2)
-  set orderBy($9.Sorting v) { setField(2, v); }
+  set orderBy($10.Sorting v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasOrderBy() => $_has(1);
   @$pb.TagNumber(2)
   void clearOrderBy() => clearField(2);
   @$pb.TagNumber(2)
-  $9.Sorting ensureOrderBy() => $_ensure(1);
+  $10.Sorting ensureOrderBy() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $9.FieldSelection get fields => $_getN(2);
+  $10.FieldSelection get fields => $_getN(2);
   @$pb.TagNumber(3)
-  set fields($9.FieldSelection v) { setField(3, v); }
+  set fields($10.FieldSelection v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasFields() => $_has(2);
   @$pb.TagNumber(3)
   void clearFields() => clearField(3);
   @$pb.TagNumber(3)
-  $9.FieldSelection ensureFields() => $_ensure(2);
+  $10.FieldSelection ensureFields() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $9.Pagination get paging => $_getN(3);
+  $10.Pagination get paging => $_getN(3);
   @$pb.TagNumber(4)
-  set paging($9.Pagination v) { setField(4, v); }
+  set paging($10.Pagination v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasPaging() => $_has(3);
   @$pb.TagNumber(4)
   void clearPaging() => clearField(4);
   @$pb.TagNumber(4)
-  $9.Pagination ensurePaging() => $_ensure(3);
+  $10.Pagination ensurePaging() => $_ensure(3);
 }
 
 class ListChatMessageResponse extends $pb.GeneratedMessage {
@@ -829,10 +817,10 @@ class ListChatMessageResponse extends $pb.GeneratedMessage {
 
 class ListChatRoomRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ListChatRoomRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Filtering>(1, 'filter', subBuilder: $9.Filtering.create)
-    ..aOM<$9.Sorting>(2, 'orderBy', subBuilder: $9.Sorting.create)
-    ..aOM<$9.FieldSelection>(3, 'fields', subBuilder: $9.FieldSelection.create)
-    ..aOM<$9.Pagination>(4, 'paging', subBuilder: $9.Pagination.create)
+    ..aOM<$10.Filtering>(1, 'filter', subBuilder: $10.Filtering.create)
+    ..aOM<$10.Sorting>(2, 'orderBy', subBuilder: $10.Sorting.create)
+    ..aOM<$10.FieldSelection>(3, 'fields', subBuilder: $10.FieldSelection.create)
+    ..aOM<$10.Pagination>(4, 'paging', subBuilder: $10.Pagination.create)
     ..hasRequiredFields = false
   ;
 
@@ -852,48 +840,48 @@ class ListChatRoomRequest extends $pb.GeneratedMessage {
   static ListChatRoomRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Filtering get filter => $_getN(0);
+  $10.Filtering get filter => $_getN(0);
   @$pb.TagNumber(1)
-  set filter($9.Filtering v) { setField(1, v); }
+  set filter($10.Filtering v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasFilter() => $_has(0);
   @$pb.TagNumber(1)
   void clearFilter() => clearField(1);
   @$pb.TagNumber(1)
-  $9.Filtering ensureFilter() => $_ensure(0);
+  $10.Filtering ensureFilter() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $9.Sorting get orderBy => $_getN(1);
+  $10.Sorting get orderBy => $_getN(1);
   @$pb.TagNumber(2)
-  set orderBy($9.Sorting v) { setField(2, v); }
+  set orderBy($10.Sorting v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasOrderBy() => $_has(1);
   @$pb.TagNumber(2)
   void clearOrderBy() => clearField(2);
   @$pb.TagNumber(2)
-  $9.Sorting ensureOrderBy() => $_ensure(1);
+  $10.Sorting ensureOrderBy() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $9.FieldSelection get fields => $_getN(2);
+  $10.FieldSelection get fields => $_getN(2);
   @$pb.TagNumber(3)
-  set fields($9.FieldSelection v) { setField(3, v); }
+  set fields($10.FieldSelection v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasFields() => $_has(2);
   @$pb.TagNumber(3)
   void clearFields() => clearField(3);
   @$pb.TagNumber(3)
-  $9.FieldSelection ensureFields() => $_ensure(2);
+  $10.FieldSelection ensureFields() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $9.Pagination get paging => $_getN(3);
+  $10.Pagination get paging => $_getN(3);
   @$pb.TagNumber(4)
-  set paging($9.Pagination v) { setField(4, v); }
+  set paging($10.Pagination v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasPaging() => $_has(3);
   @$pb.TagNumber(4)
   void clearPaging() => clearField(4);
   @$pb.TagNumber(4)
-  $9.Pagination ensurePaging() => $_ensure(3);
+  $10.Pagination ensurePaging() => $_ensure(3);
 }
 
 class ListChatRoomResponse extends $pb.GeneratedMessage {

@@ -5,7 +5,6 @@ import 'package:feat_feed/feat_feed.dart';
 import 'package:feat_health/feat_health.dart';
 import 'package:feat_journal/feat_journal.dart';
 import 'package:feat_notifications/feat_notifications.dart';
-import 'package:feat_profile/feat_profile.dart';
 import 'package:feat_services/feat_services.dart';
 import 'package:feat_splash/feat_splash.dart';
 import 'package:feat_storage/feat_storage.dart';
@@ -23,6 +22,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  @override
+  void didChangeDependencies() {
+    final profileStore = Provider.of<ProfileStore>(context);
+    profileStore.fetchOrCreateProfile();
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppStateNotifier>(context);

@@ -15,7 +15,7 @@ class ChatStore = _ChatStore with _$ChatStore;
 
 abstract class _ChatStore with Store {
   final ErrorStore errorStore;
-  final UserStore userStore;
+  final ProfileStore profileStore;
   final ChatClient _client;
   final _inputController = BehaviorSubject<StreamChatEvent>();
 
@@ -25,7 +25,7 @@ abstract class _ChatStore with Store {
 
   _ChatStore(
     this.errorStore,
-    this.userStore,
+    this.profileStore,
     this._client,
   );
 
@@ -41,14 +41,14 @@ abstract class _ChatStore with Store {
   @computed
   ChatRoomParticipant get selectedMyParticipation {
     return selectedRoom.participants.firstWhere(
-      (element) => element.profile.id.resourceId == userStore.user.uid,
+      (element) => element.profile.id != profileStore.profile.id,
     );
   }
 
   @computed
   Map<String, ChatMessageInfo> get chatMessagePlaces {
     final participants = selectedRoom.participants.where(
-      (element) => element.profile.id.resourceId != userStore.user.uid,
+      (element) => element.profile.id != profileStore.profile.id,
     );
     final latestSeen = participants.isNotEmpty
         ? participants.reduce(
@@ -71,12 +71,12 @@ abstract class _ChatStore with Store {
     final result = <String, ChatMessageInfo>{};
     reversedMessages
         .indexed()
-        .groupBy((v) => v.value.authorId.resourceId)
+        .groupBy((v) => v.value.author.id.value)
         .forEach((element) {
       element.values.fold<_Tuple<Indexed<ChatMessage>>>(null, (prev, element) {
-        final currentKey = element.value.id.resourceId;
+        final currentKey = element.value.id.value;
         if (prev != null) {
-          final prevKey = prev.second.value.id.resourceId;
+          final prevKey = prev.second.value.id.value;
           if (prev.second.index != element.index - 1) {
             result[currentKey] = ChatMessageInfo(
               place: ChatMessagePlace.LAST_SINGLE,
@@ -124,8 +124,8 @@ abstract class _ChatStore with Store {
         .forEach((element) {
       final firstMessage = element.values?.first;
       if (firstMessage != null) {
-        final i = result[firstMessage.id.resourceId];
-        result[firstMessage.id.resourceId] = ChatMessageInfo(
+        final i = result[firstMessage.id.value];
+        result[firstMessage.id.value] = ChatMessageInfo(
           message: i.message,
           place: i.place,
           seenBy: i.seenBy,
@@ -152,13 +152,13 @@ abstract class _ChatStore with Store {
       if (message == null) {
         return prev;
       }
-      if (prev.containsKey(message.id.resourceId)) {
-        prev[message.id.resourceId] = [
-          ...prev[message.id.resourceId],
+      if (prev.containsKey(message.id.value)) {
+        prev[message.id.value] = [
+          ...prev[message.id.value],
           participant,
         ];
       } else {
-        prev[message.id.resourceId] = [
+        prev[message.id.value] = [
           participant,
         ];
       }
@@ -223,8 +223,7 @@ abstract class _ChatStore with Store {
 
   void _addNewMessage(StreamChatEvent value) {
     selectedMessages.removeWhere(
-      (element) =>
-          value.sendMessage.message.id.resourceId == element.id.resourceId,
+      (element) => value.sendMessage.message.id == element.id,
     );
     selectedMessages.insert(0, value.sendMessage.message);
     selectedMessages = selectedMessages.toList();
@@ -250,10 +249,8 @@ abstract class _ChatStore with Store {
 
   @action
   Future sendMessage(String text) async {
-    final id = Identifier()..resourceId = Uuid().v4();
     final payload = ChatMessage()
-      ..id = id
-      ..authorId = selectedMyParticipation.id
+      ..author = selectedMyParticipation
       ..text = text;
     final event = EventSendMessage()..message = payload;
     final streamEvent = StreamChatEvent()..sendMessage = event;
@@ -271,8 +268,7 @@ abstract class _ChatStore with Store {
       ChatMessage message, ChatRoomParticipant latestSeen) {
     if (message.createdAt == null) {
       return ChatMessageStatus.NOT_DELIVERED;
-    } else if (message.author.id.resourceId !=
-        selectedMyParticipation.id.resourceId) {
+    } else if (message.author.id.value != selectedMyParticipation.id.value) {
       return ChatMessageStatus.NOT_PRESENT;
     } else if (latestSeen == null) {
       return ChatMessageStatus.NOT_PRESENT;

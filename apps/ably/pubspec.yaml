@@ -50,8 +50,6 @@ dependencies:
     path: ../../features/feat_chat
   feat_onboarding:
     path: ../../features/feat_onboarding
-  feat_profile:
-    path: ../../features/feat_profile
   feat_journal:
     path: ../../features/feat_journal
   feat_health:

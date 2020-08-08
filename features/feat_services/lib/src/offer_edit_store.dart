@@ -25,8 +25,7 @@ abstract class _ServiceOfferEditStore with Store {
 
   @action
   Future setApplication(ServiceProvider p, ServiceOffer o) async {
-    offer =
-        o ?? (ServiceOffer()..id = (Identifier()..resourceId = Uuid().v4()));
+    offer = o ?? ServiceOffer();
     offer = offer.copyWith((e) {
       e.provider = p;
     });
