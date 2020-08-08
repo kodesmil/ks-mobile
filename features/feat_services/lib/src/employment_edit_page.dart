@@ -91,9 +91,38 @@ class __ServiceEmploymentEditContentState
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<ServiceEmploymentEditStore>(context);
-    return CupertinoPageScaffold(
-      navigationBar: KsSmallNavigationBar(title: 'Edit contact'),
-      child: SafeArea(
+    return Scaffold(
+      appBar: KsSmallNavigationBar(title: 'Edit contact'),
+      bottomNavigationBar: ButtonBar(
+        alignment: MainAxisAlignment.center,
+        children: [
+          FlatButton(
+            child: Text('Delete'),
+            color: Colors.red,
+            shape: StadiumBorder(),
+            onPressed: () async {
+              await store.delete();
+              Navigator.pop(context, true);
+            },
+          ),
+          OutlineButton(
+            child: Text('Back'),
+            shape: StadiumBorder(),
+            onPressed: () async {
+              Navigator.pop(context, false);
+            },
+          ),
+          RaisedButton(
+            child: Text('Save'),
+            shape: StadiumBorder(),
+            onPressed: () async {
+              await store.createOrUpdate();
+              Navigator.pop(context, true);
+            },
+          ),
+        ],
+      ),
+      body: SafeArea(
         child: Material(
           child: Padding(
             padding: const EdgeInsets.all(30.0),
@@ -134,15 +163,6 @@ class __ServiceEmploymentEditContentState
                     decoration: InputDecoration(
                       labelText: 'Email',
                     ),
-                  ),
-                  SizedBox(height: 30),
-                  OutlineButton(
-                    child: Text('Save'),
-                    shape: StadiumBorder(),
-                    onPressed: () async {
-                      await store.createOrUpdate();
-                      Navigator.of(context).pop();
-                    },
                   ),
                 ],
               ),

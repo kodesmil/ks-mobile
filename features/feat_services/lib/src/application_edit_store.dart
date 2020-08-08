@@ -59,8 +59,9 @@ abstract class _ServiceApplicationEditStore with Store {
   }
 
   @action
-  Future createOrUpdate() async =>
-      application?.id?.value?.isNotEmpty == true ? await update() : await create();
+  Future createOrUpdate() async => application?.id?.value?.isNotEmpty == true
+      ? await update()
+      : await create();
 
   @action
   Future update() async {
@@ -70,7 +71,8 @@ abstract class _ServiceApplicationEditStore with Store {
           var provider = e1.provider.clone();
           provider.details = details;
           provider.employments.clear();
-          provider.employments.addAll(provider.employments.map((e) => hasSameId(e, employment) ? employment : e));
+          provider.employments.addAll(provider.employments
+              .map((e) => hasSameId(e, employment) ? employment : e));
           e1.provider = provider;
           e1.files.clear();
           e1.files.addAll(e1.files.map((e) => hasSameId(e, file) ? file : e));
@@ -91,7 +93,8 @@ abstract class _ServiceApplicationEditStore with Store {
           var provider = e1.provider.clone();
           provider.details = details;
           provider.employments.clear();
-          provider.employments.addAll(provider.employments.map((e) => hasSameId(e, employment) ? employment : e));
+          provider.employments.addAll(provider.employments
+              .map((e) => hasSameId(e, employment) ? employment : e));
           e1.provider = provider;
           e1.files.clear();
           e1.files.addAll(e1.files.map((e) => hasSameId(e, file) ? file : e));
@@ -99,6 +102,17 @@ abstract class _ServiceApplicationEditStore with Store {
       final response = await client.createServiceApplication(request);
       loadingStore.success = true;
       application = response.result;
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future deleteApplication() async {
+    try {
+      final request = DeleteServiceApplicationRequest()..id = application.id;
+      final response = await client.deleteServiceApplication(request);
+      loadingStore.success = true;
+      application = null;
     } catch (e) {
       print(e);
     }

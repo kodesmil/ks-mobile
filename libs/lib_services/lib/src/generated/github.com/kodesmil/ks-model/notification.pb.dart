@@ -7,15 +7,15 @@
 
 import 'dart:core' as $core;
 
+import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../infobloxopen/atlas-app-toolkit/rpc/resource/resource.pb.dart' as $9;
 import '../../../google/protobuf/timestamp.pb.dart' as $11;
 import '../../infobloxopen/atlas-app-toolkit/query/collection_operators.pb.dart' as $10;
 
 class NotificationSetting extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('NotificationSetting', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
     ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
     ..aOB(4, 'enableNotifications')
@@ -40,15 +40,13 @@ class NotificationSetting extends $pb.GeneratedMessage {
   static NotificationSetting _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $11.Timestamp get createdAt => $_getN(1);
@@ -168,7 +166,7 @@ class CreateNotificationSettingResponse extends $pb.GeneratedMessage {
 
 class ReadNotificationSettingRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ReadNotificationSettingRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -188,15 +186,13 @@ class ReadNotificationSettingRequest extends $pb.GeneratedMessage {
   static ReadNotificationSettingRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
 }
 
 class ReadNotificationSettingResponse extends $pb.GeneratedMessage {
@@ -300,7 +296,7 @@ class UpdateNotificationSettingResponse extends $pb.GeneratedMessage {
 
 class DeleteNotificationSettingRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteNotificationSettingRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -320,15 +316,13 @@ class DeleteNotificationSettingRequest extends $pb.GeneratedMessage {
   static DeleteNotificationSettingRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
 }
 
 class DeleteNotificationSettingResponse extends $pb.GeneratedMessage {
@@ -448,7 +442,7 @@ class ListNotificationSettingResponse extends $pb.GeneratedMessage {
 
 class NotificationDevice extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('NotificationDevice', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
     ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
     ..aOS(4, 'deviceToken')
@@ -471,15 +465,13 @@ class NotificationDevice extends $pb.GeneratedMessage {
   static NotificationDevice _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $11.Timestamp get createdAt => $_getN(1);

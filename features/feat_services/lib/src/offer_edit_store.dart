@@ -33,7 +33,7 @@ abstract class _ServiceOfferEditStore with Store {
 
   @action
   Future createOrUpdate() async =>
-      offer?.updatedAt != null ? await update() : await create();
+      offer?.id?.value?.isNotEmpty == true ? await update() : await create();
 
   @action
   Future update() async {
@@ -54,6 +54,18 @@ abstract class _ServiceOfferEditStore with Store {
       final response = await client.createServiceOffer(request);
       loadingStore.success = true;
       offer = response.result;
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @action
+  Future delete() async {
+    try {
+      final request = DeleteServiceOfferRequest()..id = offer.id;
+      await client.deleteServiceOffer(request);
+      loadingStore.success = true;
+      offer = null;
     } catch (e) {
       print(e);
     }

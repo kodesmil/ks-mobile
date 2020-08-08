@@ -7,14 +7,14 @@
 
 import 'dart:core' as $core;
 
+import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../infobloxopen/atlas-app-toolkit/rpc/resource/resource.pb.dart' as $9;
 import '../../../google/protobuf/timestamp.pb.dart' as $11;
 
 class LogActivity extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('LogActivity', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
     ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
     ..aOS(4, 'ip')
@@ -37,15 +37,13 @@ class LogActivity extends $pb.GeneratedMessage {
   static LogActivity _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $11.Timestamp get createdAt => $_getN(1);

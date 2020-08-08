@@ -7,9 +7,9 @@
 
 import 'dart:core' as $core;
 
+import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../infobloxopen/atlas-app-toolkit/rpc/resource/resource.pb.dart' as $9;
 import '../../../google/protobuf/timestamp.pb.dart' as $11;
 import '../../infobloxopen/atlas-app-toolkit/query/collection_operators.pb.dart' as $10;
 
@@ -19,7 +19,7 @@ export 'health.pbenum.dart';
 
 class HealthMenstruationPersonalInfo extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('HealthMenstruationPersonalInfo', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
     ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
     ..a<$core.int>(4, 'periodLengthInDays', $pb.PbFieldType.O3)
@@ -43,15 +43,13 @@ class HealthMenstruationPersonalInfo extends $pb.GeneratedMessage {
   static HealthMenstruationPersonalInfo _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $11.Timestamp get createdAt => $_getN(1);
@@ -96,7 +94,7 @@ class HealthMenstruationPersonalInfo extends $pb.GeneratedMessage {
 
 class HealthMenstruationDailyEntry extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('HealthMenstruationDailyEntry', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
     ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
     ..aOM<$11.Timestamp>(4, 'day', subBuilder: $11.Timestamp.create)
@@ -123,15 +121,13 @@ class HealthMenstruationDailyEntry extends $pb.GeneratedMessage {
   static HealthMenstruationDailyEntry _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $11.Timestamp get createdAt => $_getN(1);
@@ -271,7 +267,7 @@ class CreateHealthMenstruationDailyEntryResponse extends $pb.GeneratedMessage {
 
 class ReadHealthMenstruationDailyEntryRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ReadHealthMenstruationDailyEntryRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -291,15 +287,13 @@ class ReadHealthMenstruationDailyEntryRequest extends $pb.GeneratedMessage {
   static ReadHealthMenstruationDailyEntryRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
 }
 
 class ReadHealthMenstruationDailyEntryResponse extends $pb.GeneratedMessage {
@@ -403,7 +397,7 @@ class UpdateHealthMenstruationDailyEntryResponse extends $pb.GeneratedMessage {
 
 class DeleteHealthMenstruationDailyEntryRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteHealthMenstruationDailyEntryRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -423,15 +417,13 @@ class DeleteHealthMenstruationDailyEntryRequest extends $pb.GeneratedMessage {
   static DeleteHealthMenstruationDailyEntryRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
 }
 
 class DeleteHealthMenstruationDailyEntryResponse extends $pb.GeneratedMessage {
@@ -617,7 +609,7 @@ class CreateHealthMenstruationPersonalInfoResponse extends $pb.GeneratedMessage 
 
 class ReadHealthMenstruationPersonalInfoRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ReadHealthMenstruationPersonalInfoRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -637,15 +629,13 @@ class ReadHealthMenstruationPersonalInfoRequest extends $pb.GeneratedMessage {
   static ReadHealthMenstruationPersonalInfoRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
 }
 
 class ReadHealthMenstruationPersonalInfoResponse extends $pb.GeneratedMessage {
@@ -749,7 +739,7 @@ class UpdateHealthMenstruationPersonalInfoResponse extends $pb.GeneratedMessage 
 
 class DeleteHealthMenstruationPersonalInfoRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteHealthMenstruationPersonalInfoRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -769,15 +759,13 @@ class DeleteHealthMenstruationPersonalInfoRequest extends $pb.GeneratedMessage {
   static DeleteHealthMenstruationPersonalInfoRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
 }
 
 class DeleteHealthMenstruationPersonalInfoResponse extends $pb.GeneratedMessage {

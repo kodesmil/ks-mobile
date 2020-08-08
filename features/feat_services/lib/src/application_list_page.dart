@@ -73,12 +73,15 @@ class _ServiceApplicationListContentState
           Icons.add,
           color: Colors.white,
         ),
-        onPressed: () {
-          Navigator.of(context, rootNavigator: true).push(
+        onPressed: () async {
+          final reload = await Navigator.of(context, rootNavigator: true).push(
             CupertinoPageRoute(
               builder: (context) => ServiceApplicationEditPage(),
             ),
           );
+          if (reload == true) {
+            await store.fetch();
+          }
         },
       ),
       body: CustomScrollView(
@@ -113,8 +116,9 @@ class _ServiceApplicationListContentState
                               ),
                               trailing: IconButton(
                                 icon: Icon(Icons.edit),
-                                onPressed: () {
-                                  Navigator.of(context, rootNavigator: true)
+                                onPressed: () async {
+                                  final reload = await Navigator.of(context,
+                                          rootNavigator: true)
                                       .push(
                                     CupertinoPageRoute(
                                       builder: (context) =>
@@ -123,6 +127,9 @@ class _ServiceApplicationListContentState
                                       ),
                                     ),
                                   );
+                                  if (reload == true) {
+                                    await store.fetch();
+                                  }
                                 },
                               ),
                             ),
@@ -134,14 +141,18 @@ class _ServiceApplicationListContentState
                               ),
                               trailing: IconButton(
                                 icon: Icon(Icons.add),
-                                onPressed: () {
-                                  Navigator.of(context, rootNavigator: true)
+                                onPressed: () async {
+                                  final reload = await Navigator.of(context,
+                                          rootNavigator: true)
                                       .push(
                                     CupertinoPageRoute(
                                       builder: (context) =>
                                           ServiceOfferEditPage(e.provider),
                                     ),
                                   );
+                                  if (reload == true) {
+                                    await store.fetch();
+                                  }
                                 },
                               ),
                             ),
@@ -161,10 +172,11 @@ class _ServiceApplicationListContentState
                                         style:
                                             Theme.of(context).textTheme.caption,
                                       ),
-                                      onTap: () {
-                                        Navigator.of(context,
-                                                rootNavigator: true)
-                                            .push(
+                                      onTap: () async {
+                                        final reload = await Navigator.of(
+                                          context,
+                                          rootNavigator: true,
+                                        ).push(
                                           CupertinoPageRoute(
                                             builder: (context) =>
                                                 ServiceOfferEditPage(
@@ -173,6 +185,9 @@ class _ServiceApplicationListContentState
                                             ),
                                           ),
                                         );
+                                        if (reload == true) {
+                                          await store.fetch();
+                                        }
                                       },
                                     ),
                                   )
@@ -186,16 +201,19 @@ class _ServiceApplicationListContentState
                               ),
                               trailing: IconButton(
                                 icon: Icon(Icons.add),
-                                onPressed: () {
-                                    Navigator.of(context, rootNavigator: true)
-                                        .push(
-                                      CupertinoPageRoute(
-                                        builder: (context) =>
-                                            ServiceEmploymentEditPage(
-                                          e.provider,
-                                        ),
-                                      ),
-                                    );
+                                onPressed: () async {
+                                  final reload = await Navigator.of(
+                                    context,
+                                    rootNavigator: true,
+                                  ).push(
+                                    CupertinoPageRoute(
+                                      builder: (context) =>
+                                          ServiceEmploymentEditPage(e.provider),
+                                    ),
+                                  );
+                                  if (reload == true) {
+                                    await store.fetch();
+                                  }
                                 },
                               ),
                             ),
@@ -205,10 +223,11 @@ class _ServiceApplicationListContentState
                                     (o) => ListTile(
                                       title:
                                           Text('${o.firstName} ${o.lastName}'),
-                                      onTap: () {
-                                        Navigator.of(context,
-                                                rootNavigator: true)
-                                            .push(
+                                      onTap: () async {
+                                        final reload = await Navigator.of(
+                                          context,
+                                          rootNavigator: true,
+                                        ).push(
                                           CupertinoPageRoute(
                                             builder: (context) =>
                                                 ServiceEmploymentEditPage(
@@ -217,6 +236,9 @@ class _ServiceApplicationListContentState
                                             ),
                                           ),
                                         );
+                                        if (reload == true) {
+                                          await store.fetch();
+                                        }
                                       },
                                     ),
                                   )

@@ -86,9 +86,38 @@ class __ServiceOfferEditContentState extends State<ServiceOfferEditContent> {
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<ServiceOfferEditStore>(context);
-    return CupertinoPageScaffold(
-      navigationBar: KsSmallNavigationBar(title: 'Edit offer'),
-      child: SafeArea(
+    return Scaffold(
+      appBar: KsSmallNavigationBar(title: 'Edit offer'),
+      bottomNavigationBar: ButtonBar(
+        alignment: MainAxisAlignment.center,
+        children: [
+          FlatButton(
+            child: Text('Delete'),
+            color: Colors.red,
+            shape: StadiumBorder(),
+            onPressed: () async {
+              await store.delete();
+              Navigator.pop(context, true);
+            },
+          ),
+          OutlineButton(
+            child: Text('Back'),
+            shape: StadiumBorder(),
+            onPressed: () async {
+              Navigator.pop(context, false);
+            },
+          ),
+          RaisedButton(
+            child: Text('Save'),
+            shape: StadiumBorder(),
+            onPressed: () async {
+              await store.createOrUpdate();
+              Navigator.pop(context, true);
+            },
+          ),
+        ],
+      ),
+      body: SafeArea(
         child: Material(
           child: Padding(
             padding: const EdgeInsets.all(30.0),
@@ -131,15 +160,6 @@ class __ServiceOfferEditContentState extends State<ServiceOfferEditContent> {
                     decoration: InputDecoration(
                       labelText: 'Currency',
                     ),
-                  ),
-                  SizedBox(height: 30),
-                  OutlineButton(
-                    child: Text('Save'),
-                    shape: StadiumBorder(),
-                    onPressed: () async {
-                      await store.createOrUpdate();
-                      Navigator.of(context).pop();
-                    },
                   ),
                 ],
               ),

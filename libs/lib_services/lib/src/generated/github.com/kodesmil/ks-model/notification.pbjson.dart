@@ -8,7 +8,7 @@
 const NotificationSetting$json = const {
   '1': 'NotificationSetting',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'id'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '8': const {}, '10': 'id'},
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
     const {'1': 'enable_notifications', '3': 4, '4': 1, '5': 8, '10': 'enableNotifications'},
@@ -35,7 +35,7 @@ const CreateNotificationSettingResponse$json = const {
 const ReadNotificationSettingRequest$json = const {
   '1': 'ReadNotificationSettingRequest',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '10': 'id'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
   ],
 };
 
@@ -63,7 +63,7 @@ const UpdateNotificationSettingResponse$json = const {
 const DeleteNotificationSettingRequest$json = const {
   '1': 'DeleteNotificationSettingRequest',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '10': 'id'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
   ],
 };
 
@@ -91,7 +91,7 @@ const ListNotificationSettingResponse$json = const {
 const NotificationDevice$json = const {
   '1': 'NotificationDevice',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'id'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '8': const {}, '10': 'id'},
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
     const {'1': 'device_token', '3': 4, '4': 1, '5': 9, '8': const {}, '10': 'deviceToken'},

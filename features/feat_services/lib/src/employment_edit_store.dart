@@ -15,8 +15,6 @@ abstract class _ServiceEmploymentEditStore with Store {
   final LoadingStore loadingStore;
   final ServicesClient client;
 
-  ServiceProvider _provider;
-
   @observable
   ServiceEmployment employment;
 
@@ -28,13 +26,13 @@ abstract class _ServiceEmploymentEditStore with Store {
 
   @action
   Future setApplication(ServiceProvider p, ServiceEmployment o) async {
-    _provider = p;
     employment = o ?? ServiceEmployment();
+    employment.serviceProviderId = p.id;
   }
 
   @action
   Future createOrUpdate() async =>
-      employment?.updatedAt != null ? await update() : await create();
+      employment?.id != 0 ? await update() : await create();
 
   @action
   Future update() async {
@@ -55,6 +53,18 @@ abstract class _ServiceEmploymentEditStore with Store {
       final response = await client.createServiceEmployment(request);
       loadingStore.success = true;
       employment = response.result;
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @action
+  Future delete() async {
+    try {
+      final request = DeleteServiceEmploymentRequest()..id = employment.id;
+      await client.deleteServiceEmployment(request);
+      loadingStore.success = true;
+      employment = null;
     } catch (e) {
       print(e);
     }

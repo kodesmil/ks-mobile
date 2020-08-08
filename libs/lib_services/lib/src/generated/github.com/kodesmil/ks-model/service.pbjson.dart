@@ -8,7 +8,7 @@
 const ServiceTag$json = const {
   '1': 'ServiceTag',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'id'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '8': const {}, '10': 'id'},
     const {'1': 'key', '3': 2, '4': 1, '5': 9, '8': const {}, '10': 'key'},
     const {'1': 'name', '3': 3, '4': 1, '5': 9, '10': 'name'},
   ],
@@ -18,7 +18,7 @@ const ServiceTag$json = const {
 const Service$json = const {
   '1': 'Service',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'id'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '8': const {}, '10': 'id'},
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
     const {'1': 'name', '3': 4, '4': 1, '5': 9, '10': 'name'},
@@ -57,7 +57,7 @@ const ServiceOffer$json = const {
 const ServiceEmployment$json = const {
   '1': 'ServiceEmployment',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'id'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '8': const {}, '10': 'id'},
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
     const {'1': 'first_name', '3': 4, '4': 1, '5': 9, '10': 'firstName'},
@@ -65,6 +65,7 @@ const ServiceEmployment$json = const {
     const {'1': 'email', '3': 6, '4': 1, '5': 9, '10': 'email'},
     const {'1': 'phone', '3': 7, '4': 1, '5': 9, '10': 'phone'},
     const {'1': 'can_be_contacted', '3': 8, '4': 1, '5': 8, '10': 'canBeContacted'},
+    const {'1': 'service_provider_id', '3': 9, '4': 1, '5': 11, '6': '.gorm.types.UUIDValue', '10': 'serviceProviderId'},
   ],
   '7': const {},
 };
@@ -72,7 +73,7 @@ const ServiceEmployment$json = const {
 const ServiceDetails$json = const {
   '1': 'ServiceDetails',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'id'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '8': const {}, '10': 'id'},
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
     const {'1': 'name', '3': 4, '4': 1, '5': 9, '10': 'name'},
@@ -126,7 +127,7 @@ const ServiceProvider$json = const {
 const ServiceSessionEvaluation$json = const {
   '1': 'ServiceSessionEvaluation',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'id'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '8': const {}, '10': 'id'},
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
     const {'1': 'session', '3': 4, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'session'},
@@ -390,7 +391,7 @@ const CreateServiceTagResponse$json = const {
 const ReadServiceTagRequest$json = const {
   '1': 'ReadServiceTagRequest',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '10': 'id'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
   ],
 };
 
@@ -418,7 +419,7 @@ const UpdateServiceTagResponse$json = const {
 const DeleteServiceTagRequest$json = const {
   '1': 'DeleteServiceTagRequest',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '10': 'id'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
   ],
 };
 
@@ -600,7 +601,7 @@ const CreateServiceDetailsResponse$json = const {
 const ReadServiceDetailsRequest$json = const {
   '1': 'ReadServiceDetailsRequest',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '10': 'id'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
   ],
 };
 
@@ -628,7 +629,7 @@ const UpdateServiceDetailsResponse$json = const {
 const DeleteServiceDetailsRequest$json = const {
   '1': 'DeleteServiceDetailsRequest',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '10': 'id'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
   ],
 };
 
@@ -670,7 +671,7 @@ const CreateServiceEmploymentResponse$json = const {
 const ReadServiceEmploymentRequest$json = const {
   '1': 'ReadServiceEmploymentRequest',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '10': 'id'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
   ],
 };
 
@@ -698,7 +699,7 @@ const UpdateServiceEmploymentResponse$json = const {
 const DeleteServiceEmploymentRequest$json = const {
   '1': 'DeleteServiceEmploymentRequest',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '10': 'id'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
   ],
 };
 
@@ -740,7 +741,7 @@ const CreateServiceResponse$json = const {
 const ReadServiceRequest$json = const {
   '1': 'ReadServiceRequest',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '10': 'id'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
   ],
 };
 
@@ -768,7 +769,7 @@ const UpdateServiceResponse$json = const {
 const DeleteServiceRequest$json = const {
   '1': 'DeleteServiceRequest',
   '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '10': 'id'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
   ],
 };
 

@@ -6,14 +6,14 @@ import 'package:mobx/mobx.dart';
 
 part 'menstruation_daily_entry.g.dart';
 
-class MenstruationDailyEntryStore = _MenstruationDailyEntryStore with _$MenstruationDailyEntryStore;
+class MenstruationDailyEntryStore = _MenstruationDailyEntryStore
+    with _$MenstruationDailyEntryStore;
 
 abstract class _MenstruationDailyEntryStore with Store {
   final ErrorStore errorStore;
   final LoadingStore loadingStore;
 
   HealthClient client;
-
 
   _MenstruationDailyEntryStore(
     this.errorStore,
@@ -41,7 +41,7 @@ abstract class _MenstruationDailyEntryStore with Store {
     int intensityPercent,
     DateTime day,
   }) async =>
-      entry?.id?.resourceId?.isNotEmpty == true
+      entry.id != 0
           ? await update(
               entry,
               intensityPercent: intensityPercent,
@@ -51,7 +51,6 @@ abstract class _MenstruationDailyEntryStore with Store {
               intensityPercent: intensityPercent,
               day: day,
             );
-
 
   @action
   Future create({

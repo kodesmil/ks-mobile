@@ -7,9 +7,9 @@
 
 import 'dart:core' as $core;
 
+import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../infobloxopen/atlas-app-toolkit/rpc/resource/resource.pb.dart' as $9;
 import '../../../google/protobuf/timestamp.pb.dart' as $11;
 import '../../infobloxopen/protoc-gen-gorm/types/types.pb.dart' as $8;
 import 'profile.pb.dart' as $1;
@@ -21,7 +21,7 @@ export 'service.pbenum.dart';
 
 class ServiceTag extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ServiceTag', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(2, 'key')
     ..aOS(3, 'name')
     ..hasRequiredFields = false
@@ -43,15 +43,13 @@ class ServiceTag extends $pb.GeneratedMessage {
   static ServiceTag _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get key => $_getSZ(1);
@@ -74,7 +72,7 @@ class ServiceTag extends $pb.GeneratedMessage {
 
 class Service extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('Service', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
     ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
     ..aOS(4, 'name')
@@ -99,15 +97,13 @@ class Service extends $pb.GeneratedMessage {
   static Service _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $11.Timestamp get createdAt => $_getN(1);
@@ -286,7 +282,7 @@ class ServiceOffer extends $pb.GeneratedMessage {
 
 class ServiceEmployment extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ServiceEmployment', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
     ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
     ..aOS(4, 'firstName')
@@ -294,6 +290,7 @@ class ServiceEmployment extends $pb.GeneratedMessage {
     ..aOS(6, 'email')
     ..aOS(7, 'phone')
     ..aOB(8, 'canBeContacted')
+    ..aOM<$8.UUIDValue>(9, 'serviceProviderId', subBuilder: $8.UUIDValue.create)
     ..hasRequiredFields = false
   ;
 
@@ -313,15 +310,13 @@ class ServiceEmployment extends $pb.GeneratedMessage {
   static ServiceEmployment _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $11.Timestamp get createdAt => $_getN(1);
@@ -389,11 +384,22 @@ class ServiceEmployment extends $pb.GeneratedMessage {
   $core.bool hasCanBeContacted() => $_has(7);
   @$pb.TagNumber(8)
   void clearCanBeContacted() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $8.UUIDValue get serviceProviderId => $_getN(8);
+  @$pb.TagNumber(9)
+  set serviceProviderId($8.UUIDValue v) { setField(9, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasServiceProviderId() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearServiceProviderId() => clearField(9);
+  @$pb.TagNumber(9)
+  $8.UUIDValue ensureServiceProviderId() => $_ensure(8);
 }
 
 class ServiceDetails extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ServiceDetails', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
     ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
     ..aOS(4, 'name')
@@ -420,15 +426,13 @@ class ServiceDetails extends $pb.GeneratedMessage {
   static ServiceDetails _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $11.Timestamp get createdAt => $_getN(1);
@@ -753,7 +757,7 @@ class ServiceProvider extends $pb.GeneratedMessage {
 
 class ServiceSessionEvaluation extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ServiceSessionEvaluation', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
     ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
     ..aOM<ServiceSession>(4, 'session', subBuilder: ServiceSession.create)
@@ -778,15 +782,13 @@ class ServiceSessionEvaluation extends $pb.GeneratedMessage {
   static ServiceSessionEvaluation _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $11.Timestamp get createdAt => $_getN(1);
@@ -2126,7 +2128,7 @@ class CreateServiceTagResponse extends $pb.GeneratedMessage {
 
 class ReadServiceTagRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ReadServiceTagRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -2146,15 +2148,13 @@ class ReadServiceTagRequest extends $pb.GeneratedMessage {
   static ReadServiceTagRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
 }
 
 class ReadServiceTagResponse extends $pb.GeneratedMessage {
@@ -2258,7 +2258,7 @@ class UpdateServiceTagResponse extends $pb.GeneratedMessage {
 
 class DeleteServiceTagRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteServiceTagRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -2278,15 +2278,13 @@ class DeleteServiceTagRequest extends $pb.GeneratedMessage {
   static DeleteServiceTagRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
 }
 
 class DeleteServiceTagResponse extends $pb.GeneratedMessage {
@@ -3164,7 +3162,7 @@ class CreateServiceDetailsResponse extends $pb.GeneratedMessage {
 
 class ReadServiceDetailsRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ReadServiceDetailsRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -3184,15 +3182,13 @@ class ReadServiceDetailsRequest extends $pb.GeneratedMessage {
   static ReadServiceDetailsRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
 }
 
 class ReadServiceDetailsResponse extends $pb.GeneratedMessage {
@@ -3296,7 +3292,7 @@ class UpdateServiceDetailsResponse extends $pb.GeneratedMessage {
 
 class DeleteServiceDetailsRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteServiceDetailsRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -3316,15 +3312,13 @@ class DeleteServiceDetailsRequest extends $pb.GeneratedMessage {
   static DeleteServiceDetailsRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
 }
 
 class DeleteServiceDetailsResponse extends $pb.GeneratedMessage {
@@ -3510,7 +3504,7 @@ class CreateServiceEmploymentResponse extends $pb.GeneratedMessage {
 
 class ReadServiceEmploymentRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ReadServiceEmploymentRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -3530,15 +3524,13 @@ class ReadServiceEmploymentRequest extends $pb.GeneratedMessage {
   static ReadServiceEmploymentRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
 }
 
 class ReadServiceEmploymentResponse extends $pb.GeneratedMessage {
@@ -3642,7 +3634,7 @@ class UpdateServiceEmploymentResponse extends $pb.GeneratedMessage {
 
 class DeleteServiceEmploymentRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteServiceEmploymentRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -3662,15 +3654,13 @@ class DeleteServiceEmploymentRequest extends $pb.GeneratedMessage {
   static DeleteServiceEmploymentRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
 }
 
 class DeleteServiceEmploymentResponse extends $pb.GeneratedMessage {
@@ -3856,7 +3846,7 @@ class CreateServiceResponse extends $pb.GeneratedMessage {
 
 class ReadServiceRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ReadServiceRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -3876,15 +3866,13 @@ class ReadServiceRequest extends $pb.GeneratedMessage {
   static ReadServiceRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
 }
 
 class ReadServiceResponse extends $pb.GeneratedMessage {
@@ -3988,7 +3976,7 @@ class UpdateServiceResponse extends $pb.GeneratedMessage {
 
 class DeleteServiceRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteServiceRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -4008,15 +3996,13 @@ class DeleteServiceRequest extends $pb.GeneratedMessage {
   static DeleteServiceRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
 }
 
 class DeleteServiceResponse extends $pb.GeneratedMessage {

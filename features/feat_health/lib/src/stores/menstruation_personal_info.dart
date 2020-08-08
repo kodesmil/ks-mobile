@@ -45,7 +45,7 @@ abstract class _MenstruationPersonalInfoStore with Store {
     int cycleLength,
     int periodLength,
   }) async =>
-      payload?.id?.resourceId?.isNotEmpty == true
+      payload?.id != 0
           ? await update(
               payload,
               periodLength: periodLength,

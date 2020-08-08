@@ -88,9 +88,45 @@ class _ServiceApplicationEditContentState
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<ServiceApplicationEditStore>(context);
-    return CupertinoPageScaffold(
-      navigationBar: KsSmallNavigationBar(title: 'Join program'),
-      child: SafeArea(
+    return Scaffold(
+      appBar: KsSmallNavigationBar(title: 'Join program'),
+      bottomNavigationBar: ButtonBar(
+        alignment: MainAxisAlignment.center,
+        children: [
+          FlatButton(
+            child: Text('Delete'),
+            color: Colors.red,
+            shape: StadiumBorder(),
+            onPressed: () async {
+              await store.deleteApplication();
+              Navigator.pop(context, true);
+            },
+          ),
+          OutlineButton(
+            child: Text('Back'),
+            shape: StadiumBorder(),
+            onPressed: () async {
+              Navigator.pop(context, false);
+            },
+          ),
+          RaisedButton(
+            child: Text('Apply'),
+            shape: StadiumBorder(),
+            onPressed: () async {
+              await store.createOrUpdate();
+              return ksNavigateAndRemoveUntil(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => ServiceApplicationFilePage(
+                    store.application,
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+      body: SafeArea(
         child: Material(
           child: Padding(
             padding: const EdgeInsets.all(30.0),
@@ -122,22 +158,6 @@ class _ServiceApplicationEditContentState
                     decoration: InputDecoration(
                       labelText: 'Phone',
                     ),
-                  ),
-                  SizedBox(height: 30),
-                  OutlineButton(
-                    child: Text('Apply'),
-                    shape: StadiumBorder(),
-                    onPressed: () async {
-                      await store.createOrUpdate();
-                      return ksNavigateAndRemoveUntil(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => ServiceApplicationFilePage(
-                            store.application,
-                          ),
-                        ),
-                      );
-                    },
                   ),
                 ],
               ),
