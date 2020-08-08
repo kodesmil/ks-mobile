@@ -88,35 +88,37 @@ class __ServiceOfferEditContentState extends State<ServiceOfferEditContent> {
     final store = Provider.of<ServiceOfferEditStore>(context);
     return Scaffold(
       appBar: KsSmallNavigationBar(title: 'Edit offer'),
-      bottomNavigationBar: ButtonBar(
-        alignment: MainAxisAlignment.center,
-        children: [
-          FlatButton(
-            child: Text('Delete'),
-            color: Colors.red,
-            shape: StadiumBorder(),
-            onPressed: () async {
-              await store.delete();
-              Navigator.pop(context, true);
-            },
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton.extended(
+        label: Text(
+          'Save',
+          style: Theme.of(context).textTheme.button.copyWith(
+            color: Theme.of(context).colorScheme.onPrimary,
           ),
-          OutlineButton(
-            child: Text('Back'),
-            shape: StadiumBorder(),
-            onPressed: () async {
-              Navigator.pop(context, false);
-            },
-          ),
-          RaisedButton(
-            child: Text('Save'),
-            shape: StadiumBorder(),
-            onPressed: () async {
-              await store.createOrUpdate();
-              Navigator.pop(context, true);
-            },
-          ),
-        ],
+        ),
+        shape: StadiumBorder(),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        onPressed: () async {
+          await store.createOrUpdate();
+          Navigator.pop(context, true);
+        },
       ),
+      persistentFooterButtons: [
+        IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () async {
+            Navigator.pop(context, false);
+          },
+        ),
+        IconButton(
+          icon: Icon(Icons.delete),
+          color: Colors.red,
+          onPressed: () async {
+            await store.delete();
+            Navigator.pop(context, true);
+          },
+        ),
+      ],
       body: SafeArea(
         child: Material(
           child: Padding(

@@ -90,42 +90,44 @@ class _ServiceApplicationEditContentState
     final store = Provider.of<ServiceApplicationEditStore>(context);
     return Scaffold(
       appBar: KsSmallNavigationBar(title: 'Join program'),
-      bottomNavigationBar: ButtonBar(
-        alignment: MainAxisAlignment.center,
-        children: [
-          FlatButton(
-            child: Text('Delete'),
-            color: Colors.red,
-            shape: StadiumBorder(),
-            onPressed: () async {
-              await store.deleteApplication();
-              Navigator.pop(context, true);
-            },
-          ),
-          OutlineButton(
-            child: Text('Back'),
-            shape: StadiumBorder(),
-            onPressed: () async {
-              Navigator.pop(context, false);
-            },
-          ),
-          RaisedButton(
-            child: Text('Apply'),
-            shape: StadiumBorder(),
-            onPressed: () async {
-              await store.createOrUpdate();
-              return ksNavigateAndRemoveUntil(
-                context,
-                CupertinoPageRoute(
-                  builder: (context) => ServiceApplicationFilePage(
-                    store.application,
-                  ),
-                ),
-              );
-            },
-          ),
-        ],
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton.extended(
+        label: Text(
+          'Apply',
+          style: Theme.of(context).textTheme.button.copyWith(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
+        ),
+        shape: StadiumBorder(),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        onPressed: () async {
+          await store.createOrUpdate();
+          return ksNavigateAndRemoveUntil(
+            context,
+            CupertinoPageRoute(
+              builder: (context) => ServiceApplicationFilePage(
+                store.application,
+              ),
+            ),
+          );
+        },
       ),
+      persistentFooterButtons: [
+        IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () async {
+            Navigator.pop(context, false);
+          },
+        ),
+        IconButton(
+          icon: Icon(Icons.delete),
+          color: Colors.red,
+          onPressed: () async {
+            await store.deleteApplication();
+            Navigator.pop(context, true);
+          },
+        ),
+      ],
       body: SafeArea(
         child: Material(
           child: Padding(
