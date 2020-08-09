@@ -9,13 +9,13 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../infobloxopen/atlas-app-toolkit/rpc/resource/resource.pb.dart' as $9;
-import '../../../google/protobuf/timestamp.pb.dart' as $11;
+import '../../infobloxopen/atlas-app-toolkit/rpc/resource/resource.pb.dart' as $11;
+import '../../../google/protobuf/timestamp.pb.dart' as $9;
 import '../../infobloxopen/atlas-app-toolkit/query/collection_operators.pb.dart' as $10;
 
 class FeedTag extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('FeedTag', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..aOM<$11.Identifier>(1, 'id', subBuilder: $11.Identifier.create)
     ..aOS(2, 'key')
     ..aOS(3, 'name')
     ..pc<FeedArticle>(4, 'feedArticles', $pb.PbFieldType.PM, subBuilder: FeedArticle.create)
@@ -38,15 +38,15 @@ class FeedTag extends $pb.GeneratedMessage {
   static FeedTag _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $11.Identifier get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($11.Identifier v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
+  $11.Identifier ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get key => $_getSZ(1);
@@ -72,7 +72,7 @@ class FeedTag extends $pb.GeneratedMessage {
 
 class FeedAuthor extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('FeedAuthor', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..aOM<$11.Identifier>(1, 'id', subBuilder: $11.Identifier.create)
     ..aOS(2, 'name')
     ..aOS(3, 'profilePhotoUrl')
     ..aOS(4, 'bio')
@@ -96,15 +96,15 @@ class FeedAuthor extends $pb.GeneratedMessage {
   static FeedAuthor _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $11.Identifier get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($11.Identifier v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
+  $11.Identifier ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get name => $_getSZ(1);
@@ -139,7 +139,7 @@ class FeedAuthor extends $pb.GeneratedMessage {
 
 class FeedArticleDetail extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('FeedArticleDetail', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..aOM<$11.Identifier>(1, 'id', subBuilder: $11.Identifier.create)
     ..aOS(2, 'content')
     ..aOM<FeedArticle>(3, 'feedArticle', subBuilder: FeedArticle.create)
     ..hasRequiredFields = false
@@ -161,15 +161,15 @@ class FeedArticleDetail extends $pb.GeneratedMessage {
   static FeedArticleDetail _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $11.Identifier get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($11.Identifier v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
+  $11.Identifier ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get content => $_getSZ(1);
@@ -194,7 +194,7 @@ class FeedArticleDetail extends $pb.GeneratedMessage {
 
 class ReadFeedArticleDetailsRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ReadFeedArticleDetailsRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..aOM<$11.Identifier>(1, 'id', subBuilder: $11.Identifier.create)
     ..hasRequiredFields = false
   ;
 
@@ -214,15 +214,15 @@ class ReadFeedArticleDetailsRequest extends $pb.GeneratedMessage {
   static ReadFeedArticleDetailsRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $11.Identifier get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($11.Identifier v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
+  $11.Identifier ensureId() => $_ensure(0);
 }
 
 class ReadFeedArticleDetailsResponse extends $pb.GeneratedMessage {
@@ -260,8 +260,8 @@ class ReadFeedArticleDetailsResponse extends $pb.GeneratedMessage {
 
 class FeedArticle extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('FeedArticle', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
-    ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
+    ..aOM<$11.Identifier>(1, 'id', subBuilder: $11.Identifier.create)
+    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
     ..aOS(3, 'title')
     ..aOS(4, 'subtitle')
     ..aOS(5, 'coverPictureUrl')
@@ -287,26 +287,26 @@ class FeedArticle extends $pb.GeneratedMessage {
   static FeedArticle _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $11.Identifier get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($11.Identifier v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
+  $11.Identifier ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $11.Timestamp get createdAt => $_getN(1);
+  $9.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set createdAt($11.Timestamp v) { setField(2, v); }
+  set createdAt($9.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreatedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $11.Timestamp ensureCreatedAt() => $_ensure(1);
+  $9.Timestamp ensureCreatedAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
   $core.String get title => $_getSZ(2);

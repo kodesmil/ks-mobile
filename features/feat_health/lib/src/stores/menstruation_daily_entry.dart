@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:feat_auth/feat_auth.dart';
 import 'package:intl/intl.dart';
 import 'package:lib_shared/lib_shared.dart';
 import 'package:lib_services/lib_services.dart';
@@ -12,12 +13,13 @@ class MenstruationDailyEntryStore = _MenstruationDailyEntryStore
 abstract class _MenstruationDailyEntryStore with Store {
   final ErrorStore errorStore;
   final LoadingStore loadingStore;
-
-  HealthClient client;
+  final ProfileStore profileStore;
+  final HealthClient client;
 
   _MenstruationDailyEntryStore(
     this.errorStore,
     this.loadingStore,
+    this.profileStore,
     this.client,
   );
 
@@ -59,6 +61,7 @@ abstract class _MenstruationDailyEntryStore with Store {
   }) async {
     final payload = HealthMenstruationDailyEntry()
       ..intensityPercentage = intensityPercent
+      ..profileId = profileStore.profile.id.value
       ..day = Timestamp.fromDateTime(day.toUtc());
     final request = CreateHealthMenstruationDailyEntryRequest()
       ..payload = payload;

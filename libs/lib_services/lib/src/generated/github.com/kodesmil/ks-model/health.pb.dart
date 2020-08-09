@@ -10,7 +10,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../../google/protobuf/timestamp.pb.dart' as $11;
+import '../../../google/protobuf/timestamp.pb.dart' as $9;
 import '../../infobloxopen/atlas-app-toolkit/query/collection_operators.pb.dart' as $10;
 
 import 'health.pbenum.dart';
@@ -20,10 +20,11 @@ export 'health.pbenum.dart';
 class HealthMenstruationPersonalInfo extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('HealthMenstruationPersonalInfo', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
-    ..a<$core.int>(4, 'periodLengthInDays', $pb.PbFieldType.O3)
-    ..a<$core.int>(5, 'cycleLengthInDays', $pb.PbFieldType.O3)
+    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
+    ..aOS(4, 'profileId')
+    ..a<$core.int>(5, 'periodLengthInDays', $pb.PbFieldType.O3)
+    ..a<$core.int>(6, 'cycleLengthInDays', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -52,56 +53,66 @@ class HealthMenstruationPersonalInfo extends $pb.GeneratedMessage {
   void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $11.Timestamp get createdAt => $_getN(1);
+  $9.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set createdAt($11.Timestamp v) { setField(2, v); }
+  set createdAt($9.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreatedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $11.Timestamp ensureCreatedAt() => $_ensure(1);
+  $9.Timestamp ensureCreatedAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $11.Timestamp get updatedAt => $_getN(2);
+  $9.Timestamp get updatedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set updatedAt($11.Timestamp v) { setField(3, v); }
+  set updatedAt($9.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasUpdatedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpdatedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $11.Timestamp ensureUpdatedAt() => $_ensure(2);
+  $9.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $core.int get periodLengthInDays => $_getIZ(3);
+  $core.String get profileId => $_getSZ(3);
   @$pb.TagNumber(4)
-  set periodLengthInDays($core.int v) { $_setSignedInt32(3, v); }
+  set profileId($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasPeriodLengthInDays() => $_has(3);
+  $core.bool hasProfileId() => $_has(3);
   @$pb.TagNumber(4)
-  void clearPeriodLengthInDays() => clearField(4);
+  void clearProfileId() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.int get cycleLengthInDays => $_getIZ(4);
+  $core.int get periodLengthInDays => $_getIZ(4);
   @$pb.TagNumber(5)
-  set cycleLengthInDays($core.int v) { $_setSignedInt32(4, v); }
+  set periodLengthInDays($core.int v) { $_setSignedInt32(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasCycleLengthInDays() => $_has(4);
+  $core.bool hasPeriodLengthInDays() => $_has(4);
   @$pb.TagNumber(5)
-  void clearCycleLengthInDays() => clearField(5);
+  void clearPeriodLengthInDays() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.int get cycleLengthInDays => $_getIZ(5);
+  @$pb.TagNumber(6)
+  set cycleLengthInDays($core.int v) { $_setSignedInt32(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasCycleLengthInDays() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearCycleLengthInDays() => clearField(6);
 }
 
 class HealthMenstruationDailyEntry extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('HealthMenstruationDailyEntry', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$11.Timestamp>(4, 'day', subBuilder: $11.Timestamp.create)
-    ..a<$core.int>(5, 'intensityPercentage', $pb.PbFieldType.O3)
-    ..e<HealthMenstruationDailyEntry_Type>(6, 'type', $pb.PbFieldType.OE, defaultOrMaker: HealthMenstruationDailyEntry_Type.PERIOD, valueOf: HealthMenstruationDailyEntry_Type.valueOf, enumValues: HealthMenstruationDailyEntry_Type.values)
-    ..aOB(7, 'manual')
-    ..aOB(8, 'basedOnPrediction')
+    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
+    ..aOS(4, 'profileId')
+    ..aOM<$9.Timestamp>(5, 'day', subBuilder: $9.Timestamp.create)
+    ..a<$core.int>(6, 'intensityPercentage', $pb.PbFieldType.O3)
+    ..e<HealthMenstruationDailyEntry_Type>(7, 'type', $pb.PbFieldType.OE, defaultOrMaker: HealthMenstruationDailyEntry_Type.PERIOD, valueOf: HealthMenstruationDailyEntry_Type.valueOf, enumValues: HealthMenstruationDailyEntry_Type.values)
+    ..aOB(8, 'manual')
+    ..aOB(9, 'basedOnPrediction')
     ..hasRequiredFields = false
   ;
 
@@ -130,73 +141,82 @@ class HealthMenstruationDailyEntry extends $pb.GeneratedMessage {
   void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $11.Timestamp get createdAt => $_getN(1);
+  $9.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set createdAt($11.Timestamp v) { setField(2, v); }
+  set createdAt($9.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreatedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $11.Timestamp ensureCreatedAt() => $_ensure(1);
+  $9.Timestamp ensureCreatedAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $11.Timestamp get updatedAt => $_getN(2);
+  $9.Timestamp get updatedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set updatedAt($11.Timestamp v) { setField(3, v); }
+  set updatedAt($9.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasUpdatedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpdatedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $11.Timestamp ensureUpdatedAt() => $_ensure(2);
+  $9.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $11.Timestamp get day => $_getN(3);
+  $core.String get profileId => $_getSZ(3);
   @$pb.TagNumber(4)
-  set day($11.Timestamp v) { setField(4, v); }
+  set profileId($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasDay() => $_has(3);
+  $core.bool hasProfileId() => $_has(3);
   @$pb.TagNumber(4)
-  void clearDay() => clearField(4);
-  @$pb.TagNumber(4)
-  $11.Timestamp ensureDay() => $_ensure(3);
+  void clearProfileId() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.int get intensityPercentage => $_getIZ(4);
+  $9.Timestamp get day => $_getN(4);
   @$pb.TagNumber(5)
-  set intensityPercentage($core.int v) { $_setSignedInt32(4, v); }
+  set day($9.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
-  $core.bool hasIntensityPercentage() => $_has(4);
+  $core.bool hasDay() => $_has(4);
   @$pb.TagNumber(5)
-  void clearIntensityPercentage() => clearField(5);
+  void clearDay() => clearField(5);
+  @$pb.TagNumber(5)
+  $9.Timestamp ensureDay() => $_ensure(4);
 
   @$pb.TagNumber(6)
-  HealthMenstruationDailyEntry_Type get type => $_getN(5);
+  $core.int get intensityPercentage => $_getIZ(5);
   @$pb.TagNumber(6)
-  set type(HealthMenstruationDailyEntry_Type v) { setField(6, v); }
+  set intensityPercentage($core.int v) { $_setSignedInt32(5, v); }
   @$pb.TagNumber(6)
-  $core.bool hasType() => $_has(5);
+  $core.bool hasIntensityPercentage() => $_has(5);
   @$pb.TagNumber(6)
-  void clearType() => clearField(6);
+  void clearIntensityPercentage() => clearField(6);
 
   @$pb.TagNumber(7)
-  $core.bool get manual => $_getBF(6);
+  HealthMenstruationDailyEntry_Type get type => $_getN(6);
   @$pb.TagNumber(7)
-  set manual($core.bool v) { $_setBool(6, v); }
+  set type(HealthMenstruationDailyEntry_Type v) { setField(7, v); }
   @$pb.TagNumber(7)
-  $core.bool hasManual() => $_has(6);
+  $core.bool hasType() => $_has(6);
   @$pb.TagNumber(7)
-  void clearManual() => clearField(7);
+  void clearType() => clearField(7);
 
   @$pb.TagNumber(8)
-  $core.bool get basedOnPrediction => $_getBF(7);
+  $core.bool get manual => $_getBF(7);
   @$pb.TagNumber(8)
-  set basedOnPrediction($core.bool v) { $_setBool(7, v); }
+  set manual($core.bool v) { $_setBool(7, v); }
   @$pb.TagNumber(8)
-  $core.bool hasBasedOnPrediction() => $_has(7);
+  $core.bool hasManual() => $_has(7);
   @$pb.TagNumber(8)
-  void clearBasedOnPrediction() => clearField(8);
+  void clearManual() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.bool get basedOnPrediction => $_getBF(8);
+  @$pb.TagNumber(9)
+  set basedOnPrediction($core.bool v) { $_setBool(8, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasBasedOnPrediction() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearBasedOnPrediction() => clearField(9);
 }
 
 class CreateHealthMenstruationDailyEntryRequest extends $pb.GeneratedMessage {

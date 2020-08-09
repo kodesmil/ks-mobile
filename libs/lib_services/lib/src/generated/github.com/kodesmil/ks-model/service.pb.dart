@@ -10,9 +10,8 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../../google/protobuf/timestamp.pb.dart' as $11;
+import '../../../google/protobuf/timestamp.pb.dart' as $9;
 import '../../infobloxopen/protoc-gen-gorm/types/types.pb.dart' as $8;
-import 'profile.pb.dart' as $1;
 import '../../infobloxopen/atlas-app-toolkit/query/collection_operators.pb.dart' as $10;
 
 import 'service.pbenum.dart';
@@ -73,8 +72,8 @@ class ServiceTag extends $pb.GeneratedMessage {
 class Service extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('Service', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
+    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
     ..aOS(4, 'name')
     ..e<Service_Type>(5, 'type', $pb.PbFieldType.OE, defaultOrMaker: Service_Type.MEDICAL, valueOf: Service_Type.valueOf, enumValues: Service_Type.values)
     ..pc<ServiceTag>(6, 'tags', $pb.PbFieldType.PM, subBuilder: ServiceTag.create)
@@ -106,26 +105,26 @@ class Service extends $pb.GeneratedMessage {
   void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $11.Timestamp get createdAt => $_getN(1);
+  $9.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set createdAt($11.Timestamp v) { setField(2, v); }
+  set createdAt($9.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreatedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $11.Timestamp ensureCreatedAt() => $_ensure(1);
+  $9.Timestamp ensureCreatedAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $11.Timestamp get updatedAt => $_getN(2);
+  $9.Timestamp get updatedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set updatedAt($11.Timestamp v) { setField(3, v); }
+  set updatedAt($9.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasUpdatedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpdatedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $11.Timestamp ensureUpdatedAt() => $_ensure(2);
+  $9.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
   $core.String get name => $_getSZ(3);
@@ -152,8 +151,8 @@ class Service extends $pb.GeneratedMessage {
 class ServiceOffer extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ServiceOffer', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..aOM<$8.UUIDValue>(1, 'id', subBuilder: $8.UUIDValue.create)
-    ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
+    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
     ..a<$core.double>(4, 'price', $pb.PbFieldType.OF)
     ..aOS(5, 'currency')
     ..aOM<Service>(6, 'service', subBuilder: Service.create)
@@ -191,26 +190,26 @@ class ServiceOffer extends $pb.GeneratedMessage {
   $8.UUIDValue ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $11.Timestamp get createdAt => $_getN(1);
+  $9.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set createdAt($11.Timestamp v) { setField(2, v); }
+  set createdAt($9.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreatedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $11.Timestamp ensureCreatedAt() => $_ensure(1);
+  $9.Timestamp ensureCreatedAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $11.Timestamp get updatedAt => $_getN(2);
+  $9.Timestamp get updatedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set updatedAt($11.Timestamp v) { setField(3, v); }
+  set updatedAt($9.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasUpdatedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpdatedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $11.Timestamp ensureUpdatedAt() => $_ensure(2);
+  $9.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
   $core.double get price => $_getN(3);
@@ -283,14 +282,15 @@ class ServiceOffer extends $pb.GeneratedMessage {
 class ServiceEmployment extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ServiceEmployment', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
-    ..aOS(4, 'firstName')
-    ..aOS(5, 'lastName')
-    ..aOS(6, 'email')
-    ..aOS(7, 'phone')
-    ..aOB(8, 'canBeContacted')
-    ..aOM<$8.UUIDValue>(9, 'serviceProviderId', subBuilder: $8.UUIDValue.create)
+    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
+    ..aOS(4, 'profileId')
+    ..aOS(5, 'firstName')
+    ..aOS(6, 'lastName')
+    ..aOS(7, 'email')
+    ..aOS(8, 'phone')
+    ..aOB(9, 'canBeContacted')
+    ..aOM<$8.UUIDValue>(10, 'serviceProviderId', subBuilder: $8.UUIDValue.create)
     ..hasRequiredFields = false
   ;
 
@@ -319,89 +319,98 @@ class ServiceEmployment extends $pb.GeneratedMessage {
   void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $11.Timestamp get createdAt => $_getN(1);
+  $9.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set createdAt($11.Timestamp v) { setField(2, v); }
+  set createdAt($9.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreatedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $11.Timestamp ensureCreatedAt() => $_ensure(1);
+  $9.Timestamp ensureCreatedAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $11.Timestamp get updatedAt => $_getN(2);
+  $9.Timestamp get updatedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set updatedAt($11.Timestamp v) { setField(3, v); }
+  set updatedAt($9.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasUpdatedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpdatedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $11.Timestamp ensureUpdatedAt() => $_ensure(2);
+  $9.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $core.String get firstName => $_getSZ(3);
+  $core.String get profileId => $_getSZ(3);
   @$pb.TagNumber(4)
-  set firstName($core.String v) { $_setString(3, v); }
+  set profileId($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasFirstName() => $_has(3);
+  $core.bool hasProfileId() => $_has(3);
   @$pb.TagNumber(4)
-  void clearFirstName() => clearField(4);
+  void clearProfileId() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get lastName => $_getSZ(4);
+  $core.String get firstName => $_getSZ(4);
   @$pb.TagNumber(5)
-  set lastName($core.String v) { $_setString(4, v); }
+  set firstName($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasLastName() => $_has(4);
+  $core.bool hasFirstName() => $_has(4);
   @$pb.TagNumber(5)
-  void clearLastName() => clearField(5);
+  void clearFirstName() => clearField(5);
 
   @$pb.TagNumber(6)
-  $core.String get email => $_getSZ(5);
+  $core.String get lastName => $_getSZ(5);
   @$pb.TagNumber(6)
-  set email($core.String v) { $_setString(5, v); }
+  set lastName($core.String v) { $_setString(5, v); }
   @$pb.TagNumber(6)
-  $core.bool hasEmail() => $_has(5);
+  $core.bool hasLastName() => $_has(5);
   @$pb.TagNumber(6)
-  void clearEmail() => clearField(6);
+  void clearLastName() => clearField(6);
 
   @$pb.TagNumber(7)
-  $core.String get phone => $_getSZ(6);
+  $core.String get email => $_getSZ(6);
   @$pb.TagNumber(7)
-  set phone($core.String v) { $_setString(6, v); }
+  set email($core.String v) { $_setString(6, v); }
   @$pb.TagNumber(7)
-  $core.bool hasPhone() => $_has(6);
+  $core.bool hasEmail() => $_has(6);
   @$pb.TagNumber(7)
-  void clearPhone() => clearField(7);
+  void clearEmail() => clearField(7);
 
   @$pb.TagNumber(8)
-  $core.bool get canBeContacted => $_getBF(7);
+  $core.String get phone => $_getSZ(7);
   @$pb.TagNumber(8)
-  set canBeContacted($core.bool v) { $_setBool(7, v); }
+  set phone($core.String v) { $_setString(7, v); }
   @$pb.TagNumber(8)
-  $core.bool hasCanBeContacted() => $_has(7);
+  $core.bool hasPhone() => $_has(7);
   @$pb.TagNumber(8)
-  void clearCanBeContacted() => clearField(8);
+  void clearPhone() => clearField(8);
 
   @$pb.TagNumber(9)
-  $8.UUIDValue get serviceProviderId => $_getN(8);
+  $core.bool get canBeContacted => $_getBF(8);
   @$pb.TagNumber(9)
-  set serviceProviderId($8.UUIDValue v) { setField(9, v); }
+  set canBeContacted($core.bool v) { $_setBool(8, v); }
   @$pb.TagNumber(9)
-  $core.bool hasServiceProviderId() => $_has(8);
+  $core.bool hasCanBeContacted() => $_has(8);
   @$pb.TagNumber(9)
-  void clearServiceProviderId() => clearField(9);
-  @$pb.TagNumber(9)
-  $8.UUIDValue ensureServiceProviderId() => $_ensure(8);
+  void clearCanBeContacted() => clearField(9);
+
+  @$pb.TagNumber(10)
+  $8.UUIDValue get serviceProviderId => $_getN(9);
+  @$pb.TagNumber(10)
+  set serviceProviderId($8.UUIDValue v) { setField(10, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasServiceProviderId() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearServiceProviderId() => clearField(10);
+  @$pb.TagNumber(10)
+  $8.UUIDValue ensureServiceProviderId() => $_ensure(9);
 }
 
 class ServiceDetails extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ServiceDetails', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
+    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
     ..aOS(4, 'name')
     ..aOS(5, 'address')
     ..aOS(6, 'phone')
@@ -435,26 +444,26 @@ class ServiceDetails extends $pb.GeneratedMessage {
   void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $11.Timestamp get createdAt => $_getN(1);
+  $9.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set createdAt($11.Timestamp v) { setField(2, v); }
+  set createdAt($9.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreatedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $11.Timestamp ensureCreatedAt() => $_ensure(1);
+  $9.Timestamp ensureCreatedAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $11.Timestamp get updatedAt => $_getN(2);
+  $9.Timestamp get updatedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set updatedAt($11.Timestamp v) { setField(3, v); }
+  set updatedAt($9.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasUpdatedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpdatedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $11.Timestamp ensureUpdatedAt() => $_ensure(2);
+  $9.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
   $core.String get name => $_getSZ(3);
@@ -505,13 +514,13 @@ class ServiceDetails extends $pb.GeneratedMessage {
 class ServiceApplication extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ServiceApplication', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..aOM<$8.UUIDValue>(1, 'id', subBuilder: $8.UUIDValue.create)
-    ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
+    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
     ..aOM<ServiceProvider>(4, 'provider', subBuilder: ServiceProvider.create)
     ..pc<ServiceApplicationFile>(5, 'files', $pb.PbFieldType.PM, subBuilder: ServiceApplicationFile.create)
-    ..aOM<$11.Timestamp>(6, 'appliedAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$11.Timestamp>(7, 'approvedAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$1.Profile>(8, 'approvedBy', subBuilder: $1.Profile.create)
+    ..aOM<$9.Timestamp>(6, 'appliedAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(7, 'approvedAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$8.UUIDValue>(8, 'reviewerId', subBuilder: $8.UUIDValue.create)
     ..hasRequiredFields = false
   ;
 
@@ -542,26 +551,26 @@ class ServiceApplication extends $pb.GeneratedMessage {
   $8.UUIDValue ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $11.Timestamp get createdAt => $_getN(1);
+  $9.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set createdAt($11.Timestamp v) { setField(2, v); }
+  set createdAt($9.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreatedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $11.Timestamp ensureCreatedAt() => $_ensure(1);
+  $9.Timestamp ensureCreatedAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $11.Timestamp get updatedAt => $_getN(2);
+  $9.Timestamp get updatedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set updatedAt($11.Timestamp v) { setField(3, v); }
+  set updatedAt($9.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasUpdatedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpdatedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $11.Timestamp ensureUpdatedAt() => $_ensure(2);
+  $9.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
   ServiceProvider get provider => $_getN(3);
@@ -578,44 +587,44 @@ class ServiceApplication extends $pb.GeneratedMessage {
   $core.List<ServiceApplicationFile> get files => $_getList(4);
 
   @$pb.TagNumber(6)
-  $11.Timestamp get appliedAt => $_getN(5);
+  $9.Timestamp get appliedAt => $_getN(5);
   @$pb.TagNumber(6)
-  set appliedAt($11.Timestamp v) { setField(6, v); }
+  set appliedAt($9.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasAppliedAt() => $_has(5);
   @$pb.TagNumber(6)
   void clearAppliedAt() => clearField(6);
   @$pb.TagNumber(6)
-  $11.Timestamp ensureAppliedAt() => $_ensure(5);
+  $9.Timestamp ensureAppliedAt() => $_ensure(5);
 
   @$pb.TagNumber(7)
-  $11.Timestamp get approvedAt => $_getN(6);
+  $9.Timestamp get approvedAt => $_getN(6);
   @$pb.TagNumber(7)
-  set approvedAt($11.Timestamp v) { setField(7, v); }
+  set approvedAt($9.Timestamp v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasApprovedAt() => $_has(6);
   @$pb.TagNumber(7)
   void clearApprovedAt() => clearField(7);
   @$pb.TagNumber(7)
-  $11.Timestamp ensureApprovedAt() => $_ensure(6);
+  $9.Timestamp ensureApprovedAt() => $_ensure(6);
 
   @$pb.TagNumber(8)
-  $1.Profile get approvedBy => $_getN(7);
+  $8.UUIDValue get reviewerId => $_getN(7);
   @$pb.TagNumber(8)
-  set approvedBy($1.Profile v) { setField(8, v); }
+  set reviewerId($8.UUIDValue v) { setField(8, v); }
   @$pb.TagNumber(8)
-  $core.bool hasApprovedBy() => $_has(7);
+  $core.bool hasReviewerId() => $_has(7);
   @$pb.TagNumber(8)
-  void clearApprovedBy() => clearField(8);
+  void clearReviewerId() => clearField(8);
   @$pb.TagNumber(8)
-  $1.Profile ensureApprovedBy() => $_ensure(7);
+  $8.UUIDValue ensureReviewerId() => $_ensure(7);
 }
 
 class ServiceApplicationFile extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ServiceApplicationFile', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..aOM<$8.UUIDValue>(1, 'id', subBuilder: $8.UUIDValue.create)
-    ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
+    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
     ..aOS(4, 'url')
     ..hasRequiredFields = false
   ;
@@ -647,26 +656,26 @@ class ServiceApplicationFile extends $pb.GeneratedMessage {
   $8.UUIDValue ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $11.Timestamp get createdAt => $_getN(1);
+  $9.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set createdAt($11.Timestamp v) { setField(2, v); }
+  set createdAt($9.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreatedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $11.Timestamp ensureCreatedAt() => $_ensure(1);
+  $9.Timestamp ensureCreatedAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $11.Timestamp get updatedAt => $_getN(2);
+  $9.Timestamp get updatedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set updatedAt($11.Timestamp v) { setField(3, v); }
+  set updatedAt($9.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasUpdatedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpdatedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $11.Timestamp ensureUpdatedAt() => $_ensure(2);
+  $9.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
   $core.String get url => $_getSZ(3);
@@ -681,8 +690,8 @@ class ServiceApplicationFile extends $pb.GeneratedMessage {
 class ServiceProvider extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ServiceProvider', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..aOM<$8.UUIDValue>(1, 'id', subBuilder: $8.UUIDValue.create)
-    ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
+    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
     ..aOM<ServiceDetails>(4, 'details', subBuilder: ServiceDetails.create)
     ..pc<ServiceOffer>(5, 'offers', $pb.PbFieldType.PM, subBuilder: ServiceOffer.create)
     ..pc<ServiceEmployment>(6, 'employments', $pb.PbFieldType.PM, subBuilder: ServiceEmployment.create)
@@ -716,26 +725,26 @@ class ServiceProvider extends $pb.GeneratedMessage {
   $8.UUIDValue ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $11.Timestamp get createdAt => $_getN(1);
+  $9.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set createdAt($11.Timestamp v) { setField(2, v); }
+  set createdAt($9.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreatedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $11.Timestamp ensureCreatedAt() => $_ensure(1);
+  $9.Timestamp ensureCreatedAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $11.Timestamp get updatedAt => $_getN(2);
+  $9.Timestamp get updatedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set updatedAt($11.Timestamp v) { setField(3, v); }
+  set updatedAt($9.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasUpdatedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpdatedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $11.Timestamp ensureUpdatedAt() => $_ensure(2);
+  $9.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
   ServiceDetails get details => $_getN(3);
@@ -753,619 +762,6 @@ class ServiceProvider extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(6)
   $core.List<ServiceEmployment> get employments => $_getList(5);
-}
-
-class ServiceSessionEvaluation extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ServiceSessionEvaluation', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
-    ..aOM<ServiceSession>(4, 'session', subBuilder: ServiceSession.create)
-    ..aOS(5, 'comment')
-    ..a<$core.double>(6, 'recommendationRate', $pb.PbFieldType.OD)
-    ..hasRequiredFields = false
-  ;
-
-  ServiceSessionEvaluation._() : super();
-  factory ServiceSessionEvaluation() => create();
-  factory ServiceSessionEvaluation.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ServiceSessionEvaluation.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  ServiceSessionEvaluation clone() => ServiceSessionEvaluation()..mergeFromMessage(this);
-  ServiceSessionEvaluation copyWith(void Function(ServiceSessionEvaluation) updates) => super.copyWith((message) => updates(message as ServiceSessionEvaluation));
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static ServiceSessionEvaluation create() => ServiceSessionEvaluation._();
-  ServiceSessionEvaluation createEmptyInstance() => create();
-  static $pb.PbList<ServiceSessionEvaluation> createRepeated() => $pb.PbList<ServiceSessionEvaluation>();
-  @$core.pragma('dart2js:noInline')
-  static ServiceSessionEvaluation getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ServiceSessionEvaluation>(create);
-  static ServiceSessionEvaluation _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $fixnum.Int64 get id => $_getI64(0);
-  @$pb.TagNumber(1)
-  set id($fixnum.Int64 v) { $_setInt64(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearId() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $11.Timestamp get createdAt => $_getN(1);
-  @$pb.TagNumber(2)
-  set createdAt($11.Timestamp v) { setField(2, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasCreatedAt() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearCreatedAt() => clearField(2);
-  @$pb.TagNumber(2)
-  $11.Timestamp ensureCreatedAt() => $_ensure(1);
-
-  @$pb.TagNumber(3)
-  $11.Timestamp get updatedAt => $_getN(2);
-  @$pb.TagNumber(3)
-  set updatedAt($11.Timestamp v) { setField(3, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasUpdatedAt() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearUpdatedAt() => clearField(3);
-  @$pb.TagNumber(3)
-  $11.Timestamp ensureUpdatedAt() => $_ensure(2);
-
-  @$pb.TagNumber(4)
-  ServiceSession get session => $_getN(3);
-  @$pb.TagNumber(4)
-  set session(ServiceSession v) { setField(4, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasSession() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearSession() => clearField(4);
-  @$pb.TagNumber(4)
-  ServiceSession ensureSession() => $_ensure(3);
-
-  @$pb.TagNumber(5)
-  $core.String get comment => $_getSZ(4);
-  @$pb.TagNumber(5)
-  set comment($core.String v) { $_setString(4, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasComment() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearComment() => clearField(5);
-
-  @$pb.TagNumber(6)
-  $core.double get recommendationRate => $_getN(5);
-  @$pb.TagNumber(6)
-  set recommendationRate($core.double v) { $_setDouble(5, v); }
-  @$pb.TagNumber(6)
-  $core.bool hasRecommendationRate() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearRecommendationRate() => clearField(6);
-}
-
-class ServiceSession extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ServiceSession', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$8.UUIDValue>(1, 'id', subBuilder: $8.UUIDValue.create)
-    ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$11.Timestamp>(4, 'scheduledAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$11.Timestamp>(5, 'finishedAt', subBuilder: $11.Timestamp.create)
-    ..aOM<ServiceOffer>(6, 'offer', subBuilder: ServiceOffer.create)
-    ..pc<ServiceSessionNote>(7, 'notes', $pb.PbFieldType.PM, subBuilder: ServiceSessionNote.create)
-    ..aOM<ServiceSessionEvaluation>(8, 'evaluation', subBuilder: ServiceSessionEvaluation.create)
-    ..hasRequiredFields = false
-  ;
-
-  ServiceSession._() : super();
-  factory ServiceSession() => create();
-  factory ServiceSession.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ServiceSession.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  ServiceSession clone() => ServiceSession()..mergeFromMessage(this);
-  ServiceSession copyWith(void Function(ServiceSession) updates) => super.copyWith((message) => updates(message as ServiceSession));
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static ServiceSession create() => ServiceSession._();
-  ServiceSession createEmptyInstance() => create();
-  static $pb.PbList<ServiceSession> createRepeated() => $pb.PbList<ServiceSession>();
-  @$core.pragma('dart2js:noInline')
-  static ServiceSession getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ServiceSession>(create);
-  static ServiceSession _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $8.UUIDValue get id => $_getN(0);
-  @$pb.TagNumber(1)
-  set id($8.UUIDValue v) { setField(1, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $8.UUIDValue ensureId() => $_ensure(0);
-
-  @$pb.TagNumber(2)
-  $11.Timestamp get createdAt => $_getN(1);
-  @$pb.TagNumber(2)
-  set createdAt($11.Timestamp v) { setField(2, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasCreatedAt() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearCreatedAt() => clearField(2);
-  @$pb.TagNumber(2)
-  $11.Timestamp ensureCreatedAt() => $_ensure(1);
-
-  @$pb.TagNumber(3)
-  $11.Timestamp get updatedAt => $_getN(2);
-  @$pb.TagNumber(3)
-  set updatedAt($11.Timestamp v) { setField(3, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasUpdatedAt() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearUpdatedAt() => clearField(3);
-  @$pb.TagNumber(3)
-  $11.Timestamp ensureUpdatedAt() => $_ensure(2);
-
-  @$pb.TagNumber(4)
-  $11.Timestamp get scheduledAt => $_getN(3);
-  @$pb.TagNumber(4)
-  set scheduledAt($11.Timestamp v) { setField(4, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasScheduledAt() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearScheduledAt() => clearField(4);
-  @$pb.TagNumber(4)
-  $11.Timestamp ensureScheduledAt() => $_ensure(3);
-
-  @$pb.TagNumber(5)
-  $11.Timestamp get finishedAt => $_getN(4);
-  @$pb.TagNumber(5)
-  set finishedAt($11.Timestamp v) { setField(5, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasFinishedAt() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearFinishedAt() => clearField(5);
-  @$pb.TagNumber(5)
-  $11.Timestamp ensureFinishedAt() => $_ensure(4);
-
-  @$pb.TagNumber(6)
-  ServiceOffer get offer => $_getN(5);
-  @$pb.TagNumber(6)
-  set offer(ServiceOffer v) { setField(6, v); }
-  @$pb.TagNumber(6)
-  $core.bool hasOffer() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearOffer() => clearField(6);
-  @$pb.TagNumber(6)
-  ServiceOffer ensureOffer() => $_ensure(5);
-
-  @$pb.TagNumber(7)
-  $core.List<ServiceSessionNote> get notes => $_getList(6);
-
-  @$pb.TagNumber(8)
-  ServiceSessionEvaluation get evaluation => $_getN(7);
-  @$pb.TagNumber(8)
-  set evaluation(ServiceSessionEvaluation v) { setField(8, v); }
-  @$pb.TagNumber(8)
-  $core.bool hasEvaluation() => $_has(7);
-  @$pb.TagNumber(8)
-  void clearEvaluation() => clearField(8);
-  @$pb.TagNumber(8)
-  ServiceSessionEvaluation ensureEvaluation() => $_ensure(7);
-}
-
-class ServiceSessionNote extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ServiceSessionNote', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$8.UUIDValue>(1, 'id', subBuilder: $8.UUIDValue.create)
-    ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
-    ..pc<ServiceSession>(4, 'session', $pb.PbFieldType.PM, subBuilder: ServiceSession.create)
-    ..aOS(5, 'text')
-    ..hasRequiredFields = false
-  ;
-
-  ServiceSessionNote._() : super();
-  factory ServiceSessionNote() => create();
-  factory ServiceSessionNote.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ServiceSessionNote.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  ServiceSessionNote clone() => ServiceSessionNote()..mergeFromMessage(this);
-  ServiceSessionNote copyWith(void Function(ServiceSessionNote) updates) => super.copyWith((message) => updates(message as ServiceSessionNote));
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static ServiceSessionNote create() => ServiceSessionNote._();
-  ServiceSessionNote createEmptyInstance() => create();
-  static $pb.PbList<ServiceSessionNote> createRepeated() => $pb.PbList<ServiceSessionNote>();
-  @$core.pragma('dart2js:noInline')
-  static ServiceSessionNote getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ServiceSessionNote>(create);
-  static ServiceSessionNote _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $8.UUIDValue get id => $_getN(0);
-  @$pb.TagNumber(1)
-  set id($8.UUIDValue v) { setField(1, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $8.UUIDValue ensureId() => $_ensure(0);
-
-  @$pb.TagNumber(2)
-  $11.Timestamp get createdAt => $_getN(1);
-  @$pb.TagNumber(2)
-  set createdAt($11.Timestamp v) { setField(2, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasCreatedAt() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearCreatedAt() => clearField(2);
-  @$pb.TagNumber(2)
-  $11.Timestamp ensureCreatedAt() => $_ensure(1);
-
-  @$pb.TagNumber(3)
-  $11.Timestamp get updatedAt => $_getN(2);
-  @$pb.TagNumber(3)
-  set updatedAt($11.Timestamp v) { setField(3, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasUpdatedAt() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearUpdatedAt() => clearField(3);
-  @$pb.TagNumber(3)
-  $11.Timestamp ensureUpdatedAt() => $_ensure(2);
-
-  @$pb.TagNumber(4)
-  $core.List<ServiceSession> get session => $_getList(3);
-
-  @$pb.TagNumber(5)
-  $core.String get text => $_getSZ(4);
-  @$pb.TagNumber(5)
-  set text($core.String v) { $_setString(4, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasText() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearText() => clearField(5);
-}
-
-class CreateServiceSessionRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('CreateServiceSessionRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<ServiceSession>(1, 'payload', subBuilder: ServiceSession.create)
-    ..hasRequiredFields = false
-  ;
-
-  CreateServiceSessionRequest._() : super();
-  factory CreateServiceSessionRequest() => create();
-  factory CreateServiceSessionRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory CreateServiceSessionRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  CreateServiceSessionRequest clone() => CreateServiceSessionRequest()..mergeFromMessage(this);
-  CreateServiceSessionRequest copyWith(void Function(CreateServiceSessionRequest) updates) => super.copyWith((message) => updates(message as CreateServiceSessionRequest));
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static CreateServiceSessionRequest create() => CreateServiceSessionRequest._();
-  CreateServiceSessionRequest createEmptyInstance() => create();
-  static $pb.PbList<CreateServiceSessionRequest> createRepeated() => $pb.PbList<CreateServiceSessionRequest>();
-  @$core.pragma('dart2js:noInline')
-  static CreateServiceSessionRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateServiceSessionRequest>(create);
-  static CreateServiceSessionRequest _defaultInstance;
-
-  @$pb.TagNumber(1)
-  ServiceSession get payload => $_getN(0);
-  @$pb.TagNumber(1)
-  set payload(ServiceSession v) { setField(1, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasPayload() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearPayload() => clearField(1);
-  @$pb.TagNumber(1)
-  ServiceSession ensurePayload() => $_ensure(0);
-}
-
-class CreateServiceSessionResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('CreateServiceSessionResponse', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<ServiceSession>(1, 'result', subBuilder: ServiceSession.create)
-    ..hasRequiredFields = false
-  ;
-
-  CreateServiceSessionResponse._() : super();
-  factory CreateServiceSessionResponse() => create();
-  factory CreateServiceSessionResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory CreateServiceSessionResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  CreateServiceSessionResponse clone() => CreateServiceSessionResponse()..mergeFromMessage(this);
-  CreateServiceSessionResponse copyWith(void Function(CreateServiceSessionResponse) updates) => super.copyWith((message) => updates(message as CreateServiceSessionResponse));
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static CreateServiceSessionResponse create() => CreateServiceSessionResponse._();
-  CreateServiceSessionResponse createEmptyInstance() => create();
-  static $pb.PbList<CreateServiceSessionResponse> createRepeated() => $pb.PbList<CreateServiceSessionResponse>();
-  @$core.pragma('dart2js:noInline')
-  static CreateServiceSessionResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateServiceSessionResponse>(create);
-  static CreateServiceSessionResponse _defaultInstance;
-
-  @$pb.TagNumber(1)
-  ServiceSession get result => $_getN(0);
-  @$pb.TagNumber(1)
-  set result(ServiceSession v) { setField(1, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasResult() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearResult() => clearField(1);
-  @$pb.TagNumber(1)
-  ServiceSession ensureResult() => $_ensure(0);
-}
-
-class ReadServiceSessionRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ReadServiceSessionRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$8.UUIDValue>(1, 'id', subBuilder: $8.UUIDValue.create)
-    ..hasRequiredFields = false
-  ;
-
-  ReadServiceSessionRequest._() : super();
-  factory ReadServiceSessionRequest() => create();
-  factory ReadServiceSessionRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ReadServiceSessionRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  ReadServiceSessionRequest clone() => ReadServiceSessionRequest()..mergeFromMessage(this);
-  ReadServiceSessionRequest copyWith(void Function(ReadServiceSessionRequest) updates) => super.copyWith((message) => updates(message as ReadServiceSessionRequest));
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static ReadServiceSessionRequest create() => ReadServiceSessionRequest._();
-  ReadServiceSessionRequest createEmptyInstance() => create();
-  static $pb.PbList<ReadServiceSessionRequest> createRepeated() => $pb.PbList<ReadServiceSessionRequest>();
-  @$core.pragma('dart2js:noInline')
-  static ReadServiceSessionRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ReadServiceSessionRequest>(create);
-  static ReadServiceSessionRequest _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $8.UUIDValue get id => $_getN(0);
-  @$pb.TagNumber(1)
-  set id($8.UUIDValue v) { setField(1, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $8.UUIDValue ensureId() => $_ensure(0);
-}
-
-class ReadServiceSessionResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ReadServiceSessionResponse', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<ServiceSession>(1, 'result', subBuilder: ServiceSession.create)
-    ..hasRequiredFields = false
-  ;
-
-  ReadServiceSessionResponse._() : super();
-  factory ReadServiceSessionResponse() => create();
-  factory ReadServiceSessionResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ReadServiceSessionResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  ReadServiceSessionResponse clone() => ReadServiceSessionResponse()..mergeFromMessage(this);
-  ReadServiceSessionResponse copyWith(void Function(ReadServiceSessionResponse) updates) => super.copyWith((message) => updates(message as ReadServiceSessionResponse));
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static ReadServiceSessionResponse create() => ReadServiceSessionResponse._();
-  ReadServiceSessionResponse createEmptyInstance() => create();
-  static $pb.PbList<ReadServiceSessionResponse> createRepeated() => $pb.PbList<ReadServiceSessionResponse>();
-  @$core.pragma('dart2js:noInline')
-  static ReadServiceSessionResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ReadServiceSessionResponse>(create);
-  static ReadServiceSessionResponse _defaultInstance;
-
-  @$pb.TagNumber(1)
-  ServiceSession get result => $_getN(0);
-  @$pb.TagNumber(1)
-  set result(ServiceSession v) { setField(1, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasResult() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearResult() => clearField(1);
-  @$pb.TagNumber(1)
-  ServiceSession ensureResult() => $_ensure(0);
-}
-
-class UpdateServiceSessionRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('UpdateServiceSessionRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<ServiceSession>(1, 'payload', subBuilder: ServiceSession.create)
-    ..hasRequiredFields = false
-  ;
-
-  UpdateServiceSessionRequest._() : super();
-  factory UpdateServiceSessionRequest() => create();
-  factory UpdateServiceSessionRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory UpdateServiceSessionRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  UpdateServiceSessionRequest clone() => UpdateServiceSessionRequest()..mergeFromMessage(this);
-  UpdateServiceSessionRequest copyWith(void Function(UpdateServiceSessionRequest) updates) => super.copyWith((message) => updates(message as UpdateServiceSessionRequest));
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static UpdateServiceSessionRequest create() => UpdateServiceSessionRequest._();
-  UpdateServiceSessionRequest createEmptyInstance() => create();
-  static $pb.PbList<UpdateServiceSessionRequest> createRepeated() => $pb.PbList<UpdateServiceSessionRequest>();
-  @$core.pragma('dart2js:noInline')
-  static UpdateServiceSessionRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateServiceSessionRequest>(create);
-  static UpdateServiceSessionRequest _defaultInstance;
-
-  @$pb.TagNumber(1)
-  ServiceSession get payload => $_getN(0);
-  @$pb.TagNumber(1)
-  set payload(ServiceSession v) { setField(1, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasPayload() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearPayload() => clearField(1);
-  @$pb.TagNumber(1)
-  ServiceSession ensurePayload() => $_ensure(0);
-}
-
-class UpdateServiceSessionResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('UpdateServiceSessionResponse', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<ServiceSession>(1, 'result', subBuilder: ServiceSession.create)
-    ..hasRequiredFields = false
-  ;
-
-  UpdateServiceSessionResponse._() : super();
-  factory UpdateServiceSessionResponse() => create();
-  factory UpdateServiceSessionResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory UpdateServiceSessionResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  UpdateServiceSessionResponse clone() => UpdateServiceSessionResponse()..mergeFromMessage(this);
-  UpdateServiceSessionResponse copyWith(void Function(UpdateServiceSessionResponse) updates) => super.copyWith((message) => updates(message as UpdateServiceSessionResponse));
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static UpdateServiceSessionResponse create() => UpdateServiceSessionResponse._();
-  UpdateServiceSessionResponse createEmptyInstance() => create();
-  static $pb.PbList<UpdateServiceSessionResponse> createRepeated() => $pb.PbList<UpdateServiceSessionResponse>();
-  @$core.pragma('dart2js:noInline')
-  static UpdateServiceSessionResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateServiceSessionResponse>(create);
-  static UpdateServiceSessionResponse _defaultInstance;
-
-  @$pb.TagNumber(1)
-  ServiceSession get result => $_getN(0);
-  @$pb.TagNumber(1)
-  set result(ServiceSession v) { setField(1, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasResult() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearResult() => clearField(1);
-  @$pb.TagNumber(1)
-  ServiceSession ensureResult() => $_ensure(0);
-}
-
-class DeleteServiceSessionRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteServiceSessionRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$8.UUIDValue>(1, 'id', subBuilder: $8.UUIDValue.create)
-    ..hasRequiredFields = false
-  ;
-
-  DeleteServiceSessionRequest._() : super();
-  factory DeleteServiceSessionRequest() => create();
-  factory DeleteServiceSessionRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory DeleteServiceSessionRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  DeleteServiceSessionRequest clone() => DeleteServiceSessionRequest()..mergeFromMessage(this);
-  DeleteServiceSessionRequest copyWith(void Function(DeleteServiceSessionRequest) updates) => super.copyWith((message) => updates(message as DeleteServiceSessionRequest));
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static DeleteServiceSessionRequest create() => DeleteServiceSessionRequest._();
-  DeleteServiceSessionRequest createEmptyInstance() => create();
-  static $pb.PbList<DeleteServiceSessionRequest> createRepeated() => $pb.PbList<DeleteServiceSessionRequest>();
-  @$core.pragma('dart2js:noInline')
-  static DeleteServiceSessionRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteServiceSessionRequest>(create);
-  static DeleteServiceSessionRequest _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $8.UUIDValue get id => $_getN(0);
-  @$pb.TagNumber(1)
-  set id($8.UUIDValue v) { setField(1, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasId() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $8.UUIDValue ensureId() => $_ensure(0);
-}
-
-class DeleteServiceSessionResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteServiceSessionResponse', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..hasRequiredFields = false
-  ;
-
-  DeleteServiceSessionResponse._() : super();
-  factory DeleteServiceSessionResponse() => create();
-  factory DeleteServiceSessionResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory DeleteServiceSessionResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  DeleteServiceSessionResponse clone() => DeleteServiceSessionResponse()..mergeFromMessage(this);
-  DeleteServiceSessionResponse copyWith(void Function(DeleteServiceSessionResponse) updates) => super.copyWith((message) => updates(message as DeleteServiceSessionResponse));
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static DeleteServiceSessionResponse create() => DeleteServiceSessionResponse._();
-  DeleteServiceSessionResponse createEmptyInstance() => create();
-  static $pb.PbList<DeleteServiceSessionResponse> createRepeated() => $pb.PbList<DeleteServiceSessionResponse>();
-  @$core.pragma('dart2js:noInline')
-  static DeleteServiceSessionResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteServiceSessionResponse>(create);
-  static DeleteServiceSessionResponse _defaultInstance;
-}
-
-class ListServiceSessionRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ListServiceSessionRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$10.Filtering>(1, 'filter', subBuilder: $10.Filtering.create)
-    ..aOM<$10.Sorting>(2, 'orderBy', subBuilder: $10.Sorting.create)
-    ..aOM<$10.FieldSelection>(3, 'fields', subBuilder: $10.FieldSelection.create)
-    ..aOM<$10.Pagination>(4, 'paging', subBuilder: $10.Pagination.create)
-    ..hasRequiredFields = false
-  ;
-
-  ListServiceSessionRequest._() : super();
-  factory ListServiceSessionRequest() => create();
-  factory ListServiceSessionRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ListServiceSessionRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  ListServiceSessionRequest clone() => ListServiceSessionRequest()..mergeFromMessage(this);
-  ListServiceSessionRequest copyWith(void Function(ListServiceSessionRequest) updates) => super.copyWith((message) => updates(message as ListServiceSessionRequest));
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static ListServiceSessionRequest create() => ListServiceSessionRequest._();
-  ListServiceSessionRequest createEmptyInstance() => create();
-  static $pb.PbList<ListServiceSessionRequest> createRepeated() => $pb.PbList<ListServiceSessionRequest>();
-  @$core.pragma('dart2js:noInline')
-  static ListServiceSessionRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListServiceSessionRequest>(create);
-  static ListServiceSessionRequest _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $10.Filtering get filter => $_getN(0);
-  @$pb.TagNumber(1)
-  set filter($10.Filtering v) { setField(1, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasFilter() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearFilter() => clearField(1);
-  @$pb.TagNumber(1)
-  $10.Filtering ensureFilter() => $_ensure(0);
-
-  @$pb.TagNumber(2)
-  $10.Sorting get orderBy => $_getN(1);
-  @$pb.TagNumber(2)
-  set orderBy($10.Sorting v) { setField(2, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasOrderBy() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearOrderBy() => clearField(2);
-  @$pb.TagNumber(2)
-  $10.Sorting ensureOrderBy() => $_ensure(1);
-
-  @$pb.TagNumber(3)
-  $10.FieldSelection get fields => $_getN(2);
-  @$pb.TagNumber(3)
-  set fields($10.FieldSelection v) { setField(3, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasFields() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearFields() => clearField(3);
-  @$pb.TagNumber(3)
-  $10.FieldSelection ensureFields() => $_ensure(2);
-
-  @$pb.TagNumber(4)
-  $10.Pagination get paging => $_getN(3);
-  @$pb.TagNumber(4)
-  set paging($10.Pagination v) { setField(4, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasPaging() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearPaging() => clearField(4);
-  @$pb.TagNumber(4)
-  $10.Pagination ensurePaging() => $_ensure(3);
-}
-
-class ListServiceSessionResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ListServiceSessionResponse', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..pc<ServiceSession>(1, 'results', $pb.PbFieldType.PM, subBuilder: ServiceSession.create)
-    ..hasRequiredFields = false
-  ;
-
-  ListServiceSessionResponse._() : super();
-  factory ListServiceSessionResponse() => create();
-  factory ListServiceSessionResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ListServiceSessionResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  ListServiceSessionResponse clone() => ListServiceSessionResponse()..mergeFromMessage(this);
-  ListServiceSessionResponse copyWith(void Function(ListServiceSessionResponse) updates) => super.copyWith((message) => updates(message as ListServiceSessionResponse));
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static ListServiceSessionResponse create() => ListServiceSessionResponse._();
-  ListServiceSessionResponse createEmptyInstance() => create();
-  static $pb.PbList<ListServiceSessionResponse> createRepeated() => $pb.PbList<ListServiceSessionResponse>();
-  @$core.pragma('dart2js:noInline')
-  static ListServiceSessionResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListServiceSessionResponse>(create);
-  static ListServiceSessionResponse _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.List<ServiceSession> get results => $_getList(0);
 }
 
 class CreateServiceProviderRequest extends $pb.GeneratedMessage {
@@ -4118,5 +3514,1029 @@ class ListServiceResponse extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(1)
   $core.List<Service> get results => $_getList(0);
+}
+
+class ServiceSessionEvaluation extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ServiceSessionEvaluation', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
+    ..aOM<ServiceSession>(4, 'session', subBuilder: ServiceSession.create)
+    ..aOS(5, 'comment')
+    ..a<$core.double>(6, 'recommendationRate', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  ServiceSessionEvaluation._() : super();
+  factory ServiceSessionEvaluation() => create();
+  factory ServiceSessionEvaluation.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ServiceSessionEvaluation.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  ServiceSessionEvaluation clone() => ServiceSessionEvaluation()..mergeFromMessage(this);
+  ServiceSessionEvaluation copyWith(void Function(ServiceSessionEvaluation) updates) => super.copyWith((message) => updates(message as ServiceSessionEvaluation));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ServiceSessionEvaluation create() => ServiceSessionEvaluation._();
+  ServiceSessionEvaluation createEmptyInstance() => create();
+  static $pb.PbList<ServiceSessionEvaluation> createRepeated() => $pb.PbList<ServiceSessionEvaluation>();
+  @$core.pragma('dart2js:noInline')
+  static ServiceSessionEvaluation getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ServiceSessionEvaluation>(create);
+  static ServiceSessionEvaluation _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get id => $_getI64(0);
+  @$pb.TagNumber(1)
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $9.Timestamp get createdAt => $_getN(1);
+  @$pb.TagNumber(2)
+  set createdAt($9.Timestamp v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCreatedAt() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCreatedAt() => clearField(2);
+  @$pb.TagNumber(2)
+  $9.Timestamp ensureCreatedAt() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $9.Timestamp get updatedAt => $_getN(2);
+  @$pb.TagNumber(3)
+  set updatedAt($9.Timestamp v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasUpdatedAt() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearUpdatedAt() => clearField(3);
+  @$pb.TagNumber(3)
+  $9.Timestamp ensureUpdatedAt() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  ServiceSession get session => $_getN(3);
+  @$pb.TagNumber(4)
+  set session(ServiceSession v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasSession() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSession() => clearField(4);
+  @$pb.TagNumber(4)
+  ServiceSession ensureSession() => $_ensure(3);
+
+  @$pb.TagNumber(5)
+  $core.String get comment => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set comment($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasComment() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearComment() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.double get recommendationRate => $_getN(5);
+  @$pb.TagNumber(6)
+  set recommendationRate($core.double v) { $_setDouble(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasRecommendationRate() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearRecommendationRate() => clearField(6);
+}
+
+class ServiceSession extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ServiceSession', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..aOM<$8.UUIDValue>(1, 'id', subBuilder: $8.UUIDValue.create)
+    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
+    ..aOS(4, 'profileId')
+    ..aOM<$9.Timestamp>(5, 'scheduledAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(6, 'finishedAt', subBuilder: $9.Timestamp.create)
+    ..aOM<ServiceOffer>(7, 'offer', subBuilder: ServiceOffer.create)
+    ..pc<ServiceSessionNote>(8, 'notes', $pb.PbFieldType.PM, subBuilder: ServiceSessionNote.create)
+    ..aOM<ServiceSessionEvaluation>(9, 'evaluation', subBuilder: ServiceSessionEvaluation.create)
+    ..hasRequiredFields = false
+  ;
+
+  ServiceSession._() : super();
+  factory ServiceSession() => create();
+  factory ServiceSession.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ServiceSession.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  ServiceSession clone() => ServiceSession()..mergeFromMessage(this);
+  ServiceSession copyWith(void Function(ServiceSession) updates) => super.copyWith((message) => updates(message as ServiceSession));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ServiceSession create() => ServiceSession._();
+  ServiceSession createEmptyInstance() => create();
+  static $pb.PbList<ServiceSession> createRepeated() => $pb.PbList<ServiceSession>();
+  @$core.pragma('dart2js:noInline')
+  static ServiceSession getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ServiceSession>(create);
+  static ServiceSession _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $8.UUIDValue get id => $_getN(0);
+  @$pb.TagNumber(1)
+  set id($8.UUIDValue v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+  @$pb.TagNumber(1)
+  $8.UUIDValue ensureId() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $9.Timestamp get createdAt => $_getN(1);
+  @$pb.TagNumber(2)
+  set createdAt($9.Timestamp v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCreatedAt() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCreatedAt() => clearField(2);
+  @$pb.TagNumber(2)
+  $9.Timestamp ensureCreatedAt() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $9.Timestamp get updatedAt => $_getN(2);
+  @$pb.TagNumber(3)
+  set updatedAt($9.Timestamp v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasUpdatedAt() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearUpdatedAt() => clearField(3);
+  @$pb.TagNumber(3)
+  $9.Timestamp ensureUpdatedAt() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  $core.String get profileId => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set profileId($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasProfileId() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearProfileId() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $9.Timestamp get scheduledAt => $_getN(4);
+  @$pb.TagNumber(5)
+  set scheduledAt($9.Timestamp v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasScheduledAt() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearScheduledAt() => clearField(5);
+  @$pb.TagNumber(5)
+  $9.Timestamp ensureScheduledAt() => $_ensure(4);
+
+  @$pb.TagNumber(6)
+  $9.Timestamp get finishedAt => $_getN(5);
+  @$pb.TagNumber(6)
+  set finishedAt($9.Timestamp v) { setField(6, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasFinishedAt() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearFinishedAt() => clearField(6);
+  @$pb.TagNumber(6)
+  $9.Timestamp ensureFinishedAt() => $_ensure(5);
+
+  @$pb.TagNumber(7)
+  ServiceOffer get offer => $_getN(6);
+  @$pb.TagNumber(7)
+  set offer(ServiceOffer v) { setField(7, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasOffer() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearOffer() => clearField(7);
+  @$pb.TagNumber(7)
+  ServiceOffer ensureOffer() => $_ensure(6);
+
+  @$pb.TagNumber(8)
+  $core.List<ServiceSessionNote> get notes => $_getList(7);
+
+  @$pb.TagNumber(9)
+  ServiceSessionEvaluation get evaluation => $_getN(8);
+  @$pb.TagNumber(9)
+  set evaluation(ServiceSessionEvaluation v) { setField(9, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasEvaluation() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearEvaluation() => clearField(9);
+  @$pb.TagNumber(9)
+  ServiceSessionEvaluation ensureEvaluation() => $_ensure(8);
+}
+
+class ServiceSessionNote extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ServiceSessionNote', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..aOM<$8.UUIDValue>(1, 'id', subBuilder: $8.UUIDValue.create)
+    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
+    ..aOM<ServiceSession>(4, 'session', subBuilder: ServiceSession.create)
+    ..aOS(5, 'text')
+    ..hasRequiredFields = false
+  ;
+
+  ServiceSessionNote._() : super();
+  factory ServiceSessionNote() => create();
+  factory ServiceSessionNote.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ServiceSessionNote.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  ServiceSessionNote clone() => ServiceSessionNote()..mergeFromMessage(this);
+  ServiceSessionNote copyWith(void Function(ServiceSessionNote) updates) => super.copyWith((message) => updates(message as ServiceSessionNote));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ServiceSessionNote create() => ServiceSessionNote._();
+  ServiceSessionNote createEmptyInstance() => create();
+  static $pb.PbList<ServiceSessionNote> createRepeated() => $pb.PbList<ServiceSessionNote>();
+  @$core.pragma('dart2js:noInline')
+  static ServiceSessionNote getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ServiceSessionNote>(create);
+  static ServiceSessionNote _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $8.UUIDValue get id => $_getN(0);
+  @$pb.TagNumber(1)
+  set id($8.UUIDValue v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+  @$pb.TagNumber(1)
+  $8.UUIDValue ensureId() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $9.Timestamp get createdAt => $_getN(1);
+  @$pb.TagNumber(2)
+  set createdAt($9.Timestamp v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCreatedAt() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCreatedAt() => clearField(2);
+  @$pb.TagNumber(2)
+  $9.Timestamp ensureCreatedAt() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $9.Timestamp get updatedAt => $_getN(2);
+  @$pb.TagNumber(3)
+  set updatedAt($9.Timestamp v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasUpdatedAt() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearUpdatedAt() => clearField(3);
+  @$pb.TagNumber(3)
+  $9.Timestamp ensureUpdatedAt() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  ServiceSession get session => $_getN(3);
+  @$pb.TagNumber(4)
+  set session(ServiceSession v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasSession() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSession() => clearField(4);
+  @$pb.TagNumber(4)
+  ServiceSession ensureSession() => $_ensure(3);
+
+  @$pb.TagNumber(5)
+  $core.String get text => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set text($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasText() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearText() => clearField(5);
+}
+
+class CreateServiceSessionRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('CreateServiceSessionRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..aOM<ServiceSession>(1, 'payload', subBuilder: ServiceSession.create)
+    ..hasRequiredFields = false
+  ;
+
+  CreateServiceSessionRequest._() : super();
+  factory CreateServiceSessionRequest() => create();
+  factory CreateServiceSessionRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CreateServiceSessionRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  CreateServiceSessionRequest clone() => CreateServiceSessionRequest()..mergeFromMessage(this);
+  CreateServiceSessionRequest copyWith(void Function(CreateServiceSessionRequest) updates) => super.copyWith((message) => updates(message as CreateServiceSessionRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static CreateServiceSessionRequest create() => CreateServiceSessionRequest._();
+  CreateServiceSessionRequest createEmptyInstance() => create();
+  static $pb.PbList<CreateServiceSessionRequest> createRepeated() => $pb.PbList<CreateServiceSessionRequest>();
+  @$core.pragma('dart2js:noInline')
+  static CreateServiceSessionRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateServiceSessionRequest>(create);
+  static CreateServiceSessionRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ServiceSession get payload => $_getN(0);
+  @$pb.TagNumber(1)
+  set payload(ServiceSession v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPayload() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPayload() => clearField(1);
+  @$pb.TagNumber(1)
+  ServiceSession ensurePayload() => $_ensure(0);
+}
+
+class CreateServiceSessionResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('CreateServiceSessionResponse', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..aOM<ServiceSession>(1, 'result', subBuilder: ServiceSession.create)
+    ..hasRequiredFields = false
+  ;
+
+  CreateServiceSessionResponse._() : super();
+  factory CreateServiceSessionResponse() => create();
+  factory CreateServiceSessionResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory CreateServiceSessionResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  CreateServiceSessionResponse clone() => CreateServiceSessionResponse()..mergeFromMessage(this);
+  CreateServiceSessionResponse copyWith(void Function(CreateServiceSessionResponse) updates) => super.copyWith((message) => updates(message as CreateServiceSessionResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static CreateServiceSessionResponse create() => CreateServiceSessionResponse._();
+  CreateServiceSessionResponse createEmptyInstance() => create();
+  static $pb.PbList<CreateServiceSessionResponse> createRepeated() => $pb.PbList<CreateServiceSessionResponse>();
+  @$core.pragma('dart2js:noInline')
+  static CreateServiceSessionResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateServiceSessionResponse>(create);
+  static CreateServiceSessionResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ServiceSession get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result(ServiceSession v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  ServiceSession ensureResult() => $_ensure(0);
+}
+
+class ReadServiceSessionRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ReadServiceSessionRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..aOM<$8.UUIDValue>(1, 'id', subBuilder: $8.UUIDValue.create)
+    ..hasRequiredFields = false
+  ;
+
+  ReadServiceSessionRequest._() : super();
+  factory ReadServiceSessionRequest() => create();
+  factory ReadServiceSessionRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ReadServiceSessionRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  ReadServiceSessionRequest clone() => ReadServiceSessionRequest()..mergeFromMessage(this);
+  ReadServiceSessionRequest copyWith(void Function(ReadServiceSessionRequest) updates) => super.copyWith((message) => updates(message as ReadServiceSessionRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ReadServiceSessionRequest create() => ReadServiceSessionRequest._();
+  ReadServiceSessionRequest createEmptyInstance() => create();
+  static $pb.PbList<ReadServiceSessionRequest> createRepeated() => $pb.PbList<ReadServiceSessionRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ReadServiceSessionRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ReadServiceSessionRequest>(create);
+  static ReadServiceSessionRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $8.UUIDValue get id => $_getN(0);
+  @$pb.TagNumber(1)
+  set id($8.UUIDValue v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+  @$pb.TagNumber(1)
+  $8.UUIDValue ensureId() => $_ensure(0);
+}
+
+class ReadServiceSessionResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ReadServiceSessionResponse', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..aOM<ServiceSession>(1, 'result', subBuilder: ServiceSession.create)
+    ..hasRequiredFields = false
+  ;
+
+  ReadServiceSessionResponse._() : super();
+  factory ReadServiceSessionResponse() => create();
+  factory ReadServiceSessionResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ReadServiceSessionResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  ReadServiceSessionResponse clone() => ReadServiceSessionResponse()..mergeFromMessage(this);
+  ReadServiceSessionResponse copyWith(void Function(ReadServiceSessionResponse) updates) => super.copyWith((message) => updates(message as ReadServiceSessionResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ReadServiceSessionResponse create() => ReadServiceSessionResponse._();
+  ReadServiceSessionResponse createEmptyInstance() => create();
+  static $pb.PbList<ReadServiceSessionResponse> createRepeated() => $pb.PbList<ReadServiceSessionResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ReadServiceSessionResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ReadServiceSessionResponse>(create);
+  static ReadServiceSessionResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ServiceSession get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result(ServiceSession v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  ServiceSession ensureResult() => $_ensure(0);
+}
+
+class UpdateServiceSessionRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('UpdateServiceSessionRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..aOM<ServiceSession>(1, 'payload', subBuilder: ServiceSession.create)
+    ..hasRequiredFields = false
+  ;
+
+  UpdateServiceSessionRequest._() : super();
+  factory UpdateServiceSessionRequest() => create();
+  factory UpdateServiceSessionRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateServiceSessionRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  UpdateServiceSessionRequest clone() => UpdateServiceSessionRequest()..mergeFromMessage(this);
+  UpdateServiceSessionRequest copyWith(void Function(UpdateServiceSessionRequest) updates) => super.copyWith((message) => updates(message as UpdateServiceSessionRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static UpdateServiceSessionRequest create() => UpdateServiceSessionRequest._();
+  UpdateServiceSessionRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateServiceSessionRequest> createRepeated() => $pb.PbList<UpdateServiceSessionRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateServiceSessionRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateServiceSessionRequest>(create);
+  static UpdateServiceSessionRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ServiceSession get payload => $_getN(0);
+  @$pb.TagNumber(1)
+  set payload(ServiceSession v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPayload() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPayload() => clearField(1);
+  @$pb.TagNumber(1)
+  ServiceSession ensurePayload() => $_ensure(0);
+}
+
+class UpdateServiceSessionResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('UpdateServiceSessionResponse', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..aOM<ServiceSession>(1, 'result', subBuilder: ServiceSession.create)
+    ..hasRequiredFields = false
+  ;
+
+  UpdateServiceSessionResponse._() : super();
+  factory UpdateServiceSessionResponse() => create();
+  factory UpdateServiceSessionResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateServiceSessionResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  UpdateServiceSessionResponse clone() => UpdateServiceSessionResponse()..mergeFromMessage(this);
+  UpdateServiceSessionResponse copyWith(void Function(UpdateServiceSessionResponse) updates) => super.copyWith((message) => updates(message as UpdateServiceSessionResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static UpdateServiceSessionResponse create() => UpdateServiceSessionResponse._();
+  UpdateServiceSessionResponse createEmptyInstance() => create();
+  static $pb.PbList<UpdateServiceSessionResponse> createRepeated() => $pb.PbList<UpdateServiceSessionResponse>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateServiceSessionResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateServiceSessionResponse>(create);
+  static UpdateServiceSessionResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ServiceSession get result => $_getN(0);
+  @$pb.TagNumber(1)
+  set result(ServiceSession v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResult() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResult() => clearField(1);
+  @$pb.TagNumber(1)
+  ServiceSession ensureResult() => $_ensure(0);
+}
+
+class DeleteServiceSessionRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteServiceSessionRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..aOM<$8.UUIDValue>(1, 'id', subBuilder: $8.UUIDValue.create)
+    ..hasRequiredFields = false
+  ;
+
+  DeleteServiceSessionRequest._() : super();
+  factory DeleteServiceSessionRequest() => create();
+  factory DeleteServiceSessionRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DeleteServiceSessionRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  DeleteServiceSessionRequest clone() => DeleteServiceSessionRequest()..mergeFromMessage(this);
+  DeleteServiceSessionRequest copyWith(void Function(DeleteServiceSessionRequest) updates) => super.copyWith((message) => updates(message as DeleteServiceSessionRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static DeleteServiceSessionRequest create() => DeleteServiceSessionRequest._();
+  DeleteServiceSessionRequest createEmptyInstance() => create();
+  static $pb.PbList<DeleteServiceSessionRequest> createRepeated() => $pb.PbList<DeleteServiceSessionRequest>();
+  @$core.pragma('dart2js:noInline')
+  static DeleteServiceSessionRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteServiceSessionRequest>(create);
+  static DeleteServiceSessionRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $8.UUIDValue get id => $_getN(0);
+  @$pb.TagNumber(1)
+  set id($8.UUIDValue v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+  @$pb.TagNumber(1)
+  $8.UUIDValue ensureId() => $_ensure(0);
+}
+
+class DeleteServiceSessionResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteServiceSessionResponse', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  DeleteServiceSessionResponse._() : super();
+  factory DeleteServiceSessionResponse() => create();
+  factory DeleteServiceSessionResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DeleteServiceSessionResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  DeleteServiceSessionResponse clone() => DeleteServiceSessionResponse()..mergeFromMessage(this);
+  DeleteServiceSessionResponse copyWith(void Function(DeleteServiceSessionResponse) updates) => super.copyWith((message) => updates(message as DeleteServiceSessionResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static DeleteServiceSessionResponse create() => DeleteServiceSessionResponse._();
+  DeleteServiceSessionResponse createEmptyInstance() => create();
+  static $pb.PbList<DeleteServiceSessionResponse> createRepeated() => $pb.PbList<DeleteServiceSessionResponse>();
+  @$core.pragma('dart2js:noInline')
+  static DeleteServiceSessionResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteServiceSessionResponse>(create);
+  static DeleteServiceSessionResponse _defaultInstance;
+}
+
+class ListServiceSessionRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ListServiceSessionRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..aOM<$10.Filtering>(1, 'filter', subBuilder: $10.Filtering.create)
+    ..aOM<$10.Sorting>(2, 'orderBy', subBuilder: $10.Sorting.create)
+    ..aOM<$10.FieldSelection>(3, 'fields', subBuilder: $10.FieldSelection.create)
+    ..aOM<$10.Pagination>(4, 'paging', subBuilder: $10.Pagination.create)
+    ..hasRequiredFields = false
+  ;
+
+  ListServiceSessionRequest._() : super();
+  factory ListServiceSessionRequest() => create();
+  factory ListServiceSessionRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListServiceSessionRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  ListServiceSessionRequest clone() => ListServiceSessionRequest()..mergeFromMessage(this);
+  ListServiceSessionRequest copyWith(void Function(ListServiceSessionRequest) updates) => super.copyWith((message) => updates(message as ListServiceSessionRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListServiceSessionRequest create() => ListServiceSessionRequest._();
+  ListServiceSessionRequest createEmptyInstance() => create();
+  static $pb.PbList<ListServiceSessionRequest> createRepeated() => $pb.PbList<ListServiceSessionRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListServiceSessionRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListServiceSessionRequest>(create);
+  static ListServiceSessionRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $10.Filtering get filter => $_getN(0);
+  @$pb.TagNumber(1)
+  set filter($10.Filtering v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasFilter() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFilter() => clearField(1);
+  @$pb.TagNumber(1)
+  $10.Filtering ensureFilter() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $10.Sorting get orderBy => $_getN(1);
+  @$pb.TagNumber(2)
+  set orderBy($10.Sorting v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasOrderBy() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearOrderBy() => clearField(2);
+  @$pb.TagNumber(2)
+  $10.Sorting ensureOrderBy() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $10.FieldSelection get fields => $_getN(2);
+  @$pb.TagNumber(3)
+  set fields($10.FieldSelection v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasFields() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearFields() => clearField(3);
+  @$pb.TagNumber(3)
+  $10.FieldSelection ensureFields() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  $10.Pagination get paging => $_getN(3);
+  @$pb.TagNumber(4)
+  set paging($10.Pagination v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasPaging() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearPaging() => clearField(4);
+  @$pb.TagNumber(4)
+  $10.Pagination ensurePaging() => $_ensure(3);
+}
+
+class ListServiceSessionResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ListServiceSessionResponse', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..pc<ServiceSession>(1, 'results', $pb.PbFieldType.PM, subBuilder: ServiceSession.create)
+    ..hasRequiredFields = false
+  ;
+
+  ListServiceSessionResponse._() : super();
+  factory ListServiceSessionResponse() => create();
+  factory ListServiceSessionResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListServiceSessionResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  ListServiceSessionResponse clone() => ListServiceSessionResponse()..mergeFromMessage(this);
+  ListServiceSessionResponse copyWith(void Function(ListServiceSessionResponse) updates) => super.copyWith((message) => updates(message as ListServiceSessionResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListServiceSessionResponse create() => ListServiceSessionResponse._();
+  ListServiceSessionResponse createEmptyInstance() => create();
+  static $pb.PbList<ListServiceSessionResponse> createRepeated() => $pb.PbList<ListServiceSessionResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListServiceSessionResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListServiceSessionResponse>(create);
+  static ListServiceSessionResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<ServiceSession> get results => $_getList(0);
+}
+
+enum StreamSessionInputEvent_Event {
+  requestSession, 
+  joinSession, 
+  leaveSession, 
+  notSet
+}
+
+class StreamSessionInputEvent extends $pb.GeneratedMessage {
+  static const $core.Map<$core.int, StreamSessionInputEvent_Event> _StreamSessionInputEvent_EventByTag = {
+    1 : StreamSessionInputEvent_Event.requestSession,
+    2 : StreamSessionInputEvent_Event.joinSession,
+    3 : StreamSessionInputEvent_Event.leaveSession,
+    0 : StreamSessionInputEvent_Event.notSet
+  };
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('StreamSessionInputEvent', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..oo(0, [1, 2, 3])
+    ..aOM<EventRequestSession>(1, 'requestSession', subBuilder: EventRequestSession.create)
+    ..aOM<EventJoinSession>(2, 'joinSession', subBuilder: EventJoinSession.create)
+    ..aOM<EventLeaveSession>(3, 'leaveSession', subBuilder: EventLeaveSession.create)
+    ..hasRequiredFields = false
+  ;
+
+  StreamSessionInputEvent._() : super();
+  factory StreamSessionInputEvent() => create();
+  factory StreamSessionInputEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory StreamSessionInputEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  StreamSessionInputEvent clone() => StreamSessionInputEvent()..mergeFromMessage(this);
+  StreamSessionInputEvent copyWith(void Function(StreamSessionInputEvent) updates) => super.copyWith((message) => updates(message as StreamSessionInputEvent));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static StreamSessionInputEvent create() => StreamSessionInputEvent._();
+  StreamSessionInputEvent createEmptyInstance() => create();
+  static $pb.PbList<StreamSessionInputEvent> createRepeated() => $pb.PbList<StreamSessionInputEvent>();
+  @$core.pragma('dart2js:noInline')
+  static StreamSessionInputEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamSessionInputEvent>(create);
+  static StreamSessionInputEvent _defaultInstance;
+
+  StreamSessionInputEvent_Event whichEvent() => _StreamSessionInputEvent_EventByTag[$_whichOneof(0)];
+  void clearEvent() => clearField($_whichOneof(0));
+
+  @$pb.TagNumber(1)
+  EventRequestSession get requestSession => $_getN(0);
+  @$pb.TagNumber(1)
+  set requestSession(EventRequestSession v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasRequestSession() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRequestSession() => clearField(1);
+  @$pb.TagNumber(1)
+  EventRequestSession ensureRequestSession() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  EventJoinSession get joinSession => $_getN(1);
+  @$pb.TagNumber(2)
+  set joinSession(EventJoinSession v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasJoinSession() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearJoinSession() => clearField(2);
+  @$pb.TagNumber(2)
+  EventJoinSession ensureJoinSession() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  EventLeaveSession get leaveSession => $_getN(2);
+  @$pb.TagNumber(3)
+  set leaveSession(EventLeaveSession v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasLeaveSession() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearLeaveSession() => clearField(3);
+  @$pb.TagNumber(3)
+  EventLeaveSession ensureLeaveSession() => $_ensure(2);
+}
+
+class EventRequestSession extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventRequestSession', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..aOM<ServiceSession>(1, 'session', subBuilder: ServiceSession.create)
+    ..hasRequiredFields = false
+  ;
+
+  EventRequestSession._() : super();
+  factory EventRequestSession() => create();
+  factory EventRequestSession.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EventRequestSession.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  EventRequestSession clone() => EventRequestSession()..mergeFromMessage(this);
+  EventRequestSession copyWith(void Function(EventRequestSession) updates) => super.copyWith((message) => updates(message as EventRequestSession));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static EventRequestSession create() => EventRequestSession._();
+  EventRequestSession createEmptyInstance() => create();
+  static $pb.PbList<EventRequestSession> createRepeated() => $pb.PbList<EventRequestSession>();
+  @$core.pragma('dart2js:noInline')
+  static EventRequestSession getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EventRequestSession>(create);
+  static EventRequestSession _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ServiceSession get session => $_getN(0);
+  @$pb.TagNumber(1)
+  set session(ServiceSession v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSession() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSession() => clearField(1);
+  @$pb.TagNumber(1)
+  ServiceSession ensureSession() => $_ensure(0);
+}
+
+class EventJoinSession extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventJoinSession', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..aOM<ServiceSession>(1, 'session', subBuilder: ServiceSession.create)
+    ..hasRequiredFields = false
+  ;
+
+  EventJoinSession._() : super();
+  factory EventJoinSession() => create();
+  factory EventJoinSession.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EventJoinSession.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  EventJoinSession clone() => EventJoinSession()..mergeFromMessage(this);
+  EventJoinSession copyWith(void Function(EventJoinSession) updates) => super.copyWith((message) => updates(message as EventJoinSession));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static EventJoinSession create() => EventJoinSession._();
+  EventJoinSession createEmptyInstance() => create();
+  static $pb.PbList<EventJoinSession> createRepeated() => $pb.PbList<EventJoinSession>();
+  @$core.pragma('dart2js:noInline')
+  static EventJoinSession getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EventJoinSession>(create);
+  static EventJoinSession _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ServiceSession get session => $_getN(0);
+  @$pb.TagNumber(1)
+  set session(ServiceSession v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSession() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSession() => clearField(1);
+  @$pb.TagNumber(1)
+  ServiceSession ensureSession() => $_ensure(0);
+}
+
+class EventLeaveSession extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventLeaveSession', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..aOM<ServiceSession>(1, 'session', subBuilder: ServiceSession.create)
+    ..hasRequiredFields = false
+  ;
+
+  EventLeaveSession._() : super();
+  factory EventLeaveSession() => create();
+  factory EventLeaveSession.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EventLeaveSession.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  EventLeaveSession clone() => EventLeaveSession()..mergeFromMessage(this);
+  EventLeaveSession copyWith(void Function(EventLeaveSession) updates) => super.copyWith((message) => updates(message as EventLeaveSession));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static EventLeaveSession create() => EventLeaveSession._();
+  EventLeaveSession createEmptyInstance() => create();
+  static $pb.PbList<EventLeaveSession> createRepeated() => $pb.PbList<EventLeaveSession>();
+  @$core.pragma('dart2js:noInline')
+  static EventLeaveSession getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EventLeaveSession>(create);
+  static EventLeaveSession _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ServiceSession get session => $_getN(0);
+  @$pb.TagNumber(1)
+  set session(ServiceSession v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSession() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSession() => clearField(1);
+  @$pb.TagNumber(1)
+  ServiceSession ensureSession() => $_ensure(0);
+}
+
+enum StreamSessionOutputEvent_Event {
+  sessionRequested, 
+  sessionStarted, 
+  sessionTimeout, 
+  sessionFinished, 
+  notSet
+}
+
+class StreamSessionOutputEvent extends $pb.GeneratedMessage {
+  static const $core.Map<$core.int, StreamSessionOutputEvent_Event> _StreamSessionOutputEvent_EventByTag = {
+    1 : StreamSessionOutputEvent_Event.sessionRequested,
+    2 : StreamSessionOutputEvent_Event.sessionStarted,
+    3 : StreamSessionOutputEvent_Event.sessionTimeout,
+    4 : StreamSessionOutputEvent_Event.sessionFinished,
+    0 : StreamSessionOutputEvent_Event.notSet
+  };
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('StreamSessionOutputEvent', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..oo(0, [1, 2, 3, 4])
+    ..aOM<EventSessionRequested>(1, 'sessionRequested', subBuilder: EventSessionRequested.create)
+    ..aOM<EventSessionStarted>(2, 'sessionStarted', subBuilder: EventSessionStarted.create)
+    ..aOM<EventSessionTimeout>(3, 'sessionTimeout', subBuilder: EventSessionTimeout.create)
+    ..aOM<EventSessionFinished>(4, 'sessionFinished', subBuilder: EventSessionFinished.create)
+    ..hasRequiredFields = false
+  ;
+
+  StreamSessionOutputEvent._() : super();
+  factory StreamSessionOutputEvent() => create();
+  factory StreamSessionOutputEvent.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory StreamSessionOutputEvent.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  StreamSessionOutputEvent clone() => StreamSessionOutputEvent()..mergeFromMessage(this);
+  StreamSessionOutputEvent copyWith(void Function(StreamSessionOutputEvent) updates) => super.copyWith((message) => updates(message as StreamSessionOutputEvent));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static StreamSessionOutputEvent create() => StreamSessionOutputEvent._();
+  StreamSessionOutputEvent createEmptyInstance() => create();
+  static $pb.PbList<StreamSessionOutputEvent> createRepeated() => $pb.PbList<StreamSessionOutputEvent>();
+  @$core.pragma('dart2js:noInline')
+  static StreamSessionOutputEvent getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<StreamSessionOutputEvent>(create);
+  static StreamSessionOutputEvent _defaultInstance;
+
+  StreamSessionOutputEvent_Event whichEvent() => _StreamSessionOutputEvent_EventByTag[$_whichOneof(0)];
+  void clearEvent() => clearField($_whichOneof(0));
+
+  @$pb.TagNumber(1)
+  EventSessionRequested get sessionRequested => $_getN(0);
+  @$pb.TagNumber(1)
+  set sessionRequested(EventSessionRequested v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSessionRequested() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSessionRequested() => clearField(1);
+  @$pb.TagNumber(1)
+  EventSessionRequested ensureSessionRequested() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  EventSessionStarted get sessionStarted => $_getN(1);
+  @$pb.TagNumber(2)
+  set sessionStarted(EventSessionStarted v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasSessionStarted() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearSessionStarted() => clearField(2);
+  @$pb.TagNumber(2)
+  EventSessionStarted ensureSessionStarted() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  EventSessionTimeout get sessionTimeout => $_getN(2);
+  @$pb.TagNumber(3)
+  set sessionTimeout(EventSessionTimeout v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasSessionTimeout() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSessionTimeout() => clearField(3);
+  @$pb.TagNumber(3)
+  EventSessionTimeout ensureSessionTimeout() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  EventSessionFinished get sessionFinished => $_getN(3);
+  @$pb.TagNumber(4)
+  set sessionFinished(EventSessionFinished v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasSessionFinished() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSessionFinished() => clearField(4);
+  @$pb.TagNumber(4)
+  EventSessionFinished ensureSessionFinished() => $_ensure(3);
+}
+
+class EventSessionRequested extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventSessionRequested', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..aOM<ServiceSession>(1, 'session', subBuilder: ServiceSession.create)
+    ..hasRequiredFields = false
+  ;
+
+  EventSessionRequested._() : super();
+  factory EventSessionRequested() => create();
+  factory EventSessionRequested.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EventSessionRequested.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  EventSessionRequested clone() => EventSessionRequested()..mergeFromMessage(this);
+  EventSessionRequested copyWith(void Function(EventSessionRequested) updates) => super.copyWith((message) => updates(message as EventSessionRequested));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static EventSessionRequested create() => EventSessionRequested._();
+  EventSessionRequested createEmptyInstance() => create();
+  static $pb.PbList<EventSessionRequested> createRepeated() => $pb.PbList<EventSessionRequested>();
+  @$core.pragma('dart2js:noInline')
+  static EventSessionRequested getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EventSessionRequested>(create);
+  static EventSessionRequested _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ServiceSession get session => $_getN(0);
+  @$pb.TagNumber(1)
+  set session(ServiceSession v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSession() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSession() => clearField(1);
+  @$pb.TagNumber(1)
+  ServiceSession ensureSession() => $_ensure(0);
+}
+
+class EventSessionStarted extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventSessionStarted', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..aOM<ServiceSession>(1, 'session', subBuilder: ServiceSession.create)
+    ..hasRequiredFields = false
+  ;
+
+  EventSessionStarted._() : super();
+  factory EventSessionStarted() => create();
+  factory EventSessionStarted.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EventSessionStarted.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  EventSessionStarted clone() => EventSessionStarted()..mergeFromMessage(this);
+  EventSessionStarted copyWith(void Function(EventSessionStarted) updates) => super.copyWith((message) => updates(message as EventSessionStarted));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static EventSessionStarted create() => EventSessionStarted._();
+  EventSessionStarted createEmptyInstance() => create();
+  static $pb.PbList<EventSessionStarted> createRepeated() => $pb.PbList<EventSessionStarted>();
+  @$core.pragma('dart2js:noInline')
+  static EventSessionStarted getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EventSessionStarted>(create);
+  static EventSessionStarted _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ServiceSession get session => $_getN(0);
+  @$pb.TagNumber(1)
+  set session(ServiceSession v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSession() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSession() => clearField(1);
+  @$pb.TagNumber(1)
+  ServiceSession ensureSession() => $_ensure(0);
+}
+
+class EventSessionTimeout extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventSessionTimeout', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..aOM<ServiceSession>(1, 'session', subBuilder: ServiceSession.create)
+    ..hasRequiredFields = false
+  ;
+
+  EventSessionTimeout._() : super();
+  factory EventSessionTimeout() => create();
+  factory EventSessionTimeout.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EventSessionTimeout.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  EventSessionTimeout clone() => EventSessionTimeout()..mergeFromMessage(this);
+  EventSessionTimeout copyWith(void Function(EventSessionTimeout) updates) => super.copyWith((message) => updates(message as EventSessionTimeout));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static EventSessionTimeout create() => EventSessionTimeout._();
+  EventSessionTimeout createEmptyInstance() => create();
+  static $pb.PbList<EventSessionTimeout> createRepeated() => $pb.PbList<EventSessionTimeout>();
+  @$core.pragma('dart2js:noInline')
+  static EventSessionTimeout getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EventSessionTimeout>(create);
+  static EventSessionTimeout _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ServiceSession get session => $_getN(0);
+  @$pb.TagNumber(1)
+  set session(ServiceSession v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSession() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSession() => clearField(1);
+  @$pb.TagNumber(1)
+  ServiceSession ensureSession() => $_ensure(0);
+}
+
+class EventSessionFinished extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventSessionFinished', package: const $pb.PackageName('model'), createEmptyInstance: create)
+    ..aOM<ServiceSession>(1, 'session', subBuilder: ServiceSession.create)
+    ..hasRequiredFields = false
+  ;
+
+  EventSessionFinished._() : super();
+  factory EventSessionFinished() => create();
+  factory EventSessionFinished.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EventSessionFinished.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  EventSessionFinished clone() => EventSessionFinished()..mergeFromMessage(this);
+  EventSessionFinished copyWith(void Function(EventSessionFinished) updates) => super.copyWith((message) => updates(message as EventSessionFinished));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static EventSessionFinished create() => EventSessionFinished._();
+  EventSessionFinished createEmptyInstance() => create();
+  static $pb.PbList<EventSessionFinished> createRepeated() => $pb.PbList<EventSessionFinished>();
+  @$core.pragma('dart2js:noInline')
+  static EventSessionFinished getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EventSessionFinished>(create);
+  static EventSessionFinished _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ServiceSession get session => $_getN(0);
+  @$pb.TagNumber(1)
+  set session(ServiceSession v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSession() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSession() => clearField(1);
+  @$pb.TagNumber(1)
+  ServiceSession ensureSession() => $_ensure(0);
 }
 

@@ -9,8 +9,8 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../infobloxopen/atlas-app-toolkit/rpc/resource/resource.pb.dart' as $9;
-import '../../../google/protobuf/timestamp.pb.dart' as $11;
+import '../../infobloxopen/atlas-app-toolkit/rpc/resource/resource.pb.dart' as $11;
+import '../../../google/protobuf/timestamp.pb.dart' as $9;
 import '../../infobloxopen/atlas-app-toolkit/query/collection_operators.pb.dart' as $10;
 
 import 'journal.pbenum.dart';
@@ -19,9 +19,9 @@ export 'journal.pbenum.dart';
 
 class JournalSubjectType extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('JournalSubjectType', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
-    ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
+    ..aOM<$11.Identifier>(1, 'id', subBuilder: $11.Identifier.create)
+    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
     ..aOS(4, 'name')
     ..hasRequiredFields = false
   ;
@@ -42,37 +42,37 @@ class JournalSubjectType extends $pb.GeneratedMessage {
   static JournalSubjectType _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $11.Identifier get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($11.Identifier v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
+  $11.Identifier ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $11.Timestamp get createdAt => $_getN(1);
+  $9.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set createdAt($11.Timestamp v) { setField(2, v); }
+  set createdAt($9.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreatedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $11.Timestamp ensureCreatedAt() => $_ensure(1);
+  $9.Timestamp ensureCreatedAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $11.Timestamp get updatedAt => $_getN(2);
+  $9.Timestamp get updatedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set updatedAt($11.Timestamp v) { setField(3, v); }
+  set updatedAt($9.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasUpdatedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpdatedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $11.Timestamp ensureUpdatedAt() => $_ensure(2);
+  $9.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
   $core.String get name => $_getSZ(3);
@@ -86,9 +86,9 @@ class JournalSubjectType extends $pb.GeneratedMessage {
 
 class JournalSubject extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('JournalSubject', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
-    ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
+    ..aOM<$11.Identifier>(1, 'id', subBuilder: $11.Identifier.create)
+    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
     ..aOS(4, 'name')
     ..pc<JournalSubjectType>(5, 'types', $pb.PbFieldType.PM, subBuilder: JournalSubjectType.create)
     ..hasRequiredFields = false
@@ -110,37 +110,37 @@ class JournalSubject extends $pb.GeneratedMessage {
   static JournalSubject _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $11.Identifier get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($11.Identifier v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
+  $11.Identifier ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $11.Timestamp get createdAt => $_getN(1);
+  $9.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set createdAt($11.Timestamp v) { setField(2, v); }
+  set createdAt($9.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreatedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $11.Timestamp ensureCreatedAt() => $_ensure(1);
+  $9.Timestamp ensureCreatedAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $11.Timestamp get updatedAt => $_getN(2);
+  $9.Timestamp get updatedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set updatedAt($11.Timestamp v) { setField(3, v); }
+  set updatedAt($9.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasUpdatedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpdatedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $11.Timestamp ensureUpdatedAt() => $_ensure(2);
+  $9.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
   $core.String get name => $_getSZ(3);
@@ -157,11 +157,12 @@ class JournalSubject extends $pb.GeneratedMessage {
 
 class JournalEntry extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('JournalEntry', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
-    ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$11.Timestamp>(4, 'day', subBuilder: $11.Timestamp.create)
-    ..e<JournalEntry_Severity>(5, 'severity', $pb.PbFieldType.OE, defaultOrMaker: JournalEntry_Severity.NONE, valueOf: JournalEntry_Severity.valueOf, enumValues: JournalEntry_Severity.values)
+    ..aOM<$11.Identifier>(1, 'id', subBuilder: $11.Identifier.create)
+    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
+    ..aOS(4, 'profileId')
+    ..aOM<$9.Timestamp>(5, 'day', subBuilder: $9.Timestamp.create)
+    ..e<JournalEntry_Severity>(6, 'severity', $pb.PbFieldType.OE, defaultOrMaker: JournalEntry_Severity.NONE, valueOf: JournalEntry_Severity.valueOf, enumValues: JournalEntry_Severity.values)
     ..aOS(7, 'note')
     ..hasRequiredFields = false
   ;
@@ -182,64 +183,73 @@ class JournalEntry extends $pb.GeneratedMessage {
   static JournalEntry _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $11.Identifier get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($11.Identifier v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
+  $11.Identifier ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $11.Timestamp get createdAt => $_getN(1);
+  $9.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set createdAt($11.Timestamp v) { setField(2, v); }
+  set createdAt($9.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreatedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $11.Timestamp ensureCreatedAt() => $_ensure(1);
+  $9.Timestamp ensureCreatedAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $11.Timestamp get updatedAt => $_getN(2);
+  $9.Timestamp get updatedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set updatedAt($11.Timestamp v) { setField(3, v); }
+  set updatedAt($9.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasUpdatedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpdatedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $11.Timestamp ensureUpdatedAt() => $_ensure(2);
+  $9.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $11.Timestamp get day => $_getN(3);
+  $core.String get profileId => $_getSZ(3);
   @$pb.TagNumber(4)
-  set day($11.Timestamp v) { setField(4, v); }
+  set profileId($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasDay() => $_has(3);
+  $core.bool hasProfileId() => $_has(3);
   @$pb.TagNumber(4)
-  void clearDay() => clearField(4);
-  @$pb.TagNumber(4)
-  $11.Timestamp ensureDay() => $_ensure(3);
+  void clearProfileId() => clearField(4);
 
   @$pb.TagNumber(5)
-  JournalEntry_Severity get severity => $_getN(4);
+  $9.Timestamp get day => $_getN(4);
   @$pb.TagNumber(5)
-  set severity(JournalEntry_Severity v) { setField(5, v); }
+  set day($9.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
-  $core.bool hasSeverity() => $_has(4);
+  $core.bool hasDay() => $_has(4);
   @$pb.TagNumber(5)
-  void clearSeverity() => clearField(5);
+  void clearDay() => clearField(5);
+  @$pb.TagNumber(5)
+  $9.Timestamp ensureDay() => $_ensure(4);
+
+  @$pb.TagNumber(6)
+  JournalEntry_Severity get severity => $_getN(5);
+  @$pb.TagNumber(6)
+  set severity(JournalEntry_Severity v) { setField(6, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasSeverity() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearSeverity() => clearField(6);
 
   @$pb.TagNumber(7)
-  $core.String get note => $_getSZ(5);
+  $core.String get note => $_getSZ(6);
   @$pb.TagNumber(7)
-  set note($core.String v) { $_setString(5, v); }
+  set note($core.String v) { $_setString(6, v); }
   @$pb.TagNumber(7)
-  $core.bool hasNote() => $_has(5);
+  $core.bool hasNote() => $_has(6);
   @$pb.TagNumber(7)
   void clearNote() => clearField(7);
 }
@@ -312,7 +322,7 @@ class CreateJournalEntryResponse extends $pb.GeneratedMessage {
 
 class ReadJournalEntryRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ReadJournalEntryRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..aOM<$11.Identifier>(1, 'id', subBuilder: $11.Identifier.create)
     ..hasRequiredFields = false
   ;
 
@@ -332,15 +342,15 @@ class ReadJournalEntryRequest extends $pb.GeneratedMessage {
   static ReadJournalEntryRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $11.Identifier get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($11.Identifier v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
+  $11.Identifier ensureId() => $_ensure(0);
 }
 
 class ReadJournalEntryResponse extends $pb.GeneratedMessage {
@@ -444,7 +454,7 @@ class UpdateJournalEntryResponse extends $pb.GeneratedMessage {
 
 class DeleteJournalEntryRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteJournalEntryRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$9.Identifier>(1, 'id', subBuilder: $9.Identifier.create)
+    ..aOM<$11.Identifier>(1, 'id', subBuilder: $11.Identifier.create)
     ..hasRequiredFields = false
   ;
 
@@ -464,15 +474,15 @@ class DeleteJournalEntryRequest extends $pb.GeneratedMessage {
   static DeleteJournalEntryRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $9.Identifier get id => $_getN(0);
+  $11.Identifier get id => $_getN(0);
   @$pb.TagNumber(1)
-  set id($9.Identifier v) { setField(1, v); }
+  set id($11.Identifier v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
   @$pb.TagNumber(1)
-  $9.Identifier ensureId() => $_ensure(0);
+  $11.Identifier ensureId() => $_ensure(0);
 }
 
 class DeleteJournalEntryResponse extends $pb.GeneratedMessage {

@@ -1310,3 +1310,42 @@ abstract class ServicesServiceBase extends $grpc.Service {
   $async.Future<$2.DeleteServiceProviderResponse> deleteServiceProvider(
       $grpc.ServiceCall call, $2.DeleteServiceProviderRequest request);
 }
+
+class ServiceSessionStreamClient extends $grpc.Client {
+  static final _$biDi = $grpc.ClientMethod<$2.StreamSessionInputEvent,
+          $2.StreamSessionOutputEvent>(
+      '/model.ServiceSessionStream/BiDi',
+      ($2.StreamSessionInputEvent value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $2.StreamSessionOutputEvent.fromBuffer(value));
+
+  ServiceSessionStreamClient($grpc.ClientChannel channel,
+      {$grpc.CallOptions options})
+      : super(channel, options: options);
+
+  $grpc.ResponseStream<$2.StreamSessionOutputEvent> biDi(
+      $async.Stream<$2.StreamSessionInputEvent> request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(_$biDi, request, options: options);
+    return $grpc.ResponseStream(call);
+  }
+}
+
+abstract class ServiceSessionStreamServiceBase extends $grpc.Service {
+  $core.String get $name => 'model.ServiceSessionStream';
+
+  ServiceSessionStreamServiceBase() {
+    $addMethod($grpc.ServiceMethod<$2.StreamSessionInputEvent,
+            $2.StreamSessionOutputEvent>(
+        'BiDi',
+        biDi,
+        true,
+        true,
+        ($core.List<$core.int> value) =>
+            $2.StreamSessionInputEvent.fromBuffer(value),
+        ($2.StreamSessionOutputEvent value) => value.writeToBuffer()));
+  }
+
+  $async.Stream<$2.StreamSessionOutputEvent> biDi($grpc.ServiceCall call,
+      $async.Stream<$2.StreamSessionInputEvent> request);
+}

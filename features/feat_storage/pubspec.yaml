@@ -26,8 +26,6 @@ dependencies:
 
   feat_auth:
     path: ../feat_auth
-  feat_notifications:
-    path: ../feat_notifications
   lib_shared:
     path: ../../libs/lib_shared
   lib_lego:

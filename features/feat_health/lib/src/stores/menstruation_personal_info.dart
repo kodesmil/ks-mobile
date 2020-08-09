@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:intl/intl.dart';
+import 'package:feat_auth/feat_auth.dart';
 import 'package:lib_shared/lib_shared.dart';
 import 'package:lib_services/lib_services.dart';
 import 'package:mobx/mobx.dart';
@@ -12,12 +12,13 @@ class MenstruationPersonalInfoStore = _MenstruationPersonalInfoStore
 abstract class _MenstruationPersonalInfoStore with Store {
   final ErrorStore errorStore;
   final LoadingStore loadingStore;
-
-  HealthClient client;
+  final ProfileStore profileStore;
+  final HealthClient client;
 
   _MenstruationPersonalInfoStore(
     this.errorStore,
     this.loadingStore,
+    this.profileStore,
     this.client,
   );
 
@@ -45,7 +46,7 @@ abstract class _MenstruationPersonalInfoStore with Store {
     int cycleLength,
     int periodLength,
   }) async =>
-      payload?.id != 0
+      payload?.id != null
           ? await update(
               payload,
               periodLength: periodLength,
@@ -63,6 +64,7 @@ abstract class _MenstruationPersonalInfoStore with Store {
   }) async {
     loadingStore.loading = true;
     final payload = HealthMenstruationPersonalInfo()
+      ..profileId = profileStore.profile.id.value
       ..periodLengthInDays = periodLength
       ..cycleLengthInDays = cycleLength;
     final request = CreateHealthMenstruationPersonalInfoRequest()

@@ -1,3 +1,4 @@
+import 'package:feat_auth/feat_auth.dart';
 import 'package:feat_services/feat_services.dart';
 import 'package:feat_services/src/offer_page.dart';
 import 'package:feat_services/src/offer_store.dart';
@@ -23,11 +24,12 @@ class ServiceOfferDetailsPageState extends State<ServiceOfferDetailsPage> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ProxyProvider<ServicesClient, ServiceOfferStore>(
-          update: (_, dep, __) => ServiceOfferStore(
+        ProxyProvider2<ProfileStore, ServicesClient, ServiceOfferStore>(
+          update: (_, dep, dep2, __) => ServiceOfferStore(
             ErrorStore(),
             LoadingStore(),
             dep,
+            dep2,
           ),
         ),
       ],

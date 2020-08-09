@@ -8,7 +8,7 @@ import 'package:lib_shared/lib_shared.dart';
 import 'package:lib_services/lib_services.dart';
 import 'package:mobx/mobx.dart';
 
-part 'store.g.dart';
+part 'notification_settings_store.g.dart';
 
 class NotificationSettingsStore = _NotificationSettingsStore
     with _$NotificationSettingsStore;
@@ -21,12 +21,12 @@ abstract class _NotificationSettingsStore with Store {
     12,
   ).toUtc();
   final ErrorStore errorStore;
-  final UserStore userStore;
+  final ProfileStore profileStore;
   final NotificationSettingsClient client;
 
   _NotificationSettingsStore(
     this.errorStore,
-    this.userStore,
+    this.profileStore,
     this.client,
   );
 
@@ -50,8 +50,8 @@ abstract class _NotificationSettingsStore with Store {
   @action
   Future readOrCreate() async {
     final condition = StringCondition()
-      ..fieldPath.add('account_id')
-      ..value = userStore.user.uid;
+      ..fieldPath.add('profile_id')
+      ..value = profileStore.profile.id.value;
     final filter = Filtering()..stringCondition = condition;
     final request = ListNotificationSettingRequest()..filter = filter;
     final settings = await client.list(request);
@@ -64,8 +64,8 @@ abstract class _NotificationSettingsStore with Store {
 
   @action
   Future create() async {
-    final timestamp = Timestamp.fromDateTime(DateTime.now());
     final payload = NotificationSetting()
+      ..profileId = profileStore.profile.id.value
       ..enableNotifications = true
       ..cronJournalReminder = '${noon.hour} ${noon.minute} * * * *'
       ..enableJournalReminder = true;

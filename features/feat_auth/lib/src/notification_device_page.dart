@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:feat_notifications/feat_notifications.dart';
+import 'package:feat_auth/src/notification_device_store.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,11 +16,10 @@ class NotificationContainer extends StatefulWidget {
 }
 
 class _NotificationContainerState extends State<NotificationContainer> {
-
   @override
   void didChangeDependencies() {
     if (!kIsWeb) {
-      final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+      final _firebaseMessaging = FirebaseMessaging();
       final store = Provider.of<NotificationDevicesStore>(context);
       _firebaseMessaging.configure(
         onMessage: (Map<String, dynamic> message) async {

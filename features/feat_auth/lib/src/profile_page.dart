@@ -1,6 +1,6 @@
 import 'package:feat_auth/feat_auth.dart';
+import 'package:feat_auth/src/notification_settings_widget.dart';
 import 'package:feat_auth/src/profile_store.dart';
-import 'package:feat_notifications/feat_notifications.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lib_lego/lib_lego.dart';

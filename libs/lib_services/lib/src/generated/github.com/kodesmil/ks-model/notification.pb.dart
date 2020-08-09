@@ -10,17 +10,18 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../../google/protobuf/timestamp.pb.dart' as $11;
+import '../../../google/protobuf/timestamp.pb.dart' as $9;
 import '../../infobloxopen/atlas-app-toolkit/query/collection_operators.pb.dart' as $10;
 
 class NotificationSetting extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('NotificationSetting', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
-    ..aOB(4, 'enableNotifications')
-    ..aOB(5, 'enableJournalReminder')
-    ..aOS(6, 'cronJournalReminder')
+    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
+    ..aOS(4, 'profileId')
+    ..aOB(5, 'enableNotifications')
+    ..aOB(6, 'enableJournalReminder')
+    ..aOS(7, 'cronJournalReminder')
     ..hasRequiredFields = false
   ;
 
@@ -49,53 +50,62 @@ class NotificationSetting extends $pb.GeneratedMessage {
   void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $11.Timestamp get createdAt => $_getN(1);
+  $9.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set createdAt($11.Timestamp v) { setField(2, v); }
+  set createdAt($9.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreatedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $11.Timestamp ensureCreatedAt() => $_ensure(1);
+  $9.Timestamp ensureCreatedAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $11.Timestamp get updatedAt => $_getN(2);
+  $9.Timestamp get updatedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set updatedAt($11.Timestamp v) { setField(3, v); }
+  set updatedAt($9.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasUpdatedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpdatedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $11.Timestamp ensureUpdatedAt() => $_ensure(2);
+  $9.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $core.bool get enableNotifications => $_getBF(3);
+  $core.String get profileId => $_getSZ(3);
   @$pb.TagNumber(4)
-  set enableNotifications($core.bool v) { $_setBool(3, v); }
+  set profileId($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasEnableNotifications() => $_has(3);
+  $core.bool hasProfileId() => $_has(3);
   @$pb.TagNumber(4)
-  void clearEnableNotifications() => clearField(4);
+  void clearProfileId() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.bool get enableJournalReminder => $_getBF(4);
+  $core.bool get enableNotifications => $_getBF(4);
   @$pb.TagNumber(5)
-  set enableJournalReminder($core.bool v) { $_setBool(4, v); }
+  set enableNotifications($core.bool v) { $_setBool(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasEnableJournalReminder() => $_has(4);
+  $core.bool hasEnableNotifications() => $_has(4);
   @$pb.TagNumber(5)
-  void clearEnableJournalReminder() => clearField(5);
+  void clearEnableNotifications() => clearField(5);
 
   @$pb.TagNumber(6)
-  $core.String get cronJournalReminder => $_getSZ(5);
+  $core.bool get enableJournalReminder => $_getBF(5);
   @$pb.TagNumber(6)
-  set cronJournalReminder($core.String v) { $_setString(5, v); }
+  set enableJournalReminder($core.bool v) { $_setBool(5, v); }
   @$pb.TagNumber(6)
-  $core.bool hasCronJournalReminder() => $_has(5);
+  $core.bool hasEnableJournalReminder() => $_has(5);
   @$pb.TagNumber(6)
-  void clearCronJournalReminder() => clearField(6);
+  void clearEnableJournalReminder() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.String get cronJournalReminder => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set cronJournalReminder($core.String v) { $_setString(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasCronJournalReminder() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearCronJournalReminder() => clearField(7);
 }
 
 class CreateNotificationSettingRequest extends $pb.GeneratedMessage {
@@ -443,9 +453,10 @@ class ListNotificationSettingResponse extends $pb.GeneratedMessage {
 class NotificationDevice extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('NotificationDevice', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
-    ..aOS(4, 'deviceToken')
+    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
+    ..aOS(4, 'profileId')
+    ..aOS(5, 'deviceToken')
     ..hasRequiredFields = false
   ;
 
@@ -474,35 +485,44 @@ class NotificationDevice extends $pb.GeneratedMessage {
   void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $11.Timestamp get createdAt => $_getN(1);
+  $9.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set createdAt($11.Timestamp v) { setField(2, v); }
+  set createdAt($9.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreatedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $11.Timestamp ensureCreatedAt() => $_ensure(1);
+  $9.Timestamp ensureCreatedAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $11.Timestamp get updatedAt => $_getN(2);
+  $9.Timestamp get updatedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set updatedAt($11.Timestamp v) { setField(3, v); }
+  set updatedAt($9.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasUpdatedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpdatedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $11.Timestamp ensureUpdatedAt() => $_ensure(2);
+  $9.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $core.String get deviceToken => $_getSZ(3);
+  $core.String get profileId => $_getSZ(3);
   @$pb.TagNumber(4)
-  set deviceToken($core.String v) { $_setString(3, v); }
+  set profileId($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasDeviceToken() => $_has(3);
+  $core.bool hasProfileId() => $_has(3);
   @$pb.TagNumber(4)
-  void clearDeviceToken() => clearField(4);
+  void clearProfileId() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get deviceToken => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set deviceToken($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasDeviceToken() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearDeviceToken() => clearField(5);
 }
 
 class CreateNotificationDeviceRequest extends $pb.GeneratedMessage {

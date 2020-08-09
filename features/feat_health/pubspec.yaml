@@ -30,6 +30,9 @@ dependencies:
   flutter_translate: ^1.1.0
   infinite_listview: ^1.0.1+1
 
+  feat_auth:
+    path: ../feat_auth
+
   lib_shared:
     path: ../../libs/lib_shared
   lib_lego:

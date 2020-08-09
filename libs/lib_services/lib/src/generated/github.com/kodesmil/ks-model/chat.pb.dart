@@ -10,7 +10,7 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../infobloxopen/protoc-gen-gorm/types/types.pb.dart' as $8;
-import '../../../google/protobuf/timestamp.pb.dart' as $11;
+import '../../../google/protobuf/timestamp.pb.dart' as $9;
 import 'profile.pb.dart' as $1;
 import '../../infobloxopen/atlas-app-toolkit/query/collection_operators.pb.dart' as $10;
 
@@ -21,8 +21,8 @@ export 'chat.pbenum.dart';
 class ChatMessage extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ChatMessage', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..aOM<$8.UUIDValue>(1, 'id', subBuilder: $8.UUIDValue.create)
-    ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
+    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
     ..aOS(4, 'text')
     ..aOM<ChatRoomParticipant>(5, 'author', subBuilder: ChatRoomParticipant.create)
     ..e<ChatMessage_Status>(7, 'status', $pb.PbFieldType.OE, defaultOrMaker: ChatMessage_Status.DELIVERED, valueOf: ChatMessage_Status.valueOf, enumValues: ChatMessage_Status.values)
@@ -56,26 +56,26 @@ class ChatMessage extends $pb.GeneratedMessage {
   $8.UUIDValue ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $11.Timestamp get createdAt => $_getN(1);
+  $9.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set createdAt($11.Timestamp v) { setField(2, v); }
+  set createdAt($9.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreatedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $11.Timestamp ensureCreatedAt() => $_ensure(1);
+  $9.Timestamp ensureCreatedAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $11.Timestamp get updatedAt => $_getN(2);
+  $9.Timestamp get updatedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set updatedAt($11.Timestamp v) { setField(3, v); }
+  set updatedAt($9.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasUpdatedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpdatedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $11.Timestamp ensureUpdatedAt() => $_ensure(2);
+  $9.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
   $core.String get text => $_getSZ(3);
@@ -110,8 +110,8 @@ class ChatMessage extends $pb.GeneratedMessage {
 class ChatRoom extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ChatRoom', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..aOM<$8.UUIDValue>(1, 'id', subBuilder: $8.UUIDValue.create)
-    ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
+    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
     ..pc<ChatRoomParticipant>(4, 'participants', $pb.PbFieldType.PM, subBuilder: ChatRoomParticipant.create)
     ..aOS(5, 'name')
     ..hasRequiredFields = false
@@ -144,26 +144,26 @@ class ChatRoom extends $pb.GeneratedMessage {
   $8.UUIDValue ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $11.Timestamp get createdAt => $_getN(1);
+  $9.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set createdAt($11.Timestamp v) { setField(2, v); }
+  set createdAt($9.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreatedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $11.Timestamp ensureCreatedAt() => $_ensure(1);
+  $9.Timestamp ensureCreatedAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $11.Timestamp get updatedAt => $_getN(2);
+  $9.Timestamp get updatedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set updatedAt($11.Timestamp v) { setField(3, v); }
+  set updatedAt($9.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasUpdatedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpdatedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $11.Timestamp ensureUpdatedAt() => $_ensure(2);
+  $9.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
   $core.List<ChatRoomParticipant> get participants => $_getList(3);
@@ -181,9 +181,9 @@ class ChatRoom extends $pb.GeneratedMessage {
 class ChatRoomParticipant extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ChatRoomParticipant', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..aOM<$8.UUIDValue>(1, 'id', subBuilder: $8.UUIDValue.create)
-    ..aOM<$11.Timestamp>(2, 'createdAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$11.Timestamp>(3, 'updatedAt', subBuilder: $11.Timestamp.create)
-    ..aOM<$11.Timestamp>(4, 'lastSeenAt', subBuilder: $11.Timestamp.create)
+    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(4, 'lastSeenAt', subBuilder: $9.Timestamp.create)
     ..aOM<$1.Profile>(5, 'profile', subBuilder: $1.Profile.create)
     ..aOM<ChatRoom>(6, 'chatRoom', subBuilder: ChatRoom.create)
     ..hasRequiredFields = false
@@ -216,37 +216,37 @@ class ChatRoomParticipant extends $pb.GeneratedMessage {
   $8.UUIDValue ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $11.Timestamp get createdAt => $_getN(1);
+  $9.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set createdAt($11.Timestamp v) { setField(2, v); }
+  set createdAt($9.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreatedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $11.Timestamp ensureCreatedAt() => $_ensure(1);
+  $9.Timestamp ensureCreatedAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $11.Timestamp get updatedAt => $_getN(2);
+  $9.Timestamp get updatedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set updatedAt($11.Timestamp v) { setField(3, v); }
+  set updatedAt($9.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasUpdatedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearUpdatedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $11.Timestamp ensureUpdatedAt() => $_ensure(2);
+  $9.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $11.Timestamp get lastSeenAt => $_getN(3);
+  $9.Timestamp get lastSeenAt => $_getN(3);
   @$pb.TagNumber(4)
-  set lastSeenAt($11.Timestamp v) { setField(4, v); }
+  set lastSeenAt($9.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasLastSeenAt() => $_has(3);
   @$pb.TagNumber(4)
   void clearLastSeenAt() => clearField(4);
   @$pb.TagNumber(4)
-  $11.Timestamp ensureLastSeenAt() => $_ensure(3);
+  $9.Timestamp ensureLastSeenAt() => $_ensure(3);
 
   @$pb.TagNumber(5)
   $1.Profile get profile => $_getN(4);

@@ -4,7 +4,6 @@ import 'package:feat_ion/feat_ion.dart';
 import 'package:feat_feed/feat_feed.dart';
 import 'package:feat_journal/feat_journal.dart';
 import 'package:feat_health/feat_health.dart';
-import 'package:feat_notifications/feat_notifications.dart';
 import 'package:feat_onboarding/feat_onboarding.dart';
 import 'package:feat_storage/feat_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,7 +15,6 @@ import 'package:grpc/grpc.dart';
 import 'package:lib_shared/lib_shared.dart';
 import 'package:lib_lego/lib_lego.dart';
 import 'package:lib_services/lib_services.dart';
-import 'package:feat_services/feat_services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -199,13 +197,15 @@ class _AppInjectorState extends State<AppInjector> {
             dep2,
           ),
         ),
-        ProxyProvider<NotificationDevicesClient, NotificationDevicesStore>(
-          update: (_, dep, __) => NotificationDevicesStore(
+        ProxyProvider2<ProfileStore, NotificationDevicesClient,
+            NotificationDevicesStore>(
+          update: (_, dep, dep2, __) => NotificationDevicesStore(
             ErrorStore(),
             dep,
+            dep2,
           ),
         ),
-        ProxyProvider2<UserStore, NotificationSettingsClient,
+        ProxyProvider2<ProfileStore, NotificationSettingsClient,
             NotificationSettingsStore>(
           update: (_, dep, dep2, __) => NotificationSettingsStore(
             ErrorStore(),
@@ -219,25 +219,21 @@ class _AppInjectorState extends State<AppInjector> {
             dep,
           ),
         ),
-        ProxyProvider<HealthClient, MenstruationDailyEntryStore>(
-          update: (_, dep, __) => MenstruationDailyEntryStore(
+        ProxyProvider2<ProfileStore, HealthClient, MenstruationDailyEntryStore>(
+          update: (_, dep, dep2, __) => MenstruationDailyEntryStore(
             ErrorStore(),
             LoadingStore(),
             dep,
+            dep2,
           ),
         ),
-        ProxyProvider<HealthClient, MenstruationPersonalInfoStore>(
-          update: (_, dep, __) => MenstruationPersonalInfoStore(
+        ProxyProvider2<ProfileStore, HealthClient,
+            MenstruationPersonalInfoStore>(
+          update: (_, dep, dep2, __) => MenstruationPersonalInfoStore(
             ErrorStore(),
             LoadingStore(),
             dep,
-          ),
-        ),
-        ProxyProvider<HealthClient, MenstruationPersonalInfoStore>(
-          update: (_, dep, __) => MenstruationPersonalInfoStore(
-            ErrorStore(),
-            LoadingStore(),
-            dep,
+            dep2,
           ),
         ),
         ProxyProvider<FeedArticlesClient, FeedStore>(

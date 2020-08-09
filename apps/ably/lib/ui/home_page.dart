@@ -4,7 +4,6 @@ import 'package:feat_chat/feat_chat.dart';
 import 'package:feat_feed/feat_feed.dart';
 import 'package:feat_health/feat_health.dart';
 import 'package:feat_journal/feat_journal.dart';
-import 'package:feat_notifications/feat_notifications.dart';
 import 'package:feat_services/feat_services.dart';
 import 'package:feat_splash/feat_splash.dart';
 import 'package:feat_storage/feat_storage.dart';

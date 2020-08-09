@@ -10,15 +10,17 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../infobloxopen/protoc-gen-gorm/types/types.pb.dart' as $8;
-import '../../infobloxopen/atlas-app-toolkit/rpc/resource/resource.pb.dart' as $9;
+import '../../../google/protobuf/timestamp.pb.dart' as $9;
 import '../../infobloxopen/atlas-app-toolkit/query/collection_operators.pb.dart' as $10;
 
 class Group extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('Group', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..aOM<$8.UUIDValue>(1, 'id', subBuilder: $8.UUIDValue.create)
-    ..aOS(2, 'name')
-    ..aOS(3, 'notes')
-    ..aOM<$9.Identifier>(4, 'profileId', subBuilder: $9.Identifier.create)
+    ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
+    ..aOM<$8.UUIDValue>(4, 'profileId', subBuilder: $8.UUIDValue.create)
+    ..aOS(5, 'name')
+    ..aOS(6, 'notes')
     ..hasRequiredFields = false
   ;
 
@@ -49,33 +51,55 @@ class Group extends $pb.GeneratedMessage {
   $8.UUIDValue ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $core.String get name => $_getSZ(1);
+  $9.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set name($core.String v) { $_setString(1, v); }
+  set createdAt($9.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasName() => $_has(1);
+  $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
-  void clearName() => clearField(2);
+  void clearCreatedAt() => clearField(2);
+  @$pb.TagNumber(2)
+  $9.Timestamp ensureCreatedAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $core.String get notes => $_getSZ(2);
+  $9.Timestamp get updatedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set notes($core.String v) { $_setString(2, v); }
+  set updatedAt($9.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
-  $core.bool hasNotes() => $_has(2);
+  $core.bool hasUpdatedAt() => $_has(2);
   @$pb.TagNumber(3)
-  void clearNotes() => clearField(3);
+  void clearUpdatedAt() => clearField(3);
+  @$pb.TagNumber(3)
+  $9.Timestamp ensureUpdatedAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $9.Identifier get profileId => $_getN(3);
+  $8.UUIDValue get profileId => $_getN(3);
   @$pb.TagNumber(4)
-  set profileId($9.Identifier v) { setField(4, v); }
+  set profileId($8.UUIDValue v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasProfileId() => $_has(3);
   @$pb.TagNumber(4)
   void clearProfileId() => clearField(4);
   @$pb.TagNumber(4)
-  $9.Identifier ensureProfileId() => $_ensure(3);
+  $8.UUIDValue ensureProfileId() => $_ensure(3);
+
+  @$pb.TagNumber(5)
+  $core.String get name => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set name($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasName() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearName() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get notes => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set notes($core.String v) { $_setString(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasNotes() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearNotes() => clearField(6);
 }
 
 class CreateGroupRequest extends $pb.GeneratedMessage {

@@ -54,6 +54,13 @@ mixin _$ServiceEmploymentEditStore on _ServiceEmploymentEditStore, Store {
     return _$createAsyncAction.run(() => super.create());
   }
 
+  final _$deleteAsyncAction = AsyncAction('_ServiceEmploymentEditStore.delete');
+
+  @override
+  Future<dynamic> delete() {
+    return _$deleteAsyncAction.run(() => super.delete());
+  }
+
   @override
   String toString() {
     return '''

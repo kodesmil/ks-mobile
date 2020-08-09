@@ -60,12 +60,13 @@ const ServiceEmployment$json = const {
     const {'1': 'id', '3': 1, '4': 1, '5': 4, '8': const {}, '10': 'id'},
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
-    const {'1': 'first_name', '3': 4, '4': 1, '5': 9, '10': 'firstName'},
-    const {'1': 'last_name', '3': 5, '4': 1, '5': 9, '10': 'lastName'},
-    const {'1': 'email', '3': 6, '4': 1, '5': 9, '10': 'email'},
-    const {'1': 'phone', '3': 7, '4': 1, '5': 9, '10': 'phone'},
-    const {'1': 'can_be_contacted', '3': 8, '4': 1, '5': 8, '10': 'canBeContacted'},
-    const {'1': 'service_provider_id', '3': 9, '4': 1, '5': 11, '6': '.gorm.types.UUIDValue', '10': 'serviceProviderId'},
+    const {'1': 'profile_id', '3': 4, '4': 1, '5': 9, '8': const {}, '10': 'profileId'},
+    const {'1': 'first_name', '3': 5, '4': 1, '5': 9, '10': 'firstName'},
+    const {'1': 'last_name', '3': 6, '4': 1, '5': 9, '10': 'lastName'},
+    const {'1': 'email', '3': 7, '4': 1, '5': 9, '10': 'email'},
+    const {'1': 'phone', '3': 8, '4': 1, '5': 9, '10': 'phone'},
+    const {'1': 'can_be_contacted', '3': 9, '4': 1, '5': 8, '10': 'canBeContacted'},
+    const {'1': 'service_provider_id', '3': 10, '4': 1, '5': 11, '6': '.gorm.types.UUIDValue', '8': const {}, '10': 'serviceProviderId'},
   ],
   '7': const {},
 };
@@ -95,7 +96,7 @@ const ServiceApplication$json = const {
     const {'1': 'files', '3': 5, '4': 3, '5': 11, '6': '.model.ServiceApplicationFile', '10': 'files'},
     const {'1': 'applied_at', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'appliedAt'},
     const {'1': 'approved_at', '3': 7, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'approvedAt'},
-    const {'1': 'approved_by', '3': 8, '4': 1, '5': 11, '6': '.model.Profile', '10': 'approvedBy'},
+    const {'1': 'reviewer_id', '3': 8, '4': 1, '5': 11, '6': '.gorm.types.UUIDValue', '8': const {}, '10': 'reviewerId'},
   ],
   '7': const {},
 };
@@ -122,116 +123,6 @@ const ServiceProvider$json = const {
     const {'1': 'employments', '3': 6, '4': 3, '5': 11, '6': '.model.ServiceEmployment', '10': 'employments'},
   ],
   '7': const {},
-};
-
-const ServiceSessionEvaluation$json = const {
-  '1': 'ServiceSessionEvaluation',
-  '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 4, '8': const {}, '10': 'id'},
-    const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
-    const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
-    const {'1': 'session', '3': 4, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'session'},
-    const {'1': 'comment', '3': 5, '4': 1, '5': 9, '10': 'comment'},
-    const {'1': 'recommendation_rate', '3': 6, '4': 1, '5': 1, '10': 'recommendationRate'},
-  ],
-  '7': const {},
-};
-
-const ServiceSession$json = const {
-  '1': 'ServiceSession',
-  '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.gorm.types.UUIDValue', '8': const {}, '10': 'id'},
-    const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
-    const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
-    const {'1': 'scheduled_at', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'scheduledAt'},
-    const {'1': 'finished_at', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'finishedAt'},
-    const {'1': 'offer', '3': 6, '4': 1, '5': 11, '6': '.model.ServiceOffer', '8': const {}, '10': 'offer'},
-    const {'1': 'notes', '3': 7, '4': 3, '5': 11, '6': '.model.ServiceSessionNote', '10': 'notes'},
-    const {'1': 'evaluation', '3': 8, '4': 1, '5': 11, '6': '.model.ServiceSessionEvaluation', '10': 'evaluation'},
-  ],
-  '7': const {},
-};
-
-const ServiceSessionNote$json = const {
-  '1': 'ServiceSessionNote',
-  '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.gorm.types.UUIDValue', '8': const {}, '10': 'id'},
-    const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
-    const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
-    const {'1': 'session', '3': 4, '4': 3, '5': 11, '6': '.model.ServiceSession', '10': 'session'},
-    const {'1': 'text', '3': 5, '4': 1, '5': 9, '10': 'text'},
-  ],
-  '7': const {},
-};
-
-const CreateServiceSessionRequest$json = const {
-  '1': 'CreateServiceSessionRequest',
-  '2': const [
-    const {'1': 'payload', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'payload'},
-  ],
-};
-
-const CreateServiceSessionResponse$json = const {
-  '1': 'CreateServiceSessionResponse',
-  '2': const [
-    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'result'},
-  ],
-};
-
-const ReadServiceSessionRequest$json = const {
-  '1': 'ReadServiceSessionRequest',
-  '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.gorm.types.UUIDValue', '10': 'id'},
-  ],
-};
-
-const ReadServiceSessionResponse$json = const {
-  '1': 'ReadServiceSessionResponse',
-  '2': const [
-    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'result'},
-  ],
-};
-
-const UpdateServiceSessionRequest$json = const {
-  '1': 'UpdateServiceSessionRequest',
-  '2': const [
-    const {'1': 'payload', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'payload'},
-  ],
-};
-
-const UpdateServiceSessionResponse$json = const {
-  '1': 'UpdateServiceSessionResponse',
-  '2': const [
-    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'result'},
-  ],
-};
-
-const DeleteServiceSessionRequest$json = const {
-  '1': 'DeleteServiceSessionRequest',
-  '2': const [
-    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.gorm.types.UUIDValue', '10': 'id'},
-  ],
-};
-
-const DeleteServiceSessionResponse$json = const {
-  '1': 'DeleteServiceSessionResponse',
-};
-
-const ListServiceSessionRequest$json = const {
-  '1': 'ListServiceSessionRequest',
-  '2': const [
-    const {'1': 'filter', '3': 1, '4': 1, '5': 11, '6': '.infoblox.api.Filtering', '10': 'filter'},
-    const {'1': 'order_by', '3': 2, '4': 1, '5': 11, '6': '.infoblox.api.Sorting', '10': 'orderBy'},
-    const {'1': 'fields', '3': 3, '4': 1, '5': 11, '6': '.infoblox.api.FieldSelection', '10': 'fields'},
-    const {'1': 'paging', '3': 4, '4': 1, '5': 11, '6': '.infoblox.api.Pagination', '10': 'paging'},
-  ],
-};
-
-const ListServiceSessionResponse$json = const {
-  '1': 'ListServiceSessionResponse',
-  '2': const [
-    const {'1': 'results', '3': 1, '4': 3, '5': 11, '6': '.model.ServiceSession', '10': 'results'},
-  ],
 };
 
 const CreateServiceProviderRequest$json = const {
@@ -791,6 +682,191 @@ const ListServiceResponse$json = const {
   '1': 'ListServiceResponse',
   '2': const [
     const {'1': 'results', '3': 1, '4': 3, '5': 11, '6': '.model.Service', '10': 'results'},
+  ],
+};
+
+const ServiceSessionEvaluation$json = const {
+  '1': 'ServiceSessionEvaluation',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '8': const {}, '10': 'id'},
+    const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
+    const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
+    const {'1': 'session', '3': 4, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'session'},
+    const {'1': 'comment', '3': 5, '4': 1, '5': 9, '10': 'comment'},
+    const {'1': 'recommendation_rate', '3': 6, '4': 1, '5': 1, '10': 'recommendationRate'},
+  ],
+  '7': const {},
+};
+
+const ServiceSession$json = const {
+  '1': 'ServiceSession',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.gorm.types.UUIDValue', '8': const {}, '10': 'id'},
+    const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
+    const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
+    const {'1': 'profile_id', '3': 4, '4': 1, '5': 9, '8': const {}, '10': 'profileId'},
+    const {'1': 'scheduled_at', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'scheduledAt'},
+    const {'1': 'finished_at', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'finishedAt'},
+    const {'1': 'offer', '3': 7, '4': 1, '5': 11, '6': '.model.ServiceOffer', '8': const {}, '10': 'offer'},
+    const {'1': 'notes', '3': 8, '4': 3, '5': 11, '6': '.model.ServiceSessionNote', '10': 'notes'},
+    const {'1': 'evaluation', '3': 9, '4': 1, '5': 11, '6': '.model.ServiceSessionEvaluation', '10': 'evaluation'},
+  ],
+  '7': const {},
+};
+
+const ServiceSessionNote$json = const {
+  '1': 'ServiceSessionNote',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.gorm.types.UUIDValue', '8': const {}, '10': 'id'},
+    const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
+    const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
+    const {'1': 'session', '3': 4, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'session'},
+    const {'1': 'text', '3': 5, '4': 1, '5': 9, '10': 'text'},
+  ],
+  '7': const {},
+};
+
+const CreateServiceSessionRequest$json = const {
+  '1': 'CreateServiceSessionRequest',
+  '2': const [
+    const {'1': 'payload', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'payload'},
+  ],
+};
+
+const CreateServiceSessionResponse$json = const {
+  '1': 'CreateServiceSessionResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'result'},
+  ],
+};
+
+const ReadServiceSessionRequest$json = const {
+  '1': 'ReadServiceSessionRequest',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.gorm.types.UUIDValue', '10': 'id'},
+  ],
+};
+
+const ReadServiceSessionResponse$json = const {
+  '1': 'ReadServiceSessionResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'result'},
+  ],
+};
+
+const UpdateServiceSessionRequest$json = const {
+  '1': 'UpdateServiceSessionRequest',
+  '2': const [
+    const {'1': 'payload', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'payload'},
+  ],
+};
+
+const UpdateServiceSessionResponse$json = const {
+  '1': 'UpdateServiceSessionResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'result'},
+  ],
+};
+
+const DeleteServiceSessionRequest$json = const {
+  '1': 'DeleteServiceSessionRequest',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.gorm.types.UUIDValue', '10': 'id'},
+  ],
+};
+
+const DeleteServiceSessionResponse$json = const {
+  '1': 'DeleteServiceSessionResponse',
+};
+
+const ListServiceSessionRequest$json = const {
+  '1': 'ListServiceSessionRequest',
+  '2': const [
+    const {'1': 'filter', '3': 1, '4': 1, '5': 11, '6': '.infoblox.api.Filtering', '10': 'filter'},
+    const {'1': 'order_by', '3': 2, '4': 1, '5': 11, '6': '.infoblox.api.Sorting', '10': 'orderBy'},
+    const {'1': 'fields', '3': 3, '4': 1, '5': 11, '6': '.infoblox.api.FieldSelection', '10': 'fields'},
+    const {'1': 'paging', '3': 4, '4': 1, '5': 11, '6': '.infoblox.api.Pagination', '10': 'paging'},
+  ],
+};
+
+const ListServiceSessionResponse$json = const {
+  '1': 'ListServiceSessionResponse',
+  '2': const [
+    const {'1': 'results', '3': 1, '4': 3, '5': 11, '6': '.model.ServiceSession', '10': 'results'},
+  ],
+};
+
+const StreamSessionInputEvent$json = const {
+  '1': 'StreamSessionInputEvent',
+  '2': const [
+    const {'1': 'request_session', '3': 1, '4': 1, '5': 11, '6': '.model.EventRequestSession', '9': 0, '10': 'requestSession'},
+    const {'1': 'join_session', '3': 2, '4': 1, '5': 11, '6': '.model.EventJoinSession', '9': 0, '10': 'joinSession'},
+    const {'1': 'leave_session', '3': 3, '4': 1, '5': 11, '6': '.model.EventLeaveSession', '9': 0, '10': 'leaveSession'},
+  ],
+  '8': const [
+    const {'1': 'event'},
+  ],
+};
+
+const EventRequestSession$json = const {
+  '1': 'EventRequestSession',
+  '2': const [
+    const {'1': 'session', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'session'},
+  ],
+};
+
+const EventJoinSession$json = const {
+  '1': 'EventJoinSession',
+  '2': const [
+    const {'1': 'session', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'session'},
+  ],
+};
+
+const EventLeaveSession$json = const {
+  '1': 'EventLeaveSession',
+  '2': const [
+    const {'1': 'session', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'session'},
+  ],
+};
+
+const StreamSessionOutputEvent$json = const {
+  '1': 'StreamSessionOutputEvent',
+  '2': const [
+    const {'1': 'session_requested', '3': 1, '4': 1, '5': 11, '6': '.model.EventSessionRequested', '9': 0, '10': 'sessionRequested'},
+    const {'1': 'session_started', '3': 2, '4': 1, '5': 11, '6': '.model.EventSessionStarted', '9': 0, '10': 'sessionStarted'},
+    const {'1': 'session_timeout', '3': 3, '4': 1, '5': 11, '6': '.model.EventSessionTimeout', '9': 0, '10': 'sessionTimeout'},
+    const {'1': 'session_finished', '3': 4, '4': 1, '5': 11, '6': '.model.EventSessionFinished', '9': 0, '10': 'sessionFinished'},
+  ],
+  '8': const [
+    const {'1': 'event'},
+  ],
+};
+
+const EventSessionRequested$json = const {
+  '1': 'EventSessionRequested',
+  '2': const [
+    const {'1': 'session', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'session'},
+  ],
+};
+
+const EventSessionStarted$json = const {
+  '1': 'EventSessionStarted',
+  '2': const [
+    const {'1': 'session', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'session'},
+  ],
+};
+
+const EventSessionTimeout$json = const {
+  '1': 'EventSessionTimeout',
+  '2': const [
+    const {'1': 'session', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'session'},
+  ],
+};
+
+const EventSessionFinished$json = const {
+  '1': 'EventSessionFinished',
+  '2': const [
+    const {'1': 'session', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'session'},
   ],
 };
 
