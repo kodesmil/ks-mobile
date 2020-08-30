@@ -7,7 +7,7 @@ import 'package:feat_health/feat_health.dart';
 import 'package:feat_onboarding/feat_onboarding.dart';
 import 'package:feat_storage/feat_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fluro/fluro.dart';
+import 'package:fluro/fluro.dart' as fluro;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -29,7 +29,7 @@ class AppInjector extends StatefulWidget {
   _AppInjectorState createState() => _AppInjectorState();
 }
 
-final router = Router();
+final router = fluro.Router();
 
 class _AppInjectorState extends State<AppInjector> {
   final channel = ClientChannel(
@@ -118,7 +118,7 @@ class _AppInjectorState extends State<AppInjector> {
                 (metadata, url) async {
                   if (store.user == null) return;
                   final idToken = await store.user.getIdToken();
-                  metadata['authorization'] = 'Bearer ${idToken.token}';
+                  metadata['authorization'] = 'Bearer ${idToken}';
                 },
               ],
             );
@@ -138,6 +138,12 @@ class _AppInjectorState extends State<AppInjector> {
         ),
         ProxyProvider<CallOptions, ServicesClient>(
           update: (_, dep, __) => ServicesClient(
+            channel,
+            options: dep,
+          ),
+        ),
+        ProxyProvider<CallOptions, ServiceSessionStreamClient>(
+          update: (_, dep, __) => ServiceSessionStreamClient(
             channel,
             options: dep,
           ),

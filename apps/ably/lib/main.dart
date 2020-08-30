@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:ably/injector.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lib_lego/lib_lego.dart';
@@ -10,6 +11,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
 void realMain() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   var delegate = await LocalizationDelegate.create(
     fallbackLocale: 'en_US',
     supportedLocales: ['en_US', 'nb_NO', 'pl_PL', 'te_IN', 'hi_IN'],

@@ -71,7 +71,7 @@ abstract class _ChatStore with Store {
     final result = <String, ChatMessageInfo>{};
     reversedMessages
         .indexed()
-        .groupBy((v) => v.value.author.id.value)
+        .groupBy((v) => v.value.author.id)
         .forEach((element) {
       element.values.fold<_Tuple<Indexed<ChatMessage>>>(null, (prev, element) {
         final currentKey = element.value.id.value;
@@ -268,7 +268,7 @@ abstract class _ChatStore with Store {
       ChatMessage message, ChatRoomParticipant latestSeen) {
     if (message.createdAt == null) {
       return ChatMessageStatus.NOT_DELIVERED;
-    } else if (message.author.id.value != selectedMyParticipation.id.value) {
+    } else if (message.author.id != selectedMyParticipation.id) {
       return ChatMessageStatus.NOT_PRESENT;
     } else if (latestSeen == null) {
       return ChatMessageStatus.NOT_PRESENT;

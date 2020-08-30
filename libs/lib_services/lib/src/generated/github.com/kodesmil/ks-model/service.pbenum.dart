@@ -24,3 +24,22 @@ class Service_Type extends $pb.ProtobufEnum {
   const Service_Type._($core.int v, $core.String n) : super(v, n);
 }
 
+class ServiceSession_Status extends $pb.ProtobufEnum {
+  static const ServiceSession_Status NOT_STARTED = ServiceSession_Status._(0, 'NOT_STARTED');
+  static const ServiceSession_Status WAITING_FOR_ATTENDEES = ServiceSession_Status._(1, 'WAITING_FOR_ATTENDEES');
+  static const ServiceSession_Status ONGOING = ServiceSession_Status._(2, 'ONGOING');
+  static const ServiceSession_Status FINISHED = ServiceSession_Status._(3, 'FINISHED');
+
+  static const $core.List<ServiceSession_Status> values = <ServiceSession_Status> [
+    NOT_STARTED,
+    WAITING_FOR_ATTENDEES,
+    ONGOING,
+    FINISHED,
+  ];
+
+  static final $core.Map<$core.int, ServiceSession_Status> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static ServiceSession_Status valueOf($core.int value) => _byValue[value];
+
+  const ServiceSession_Status._($core.int v, $core.String n) : super(v, n);
+}
+

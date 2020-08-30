@@ -12,13 +12,13 @@ mixin _$UserStore on _UserStore, Store {
   final _$userAtom = Atom(name: '_UserStore.user');
 
   @override
-  FirebaseUser get user {
+  User get user {
     _$userAtom.reportRead();
     return super.user;
   }
 
   @override
-  set user(FirebaseUser value) {
+  set user(User value) {
     _$userAtom.reportWrite(value, super.user, () {
       super.user = value;
     });
@@ -27,7 +27,7 @@ mixin _$UserStore on _UserStore, Store {
   final _$signInSilentlyAsyncAction = AsyncAction('_UserStore.signInSilently');
 
   @override
-  Future<FirebaseUser> signInSilently() {
+  Future<User> signInSilently() {
     return _$signInSilentlyAsyncAction.run(() => super.signInSilently());
   }
 

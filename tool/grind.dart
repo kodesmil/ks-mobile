@@ -16,8 +16,6 @@ final apps = [
   'features/feat_storage',
   'features/feat_onboarding',
   'features/feat_splash',
-  'features/feat_notifications',
-  'features/feat_profile',
   'features/feat_feed',
   'features/feat_journal',
   'features/feat_health',

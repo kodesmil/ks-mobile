@@ -57,9 +57,14 @@ abstract class _SessionStreamStore with Store {
   }
 
   @action
-  Future requestSession() async {
-    final streamEvent = StreamSessionInputEvent()
-      ..requestSession = EventRequestSession();
-    _input.add(streamEvent);
-  }
+  Future requestSession() async => _input.add(StreamSessionInputEvent()
+    ..requestSession = (EventRequestSession()
+      ..profile = profileStore.profile.id
+      ..session = session));
+
+  @action
+  Future join() async => _input.add(StreamSessionInputEvent()
+    ..joinSession = (EventJoinSession()
+      ..profile = profileStore.profile.id
+      ..session = session));
 }

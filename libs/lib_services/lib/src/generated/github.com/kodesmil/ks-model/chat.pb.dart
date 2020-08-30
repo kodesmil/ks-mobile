@@ -7,6 +7,7 @@
 
 import 'dart:core' as $core;
 
+import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../infobloxopen/protoc-gen-gorm/types/types.pb.dart' as $8;
@@ -180,7 +181,7 @@ class ChatRoom extends $pb.GeneratedMessage {
 
 class ChatRoomParticipant extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ChatRoomParticipant', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$8.UUIDValue>(1, 'id', subBuilder: $8.UUIDValue.create)
+    ..a<$fixnum.Int64>(1, 'id', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
     ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
     ..aOM<$9.Timestamp>(4, 'lastSeenAt', subBuilder: $9.Timestamp.create)
@@ -205,15 +206,13 @@ class ChatRoomParticipant extends $pb.GeneratedMessage {
   static ChatRoomParticipant _defaultInstance;
 
   @$pb.TagNumber(1)
-  $8.UUIDValue get id => $_getN(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set id($8.UUIDValue v) { setField(1, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $8.UUIDValue ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $9.Timestamp get createdAt => $_getN(1);

@@ -2,7 +2,7 @@ import 'package:ably/ui/home_page.dart';
 import 'package:feat_auth/feat_auth.dart';
 import 'package:feat_ion/feat_ion.dart';
 import 'package:feat_onboarding/feat_onboarding.dart';
-import 'package:fluro/fluro.dart';
+import 'package:fluro/fluro.dart' as fluro;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,14 +11,14 @@ class Routes {
   static String onboarding = '/onboarding';
   static String meeting = '/meeting';
 
-  static void configureRoutes(Router router) {
+  static void configureRoutes(fluro.Router router) {
     router.define(root, handler: rootHandler);
     router.define(onboarding, handler: rootHandler);
     router.define(meeting, handler: meetingHandler);
   }
 }
 
-var rootHandler = Handler(
+var rootHandler = fluro.Handler(
   handlerFunc: (context, params) => authGuarded(
     context,
     params,
@@ -28,7 +28,7 @@ var rootHandler = Handler(
   ),
 );
 
-var onboardingHandler = Handler(
+var onboardingHandler = fluro.Handler(
   handlerFunc: (context, params) => authGuarded(
     context,
     params,
@@ -38,7 +38,7 @@ var onboardingHandler = Handler(
   ),
 );
 
-var meetingHandler = Handler(
+var meetingHandler = fluro.Handler(
   handlerFunc: (context, params) => authGuarded(
     context,
     params,

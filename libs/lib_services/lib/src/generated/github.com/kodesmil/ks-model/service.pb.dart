@@ -3614,6 +3614,7 @@ class ServiceSession extends $pb.GeneratedMessage {
     ..aOM<ServiceOffer>(7, 'offer', subBuilder: ServiceOffer.create)
     ..pc<ServiceSessionNote>(8, 'notes', $pb.PbFieldType.PM, subBuilder: ServiceSessionNote.create)
     ..aOM<ServiceSessionEvaluation>(9, 'evaluation', subBuilder: ServiceSessionEvaluation.create)
+    ..e<ServiceSession_Status>(10, 'status', $pb.PbFieldType.OE, defaultOrMaker: ServiceSession_Status.NOT_STARTED, valueOf: ServiceSession_Status.valueOf, enumValues: ServiceSession_Status.values)
     ..hasRequiredFields = false
   ;
 
@@ -3720,6 +3721,15 @@ class ServiceSession extends $pb.GeneratedMessage {
   void clearEvaluation() => clearField(9);
   @$pb.TagNumber(9)
   ServiceSessionEvaluation ensureEvaluation() => $_ensure(8);
+
+  @$pb.TagNumber(10)
+  ServiceSession_Status get status => $_getN(9);
+  @$pb.TagNumber(10)
+  set status(ServiceSession_Status v) { setField(10, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasStatus() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearStatus() => clearField(10);
 }
 
 class ServiceSessionNote extends $pb.GeneratedMessage {
@@ -4224,6 +4234,7 @@ class StreamSessionInputEvent extends $pb.GeneratedMessage {
 class EventRequestSession extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventRequestSession', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..aOM<ServiceSession>(1, 'session', subBuilder: ServiceSession.create)
+    ..aOM<$8.UUIDValue>(2, 'profile', subBuilder: $8.UUIDValue.create)
     ..hasRequiredFields = false
   ;
 
@@ -4252,11 +4263,23 @@ class EventRequestSession extends $pb.GeneratedMessage {
   void clearSession() => clearField(1);
   @$pb.TagNumber(1)
   ServiceSession ensureSession() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $8.UUIDValue get profile => $_getN(1);
+  @$pb.TagNumber(2)
+  set profile($8.UUIDValue v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasProfile() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearProfile() => clearField(2);
+  @$pb.TagNumber(2)
+  $8.UUIDValue ensureProfile() => $_ensure(1);
 }
 
 class EventJoinSession extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventJoinSession', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..aOM<ServiceSession>(1, 'session', subBuilder: ServiceSession.create)
+    ..aOM<$8.UUIDValue>(2, 'profile', subBuilder: $8.UUIDValue.create)
     ..hasRequiredFields = false
   ;
 
@@ -4285,11 +4308,23 @@ class EventJoinSession extends $pb.GeneratedMessage {
   void clearSession() => clearField(1);
   @$pb.TagNumber(1)
   ServiceSession ensureSession() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $8.UUIDValue get profile => $_getN(1);
+  @$pb.TagNumber(2)
+  set profile($8.UUIDValue v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasProfile() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearProfile() => clearField(2);
+  @$pb.TagNumber(2)
+  $8.UUIDValue ensureProfile() => $_ensure(1);
 }
 
 class EventLeaveSession extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventLeaveSession', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..aOM<ServiceSession>(1, 'session', subBuilder: ServiceSession.create)
+    ..aOM<$8.UUIDValue>(2, 'profile', subBuilder: $8.UUIDValue.create)
     ..hasRequiredFields = false
   ;
 
@@ -4318,6 +4353,17 @@ class EventLeaveSession extends $pb.GeneratedMessage {
   void clearSession() => clearField(1);
   @$pb.TagNumber(1)
   ServiceSession ensureSession() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $8.UUIDValue get profile => $_getN(1);
+  @$pb.TagNumber(2)
+  set profile($8.UUIDValue v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasProfile() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearProfile() => clearField(2);
+  @$pb.TagNumber(2)
+  $8.UUIDValue ensureProfile() => $_ensure(1);
 }
 
 enum StreamSessionOutputEvent_Event {
@@ -4411,6 +4457,7 @@ class StreamSessionOutputEvent extends $pb.GeneratedMessage {
 class EventSessionRequested extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventSessionRequested', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..aOM<ServiceSession>(1, 'session', subBuilder: ServiceSession.create)
+    ..aOM<$8.UUIDValue>(2, 'profile', subBuilder: $8.UUIDValue.create)
     ..hasRequiredFields = false
   ;
 
@@ -4439,11 +4486,23 @@ class EventSessionRequested extends $pb.GeneratedMessage {
   void clearSession() => clearField(1);
   @$pb.TagNumber(1)
   ServiceSession ensureSession() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $8.UUIDValue get profile => $_getN(1);
+  @$pb.TagNumber(2)
+  set profile($8.UUIDValue v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasProfile() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearProfile() => clearField(2);
+  @$pb.TagNumber(2)
+  $8.UUIDValue ensureProfile() => $_ensure(1);
 }
 
 class EventSessionStarted extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventSessionStarted', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..aOM<ServiceSession>(1, 'session', subBuilder: ServiceSession.create)
+    ..aOM<$8.UUIDValue>(2, 'profile', subBuilder: $8.UUIDValue.create)
     ..hasRequiredFields = false
   ;
 
@@ -4472,6 +4531,17 @@ class EventSessionStarted extends $pb.GeneratedMessage {
   void clearSession() => clearField(1);
   @$pb.TagNumber(1)
   ServiceSession ensureSession() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $8.UUIDValue get profile => $_getN(1);
+  @$pb.TagNumber(2)
+  set profile($8.UUIDValue v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasProfile() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearProfile() => clearField(2);
+  @$pb.TagNumber(2)
+  $8.UUIDValue ensureProfile() => $_ensure(1);
 }
 
 class EventSessionTimeout extends $pb.GeneratedMessage {
@@ -4510,6 +4580,7 @@ class EventSessionTimeout extends $pb.GeneratedMessage {
 class EventSessionFinished extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('EventSessionFinished', package: const $pb.PackageName('model'), createEmptyInstance: create)
     ..aOM<ServiceSession>(1, 'session', subBuilder: ServiceSession.create)
+    ..aOM<$8.UUIDValue>(2, 'profile', subBuilder: $8.UUIDValue.create)
     ..hasRequiredFields = false
   ;
 
@@ -4538,5 +4609,16 @@ class EventSessionFinished extends $pb.GeneratedMessage {
   void clearSession() => clearField(1);
   @$pb.TagNumber(1)
   ServiceSession ensureSession() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $8.UUIDValue get profile => $_getN(1);
+  @$pb.TagNumber(2)
+  set profile($8.UUIDValue v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasProfile() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearProfile() => clearField(2);
+  @$pb.TagNumber(2)
+  $8.UUIDValue ensureProfile() => $_ensure(1);
 }
 
