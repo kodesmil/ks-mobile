@@ -44,8 +44,8 @@ jobs:
           - 'google-gdk-license-.+'
       before_install:
         - touch $HOME/.android/repositories.cfg
-        - yes | sdkmanager "platforms;android-28"
-        - yes | sdkmanager "build-tools;28.0.3"
+        - yes | sdkmanager "platforms;android-30"
+        - yes | sdkmanager "build-tools;30.0.0"
 
       if: branch = dev
       script:
@@ -81,8 +81,8 @@ jobs:
           - 'google-gdk-license-.+'
       before_install:
         - touch $HOME/.android/repositories.cfg
-        - yes | sdkmanager "platforms;android-28"
-        - yes | sdkmanager "build-tools;28.0.3"
+        - yes | sdkmanager "platforms;android-30"
+        - yes | sdkmanager "build-tools;30.0.0"
 
       if: branch = master
       script:
@@ -100,6 +100,6 @@ cache:
 
 env:
   global:
-    - ANDROID_API_LEVEL=28
-    - ANDROID_BUILD_TOOLS_VERSION=28.0.3
+    - ANDROID_API_LEVEL=30
+    - ANDROID_BUILD_TOOLS_VERSION=30.0.0
     - ANDROID_ABI=armeabi-v7a
