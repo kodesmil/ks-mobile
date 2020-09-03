@@ -7,7 +7,7 @@ install:
   - tar xvf config.tar
 
 before_script:
-  - flutter pub upgrade
+  - flutter pub get
   - curl -sL https://firebase.tools | bash
 
 jobs:
