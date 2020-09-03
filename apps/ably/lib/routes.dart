@@ -52,20 +52,14 @@ Widget authGuarded(
   BuildContext context,
   Map<String, List<String>> params,
   Widget page,
-) {
-  final store = Provider.of<UserStore>(context);
-  if (store.user != null) {
-    return page;
-  }
-  store.signInSilently();
-  return StreamBuilder(
-    stream: store.output,
-    builder: (context, snap) {
-      if (snap.data != null) {
-        return page;
-      } else {
-        return LoginPage();
-      }
-    },
-  );
-}
+) =>
+    StreamBuilder(
+      stream: Provider.of<UserStore>(context).firebaseAuth.authStateChanges(),
+      builder: (context, snap) {
+        if (snap.data != null) {
+          return page;
+        } else {
+          return LoginPage();
+        }
+      },
+    );

@@ -116,8 +116,7 @@ class _AppInjectorState extends State<AppInjector> {
             return CallOptions(
               providers: [
                 (metadata, url) async {
-                  if (store.user == null) return;
-                  final idToken = await store.user.getIdToken();
+                  final idToken = await store.firebaseAuth.currentUser.getIdToken();
                   metadata['authorization'] = 'Bearer ${idToken}';
                 },
               ],

@@ -93,7 +93,6 @@ abstract class _SignUpStore with Store {
         email: email,
         password: password,
       );
-      await userStore.signInSilently();
       loading = false;
       success = true;
       errorStore.showError = false;

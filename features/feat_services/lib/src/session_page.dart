@@ -53,7 +53,7 @@ class _ServiceSessionContentState extends State<ServiceSessionContent> {
   void didChangeDependencies() {
     final store = Provider.of<SessionStreamStore>(context);
     store.connect();
-    store.requestSession();
+    store.joinSession();
     super.didChangeDependencies();
   }
 
@@ -87,7 +87,7 @@ class _ServiceSessionContentState extends State<ServiceSessionContent> {
                   OutlineButton(
                     child: Text('Join'),
                     onPressed: () {
-                      store.join();
+                      store.joinSession();
                     },
                   ),
                   SizedBox(height: 10),

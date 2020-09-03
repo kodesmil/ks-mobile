@@ -50,6 +50,13 @@ class ServicesClient extends $grpc.Client {
       ($2.ListServiceSessionRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $2.ListServiceSessionResponse.fromBuffer(value));
+  static final _$listServiceOfferSession = $grpc.ClientMethod<
+          $2.ListServiceOfferSessionRequest,
+          $2.ListServiceOfferSessionResponse>(
+      '/model.Services/ListServiceOfferSession',
+      ($2.ListServiceOfferSessionRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $2.ListServiceOfferSessionResponse.fromBuffer(value));
   static final _$createServiceSession = $grpc.ClientMethod<
           $2.CreateServiceSessionRequest, $2.CreateServiceSessionResponse>(
       '/model.Services/CreateServiceSession',
@@ -74,6 +81,41 @@ class ServicesClient extends $grpc.Client {
       ($2.DeleteServiceSessionRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $2.DeleteServiceSessionResponse.fromBuffer(value));
+  static final _$listServiceSessionEvaluation = $grpc.ClientMethod<
+          $2.ListServiceSessionEvaluationRequest,
+          $2.ListServiceSessionEvaluationResponse>(
+      '/model.Services/ListServiceSessionEvaluation',
+      ($2.ListServiceSessionEvaluationRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $2.ListServiceSessionEvaluationResponse.fromBuffer(value));
+  static final _$createServiceSessionEvaluation = $grpc.ClientMethod<
+          $2.CreateServiceSessionEvaluationRequest,
+          $2.CreateServiceSessionEvaluationResponse>(
+      '/model.Services/CreateServiceSessionEvaluation',
+      ($2.CreateServiceSessionEvaluationRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $2.CreateServiceSessionEvaluationResponse.fromBuffer(value));
+  static final _$readServiceSessionEvaluation = $grpc.ClientMethod<
+          $2.ReadServiceSessionEvaluationRequest,
+          $2.ReadServiceSessionEvaluationResponse>(
+      '/model.Services/ReadServiceSessionEvaluation',
+      ($2.ReadServiceSessionEvaluationRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $2.ReadServiceSessionEvaluationResponse.fromBuffer(value));
+  static final _$updateServiceSessionEvaluation = $grpc.ClientMethod<
+          $2.UpdateServiceSessionEvaluationRequest,
+          $2.UpdateServiceSessionEvaluationResponse>(
+      '/model.Services/UpdateServiceSessionEvaluation',
+      ($2.UpdateServiceSessionEvaluationRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $2.UpdateServiceSessionEvaluationResponse.fromBuffer(value));
+  static final _$deleteServiceSessionEvaluation = $grpc.ClientMethod<
+          $2.DeleteServiceSessionEvaluationRequest,
+          $2.DeleteServiceSessionEvaluationResponse>(
+      '/model.Services/DeleteServiceSessionEvaluation',
+      ($2.DeleteServiceSessionEvaluationRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $2.DeleteServiceSessionEvaluationResponse.fromBuffer(value));
   static final _$listServiceTag =
       $grpc.ClientMethod<$2.ListServiceTagRequest, $2.ListServiceTagResponse>(
           '/model.Services/ListServiceTag',
@@ -318,6 +360,15 @@ class ServicesClient extends $grpc.Client {
     return $grpc.ResponseFuture(call);
   }
 
+  $grpc.ResponseFuture<$2.ListServiceOfferSessionResponse>
+      listServiceOfferSession($2.ListServiceOfferSessionRequest request,
+          {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$listServiceOfferSession, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
   $grpc.ResponseFuture<$2.CreateServiceSessionResponse> createServiceSession(
       $2.CreateServiceSessionRequest request,
       {$grpc.CallOptions options}) {
@@ -350,6 +401,56 @@ class ServicesClient extends $grpc.Client {
       {$grpc.CallOptions options}) {
     final call = $createCall(
         _$deleteServiceSession, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$2.ListServiceSessionEvaluationResponse>
+      listServiceSessionEvaluation(
+          $2.ListServiceSessionEvaluationRequest request,
+          {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$listServiceSessionEvaluation, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$2.CreateServiceSessionEvaluationResponse>
+      createServiceSessionEvaluation(
+          $2.CreateServiceSessionEvaluationRequest request,
+          {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$createServiceSessionEvaluation, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$2.ReadServiceSessionEvaluationResponse>
+      readServiceSessionEvaluation(
+          $2.ReadServiceSessionEvaluationRequest request,
+          {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$readServiceSessionEvaluation, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$2.UpdateServiceSessionEvaluationResponse>
+      updateServiceSessionEvaluation(
+          $2.UpdateServiceSessionEvaluationRequest request,
+          {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$updateServiceSessionEvaluation, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$2.DeleteServiceSessionEvaluationResponse>
+      deleteServiceSessionEvaluation(
+          $2.DeleteServiceSessionEvaluationRequest request,
+          {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$deleteServiceSessionEvaluation, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -683,6 +784,15 @@ abstract class ServicesServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $2.ListServiceSessionRequest.fromBuffer(value),
         ($2.ListServiceSessionResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.ListServiceOfferSessionRequest,
+            $2.ListServiceOfferSessionResponse>(
+        'ListServiceOfferSession',
+        listServiceOfferSession_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $2.ListServiceOfferSessionRequest.fromBuffer(value),
+        ($2.ListServiceOfferSessionResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$2.CreateServiceSessionRequest,
             $2.CreateServiceSessionResponse>(
         'CreateServiceSession',
@@ -719,6 +829,56 @@ abstract class ServicesServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $2.DeleteServiceSessionRequest.fromBuffer(value),
         ($2.DeleteServiceSessionResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.ListServiceSessionEvaluationRequest,
+            $2.ListServiceSessionEvaluationResponse>(
+        'ListServiceSessionEvaluation',
+        listServiceSessionEvaluation_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $2.ListServiceSessionEvaluationRequest.fromBuffer(value),
+        ($2.ListServiceSessionEvaluationResponse value) =>
+            value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.CreateServiceSessionEvaluationRequest,
+            $2.CreateServiceSessionEvaluationResponse>(
+        'CreateServiceSessionEvaluation',
+        createServiceSessionEvaluation_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $2.CreateServiceSessionEvaluationRequest.fromBuffer(value),
+        ($2.CreateServiceSessionEvaluationResponse value) =>
+            value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.ReadServiceSessionEvaluationRequest,
+            $2.ReadServiceSessionEvaluationResponse>(
+        'ReadServiceSessionEvaluation',
+        readServiceSessionEvaluation_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $2.ReadServiceSessionEvaluationRequest.fromBuffer(value),
+        ($2.ReadServiceSessionEvaluationResponse value) =>
+            value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.UpdateServiceSessionEvaluationRequest,
+            $2.UpdateServiceSessionEvaluationResponse>(
+        'UpdateServiceSessionEvaluation',
+        updateServiceSessionEvaluation_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $2.UpdateServiceSessionEvaluationRequest.fromBuffer(value),
+        ($2.UpdateServiceSessionEvaluationResponse value) =>
+            value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$2.DeleteServiceSessionEvaluationRequest,
+            $2.DeleteServiceSessionEvaluationResponse>(
+        'DeleteServiceSessionEvaluation',
+        deleteServiceSessionEvaluation_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $2.DeleteServiceSessionEvaluationRequest.fromBuffer(value),
+        ($2.DeleteServiceSessionEvaluationResponse value) =>
+            value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$2.ListServiceTagRequest,
             $2.ListServiceTagResponse>(
         'ListServiceTag',
@@ -1025,6 +1185,12 @@ abstract class ServicesServiceBase extends $grpc.Service {
     return listServiceSession(call, await request);
   }
 
+  $async.Future<$2.ListServiceOfferSessionResponse> listServiceOfferSession_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$2.ListServiceOfferSessionRequest> request) async {
+    return listServiceOfferSession(call, await request);
+  }
+
   $async.Future<$2.CreateServiceSessionResponse> createServiceSession_Pre(
       $grpc.ServiceCall call,
       $async.Future<$2.CreateServiceSessionRequest> request) async {
@@ -1047,6 +1213,42 @@ abstract class ServicesServiceBase extends $grpc.Service {
       $grpc.ServiceCall call,
       $async.Future<$2.DeleteServiceSessionRequest> request) async {
     return deleteServiceSession(call, await request);
+  }
+
+  $async.Future<$2.ListServiceSessionEvaluationResponse>
+      listServiceSessionEvaluation_Pre($grpc.ServiceCall call,
+          $async.Future<$2.ListServiceSessionEvaluationRequest> request) async {
+    return listServiceSessionEvaluation(call, await request);
+  }
+
+  $async.Future<$2.CreateServiceSessionEvaluationResponse>
+      createServiceSessionEvaluation_Pre(
+          $grpc.ServiceCall call,
+          $async.Future<$2.CreateServiceSessionEvaluationRequest>
+              request) async {
+    return createServiceSessionEvaluation(call, await request);
+  }
+
+  $async.Future<$2.ReadServiceSessionEvaluationResponse>
+      readServiceSessionEvaluation_Pre($grpc.ServiceCall call,
+          $async.Future<$2.ReadServiceSessionEvaluationRequest> request) async {
+    return readServiceSessionEvaluation(call, await request);
+  }
+
+  $async.Future<$2.UpdateServiceSessionEvaluationResponse>
+      updateServiceSessionEvaluation_Pre(
+          $grpc.ServiceCall call,
+          $async.Future<$2.UpdateServiceSessionEvaluationRequest>
+              request) async {
+    return updateServiceSessionEvaluation(call, await request);
+  }
+
+  $async.Future<$2.DeleteServiceSessionEvaluationResponse>
+      deleteServiceSessionEvaluation_Pre(
+          $grpc.ServiceCall call,
+          $async.Future<$2.DeleteServiceSessionEvaluationRequest>
+              request) async {
+    return deleteServiceSessionEvaluation(call, await request);
   }
 
   $async.Future<$2.ListServiceTagResponse> listServiceTag_Pre(
@@ -1241,6 +1443,8 @@ abstract class ServicesServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $2.DeleteServiceRequest request);
   $async.Future<$2.ListServiceSessionResponse> listServiceSession(
       $grpc.ServiceCall call, $2.ListServiceSessionRequest request);
+  $async.Future<$2.ListServiceOfferSessionResponse> listServiceOfferSession(
+      $grpc.ServiceCall call, $2.ListServiceOfferSessionRequest request);
   $async.Future<$2.CreateServiceSessionResponse> createServiceSession(
       $grpc.ServiceCall call, $2.CreateServiceSessionRequest request);
   $async.Future<$2.ReadServiceSessionResponse> readServiceSession(
@@ -1249,6 +1453,21 @@ abstract class ServicesServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $2.UpdateServiceSessionRequest request);
   $async.Future<$2.DeleteServiceSessionResponse> deleteServiceSession(
       $grpc.ServiceCall call, $2.DeleteServiceSessionRequest request);
+  $async.Future<$2.ListServiceSessionEvaluationResponse>
+      listServiceSessionEvaluation($grpc.ServiceCall call,
+          $2.ListServiceSessionEvaluationRequest request);
+  $async.Future<$2.CreateServiceSessionEvaluationResponse>
+      createServiceSessionEvaluation($grpc.ServiceCall call,
+          $2.CreateServiceSessionEvaluationRequest request);
+  $async.Future<$2.ReadServiceSessionEvaluationResponse>
+      readServiceSessionEvaluation($grpc.ServiceCall call,
+          $2.ReadServiceSessionEvaluationRequest request);
+  $async.Future<$2.UpdateServiceSessionEvaluationResponse>
+      updateServiceSessionEvaluation($grpc.ServiceCall call,
+          $2.UpdateServiceSessionEvaluationRequest request);
+  $async.Future<$2.DeleteServiceSessionEvaluationResponse>
+      deleteServiceSessionEvaluation($grpc.ServiceCall call,
+          $2.DeleteServiceSessionEvaluationRequest request);
   $async.Future<$2.ListServiceTagResponse> listServiceTag(
       $grpc.ServiceCall call, $2.ListServiceTagRequest request);
   $async.Future<$2.CreateServiceTagResponse> createServiceTag(

@@ -55,7 +55,7 @@ class _ServiceSessionEvaluationContentState
   @override
   void didChangeDependencies() async {
     final store = Provider.of<ServiceSessionEvaluationStore>(context);
-    store.evaluation = widget.session.evaluation ?? ServiceSessionEvaluation();
+    store.evaluation = ServiceSessionEvaluation();
     _commentController.addListener(_commentListener);
     _commentController.text = store.evaluation.comment;
     _recommendationRate = store.evaluation.recommendationRate;
@@ -125,10 +125,7 @@ class _ServiceSessionEvaluationContentState
                             shape: StadiumBorder(),
                             onPressed: () async {
                               await store.create(widget.session);
-                              return ksNavigateNamedAndRemoveUntil(
-                                context,
-                                '/',
-                              );
+                              Navigator.pop(context);
                             },
                           ),
                         ],

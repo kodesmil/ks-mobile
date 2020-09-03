@@ -23,18 +23,15 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   @override
-  void didChangeDependencies() {
-    final profileStore = Provider.of<ProfileStore>(context);
-    profileStore.fetchOrCreateProfile();
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppStateNotifier>(context);
-    return appState.appMode == AppMode.client
-        ? HomeClientPage()
-        : HomeBusinessPage();
+    return Material(
+      child: NotificationContainer(
+        child: appState.appMode == AppMode.client
+            ? HomeClientPage()
+            : HomeBusinessPage(),
+      ),
+    );
   }
 }
 
@@ -55,7 +52,6 @@ class _HomeClientPageState extends State<HomeClientPage> {
 
   @override
   Widget build(BuildContext context) {
-    final appState = Provider.of<AppStateNotifier>(context);
     final titles = [
       'Journal',
       'Hi!',
@@ -93,54 +89,52 @@ class _HomeClientPageState extends State<HomeClientPage> {
       ),
     ];
     var theme = Theme.of(context).bottomNavigationBarTheme;
-    return NotificationContainer(
-      child: MenstruationPersonalInfoWidget(
-        child: CupertinoTabScaffold(
-          tabBar: CupertinoTabBar(
-            backgroundColor: theme.backgroundColor,
-            activeColor: theme.selectedItemColor,
-            inactiveColor: theme.unselectedItemColor,
-            currentIndex: 1,
-            items: items,
-          ),
-          tabBuilder: (BuildContext context, int index) {
-            return CupertinoTabView(
-              builder: (BuildContext context) {
-                return CupertinoPageScaffold(
-                  child: CustomScrollView(
-                    slivers: [
-                      KsNavigationBar(
-                        withBackgroundImage: false,
-                        action: GestureDetector(
-                          child: Container(
-                            padding: const EdgeInsets.all(8),
-                            child: SizedBox(
-                              width: 40,
-                              height: 40,
-                              child: Container(
-                                child: ProfileAvatar(),
-                              ),
+    return MenstruationPersonalInfoWidget(
+      child: CupertinoTabScaffold(
+        tabBar: CupertinoTabBar(
+          backgroundColor: theme.backgroundColor,
+          activeColor: theme.selectedItemColor,
+          inactiveColor: theme.unselectedItemColor,
+          currentIndex: 1,
+          items: items,
+        ),
+        tabBuilder: (BuildContext context, int index) {
+          return CupertinoTabView(
+            builder: (BuildContext context) {
+              return CupertinoPageScaffold(
+                child: CustomScrollView(
+                  slivers: [
+                    KsNavigationBar(
+                      withBackgroundImage: false,
+                      action: GestureDetector(
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          child: SizedBox(
+                            width: 40,
+                            height: 40,
+                            child: Container(
+                              child: ProfileAvatar(),
                             ),
                           ),
-                          onTap: () {
-                            Navigator.of(context, rootNavigator: true).push(
-                              CupertinoPageRoute(
-                                fullscreenDialog: true,
-                                builder: (context) => ProfilePage(),
-                              ),
-                            );
-                          },
                         ),
-                        title: titles[index],
+                        onTap: () {
+                          Navigator.of(context, rootNavigator: true).push(
+                            CupertinoPageRoute(
+                              fullscreenDialog: true,
+                              builder: (context) => ProfilePage(),
+                            ),
+                          );
+                        },
                       ),
-                      pages[index],
-                    ],
-                  ),
-                );
-              },
-            );
-          },
-        ),
+                      title: titles[index],
+                    ),
+                    pages[index],
+                  ],
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }
@@ -156,29 +150,69 @@ class HomeBusinessPage extends StatefulWidget {
 class _HomeBusinessPageState extends State<HomeBusinessPage> {
   @override
   Widget build(BuildContext context) {
-    return ServiceApplicationListPage(
-      navigationBar: KsNavigationBar(
-        withBackgroundImage: false,
-        action: GestureDetector(
-          child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: SizedBox(
-              width: 40,
-              height: 40,
-              child: ProfileAvatar(),
-            ),
-          ),
-          onTap: () {
-            Navigator.of(context, rootNavigator: true).push(
-              CupertinoPageRoute(
-                fullscreenDialog: true,
-                builder: (context) => ProfilePage(),
+    final titles = [
+      'Sessions',
+      'Configuration',
+    ];
+    final pages = [
+      ServiceSessionBizListPage(),
+      ServiceApplicationListPage(),
+    ];
+    final items = [
+      BottomNavigationBarItem(
+        icon: Icon(Icons.work),
+        title: Text('Sessions'),
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.archive),
+        title: Text('Configuration'),
+      ),
+    ];
+    var theme = Theme.of(context).bottomNavigationBarTheme;
+    return CupertinoTabScaffold(
+      tabBar: CupertinoTabBar(
+        backgroundColor: theme.backgroundColor,
+        activeColor: theme.selectedItemColor,
+        inactiveColor: theme.unselectedItemColor,
+        items: items,
+      ),
+      tabBuilder: (BuildContext context, int index) {
+        return CupertinoTabView(
+          builder: (BuildContext context) {
+            return CupertinoPageScaffold(
+              child: CustomScrollView(
+                slivers: [
+                  KsNavigationBar(
+                    withBackgroundImage: false,
+                    action: GestureDetector(
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        child: SizedBox(
+                          width: 40,
+                          height: 40,
+                          child: Container(
+                            child: ProfileAvatar(),
+                          ),
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.of(context, rootNavigator: true).push(
+                          CupertinoPageRoute(
+                            fullscreenDialog: true,
+                            builder: (context) => ProfilePage(),
+                          ),
+                        );
+                      },
+                    ),
+                    title: titles[index],
+                  ),
+                  pages[index],
+                ],
               ),
             );
           },
-        ),
-        title: 'Services',
-      ),
+        );
+      },
     );
   }
 }

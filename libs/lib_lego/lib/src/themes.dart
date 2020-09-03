@@ -10,7 +10,7 @@ enum AppMode {
 
 class AppStateNotifier extends ChangeNotifier {
   ThemeMode themeMode;
-  AppMode appMode = AppMode.business;
+  AppMode appMode = AppMode.client;
 
   void updateTheme(ThemeMode mode) {
     themeMode = mode;

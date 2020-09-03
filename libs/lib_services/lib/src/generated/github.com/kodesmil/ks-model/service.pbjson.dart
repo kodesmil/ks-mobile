@@ -50,6 +50,8 @@ const ServiceOffer$json = const {
     const {'1': 'description', '3': 8, '4': 1, '5': 9, '10': 'description'},
     const {'1': 'title', '3': 9, '4': 1, '5': 9, '10': 'title'},
     const {'1': 'picture_url', '3': 10, '4': 1, '5': 9, '10': 'pictureUrl'},
+    const {'1': 'sessions', '3': 11, '4': 3, '5': 11, '6': '.model.ServiceSession', '10': 'sessions'},
+    const {'1': 'owner', '3': 12, '4': 1, '5': 11, '6': '.model.ServiceEmployment', '8': const {}, '10': 'owner'},
   ],
   '7': const {},
 };
@@ -691,7 +693,7 @@ const ServiceSessionEvaluation$json = const {
     const {'1': 'id', '3': 1, '4': 1, '5': 4, '8': const {}, '10': 'id'},
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
-    const {'1': 'session', '3': 4, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'session'},
+    const {'1': 'session', '3': 4, '4': 1, '5': 11, '6': '.model.ServiceSession', '8': const {}, '10': 'session'},
     const {'1': 'comment', '3': 5, '4': 1, '5': 9, '10': 'comment'},
     const {'1': 'recommendation_rate', '3': 6, '4': 1, '5': 1, '10': 'recommendationRate'},
   ],
@@ -709,8 +711,8 @@ const ServiceSession$json = const {
     const {'1': 'finished_at', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'finishedAt'},
     const {'1': 'offer', '3': 7, '4': 1, '5': 11, '6': '.model.ServiceOffer', '8': const {}, '10': 'offer'},
     const {'1': 'notes', '3': 8, '4': 3, '5': 11, '6': '.model.ServiceSessionNote', '10': 'notes'},
-    const {'1': 'evaluation', '3': 9, '4': 1, '5': 11, '6': '.model.ServiceSessionEvaluation', '10': 'evaluation'},
-    const {'1': 'status', '3': 10, '4': 1, '5': 14, '6': '.model.ServiceSession.Status', '10': 'status'},
+    const {'1': 'status', '3': 9, '4': 1, '5': 14, '6': '.model.ServiceSession.Status', '10': 'status'},
+    const {'1': 'evaluations', '3': 10, '4': 3, '5': 11, '6': '.model.ServiceSessionEvaluation', '10': 'evaluations'},
   ],
   '4': const [ServiceSession_Status$json],
   '7': const {},
@@ -723,6 +725,7 @@ const ServiceSession_Status$json = const {
     const {'1': 'WAITING_FOR_ATTENDEES', '2': 1},
     const {'1': 'ONGOING', '2': 2},
     const {'1': 'FINISHED', '2': 3},
+    const {'1': 'CANCELED', '2': 4},
   ],
 };
 
@@ -805,6 +808,93 @@ const ListServiceSessionResponse$json = const {
   '1': 'ListServiceSessionResponse',
   '2': const [
     const {'1': 'results', '3': 1, '4': 3, '5': 11, '6': '.model.ServiceSession', '10': 'results'},
+  ],
+};
+
+const ListServiceOfferSessionRequest$json = const {
+  '1': 'ListServiceOfferSessionRequest',
+  '2': const [
+    const {'1': 'filter', '3': 1, '4': 1, '5': 11, '6': '.infoblox.api.Filtering', '10': 'filter'},
+    const {'1': 'order_by', '3': 2, '4': 1, '5': 11, '6': '.infoblox.api.Sorting', '10': 'orderBy'},
+    const {'1': 'fields', '3': 3, '4': 1, '5': 11, '6': '.infoblox.api.FieldSelection', '10': 'fields'},
+    const {'1': 'paging', '3': 4, '4': 1, '5': 11, '6': '.infoblox.api.Pagination', '10': 'paging'},
+  ],
+};
+
+const ListServiceOfferSessionResponse$json = const {
+  '1': 'ListServiceOfferSessionResponse',
+  '2': const [
+    const {'1': 'results', '3': 1, '4': 3, '5': 11, '6': '.model.ServiceSession', '10': 'results'},
+  ],
+};
+
+const CreateServiceSessionEvaluationRequest$json = const {
+  '1': 'CreateServiceSessionEvaluationRequest',
+  '2': const [
+    const {'1': 'payload', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSessionEvaluation', '10': 'payload'},
+  ],
+};
+
+const CreateServiceSessionEvaluationResponse$json = const {
+  '1': 'CreateServiceSessionEvaluationResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSessionEvaluation', '10': 'result'},
+  ],
+};
+
+const ReadServiceSessionEvaluationRequest$json = const {
+  '1': 'ReadServiceSessionEvaluationRequest',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
+  ],
+};
+
+const ReadServiceSessionEvaluationResponse$json = const {
+  '1': 'ReadServiceSessionEvaluationResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSessionEvaluation', '10': 'result'},
+  ],
+};
+
+const UpdateServiceSessionEvaluationRequest$json = const {
+  '1': 'UpdateServiceSessionEvaluationRequest',
+  '2': const [
+    const {'1': 'payload', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSessionEvaluation', '10': 'payload'},
+  ],
+};
+
+const UpdateServiceSessionEvaluationResponse$json = const {
+  '1': 'UpdateServiceSessionEvaluationResponse',
+  '2': const [
+    const {'1': 'result', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSessionEvaluation', '10': 'result'},
+  ],
+};
+
+const DeleteServiceSessionEvaluationRequest$json = const {
+  '1': 'DeleteServiceSessionEvaluationRequest',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
+  ],
+};
+
+const DeleteServiceSessionEvaluationResponse$json = const {
+  '1': 'DeleteServiceSessionEvaluationResponse',
+};
+
+const ListServiceSessionEvaluationRequest$json = const {
+  '1': 'ListServiceSessionEvaluationRequest',
+  '2': const [
+    const {'1': 'filter', '3': 1, '4': 1, '5': 11, '6': '.infoblox.api.Filtering', '10': 'filter'},
+    const {'1': 'order_by', '3': 2, '4': 1, '5': 11, '6': '.infoblox.api.Sorting', '10': 'orderBy'},
+    const {'1': 'fields', '3': 3, '4': 1, '5': 11, '6': '.infoblox.api.FieldSelection', '10': 'fields'},
+    const {'1': 'paging', '3': 4, '4': 1, '5': 11, '6': '.infoblox.api.Pagination', '10': 'paging'},
+  ],
+};
+
+const ListServiceSessionEvaluationResponse$json = const {
+  '1': 'ListServiceSessionEvaluationResponse',
+  '2': const [
+    const {'1': 'results', '3': 1, '4': 3, '5': 11, '6': '.model.ServiceSessionEvaluation', '10': 'results'},
   ],
 };
 

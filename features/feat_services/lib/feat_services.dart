@@ -2,6 +2,7 @@ export 'src/application_list_page.dart';
 export 'src/application_edit_page.dart';
 export 'src/application_success_page.dart';
 export 'src/session_archive_page.dart';
+export 'src/business/sessions_page.dart';
 export 'src/session_evaluation_page.dart';
 export 'src/session_page.dart';
 export 'src/offer_details_page.dart';

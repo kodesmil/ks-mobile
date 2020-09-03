@@ -36,19 +36,12 @@ class ServiceApplicationListPageState
           ),
         ),
       ],
-      child: ServiceApplicationListContent(
-        navigationBar: widget.navigationBar,
-      ),
+      child: ServiceApplicationListContent(),
     );
   }
 }
 
 class ServiceApplicationListContent extends StatefulWidget {
-  final Widget navigationBar;
-
-  const ServiceApplicationListContent({Key key, this.navigationBar})
-      : super(key: key);
-
   @override
   _ServiceApplicationListContentState createState() =>
       _ServiceApplicationListContentState();
@@ -67,148 +60,100 @@ class _ServiceApplicationListContentState
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<ServiceApplicationListStore>(context);
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-        onPressed: () async {
-          final reload = await Navigator.of(context, rootNavigator: true).push(
-            CupertinoPageRoute(
-              builder: (context) => ServiceApplicationEditPage(),
-            ),
-          );
-          if (reload == true) {
-            await store.fetch();
-          }
-        },
-      ),
-      body: CustomScrollView(
-        slivers: [
-          widget.navigationBar,
-          Observer(
-            builder: (context) => SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final e = store.subjects[index];
-                  final details = e.provider.details;
-                  return Padding(
-                    padding: const EdgeInsets.only(
-                      top: 15,
-                      right: 15,
-                      left: 15,
-                    ),
-                    child: Card(
-                      shape: BeveledRectangleBorder(),
-                      child: Padding(
-                        padding: const EdgeInsets.all(5),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ListTile(
-                              title: Text(
-                                details.name,
-                                style: Theme.of(context).textTheme.headline4,
+    return Observer(
+      builder: (context) => SliverList(
+        delegate: SliverChildBuilderDelegate(
+          (context, index) {
+            final e = store.subjects[index];
+            final details = e.provider.details;
+            return Padding(
+              padding: const EdgeInsets.only(
+                top: 15,
+                right: 15,
+                left: 15,
+              ),
+              child: Card(
+                shape: BeveledRectangleBorder(),
+                child: Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ListTile(
+                        title: Text(
+                          details.name,
+                          style: Theme.of(context).textTheme.headline4,
+                        ),
+                        subtitle: Text(
+                          details.address,
+                        ),
+                        trailing: IconButton(
+                          icon: Icon(Icons.edit),
+                          onPressed: () async {
+                            final reload =
+                                await Navigator.of(context, rootNavigator: true)
+                                    .push(
+                              CupertinoPageRoute(
+                                builder: (context) =>
+                                    ServiceApplicationEditPage(
+                                  application: e,
+                                ),
                               ),
-                              subtitle: Text(
-                                details.address,
+                            );
+                            if (reload == true) {
+                              await store.fetch();
+                            }
+                          },
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      ListTile(
+                        title: Text(
+                          'Offers',
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                        trailing: IconButton(
+                          icon: Icon(Icons.add),
+                          onPressed: () async {
+                            final reload =
+                                await Navigator.of(context, rootNavigator: true)
+                                    .push(
+                              CupertinoPageRoute(
+                                builder: (context) =>
+                                    ServiceOfferEditPage(e.provider),
                               ),
-                              trailing: IconButton(
-                                icon: Icon(Icons.edit),
-                                onPressed: () async {
-                                  final reload = await Navigator.of(context,
-                                          rootNavigator: true)
-                                      .push(
-                                    CupertinoPageRoute(
-                                      builder: (context) =>
-                                          ServiceApplicationEditPage(
-                                        application: e,
-                                      ),
-                                    ),
-                                  );
-                                  if (reload == true) {
-                                    await store.fetch();
-                                  }
-                                },
-                              ),
-                            ),
-                            SizedBox(height: 20),
-                            ListTile(
-                              title: Text(
-                                'Offers',
-                                style: Theme.of(context).textTheme.headline6,
-                              ),
-                              trailing: IconButton(
-                                icon: Icon(Icons.add),
-                                onPressed: () async {
-                                  final reload = await Navigator.of(context,
-                                          rootNavigator: true)
-                                      .push(
-                                    CupertinoPageRoute(
-                                      builder: (context) =>
-                                          ServiceOfferEditPage(e.provider),
-                                    ),
-                                  );
-                                  if (reload == true) {
-                                    await store.fetch();
-                                  }
-                                },
-                              ),
-                            ),
-                            Column(
-                              children: e.provider.offers
-                                  .map(
-                                    (o) => ListTile(
-                                      title: Text(o.title),
-                                      subtitle: Text(
-                                        o.description,
-                                        maxLines: 2,
-                                        style:
-                                            Theme.of(context).textTheme.caption,
-                                      ),
-                                      trailing: Text(
-                                        '${o.price} ${o.currency}',
-                                        style:
-                                            Theme.of(context).textTheme.caption,
-                                      ),
-                                      onTap: () async {
-                                        final reload = await Navigator.of(
-                                          context,
-                                          rootNavigator: true,
-                                        ).push(
-                                          CupertinoPageRoute(
-                                            builder: (context) =>
-                                                ServiceOfferEditPage(
-                                              e.provider,
-                                              offer: o,
-                                            ),
-                                          ),
-                                        );
-                                        if (reload == true) {
-                                          await store.fetch();
-                                        }
-                                      },
-                                    ),
-                                  )
-                                  .toList(),
-                            ),
-                            SizedBox(height: 20),
-                            ListTile(
-                              leading: Text(
-                                'Team',
-                                style: Theme.of(context).textTheme.headline6,
-                              ),
-                              trailing: IconButton(
-                                icon: Icon(Icons.add),
-                                onPressed: () async {
+                            );
+                            if (reload == true) {
+                              await store.fetch();
+                            }
+                          },
+                        ),
+                      ),
+                      Column(
+                        children: e.provider.offers
+                            .map(
+                              (o) => ListTile(
+                                title: Text(o.title),
+                                subtitle: Text(
+                                  o.description,
+                                  maxLines: 2,
+                                  style: Theme.of(context).textTheme.caption,
+                                ),
+                                trailing: Text(
+                                  '${o.price} ${o.currency}',
+                                  style: Theme.of(context).textTheme.caption,
+                                ),
+                                onTap: () async {
                                   final reload = await Navigator.of(
                                     context,
                                     rootNavigator: true,
                                   ).push(
                                     CupertinoPageRoute(
                                       builder: (context) =>
-                                          ServiceEmploymentEditPage(e.provider),
+                                          ServiceOfferEditPage(
+                                        e.provider,
+                                        offer: o,
+                                      ),
                                     ),
                                   );
                                   if (reload == true) {
@@ -216,45 +161,67 @@ class _ServiceApplicationListContentState
                                   }
                                 },
                               ),
-                            ),
-                            Column(
-                              children: e.provider.employments
-                                  .map(
-                                    (o) => ListTile(
-                                      title:
-                                          Text('${o.firstName} ${o.lastName}'),
-                                      onTap: () async {
-                                        final reload = await Navigator.of(
-                                          context,
-                                          rootNavigator: true,
-                                        ).push(
-                                          CupertinoPageRoute(
-                                            builder: (context) =>
-                                                ServiceEmploymentEditPage(
-                                              e.provider,
-                                              employment: o,
-                                            ),
-                                          ),
-                                        );
-                                        if (reload == true) {
-                                          await store.fetch();
-                                        }
-                                      },
-                                    ),
-                                  )
-                                  .toList(),
-                            ),
-                          ],
+                            )
+                            .toList(),
+                      ),
+                      SizedBox(height: 20),
+                      ListTile(
+                        leading: Text(
+                          'Team',
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                        trailing: IconButton(
+                          icon: Icon(Icons.add),
+                          onPressed: () async {
+                            final reload = await Navigator.of(
+                              context,
+                              rootNavigator: true,
+                            ).push(
+                              CupertinoPageRoute(
+                                builder: (context) =>
+                                    ServiceEmploymentEditPage(e.provider),
+                              ),
+                            );
+                            if (reload == true) {
+                              await store.fetch();
+                            }
+                          },
                         ),
                       ),
-                    ),
-                  );
-                },
-                childCount: store.subjects.length,
+                      Column(
+                        children: e.provider.employments
+                            .map(
+                              (o) => ListTile(
+                                title: Text('${o.firstName} ${o.lastName}'),
+                                onTap: () async {
+                                  final reload = await Navigator.of(
+                                    context,
+                                    rootNavigator: true,
+                                  ).push(
+                                    CupertinoPageRoute(
+                                      builder: (context) =>
+                                          ServiceEmploymentEditPage(
+                                        e.provider,
+                                        employment: o,
+                                      ),
+                                    ),
+                                  );
+                                  if (reload == true) {
+                                    await store.fetch();
+                                  }
+                                },
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ),
-        ],
+            );
+          },
+          childCount: store.subjects.length,
+        ),
       ),
     );
   }

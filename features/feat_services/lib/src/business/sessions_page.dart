@@ -1,6 +1,5 @@
-import 'package:feat_ion/feat_ion.dart';
+import 'package:feat_services/feat_services.dart';
 import 'package:feat_services/src/offer_page.dart';
-import 'package:feat_services/src/session_archive_store.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -10,55 +9,55 @@ import 'package:lib_shared/lib_shared.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 
-import 'session_page.dart';
+import 'sessions_store.dart';
 
-class ServiceSessionArchivePage extends StatefulWidget {
-  ServiceSessionArchivePage();
+class ServiceSessionBizListPage extends StatefulWidget {
+  ServiceSessionBizListPage();
 
   @override
-  ServiceSessionArchivePageState createState() =>
-      ServiceSessionArchivePageState();
+  ServiceSessionBizListPageState createState() =>
+      ServiceSessionBizListPageState();
 }
 
-class ServiceSessionArchivePageState extends State<ServiceSessionArchivePage> {
+class ServiceSessionBizListPageState extends State<ServiceSessionBizListPage> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ProxyProvider<ServicesClient, ServiceSessionArchiveStore>(
-          update: (_, dep, __) => ServiceSessionArchiveStore(
+        ProxyProvider<ServicesClient, ServiceSessionBizListStore>(
+          update: (_, dep, __) => ServiceSessionBizListStore(
             ErrorStore(),
             LoadingStore(),
             dep,
           ),
         ),
       ],
-      child: ServiceSessionArchiveContent(),
+      child: ServiceSessionBizListContent(),
     );
   }
 }
 
-class ServiceSessionArchiveContent extends StatefulWidget {
-  ServiceSessionArchiveContent();
+class ServiceSessionBizListContent extends StatefulWidget {
+  ServiceSessionBizListContent();
 
   @override
-  _ServiceSessionArchiveContentState createState() =>
-      _ServiceSessionArchiveContentState();
+  _ServiceSessionBizListContentState createState() =>
+      _ServiceSessionBizListContentState();
 }
 
-class _ServiceSessionArchiveContentState
-    extends State<ServiceSessionArchiveContent> {
+class _ServiceSessionBizListContentState
+    extends State<ServiceSessionBizListContent> {
   @override
   void didChangeDependencies() async {
     final store =
-        Provider.of<ServiceSessionArchiveStore>(context, listen: false);
+        Provider.of<ServiceSessionBizListStore>(context, listen: false);
     await store.fetch();
     super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
-    final store = Provider.of<ServiceSessionArchiveStore>(context);
+    final store = Provider.of<ServiceSessionBizListStore>(context);
     return Observer(
       builder: (context) => SliverList(
         delegate: SliverChildBuilderDelegate(

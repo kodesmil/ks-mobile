@@ -24,6 +24,7 @@ abstract class _NotificationDevicesStore with Store {
 
   @action
   Future registerDeviceToken(String token) async {
+    await profileStore.fetchOrCreateProfile();
     final payload = NotificationDevice()
       ..profileId = profileStore.profile.id.value
       ..deviceToken = token;

@@ -12,35 +12,18 @@ abstract class _UserStore with Store {
 
   _UserStore(this.firebaseAuth);
 
-  @observable
-  User user;
+  @computed
+  User get user => firebaseAuth.currentUser;
 
-  final _controller = StreamController<User>.broadcast();
-
-  Stream<User> get output => _controller.stream;
-
-  Sink<User> get input => _controller.sink;
-
-  @action
-  Future<User> signInSilently() async {
-    if (user == null) {
-      user = firebaseAuth.currentUser;
-      input.add(user);
-    }
-    return user;
-  }
+  Stream<User> get changes => firebaseAuth.authStateChanges();
 
   @action
   Future signOut() async {
     await firebaseAuth.signOut();
-    user = null;
-    input.add(null);
   }
 
   @action
   Future deleteUser() async {
     await user.delete();
-    user = null;
-    input.add(null);
   }
 }

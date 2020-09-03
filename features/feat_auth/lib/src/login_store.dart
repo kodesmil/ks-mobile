@@ -90,7 +90,6 @@ abstract class _LoginStore with Store {
         email: email,
         password: password,
       );
-      await userStore.signInSilently();
       loading = false;
       success = true;
       errorStore.showError = false;
@@ -111,7 +110,6 @@ abstract class _LoginStore with Store {
         idToken: googleSignInAuthentication.idToken,
       );
       await firebaseAuth.signInWithCredential(credential);
-      await userStore.signInSilently();
       loading = false;
       success = true;
       errorStore.showError = false;
@@ -125,7 +123,6 @@ abstract class _LoginStore with Store {
     loading = true;
     try {
       await firebaseAuth.signInAnonymously();
-      await userStore.signInSilently();
       loading = false;
       success = true;
       errorStore.showError = false;

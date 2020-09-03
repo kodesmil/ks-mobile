@@ -15,10 +15,10 @@ abstract class _ServiceSessionEvaluationStore with Store {
   ServicesClient client;
 
   _ServiceSessionEvaluationStore(
-      this.errorStore,
-      this.loadingStore,
-      this.client,
-      );
+    this.errorStore,
+    this.loadingStore,
+    this.client,
+  );
 
   @observable
   ServiceSessionEvaluation evaluation;
@@ -27,9 +27,15 @@ abstract class _ServiceSessionEvaluationStore with Store {
   Future create(ServiceSession session) async {
     final request = UpdateServiceSessionRequest()
       ..payload = (session
-        ..finishedAt = Timestamp.fromDateTime(DateTime.now())
-        ..evaluation = evaluation);
-    final response = await client.updateServiceSession(request);
+        ..status = ServiceSession_Status.FINISHED
+        ..finishedAt = Timestamp.fromDateTime(DateTime.now()));
+    await client.updateServiceSession(request);
+    await client.createServiceSessionEvaluation(
+      CreateServiceSessionEvaluationRequest()
+        ..payload = (evaluation.copyWith((o) {
+          o.session = session;
+        })),
+    );
     loadingStore.success = true;
   }
 }

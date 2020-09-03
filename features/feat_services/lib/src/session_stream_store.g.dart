@@ -16,12 +16,12 @@ mixin _$SessionStreamStore on _SessionStreamStore, Store {
     return _$connectAsyncAction.run(() => super.connect());
   }
 
-  final _$requestSessionAsyncAction =
-      AsyncAction('_SessionStreamStore.requestSession');
+  final _$joinSessionAsyncAction =
+      AsyncAction('_SessionStreamStore.joinSession');
 
   @override
-  Future<dynamic> requestSession() {
-    return _$requestSessionAsyncAction.run(() => super.requestSession());
+  Future<dynamic> joinSession() {
+    return _$joinSessionAsyncAction.run(() => super.joinSession());
   }
 
   @override

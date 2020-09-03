@@ -3,17 +3,17 @@ import 'package:lib_services/lib_services.dart';
 import 'package:lib_shared/lib_shared.dart';
 import 'package:mobx/mobx.dart';
 
-part 'session_store.g.dart';
+part 'sessions_store.g.dart';
 
-class ServiceSessionStore = _ServiceSessionStore with _$ServiceSessionStore;
+class ServiceSessionBizListStore = _ServiceSessionBizListStore with _$ServiceSessionBizListStore;
 
-abstract class _ServiceSessionStore with Store {
+abstract class _ServiceSessionBizListStore with Store {
   final ErrorStore errorStore;
   final LoadingStore loadingStore;
 
   ServicesClient client;
 
-  _ServiceSessionStore(
+  _ServiceSessionBizListStore(
     this.errorStore,
     this.loadingStore,
     this.client,
@@ -24,9 +24,12 @@ abstract class _ServiceSessionStore with Store {
 
   @action
   Future fetch() async {
-    final request = ListServiceSessionRequest();
-    final response = await client.listServiceSession(request);
+    final request = ListServiceOfferSessionRequest();
+    final response = await client.listServiceOfferSession(request);
     loadingStore.success = true;
     sessions = response.results;
+    sessions.sort(
+      (a, b) => b.createdAt.toDateTime().compareTo(a.createdAt.toDateTime()),
+    );
   }
 }

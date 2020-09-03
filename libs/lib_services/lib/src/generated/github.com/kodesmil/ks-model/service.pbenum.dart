@@ -29,12 +29,14 @@ class ServiceSession_Status extends $pb.ProtobufEnum {
   static const ServiceSession_Status WAITING_FOR_ATTENDEES = ServiceSession_Status._(1, 'WAITING_FOR_ATTENDEES');
   static const ServiceSession_Status ONGOING = ServiceSession_Status._(2, 'ONGOING');
   static const ServiceSession_Status FINISHED = ServiceSession_Status._(3, 'FINISHED');
+  static const ServiceSession_Status CANCELED = ServiceSession_Status._(4, 'CANCELED');
 
   static const $core.List<ServiceSession_Status> values = <ServiceSession_Status> [
     NOT_STARTED,
     WAITING_FOR_ATTENDEES,
     ONGOING,
     FINISHED,
+    CANCELED,
   ];
 
   static final $core.Map<$core.int, ServiceSession_Status> _byValue = $pb.ProtobufEnum.initByValue(values);

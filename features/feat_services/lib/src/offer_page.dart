@@ -78,8 +78,8 @@ class _ServiceOfferContentState extends State<ServiceOfferContent> {
                 trailing: DetailsWidget(
                   details: details,
                 ),
-                onTap: () {
-                  Navigator.of(context, rootNavigator: true).push(
+                onTap: () async {
+                  await Navigator.of(context, rootNavigator: true).push(
                     CupertinoPageRoute(
                       builder: (context) => ServiceOfferDetailsPage(e),
                     ),

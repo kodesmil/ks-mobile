@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
 
+import 'profile_store.dart';
+
 class NotificationContainer extends StatefulWidget {
   final Widget child;
 
@@ -20,7 +22,7 @@ class _NotificationContainerState extends State<NotificationContainer> {
   void didChangeDependencies() {
     if (!kIsWeb) {
       final _firebaseMessaging = FirebaseMessaging();
-      final store = Provider.of<NotificationDevicesStore>(context);
+      final store = Provider.of<NotificationDevicesStore>(context, listen: false);
       _firebaseMessaging.configure(
         onMessage: (Map<String, dynamic> message) async {
           print('onMessage: $message');

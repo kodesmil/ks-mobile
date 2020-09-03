@@ -1,3 +1,5 @@
+import 'package:feat_auth/feat_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:lib_lego/lib_lego.dart';
@@ -140,7 +142,12 @@ class _LoginPageState extends State<LoginPage> {
                     builder: (context) => OutlineButton(
                       child: Text('Sign up with email'),
                       shape: StadiumBorder(),
-                      onPressed: () => Navigator.pushNamed(context, '/sign-up'),
+                      onPressed: () => Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            fullscreenDialog: true,
+                            builder: (context) => SignUpPage(),
+                          )),
                     ),
                   ),
                   Observer(
