@@ -62,7 +62,7 @@ const ServiceEmployment$json = const {
     const {'1': 'id', '3': 1, '4': 1, '5': 4, '8': const {}, '10': 'id'},
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
-    const {'1': 'profile_id', '3': 4, '4': 1, '5': 9, '8': const {}, '10': 'profileId'},
+    const {'1': 'profile_id', '3': 4, '4': 1, '5': 9, '10': 'profileId'},
     const {'1': 'first_name', '3': 5, '4': 1, '5': 9, '10': 'firstName'},
     const {'1': 'last_name', '3': 6, '4': 1, '5': 9, '10': 'lastName'},
     const {'1': 'email', '3': 7, '4': 1, '5': 9, '10': 'email'},
@@ -706,7 +706,7 @@ const ServiceSession$json = const {
     const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.gorm.types.UUIDValue', '8': const {}, '10': 'id'},
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
-    const {'1': 'profile_id', '3': 4, '4': 1, '5': 9, '8': const {}, '10': 'profileId'},
+    const {'1': 'profile_id', '3': 4, '4': 1, '5': 9, '10': 'profileId'},
     const {'1': 'scheduled_at', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'scheduledAt'},
     const {'1': 'finished_at', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'finishedAt'},
     const {'1': 'offer', '3': 7, '4': 1, '5': 11, '6': '.model.ServiceOffer', '8': const {}, '10': 'offer'},
@@ -914,7 +914,6 @@ const EventRequestSession$json = const {
   '1': 'EventRequestSession',
   '2': const [
     const {'1': 'session', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'session'},
-    const {'1': 'profile', '3': 2, '4': 1, '5': 11, '6': '.gorm.types.UUIDValue', '10': 'profile'},
   ],
 };
 
@@ -922,7 +921,6 @@ const EventJoinSession$json = const {
   '1': 'EventJoinSession',
   '2': const [
     const {'1': 'session', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'session'},
-    const {'1': 'profile', '3': 2, '4': 1, '5': 11, '6': '.gorm.types.UUIDValue', '10': 'profile'},
   ],
 };
 
@@ -930,7 +928,6 @@ const EventLeaveSession$json = const {
   '1': 'EventLeaveSession',
   '2': const [
     const {'1': 'session', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'session'},
-    const {'1': 'profile', '3': 2, '4': 1, '5': 11, '6': '.gorm.types.UUIDValue', '10': 'profile'},
   ],
 };
 
@@ -951,7 +948,6 @@ const EventSessionRequested$json = const {
   '1': 'EventSessionRequested',
   '2': const [
     const {'1': 'session', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'session'},
-    const {'1': 'profile', '3': 2, '4': 1, '5': 11, '6': '.gorm.types.UUIDValue', '10': 'profile'},
   ],
 };
 
@@ -959,7 +955,6 @@ const EventSessionStarted$json = const {
   '1': 'EventSessionStarted',
   '2': const [
     const {'1': 'session', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'session'},
-    const {'1': 'profile', '3': 2, '4': 1, '5': 11, '6': '.gorm.types.UUIDValue', '10': 'profile'},
   ],
 };
 
@@ -974,7 +969,6 @@ const EventSessionFinished$json = const {
   '1': 'EventSessionFinished',
   '2': const [
     const {'1': 'session', '3': 1, '4': 1, '5': 11, '6': '.model.ServiceSession', '10': 'session'},
-    const {'1': 'profile', '3': 2, '4': 1, '5': 11, '6': '.gorm.types.UUIDValue', '10': 'profile'},
   ],
 };
 

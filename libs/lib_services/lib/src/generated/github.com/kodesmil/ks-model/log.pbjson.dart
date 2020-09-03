@@ -12,6 +12,7 @@ const LogActivity$json = const {
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
     const {'1': 'ip', '3': 4, '4': 1, '5': 9, '10': 'ip'},
+    const {'1': 'profile_id', '3': 5, '4': 1, '5': 9, '10': 'profileId'},
   ],
   '7': const {},
 };

@@ -9,14 +9,13 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../infobloxopen/protoc-gen-gorm/types/types.pb.dart' as $8;
 import '../../../google/protobuf/timestamp.pb.dart' as $9;
 import 'group.pb.dart' as $0;
 import '../../infobloxopen/atlas-app-toolkit/query/collection_operators.pb.dart' as $10;
 
 class Profile extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('Profile', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$8.UUIDValue>(1, 'id', subBuilder: $8.UUIDValue.create)
+    ..aOS(1, 'id')
     ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
     ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
     ..aOS(4, 'notes')
@@ -44,15 +43,13 @@ class Profile extends $pb.GeneratedMessage {
   static Profile _defaultInstance;
 
   @$pb.TagNumber(1)
-  $8.UUIDValue get id => $_getN(0);
+  $core.String get id => $_getSZ(0);
   @$pb.TagNumber(1)
-  set id($8.UUIDValue v) { setField(1, v); }
+  set id($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $8.UUIDValue ensureId() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $9.Timestamp get createdAt => $_getN(1);
@@ -193,7 +190,7 @@ class CreateProfileResponse extends $pb.GeneratedMessage {
 
 class ReadProfileRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ReadProfileRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$8.UUIDValue>(1, 'id', subBuilder: $8.UUIDValue.create)
+    ..aOS(1, 'id')
     ..hasRequiredFields = false
   ;
 
@@ -213,15 +210,13 @@ class ReadProfileRequest extends $pb.GeneratedMessage {
   static ReadProfileRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $8.UUIDValue get id => $_getN(0);
+  $core.String get id => $_getSZ(0);
   @$pb.TagNumber(1)
-  set id($8.UUIDValue v) { setField(1, v); }
+  set id($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $8.UUIDValue ensureId() => $_ensure(0);
 }
 
 class ReadProfileResponse extends $pb.GeneratedMessage {
@@ -325,7 +320,7 @@ class UpdateProfileResponse extends $pb.GeneratedMessage {
 
 class DeleteProfileRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('DeleteProfileRequest', package: const $pb.PackageName('model'), createEmptyInstance: create)
-    ..aOM<$8.UUIDValue>(1, 'id', subBuilder: $8.UUIDValue.create)
+    ..aOS(1, 'id')
     ..hasRequiredFields = false
   ;
 
@@ -345,15 +340,13 @@ class DeleteProfileRequest extends $pb.GeneratedMessage {
   static DeleteProfileRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $8.UUIDValue get id => $_getN(0);
+  $core.String get id => $_getSZ(0);
   @$pb.TagNumber(1)
-  set id($8.UUIDValue v) { setField(1, v); }
+  set id($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-  @$pb.TagNumber(1)
-  $8.UUIDValue ensureId() => $_ensure(0);
 }
 
 class DeleteProfileResponse extends $pb.GeneratedMessage {

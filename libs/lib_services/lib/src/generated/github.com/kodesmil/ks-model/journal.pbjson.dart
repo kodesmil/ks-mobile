@@ -34,7 +34,7 @@ const JournalEntry$json = const {
     const {'1': 'id', '3': 1, '4': 1, '5': 11, '6': '.atlas.rpc.Identifier', '8': const {}, '10': 'id'},
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
-    const {'1': 'profile_id', '3': 4, '4': 1, '5': 9, '8': const {}, '10': 'profileId'},
+    const {'1': 'profile_id', '3': 4, '4': 1, '5': 9, '10': 'profileId'},
     const {'1': 'day', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'day'},
     const {'1': 'severity', '3': 6, '4': 1, '5': 14, '6': '.model.JournalEntry.Severity', '10': 'severity'},
     const {'1': 'note', '3': 7, '4': 1, '5': 9, '10': 'note'},

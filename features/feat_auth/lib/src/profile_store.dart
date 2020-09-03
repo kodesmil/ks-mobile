@@ -37,26 +37,29 @@ abstract class _ProfileStore with Store {
   @action
   Future fetchOrCreateProfile() async {
     try {
-      final request = ListProfileRequest();
-      final response = await client.list(request);
-      if (response.results.isEmpty) {
-        await createOrUpdateProfile();
-      } else {
-        profile = response.results?.first;
-      }
+      final request = ReadProfileRequest()..id = userStore.user.uid;
+      final response = await client.read(request);
+      profile = response.result;
     } catch (e) {
-      print(e);
+      if (e.message == 'record not found') {
+        await createOrUpdateProfile();
+      }
     }
   }
 
   @action
-  Future createOrUpdateProfile() async => profile?.id?.value?.isNotEmpty == true
+  Future createOrUpdateProfile() async => profile?.id?.isNotEmpty == true
       ? await updateProfile()
       : await createProfile();
 
   @action
   Future createProfile() async {
-    final request = CreateProfileRequest()..payload = Profile();
+    final user = userStore.user;
+    final request = CreateProfileRequest()
+      ..payload = (Profile()
+        ..id = user.uid
+        ..primaryEmail = user.email
+        ..firstName = user.phoneNumber);
     final response = await client.create(request);
     profile = response.result;
   }

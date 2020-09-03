@@ -18,7 +18,6 @@ class Group extends $pb.GeneratedMessage {
     ..aOM<$8.UUIDValue>(1, 'id', subBuilder: $8.UUIDValue.create)
     ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
     ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
-    ..aOM<$8.UUIDValue>(4, 'profileId', subBuilder: $8.UUIDValue.create)
     ..aOS(5, 'name')
     ..aOS(6, 'notes')
     ..hasRequiredFields = false
@@ -72,32 +71,21 @@ class Group extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $9.Timestamp ensureUpdatedAt() => $_ensure(2);
 
-  @$pb.TagNumber(4)
-  $8.UUIDValue get profileId => $_getN(3);
-  @$pb.TagNumber(4)
-  set profileId($8.UUIDValue v) { setField(4, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasProfileId() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearProfileId() => clearField(4);
-  @$pb.TagNumber(4)
-  $8.UUIDValue ensureProfileId() => $_ensure(3);
-
   @$pb.TagNumber(5)
-  $core.String get name => $_getSZ(4);
+  $core.String get name => $_getSZ(3);
   @$pb.TagNumber(5)
-  set name($core.String v) { $_setString(4, v); }
+  set name($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(5)
-  $core.bool hasName() => $_has(4);
+  $core.bool hasName() => $_has(3);
   @$pb.TagNumber(5)
   void clearName() => clearField(5);
 
   @$pb.TagNumber(6)
-  $core.String get notes => $_getSZ(5);
+  $core.String get notes => $_getSZ(4);
   @$pb.TagNumber(6)
-  set notes($core.String v) { $_setString(5, v); }
+  set notes($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(6)
-  $core.bool hasNotes() => $_has(5);
+  $core.bool hasNotes() => $_has(4);
   @$pb.TagNumber(6)
   void clearNotes() => clearField(6);
 }

@@ -33,19 +33,14 @@ abstract class _SessionStreamStore with Store {
       (value) {
         switch (value.whichEvent()) {
           case StreamSessionOutputEvent_Event.sessionRequested:
-            print(value);
             break;
           case StreamSessionOutputEvent_Event.sessionFinished:
-            print(value);
             break;
           case StreamSessionOutputEvent_Event.sessionTimeout:
-            print(value);
             break;
           case StreamSessionOutputEvent_Event.sessionStarted:
-            print(value);
             break;
           case StreamSessionOutputEvent_Event.notSet:
-            print(value);
             break;
         }
       },
@@ -58,7 +53,5 @@ abstract class _SessionStreamStore with Store {
 
   @action
   Future joinSession() async => _input.add(StreamSessionInputEvent()
-    ..requestSession = (EventRequestSession()
-      ..profile = profileStore.profile.id
-      ..session = session));
+    ..requestSession = (EventRequestSession()..session = session));
 }

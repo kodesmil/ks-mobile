@@ -61,7 +61,7 @@ abstract class _MenstruationDailyEntryStore with Store {
   }) async {
     final payload = HealthMenstruationDailyEntry()
       ..intensityPercentage = intensityPercent
-      ..profileId = profileStore.profile.id.value
+      ..profileId = profileStore.profile.id
       ..day = Timestamp.fromDateTime(day.toUtc());
     final request = CreateHealthMenstruationDailyEntryRequest()
       ..payload = payload;

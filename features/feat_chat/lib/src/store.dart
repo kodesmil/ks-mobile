@@ -41,7 +41,7 @@ abstract class _ChatStore with Store {
   @computed
   ChatRoomParticipant get selectedMyParticipation {
     return selectedRoom.participants.firstWhere(
-      (element) => element.profile.id != profileStore.profile.id,
+      (element) => element.profile.id == profileStore.profile.id,
     );
   }
 

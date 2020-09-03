@@ -51,7 +51,7 @@ abstract class _NotificationSettingsStore with Store {
   Future readOrCreate() async {
     final condition = StringCondition()
       ..fieldPath.add('profile_id')
-      ..value = profileStore.profile.id.value;
+      ..value = profileStore.profile?.id;
     final filter = Filtering()..stringCondition = condition;
     final request = ListNotificationSettingRequest()..filter = filter;
     final settings = await client.list(request);
@@ -65,7 +65,7 @@ abstract class _NotificationSettingsStore with Store {
   @action
   Future create() async {
     final payload = NotificationSetting()
-      ..profileId = profileStore.profile.id.value
+      ..profileId = profileStore.profile.id
       ..enableNotifications = true
       ..cronJournalReminder = '${noon.hour} ${noon.minute} * * * *'
       ..enableJournalReminder = true;

@@ -64,7 +64,7 @@ abstract class _MenstruationPersonalInfoStore with Store {
   }) async {
     loadingStore.loading = true;
     final payload = HealthMenstruationPersonalInfo()
-      ..profileId = profileStore.profile.id.value
+      ..profileId = profileStore.profile.id
       ..periodLengthInDays = periodLength
       ..cycleLengthInDays = cycleLength;
     final request = CreateHealthMenstruationPersonalInfoRequest()

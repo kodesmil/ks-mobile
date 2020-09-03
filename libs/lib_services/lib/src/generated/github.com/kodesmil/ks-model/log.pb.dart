@@ -18,6 +18,7 @@ class LogActivity extends $pb.GeneratedMessage {
     ..aOM<$9.Timestamp>(2, 'createdAt', subBuilder: $9.Timestamp.create)
     ..aOM<$9.Timestamp>(3, 'updatedAt', subBuilder: $9.Timestamp.create)
     ..aOS(4, 'ip')
+    ..aOS(5, 'profileId')
     ..hasRequiredFields = false
   ;
 
@@ -75,5 +76,14 @@ class LogActivity extends $pb.GeneratedMessage {
   $core.bool hasIp() => $_has(3);
   @$pb.TagNumber(4)
   void clearIp() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get profileId => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set profileId($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasProfileId() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearProfileId() => clearField(5);
 }
 

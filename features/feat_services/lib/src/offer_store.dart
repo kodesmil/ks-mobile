@@ -40,7 +40,7 @@ abstract class _ServiceOfferStore with Store {
   Future<ServiceSession> startSession(ServiceOffer offer) async {
     try {
       final payload = ServiceSession()
-        ..profileId = profileStore.profile.id.value
+        ..profileId = profileStore.profile.id
         ..scheduledAt = Timestamp.fromDateTime(DateTime.now())
         ..offer = offer;
       final request = CreateServiceSessionRequest();
