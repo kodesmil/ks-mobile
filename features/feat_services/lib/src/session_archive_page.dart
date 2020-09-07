@@ -68,6 +68,7 @@ class _ServiceSessionArchiveContentState
           (context, index) {
             final e = store.sessions[index];
             final details = e.offer.provider.details;
+            print(e.id);
             return Padding(
               padding: const EdgeInsets.only(top: 20),
               child: ListTile(

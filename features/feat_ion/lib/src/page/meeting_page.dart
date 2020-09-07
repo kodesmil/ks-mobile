@@ -7,8 +7,12 @@ import '../widget/video_render_adapter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MeetingPage extends StatefulWidget {
+  final String roomId;
 
-  const MeetingPage({Key key}) : super(key: key);
+  const MeetingPage(
+    this.roomId, {
+    Key key,
+  }) : super(key: key);
 
   @override
   _MeetingPageState createState() => _MeetingPageState();
@@ -16,7 +20,7 @@ class MeetingPage extends StatefulWidget {
 
 class _MeetingPageState extends State<MeetingPage> {
   SharedPreferences prefs;
-  List<VideoRendererAdapter> _remoteVideos = List();
+  final List<VideoRendererAdapter> _remoteVideos = [];
   VideoRendererAdapter _localVideo;
 
   bool _cameraOff = false;
@@ -30,18 +34,18 @@ class _MeetingPageState extends State<MeetingPage> {
   final double LOCAL_VIDEO_WIDTH = 114.0;
   final double LOCAL_VIDEO_HEIGHT = 72.0;
 
-  init() async {
+  void init() async {
     prefs = await SharedPreferences.getInstance();
     final helper = Provider.of<IonHelper>(context, listen: false);
     var client = helper.client;
 
     client.on('peer-join', (rid, id, info) async {
       var name = info['name'];
-      this._showSnackBar(":::Peer [$id:$name] join:::");
+      _showSnackBar(':::Peer [$id:$name] join:::');
     });
 
     client.on('peer-leave', (rid, id) async {
-      this._showSnackBar(":::Peer [$id] leave:::");
+      _showSnackBar(':::Peer [$id] leave:::');
     });
 
     client.on('stream-add', (rid, mid, info, tracks) async {
@@ -52,46 +56,48 @@ class _MeetingPageState extends State<MeetingPage> {
       setState(() {
         _remoteVideos.add(adapter);
       });
-      this._showSnackBar(":::stream-add [$mid]:::");
+      _showSnackBar(':::stream-add [$mid]:::');
     });
 
     client.on('stream-remove', (rid, mid) async {
       var adapter = _remoteVideos.firstWhere((item) => item.sid == mid);
       if (adapter != null) {
         await adapter.dispose();
-        this.setState(() {
+        setState(() {
           _remoteVideos.remove(adapter);
         });
       }
-      this._showSnackBar(":::stream-remove [$mid]:::");
+      _showSnackBar(':::stream-remove [$mid]:::');
     });
 
     client.on('broadcast', (rid, uid, info) async {
       print('message: ' + info.toString());
-      _messages.add({"name": info['senderName'], "text": info['msg']});
+      _messages.add({'name': info['senderName'], 'text': info['msg']});
       setState(() {
         _messages = _messages;
       });
     });
 
-    helper.join(name);
+    helper.join(name, widget.roomId);
     try {
       var resolution = prefs.getString('resolution') ?? 'vga';
       var bandwidth = prefs.getString('bandwidth') ?? '512';
       var codec = prefs.getString('codec') ?? 'vp8';
-      client
+      await client
           .publish(true, true, false, codec, bandwidth, resolution)
           .then((stream) async {
         var adapter = VideoRendererAdapter(stream.mid, stream, true);
         await adapter.setupSrcObject();
         var localStream = stream.stream;
-        MediaStreamTrack audioTrack = localStream.getAudioTracks()[0];
+        var audioTrack = localStream.getAudioTracks()[0];
         audioTrack.enableSpeakerphone(true);
         setState(() {
           _localVideo = adapter;
         });
       });
-    } catch (error) {}
+    } catch (error) {
+      print(error);
+    }
   }
 
   @override
@@ -100,7 +106,7 @@ class _MeetingPageState extends State<MeetingPage> {
     super.didChangeDependencies();
   }
 
-  _cleanUp() async {
+  void _cleanUp() async {
     final helper = Provider.of<IonHelper>(context, listen: false);
     var rid = helper.roomId;
     var client = helper.client;
@@ -118,9 +124,11 @@ class _MeetingPageState extends State<MeetingPage> {
       try {
         await client.unsubscribe(rid, item.mid);
         await stream.dispose();
-      } catch (error) {}
+      } catch (error) {
+        print(error);
+      }
     });
-    this.setState(() {});
+    setState(() {});
     _remoteVideos.clear();
     await helper.close();
     Navigator.of(context, rootNavigator: true).pop();
@@ -144,38 +152,41 @@ class _MeetingPageState extends State<MeetingPage> {
 
     var adapter = _remoteVideos[0];
     return GestureDetector(
-        onDoubleTap: () {
-          adapter.switchObjFit();
-        },
-        child: RTCVideoView(adapter.renderer));
+      onDoubleTap: () {
+        adapter.switchObjFit();
+      },
+      child: RTCVideoView(adapter.renderer),
+    );
   }
 
   Widget _buildLocalVideo(Orientation orientation) {
     if (_localVideo != null) {
       return SizedBox(
-          width: (orientation == Orientation.portrait)
-              ? LOCAL_VIDEO_HEIGHT
-              : LOCAL_VIDEO_WIDTH,
-          height: (orientation == Orientation.portrait)
-              ? LOCAL_VIDEO_WIDTH
-              : LOCAL_VIDEO_HEIGHT,
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.black87,
-              border: Border.all(
-                color: Colors.white,
-                width: 0.5,
-              ),
+        width: (orientation == Orientation.portrait)
+            ? LOCAL_VIDEO_HEIGHT
+            : LOCAL_VIDEO_WIDTH,
+        height: (orientation == Orientation.portrait)
+            ? LOCAL_VIDEO_WIDTH
+            : LOCAL_VIDEO_HEIGHT,
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.black87,
+            border: Border.all(
+              color: Colors.white,
+              width: 0.5,
             ),
-            child: GestureDetector(
-                onTap: () {
-                  _switchCamera();
-                },
-                onDoubleTap: () {
-                  _localVideo.switchObjFit();
-                },
-                child: RTCVideoView(_localVideo.renderer)),
-          ));
+          ),
+          child: GestureDetector(
+            onTap: () {
+              _switchCamera();
+            },
+            onDoubleTap: () {
+              _localVideo.switchObjFit();
+            },
+            child: RTCVideoView(_localVideo.renderer),
+          ),
+        ),
+      );
     }
     return Container();
   }
@@ -191,7 +202,7 @@ class _MeetingPageState extends State<MeetingPage> {
     return views;
   }
 
-  _swapVideoPostion(adapter) {
+  void _swapVideoPosition(adapter) {
     var index =
         _remoteVideos.indexWhere((element) => element.mid == adapter.mid);
     if (index == -1) return;
@@ -215,26 +226,27 @@ class _MeetingPageState extends State<MeetingPage> {
           ),
         ),
         child: GestureDetector(
-            onTap: () => _swapVideoPostion(adapter),
-            onDoubleTap: () => adapter.switchObjFit(),
-            child: RTCVideoView(adapter.renderer)),
+          onTap: () => _swapVideoPosition(adapter),
+          onDoubleTap: () => adapter.switchObjFit(),
+          child: RTCVideoView(adapter.renderer),
+        ),
       ),
     );
   }
 
   //Switch speaker/earpiece
-  _switchSpeaker() {
+  void _switchSpeaker() {
     setState(() {
       _speakerOn = !_speakerOn;
       MediaStreamTrack audioTrack = _localVideo.stream.getAudioTracks()[0];
       audioTrack.enableSpeakerphone(_speakerOn);
       _showSnackBar(
-          ":::Switch to " + (_speakerOn ? 'speaker' : 'earpiece') + ":::");
+          ':::Switch to ' + (_speakerOn ? 'speaker' : 'earpiece') + ':::');
     });
   }
 
   //Switch local camera
-  _switchCamera() {
+  void _switchCamera() {
     if (_localVideo != null && _localVideo.stream.getVideoTracks().length > 0) {
       _localVideo.stream.getVideoTracks()[0].switchCamera();
     } else {
@@ -243,7 +255,7 @@ class _MeetingPageState extends State<MeetingPage> {
   }
 
   //Open or close local video
-  _turnCamera() {
+  void _turnCamera() {
     if (_localVideo != null && _localVideo.stream.getVideoTracks().length > 0) {
       var muted = !_cameraOff;
       setState(() {
@@ -251,12 +263,12 @@ class _MeetingPageState extends State<MeetingPage> {
       });
       _localVideo.stream.getVideoTracks()[0].enabled = !muted;
     } else {
-      _showSnackBar(":::Unable to operate the camera:::");
+      _showSnackBar(':::Unable to operate the camera:::');
     }
   }
 
   //Open or close local audio
-  _turnMicrophone() {
+  void _turnMicrophone() {
     if (_localVideo != null && _localVideo.stream.getAudioTracks().length > 0) {
       var muted = !_microphoneOff;
       setState(() {
@@ -265,41 +277,43 @@ class _MeetingPageState extends State<MeetingPage> {
       _localVideo.stream.getAudioTracks()[0].enabled = !muted;
 
       if (muted) {
-        _showSnackBar(":::The microphone is muted:::");
+        _showSnackBar(':::The microphone is muted:::');
       } else {
-        _showSnackBar(":::The microphone is unmuted:::");
+        _showSnackBar(':::The microphone is unmuted:::');
       }
     } else {}
   }
 
   //Leave current video room
-  _hangUp() {
+  void _hangUp() {
     showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-                title: Text('Hangup'),
-                content: Text('Are you sure to leave the room?'),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text('Cancel'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  FlatButton(
-                    child: Text(
-                      'Hangup',
-                      style: TextStyle(color: Colors.red),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      _cleanUp();
-                    },
-                  )
-                ]));
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text('Hangup'),
+        content: Text('Are you sure to leave the room?'),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Cancel'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          FlatButton(
+            child: Text(
+              'Hangup',
+              style: TextStyle(color: Colors.red),
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+              _cleanUp();
+            },
+          )
+        ],
+      ),
+    );
   }
 
-  _showSnackBar(String message) {
+  void _showSnackBar(String message) {
     final snackBar = SnackBar(
       content: Text(
         message,
@@ -328,9 +342,10 @@ class _MeetingPageState extends State<MeetingPage> {
           Text(
             'Waiting for others to join...',
             style: TextStyle(
-                color: Colors.white,
-                fontSize: 22.0,
-                fontWeight: FontWeight.bold),
+              color: Colors.white,
+              fontSize: 22.0,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ],
       ),
@@ -435,197 +450,196 @@ class _MeetingPageState extends State<MeetingPage> {
 
   @override
   Widget build(BuildContext context) {
-    final helper = Provider.of<IonHelper>(context, listen: false);
-    return OrientationBuilder(builder: (context, orientation) {
-      return SafeArea(
-        child: Scaffold(
-          key: _scaffoldkey,
-          body: orientation == Orientation.portrait
-              ? Container(
-                  color: Colors.black87,
-                  child: Stack(
-                    children: <Widget>[
-                      Positioned(
-                        left: 0,
-                        right: 0,
-                        top: 0,
-                        bottom: 0,
-                        child: Container(
-                          color: Colors.black54,
+    return OrientationBuilder(
+      builder: (context, orientation) {
+        return SafeArea(
+          child: Scaffold(
+            key: _scaffoldkey,
+            body: orientation == Orientation.portrait
+                ? Container(
+                    color: Colors.black87,
+                    child: Stack(
+                      children: <Widget>[
+                        Positioned(
+                          left: 0,
+                          right: 0,
+                          top: 0,
+                          bottom: 0,
+                          child: Container(
+                            color: Colors.black54,
+                            child: Stack(
+                              children: <Widget>[
+                                Positioned(
+                                  left: 0,
+                                  right: 0,
+                                  top: 0,
+                                  bottom: 0,
+                                  child: Container(
+                                    child: _buildMainVideo(),
+                                  ),
+                                ),
+                                Positioned(
+                                  right: 10,
+                                  top: 48,
+                                  child: Container(
+                                    child: _buildLocalVideo(orientation),
+                                  ),
+                                ),
+                                Positioned(
+                                  left: 0,
+                                  right: 0,
+                                  bottom: 48,
+                                  height: 90,
+                                  child: Container(
+                                    margin: EdgeInsets.all(6.0),
+                                    child: ListView(
+                                      scrollDirection: Axis.horizontal,
+                                      children: _buildVideoViews(),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        (_remoteVideos.isEmpty) ? _buildLoading() : Container(),
+                        Positioned(
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          height: 48,
                           child: Stack(
                             children: <Widget>[
-                              Positioned(
-                                left: 0,
-                                right: 0,
-                                top: 0,
-                                bottom: 0,
+                              Opacity(
+                                opacity: 0.5,
                                 child: Container(
-                                  child: _buildMainVideo(),
+                                  color: Colors.black,
                                 ),
                               ),
-                              Positioned(
-                                right: 10,
-                                top: 48,
-                                child: Container(
-                                  child: _buildLocalVideo(orientation),
+                              Container(
+                                height: 48,
+                                margin: EdgeInsets.all(0.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: _buildTools(),
                                 ),
                               ),
-                              Positioned(
-                                left: 0,
-                                right: 0,
-                                bottom: 48,
-                                height: 90,
+                            ],
+                          ),
+                        ),
+                        Positioned(
+                          left: 0,
+                          right: 0,
+                          top: 0,
+                          height: 48,
+                          child: Stack(
+                            children: <Widget>[
+                              Opacity(
+                                opacity: 0.5,
                                 child: Container(
-                                  margin: EdgeInsets.all(6.0),
-                                  child: ListView(
-                                    scrollDirection: Axis.horizontal,
-                                    children: _buildVideoViews(),
+                                  color: Colors.black,
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.all(0.0),
+                                child: Center(
+                                  child: Text(
+                                    '',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18.0,
+                                    ),
                                   ),
                                 ),
                               ),
                             ],
                           ),
                         ),
-                      ),
-                      (_remoteVideos.isEmpty) ? _buildLoading() : Container(),
-                      Positioned(
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        height: 48,
-                        child: Stack(
-                          children: <Widget>[
-                            Opacity(
-                              opacity: 0.5,
-                              child: Container(
-                                color: Colors.black,
-                              ),
-                            ),
-                            Container(
-                              height: 48,
-                              margin: EdgeInsets.all(0.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: _buildTools(),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Positioned(
-                        left: 0,
-                        right: 0,
-                        top: 0,
-                        height: 48,
-                        child: Stack(
-                          children: <Widget>[
-                            Opacity(
-                              opacity: 0.5,
-                              child: Container(
-                                color: Colors.black,
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.all(0.0),
-                              child: Center(
-                                child: Text(
-                                  '',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18.0,
+                      ],
+                    ),
+                  )
+                : Container(
+                    color: Colors.black54,
+                    child: Stack(
+                      children: <Widget>[
+                        Positioned(
+                          left: 0,
+                          right: 0,
+                          top: 0,
+                          bottom: 0,
+                          child: Container(
+                            color: Colors.black87,
+                            child: Stack(
+                              children: <Widget>[
+                                Positioned(
+                                  left: 0,
+                                  right: 0,
+                                  top: 0,
+                                  bottom: 0,
+                                  child: Container(
+                                    child: _buildMainVideo(),
                                   ),
                                 ),
-                              ),
+                                Positioned(
+                                  right: 60,
+                                  top: 10,
+                                  child: Container(
+                                    child: _buildLocalVideo(orientation),
+                                  ),
+                                ),
+                                Positioned(
+                                  left: 0,
+                                  top: 0,
+                                  bottom: 0,
+                                  width: 120,
+                                  child: Container(
+                                    margin: EdgeInsets.all(6.0),
+                                    child: ListView(
+                                      scrollDirection: Axis.vertical,
+                                      children: _buildVideoViews(),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                )
-              : Container(
-                  color: Colors.black54,
-                  child: Stack(
-                    children: <Widget>[
-                      Positioned(
-                        left: 0,
-                        right: 0,
-                        top: 0,
-                        bottom: 0,
-                        child: Container(
-                          color: Colors.black87,
+                        (_remoteVideos.isEmpty) ? _buildLoading() : Container(),
+                        Positioned(
+                          top: 0,
+                          right: 0,
+                          bottom: 0,
+                          width: 48,
                           child: Stack(
                             children: <Widget>[
-                              Positioned(
-                                left: 0,
-                                right: 0,
-                                top: 0,
-                                bottom: 0,
+                              Opacity(
+                                opacity: 0.5,
                                 child: Container(
-                                  child: _buildMainVideo(),
+                                  color: Colors.black,
                                 ),
                               ),
-                              Positioned(
-                                right: 60,
-                                top: 10,
-                                child: Container(
-                                  child: _buildLocalVideo(orientation),
-                                ),
-                              ),
-                              Positioned(
-                                left: 0,
-                                top: 0,
-                                bottom: 0,
-                                width: 120,
-                                child: Container(
-                                  margin: EdgeInsets.all(6.0),
-                                  child: ListView(
-                                    scrollDirection: Axis.vertical,
-                                    children: _buildVideoViews(),
-                                  ),
+                              Container(
+                                width: 48,
+                                margin: EdgeInsets.all(0.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: _buildTools(),
                                 ),
                               ),
                             ],
                           ),
                         ),
-                      ),
-                      (_remoteVideos.length == 0)
-                          ? _buildLoading()
-                          : Container(),
-                      Positioned(
-                        top: 0,
-                        right: 0,
-                        bottom: 0,
-                        width: 48,
-                        child: Stack(
-                          children: <Widget>[
-                            Opacity(
-                              opacity: 0.5,
-                              child: Container(
-                                color: Colors.black,
-                              ),
-                            ),
-                            Container(
-                              width: 48,
-                              margin: EdgeInsets.all(0.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: _buildTools(),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-        ),
-      );
-    });
+          ),
+        );
+      },
+    );
   }
 }

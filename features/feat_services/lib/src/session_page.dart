@@ -3,14 +3,13 @@ import 'package:feat_ion/feat_ion.dart';
 import 'package:feat_services/src/offer_page.dart';
 import 'package:feat_services/src/session_evaluation_page.dart';
 import 'package:feat_services/src/session_stream_store.dart';
-import 'package:feat_services/src/sessions_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:lib_lego/lib_lego.dart';
 import 'package:lib_services/lib_services.dart';
 import 'package:lib_shared/lib_shared.dart';
-import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 
 class ServiceSessionPage extends StatefulWidget {
@@ -36,12 +35,16 @@ class ServiceSessionPageState extends State<ServiceSessionPage> {
           ),
         ),
       ],
-      child: ServiceSessionContent(),
+      child: ServiceSessionContent(widget.sessionId),
     );
   }
 }
 
 class ServiceSessionContent extends StatefulWidget {
+  final UUIDValue sessionId;
+
+  ServiceSessionContent(this.sessionId);
+
   @override
   _ServiceSessionContentState createState() => _ServiceSessionContentState();
 }
@@ -54,6 +57,17 @@ class _ServiceSessionContentState extends State<ServiceSessionContent> {
     super.didChangeDependencies();
   }
 
+  Future handleJoin() async {
+    final helper = Provider.of<IonHelper>(context, listen: false);
+    await helper.connect('ion.qa.api.kodesmil.com', (result) {
+      if (result) {
+        Navigator.of(context).pushReplacementNamed(
+          '/meetings/${widget.sessionId}',
+        );
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<SessionStreamStore>(context);
@@ -64,9 +78,44 @@ class _ServiceSessionContentState extends State<ServiceSessionContent> {
         }
         final offer = store.session.offer;
         final details = offer.provider.details;
-        return CupertinoPageScaffold(
-          navigationBar: KsSmallNavigationBar(title: 'Session'),
-          child: Material(
+        return Scaffold(
+          appBar: KsSmallNavigationBar(title: 'Session'),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: FloatingActionButton.extended(
+            label: Text(
+              'Join',
+              style: Theme.of(context).textTheme.button.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+            ),
+            shape: StadiumBorder(),
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            onPressed: () async {
+              await handleJoin();
+            },
+          ),
+          persistentFooterButtons: [
+            IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.cancel_outlined),
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                  CupertinoPageRoute(
+                    builder: (context) => ServiceSessionEvaluationPage(
+                      store.session,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ],
+          body: Material(
             child: SafeArea(
               child: Center(
                 child: Padding(
@@ -74,37 +123,30 @@ class _ServiceSessionContentState extends State<ServiceSessionContent> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(height: 30),
+                      SizedBox(height: 50),
                       DetailsWidget(
                         details: details,
                       ),
-                      SizedBox(height: 40),
+                      SizedBox(height: 25),
+                      Container(
+                        height: 200,
+                        width: 200,
+                        child: CircleAvatar(
+                          radius: 50,
+                          backgroundImage: AssetImage(
+                            'assets/images/peach/example/example-scene-3.png',
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 25),
                       Text(
-                        offer.description,
+                        offer.title,
                         style: Theme.of(context).textTheme.headline6,
                       ),
-                      SizedBox(height: 40),
-                      ConnectToVideoButton(),
                       SizedBox(height: 10),
-                      OutlineButton(
-                        child: Text('Join'),
-                        onPressed: () {
-                          store.joinSession();
-                        },
-                      ),
-                      SizedBox(height: 10),
-                      OutlineButton(
-                        child: Text('Finish session'),
-                        onPressed: () {
-                          Navigator.of(context).pushReplacement(
-                            CupertinoPageRoute(
-                              builder: (context) =>
-                                  ServiceSessionEvaluationPage(
-                                store.session,
-                              ),
-                            ),
-                          );
-                        },
+                      Text(
+                        offer.description,
+                        style: Theme.of(context).textTheme.bodyText2,
                       ),
                     ],
                   ),

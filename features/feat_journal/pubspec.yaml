@@ -25,7 +25,7 @@ dependencies:
   jiffy: ^3.0.1
   scrollable_positioned_list: ^0.1.6
   scroll_to_index: ^1.0.6
-  flutter_svg: ^0.18.0
+  flutter_svg: ^0.18.1
   dots_indicator: ^1.1.0
   flutter_translate: ^1.1.0
   infinite_listview: ^1.0.1+1

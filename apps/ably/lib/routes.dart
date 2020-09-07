@@ -11,13 +11,13 @@ import 'package:provider/provider.dart';
 class Routes {
   static String root = '/';
   static String onboarding = '/onboarding';
-  static String meeting = '/meeting';
+  static String meetings = '/meetings/:roomId';
   static String sessions = '/sessions/:sessionId';
 
   static void configureRoutes(fluro.Router router) {
     router.define(root, handler: rootHandler);
     router.define(onboarding, handler: rootHandler);
-    router.define(meeting, handler: meetingHandler);
+    router.define(meetings, handler: meetingHandler);
     router.define(sessions, handler: sessionsHandler);
   }
 }
@@ -46,9 +46,7 @@ var meetingHandler = fluro.Handler(
   handlerFunc: (context, params) => authGuarded(
     context,
     params,
-    MeetingPage(
-      key: Key(Routes.meeting),
-    ),
+    MeetingPage(params['roomId'][0]),
   ),
 );
 

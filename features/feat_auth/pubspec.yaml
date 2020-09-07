@@ -21,7 +21,7 @@ dependencies:
   mobx: ^1.2.1
   mobx_codegen: ^1.1.0
   json_serializable: ^3.2.3
-  flutter_svg: ^0.18.0
+  flutter_svg: ^0.18.1
   url_launcher: ^5.4.7
   rxdart: ^0.24.1
 

@@ -5,9 +5,9 @@ class IonHelper extends EventEmitter {
   Client _client;
   String _rid;
 
-  get client => _client;
+  Client get client => _client;
 
-  get roomId => _rid;
+  String get roomId => _rid;
 
   Future connect(String host, Function onConnected) async {
     if (_client == null) {
@@ -21,12 +21,12 @@ class IonHelper extends EventEmitter {
     await _client.connect();
   }
 
-  join(String displayName) async {
-    this._rid = "room1";
-    await _client.join("room1", {'name': '$displayName'});
+  void join(String displayName, String roomId) async {
+    _rid = roomId;
+    await _client.join(roomId, {'name': '$displayName'});
   }
 
-  close() async {
+  void close() async {
     if (_client != null) {
       await _client.leave();
       _client.close();

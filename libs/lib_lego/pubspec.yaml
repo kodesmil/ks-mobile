@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   provider: ^4.0.4
-  flutter_svg: ^0.18.0
+  flutter_svg: ^0.18.1
   transparent_image: ^1.0.0
 
 dev_dependencies:
