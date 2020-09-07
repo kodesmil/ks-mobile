@@ -49,45 +49,68 @@ class ServiceOfferDetailsContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final store = Provider.of<ServiceOfferStore>(context);
     final details = offer.provider.details;
-    return CupertinoPageScaffold(
-      navigationBar: KsSmallNavigationBar(title: 'Details'),
-      child: Material(
-        child: SafeArea(
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(30),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: 30),
-                  DetailsWidget(
-                    details: details,
-                  ),
-                  SizedBox(height: 40),
-                  Text(
-                    offer.title,
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    offer.description,
-                  ),
-                  SizedBox(height: 20),
-                  Text('${offer.price} ${offer.currency}'),
-                  SizedBox(height: 40),
-                  RaisedButton(
-                    child: Text('Start session'),
-                    onPressed: () async {
-                      final session = await store.startSession(offer);
-                      await Navigator.of(context).pushReplacement(
-                        CupertinoPageRoute(
-                          builder: (context) => ServiceSessionPage(session.id),
-                        ),
-                      );
-                    },
-                  ),
-                ],
+    return Scaffold(
+      appBar: KsSmallNavigationBar(title: 'Details'),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton.extended(
+        label: Text(
+          'Start session',
+          style: Theme.of(context).textTheme.button.copyWith(
+                color: Theme.of(context).colorScheme.onPrimary,
               ),
+        ),
+        shape: StadiumBorder(),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        onPressed: () async {
+          final session = await store.startSession(offer);
+          await Navigator.of(context).pushReplacement(
+            CupertinoPageRoute(
+              builder: (context) => ServiceSessionPage(session.id),
+            ),
+          );
+        },
+      ),
+      persistentFooterButtons: [
+        IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ],
+      body: Material(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(10),
+                    ),
+                    child: Image.asset(
+                      'assets/images/peach/example/example-scene-2.png',
+                    ),
+                  ),
+                ),
+                SizedBox(height: 25),
+                Text(
+                  offer.title,
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  offer.description,
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  offer.provider.details.name,
+                  style: Theme.of(context).textTheme.caption,
+                ),
+              ],
             ),
           ),
         ),

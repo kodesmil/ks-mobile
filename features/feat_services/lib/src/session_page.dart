@@ -117,39 +117,42 @@ class _ServiceSessionContentState extends State<ServiceSessionContent> {
           ],
           body: Material(
             child: SafeArea(
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(30),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(height: 50),
-                      DetailsWidget(
-                        details: details,
-                      ),
-                      SizedBox(height: 25),
-                      Container(
-                        height: 200,
-                        width: 200,
-                        child: CircleAvatar(
-                          radius: 50,
-                          backgroundImage: AssetImage(
-                            'assets/images/peach/example/example-scene-3.png',
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
+                child: Stack(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(10),
+                            ),
+                            child: Image.asset(
+                              'assets/images/peach/example/example-scene-3.png',
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(height: 25),
-                      Text(
-                        offer.title,
-                        style: Theme.of(context).textTheme.headline6,
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        offer.description,
-                        style: Theme.of(context).textTheme.bodyText2,
-                      ),
-                    ],
-                  ),
+                        SizedBox(height: 25),
+                        Text(
+                          offer.title,
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          offer.description,
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          offer.provider.details.name,
+                          style: Theme.of(context).textTheme.caption,
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),

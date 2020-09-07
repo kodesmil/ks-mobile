@@ -33,31 +33,17 @@ var rootHandler = fluro.Handler(
 );
 
 var onboardingHandler = fluro.Handler(
-  handlerFunc: (context, params) => authGuarded(
-    context,
-    params,
-    OnboardingPage(
-      key: Key(Routes.onboarding),
-    ),
-  ),
+  handlerFunc: (context, params) => OnboardingPage(key: Key(Routes.onboarding)),
 );
 
 var meetingHandler = fluro.Handler(
-  handlerFunc: (context, params) => authGuarded(
-    context,
-    params,
-    MeetingPage(params['roomId'][0]),
-  ),
+  handlerFunc: (context, params) => MeetingPage(params['roomId'][0]),
 );
 
 var sessionsHandler = fluro.Handler(
-  handlerFunc: (context, params) {
-    return authGuarded(
-      context,
-      params,
-      ServiceSessionPage(UUIDValue()..value = params['sessionId'][0]),
-    );
-  },
+  handlerFunc: (context, params) => ServiceSessionPage(
+    UUIDValue()..value = params['sessionId'][0],
+  ),
 );
 
 Widget authGuarded(
