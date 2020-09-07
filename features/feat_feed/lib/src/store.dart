@@ -10,7 +10,7 @@ class FeedStore = _FeedStore with _$FeedStore;
 abstract class _FeedStore with Store {
   final ErrorStore errorStore;
 
-  FeedArticlesClient client;
+  FeedClient client;
 
   _FeedStore(
     this.errorStore,
@@ -44,7 +44,7 @@ abstract class _FeedStore with Store {
   @action
   Future fetchArticles(String tagKey) async {
     final request = ListFeedArticleRequest();
-    final response = await client.list(request);
+    final response = await client.listFeedArticle(request);
     success = true;
     articles = response.results;
   }

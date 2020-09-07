@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:feat_auth/feat_auth.dart';
+import 'package:feat_services/src/sessions_state.dart';
 import 'package:lib_services/lib_services.dart';
 import 'package:lib_shared/lib_shared.dart';
 import 'package:mobx/mobx.dart';
@@ -13,6 +14,7 @@ abstract class _ServiceOfferStore with Store {
   final ErrorStore errorStore;
   final LoadingStore loadingStore;
   final ProfileStore profileStore;
+  final SessionsStateNotifier notifier;
   final ServicesClient client;
 
   @observable
@@ -23,6 +25,7 @@ abstract class _ServiceOfferStore with Store {
     this.loadingStore,
     this.profileStore,
     this.client,
+    this.notifier,
   );
 
   @action
@@ -46,6 +49,7 @@ abstract class _ServiceOfferStore with Store {
       final request = CreateServiceSessionRequest();
       request..payload = payload;
       final response = await client.createServiceSession(request);
+      notifier.reloadSessionState();
       return response.result;
     } catch (e) {
       print(e);

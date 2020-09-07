@@ -127,26 +127,14 @@ class _AppInjectorState extends State<AppInjector> {
             );
           },
         ),
-        ProxyProvider<CallOptions, NotificationSettingsClient>(
-          update: (_, dep, __) => NotificationSettingsClient(
-            channel,
-            options: dep,
-          ),
-        ),
-        ProxyProvider<CallOptions, NotificationDevicesClient>(
-          update: (_, dep, __) => NotificationDevicesClient(
+        ProxyProvider<CallOptions, NotificationsClient>(
+          update: (_, dep, __) => NotificationsClient(
             channel,
             options: dep,
           ),
         ),
         ProxyProvider<CallOptions, ServicesClient>(
           update: (_, dep, __) => ServicesClient(
-            channel,
-            options: dep,
-          ),
-        ),
-        ProxyProvider<CallOptions, ServiceSessionStreamClient>(
-          update: (_, dep, __) => ServiceSessionStreamClient(
             channel,
             options: dep,
           ),
@@ -175,20 +163,8 @@ class _AppInjectorState extends State<AppInjector> {
             options: dep,
           ),
         ),
-        ProxyProvider<CallOptions, FeedArticlesClient>(
-          update: (_, dep, __) => FeedArticlesClient(
-            channel,
-            options: dep,
-          ),
-        ),
-        ProxyProvider<CallOptions, FeedArticleDetailsClient>(
-          update: (_, dep, __) => FeedArticleDetailsClient(
-            channel,
-            options: dep,
-          ),
-        ),
-        ProxyProvider<CallOptions, FeedArticlesClient>(
-          update: (_, dep, __) => FeedArticlesClient(
+        ProxyProvider<CallOptions, FeedClient>(
+          update: (_, dep, __) => FeedClient(
             channel,
             options: dep,
           ),
@@ -206,7 +182,7 @@ class _AppInjectorState extends State<AppInjector> {
             dep2,
           ),
         ),
-        ProxyProvider2<ProfileStore, NotificationDevicesClient,
+        ProxyProvider2<ProfileStore, NotificationsClient,
             NotificationDevicesStore>(
           update: (_, dep, dep2, __) => NotificationDevicesStore(
             ErrorStore(),
@@ -214,7 +190,7 @@ class _AppInjectorState extends State<AppInjector> {
             dep2,
           ),
         ),
-        ProxyProvider2<ProfileStore, NotificationSettingsClient,
+        ProxyProvider2<ProfileStore, NotificationsClient,
             NotificationSettingsStore>(
           update: (_, dep, dep2, __) => NotificationSettingsStore(
             ErrorStore(),
@@ -245,7 +221,7 @@ class _AppInjectorState extends State<AppInjector> {
             dep2,
           ),
         ),
-        ProxyProvider<FeedArticlesClient, FeedStore>(
+        ProxyProvider<FeedClient, FeedStore>(
           update: (_, dep, __) => FeedStore(
             ErrorStore(),
             dep,

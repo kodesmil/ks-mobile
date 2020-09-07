@@ -23,7 +23,7 @@ abstract class _ProfileStore with Store {
   @action
   Future deleteProfile() async {
     final request = DeleteProfileRequest()..id = profile.id;
-    await client.delete(request);
+    await client.deleteProfile(request);
     await userStore.deleteUser();
     profile = null;
   }
@@ -38,7 +38,7 @@ abstract class _ProfileStore with Store {
   Future fetchOrCreateProfile() async {
     try {
       final request = ReadProfileRequest()..id = userStore.user.uid;
-      final response = await client.read(request);
+      final response = await client.readProfile(request);
       profile = response.result;
     } catch (e) {
       if (e.message == 'record not found') {
@@ -60,7 +60,7 @@ abstract class _ProfileStore with Store {
         ..id = user.uid
         ..primaryEmail = user.email
         ..firstName = user.phoneNumber);
-    final response = await client.create(request);
+    final response = await client.createProfile(request);
     profile = response.result;
   }
 
@@ -72,7 +72,7 @@ abstract class _ProfileStore with Store {
       profile = profile..profilePictureUrl = url;
     }
     final request = UpdateProfileRequest()..payload = profile;
-    final response = await client.update(request);
+    final response = await client.updateProfile(request);
     profile = response.result;
   }
 }

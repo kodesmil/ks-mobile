@@ -22,7 +22,7 @@ abstract class _NotificationSettingsStore with Store {
   ).toUtc();
   final ErrorStore errorStore;
   final ProfileStore profileStore;
-  final NotificationSettingsClient client;
+  final NotificationsClient client;
 
   _NotificationSettingsStore(
     this.errorStore,
@@ -54,7 +54,7 @@ abstract class _NotificationSettingsStore with Store {
       ..value = profileStore.profile?.id;
     final filter = Filtering()..stringCondition = condition;
     final request = ListNotificationSettingRequest()..filter = filter;
-    final settings = await client.list(request);
+    final settings = await client.listNotificationSetting(request);
     if (settings.results.isNotEmpty) {
       setting = settings.results.first;
     } else {
@@ -70,7 +70,7 @@ abstract class _NotificationSettingsStore with Store {
       ..cronJournalReminder = '${noon.hour} ${noon.minute} * * * *'
       ..enableJournalReminder = true;
     final request = CreateNotificationSettingRequest()..payload = payload;
-    final response = await client.create(request);
+    final response = await client.createNotificationSetting(request);
     setting = response.result;
   }
 
@@ -98,7 +98,7 @@ abstract class _NotificationSettingsStore with Store {
       ..enableNotifications =
           enableNotifications ?? setting.enableNotifications;
     final request = UpdateNotificationSettingRequest()..payload = payload;
-    final response = await client.update(request);
+    final response = await client.updateNotificationSetting(request);
     setting = response.result;
   }
 }

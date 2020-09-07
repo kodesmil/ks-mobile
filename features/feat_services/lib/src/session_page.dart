@@ -27,13 +27,11 @@ class ServiceSessionPageState extends State<ServiceSessionPage> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ProxyProvider3<ProfileStore, ServiceSessionStreamClient, ServicesClient,
-            SessionStreamStore>(
-          update: (_, dep, dep2, dep3, __) => SessionStreamStore(
+        ProxyProvider2<ProfileStore, ServicesClient, SessionStreamStore>(
+          update: (_, dep, dep2, __) => SessionStreamStore(
             ErrorStore(),
             dep,
             dep2,
-            dep3,
             widget.sessionId,
           ),
         ),
@@ -62,7 +60,7 @@ class _ServiceSessionContentState extends State<ServiceSessionContent> {
     return Observer(
       builder: (context) {
         if (store.session == null) {
-          return CircularProgressIndicator();
+          return KsProgressIndicator();
         }
         final offer = store.session.offer;
         final details = offer.provider.details;
@@ -98,15 +96,14 @@ class _ServiceSessionContentState extends State<ServiceSessionContent> {
                       OutlineButton(
                         child: Text('Finish session'),
                         onPressed: () {
-                          Navigator.of(context)
-                              .pushReplacement(
-                                CupertinoPageRoute(
-                                  builder: (context) =>
-                                      ServiceSessionEvaluationPage(
-                                    store.session,
-                                  ),
-                                ),
-                              );
+                          Navigator.of(context).pushReplacement(
+                            CupertinoPageRoute(
+                              builder: (context) =>
+                                  ServiceSessionEvaluationPage(
+                                store.session,
+                              ),
+                            ),
+                          );
                         },
                       ),
                     ],

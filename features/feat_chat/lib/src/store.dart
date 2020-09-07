@@ -182,7 +182,7 @@ abstract class _ChatStore with Store {
   @action
   Future connect() async {
     if (_output == null) {
-      _output = _client.stream(_inputController.stream).listen(
+      _output = _client.biDi(_inputController.stream).listen(
         (value) {
           switch (value.whichEvent()) {
             case StreamChatEvent_Event.none:

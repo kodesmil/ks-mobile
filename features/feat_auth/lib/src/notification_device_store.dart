@@ -14,7 +14,7 @@ class NotificationDevicesStore = _NotificationDevicesStore
 abstract class _NotificationDevicesStore with Store {
   final ErrorStore errorStore;
   final ProfileStore profileStore;
-  NotificationDevicesClient client;
+  NotificationsClient client;
 
   _NotificationDevicesStore(
     this.errorStore,
@@ -30,7 +30,7 @@ abstract class _NotificationDevicesStore with Store {
       ..deviceToken = token;
     final request = CreateNotificationDeviceRequest()..payload = payload;
     try {
-      await client.create(request);
+      await client.createNotificationDevice(request);
     } catch (e) {
       print(e);
     }

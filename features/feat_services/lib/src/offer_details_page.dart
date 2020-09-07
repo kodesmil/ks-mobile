@@ -24,12 +24,14 @@ class ServiceOfferDetailsPageState extends State<ServiceOfferDetailsPage> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ProxyProvider2<ProfileStore, ServicesClient, ServiceOfferStore>(
-          update: (_, dep, dep2, __) => ServiceOfferStore(
+        ProxyProvider3<ProfileStore, ServicesClient, SessionsStateNotifier,
+            ServiceOfferStore>(
+          update: (_, dep, dep2, dep3, __) => ServiceOfferStore(
             ErrorStore(),
             LoadingStore(),
             dep,
             dep2,
+            dep3,
           ),
         ),
       ],

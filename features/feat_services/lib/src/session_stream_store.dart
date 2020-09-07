@@ -12,7 +12,6 @@ class SessionStreamStore = _SessionStreamStore with _$SessionStreamStore;
 abstract class _SessionStreamStore with Store {
   final ErrorStore errorStore;
   final ProfileStore profileStore;
-  final ServiceSessionStreamClient streamClient;
   final ServicesClient client;
   final UUIDValue sessionId;
   final _inputController = BehaviorSubject<StreamSessionInputEvent>();
@@ -27,7 +26,6 @@ abstract class _SessionStreamStore with Store {
   _SessionStreamStore(
     this.errorStore,
     this.profileStore,
-    this.streamClient,
     this.client,
     this.sessionId,
   );
@@ -44,7 +42,7 @@ abstract class _SessionStreamStore with Store {
 
   @action
   Future connect() async {
-    _output ??= streamClient.biDi(_inputController.stream).listen(
+    _output ??= client.biDi(_inputController.stream).listen(
       (value) {
         switch (value.whichEvent()) {
           case StreamSessionOutputEvent_Event.sessionRequested:
