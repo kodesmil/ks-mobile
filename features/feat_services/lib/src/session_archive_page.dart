@@ -1,4 +1,5 @@
 import 'package:feat_ion/feat_ion.dart';
+import 'package:feat_services/feat_services.dart';
 import 'package:feat_services/src/offer_page.dart';
 import 'package:feat_services/src/session_archive_store.dart';
 import 'package:flutter/cupertino.dart';
@@ -33,7 +34,9 @@ class ServiceSessionArchivePageState extends State<ServiceSessionArchivePage> {
           ),
         ),
       ],
-      child: ServiceSessionArchiveContent(),
+      child: Consumer<SessionsStateNotifier>(
+        builder: (context, state, child) => ServiceSessionArchiveContent(),
+      ),
     );
   }
 }
@@ -73,7 +76,7 @@ class _ServiceSessionArchiveContentState
                       e.status != ServiceSession_Status.CANCELED) {
                     await Navigator.of(context, rootNavigator: true).push(
                       CupertinoPageRoute(
-                        builder: (context) => ServiceSessionPage(e),
+                        builder: (context) => ServiceSessionPage(e.id),
                       ),
                     );
                     await store.fetch();

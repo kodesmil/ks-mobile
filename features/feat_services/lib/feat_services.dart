@@ -8,3 +8,4 @@ export 'src/session_page.dart';
 export 'src/offer_details_page.dart';
 export 'src/offer_edit_page.dart';
 export 'src/offer_page.dart';
+export 'src/sessions_state.dart';

@@ -2,19 +2,23 @@ import 'package:ably/ui/home_page.dart';
 import 'package:feat_auth/feat_auth.dart';
 import 'package:feat_ion/feat_ion.dart';
 import 'package:feat_onboarding/feat_onboarding.dart';
+import 'package:feat_services/feat_services.dart';
 import 'package:fluro/fluro.dart' as fluro;
 import 'package:flutter/material.dart';
+import 'package:lib_services/lib_services.dart';
 import 'package:provider/provider.dart';
 
 class Routes {
   static String root = '/';
   static String onboarding = '/onboarding';
   static String meeting = '/meeting';
+  static String sessions = '/sessions/:sessionId';
 
   static void configureRoutes(fluro.Router router) {
     router.define(root, handler: rootHandler);
     router.define(onboarding, handler: rootHandler);
     router.define(meeting, handler: meetingHandler);
+    router.define(sessions, handler: sessionsHandler);
   }
 }
 
@@ -46,6 +50,16 @@ var meetingHandler = fluro.Handler(
       key: Key(Routes.meeting),
     ),
   ),
+);
+
+var sessionsHandler = fluro.Handler(
+  handlerFunc: (context, params) {
+    return authGuarded(
+      context,
+      params,
+      ServiceSessionPage(UUIDValue()..value = params['sessionId'][0]),
+    );
+  },
 );
 
 Widget authGuarded(

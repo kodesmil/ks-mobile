@@ -12,24 +12,39 @@ class SessionStreamStore = _SessionStreamStore with _$SessionStreamStore;
 abstract class _SessionStreamStore with Store {
   final ErrorStore errorStore;
   final ProfileStore profileStore;
-  final ServiceSessionStreamClient client;
-  final ServiceSession session;
+  final ServiceSessionStreamClient streamClient;
+  final ServicesClient client;
+  final UUIDValue sessionId;
   final _inputController = BehaviorSubject<StreamSessionInputEvent>();
 
   StreamSink<StreamSessionInputEvent> get _input => _inputController.sink;
 
   StreamSubscription<StreamSessionOutputEvent> _output;
 
+  @observable
+  ServiceSession session;
+
   _SessionStreamStore(
     this.errorStore,
     this.profileStore,
+    this.streamClient,
     this.client,
-    this.session,
+    this.sessionId,
   );
 
   @action
+  Future init() async {
+    print(sessionId);
+    final result = await client
+        .readServiceSession(ReadServiceSessionRequest()..id = sessionId);
+    session = result.result;
+    await connect();
+    await joinSession();
+  }
+
+  @action
   Future connect() async {
-    _output ??= client.biDi(_inputController.stream).listen(
+    _output ??= streamClient.biDi(_inputController.stream).listen(
       (value) {
         switch (value.whichEvent()) {
           case StreamSessionOutputEvent_Event.sessionRequested:

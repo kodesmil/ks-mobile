@@ -53,6 +53,7 @@ class _ServiceOfferContentState extends State<ServiceOfferContent> {
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<ServiceOfferStore>(context);
+    final appState = Provider.of<AppStateNotifier>(context);
     return Observer(
       builder: (context) => SliverList(
         delegate: SliverChildBuilderDelegate(
@@ -78,13 +79,12 @@ class _ServiceOfferContentState extends State<ServiceOfferContent> {
                 trailing: DetailsWidget(
                   details: details,
                 ),
-                onTap: () async {
-                  await Navigator.of(context, rootNavigator: true).push(
-                    CupertinoPageRoute(
-                      builder: (context) => ServiceOfferDetailsPage(e),
-                    ),
-                  );
-                },
+                onTap: () async =>
+                    await Navigator.of(context, rootNavigator: true).push(
+                  CupertinoPageRoute(
+                    builder: (context) => ServiceOfferDetailsPage(e),
+                  ),
+                ),
               ),
             );
           },

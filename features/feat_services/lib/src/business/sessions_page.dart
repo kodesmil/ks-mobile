@@ -72,7 +72,7 @@ class _ServiceSessionBizListContentState
                       e.status != ServiceSession_Status.CANCELED) {
                     await Navigator.of(context, rootNavigator: true).push(
                       CupertinoPageRoute(
-                        builder: (context) => ServiceSessionPage(e),
+                        builder: (context) => ServiceSessionPage(e.id),
                       ),
                     );
                     await store.fetch();

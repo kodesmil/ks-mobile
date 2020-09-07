@@ -79,7 +79,7 @@ class ServiceOfferDetailsContent extends StatelessWidget {
                       final session = await store.startSession(offer);
                       await Navigator.of(context).pushReplacement(
                         CupertinoPageRoute(
-                          builder: (context) => ServiceSessionPage(session),
+                          builder: (context) => ServiceSessionPage(session.id),
                         ),
                       );
                     },

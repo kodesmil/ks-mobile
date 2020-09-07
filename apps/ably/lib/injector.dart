@@ -5,6 +5,7 @@ import 'package:feat_feed/feat_feed.dart';
 import 'package:feat_journal/feat_journal.dart';
 import 'package:feat_health/feat_health.dart';
 import 'package:feat_onboarding/feat_onboarding.dart';
+import 'package:feat_services/feat_services.dart';
 import 'package:feat_storage/feat_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluro/fluro.dart' as fluro;
@@ -52,6 +53,9 @@ class _AppInjectorState extends State<AppInjector> {
       providers: [
         ChangeNotifierProvider(
           create: (_) => AppStateNotifier(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => SessionsStateNotifier(),
         ),
         ProxyProvider0(
           update: (_, __) => FirebaseAuth.instance,
