@@ -37,7 +37,7 @@ class KsColorScheme extends ColorScheme {
         secondary: const Color(0xFF00BFA6),
         secondaryVariant: const Color(0xFF00BFA6),
         background: const Color(0xFFf6ffff),
-        surface: const Color(0xFFe0ffff),
+        surface: Colors.tealAccent.shade100,
         onBackground: Colors.black,
         error: Colors.red,
         onError: Colors.black,

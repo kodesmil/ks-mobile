@@ -22,7 +22,6 @@ dependencies:
   grpc: ^2.2.0
   image_picker: ^0.6.7
   uuid: ^2.0.4
-  file_picker: ^1.13.0
 
   feat_auth:
     path: ../feat_auth
