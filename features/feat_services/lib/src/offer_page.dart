@@ -65,22 +65,9 @@ class _ServiceOfferContentState extends State<ServiceOfferContent> {
             return Padding(
               padding: const EdgeInsets.only(top: 15),
               child: ListTile(
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      e.title,
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                    Text(e.description),
-                  ],
-                ),
-                subtitle: Text(
-                  '${e.price} ${e.currency}',
-                ),
-                trailing: DetailsWidget(
-                  details: details,
-                ),
+                title: Text(e.provider.details.name),
+                subtitle: Text(e.title),
+                trailing: Text('${e.price} ${e.currency}'),
                 onTap: () async =>
                     await Navigator.of(context, rootNavigator: true).push(
                   CupertinoPageRoute(
@@ -93,25 +80,6 @@ class _ServiceOfferContentState extends State<ServiceOfferContent> {
           childCount: store.subjects.length,
         ),
       ),
-    );
-  }
-}
-
-class DetailsWidget extends StatelessWidget {
-  const DetailsWidget({
-    Key key,
-    @required this.details,
-  }) : super(key: key);
-
-  final ServiceDetails details;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        Text(details.name),
-      ],
     );
   }
 }

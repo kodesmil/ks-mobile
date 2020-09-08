@@ -77,7 +77,6 @@ class _ServiceSessionContentState extends State<ServiceSessionContent> {
           return KsProgressIndicator();
         }
         final offer = store.session.offer;
-        final details = offer.provider.details;
         return Scaffold(
           appBar: KsSmallNavigationBar(title: 'Session'),
           floatingActionButtonLocation:
@@ -117,42 +116,41 @@ class _ServiceSessionContentState extends State<ServiceSessionContent> {
           ],
           body: Material(
             child: SafeArea(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-                child: Stack(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(10),
-                            ),
-                            child: Image.asset(
-                              'assets/images/peach/example/example-scene-3.png',
-                            ),
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    right: 50,
+                    left: 50,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 25),
+                      Container(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(10),
+                          ),
+                          child: Image.asset(
+                            'assets/images/peach/example/example-scene-3.png',
                           ),
                         ),
-                        SizedBox(height: 25),
-                        Text(
-                          offer.title,
-                          style: Theme.of(context).textTheme.headline6,
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          offer.description,
-                          style: Theme.of(context).textTheme.bodyText2,
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          offer.provider.details.name,
-                          style: Theme.of(context).textTheme.caption,
-                        ),
-                      ],
-                    ),
-                  ],
+                      ),
+                      SizedBox(height: 25),
+                      Text(
+                        offer.title,
+                        style: Theme.of(context).textTheme.headline5,
+                      ),
+                      SizedBox(height: 15),
+                      Text(
+                        offer.description,
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
+                      SizedBox(height: 10),
+                      Text(offer.provider.details.name),
+                      SizedBox(height: 50),
+                    ],
+                  ),
                 ),
               ),
             ),

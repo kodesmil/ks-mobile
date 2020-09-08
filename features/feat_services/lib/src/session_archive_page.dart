@@ -123,9 +123,7 @@ class _ServiceSessionArchiveContentState
                     ),
                   ],
                 ),
-                trailing: DetailsWidget(
-                  details: details,
-                ),
+                trailing: Text(details.name),
               ),
             );
           },

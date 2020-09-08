@@ -118,9 +118,7 @@ class _ServiceSessionBizListContentState
                     ),
                   ],
                 ),
-                trailing: DetailsWidget(
-                  details: details,
-                ),
+                trailing: Text(details.name),
               ),
             );
           },

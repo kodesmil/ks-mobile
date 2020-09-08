@@ -211,11 +211,47 @@ class KsTextTheme extends TextTheme {
             fontWeight: FontWeight.w700,
             letterSpacing: 2.8,
           ),
+          caption: base.caption.copyWith(
+            fontFamily: fontFamily,
+          ),
+          overline: base.overline.copyWith(
+            fontFamily: fontFamily,
+          ),
+          subtitle1: base.subtitle1.copyWith(
+            fontFamily: fontFamily,
+          ),
+          subtitle2: base.subtitle2.copyWith(
+            fontFamily: fontFamily,
+          ),
+          headline1: base.headline1.copyWith(
+            fontFamily: fontFamily,
+            height: 1,
+          ),
+          headline2: base.headline2.copyWith(
+            fontFamily: fontFamily,
+            height: 1,
+          ),
+          headline3: base.headline3.copyWith(
+            fontFamily: fontFamily,
+            height: 1,
+          ),
+          headline4: base.headline4.copyWith(
+            fontFamily: fontFamily,
+            height: 1,
+          ),
           headline5: base.headline5.copyWith(
             fontFamily: fontFamily,
             fontSize: 40,
             fontWeight: FontWeight.w900,
             letterSpacing: 1.4,
+            height: 1,
+          ),
+          headline6: base.headline6.copyWith(
+            fontFamily: fontFamily,
+            fontSize: 22,
+            fontWeight: FontWeight.w600,
+            letterSpacing: 1.1,
+            height: 1,
           ),
         )
         .apply(
