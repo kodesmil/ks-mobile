@@ -1,25 +1,51 @@
-import 'package:feat_ion/src/helper/ion_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webrtc/webrtc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:lib_shared/lib_shared.dart';
 import 'package:provider/provider.dart';
-import '../widget/video_render_adapter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import 'meeting_store.dart';
+import 'meeting_widget.dart';
 
 class MeetingPage extends StatefulWidget {
   final String roomId;
 
-  const MeetingPage(
+  MeetingPage(this.roomId);
+
+  @override
+  MeetingPageState createState() => MeetingPageState();
+}
+
+class MeetingPageState extends State<MeetingPage> {
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ProxyProvider0<MeetingStore>(
+          update: (_, __) => MeetingStore(
+            ErrorStore(),
+            widget.roomId,
+          ),
+        ),
+      ],
+      child: MeetingContent(widget.roomId),
+    );
+  }
+}
+
+class MeetingContent extends StatefulWidget {
+  final String roomId;
+
+  const MeetingContent(
     this.roomId, {
     Key key,
   }) : super(key: key);
 
   @override
-  _MeetingPageState createState() => _MeetingPageState();
+  _MeetingContentState createState() => _MeetingContentState();
 }
 
-class _MeetingPageState extends State<MeetingPage> {
-  SharedPreferences prefs;
+class _MeetingContentState extends State<MeetingContent> {
   final List<VideoRendererAdapter> _remoteVideos = [];
   VideoRendererAdapter _localVideo;
 
@@ -27,7 +53,6 @@ class _MeetingPageState extends State<MeetingPage> {
   bool _microphoneOff = false;
   bool _speakerOn = true;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  var _messages = [];
   var name;
   var room;
 
@@ -35,28 +60,27 @@ class _MeetingPageState extends State<MeetingPage> {
   final double LOCAL_VIDEO_HEIGHT = 72.0;
 
   void init() async {
-    prefs = await SharedPreferences.getInstance();
-    final helper = Provider.of<IonHelper>(context, listen: false);
+    final helper = Provider.of<MeetingStore>(context, listen: false);
     var client = helper.client;
 
     client.on('peer-join', (rid, id, info) async {
       var name = info['name'];
-      _showSnackBar(':::Peer [$id:$name] join:::');
+      _showSnackBar('$name joined');
     });
 
-    client.on('peer-leave', (rid, id) async {
-      _showSnackBar(':::Peer [$id] leave:::');
+    client.on('peer-leave', (rid, id, info) async {
+      var name = info['name'];
+      _showSnackBar('$name left');
     });
 
     client.on('stream-add', (rid, mid, info, tracks) async {
-      var bandwidth = prefs.getString('bandwidth') ?? '512';
+      var bandwidth = '512';
       var stream = await client.subscribe(rid, mid, tracks, bandwidth);
       var adapter = VideoRendererAdapter(stream.mid, stream, false, mid);
       await adapter.setupSrcObject();
       setState(() {
         _remoteVideos.add(adapter);
       });
-      _showSnackBar(':::stream-add [$mid]:::');
     });
 
     client.on('stream-remove', (rid, mid) async {
@@ -67,22 +91,14 @@ class _MeetingPageState extends State<MeetingPage> {
           _remoteVideos.remove(adapter);
         });
       }
-      _showSnackBar(':::stream-remove [$mid]:::');
-    });
-
-    client.on('broadcast', (rid, uid, info) async {
-      print('message: ' + info.toString());
-      _messages.add({'name': info['senderName'], 'text': info['msg']});
-      setState(() {
-        _messages = _messages;
-      });
     });
 
     helper.join(name, widget.roomId);
+
     try {
-      var resolution = prefs.getString('resolution') ?? 'vga';
-      var bandwidth = prefs.getString('bandwidth') ?? '512';
-      var codec = prefs.getString('codec') ?? 'vp8';
+      var resolution = 'vga';
+      var bandwidth = '512';
+      var codec = 'vp8';
       await client
           .publish(true, true, false, codec, bandwidth, resolution)
           .then((stream) async {
@@ -107,17 +123,15 @@ class _MeetingPageState extends State<MeetingPage> {
   }
 
   void _cleanUp() async {
-    final helper = Provider.of<IonHelper>(context, listen: false);
+    final helper = Provider.of<MeetingStore>(context, listen: false);
     var rid = helper.roomId;
     var client = helper.client;
     if (_localVideo != null) {
-      // stop local video
       var stream = _localVideo.stream;
       await client.unpublish(_localVideo.mid);
       await stream.dispose();
       _localVideo = null;
     }
-
     _remoteVideos.forEach((item) async {
       var stream = item.stream;
       try {
@@ -163,10 +177,10 @@ class _MeetingPageState extends State<MeetingPage> {
   Widget _buildLocalVideo(Orientation orientation) {
     if (_localVideo != null) {
       return SizedBox(
-        width: (orientation == Orientation.portrait)
+        width: orientation == Orientation.portrait
             ? LOCAL_VIDEO_HEIGHT
             : LOCAL_VIDEO_WIDTH,
-        height: (orientation == Orientation.portrait)
+        height: orientation == Orientation.portrait
             ? LOCAL_VIDEO_WIDTH
             : LOCAL_VIDEO_HEIGHT,
         child: Container(
@@ -203,8 +217,9 @@ class _MeetingPageState extends State<MeetingPage> {
   }
 
   void _swapVideoPosition(adapter) {
-    var index =
-        _remoteVideos.indexWhere((element) => element.mid == adapter.mid);
+    var index = _remoteVideos.indexWhere(
+      (element) => element.mid == adapter.mid,
+    );
     if (index == -1) return;
     setState(() {
       var temp = _remoteVideos[0];
@@ -227,64 +242,45 @@ class _MeetingPageState extends State<MeetingPage> {
         ),
         child: GestureDetector(
           onTap: () => _swapVideoPosition(adapter),
-          onDoubleTap: () => adapter.switchObjFit(),
           child: RTCVideoView(adapter.renderer),
         ),
       ),
     );
   }
 
-  //Switch speaker/earpiece
   void _switchSpeaker() {
     setState(() {
       _speakerOn = !_speakerOn;
-      MediaStreamTrack audioTrack = _localVideo.stream.getAudioTracks()[0];
+      var audioTrack = _localVideo.stream.getAudioTracks()[0];
       audioTrack.enableSpeakerphone(_speakerOn);
-      _showSnackBar(
-          ':::Switch to ' + (_speakerOn ? 'speaker' : 'earpiece') + ':::');
     });
   }
 
-  //Switch local camera
   void _switchCamera() {
-    if (_localVideo != null && _localVideo.stream.getVideoTracks().length > 0) {
+    if (_localVideo != null && _localVideo.stream.getVideoTracks().isNotEmpty) {
       _localVideo.stream.getVideoTracks()[0].switchCamera();
-    } else {
-      _showSnackBar(':::Unable to switch the camera:::');
     }
   }
 
-  //Open or close local video
   void _turnCamera() {
-    if (_localVideo != null && _localVideo.stream.getVideoTracks().length > 0) {
-      var muted = !_cameraOff;
+    if (_localVideo != null && _localVideo.stream.getVideoTracks().isNotEmpty) {
       setState(() {
-        _cameraOff = muted;
+        _cameraOff = !_cameraOff;
+        _localVideo.stream.getVideoTracks()[0].enabled = !_cameraOff;
       });
-      _localVideo.stream.getVideoTracks()[0].enabled = !muted;
-    } else {
-      _showSnackBar(':::Unable to operate the camera:::');
     }
   }
 
-  //Open or close local audio
   void _turnMicrophone() {
-    if (_localVideo != null && _localVideo.stream.getAudioTracks().length > 0) {
+    if (_localVideo != null && _localVideo.stream.getAudioTracks().isNotEmpty) {
       var muted = !_microphoneOff;
       setState(() {
         _microphoneOff = muted;
       });
       _localVideo.stream.getAudioTracks()[0].enabled = !muted;
-
-      if (muted) {
-        _showSnackBar(':::The microphone is muted:::');
-      } else {
-        _showSnackBar(':::The microphone is unmuted:::');
-      }
-    } else {}
+    }
   }
 
-  //Leave current video room
   void _hangUp() {
     showDialog(
       context: context,
@@ -299,10 +295,7 @@ class _MeetingPageState extends State<MeetingPage> {
             },
           ),
           FlatButton(
-            child: Text(
-              'Hangup',
-              style: TextStyle(color: Colors.red),
-            ),
+            child: Text('Hangup'),
             onPressed: () {
               Navigator.of(context).pop();
               _cleanUp();
@@ -367,7 +360,8 @@ class _MeetingPageState extends State<MeetingPage> {
           ),
           child: Icon(
             MaterialCommunityIcons.getIconData(
-                _cameraOff ? 'video-off' : 'video'),
+              _cameraOff ? 'video-off' : 'video',
+            ),
             color: _cameraOff ? Colors.red : Colors.white,
           ),
           onPressed: _turnCamera,

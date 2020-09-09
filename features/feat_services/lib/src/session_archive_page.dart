@@ -1,6 +1,4 @@
-import 'package:feat_ion/feat_ion.dart';
 import 'package:feat_services/feat_services.dart';
-import 'package:feat_services/src/offer_page.dart';
 import 'package:feat_services/src/session_archive_store.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

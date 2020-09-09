@@ -10,6 +10,8 @@ import 'package:lib_services/src/generated/github.com/kodesmil/ks-model/service.
 import 'package:lib_shared/lib_shared.dart';
 import 'package:provider/provider.dart';
 
+import 'session_page.dart';
+
 class ServiceOfferDetailsPage extends StatefulWidget {
   final ServiceOffer offer;
 

@@ -9,6 +9,7 @@ import 'package:lib_shared/lib_shared.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 
+import '../session_page.dart';
 import 'sessions_store.dart';
 
 class ServiceSessionBizListPage extends StatefulWidget {

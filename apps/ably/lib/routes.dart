@@ -1,6 +1,5 @@
 import 'package:ably/ui/home_page.dart';
 import 'package:feat_auth/feat_auth.dart';
-import 'package:feat_ion/feat_ion.dart';
 import 'package:feat_onboarding/feat_onboarding.dart';
 import 'package:feat_services/feat_services.dart';
 import 'package:fluro/fluro.dart' as fluro;

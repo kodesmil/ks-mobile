@@ -40,8 +40,6 @@ dependencies:
 
   feat_storage:
     path: ../../features/feat_storage
-  feat_ion:
-    path: ../../features/feat_ion
   feat_auth:
     path: ../../features/feat_auth
   feat_splash:

@@ -1,6 +1,5 @@
 import 'package:feat_auth/feat_auth.dart';
 import 'package:feat_chat/feat_chat.dart';
-import 'package:feat_ion/feat_ion.dart';
 import 'package:feat_feed/feat_feed.dart';
 import 'package:feat_journal/feat_journal.dart';
 import 'package:feat_health/feat_health.dart';
@@ -65,11 +64,6 @@ class _AppInjectorState extends State<AppInjector> {
             ErrorStore(),
           ),
         ),
-        ProxyProvider0(
-          update: (_, __) {
-            return IonHelper();
-          },
-        ),
         ProxyProvider<FirebaseAuth, UserStore>(
           update: (_, dep, old) {
             return old ?? UserStore(dep);
@@ -120,7 +114,8 @@ class _AppInjectorState extends State<AppInjector> {
             return CallOptions(
               providers: [
                 (metadata, url) async {
-                  final idToken = await store.firebaseAuth.currentUser.getIdToken();
+                  final idToken =
+                      await store.firebaseAuth.currentUser.getIdToken();
                   metadata['authorization'] = 'Bearer ${idToken}';
                 },
               ],

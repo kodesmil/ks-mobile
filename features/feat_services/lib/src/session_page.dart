@@ -1,12 +1,9 @@
 import 'package:feat_auth/feat_auth.dart';
-import 'package:feat_ion/feat_ion.dart';
-import 'package:feat_services/src/offer_page.dart';
 import 'package:feat_services/src/session_evaluation_page.dart';
 import 'package:feat_services/src/session_stream_store.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:lib_lego/lib_lego.dart';
 import 'package:lib_services/lib_services.dart';
 import 'package:lib_shared/lib_shared.dart';
@@ -58,14 +55,9 @@ class _ServiceSessionContentState extends State<ServiceSessionContent> {
   }
 
   Future handleJoin() async {
-    final helper = Provider.of<IonHelper>(context, listen: false);
-    await helper.connect('ion.qa.api.kodesmil.com', (result) {
-      if (result) {
-        Navigator.of(context).pushReplacementNamed(
-          '/meetings/${widget.sessionId}',
-        );
-      }
-    });
+    await Navigator.of(context).pushReplacementNamed(
+      '/meetings/${widget.sessionId}',
+    );
   }
 
   @override
