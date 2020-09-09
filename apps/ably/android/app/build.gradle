@@ -85,6 +85,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    // to remove
+    lintOptions {
+        checkReleaseBuilds false
+    }
 }
 
 flutter {
