@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -103,11 +104,10 @@ class _StorageFileSelectWidgetState extends State<StorageFileSelectWidget> {
   }
 
   Future<void> selectPicture(BuildContext context, StorageStore store) async {
-    final file = null;
-    /*await FilePicker.getFile(
+    final file = await FilePicker.getFile(
       type: FileType.custom,
       allowedExtensions: ['jpg', 'pdf', 'png'],
-    );*/
+    );
     if (file == null) {
       widget.onFileUploaded('');
       return;
