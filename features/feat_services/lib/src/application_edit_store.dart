@@ -118,5 +118,5 @@ abstract class _ServiceApplicationEditStore with Store {
     }
   }
 
-  bool hasSameId(e, other) => e.id.resourceId == other?.id?.resourceId;
+  bool hasSameId(e, other) => e.mid.resourceId == other?.mid?.resourceId;
 }
