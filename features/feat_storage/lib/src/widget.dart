@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:file_picker/file_picker.dart';
 
 import 'store.dart';
 
@@ -54,7 +53,8 @@ class _StoragePictureSelectWidgetState
                   Navigator.pop(context);
                   final picked = await getImage(ImageSource.gallery);
                   if (picked == null) return;
-                  final url = await store.upload('profile_pictures', File(picked.path));
+                  final url =
+                      await store.upload('profile_pictures', File(picked.path));
                   widget.onFileUploaded(url);
                 },
               ),
@@ -64,7 +64,8 @@ class _StoragePictureSelectWidgetState
                   Navigator.pop(context);
                   final picked = await getImage(ImageSource.camera);
                   if (picked == null) return;
-                  final url = await store.upload('profile_pictures', File(picked.path));
+                  final url =
+                      await store.upload('profile_pictures', File(picked.path));
                   widget.onFileUploaded(url);
                 },
               )
@@ -102,10 +103,11 @@ class _StorageFileSelectWidgetState extends State<StorageFileSelectWidget> {
   }
 
   Future<void> selectPicture(BuildContext context, StorageStore store) async {
-    final file = await FilePicker.getFile(
+    final file = null;
+    /*await FilePicker.getFile(
       type: FileType.custom,
       allowedExtensions: ['jpg', 'pdf', 'png'],
-    );
+    );*/
     if (file == null) {
       widget.onFileUploaded('');
       return;

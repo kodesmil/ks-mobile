@@ -2,45 +2,34 @@ import 'package:flutter_webrtc/webrtc.dart';
 import 'package:flutter_ion/flutter_ion.dart';
 
 class VideoRendererAdapter {
-  String _mid;
-  String _sid;
-  bool _local;
+  final String _mid;
+  final String _sid;
+  final bool _local;
   RTCVideoRenderer _renderer;
-  Stream _stream;
-  RTCVideoViewObjectFit _objectFit =
-      RTCVideoViewObjectFit.RTCVideoViewObjectFitContain;
+  final Stream _stream;
+  var _objectFit = RTCVideoViewObjectFit.RTCVideoViewObjectFitContain;
+
   VideoRendererAdapter(this._mid, this._stream, this._local, [this._sid]);
 
-  setupSrcObject() async {
+  Future setupSrcObject() async {
     if (_renderer == null) {
-      _renderer = new RTCVideoRenderer();
+      _renderer = RTCVideoRenderer();
       await _renderer.initialize();
     }
     _renderer.srcObject = _stream.stream;
     if (_local) {
       _objectFit = RTCVideoViewObjectFit.RTCVideoViewObjectFitCover;
-      _renderer.mirror = true;
-      _renderer.objectFit = _objectFit;
     }
   }
 
-  switchObjFit() {
+  void switchObjFit() {
     _objectFit =
         (_objectFit == RTCVideoViewObjectFit.RTCVideoViewObjectFitContain)
             ? RTCVideoViewObjectFit.RTCVideoViewObjectFitCover
             : RTCVideoViewObjectFit.RTCVideoViewObjectFitContain;
-    _renderer.objectFit = _objectFit;
   }
 
-  set objectFit(RTCVideoViewObjectFit objectFit) {
-    _objectFit = objectFit;
-    if (this._renderer != null) {
-      _renderer.objectFit = _objectFit;
-    }
-  }
-
-
-  dispose() async {
+  Future dispose() async {
     if (_renderer != null) {
       print('dispose for texture id ' + _renderer.textureId.toString());
       _renderer.srcObject = null;
@@ -49,13 +38,13 @@ class VideoRendererAdapter {
     }
   }
 
-  get local => _local;
+  bool get local => _local;
 
-  get mid => _mid;
+  String get mid => _mid;
 
-  get sid => _sid;
+  String get sid => _sid;
 
-  get renderer => _renderer;
+  RTCVideoRenderer get renderer => _renderer;
 
-  get stream => _stream.stream;
+  MediaStream get stream => _stream.stream;
 }

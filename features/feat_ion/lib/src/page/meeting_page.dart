@@ -26,7 +26,7 @@ class _MeetingPageState extends State<MeetingPage> {
   bool _cameraOff = false;
   bool _microphoneOff = false;
   bool _speakerOn = true;
-  final _scaffoldkey = GlobalKey<ScaffoldState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   var _messages = [];
   var name;
   var room;
@@ -110,7 +110,6 @@ class _MeetingPageState extends State<MeetingPage> {
     final helper = Provider.of<IonHelper>(context, listen: false);
     var rid = helper.roomId;
     var client = helper.client;
-
     if (_localVideo != null) {
       // stop local video
       var stream = _localVideo.stream;
@@ -124,6 +123,8 @@ class _MeetingPageState extends State<MeetingPage> {
       try {
         await client.unsubscribe(rid, item.mid);
         await stream.dispose();
+        await item.renderer.dispose();
+        await item.dispose();
       } catch (error) {
         print(error);
       }
@@ -195,7 +196,6 @@ class _MeetingPageState extends State<MeetingPage> {
     var views = <Widget>[];
     if (_remoteVideos.length > 1) {
       _remoteVideos.getRange(1, _remoteVideos.length).forEach((adapter) {
-        adapter.objectFit = RTCVideoViewObjectFit.RTCVideoViewObjectFitCover;
         views.add(_buildVideo(adapter));
       });
     }
@@ -323,7 +323,7 @@ class _MeetingPageState extends State<MeetingPage> {
         milliseconds: 1000,
       ),
     );
-    _scaffoldkey.currentState.showSnackBar(snackBar);
+    _scaffoldKey.currentState.showSnackBar(snackBar);
   }
 
   Widget _buildLoading() {
@@ -454,7 +454,7 @@ class _MeetingPageState extends State<MeetingPage> {
       builder: (context, orientation) {
         return SafeArea(
           child: Scaffold(
-            key: _scaffoldkey,
+            key: _scaffoldKey,
             body: orientation == Orientation.portrait
                 ? Container(
                     color: Colors.black87,
