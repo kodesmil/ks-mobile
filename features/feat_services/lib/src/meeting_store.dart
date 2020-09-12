@@ -15,9 +15,9 @@ class MeetingVideo {
 
   MeetingVideo(this.mid, this.stream);
 
-  void setupSrcObject() {
+  void setupSrcObject() async {
     renderer = RTCVideoRenderer();
-    renderer.initialize();
+    await renderer.initialize();
     renderer.srcObject = stream.stream;
     getAudioTrack().enableSpeakerphone(true);
   }
@@ -28,11 +28,13 @@ class MeetingVideo {
     await renderer.dispose();
   }
 
-  MediaStreamTrack getAudioTrack() => stream.stream.getAudioTracks()[0];
+  MediaStreamTrack getAudioTrack() =>
+      stream.stream.getAudioTracks()?.elementAt(0);
 
   List<MediaStreamTrack> getAudioTracks() => stream.stream.getAudioTracks();
 
-  MediaStreamTrack getVideoTrack() => stream.stream.getVideoTracks()[0];
+  MediaStreamTrack getVideoTrack() =>
+      stream.stream.getVideoTracks()?.elementAt(0);
 
   List<MediaStreamTrack> getVideoTracks() => stream.stream.getVideoTracks();
 
@@ -68,7 +70,6 @@ abstract class _MeetingStore with Store {
     if (client == null) {
       var url = 'https://$host/ws';
       client = Client(url);
-      await init();
       client.on('transport-open', () async {
         try {
           await client.join(roomId, {'name': 'Aaa'});
@@ -91,6 +92,7 @@ abstract class _MeetingStore with Store {
         }
       });
     }
+    await init();
     await client.connect();
   }
 
@@ -159,10 +161,11 @@ abstract class _MeetingStore with Store {
       }
     });
     remotes.clear();
+    client.clearListeners();
   }
 
   @action
-  Future init() async {
+  void init() {
     client.on('peer-join', (rid, id, info) async {
       var name = info['name'];
     });
@@ -172,12 +175,15 @@ abstract class _MeetingStore with Store {
     client.on('stream-add', (rid, mid, info, tracks) async {
       var bandwidth = '512';
       var stream = await client.subscribe(rid, mid, tracks, bandwidth);
-      var remote = MeetingVideo(mid, stream);
-      await remote.setupSrcObject();
-      remotes.add(remote);
+      // var remote = MeetingVideo(mid, stream);
+      // await remote.setupSrcObject();
+      // local = remote;
     });
     client.on('stream-remove', (rid, mid) async {
-      var remote = remotes.firstWhere((item) => item.mid == mid);
+      var remote = remotes.firstWhere(
+        (item) => item.mid == mid,
+        orElse: () => null,
+      );
       if (remote != null) {
         await remote.dispose();
         remotes.remove(remote);

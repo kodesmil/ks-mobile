@@ -82,7 +82,7 @@ class KsTheme {
           color: colorScheme.onPrimary,
         ),
       ),
-      dialogBackgroundColor: colorScheme.background,
+      dialogBackgroundColor: Colors.white,
       tabBarTheme: TabBarTheme(
         labelColor: colorScheme.onPrimary,
       ),
@@ -102,7 +102,7 @@ class KsTheme {
       iconTheme: IconThemeData(color: colorScheme.onBackground),
       canvasColor: colorScheme.background,
       scaffoldBackgroundColor: colorScheme.background,
-      highlightColor: Colors.transparent,
+      highlightColor: Colors.white10,
       accentColor: colorScheme.primary,
       primaryColor: colorScheme.primary,
       focusColor: focusColor,
@@ -117,9 +117,9 @@ class KsTheme {
         colorScheme: colorScheme,
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: colorScheme.primary,
-        unselectedItemColor: colorScheme.background.withAlpha(128),
-        selectedItemColor: colorScheme.background,
+        backgroundColor: colorScheme.surface,
+        unselectedItemColor: Colors.white38,
+        selectedItemColor: Colors.white.withOpacity(0.9),
       ),
       inputDecorationTheme: InputDecorationTheme(
         labelStyle: TextStyle(
@@ -223,9 +223,6 @@ class KsTextTheme extends TextTheme {
             fontFamily: fontFamily,
           ),
           subtitle1: base.subtitle1.copyWith(
-            fontSize: 22,
-            fontWeight: FontWeight.w600,
-            letterSpacing: 0.5,
             height: 1,
             fontFamily: fontFamily,
           ),
@@ -252,14 +249,13 @@ class KsTextTheme extends TextTheme {
             fontFamily: fontFamily,
             fontSize: 40,
             fontWeight: FontWeight.w900,
-            letterSpacing: 1.4,
+            letterSpacing: 1,
             height: 1,
           ),
           headline6: base.headline6.copyWith(
             fontFamily: fontFamily,
             fontSize: 22,
             fontWeight: FontWeight.w600,
-            letterSpacing: 1.1,
             height: 1,
           ),
         )

@@ -4,6 +4,7 @@ import 'package:ably/injector.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lib_lego/lib_lego.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/widgets.dart';
@@ -11,6 +12,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
 void realMain() async {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.black,
+  ));
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   var delegate = await LocalizationDelegate.create(
@@ -34,6 +38,7 @@ class _MyAppState extends State<MyApp> {
       child: AppInjector(
         child: Consumer<AppStateNotifier>(
           builder: (context, appState, child) => MaterialApp(
+            debugShowCheckedModeBanner: false,
             localizationsDelegates: [
               localizationDelegate,
               GlobalMaterialLocalizations.delegate,

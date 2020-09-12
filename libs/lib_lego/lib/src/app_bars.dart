@@ -29,16 +29,7 @@ class KsNavigationBar extends StatelessWidget implements PreferredSizeWidget {
     return SliverAppBar(
       expandedHeight: 120.0,
       pinned: true,
-      iconTheme: IconThemeData(
-        color: Theme.of(context).colorScheme.onSurface,
-      ),
-      actions: [
-        action,
-        SizedBox(
-          width: 10,
-        )
-      ],
-      shape: RoundedRectangleBorder(),
+      actions: [action, SizedBox(width: 10)],
       flexibleSpace: FlexibleSpaceBar(
         titlePadding: EdgeInsets.only(
           left: 15,
@@ -52,6 +43,7 @@ class KsNavigationBar extends StatelessWidget implements PreferredSizeWidget {
                   fontSize: 32,
                   fontWeight: FontWeight.w600,
                   letterSpacing: 0,
+                  color: Colors.white.withOpacity(0.85),
                 ),
           ),
         ),
@@ -100,7 +92,7 @@ class KsSmallNavigationBar extends StatelessWidget
             ),
       ),
       actionsForegroundColor: Theme.of(context).colorScheme.onPrimary,
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: Theme.of(context).colorScheme.surface,
     );
   }
 

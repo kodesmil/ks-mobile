@@ -57,7 +57,7 @@ class _ServiceOfferContentState extends State<ServiceOfferContent> {
     final store = Provider.of<ServiceOfferStore>(context);
     return Observer(
       builder: (context) => SliverPadding(
-        padding: const EdgeInsets.only(top: 20),
+        padding: const EdgeInsets.only(top: 15),
         sliver: SliverList(
           delegate: SliverChildBuilderDelegate(
             (context, index) {
@@ -68,7 +68,7 @@ class _ServiceOfferContentState extends State<ServiceOfferContent> {
                   contentPadding: EdgeInsets.all(10),
                   title: Text(
                     e.title,
-                    style: Theme.of(context).textTheme.subtitle1,
+                    style: Theme.of(context).textTheme.headline6,
                   ),
                   subtitle: Text(
                     e.description,

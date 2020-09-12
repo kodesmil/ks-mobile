@@ -143,11 +143,18 @@ mixin _$MeetingStore on _MeetingStore, Store {
     return _$cleanUpAsyncAction.run(() => super.cleanUp());
   }
 
-  final _$initAsyncAction = AsyncAction('_MeetingStore.init');
+  final _$_MeetingStoreActionController =
+      ActionController(name: '_MeetingStore');
 
   @override
-  Future<dynamic> init() {
-    return _$initAsyncAction.run(() => super.init());
+  void init() {
+    final _$actionInfo =
+        _$_MeetingStoreActionController.startAction(name: '_MeetingStore.init');
+    try {
+      return super.init();
+    } finally {
+      _$_MeetingStoreActionController.endAction(_$actionInfo);
+    }
   }
 
   @override

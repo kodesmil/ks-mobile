@@ -23,10 +23,11 @@ class MeetingPageState extends State<MeetingPage> {
     return MultiProvider(
       providers: [
         ProxyProvider0<MeetingStore>(
-          update: (_, __) => MeetingStore(
-            ErrorStore(),
-            widget.roomId,
-          ),
+          update: (_, __) =>
+              MeetingStore(
+                ErrorStore(),
+                widget.roomId,
+              ),
         ),
       ],
       child: MeetingContent(widget.roomId),
@@ -37,8 +38,7 @@ class MeetingPageState extends State<MeetingPage> {
 class MeetingContent extends StatefulWidget {
   final String roomId;
 
-  const MeetingContent(
-    this.roomId, {
+  const MeetingContent(this.roomId, {
     Key key,
   }) : super(key: key);
 
@@ -68,25 +68,26 @@ class _MeetingContentState extends State<MeetingContent> {
   void _hangUp() {
     showDialog(
       context: context,
-      builder: (_) => AlertDialog(
-        title: Text('Hangup'),
-        content: Text('Are you sure to leave the room?'),
-        actions: <Widget>[
-          FlatButton(
-            child: Text('Cancel'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
+      builder: (_) =>
+          AlertDialog(
+            title: Text('Hangup'),
+            content: Text('Are you sure to leave the room?'),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Cancel'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              FlatButton(
+                child: Text('Hangup'),
+                onPressed: () async {
+                  await Navigator.of(context).pop();
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
           ),
-          FlatButton(
-            child: Text('Hangup'),
-            onPressed: () async {
-              await Navigator.of(context).pop();
-              Navigator.of(context).pop();
-            },
-          )
-        ],
-      ),
     );
   }
 
@@ -189,84 +190,77 @@ class _MeetingContentState extends State<MeetingContent> {
 
   @override
   Widget build(BuildContext context) {
-    return Observer(
-      builder: (context) => OrientationBuilder(
-        builder: (context, orientation) {
-          return SafeArea(
-            child: Scaffold(
-                key: _scaffoldKey,
-                body: Observer(
-                  builder: (context) => Container(
-                    color: Colors.black87,
-                    child: Stack(
-                      children: <Widget>[
-                        Positioned(
-                          left: 0,
-                          right: 0,
-                          top: 0,
-                          bottom: 0,
-                          child: Container(
-                            color: Colors.black54,
-                            child: Stack(
-                              children: <Widget>[
-                                Positioned(
-                                  left: 0,
-                                  right: 0,
-                                  top: 0,
-                                  bottom: 0,
-                                  child: Observer(
-                                    builder: (context) =>
-                                        store.remotes?.isNotEmpty == true
-                                            ? GestureDetector(
-                                                child: RTCVideoView(
-                                                  store.remotes.first.renderer,
-                                                ),
-                                              )
-                                            : Container(),
-                                  ),
+    return OrientationBuilder(
+      builder: (context, orientation) {
+        return SafeArea(
+          child: Scaffold(
+            key: _scaffoldKey,
+            body: Container(
+              color: Colors.black87,
+              child: Stack(
+                children: <Widget>[
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    bottom: 0,
+                    child: Container(
+                      color: Colors.black54,
+                      child: Stack(
+                        children: <Widget>[
+                          Positioned(
+                            left: 0,
+                            right: 0,
+                            top: 0,
+                            bottom: 0,
+                            child: Observer(
+                              builder: (context) =>
+                              store.local != null
+                                  ? GestureDetector(
+                                child: RTCVideoView(
+                                  store.local.renderer,
+                                  mirror: true,
                                 ),
-                                Positioned(
-                                  right: 10,
-                                  top: 48,
-                                  child: LocalVideo(orientation),
-                                ),
-                              ],
+                              )
+                                  : Container(),
                             ),
                           ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    height: 48,
+                    child: Stack(
+                      children: <Widget>[
+                        Opacity(
+                          opacity: 0.5,
+                          child: Container(
+                            color: Colors.black,
+                          ),
                         ),
-                        Positioned(
-                          left: 0,
-                          right: 0,
-                          bottom: 0,
+                        Container(
                           height: 48,
-                          child: Stack(
-                            children: <Widget>[
-                              Opacity(
-                                opacity: 0.5,
-                                child: Container(
-                                  color: Colors.black,
-                                ),
-                              ),
-                              Container(
-                                height: 48,
-                                margin: EdgeInsets.all(0.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: _buildTools(),
-                                ),
-                              ),
-                            ],
+                          margin: EdgeInsets.all(0.0),
+                          child: Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: _buildTools(),
                           ),
                         ),
                       ],
                     ),
                   ),
-                )),
-          );
-        },
-      ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -283,26 +277,26 @@ class LocalVideo extends StatelessWidget {
     final store = Provider.of<MeetingStore>(context);
     return store.local != null
         ? SizedBox(
-            width: orientation == Orientation.portrait
-                ? LOCAL_VIDEO_HEIGHT
-                : LOCAL_VIDEO_WIDTH,
-            height: orientation == Orientation.portrait
-                ? LOCAL_VIDEO_WIDTH
-                : LOCAL_VIDEO_HEIGHT,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.black87,
-                border: Border.all(
-                  color: Colors.white,
-                  width: 0.5,
-                ),
-              ),
-              child: GestureDetector(
-                onTap: () => store.switchCamera(),
-                child: RTCVideoView(store.local.renderer),
-              ),
-            ),
-          )
+      width: orientation == Orientation.portrait
+          ? LOCAL_VIDEO_HEIGHT
+          : LOCAL_VIDEO_WIDTH,
+      height: orientation == Orientation.portrait
+          ? LOCAL_VIDEO_WIDTH
+          : LOCAL_VIDEO_HEIGHT,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.black87,
+          border: Border.all(
+            color: Colors.white,
+            width: 0.5,
+          ),
+        ),
+        child: GestureDetector(
+          onTap: () => store.switchCamera(),
+          child: RTCVideoView(store.local.renderer),
+        ),
+      ),
+    )
         : Container();
   }
 }
