@@ -97,7 +97,7 @@ class _ColorLoader3State extends State<ColorLoader3>
                   Transform.translate(
                     child: Dot(
                       radius: dotRadius,
-                      color: Colors.amber,
+                      color: Colors.white,
                     ),
                     offset: Offset(
                       radius * cos(0.0),
@@ -107,7 +107,7 @@ class _ColorLoader3State extends State<ColorLoader3>
                   Transform.translate(
                     child: Dot(
                       radius: dotRadius,
-                      color: Colors.deepOrangeAccent,
+                      color: Colors.black,
                     ),
                     offset: Offset(
                       radius * cos(0.0 + 1 * pi / 4),
@@ -117,7 +117,7 @@ class _ColorLoader3State extends State<ColorLoader3>
                   Transform.translate(
                     child: Dot(
                       radius: dotRadius,
-                      color: Colors.pinkAccent,
+                      color: Colors.teal,
                     ),
                     offset: Offset(
                       radius * cos(0.0 + 2 * pi / 4),
@@ -127,7 +127,7 @@ class _ColorLoader3State extends State<ColorLoader3>
                   Transform.translate(
                     child: Dot(
                       radius: dotRadius,
-                      color: Colors.purple,
+                      color: Colors.white,
                     ),
                     offset: Offset(
                       radius * cos(0.0 + 3 * pi / 4),
@@ -137,7 +137,7 @@ class _ColorLoader3State extends State<ColorLoader3>
                   Transform.translate(
                     child: Dot(
                       radius: dotRadius,
-                      color: Colors.yellow,
+                      color: Colors.black,
                     ),
                     offset: Offset(
                       radius * cos(0.0 + 4 * pi / 4),
@@ -147,7 +147,7 @@ class _ColorLoader3State extends State<ColorLoader3>
                   Transform.translate(
                     child: Dot(
                       radius: dotRadius,
-                      color: Colors.lightGreen,
+                      color: Colors.teal,
                     ),
                     offset: Offset(
                       radius * cos(0.0 + 5 * pi / 4),
@@ -157,7 +157,7 @@ class _ColorLoader3State extends State<ColorLoader3>
                   Transform.translate(
                     child: Dot(
                       radius: dotRadius,
-                      color: Colors.orangeAccent,
+                      color: Colors.white,
                     ),
                     offset: Offset(
                       radius * cos(0.0 + 6 * pi / 4),
@@ -167,7 +167,7 @@ class _ColorLoader3State extends State<ColorLoader3>
                   Transform.translate(
                     child: Dot(
                       radius: dotRadius,
-                      color: Colors.blueAccent,
+                      color: Colors.black,
                     ),
                     offset: Offset(
                       radius * cos(0.0 + 7 * pi / 4),
