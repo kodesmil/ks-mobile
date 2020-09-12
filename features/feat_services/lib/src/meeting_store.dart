@@ -17,8 +17,8 @@ class MeetingVideo {
 
   void setupSrcObject() {
     renderer = RTCVideoRenderer();
-    renderer.srcObject = stream.stream;
     renderer.initialize();
+    renderer.srcObject = stream.stream;
     getAudioTrack().enableSpeakerphone(true);
   }
 
@@ -69,16 +69,29 @@ abstract class _MeetingStore with Store {
       var url = 'https://$host/ws';
       client = Client(url);
       await init();
-      client.on('transport-open', () {
-        onConnected(true);
+      client.on('transport-open', () async {
+        try {
+          await client.join(roomId, {'name': 'Aaa'});
+          var resolution = 'vga';
+          var bandwidth = '512';
+          var codec = 'vp8';
+          var stream = await client.publish(
+            true,
+            true,
+            false,
+            codec,
+            bandwidth,
+            resolution,
+          );
+          var v = MeetingVideo(stream.mid, stream);
+          await v.setupSrcObject();
+          local = v;
+        } catch (error) {
+          print(error);
+        }
       });
     }
     await client.connect();
-  }
-
-  @action
-  Future join(String displayName, String roomId) async {
-    await client.join(roomId, {'name': '$displayName'});
   }
 
   @action
@@ -170,23 +183,5 @@ abstract class _MeetingStore with Store {
         remotes.remove(remote);
       }
     });
-
-    try {
-      var resolution = 'vga';
-      var bandwidth = '512';
-      var codec = 'vp8';
-      var stream = await client.publish(
-        true,
-        true,
-        false,
-        codec,
-        bandwidth,
-        resolution,
-      );
-      local = MeetingVideo(stream.mid, stream);
-      await local.setupSrcObject();
-    } catch (error) {
-      print(error);
-    }
   }
 }

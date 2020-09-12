@@ -91,13 +91,6 @@ mixin _$MeetingStore on _MeetingStore, Store {
     return _$connectAsyncAction.run(() => super.connect(host, onConnected));
   }
 
-  final _$joinAsyncAction = AsyncAction('_MeetingStore.join');
-
-  @override
-  Future<dynamic> join(String displayName, String roomId) {
-    return _$joinAsyncAction.run(() => super.join(displayName, roomId));
-  }
-
   final _$closeAsyncAction = AsyncAction('_MeetingStore.close');
 
   @override
