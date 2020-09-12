@@ -55,29 +55,37 @@ class _ServiceOfferContentState extends State<ServiceOfferContent> {
   @override
   Widget build(BuildContext context) {
     final store = Provider.of<ServiceOfferStore>(context);
-    final appState = Provider.of<AppStateNotifier>(context);
     return Observer(
-      builder: (context) => SliverList(
-        delegate: SliverChildBuilderDelegate(
-          (context, index) {
-            final e = store.subjects[index];
-            final details = e.provider.details;
-            return Padding(
-              padding: const EdgeInsets.only(top: 15),
-              child: ListTile(
-                title: Text(e.provider.details.name),
-                subtitle: Text(e.title),
-                trailing: Text('${e.price} ${e.currency}'),
-                onTap: () async =>
-                    await Navigator.of(context, rootNavigator: true).push(
-                  CupertinoPageRoute(
-                    builder: (context) => ServiceOfferDetailsPage(e),
+      builder: (context) => SliverPadding(
+        padding: const EdgeInsets.only(top: 20),
+        sliver: SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              final e = store.subjects[index];
+              final details = e.provider.details;
+              return Card(
+                child: ListTile(
+                  contentPadding: EdgeInsets.all(10),
+                  title: Text(
+                    e.title,
+                    style: Theme.of(context).textTheme.subtitle1,
+                  ),
+                  subtitle: Text(
+                    e.description,
+                    maxLines: 3,
+                  ),
+                  trailing: Text('${e.price} ${e.currency}'),
+                  onTap: () async =>
+                      await Navigator.of(context, rootNavigator: true).push(
+                    CupertinoPageRoute(
+                      builder: (context) => ServiceOfferDetailsPage(e),
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
-          childCount: store.subjects.length,
+              );
+            },
+            childCount: store.subjects.length,
+          ),
         ),
       ),
     );

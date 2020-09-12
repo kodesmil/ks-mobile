@@ -93,6 +93,11 @@ class KsTheme {
       disabledColor: colorScheme.background.withAlpha(128),
       hintColor: colorScheme.onBackground,
       cursorColor: colorScheme.onSurface,
+      cardTheme: CardTheme(
+        color: Colors.white,
+        margin: EdgeInsets.only(bottom: 10, left: 20, right: 20),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
+      ),
       backgroundColor: colorScheme.background,
       iconTheme: IconThemeData(color: colorScheme.onBackground),
       canvasColor: colorScheme.background,
@@ -218,6 +223,10 @@ class KsTextTheme extends TextTheme {
             fontFamily: fontFamily,
           ),
           subtitle1: base.subtitle1.copyWith(
+            fontSize: 22,
+            fontWeight: FontWeight.w600,
+            letterSpacing: 0.5,
+            height: 1,
             fontFamily: fontFamily,
           ),
           subtitle2: base.subtitle2.copyWith(

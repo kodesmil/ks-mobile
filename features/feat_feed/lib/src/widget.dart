@@ -64,62 +64,57 @@ class DailyFeed extends StatelessWidget {
       child: Observer(
         builder: (context) {
           final articles = getArticlesFromKey(store, feedKey);
-          return Padding(
-            padding: EdgeInsets.only(left: 15),
-            child: ListView.separated(
-              itemCount: articles.length,
-              separatorBuilder: (context, index) => SizedBox.fromSize(
-                size: Size.fromWidth(1),
-              ),
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                final article = articles[index];
-                return InkWell(
-                  onTap: () => newPageStart(context, article),
-                  child: Container(
-                    width: 260,
-                    child: Card(
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Stack(
-                        children: <Widget>[
-                          KsFadeInImage(
-                            image: article.coverPictureUrl,
-                            size: 260,
-                          ),
-                          Flex(
-                            direction: Axis.vertical,
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  color: Colors.black26,
-                                ),
+          return ListView.builder(
+            itemCount: articles.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              final article = articles[index];
+              return InkWell(
+                onTap: () => newPageStart(context, article),
+                child: Container(
+                  width: 260,
+                  child: Card(
+                    margin: EdgeInsets.only(left: 15),
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Stack(
+                      children: <Widget>[
+                        KsFadeInImage(
+                          image: article.coverPictureUrl,
+                          size: 260,
+                        ),
+                        Flex(
+                          direction: Axis.vertical,
+                          children: [
+                            Expanded(
+                              child: Container(
+                                color: Colors.black26,
                               ),
-                            ],
-                          ),
-                          ListTile(
-                            title: Text(
-                              article.title,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText2
-                                  .copyWith(color: Colors.white, shadows: [
-                                BoxShadow(
-                                  blurRadius: 20,
-                                  spreadRadius: 5,
-                                )
-                              ]),
                             ),
+                          ],
+                        ),
+                        ListTile(
+                          title: Text(
+                            article.title,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText2
+                                .copyWith(color: Colors.white, shadows: [
+                              BoxShadow(
+                                blurRadius: 20,
+                                spreadRadius: 5,
+                              )
+                            ]),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           );
         },
       ),

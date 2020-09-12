@@ -21,7 +21,6 @@ class FeedPage extends StatelessWidget {
             child: Material(
               child: Column(
                 children: [
-                  KsSpace.xs(),
                   ListTile(
                     leading: Text(
                       'Notifications',
