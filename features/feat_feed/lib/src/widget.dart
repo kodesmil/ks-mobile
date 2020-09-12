@@ -30,16 +30,21 @@ class _FeedScrollState extends State<FeedScroll> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox.fromSize(size: Size.fromHeight(5)),
-        Padding(
-          padding: const EdgeInsets.only(
-            left: 18,
-            top: 15,
-            bottom: 5,
-          ),
-          child: Text(
-            widget.title,
-            textAlign: TextAlign.left,
-            style: Theme.of(context).textTheme.headline6,
+        Container(
+          margin: EdgeInsets.only(top: 10, bottom: 10),
+          color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: 15,
+              right: 15,
+              top: 5,
+              bottom: 5,
+            ),
+            child: Text(
+              widget.title,
+              textAlign: TextAlign.left,
+              style: Theme.of(context).textTheme.headline6,
+            ),
           ),
         ),
         DailyFeed(feedKey: widget.feedKey),
@@ -76,9 +81,6 @@ class DailyFeed extends StatelessWidget {
                   child: Card(
                     margin: EdgeInsets.only(left: 15),
                     clipBehavior: Clip.antiAliasWithSaveLayer,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6),
-                    ),
                     child: Stack(
                       children: <Widget>[
                         KsFadeInImage(

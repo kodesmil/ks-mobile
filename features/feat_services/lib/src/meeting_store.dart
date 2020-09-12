@@ -26,15 +26,16 @@ class MeetingVideo {
     stream.clearListeners();
     await stream.stream.dispose();
     await renderer.dispose();
+    renderer = null;
   }
 
   MediaStreamTrack getAudioTrack() =>
-      stream.stream.getAudioTracks()?.elementAt(0);
-
-  List<MediaStreamTrack> getAudioTracks() => stream.stream.getAudioTracks();
+      getAudioTracks().isNotEmpty ? getAudioTracks().first : null;
 
   MediaStreamTrack getVideoTrack() =>
-      stream.stream.getVideoTracks()?.elementAt(0);
+      getVideoTracks().isNotEmpty ? getVideoTracks().first : null;
+
+  List<MediaStreamTrack> getAudioTracks() => stream.stream.getAudioTracks();
 
   List<MediaStreamTrack> getVideoTracks() => stream.stream.getVideoTracks();
 
@@ -85,6 +86,7 @@ abstract class _MeetingStore with Store {
             resolution,
           );
           var v = MeetingVideo(stream.mid, stream);
+          print("Remote ${stream.mid}");
           await v.setupSrcObject();
           local = v;
         } catch (error) {
@@ -175,9 +177,10 @@ abstract class _MeetingStore with Store {
     client.on('stream-add', (rid, mid, info, tracks) async {
       var bandwidth = '512';
       var stream = await client.subscribe(rid, mid, tracks, bandwidth);
-      // var remote = MeetingVideo(mid, stream);
-      // await remote.setupSrcObject();
-      // local = remote;
+      var remote = MeetingVideo(mid, stream);
+      await remote.setupSrcObject();
+      print("Remote 2 $mid");
+      remotes = [remote];
     });
     client.on('stream-remove', (rid, mid) async {
       var remote = remotes.firstWhere(
