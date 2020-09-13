@@ -9,22 +9,36 @@ part 'meeting_store.g.dart';
 class MeetingStore = _MeetingStore with _$MeetingStore;
 
 class MeetingVideo {
-  final String mid;
+  final String id;
   final Stream stream;
+  final bool isLocal;
   RTCVideoRenderer renderer;
 
-  MeetingVideo(this.mid, this.stream);
+  MeetingVideo(this.id, this.stream, this.isLocal);
 
-  void setupSrcObject() async {
+  factory MeetingVideo.local(stream) => MeetingVideo(stream.mid, stream, true);
+
+  factory MeetingVideo.remote(stream) =>
+      MeetingVideo(stream.mid, stream, false);
+
+  Future initialize() async {
     renderer = RTCVideoRenderer();
     await renderer.initialize();
     renderer.srcObject = stream.stream;
     getAudioTrack().enableSpeakerphone(true);
+    getVideoTrack().enabled = false;
   }
 
   Future dispose() async {
     stream.clearListeners();
-    await stream.stream.dispose();
+    for (var t in getAudioTracks()) {
+      await t.dispose();
+    }
+    for (var t in getVideoTracks()) {
+      await t.dispose();
+    }
+    await renderer.srcObject.dispose();
+    renderer.srcObject = null;
     await renderer.dispose();
     renderer = null;
   }
@@ -39,9 +53,18 @@ class MeetingVideo {
 
   List<MediaStreamTrack> getVideoTracks() => stream.stream.getVideoTracks();
 
-  bool get hasVideoTrack => stream.stream.getVideoTracks().isNotEmpty;
+  bool get hasVideoTrack => getVideoTracks().isNotEmpty;
 
-  bool get hasAudioTrack => stream.stream.getAudioTracks().isNotEmpty;
+  bool get hasAudioTrack => getAudioTracks().isNotEmpty;
+
+  @override
+  bool operator ==(Object other) {
+    if (other is MeetingVideo) {
+      return id == other.id;
+    } else {
+      return false;
+    }
+  }
 }
 
 abstract class _MeetingStore with Store {
@@ -50,16 +73,32 @@ abstract class _MeetingStore with Store {
   final ErrorStore errorStore;
 
   @observable
-  List<MeetingVideo> remotes = [];
+  List<MeetingVideo> videos = [];
+
+  @computed
+  MeetingVideo get largeVideo => videos.firstWhere(
+        (element) => element.id == largeVideoId,
+        orElse: () => null,
+      );
+
+  @computed
+  MeetingVideo get localVideo => videos.firstWhere(
+        (element) => element.isLocal,
+        orElse: () => null,
+      );
+
+  @computed
+  List<MeetingVideo> get smallVideos =>
+      videos.where((element) => element.id != largeVideoId).toList();
 
   @observable
-  MeetingVideo local;
+  String largeVideoId = '';
 
   @observable
   bool speakerOn = false;
 
   @observable
-  bool cameraOff = false;
+  bool cameraOff = true;
 
   @observable
   bool microphoneOff = false;
@@ -85,10 +124,13 @@ abstract class _MeetingStore with Store {
             bandwidth,
             resolution,
           );
-          var v = MeetingVideo(stream.mid, stream);
-          print("Remote ${stream.mid}");
-          await v.setupSrcObject();
-          local = v;
+          var video = MeetingVideo.local(stream);
+          if (!videos.contains(video)) {
+            await video.initialize();
+            videos.add(video);
+            videos = [...videos];
+            largeVideoId = video.id;
+          }
         } catch (error) {
           print(error);
         }
@@ -99,97 +141,99 @@ abstract class _MeetingStore with Store {
   }
 
   @action
-  Future close() async {
-    if (client != null) {
-      await client.leave();
-      client.close();
-      client = null;
-    }
-  }
-
-  @action
   Future switchSpeaker() async {
     speakerOn = !speakerOn;
-    local.getAudioTrack().enableSpeakerphone(speakerOn);
+    localVideo?.getAudioTrack()?.enableSpeakerphone(speakerOn);
   }
 
   @action
   Future switchCamera() async {
-    if (local?.hasVideoTrack == true) {
-      await local.getVideoTrack().switchCamera();
+    if (localVideo?.hasVideoTrack == true) {
+      await localVideo?.getVideoTrack()?.switchCamera();
     }
   }
 
   @action
   Future turnCamera() async {
-    if (local?.hasVideoTrack == true) {
+    if (localVideo?.hasVideoTrack == true) {
       cameraOff = !cameraOff;
-      local.getVideoTrack().enabled = !cameraOff;
+      localVideo?.getVideoTrack()?.enabled = !cameraOff;
     }
   }
 
   @action
   Future turnMicrophone() async {
-    if (local?.hasAudioTrack == true) {
+    if (localVideo?.hasAudioTrack == true) {
       microphoneOff = !microphoneOff;
-      local.getAudioTrack().enabled = !microphoneOff;
+      localVideo.getAudioTrack().enabled = !microphoneOff;
     }
+  }
+
+  @action
+  Future switchLargeVideo(String id) async {
+    largeVideoId = id;
   }
 
   @action
   Future swapVideoPosition(adapter) async {
-    var index = remotes.indexWhere(
-      (element) => element.mid == adapter.mid,
+    var index = videos.indexWhere(
+      (element) => element.id == adapter.id,
     );
     if (index == -1) return;
-    var temp = remotes[0];
-    remotes[0] = remotes[index];
-    remotes[index] = temp;
+    var temp = videos[0];
+    videos[0] = videos[index];
+    videos[index] = temp;
   }
 
   @action
-  Future cleanUp() async {
-    if (local != null) {
-      await client.unpublish(local.mid);
-      await local.dispose();
-      local = null;
-    }
-    remotes.forEach((remote) async {
+  Future dispose() async {
+    for (var video in videos) {
       try {
-        await client.unsubscribe(roomId, remote.mid);
-        await remote.dispose();
+        if (video.isLocal) {
+          await client.leave();
+          await client.unpublish(video.id);
+        } else {
+          await client.unsubscribe(roomId, video.id);
+        }
+        await video.dispose();
       } catch (error) {
         print(error);
       }
-    });
-    remotes.clear();
+    }
+    videos.clear();
+    client.close();
     client.clearListeners();
+    client = null;
   }
 
   @action
   void init() {
     client.on('peer-join', (rid, id, info) async {
-      var name = info['name'];
+      // var name = info['name'];
     });
-    client.on('peer-leave', (rid, id, info) async {
-      var name = info['name'];
+    client.on('peer-leave', (rid, id) async {
+      // nothing
     });
     client.on('stream-add', (rid, mid, info, tracks) async {
-      var bandwidth = '512';
-      var stream = await client.subscribe(rid, mid, tracks, bandwidth);
-      var remote = MeetingVideo(mid, stream);
-      await remote.setupSrcObject();
-      print("Remote 2 $mid");
-      remotes = [remote];
+      var stream = await client.subscribe(rid, mid, tracks, '512');
+      var video = MeetingVideo.remote(stream);
+      if (!videos.contains(video)) {
+        await video.initialize();
+        videos.add(video);
+        videos = [...videos];
+        largeVideoId = video.id;
+      }
     });
     client.on('stream-remove', (rid, mid) async {
-      var remote = remotes.firstWhere(
-        (item) => item.mid == mid,
+      var remote = videos.firstWhere(
+        (item) => item.id == mid,
         orElse: () => null,
       );
       if (remote != null) {
         await remote.dispose();
-        remotes.remove(remote);
+        videos.remove(remote);
+        videos = [...videos];
+        largeVideoId = videos.first.id;
       }
     });
   }

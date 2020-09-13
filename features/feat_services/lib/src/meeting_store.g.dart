@@ -9,33 +9,55 @@ part of 'meeting_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$MeetingStore on _MeetingStore, Store {
-  final _$remotesAtom = Atom(name: '_MeetingStore.remotes');
+  Computed<MeetingVideo> _$largeVideoComputed;
 
   @override
-  List<MeetingVideo> get remotes {
-    _$remotesAtom.reportRead();
-    return super.remotes;
+  MeetingVideo get largeVideo =>
+      (_$largeVideoComputed ??= Computed<MeetingVideo>(() => super.largeVideo,
+              name: '_MeetingStore.largeVideo'))
+          .value;
+  Computed<MeetingVideo> _$localVideoComputed;
+
+  @override
+  MeetingVideo get localVideo =>
+      (_$localVideoComputed ??= Computed<MeetingVideo>(() => super.localVideo,
+              name: '_MeetingStore.localVideo'))
+          .value;
+  Computed<List<MeetingVideo>> _$smallVideosComputed;
+
+  @override
+  List<MeetingVideo> get smallVideos => (_$smallVideosComputed ??=
+          Computed<List<MeetingVideo>>(() => super.smallVideos,
+              name: '_MeetingStore.smallVideos'))
+      .value;
+
+  final _$videosAtom = Atom(name: '_MeetingStore.videos');
+
+  @override
+  List<MeetingVideo> get videos {
+    _$videosAtom.reportRead();
+    return super.videos;
   }
 
   @override
-  set remotes(List<MeetingVideo> value) {
-    _$remotesAtom.reportWrite(value, super.remotes, () {
-      super.remotes = value;
+  set videos(List<MeetingVideo> value) {
+    _$videosAtom.reportWrite(value, super.videos, () {
+      super.videos = value;
     });
   }
 
-  final _$localAtom = Atom(name: '_MeetingStore.local');
+  final _$largeVideoIdAtom = Atom(name: '_MeetingStore.largeVideoId');
 
   @override
-  MeetingVideo get local {
-    _$localAtom.reportRead();
-    return super.local;
+  String get largeVideoId {
+    _$largeVideoIdAtom.reportRead();
+    return super.largeVideoId;
   }
 
   @override
-  set local(MeetingVideo value) {
-    _$localAtom.reportWrite(value, super.local, () {
-      super.local = value;
+  set largeVideoId(String value) {
+    _$largeVideoIdAtom.reportWrite(value, super.largeVideoId, () {
+      super.largeVideoId = value;
     });
   }
 
@@ -91,13 +113,6 @@ mixin _$MeetingStore on _MeetingStore, Store {
     return _$connectAsyncAction.run(() => super.connect(host, onConnected));
   }
 
-  final _$closeAsyncAction = AsyncAction('_MeetingStore.close');
-
-  @override
-  Future<dynamic> close() {
-    return _$closeAsyncAction.run(() => super.close());
-  }
-
   final _$switchSpeakerAsyncAction = AsyncAction('_MeetingStore.switchSpeaker');
 
   @override
@@ -127,6 +142,14 @@ mixin _$MeetingStore on _MeetingStore, Store {
     return _$turnMicrophoneAsyncAction.run(() => super.turnMicrophone());
   }
 
+  final _$switchLargeVideoAsyncAction =
+      AsyncAction('_MeetingStore.switchLargeVideo');
+
+  @override
+  Future<dynamic> switchLargeVideo(String id) {
+    return _$switchLargeVideoAsyncAction.run(() => super.switchLargeVideo(id));
+  }
+
   final _$swapVideoPositionAsyncAction =
       AsyncAction('_MeetingStore.swapVideoPosition');
 
@@ -136,11 +159,11 @@ mixin _$MeetingStore on _MeetingStore, Store {
         .run(() => super.swapVideoPosition(adapter));
   }
 
-  final _$cleanUpAsyncAction = AsyncAction('_MeetingStore.cleanUp');
+  final _$disposeAsyncAction = AsyncAction('_MeetingStore.dispose');
 
   @override
-  Future<dynamic> cleanUp() {
-    return _$cleanUpAsyncAction.run(() => super.cleanUp());
+  Future<dynamic> dispose() {
+    return _$disposeAsyncAction.run(() => super.dispose());
   }
 
   final _$_MeetingStoreActionController =
@@ -160,11 +183,14 @@ mixin _$MeetingStore on _MeetingStore, Store {
   @override
   String toString() {
     return '''
-remotes: ${remotes},
-local: ${local},
+videos: ${videos},
+largeVideoId: ${largeVideoId},
 speakerOn: ${speakerOn},
 cameraOff: ${cameraOff},
-microphoneOff: ${microphoneOff}
+microphoneOff: ${microphoneOff},
+largeVideo: ${largeVideo},
+localVideo: ${localVideo},
+smallVideos: ${smallVideos}
     ''';
   }
 }

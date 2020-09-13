@@ -56,35 +56,37 @@ class _ServiceOfferContentState extends State<ServiceOfferContent> {
   Widget build(BuildContext context) {
     final store = Provider.of<ServiceOfferStore>(context);
     return Observer(
-      builder: (context) => SliverPadding(
-        padding: const EdgeInsets.only(top: 15),
-        sliver: SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) {
-              final e = store.subjects[index];
-              final details = e.provider.details;
-              return Card(
-                child: ListTile(
-                  contentPadding: EdgeInsets.all(10),
-                  title: Text(
-                    e.title,
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                  subtitle: Text(
-                    e.description,
-                    maxLines: 3,
-                  ),
-                  trailing: Text('${e.price} ${e.currency}'),
-                  onTap: () async =>
-                      await Navigator.of(context, rootNavigator: true).push(
-                    CupertinoPageRoute(
-                      builder: (context) => ServiceOfferDetailsPage(e),
+      builder: (context) => SliverSafeArea(
+        sliver: SliverPadding(
+          padding: const EdgeInsets.only(top: 15),
+          sliver: SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                final e = store.subjects[index];
+                final details = e.provider.details;
+                return Card(
+                  child: ListTile(
+                    contentPadding: EdgeInsets.all(10),
+                    title: Text(
+                      e.title,
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                    subtitle: Text(
+                      e.description,
+                      maxLines: 3,
+                    ),
+                    trailing: Text('${e.price} ${e.currency}'),
+                    onTap: () async =>
+                        await Navigator.of(context, rootNavigator: true).push(
+                      CupertinoPageRoute(
+                        builder: (context) => ServiceOfferDetailsPage(e),
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
-            childCount: store.subjects.length,
+                );
+              },
+              childCount: store.subjects.length,
+            ),
           ),
         ),
       ),

@@ -59,9 +59,9 @@ class _MeetingContentState extends State<MeetingContent> {
   }
 
   @override
-  void dispose() {
-    store.cleanUp();
-    super.dispose();
+  void deactivate() {
+    super.deactivate();
+    store.dispose();
   }
 
   void _hangUp() {
@@ -95,20 +95,22 @@ class _MeetingContentState extends State<MeetingContent> {
       SizedBox(
         width: 36,
         height: 36,
-        child: RawMaterialButton(
-          shape: CircleBorder(
-            side: BorderSide(
-              color: Colors.white,
-              width: 1,
+        child: Observer(
+          builder: (context) => RawMaterialButton(
+            shape: CircleBorder(
+              side: BorderSide(
+                color: Colors.white,
+                width: 1,
+              ),
             ),
-          ),
-          child: Icon(
-            MaterialCommunityIcons.getIconData(
-              store.cameraOff ? 'video-off' : 'video',
+            child: Icon(
+              MaterialCommunityIcons.getIconData(
+                store.cameraOff ? 'video-off' : 'video',
+              ),
+              color: store.cameraOff ? Colors.red : Colors.white,
             ),
-            color: store.cameraOff ? Colors.red : Colors.white,
+            onPressed: store.turnCamera,
           ),
-          onPressed: store.turnCamera,
         ),
       ),
       SizedBox(
@@ -131,39 +133,43 @@ class _MeetingContentState extends State<MeetingContent> {
       SizedBox(
         width: 36,
         height: 36,
-        child: RawMaterialButton(
-          shape: CircleBorder(
-            side: BorderSide(
-              color: Colors.white,
-              width: 1,
+        child: Observer(
+          builder: (context) => RawMaterialButton(
+            shape: CircleBorder(
+              side: BorderSide(
+                color: Colors.white,
+                width: 1,
+              ),
             ),
-          ),
-          child: Icon(
-            MaterialCommunityIcons.getIconData(
-              store.microphoneOff ? 'microphone-off' : 'microphone',
+            child: Icon(
+              MaterialCommunityIcons.getIconData(
+                store.microphoneOff ? 'microphone-off' : 'microphone',
+              ),
+              color: store.microphoneOff ? Colors.red : Colors.white,
             ),
-            color: store.microphoneOff ? Colors.red : Colors.white,
+            onPressed: store.turnMicrophone,
           ),
-          onPressed: store.turnMicrophone,
         ),
       ),
       SizedBox(
         width: 36,
         height: 36,
-        child: RawMaterialButton(
-          shape: CircleBorder(
-            side: BorderSide(
+        child: Observer(
+          builder: (context) => RawMaterialButton(
+            shape: CircleBorder(
+              side: BorderSide(
+                color: Colors.white,
+                width: 1,
+              ),
+            ),
+            child: Icon(
+              MaterialIcons.getIconData(
+                store.speakerOn ? 'volume-up' : 'speaker-phone',
+              ),
               color: Colors.white,
-              width: 1,
             ),
+            onPressed: store.switchSpeaker,
           ),
-          child: Icon(
-            MaterialIcons.getIconData(
-              store.speakerOn ? 'volume-up' : 'speaker-phone',
-            ),
-            color: Colors.white,
-          ),
-          onPressed: store.switchSpeaker,
         ),
       ),
       SizedBox(
@@ -207,13 +213,13 @@ class _MeetingContentState extends State<MeetingContent> {
                       child: Stack(
                         children: <Widget>[
                           Positioned(
-                            child: RemoteVideo(
+                            child: LargeVideo(
                               orientation,
                             ),
                           ),
                           Positioned(
                             right: 0,
-                            child: LocalVideo(
+                            child: SmallVideos(
                               orientation,
                             ),
                           ),
@@ -225,7 +231,7 @@ class _MeetingContentState extends State<MeetingContent> {
                     left: 0,
                     right: 0,
                     bottom: 0,
-                    height: 48,
+                    height: 72,
                     child: Stack(
                       children: <Widget>[
                         Opacity(
@@ -234,9 +240,7 @@ class _MeetingContentState extends State<MeetingContent> {
                             color: Colors.black,
                           ),
                         ),
-                        Container(
-                          height: 48,
-                          margin: EdgeInsets.all(0.0),
+                        Center(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -256,42 +260,10 @@ class _MeetingContentState extends State<MeetingContent> {
   }
 }
 
-class LocalVideo extends StatelessWidget {
-  final double LOCAL_VIDEO_WIDTH = 114.0;
-  final double LOCAL_VIDEO_HEIGHT = 72.0;
+class LargeVideo extends StatelessWidget {
   final Orientation orientation;
 
-  LocalVideo(this.orientation);
-
-  @override
-  Widget build(BuildContext context) {
-    return Observer(
-      builder: (context) {
-        final store = Provider.of<MeetingStore>(context);
-        if (store.local == null) {
-          return Container();
-        }
-        return SizedBox(
-          width: orientation == Orientation.portrait
-              ? LOCAL_VIDEO_HEIGHT
-              : LOCAL_VIDEO_WIDTH,
-          height: orientation == Orientation.portrait
-              ? LOCAL_VIDEO_WIDTH
-              : LOCAL_VIDEO_HEIGHT,
-          child: GestureDetector(
-            onTap: () => store.switchCamera(),
-            child: RTCVideoView(store.local.renderer),
-          ),
-        );
-      },
-    );
-  }
-}
-
-class RemoteVideo extends StatelessWidget {
-  final Orientation orientation;
-
-  RemoteVideo(this.orientation);
+  LargeVideo(this.orientation);
 
   @override
   Widget build(BuildContext context) {
@@ -299,19 +271,57 @@ class RemoteVideo extends StatelessWidget {
     return Observer(
       builder: (context) {
         final store = Provider.of<MeetingStore>(context);
-        if (store.remotes?.isEmpty == true) {
+        if (store.largeVideo == null) {
           return Container();
         }
         return SizedBox(
           width: size.width,
           height: size.height,
           child: GestureDetector(
-            child: RTCVideoView(
-              store.remotes.first.renderer,
-              mirror: false,
-              objectFit: RTCVideoViewObjectFit.RTCVideoViewObjectFitCover,
-            ),
+            onTap: () => store.switchCamera(),
+            child: RTCVideoView(store.largeVideo.renderer),
           ),
+        );
+      },
+    );
+  }
+}
+
+class SmallVideos extends StatelessWidget {
+  final double LOCAL_VIDEO_WIDTH = 114.0;
+  final double LOCAL_VIDEO_HEIGHT = 72.0;
+  final Orientation orientation;
+
+  SmallVideos(this.orientation);
+
+  @override
+  Widget build(BuildContext context) {
+    return Observer(
+      builder: (context) {
+        final store = Provider.of<MeetingStore>(context);
+        if (store.smallVideos.isEmpty) {
+          return Container();
+        }
+        return Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: store.smallVideos
+              .map((e) => SizedBox(
+                    width: orientation == Orientation.portrait
+                        ? LOCAL_VIDEO_HEIGHT
+                        : LOCAL_VIDEO_WIDTH,
+                    height: orientation == Orientation.portrait
+                        ? LOCAL_VIDEO_WIDTH
+                        : LOCAL_VIDEO_HEIGHT,
+                    child: GestureDetector(
+                      onTap: () => store.switchLargeVideo(e.id),
+                      child: RTCVideoView(
+                        e.renderer,
+                        mirror: false,
+                      ),
+                    ),
+                  ))
+              .toList(),
         );
       },
     );

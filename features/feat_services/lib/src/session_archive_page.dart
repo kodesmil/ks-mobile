@@ -62,73 +62,75 @@ class _ServiceSessionArchiveContentState
   Widget build(BuildContext context) {
     final store = Provider.of<ServiceSessionArchiveStore>(context);
     return Observer(
-      builder: (context) => SliverPadding(
-        padding: const EdgeInsets.only(top: 15),
-        sliver: SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) {
-              final e = store.sessions[index];
-              final details = e.offer.provider.details;
-              print(e.id);
-              return Card(
-                child: ListTile(
-                  contentPadding: EdgeInsets.all(10),
-                  onTap: () async {
-                    if (e.status != ServiceSession_Status.FINISHED &&
-                        e.status != ServiceSession_Status.CANCELED) {
-                      await Navigator.of(context, rootNavigator: true).push(
-                        CupertinoPageRoute(
-                          builder: (context) => ServiceSessionPage(e.id),
+      builder: (context) => SliverSafeArea(
+        sliver: SliverPadding(
+          padding: const EdgeInsets.only(top: 15),
+          sliver: SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                final e = store.sessions[index];
+                final details = e.offer.provider.details;
+                print(e.id);
+                return Card(
+                  child: ListTile(
+                    contentPadding: EdgeInsets.all(10),
+                    onTap: () async {
+                      if (e.status != ServiceSession_Status.FINISHED &&
+                          e.status != ServiceSession_Status.CANCELED) {
+                        await Navigator.of(context, rootNavigator: true).push(
+                          CupertinoPageRoute(
+                            builder: (context) => ServiceSessionPage(e.id),
+                          ),
+                        );
+                        await store.fetch();
+                      }
+                    },
+                    title: Text(
+                      e.offer.title,
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'From: ${_presentDate(e.scheduledAt)}',
                         ),
-                      );
-                      await store.fetch();
-                    }
-                  },
-                  title: Text(
-                    e.offer.title,
-                    style: Theme.of(context).textTheme.headline6,
+                        e.finishedAt.seconds != 0
+                            ? Text('To: ${_presentDate(e.finishedAt)}')
+                            : Container(),
+                        Text(
+                          'Status: ${e.status}',
+                        ),
+                        Text('Paid: ${e.offer.price} ${e.offer.currency}'),
+                        Column(
+                          children: e.evaluations
+                              .map((o) => Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      o.comment?.isNotEmpty == true
+                                          ? Text('Comment: ${o.comment}')
+                                          : Container(),
+                                      SmoothStarRating(
+                                        starCount: 5,
+                                        rating: o.recommendationRate,
+                                        size: 30,
+                                        isReadOnly: true,
+                                        color: Colors.yellow,
+                                        borderColor: Colors.yellow.withOpacity(0.5),
+                                        spacing: 0,
+                                      ),
+                                    ],
+                                  ))
+                              .toList(),
+                        ),
+                      ],
+                    ),
+                    trailing: Text(details.name),
                   ),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'From: ${_presentDate(e.scheduledAt)}',
-                      ),
-                      e.finishedAt.seconds != 0
-                          ? Text('To: ${_presentDate(e.finishedAt)}')
-                          : Container(),
-                      Text(
-                        'Status: ${e.status}',
-                      ),
-                      Text('Paid: ${e.offer.price} ${e.offer.currency}'),
-                      Column(
-                        children: e.evaluations
-                            .map((o) => Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    o.comment?.isNotEmpty == true
-                                        ? Text('Comment: ${o.comment}')
-                                        : Container(),
-                                    SmoothStarRating(
-                                      starCount: 5,
-                                      rating: o.recommendationRate,
-                                      size: 30,
-                                      isReadOnly: true,
-                                      color: Colors.yellow,
-                                      borderColor: Colors.yellow.withOpacity(0.5),
-                                      spacing: 0,
-                                    ),
-                                  ],
-                                ))
-                            .toList(),
-                      ),
-                    ],
-                  ),
-                  trailing: Text(details.name),
-                ),
-              );
-            },
-            childCount: store.sessions.length,
+                );
+              },
+              childCount: store.sessions.length,
+            ),
           ),
         ),
       ),
