@@ -113,12 +113,12 @@ class _ServiceSessionEvaluationContentState
                             starCount: 5,
                             rating: _recommendationRate,
                             size: 40,
-                            color: Colors.yellow,
-                            borderColor: Colors.yellow.withOpacity(0.5),
+                            color: Colors.yellow.shade900,
+                            borderColor: Colors.yellow.shade900.withOpacity(0.5),
                             spacing: 5,
                           ),
                           SizedBox(height: 30),
-                          OutlineButton(
+                          RaisedButton(
                             child: Text('Done'),
                             shape: StadiumBorder(),
                             onPressed: () async {

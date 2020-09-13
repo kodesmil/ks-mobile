@@ -54,10 +54,15 @@ class _ServiceSessionContentState extends State<ServiceSessionContent> {
     super.didChangeDependencies();
   }
 
-  Future handleJoin() async {
-    await Navigator.of(context).pushReplacementNamed(
-      '/meetings/${widget.sessionId}',
-    );
+  void handleJoin() async {
+    final store = Provider.of<SessionStreamStore>(context, listen: false);
+    await Navigator.of(context)
+        .pushNamed('/meetings/${widget.sessionId}');
+    await Navigator.of(context).pushReplacement(CupertinoPageRoute(
+      builder: (context) => ServiceSessionEvaluationPage(
+        store.session,
+      ),
+    ));
   }
 
   @override
