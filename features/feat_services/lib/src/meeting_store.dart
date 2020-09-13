@@ -3,6 +3,7 @@ import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:flutter_ion/flutter_ion.dart';
 import 'package:lib_shared/lib_shared.dart';
 import 'package:mobx/mobx.dart';
+import 'package:mutex/mutex.dart';
 
 part 'meeting_store.g.dart';
 
@@ -16,17 +17,15 @@ class MeetingVideo {
 
   MeetingVideo(this.id, this.stream, this.isLocal);
 
-  factory MeetingVideo.local(stream) => MeetingVideo(stream.mid, stream, true);
+  factory MeetingVideo.local(id, stream) => MeetingVideo(id, stream, true);
 
-  factory MeetingVideo.remote(stream) =>
-      MeetingVideo(stream.mid, stream, false);
+  factory MeetingVideo.remote(id, stream) => MeetingVideo(id, stream, false);
 
   Future initialize() async {
     renderer = RTCVideoRenderer();
     await renderer.initialize();
     renderer.srcObject = stream.stream;
     getAudioTrack().enableSpeakerphone(true);
-    getVideoTrack().enabled = false;
   }
 
   Future dispose() async {
@@ -58,6 +57,11 @@ class MeetingVideo {
   bool get hasAudioTrack => getAudioTracks().isNotEmpty;
 
   @override
+  String toString() {
+    return id;
+  }
+
+  @override
   bool operator ==(Object other) {
     if (other is MeetingVideo) {
       return id == other.id;
@@ -68,9 +72,10 @@ class MeetingVideo {
 }
 
 abstract class _MeetingStore with Store {
-  Client client;
+  final mtx = Mutex();
   final String roomId;
   final ErrorStore errorStore;
+  Client client;
 
   @observable
   List<MeetingVideo> videos = [];
@@ -98,7 +103,7 @@ abstract class _MeetingStore with Store {
   bool speakerOn = false;
 
   @observable
-  bool cameraOff = true;
+  bool cameraOff = false;
 
   @observable
   bool microphoneOff = false;
@@ -112,25 +117,31 @@ abstract class _MeetingStore with Store {
       client = Client(url);
       client.on('transport-open', () async {
         try {
-          await client.join(roomId, {'name': 'Aaa'});
-          var resolution = 'vga';
-          var bandwidth = '512';
-          var codec = 'vp8';
-          var stream = await client.publish(
-            true,
-            true,
-            false,
-            codec,
-            bandwidth,
-            resolution,
-          );
-          var video = MeetingVideo.local(stream);
-          if (!videos.contains(video)) {
-            await video.initialize();
-            videos.add(video);
-            videos = [...videos];
-            largeVideoId = video.id;
-          }
+          await mtx.protect(() async {
+            await client.join(roomId, {'name': 'Aaa'});
+            var resolution = 'vga';
+            var bandwidth = '512';
+            var codec = 'vp8';
+            var stream = await client.publish(
+              true,
+              true,
+              false,
+              codec,
+              bandwidth,
+              resolution,
+            );
+            var video = MeetingVideo.local(stream.mid, stream);
+            print('MeSt local: ${video.id} start');
+            if (!videos.contains(video)) {
+              await video.initialize();
+              videos.add(video);
+              videos = [...videos];
+              largeVideoId = video.id;
+              print('MeSt local: ${video.id} success');
+              print('MeSt videos: $videos');
+              await turnCamera();
+            }
+          });
         } catch (error) {
           print(error);
         }
@@ -192,8 +203,10 @@ abstract class _MeetingStore with Store {
         if (video.isLocal) {
           await client.leave();
           await client.unpublish(video.id);
+          print('MeSt unpublish: ${video.id} start');
         } else {
           await client.unsubscribe(roomId, video.id);
+          print('MeSt unsubscribe: ${video.id} start');
         }
         await video.dispose();
       } catch (error) {
@@ -209,31 +222,47 @@ abstract class _MeetingStore with Store {
   @action
   void init() {
     client.on('peer-join', (rid, id, info) async {
-      // var name = info['name'];
+      print('MeSt join: $id');
     });
     client.on('peer-leave', (rid, id) async {
-      // nothing
+      print('MeSt leave: $id');
     });
     client.on('stream-add', (rid, mid, info, tracks) async {
-      var stream = await client.subscribe(rid, mid, tracks, '512');
-      var video = MeetingVideo.remote(stream);
-      if (!videos.contains(video)) {
-        await video.initialize();
-        videos.add(video);
-        videos = [...videos];
-        largeVideoId = video.id;
-      }
+      await mtx.protect(() async {
+        print('MeSt add: $mid start');
+        var video = videos.firstWhere(
+          (item) => item.id == mid,
+          orElse: () => null,
+        );
+        if (video != null) {
+          return;
+        }
+        var stream = await client.subscribe(rid, mid, tracks, '512');
+        print('MeSt add: $mid stream');
+        video = MeetingVideo.remote(mid, stream);
+        if (!videos.contains(video)) {
+          await video.initialize();
+          videos.add(video);
+          videos = [...videos];
+          largeVideoId = video.id;
+          print('MeSt add: ${video.id} success');
+          print('MeSt videos: $videos');
+        }
+      });
     });
     client.on('stream-remove', (rid, mid) async {
-      var remote = videos.firstWhere(
+      print('MeSt remove: $mid start');
+      var video = videos.firstWhere(
         (item) => item.id == mid,
         orElse: () => null,
       );
-      if (remote != null) {
-        await remote.dispose();
-        videos.remove(remote);
+      if (video != null) {
+        await video.dispose();
+        videos.remove(video);
         videos = [...videos];
         largeVideoId = videos.first.id;
+        print('MeSt remove: ${video.id} success');
+        print('MeSt videos: $videos');
       }
     });
   }

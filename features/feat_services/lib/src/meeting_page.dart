@@ -22,10 +22,12 @@ class MeetingPageState extends State<MeetingPage> {
     return MultiProvider(
       providers: [
         ProxyProvider0<MeetingStore>(
-          update: (_, __) => MeetingStore(
-            ErrorStore(),
-            widget.roomId,
-          ),
+          update: (_, old) =>
+              old ??
+              MeetingStore(
+                ErrorStore(),
+                widget.roomId,
+              ),
         ),
       ],
       child: MeetingContent(widget.roomId),
